@@ -80,7 +80,7 @@ export class NavigationService {
 
     public filterNavigationByProvider = (
         navigationItems: INavigationItem[],
-        userProvider: ILoginProvider,
+        userLoginProvider: ILoginProvider,
     ) => (
         R.reject(
             (navigationItem: INavigationItem) => {
@@ -89,7 +89,7 @@ export class NavigationService {
                 }
 
                 return !R.find(
-                    R.equals(userProvider),
+                    R.equals(userLoginProvider),
                 )(navigationItem.allowedLoginProviders);
             },
         )(navigationItems)

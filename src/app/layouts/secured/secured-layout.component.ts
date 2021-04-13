@@ -100,9 +100,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             )
             .subscribe((current: IStoreUi)  => {
                 if (current.securedLayout) {
-                    const userProvider = authService.currentUserValue.provider;
+                    const userLoginProvider = authService.currentUserValue.provider;
                     const sourceConfig = current.securedLayout.navigationConfig[0];
-                    this.navConfig = [this.navigationService.filterNavigationByProvider(sourceConfig, userProvider)];
+                    this.navConfig = [this.navigationService.filterNavigationByProvider(sourceConfig, userLoginProvider)];
                     this.showOverlay = current.showOverlay;
                     this.cd.markForCheck();
                 }
@@ -152,9 +152,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
         this.renderer.addClass(document.body, 'secured');
         const userType = this.authService.currentUserValue.type;
-        const userProvider = this.authService.currentUserValue.provider;
+        const userLoginProvider = this.authService.currentUserValue.provider;
         const sourceConfig = this.navigationService.MENU_BY_USER_TYPE_MAPPING[userType].navigationMenuActions;
-        this.navigationMenuUserActions = this.navigationService.filterNavigationByProvider(sourceConfig, userProvider);
+        this.navigationMenuUserActions = this.navigationService.filterNavigationByProvider(sourceConfig, userLoginProvider);
     }
 
     ngOnDestroy() {
