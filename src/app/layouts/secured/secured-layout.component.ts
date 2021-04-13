@@ -36,6 +36,7 @@ import {
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
+    INavigationItem,
     INavigationMenu,
 } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
@@ -99,7 +100,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             )
             .subscribe((current: IStoreUi)  => {
                 if (current.securedLayout) {
-                    this.navConfig = current.securedLayout.navigationConfig;
+                    const userLoginProvider = authService.currentUserValue.provider;
+                    const sourceConfig = current.securedLayout.navigationConfig[0];
+                    this.navConfig = [this.navigationService.filterNavigationByProvider(sourceConfig, userLoginProvider)];
                     this.showOverlay = current.showOverlay;
                     this.cd.markForCheck();
                 }
@@ -149,7 +152,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
         this.renderer.addClass(document.body, 'secured');
         const userType = this.authService.currentUserValue.type;
-        this.navigationMenuUserActions = this.navigationService.MENU_BY_USER_TYPE_MAPPING[userType].navigationMenuActions;
+        const userLoginProvider = this.authService.currentUserValue.provider;
+        const sourceConfig = this.navigationService.MENU_BY_USER_TYPE_MAPPING[userType].navigationMenuActions;
+        this.navigationMenuUserActions = this.navigationService.filterNavigationByProvider(sourceConfig, userLoginProvider);
     }
 
     ngOnDestroy() {

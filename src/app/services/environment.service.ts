@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
-import { Environment } from 'src/app/models/environment/oAuth.model';
+import { Environment } from 'src/app/models/environment/environment.model';
 
 @Injectable({
     providedIn: 'root',
