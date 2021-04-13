@@ -6,7 +6,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { Environment } from 'src/app/models/environment/oAuth.model';
+import { Environment } from 'src/app/models/environment/environment.model';
 import { EnvironmentService } from 'src/app/services/environment.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
 import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
