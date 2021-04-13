@@ -14,8 +14,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     IMenuByUserTypeMapping,
     INavigationConfig,
+    INavigationItem,
 } from 'src/common/ui/navigation/models/navigation.model';
-import { IUserTypes } from 'src/app/services/model/auth.model';
+import {
+    IProvider,
+    IUserTypes,
+} from 'src/app/services/model/auth.model';
 import {
     navigationMenuUsers,
     navigationMenuUserActions,
@@ -73,4 +77,21 @@ export class NavigationService {
     public saveConfigToStore = (config: INavigationConfig) => {
         this.navigationApolloService.saveConfig(config).subscribe();
     }
+
+    public filterNavigationByProvider = (
+        navigationItems: INavigationItem[],
+        userProvider: IProvider,
+    ) => (
+        R.reject(
+            (navigationItem: INavigationItem) => {
+                if (!navigationItem.onlyInProvider) {
+                    return false;
+                }
+
+                return !R.find(
+                    R.equals(userProvider),
+                )(navigationItem.onlyInProvider);
+            },
+        )(navigationItems)
+    )
 }

@@ -13,7 +13,8 @@ export const getConfigQuery = gql`
                     children {
                         label,
                         url,
-                    }
+                    },
+                    onlyInProvider
                 }
                 navigationItemOpened{
                     label,
