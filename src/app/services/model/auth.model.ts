@@ -11,7 +11,7 @@ export interface ILoginResponse {
     error?: string;
 }
 
-export enum IProvider {
+export enum ILoginProvider {
     LOCAL = 'local',
     GOOGLE = 'google',
     FACEBOOK = 'facebook',
@@ -27,7 +27,7 @@ export interface IJwtPayload {
     manageOffers: boolean;
     manageOrders: boolean;
     manageUsers: boolean;
-    provider?: IProvider;
+    provider?: ILoginProvider;
     role: any;
     sid: string;
     smsConfirmed: boolean;

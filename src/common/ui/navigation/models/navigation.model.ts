@@ -1,6 +1,6 @@
 import { INavigationItemType } from 'src/app/app.constants';
 import {
-    IProvider,
+    ILoginProvider,
     IUserTypes,
 } from 'src/app/services/model/auth.model';
 
@@ -15,7 +15,7 @@ export interface INavigationItem {
     id?: string;
     badge?: string;
     class?: string;
-    onlyInProvider?: IProvider[];
+    allowedLoginProviders?: ILoginProvider[];
     type?: INavigationItemType;
     children?: Array<INavigationChildItem>;
     __typename?: string;

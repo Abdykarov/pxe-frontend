@@ -14,7 +14,7 @@ export const getConfigQuery = gql`
                         label,
                         url,
                     },
-                    onlyInProvider
+                    allowedLoginProviders
                 }
                 navigationItemOpened{
                     label,

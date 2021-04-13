@@ -17,7 +17,7 @@ import {
     INavigationItem,
 } from 'src/common/ui/navigation/models/navigation.model';
 import {
-    IProvider,
+    ILoginProvider,
     IUserTypes,
 } from 'src/app/services/model/auth.model';
 import {
@@ -80,17 +80,17 @@ export class NavigationService {
 
     public filterNavigationByProvider = (
         navigationItems: INavigationItem[],
-        userProvider: IProvider,
+        userProvider: ILoginProvider,
     ) => (
         R.reject(
             (navigationItem: INavigationItem) => {
-                if (!navigationItem.onlyInProvider) {
+                if (!navigationItem.allowedLoginProviders) {
                     return false;
                 }
 
                 return !R.find(
                     R.equals(userProvider),
-                )(navigationItem.onlyInProvider);
+                )(navigationItem.allowedLoginProviders);
             },
         )(navigationItems)
     )
