@@ -138,10 +138,14 @@
                             </a>
                             <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="blogAction.emit()">
+                                Blog
+                            </a>
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
                                (click)="faqAction.emit()">
                                 FAQ
                             </a>
-
                             <a *ngIf="!settings.isPublicEmptyPage && isLogged"
                                 class="dropdown-item dropdown-item--without-icon"
                                (click)="logoutAction.emit() ">

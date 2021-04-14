@@ -113,7 +113,7 @@
                     "options": {
                         "sourceMap": false,
                         "outputPath": "dist/server",
-                        "main": "server.ts",
+                        "main": "ssr/app.ts",
                         "tsConfig": "src/tsconfig.server.json"
                     },
                     "configurations": {

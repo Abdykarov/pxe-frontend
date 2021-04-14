@@ -8,6 +8,14 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     token: string;
     landingPage: LANDING_PAGE;
+    error?: string;
+}
+
+export enum ILoginProvider {
+    LOCAL = 'local',
+    GOOGLE = 'google',
+    FACEBOOK = 'facebook',
+    BANK_ID = 'bankid',
 }
 
 export interface IJwtPayload {
@@ -19,6 +27,7 @@ export interface IJwtPayload {
     manageOffers: boolean;
     manageOrders: boolean;
     manageUsers: boolean;
+    provider?: ILoginProvider;
     role: any;
     sid: string;
     smsConfirmed: boolean;

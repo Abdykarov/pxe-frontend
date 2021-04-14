@@ -49,6 +49,7 @@ import {
     LANDING_PAGE,
     PASSWORD_DESTINATION,
 } from 'src/common/graphql/models/user.model';
+import { OAuthService } from 'src/app/services/OAuth.service';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -88,6 +89,7 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
         private cookieService: CookiesService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
+        private oAuthService: OAuthService,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
@@ -95,6 +97,21 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+
+        const loginResponse: ILoginResponse = <ILoginResponse>this.route.snapshot.queryParams;
+
+        if (this.oAuthService.isSuccessRedirectURI(loginResponse)) {
+            this.oAuthService.processLogin(loginResponse);
+            this.navigateAfterLogin(loginResponse);
+        }
+
+        const oAuthError = this.oAuthService.getError(loginResponse);
+        if (oAuthError) {
+            setTimeout( _ => {
+                this.globalError = [oAuthError];
+                this.cd.detectChanges();
+            });
+        }
 
         if (isPlatformBrowser(this.platformId)) {
             this.reasonForLogoutUser = this.cookieService.get(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
