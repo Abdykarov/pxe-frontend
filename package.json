@@ -32,7 +32,8 @@
     "ng-high-memory": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng",
     "dev:ssr": "yarn ng-high-memory run app:serve-ssr",
     "build:ssr": "yarn build:client-and-server-bundles",
-    "prerender": "ng run app:prerender"
+    "prerender": "ng run app:prerender",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
