@@ -30,7 +30,7 @@ export class ReCaptchaInitializerComponent implements OnInit, OnDestroy {
         this.reCaptchaService.setReCaptcha(null);
     }
 
-    public resolve(code: string): void {
+    public resolve(code: string = ''): void {
         this.reCaptchaService.resolve(code);
     }
 }
