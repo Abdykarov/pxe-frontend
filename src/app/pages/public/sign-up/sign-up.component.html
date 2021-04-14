@@ -1,4 +1,4 @@
-<div #howItWorks class="section">
+<div class="section">
     <div class="container-fluid container-fluid--max-width">
         <div class="row no-gutters">
             <div class="col-xl-6">
@@ -11,14 +11,18 @@
                                 <a class="d-inline-block" (click)="routerToLogin($event)">
                                     Přihlaste se zde.</a>
                             </p>
-                            <pxe-registration-form
-                                [formFields]="formFields"
-                                [formLoading]="formLoading"
-                                [formSent]="formSent"
-                                [globalError]="globalError"
-                                [fieldError]="fieldError"
-                                (submitAction)="submitForm($event)"
-                            ></pxe-registration-form>
+                            <pxe-re-captcha #reCapcha
+                                            id="sign-up"
+                                            (resolveAction)="submitForm($event)">
+                                <pxe-registration-form
+                                    [formFields]="formFields"
+                                    [formLoading]="formLoading"
+                                    [formSent]="formSent"
+                                    [globalError]="globalError"
+                                    [fieldError]="fieldError"
+                                    (submitAction)="reCapcha.execute($event)"
+                                ></pxe-registration-form>
+                            </pxe-re-captcha>
                         </div>
                     </div>
                 </div>
