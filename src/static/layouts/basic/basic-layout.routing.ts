@@ -108,6 +108,10 @@ import {
     listSupplyPointsPageRoutes,
 } from 'src/static/pages/list-supply-points/page.module';
 import {
+    LoaderPageModule,
+    loaderPageRoutes,
+} from 'src/static/atoms/loader/page.module';
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -241,6 +245,7 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...listOfNotificationsPageRoutes,
             ...listSupplyPointsPageRoutes,
+            ...loaderPageRoutes,
             ...modalsPageRoutes,
             ...microTablePageRoutes,
             ...newsPageRoutes,
@@ -302,6 +307,7 @@ const routes: Routes = [
         InfoBannerPageModule,
         ListOfNotificationsPageModule,
         ListSupplyPointsPageModule,
+        LoaderPageModule,
         MicroTablePageModule,
         ModalsPageModule,
         NewsPageModule,

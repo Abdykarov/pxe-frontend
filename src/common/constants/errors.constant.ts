@@ -97,6 +97,11 @@ export const importErrorViolations = {
 };
 
 export const oAuthApiError = {
+    'SEC0007': 'Přihlášení se nezdařilo. Přihlašte se přes Bankovní identitu.',
+    'SEC0006': 'Přihlášení se nezdařilo. Přihlašte se přes Google.',
+    'SEC0005': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',
+    'SEC0005#_=_': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',
+    'SEC0004': 'Přihlášení se nezdařilo. Přihlašte se pomocí e-mailu (přihlašovacího jména) a hesla.',
     'SEC0003': 'Přihlášení se nezdařilo.',
     'SEC0003#_=_': 'Přihlášení se nezdařilo.',
 };
