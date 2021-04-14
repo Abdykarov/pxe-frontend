@@ -28,7 +28,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'lnd-root',
-    template: '<router-outlet></router-outlet>',
+    templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })

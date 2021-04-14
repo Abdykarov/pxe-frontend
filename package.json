@@ -70,6 +70,7 @@
     "latinize": "^0.4.1",
     "memory-cache": "^0.2.0",
     "moment": "^2.22.2",
+    "ng-recaptcha": "^7.0.1",
     "ngx-bootstrap": "^4.3.0",
     "ngx-cookie": "^4.1.2",
     "parse5": "^6.0.0",
