@@ -72,7 +72,7 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         },
         {
             provide: RECAPTCHA_LANGUAGE,
-            useValue: 'cs', // use French language
+            useValue: 'cs',
         },
     ],
     bootstrap: [
