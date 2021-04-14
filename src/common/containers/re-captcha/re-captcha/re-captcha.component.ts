@@ -5,10 +5,14 @@ import {
     Output,
 } from '@angular/core';
 
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
+
 import { AbstractComponent } from 'src/common/abstract.component';
-import { IResolveAction } from '../models/models';
+import { IResolveAction } from 'src/common/containers/re-captcha/models/models';
 import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
-import {filter, takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'pxe-re-captcha',

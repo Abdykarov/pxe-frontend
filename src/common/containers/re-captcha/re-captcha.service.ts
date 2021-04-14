@@ -28,5 +28,9 @@ export class ReCaptchaService {
         this.reset();
     }
 
-    public reset = () => setTimeout(_ => this.getReCaptcha().reset());
+    public reset = () => setTimeout(_ => {
+        this.resolveActionSubject$.next(null);
+        this.executionResolveAction = null;
+        this.getReCaptcha().reset();
+    })
 }
