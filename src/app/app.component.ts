@@ -90,6 +90,4 @@ export class AppComponent extends AbstractComponent implements OnInit {
             this.elementRef.nativeElement.removeAttribute('ng-version');
         }
     }
-
-    public resolve = (aa) => console.log(aa);
 }

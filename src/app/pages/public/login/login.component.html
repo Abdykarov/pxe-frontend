@@ -16,6 +16,7 @@
                             </ng-container>
                         </lnd-alert>
                         <pxe-re-captcha #reCapcha
+                                        id="login"
                                         (resolveAction)="submitFormLogin($event)">
                             <pxe-login-form
                                 *ngIf="[LOGIN_STATE.LOGIN, LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) !== -1"
@@ -41,6 +42,7 @@
                             (customAction)="resendSupplierLoginSms($event)"
                         ></pxe-login-supply-auth-form>
                         <pxe-re-captcha #reCapchaResetPassword
+                                        id="reset-password"
                                         (resolveAction)="submitResetPassword($event)">
                             <pxe-reset-password-form
                                 *ngIf="state === LOGIN_STATE.RESET"

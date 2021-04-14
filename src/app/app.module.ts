@@ -19,7 +19,6 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import {
     RECAPTCHA_LANGUAGE,
     RECAPTCHA_SETTINGS,
-    RecaptchaModule,
 } from 'ng-recaptcha';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
@@ -51,7 +50,6 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         HttpClientModule,
         HttpLinkModule,
         PipesModule,
-        RecaptchaModule,
         ReactiveFormsModule,
         TransferHttpCacheModule,
     ],
@@ -66,10 +64,10 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         {
             provide: RECAPTCHA_SETTINGS,
             useValue: {
-                siteKey: environment.re_captcha.siteKey,
-                size: environment.re_captcha.size,
-                errorMode: environment.re_captcha.errorMode,
-                badge: environment.re_captcha.badge,
+                siteKey: environment.re_captcha?.siteKey,
+                size: environment.re_captcha?.size,
+                errorMode: environment.re_captcha?.errorMode,
+                badge: environment.re_captcha?.badge,
             },
         },
         {
