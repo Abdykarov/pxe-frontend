@@ -7,8 +7,8 @@ import { LayoutContainerModule } from 'src/common/containers/layout-container/la
 import { RegistrationFormModule } from 'src/common/containers/form/forms/registration/registration-form.module';
 import { SignUpComponent } from './sign-up.component';
 import { SignUpRoutingModule } from './sign-up-routing.module';
+import { ReCaptchaModule } from 'src/common/containers/re-captcha/re-captcha.module';
 import { SupplierContainerModule } from 'src/common/containers/supplier-container/supplier-conteiner.module';
-import {ReCaptchaModule} from 'src/common/ui/re-captcha/re-captcha.module';
 
 @NgModule({
     declarations: [

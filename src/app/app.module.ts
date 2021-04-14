@@ -28,6 +28,7 @@ import { ApolloCMSGraphQLProvider } from 'src/common/cms/middleware/apollo-cms-g
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+import { environment } from 'src/environments/environment';
 import { FileUploadModule } from 'src/third-sides/file-upload';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
@@ -65,11 +66,10 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         {
             provide: RECAPTCHA_SETTINGS,
             useValue: {
-                siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // TEST
-//                siteKey: '6Ldp0xgUAAAAAF_iIss_hpFaVrjLbPGjwyfJwebB', // ERROR
-                size: 'invisible',
-                errorMode: 'handled',
-                badge: 'none',
+                siteKey: environment.re_captcha.siteKey,
+                size: environment.re_captcha.size,
+                errorMode: environment.re_captcha.errorMode,
+                badge: environment.re_captcha.badge,
             },
         },
         {

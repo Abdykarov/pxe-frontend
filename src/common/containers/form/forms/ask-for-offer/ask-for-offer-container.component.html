@@ -84,6 +84,7 @@
                 ></lnd-form-field>
                 <div class="text-right">
                     <pxe-re-captcha #reCapcha
+                                    [id]="id"
                                     (resolveAction)="submitForm($event)">
                         <lnd-button
                             type="gradient-primary"
