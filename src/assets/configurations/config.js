@@ -2,6 +2,7 @@
 // !!! it is necessary to follow the JSON structure !!!
 //api/content/pxe-parc4u/graphql for localhost developing url_cms_api
 //cms-api for ssr
+//siteKey test all valid
 window.angularDevstack = {
     "config": {
         "gaId": "",
@@ -9,7 +10,7 @@ window.angularDevstack = {
         "environment": "preview",
         "production": false,
         "re_captcha": {
-            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", // test all valid
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
             "size": "invisible",
             "errorMode": "handled",
             "badge": "none"
