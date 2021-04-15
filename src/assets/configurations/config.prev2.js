@@ -8,10 +8,10 @@ window.angularDevstack = {
         "environment": "preview",
         "production": true,
         "re_captcha": {
-            siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // test all valid
-            size: 'invisible',
-            errorMode: 'handled',
-            badge: 'none',
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", // test all valid
+            "size": "invisible",
+            "errorMode": "handled",
+            "badge": "none"
         },
         "sAnalyticsTId": "",
         "url": "https://pxeparc-preview.lnd.bz",

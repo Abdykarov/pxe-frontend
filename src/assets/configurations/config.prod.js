@@ -9,10 +9,10 @@ window.angularDevstack = {
         "sAnalyticsTId": "SA-00080-1",
         "production": true,
         "re_captcha": {
-            siteKey: '6Lf2gakaAAAAAAPDsPPKvsCih_A2lGeahqlxCtuO',
-            size: 'invisible',
-            errorMode: 'handled',
-            badge: 'none',
+            "siteKey": "6Lf2gakaAAAAAAPDsPPKvsCih_A2lGeahqlxCtuO",
+            "size": "invisible",
+            "errorMode": "handled",
+            "badge": "none"
         },
         "url": "https://parc4u.cz",
         "url_cms_assets": "https://squidex-prod.lnd.bz/api/assets/pxe-parc4u/",
