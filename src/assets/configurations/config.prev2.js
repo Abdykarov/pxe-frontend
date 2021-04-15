@@ -1,5 +1,6 @@
 // Default variables for PREVIEW environment
 // !!! it is necessary to follow the JSON structure !!!
+//siteKey test all valid
 
 window.angularDevstack = {
     "config": {
@@ -8,7 +9,7 @@ window.angularDevstack = {
         "environment": "preview",
         "production": true,
         "re_captcha": {
-            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", // test all valid
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
             "size": "invisible",
             "errorMode": "handled",
             "badge": "none"
