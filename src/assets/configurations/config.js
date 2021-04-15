@@ -9,10 +9,10 @@ window.angularDevstack = {
         "environment": "preview",
         "production": false,
         "re_captcha": {
-            siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // test all valid
-            size: 'invisible',
-            errorMode: 'handled',
-            badge: 'none',
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", // test all valid
+            "size": "invisible",
+            "errorMode": "handled",
+            "badge": "none"
         },
         "sAnalyticsTId": "",
         "url": "http://localhost:4200",
