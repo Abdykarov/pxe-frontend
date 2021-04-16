@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { BehaviorSubject } from 'rxjs';
 import { RecaptchaComponent } from 'ng-recaptcha';
 
@@ -25,7 +26,7 @@ export class ReCaptchaService {
 
     public resolve = (code: string) => {
         this.resolveActionSubject$.next(this.executionResolveAction);
-        if (this.executionResolveAction !== null) {
+        if (R.isNil(this.executionResolveAction)) {
             this.reset();
         }
     }
