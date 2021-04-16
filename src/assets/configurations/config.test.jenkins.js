@@ -7,6 +7,12 @@ window.angularDevstack = {
         "gtmId": "",
         "production": false,
         "url": "http://mock:9002",
+        "re_captcha": {
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", // test all valid
+            "size": "invisible",
+            "errorMode": "handled",
+            "badge": "none"
+        },
         "url_graphql": "http://mock:9002/graphql",
         "url_api": "http://mock:9002/api",
         "url_cms": "http://mock:9002/cms-api",

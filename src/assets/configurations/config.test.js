@@ -7,10 +7,10 @@ window.angularDevstack = {
         "gtmId": "GTM-58VS48R",
         "production": true,
         "re_captcha": {
-            siteKey: '6Lf2gakaAAAAAAPDsPPKvsCih_A2lGeahqlxCtuO',
-            size: 'invisible',
-            errorMode: 'handled',
-            badge: 'none',
+            "siteKey": "6Lf2gakaAAAAAAPDsPPKvsCih_A2lGeahqlxCtuO",
+            "size": "invisible",
+            "errorMode": "handled",
+            "badge": "none"
         },
         "url": "https://test.parc4u.cz",
         "url_cms_assets": "https://squidex-preview.lnd.bz/api/assets/pxe-parc4u/",
