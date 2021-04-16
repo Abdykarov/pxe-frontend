@@ -26,7 +26,7 @@ export class ReCaptchaService {
 
     public resolve = (code: string) => {
         this.resolveActionSubject$.next(this.executionResolveAction);
-        if (R.isNil(this.executionResolveAction)) {
+        if (!R.isNil(this.executionResolveAction)) {
             this.reset();
         }
     }
