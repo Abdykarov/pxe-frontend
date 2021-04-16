@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 import { RecaptchaComponent } from 'ng-recaptcha';
@@ -18,6 +18,10 @@ export class ReCaptchaService {
     public setReCaptcha = (captchaRef: RecaptchaComponent) => this.reCaptcha = captchaRef;
     public getReCaptcha = (): RecaptchaComponent => this.reCaptcha;
 
+    constructor(
+        private ngZone: NgZone,
+    ) {}
+
     public execute = (resolveAction: IResolveAction) => {
         this.executionResolveAction = resolveAction;
         this.getReCaptcha().execute();
@@ -25,12 +29,14 @@ export class ReCaptchaService {
 
     public resolve = (code: string) => {
         this.resolveActionSubject$.next(this.executionResolveAction);
-        this.reset();
+        if (this.executionResolveAction !== null) {
+            this.reset();
+        }
     }
 
-    public reset = () => setTimeout(_ => {
+    public reset = () => {
         this.resolveActionSubject$.next(null);
         this.executionResolveAction = null;
         this.getReCaptcha().reset();
-    })
+    }
 }
