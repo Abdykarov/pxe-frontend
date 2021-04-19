@@ -170,6 +170,10 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 () => {
                     this.formLoading = false;
                     this.formSent = true;
+                    setTimeout(_ => {
+                        this.formSent = false;
+                        this.cd.markForCheck();
+                    }, 5000);
                     scrollToElementFnc('top');
                     this.cd.markForCheck();
                 },
