@@ -66,6 +66,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-detail-form.component.scss'],
 })
 export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+    public fileLoading = false;
+
     @Input()
     public supplyPoint: ISupplyPoint;
 
@@ -289,6 +291,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     }
 
     public downloadPdf = () => {
+        this.formLoading = true;
         this.documentService.getDocument(this.supplyPoint.contract.contractId, IDocumentType.CONTRACT)
             .pipe(
                 takeUntil(this.destroy$),
@@ -302,6 +305,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 (error) => {
                     const message = parseRestAPIErrors(error);
                     this.globalError = [message];
+                    this.formLoading = false;
                     this.cd.markForCheck();
                 },
             );

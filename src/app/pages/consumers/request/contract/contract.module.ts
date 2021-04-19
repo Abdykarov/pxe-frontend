@@ -9,6 +9,7 @@ import { ContractComponent } from './contract.component';
 import { ContractRoutingModule } from './contract-routing.module';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { LoaderModule } from 'src/common/ui/loader/loader.module';
 import { PdfViewerModule } from 'src/common/ui/pdf-viewer/pdf-viewer.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
@@ -31,6 +32,7 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         ContractRoutingModule,
         InfoBannerModule,
         LayoutContainerModule,
+        LoaderModule,
         PdfViewerModule,
         PipesModule,
         PlaceloaderModule,

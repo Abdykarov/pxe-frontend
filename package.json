@@ -29,7 +29,8 @@
     "test": "ng test app",
     "test:watch": "ng test --watch=true app",
     "build:client-and-server-bundles": "yarn build:app && ng run app:server:production",
-    "dev:ssr": "ng run app:serve-ssr",
+    "ng-high-memory": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng",
+    "dev:ssr": "yarn ng-high-memory run app:serve-ssr",
     "build:ssr": "yarn build:client-and-server-bundles",
     "prerender": "ng run app:prerender"
   },
@@ -69,6 +70,7 @@
     "latinize": "^0.4.1",
     "memory-cache": "^0.2.0",
     "moment": "^2.22.2",
+    "ng-recaptcha": "^6.1.0",
     "ngx-bootstrap": "^4.3.0",
     "ngx-cookie": "^4.1.2",
     "parse5": "^6.0.0",

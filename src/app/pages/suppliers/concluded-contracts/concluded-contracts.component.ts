@@ -62,7 +62,7 @@ export class ConcludedContractsComponent extends AbstractComponent implements On
     public numberOfPagesSubject$: BehaviorSubject<number> = new BehaviorSubject(1);
     public numberOfPages$ = this.numberOfPagesSubject$.asObservable();
     public commodityType: CommodityType = null;
-    public downloadingContractId = 0;
+    public downloadingContractIds: string[] = [];
 
     public paginationConfig: IPaginationConfig = null;
 
@@ -150,7 +150,7 @@ export class ConcludedContractsComponent extends AbstractComponent implements On
     }
 
     public downloadPDF = (contractId: string) => {
-        this.downloadingContractId = Number(contractId);
+        this.downloadingContractIds = R.append(contractId, this.downloadingContractIds);
         this.globalError = [];
         this.documentService.getDocument(contractId, IDocumentType.CONTRACT)
             .pipe(
@@ -158,14 +158,14 @@ export class ConcludedContractsComponent extends AbstractComponent implements On
             )
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
-                    this.downloadingContractId = null;
+                    this.downloadingContractIds = R.without(contractId, this.downloadingContractIds);
                     this.documentService.documentSave(responseDataDocument);
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {
                     const message = parseRestAPIErrors(error);
-                    this.downloadingContractId = null;
+                    this.downloadingContractIds = R.without(contractId, this.downloadingContractIds);
                     this.globalError = [message];
                     this.cd.markForCheck();
                 },

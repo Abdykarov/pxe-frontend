@@ -258,6 +258,7 @@
                                 <lnd-button
                                     label="Export nabídek"
                                     type="primary"
+                                    [isDisabled]="exporting"
                                     customClass="mb-3 mb-md-0"
                                     (click)="exportOffers($event)"
                                 ></lnd-button>

@@ -8,6 +8,7 @@ import { ModalModule } from 'src/common/containers/modal/modal.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PublicLayoutComponent } from './public-layout.component';
 import { PublicLayoutRoutingModule } from './public-layout.routing';
+import { ReCaptchaModule } from 'src/common/containers/re-captcha/re-captcha.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { PublicLayoutRoutingModule } from './public-layout.routing';
         HeaderModule,
         ModalModule,
         PipesModule,
+        ReCaptchaModule,
         PublicLayoutRoutingModule,
     ],
 })

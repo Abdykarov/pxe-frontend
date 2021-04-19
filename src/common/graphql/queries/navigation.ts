@@ -13,7 +13,8 @@ export const getConfigQuery = gql`
                     children {
                         label,
                         url,
-                    }
+                    },
+                    allowedLoginProviders
                 }
                 navigationItemOpened{
                     label,

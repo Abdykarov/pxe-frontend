@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { ILoginResponse } from './model/auth.model';
 import { oAuthApiError } from 'src/common/constants/errors.constant';
-import { OAuthType } from 'src/app/models/oAuth/oAuth.model';
+import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 
 @Injectable({
     providedIn: 'root',
