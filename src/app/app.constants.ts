@@ -137,7 +137,7 @@ export const CONSTS = {
         REQUESTS : 'rozpracovane-smlouvy',
         RESULT : 'vysledek',
         SECURED : 'aplikace',
-        SECURING_YOUR_DATA : 'ochrana-osobnich',
+        SECURING_YOUR_DATA : 'ochrana-osobnich-udaju',
         SIGNBOARD: 'informace',
         SIGN_UP : 'registrace',
         SUPPLY_POINT : 'odberne-misto',
@@ -145,7 +145,7 @@ export const CONSTS = {
         SUPPLY_POINTS : 'uzavrene-smlouvy',
         SUPPLY_OFFER: 'sprava-nabidek',
         SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
-        TERMS_OF_USE : 'zasady-pouzivani-cookies',
+        TERMS_OF_USE : 'podminky-uzivani',
         UPLOAD: 'nahrani',
         USER_PROFILE: 'uzivatelsky-profil',
         WILD_CART  : '**',
@@ -354,14 +354,9 @@ export const commodityTypes = {
 };
 
 export enum SubjectTypeLowerCase {
-    INDIVIDUAL = 'individual',
-    BUSINESSMAN = 'business',
+    INDIVIDUAL = 'domacnost',
+    BUSINESSMAN = 'firma',
 }
-
-export const SubjectTypesTypes = {
-    [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-    [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-};
 
 export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     {

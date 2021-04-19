@@ -22,7 +22,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityTypesLowerCase,
     CONSTS,
-    SubjectTypeLowerCase,
+    SubjectTypeLowerCase, urlCommodityToCommodityType,
 } from 'src/app/app.constants';
 import {
     historyColConfig,
@@ -94,6 +94,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             .subscribe(params => {
                 this.subjectType = params.subjectType;
                 const tree = this.router.parseUrl(this.router.url);
+       //         this.commodityType = urlCommodityToCommodityType[tree.fragment];
                 this.commodityType = <CommodityTypesLowerCase>tree.fragment;
 
                 this.prepareActiveContract();
