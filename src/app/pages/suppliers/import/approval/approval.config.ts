@@ -281,7 +281,6 @@ export class ApprovalConfig {
             confirmText: `Vrácením o krok zpět ztratíte nahrané nabídky.<br />Opravdu chcete pokračovat?`,
             titleConfirm: 'Ano',
             titleClose: 'Ne',
-            size: 'xl',
         },
     })
 }
