@@ -510,7 +510,19 @@
 	&.btn-google,
 	&.btn-bankid {
 		height: $btn-social-height;
+		min-height: auto;
 		padding: $spacer;
+		line-height: 1;
+		text-align: left;
+	}
+
+
+	&.btn-facebook,
+	&.btn-google {
+		height: $btn-social-height;
+		min-height: auto;
+		padding: $spacer;
+		line-height: 1;
 		text-align: left;
 
 		&::after {
@@ -568,12 +580,18 @@
 	}
 
 	&.btn-bankid {
-		padding-right: ( $btn-padding-x + $btn-width-icon + ( $spacer * .75 ) );
 		background-color: $success-darken;
 
-		&::after {
+		.btn__icon::after {
 			content: '';
+			position: relative;
+			display: block;
+			width: auto;
+			height: 14px;
 			background-image: url(../../../assets/images/social/bankid.svg);
+			background-size: auto;
+			background-repeat: no-repeat;
+			background-position-y: center;
 		}
 
 		&:hover,
