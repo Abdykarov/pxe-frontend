@@ -26,6 +26,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     commodityTypes,
     ROUTES,
+    urlCommodityToCommodityType,
 } from 'src/app/app.constants';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
@@ -90,7 +91,7 @@ export class ConcludedContractsComponent extends AbstractComponent implements On
             .pipe(
                 takeUntil(this.destroy$),
                 filter((params) => {
-                    if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                    if (R.indexOf(urlCommodityToCommodityType[params.commodityType], R.keys(commodityTypes)) < 0) {
                         this.router.navigate([this.routePower]);
                         return false;
                     }
@@ -98,7 +99,7 @@ export class ConcludedContractsComponent extends AbstractComponent implements On
                 }),
             )
             .subscribe(params => {
-                this.commodityType = commodityTypes[params.commodityType];
+                this.commodityType = commodityTypes[urlCommodityToCommodityType[params.commodityType]];
                 this.commodityTypeSubject$.next(this.commodityType);
                 this.cd.markForCheck();
             });
