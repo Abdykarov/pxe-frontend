@@ -267,13 +267,13 @@
 		}
 
 		&__link {
-			@include link {
+			@include link-without-href {
 				color: $font-text;
 				font-size: $perex-font-size;
 				text-transform: uppercase;
 			}
 
-			@include link-interactive {
+			@include link-without-href-interactive {
 				color: $font-text;
 				text-decoration: none;
 				border-bottom: 2px solid rgba($primary, .6);
