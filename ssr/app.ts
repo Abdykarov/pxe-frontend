@@ -17,7 +17,7 @@ import router from './routes/index';
 import { AppServerModule } from '../src/app.server';
 
 const server = express();
-server.set('trust proxy', '127.0.0.1');
+server.set('trust proxy', ['127.0.0.1', 'pxeparc-preview', 'parc4u']);
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
