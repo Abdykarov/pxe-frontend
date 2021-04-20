@@ -1,5 +1,5 @@
 <div class="row mb-6" *ngIf="(activeArticle$ | async) as activeArticle">
-    <div class="col-12 col-xl-10 offset-xl-1 mb-3">
+    <div class="col-12 col-xl-6 offset-xl-3 mb-3">
         <h1 class="h2--public">{{activeArticle.header}}</h1>
         <div [innerHTML]="activeArticle.content | htmlContent"></div>
     </div>
