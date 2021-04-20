@@ -9,6 +9,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ALL_BLOG: 'vse',
     ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_requests:',
     APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
@@ -341,6 +342,11 @@ export const COMMODITY_TO_DISTRIBUTION_MAP = {
 export enum CommodityTypesLowerCase {
     POWER = 'power',
     GAS = 'gas',
+}
+
+export enum CommodityTypesCsLowerCase {
+    POWER = 'elektrina',
+    GAS = 'plyn',
 }
 
 export const urlCommodityToCommodityType = {

@@ -19,6 +19,7 @@ import {
 } from 'src/common/cms/models/blog';
 import { IRouterParams } from './blog.model';
 import { ISeo } from 'src/common/cms/models/seo';
+import {CONSTS} from '../../../app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -189,5 +190,5 @@ export class BlogFacade {
     }
 
     private isDetailPage = (): boolean => this.isDetailSubject$.getValue();
-    private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === 'all';
+    private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 }

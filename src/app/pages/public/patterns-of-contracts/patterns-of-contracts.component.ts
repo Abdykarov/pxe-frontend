@@ -20,9 +20,9 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    CommodityTypesLowerCase,
+    CommodityTypesCsLowerCase,
     CONSTS,
-    SubjectTypeLowerCase, urlCommodityToCommodityType,
+    SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import {
     historyColConfig,
@@ -53,7 +53,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     @ViewChild('pxePdfViewer', { static: true })
     public pxePdfViewer: PdfViewerComponent;
 
-    public readonly COMMODITY_TYPE = CommodityTypesLowerCase;
+    public readonly COMMODITY_TYPE = CommodityTypesCsLowerCase;
     public readonly SUBJECT_TYPE = SubjectTypeLowerCase;
 
     public commodityType = this.COMMODITY_TYPE.POWER;
@@ -94,8 +94,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             .subscribe(params => {
                 this.subjectType = params.subjectType;
                 const tree = this.router.parseUrl(this.router.url);
-       //         this.commodityType = urlCommodityToCommodityType[tree.fragment];
-                this.commodityType = <CommodityTypesLowerCase>tree.fragment;
+                this.commodityType = <CommodityTypesCsLowerCase>tree.fragment;
 
                 this.prepareActiveContract();
                 this.prepareFutureContracts();
@@ -125,7 +124,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
         this.navigateToCorrectUrl();
     }
 
-    public routeToCommodityType = (evt, commodityType: CommodityTypesLowerCase) => {
+    public routeToCommodityType = (evt, commodityType: CommodityTypesCsLowerCase) => {
         evt.preventDefault();
         this.commodityType = commodityType;
         this.navigateToCorrectUrl();

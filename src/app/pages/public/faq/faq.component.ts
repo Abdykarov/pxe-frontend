@@ -13,9 +13,9 @@ import { takeUntil} from 'rxjs/operators';
 
 import { AbstractFaqComponent } from './abstract-faq.component';
 import { CONSTS } from 'src/app/app.constants';
+import { FaqService } from 'src/app/services/faq.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IFaq } from 'src/common/cms/models/faq';
-import {FaqService} from '../../../services/faq.service';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
