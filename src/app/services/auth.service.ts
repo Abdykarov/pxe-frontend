@@ -320,7 +320,7 @@ export class AuthService {
                 return;
             }
         }
-        // TODO ADMIN!!!
+
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
         } else if (this.isCurrentUser(IUserTypes.SUPPLIER)) {
