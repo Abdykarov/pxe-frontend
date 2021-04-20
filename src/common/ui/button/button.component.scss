@@ -427,7 +427,7 @@
 			}
 		}
 
-		&--alone {
+		&--alone:not(.btn-bankid) {
 			position: relative;
 			width: $btn-width-icon-alone;
 			padding: ( $spacer / 4 );
@@ -582,16 +582,18 @@
 	&.btn-bankid {
 		background-color: $success-darken;
 
-		.btn__icon::after {
-			content: '';
-			position: relative;
-			display: block;
-			width: auto;
-			height: 14px;
-			background-image: url(../../../assets/images/social/bankid.svg);
-			background-size: auto;
-			background-repeat: no-repeat;
-			background-position-y: center;
+		.btn__icon {
+			&::after {
+				content: '';
+				position: relative;
+				display: block;
+				width: 73px;
+				height: 14px;
+				background-image: url(../../../assets/images/social/bankid.svg);
+				background-size: auto;
+				background-repeat: no-repeat;
+				background-position-y: center;
+			}
 		}
 
 		&:hover,
