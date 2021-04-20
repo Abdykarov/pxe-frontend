@@ -513,16 +513,11 @@
 		min-height: auto;
 		padding: $spacer;
 		line-height: 1;
-		text-align: left;
 	}
 
 
 	&.btn-facebook,
 	&.btn-google {
-		height: $btn-social-height;
-		min-height: auto;
-		padding: $spacer;
-		line-height: 1;
 		text-align: left;
 
 		&::after {
@@ -581,6 +576,7 @@
 
 	&.btn-bankid {
 		background-color: $black;
+		text-align: center;
 
 		&:hover,
 		&:active,
@@ -590,11 +586,9 @@
 
 		&::after {
 			content: '';
-			position: relative;
-			display: block;
+			display: inline-block;
 			width: 73px;
 			height: 14px;
-			margin: 0 auto;
 			background-image: url(../../../assets/images/social/bankid.svg);
 			background-size: auto;
 			background-repeat: no-repeat;
