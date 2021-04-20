@@ -296,6 +296,8 @@
  */
 
 @mixin link-without-href() {
+	&,
+	&:visited,
 	&:not([href]):not([tabindex]),
 	&:not([href]):not([tabindex]):visited {
 		@content;
@@ -313,6 +315,9 @@
 }
 
 @mixin link-without-href-interactive() {
+	&.focus,
+	&:focus,
+	&:hover,
 	&:not([href]):not([tabindex]):not(.active).focus,
 	&:not([href]):not([tabindex]):not(.active):focus,
 	&:not([href]):not([tabindex]):not(.active):hover {
