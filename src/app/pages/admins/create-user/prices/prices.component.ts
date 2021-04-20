@@ -70,7 +70,7 @@ export class PricesComponent extends AbstractComponent implements OnInit {
         const data = formData.value;
         const isOnlySave = formData.data;
         const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
-        supplyPoint.importPermanentMonthyPay = data?.importPermanentMonthyPay,
+        supplyPoint.importPermanentMonthlyPay = data?.importPermanentMonthlyPay,
         supplyPoint.importPriceTotalPerYear = data?.importPriceTotalPerYear,
         supplyPoint.importPricePerKwPowerVT = data?.importPricePerKwPowerVT,
         supplyPoint.importPricePerKwPowerNT = data?.importPricePerKwPowerNT,

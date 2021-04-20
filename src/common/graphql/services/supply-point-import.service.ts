@@ -191,7 +191,7 @@ export class SupplyPointImportService {
             importPricePerKwPowerVT: supplyPoint?.importPricePerKwPowerVT,
             importPricePerKwPowerNT: supplyPoint?.importPricePerKwPowerNT,
             importPricePerKwGas: supplyPoint?.importPricePerKwGas,
-            importPermanentMonthyPay: supplyPoint?.importPermanentMonthyPay,
+            importPermanentMonthlyPay: supplyPoint?.importPermanentMonthlyPay,
         };
     }
 
@@ -200,6 +200,6 @@ export class SupplyPointImportService {
         supplyPoint.importPricePerKwPowerVT = data?.importPricePerKwPowerVT;
         supplyPoint.importPricePerKwPowerNT = data?.importPricePerKwPowerNT;
         supplyPoint.importPricePerKwGas = data?.importPricePerKwGas;
-        supplyPoint.importPermanentMonthyPay = data?.importPermanentMonthyPay;
+        supplyPoint.importPermanentMonthlyPay = data?.importPermanentMonthlyPay;
     }
 }

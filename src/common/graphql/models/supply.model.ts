@@ -141,7 +141,7 @@ export interface ISupplyPoint {
     importPricePerKwPowerNT?: number;
     importPricePerKwGas?: number;
     importPriceTotalPerYear?: number;
-    importPermanentMonthyPay?: number;
+    importPermanentMonthlyPay?: number;
     imported?: boolean;
 }
 

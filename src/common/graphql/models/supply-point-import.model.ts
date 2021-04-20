@@ -22,7 +22,7 @@ export interface ISupplyPointImportInput {
     importPricePerKwPowerNT?: number;
     importPricePerKwGas?: number;
     importPriceTotalPerYear?: number;
-    importPermanentMonthyPay?: number;
+    importPermanentMonthlyPay?: number;
 }
 
 export interface ISupplyPointPowerAttributesImport {

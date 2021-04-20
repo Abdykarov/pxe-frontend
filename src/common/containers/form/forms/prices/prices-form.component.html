@@ -59,14 +59,14 @@
         [validationMessages]="formFields.validationMessages.importPriceTotalPerYear"
     ></lnd-form-field>
     <lnd-form-field
-        [error]="formError.importPermanentMonthyPay || form.controls.importPermanentMonthyPay.errors"
-        [formControl]="form.controls.importPermanentMonthyPay"
-        [id]="'importPermanentMonthyPay'"
+        [error]="formError.importPermanentMonthlyPay || form.controls.importPermanentMonthlyPay.errors"
+        [formControl]="form.controls.importPermanentMonthlyPay"
+        [id]="'importPermanentMonthlyPay'"
         appendText="Kč/MWh (bez DPH)"
         label="Stálá měsíční platba"
-        [success]="form.controls.importPermanentMonthyPay.valid && (form.controls.importPermanentMonthyPay.touched || formError.importPermanentMonthyPay)"
-        [touched]="form.controls.importPermanentMonthyPay.touched || formError.importPermanentMonthyPay"
-        [validationMessages]="formFields.validationMessages.importPermanentMonthyPay"
+        [success]="form.controls.importPermanentMonthlyPay.valid && (form.controls.importPermanentMonthlyPay.touched || formError.importPermanentMonthlyPay)"
+        [touched]="form.controls.importPermanentMonthlyPay.touched || formError.importPermanentMonthlyPay"
+        [validationMessages]="formFields.validationMessages.importPermanentMonthlyPay"
     ></lnd-form-field>
     <div class="row">
         <div class="col-12 text-center">

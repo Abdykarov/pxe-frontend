@@ -106,7 +106,7 @@ type SupplyPoint {
     importPricePerKwPowerNT: Float
     importPricePerKwGas: Float
     importPriceTotalPerYear: Float
-    importPermanentMonthyPay: Float
+    importPermanentMonthlyPay: Float
 }
 
 enum ProgressStatus {
@@ -315,7 +315,7 @@ input SupplyPointInputImport {
     importPricePerKwPowerNT: Float
     importPricePerKwGas: Float
     importPriceTotalPerYear: Float
-    importPermanentMonthyPay: Float
+    importPermanentMonthlyPay: Float
 }
 
 type SupplyPointImportResponse {
