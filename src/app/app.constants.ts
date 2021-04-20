@@ -33,6 +33,16 @@ export const CONSTS = {
         MAX_FILE_COUNT: 10,
         MAX_FILE_SIZE: 10485760,
     },
+    CMS: {
+        CLIENT_ID: 'pxe-parc4u:default',
+        CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
+        GRAND_TYPE: 'client_credentials',
+        REFRESH_TOKEN_URL: 'identity-server/connect/token',
+        REGEX_CONTAIN_CMS: 'cms-api',
+        REGEX_CONTAIN_CMS_DIRECT: 'content/pxe-parc4u/graphql',
+        SCOPE: 'squidex-api',
+    },
+    CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);
@@ -41,7 +51,6 @@ export const CONSTS = {
             return CryptoJS.lib.WordArray.random(128 / 8);
         },
     },
-    CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -145,15 +154,6 @@ export const CONSTS = {
         INTERVAL: 300000,
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
-    },
-    CMS: {
-        CLIENT_ID: 'pxe-parc4u:default',
-        CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
-        GRAND_TYPE: 'client_credentials',
-        REFRESH_TOKEN_URL: 'identity-server/connect/token',
-        REGEX_CONTAIN_CMS: 'cms-api',
-        REGEX_CONTAIN_CMS_DIRECT: 'content/pxe-parc4u/graphql',
-        SCOPE: 'squidex-api',
     },
     START_STICKER_HEADER: 0,
     STORAGE_HELPERS: {

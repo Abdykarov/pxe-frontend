@@ -141,6 +141,18 @@
 	}
 }
 
+.loader__wrapper-text {
+	position: relative;
+	display: inline-block;
+	padding-right: ( $loader-size + $spacer );
+
+	.loader {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+}
+
 //
 // Overwriting default - Extend new definition `table-row-group` for default Bootstrap
 //

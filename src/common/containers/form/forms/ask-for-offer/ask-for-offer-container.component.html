@@ -83,15 +83,19 @@
                     [validationMessages]="formFields.validationMessages.consent"
                 ></lnd-form-field>
                 <div class="text-right">
-                    <lnd-button
-                        type="gradient-primary"
-                        class="w-100"
-                        [isDisabled]="fileUploader.isUploading"
-                        customClass="w-100 btn-public"
-                        [submit]="true"
-                        (action)="submitForm($event)"
-                        [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
-                    </lnd-button>
+                    <pxe-re-captcha #reCapcha
+                                    [id]="id"
+                                    (resolveAction)="submitForm($event)">
+                        <lnd-button
+                            type="gradient-primary"
+                            class="w-100"
+                            [isDisabled]="fileUploader.isUploading"
+                            customClass="w-100 btn-public"
+                            [submit]="true"
+                            (action)="reCapcha.execute($event)"
+                            [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
+                        </lnd-button>
+                    </pxe-re-captcha>
                 </div>
             </div>
         </div>

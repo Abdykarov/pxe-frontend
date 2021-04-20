@@ -29,12 +29,13 @@ export const questionsQuery = gql`
 
 export const faqConfigQuery = gql`
     query queryTagContents {
-      queryTagContents {
+      queryTagContents (orderby:"data/order/iv asc"){
         flatData {
           type
           url
           label
-          title
+          title,
+          order
         }
       }
     }`;
@@ -51,6 +52,7 @@ query queryFaqContents {
           url
           label
           title
+          order
         },
       },
       seo {

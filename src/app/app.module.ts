@@ -16,7 +16,10 @@ import { ApolloModule } from 'apollo-angular';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CookieModule } from 'ngx-cookie';
 import { HttpLinkModule } from 'apollo-angular-link-http';
-
+import {
+    RECAPTCHA_LANGUAGE,
+    RECAPTCHA_SETTINGS,
+} from 'ng-recaptcha';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 // own classes
@@ -24,6 +27,7 @@ import { ApolloCMSGraphQLProvider } from 'src/common/cms/middleware/apollo-cms-g
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+import { environment } from 'src/environments/environment';
 import { FileUploadModule } from 'src/third-sides/file-upload';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
@@ -56,6 +60,19 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         {
             provide: LOCALE_ID,
             useValue: 'cs-CZ',
+        },
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: {
+                siteKey: environment.re_captcha?.siteKey,
+                size: environment.re_captcha?.size,
+                errorMode: environment.re_captcha?.errorMode,
+                badge: environment.re_captcha?.badge,
+            },
+        },
+        {
+            provide: RECAPTCHA_LANGUAGE,
+            useValue: 'cs',
         },
     ],
     bootstrap: [
