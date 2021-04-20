@@ -11,6 +11,7 @@ import {
     combineLatest,
 } from 'rxjs';
 
+import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import {
     IArticle,
@@ -189,5 +190,5 @@ export class BlogFacade {
     }
 
     private isDetailPage = (): boolean => this.isDetailSubject$.getValue();
-    private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === 'all';
+    private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 }

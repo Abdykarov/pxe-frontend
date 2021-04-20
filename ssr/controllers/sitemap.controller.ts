@@ -28,7 +28,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/faq/${(question.flatData.tag[0].flatData.url)}/${question.flatData.url}`,
+                            `${req.protocol}://${req.get('host')}/casto-kladene-otazky/${(question.flatData.tag[0].flatData.url)}/${question.flatData.url}`,
                         ],
                     });
                 }
@@ -37,7 +37,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/faq/${(faqType.tag[0].url)}`,
+                            `${req.protocol}://${req.get('host')}/casto-kladene-otazky/${(faqType.tag[0].url)}`,
                         ],
                     });
                 }

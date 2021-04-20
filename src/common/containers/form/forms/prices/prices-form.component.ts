@@ -49,7 +49,7 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     public setForm = () => {
         if (this.supplyPoint.commodityType === CommodityType.POWER) {
             this.setDisableField('importPricePerKwGas');
-            this.setAnnualConsumptionNTState(this.supplyPoint.distributionRate.code, this.codeLists);
+            this.setAnnualConsumptionNTState(this.supplyPoint?.distributionRate?.code, this.codeLists);
         } else {
             this.setDisableField('importPricePerKwPowerNT');
             this.setDisableField('importPricePerKwPowerVT');
