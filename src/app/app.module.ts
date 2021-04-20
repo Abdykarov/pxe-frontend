@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import localeCs from '@angular/common/locales/cs';
 import {
+    ErrorHandler,
     LOCALE_ID,
     NgModule,
 } from '@angular/core';
@@ -25,6 +26,7 @@ import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-grap
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { FileUploadModule } from 'src/third-sides/file-upload';
+import { GlobalErrorHandler } from './errors/global.error.handler';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
@@ -53,6 +55,10 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         ApolloGraphQLProvider,
         ApolloCMSGraphQLProvider,
         InterceptorProviders,
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler,
+        },
         {
             provide: LOCALE_ID,
             useValue: 'cs-CZ',
