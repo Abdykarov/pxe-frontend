@@ -70,18 +70,21 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
         let importPricePerKwPowerNT = null;
         let importPricePerKwPowerVT = null;
         let importPriceTotalPerYear = null;
+        let importPermanentMonthyPay = null;
 
         if (this.supplyPoint) {
-            importPricePerKwGas = this.supplyPoint.importPricePerKwGas;
-            importPricePerKwPowerNT = this.supplyPoint.importPricePerKwPowerNT;
-            importPricePerKwPowerVT = this.supplyPoint.importPricePerKwPowerVT;
-            importPriceTotalPerYear = this.supplyPoint.importPriceTotalPerYear;
+            importPricePerKwGas = this.supplyPoint?.importPricePerKwGas;
+            importPricePerKwPowerNT = this.supplyPoint?.importPricePerKwPowerNT;
+            importPricePerKwPowerVT = this.supplyPoint?.importPricePerKwPowerVT;
+            importPriceTotalPerYear = this.supplyPoint?.importPriceTotalPerYear;
+            importPermanentMonthyPay = this.supplyPoint?.importPermanentMonthyPay;
         }
 
         this.form.controls['importPricePerKwGas'].setValue(importPricePerKwGas);
         this.form.controls['importPricePerKwPowerNT'].setValue(importPricePerKwPowerNT);
         this.form.controls['importPricePerKwPowerVT'].setValue(importPricePerKwPowerVT);
         this.form.controls['importPriceTotalPerYear'].setValue(importPriceTotalPerYear);
+        this.form.controls['importPermanentMonthyPay'].setValue(importPermanentMonthyPay);
         this.resetFormError(false);
     }
 }

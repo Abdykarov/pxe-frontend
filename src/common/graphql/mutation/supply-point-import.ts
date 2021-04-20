@@ -59,6 +59,7 @@ export const createSupplyPointImportMutation = gql`
             importPricePerKwPowerNT,
             importPricePerKwGas,
             importPriceTotalPerYear,
+            importPermanentMonthyPay,
             expirationDate,
             subject{
                 type,
