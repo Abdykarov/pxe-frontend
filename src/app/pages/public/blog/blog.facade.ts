@@ -11,6 +11,7 @@ import {
     combineLatest,
 } from 'rxjs';
 
+import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import {
     IArticle,
@@ -19,7 +20,6 @@ import {
 } from 'src/common/cms/models/blog';
 import { IRouterParams } from './blog.model';
 import { ISeo } from 'src/common/cms/models/seo';
-import {CONSTS} from '../../../app.constants';
 
 @Injectable({
     providedIn: 'root',
