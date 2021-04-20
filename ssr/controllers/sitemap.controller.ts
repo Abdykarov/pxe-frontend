@@ -28,7 +28,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/casto-kladene-otazky/${(question.flatData.tag[0].flatData.url)}/${question.flatData.url}`,
+                            `${req.protocol}s://${req.get('host')}/casto-kladene-otazky/${(question.flatData.tag[0].flatData.url)}/${question.flatData.url}`,
                         ],
                     });
                 }
@@ -37,7 +37,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/casto-kladene-otazky/${(faqType.tag[0].url)}`,
+                            `${req.protocol}s://${req.get('host')}/casto-kladene-otazky/${(faqType.tag[0].url)}`,
                         ],
                     });
                 }
@@ -46,7 +46,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/blog/${(type.url)}`,
+                            `${req.protocol}s://${req.get('host')}/blog/${(type.url)}`,
                         ],
                     });
                 }
@@ -55,7 +55,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/blog/${getTypeOfArticle(article)}/${(article.url)}`,
+                            `${req.protocol}s://${req.get('host')}/blog/${getTypeOfArticle(article)}/${(article.url)}`,
                         ],
                     });
                 }
