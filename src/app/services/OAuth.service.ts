@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ILoginResponse } from './model/auth.model';
 import { oAuthApiError } from 'src/common/constants/errors.constant';
 import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
+import {CONSTS} from '../app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -29,7 +30,7 @@ export class OAuthService {
 
     public tryLoginWithOAuth = (oAuthType: OAuthType): void => {
         window.open(
-            `${environment.url}/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/login`,
+            `${environment.url}/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/${CONSTS.PATHS.LOGIN}`,
             '_self',
         );
     }
