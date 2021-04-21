@@ -111,7 +111,7 @@ export const CONSTS = {
         ASK_FOR_OFFER : 'nahrane-faktury',
         ASK_FOR_OFFER_NEW: 'prijate',
         ASK_FOR_OFFER_IN_PROGRESS: 'rozpracovane',
-        ASK_FOR_OFFER_PROCESSED: 'zpracovane',
+        ASK_FOR_OFFER_PROCESSED: 'uzavrene',
         BLOG: 'blog',
         CREATE_USER: 'vytvoreni-odberatele',
         CONTRACT : 'smlouva',

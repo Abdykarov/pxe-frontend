@@ -147,7 +147,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
         evt.preventDefault();
         const lastSupplyPointsWithConcludedContract = R.find(
             (supplyPoint: ISupplyPoint) =>
-                inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
+                supplyPoint.allowedOperations && inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
         )(this.sourceSupplyPoints);
 
         if (lastSupplyPointsWithConcludedContract) {
