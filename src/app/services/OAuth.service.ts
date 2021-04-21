@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { ILoginResponse } from './model/auth.model';
 import { oAuthApiError } from 'src/common/constants/errors.constant';
 import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
-import {CONSTS} from '../app.constants';
 
 @Injectable({
     providedIn: 'root',
