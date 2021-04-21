@@ -1,5 +1,6 @@
 // Default variables for PREVIEW environment
 // !!! it is necessary to follow the JSON structure !!!
+//siteKey test all valid
 
 window.angularDevstack = {
     "config": {
@@ -7,6 +8,12 @@ window.angularDevstack = {
         "gtmId": "",
         "environment": "preview",
         "production": true,
+        "re_captcha": {
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+            "size": "invisible",
+            "errorMode": "handled",
+            "badge": "none"
+        },
         "sAnalyticsTId": "",
         "url": "https://pxeparc-preview.lnd.bz",
         "url_cms_assets": "https://squidex.lnd.bz/api/assets/pxe-parc4u/",

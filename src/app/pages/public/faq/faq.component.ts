@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
 } from '@angular/core';
 import {
@@ -10,17 +11,18 @@ import {
 import * as R from 'ramda';
 import { takeUntil} from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFaqComponent } from './abstract-faq.component';
 import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IFaq } from 'src/common/cms/models/faq';
+import {FaqService} from '../../../services/faq.service';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
     templateUrl: './faq.component.html',
     styleUrls: ['./faq.component.scss'],
 })
-export class FaqComponent extends AbstractComponent {
+export class FaqComponent extends AbstractFaqComponent {
     private readonly NUMBER_OF_SLASH_IN_DETAIL_IN_URL = 3;
     public readonly faqSource: IFaq[] = this.route.snapshot.data.faq;
     public faq: IFaq = null;
@@ -36,18 +38,32 @@ export class FaqComponent extends AbstractComponent {
     ];
 
     constructor(
-        private route: ActivatedRoute,
+        private cd: ChangeDetectorRef,
+        public route: ActivatedRoute,
+        public faqService: FaqService,
         protected router: Router,
     ) {
-        super();
+        super(
+            faqService,
+            route,
+        );
+
+        this.loadConfigs$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe( _ => {
+                const activeTag: string = this.getActiveTag();
+                if (!activeTag) {
+                    const firstTag = this.faqConfig[0].url;
+                    this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
+                }
+            });
 
         this.router.events
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    const activeTag: string = <string>this.route.firstChild.snapshot.params?.tag;
+                    const activeTag: string = this.getActiveTag();
                     if (!activeTag) {
-                        this.router.navigate(['/', CONSTS.PATHS.FAQ, R.head(R.head(this.faqSource).tag).url]);
                         return;
                     }
                     this.faq = this.getFaqByTagType(activeTag)(this.faqSource);
@@ -59,6 +75,7 @@ export class FaqComponent extends AbstractComponent {
                     } else {
                         this.breadcrumbItemsSimple[1].url = ``;
                     }
+                    this.cd.markForCheck();
                 }
             });
     }
@@ -71,4 +88,5 @@ export class FaqComponent extends AbstractComponent {
         ),
     )
 
+    private getActiveTag = (): string => <string>this.route.firstChild.snapshot?.params?.tag;
 }

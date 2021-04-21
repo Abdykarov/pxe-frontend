@@ -78,6 +78,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public commodityTypeOptions = CommodityType;
     public currentOfferFormValues = {};
     public deleteDisabled: boolean[] = [];
+    public exporting = false;
     public fieldError: IFieldError = {};
     public formFields = formFields;
     public formLoading = false;
@@ -280,15 +281,18 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public exportOffers = (evt) => {
+        this.exporting = true;
         evt.preventDefault();
         this.offerService.exportCSV()
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
+                    this.exporting = false;
                     this.documentService.documentSave(responseDataDocument);
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    this.exporting = false;
                     const message = parseRestAPIErrors(error);
                     this.globalError.push(message);
                     this.cd.markForCheck();

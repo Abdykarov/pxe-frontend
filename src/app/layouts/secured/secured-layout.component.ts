@@ -114,6 +114,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
             this.modalsService.closeModalData$
                 .pipe(
+                    takeUntil(this.destroy$),
                     filter(R_.isNotNil),
                 )
                 .subscribe(modal => {
