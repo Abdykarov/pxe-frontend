@@ -6,7 +6,7 @@
                     <h1 class="h2--public mb-2">
                         Přihlaste se
                     </h1>
-                    <p>Ještě nemáte účet? <a class="d-inline-block" routerLink="/sign-up">Založte si jej zde</a>.</p>
+                    <p>Ještě nemáte účet? <a class="d-inline-block" [routerLink]="ROUTES.ROUTER_SIGN_UP">Založte si jej zde</a>.</p>
                     <div class="form-container form-container--large ml-0">
                         <lnd-alert
                             *ngIf="globalError.length"
