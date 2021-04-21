@@ -63,6 +63,7 @@ export const supplyPointFragment = gql`
             importPricePerKwPowerNT,
             importPricePerKwGas,
             importPriceTotalPerYear,
+            importPermanentMonthlyPay,
             expirationDate,
             subject{
                 type,
