@@ -20,6 +20,7 @@
         [formControl]="form.controls.importPricePerKwPowerNT"
         [id]="'importPricePerKwPowerNT'"
         label="Cena za nízký tarif"
+        appendText="Kč/MWh (bez DPH)"
         [success]="form.controls.importPricePerKwPowerNT.valid && (form.controls.importPricePerKwPowerNT.touched || formError.importPricePerKwPowerNT)"
         [touched]="form.controls.importPricePerKwPowerNT.touched || formError.importPricePerKwPowerNT"
         [validationMessages]="formFields.validationMessages.importPricePerKwPowerNT"
@@ -30,6 +31,7 @@
         [formControl]="form.controls.importPricePerKwPowerVT"
         [id]="'importPricePerKwPowerVT'"
         label="Cena za vysoký tarif"
+        appendText="Kč/MWh (bez DPH)"
         [success]="form.controls.importPricePerKwPowerVT.valid && (form.controls.importPricePerKwPowerVT.touched || formError.importPricePerKwPowerVT)"
         [touched]="form.controls.importPricePerKwPowerVT.touched || formError.importPricePerKwPowerVT"
         [validationMessages]="formFields.validationMessages.importPricePerKwPowerVT"
@@ -40,6 +42,7 @@
         [formControl]="form.controls.importPricePerKwGas"
         [id]="'importPricePerKwGas'"
         label="Cena"
+        appendText="Kč/MWh (bez DPH)"
         [success]="form.controls.importPricePerKwGas.valid && (form.controls.importPricePerKwGas.touched || formError.importPricePerKwGas)"
         [touched]="form.controls.importPricePerKwGas.touched || formError.importPricePerKwGas"
         [validationMessages]="formFields.validationMessages.importPricePerKwGas"
@@ -49,10 +52,21 @@
         [error]="formError.importPriceTotalPerYear || form.controls.importPriceTotalPerYear.errors"
         [formControl]="form.controls.importPriceTotalPerYear"
         [id]="'importPriceTotalPerYear'"
+        appendText="Kč/MWh (bez DPH)"
         label="Cena celkem za rok"
         [success]="form.controls.importPriceTotalPerYear.valid && (form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear)"
         [touched]="form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear"
         [validationMessages]="formFields.validationMessages.importPriceTotalPerYear"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.importPermanentMonthlyPay || form.controls.importPermanentMonthlyPay.errors"
+        [formControl]="form.controls.importPermanentMonthlyPay"
+        [id]="'importPermanentMonthlyPay'"
+        appendText="Kč/MWh (bez DPH)"
+        label="Stálá měsíční platba"
+        [success]="form.controls.importPermanentMonthlyPay.valid && (form.controls.importPermanentMonthlyPay.touched || formError.importPermanentMonthlyPay)"
+        [touched]="form.controls.importPermanentMonthlyPay.touched || formError.importPermanentMonthlyPay"
+        [validationMessages]="formFields.validationMessages.importPermanentMonthlyPay"
     ></lnd-form-field>
     <div class="row">
         <div class="col-12 text-center">

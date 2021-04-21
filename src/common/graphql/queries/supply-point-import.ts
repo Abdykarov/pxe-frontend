@@ -56,6 +56,7 @@ export const getCreateUserQuery = gql`
                 importPricePerKwPowerNT,
                 importPricePerKwGas,
                 importPriceTotalPerYear,
+                importPermanentMonthlyPay,
                 expirationDate,
                 subject{
                     type,
