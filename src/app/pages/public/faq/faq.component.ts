@@ -1,15 +1,19 @@
 import {
-    ChangeDetectorRef,
-    Component,
-} from '@angular/core';
-import {
     ActivatedRoute,
     NavigationEnd,
     Router,
 } from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil} from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractFaqComponent } from './abstract-faq.component';
 import { CONSTS } from 'src/app/app.constants';
@@ -48,35 +52,31 @@ export class FaqComponent extends AbstractFaqComponent {
             route,
         );
 
-        this.loadConfigs$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe( _ => {
+        combineLatest([this.router.events, this.loadConfigs$])
+            .pipe(
+                takeUntil(this.destroy$),
+                filter(([event, _]) => event instanceof NavigationEnd),
+            )
+            .subscribe(([event, _]) => {
                 const activeTag: string = this.getActiveTag();
+
                 if (!activeTag) {
                     const firstTag = this.faqConfig[0].url;
                     this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
+                    return;
                 }
-            });
 
-        this.router.events
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                    const activeTag: string = this.getActiveTag();
-                    if (!activeTag) {
-                        return;
-                    }
-                    this.faq = this.getFaqByTagType(activeTag)(this.faqSource);
-                    this.breadcrumbItemsSimple[1].label = this.faq.breadcrumbTitle;
+                this.faq = this.getFaqByTagType(activeTag)(this.faqSource);
+                this.breadcrumbItemsSimple[1].label = this.faq.breadcrumbTitle;
 
-                    const isDetail = (event.urlAfterRedirects.match(/\//g) || []).length === this.NUMBER_OF_SLASH_IN_DETAIL_IN_URL;
-                    if (isDetail) {
-                        this.breadcrumbItemsSimple[1].url = `/${CONSTS.PATHS.FAQ}`;
-                    } else {
-                        this.breadcrumbItemsSimple[1].url = ``;
-                    }
-                    this.cd.markForCheck();
+                const isDetail =
+                    ((<NavigationEnd>event).urlAfterRedirects.match(/\//g) || []).length === this.NUMBER_OF_SLASH_IN_DETAIL_IN_URL;
+                if (isDetail) {
+                    this.breadcrumbItemsSimple[1].url = `/${CONSTS.PATHS.FAQ}`;
+                } else {
+                    this.breadcrumbItemsSimple[1].url = ``;
                 }
+                this.cd.markForCheck();
             });
     }
 
