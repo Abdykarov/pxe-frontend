@@ -1,22 +1,25 @@
 import {
-    ChangeDetectorRef,
-    Component,
-} from '@angular/core';
-import {
     ActivatedRoute,
     NavigationEnd,
     Router,
 } from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil} from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractFaqComponent } from './abstract-faq.component';
 import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IFaq } from 'src/common/cms/models/faq';
-import {combineLatest} from 'rxjs';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -52,28 +55,28 @@ export class FaqComponent extends AbstractFaqComponent {
         combineLatest([this.router.events, this.loadConfigs$])
             .pipe(
                 takeUntil(this.destroy$),
+                filter(([event, _]) => event instanceof NavigationEnd),
             )
             .subscribe(([event, _]) => {
-                if (event instanceof NavigationEnd) {
-                    const activeTag: string = this.getActiveTag();
+                const activeTag: string = this.getActiveTag();
 
-                    if (!activeTag) {
-                        const firstTag = this.faqConfig[0].url;
-                        this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
-                        return;
-                    }
-
-                    this.faq = this.getFaqByTagType(activeTag)(this.faqSource);
-                    this.breadcrumbItemsSimple[1].label = this.faq.breadcrumbTitle;
-
-                    const isDetail = (event.urlAfterRedirects.match(/\//g) || []).length === this.NUMBER_OF_SLASH_IN_DETAIL_IN_URL;
-                    if (isDetail) {
-                        this.breadcrumbItemsSimple[1].url = `/${CONSTS.PATHS.FAQ}`;
-                    } else {
-                        this.breadcrumbItemsSimple[1].url = ``;
-                    }
-                    this.cd.markForCheck();
+                if (!activeTag) {
+                    const firstTag = this.faqConfig[0].url;
+                    this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
+                    return;
                 }
+
+                this.faq = this.getFaqByTagType(activeTag)(this.faqSource);
+                this.breadcrumbItemsSimple[1].label = this.faq.breadcrumbTitle;
+
+                const isDetail =
+                    ((<NavigationEnd>event).urlAfterRedirects.match(/\//g) || []).length === this.NUMBER_OF_SLASH_IN_DETAIL_IN_URL;
+                if (isDetail) {
+                    this.breadcrumbItemsSimple[1].url = `/${CONSTS.PATHS.FAQ}`;
+                } else {
+                    this.breadcrumbItemsSimple[1].url = ``;
+                }
+                this.cd.markForCheck();
             });
     }
 
