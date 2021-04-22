@@ -191,7 +191,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 },
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);
-                    this.offerSelected = true;
+                    this.offerSelected = false;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },

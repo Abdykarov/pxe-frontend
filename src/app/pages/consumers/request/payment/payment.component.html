@@ -83,7 +83,7 @@
         </div>
     </div>
 </ng-template>
-<pxe-layout-container [pageTitle]="supplyPoint.contract?.contractStatus == contractStatus.CONCLUDED ? 'Potvrzení' : 'Platba'">
+<pxe-layout-container [pageTitle]="supplyPoint?.contract?.contractStatus == contractStatus.CONCLUDED ? 'Potvrzení' : 'Platba'">
     <div class="row mb-6">
         <div *ngIf="supplyPoint && supplyPoint.name" class="col-12 text-center">
             <h2>Odběrné místo: {{supplyPoint.name}}</h2>
