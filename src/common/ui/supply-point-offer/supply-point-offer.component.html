@@ -102,6 +102,7 @@
                         *ngIf="!isOwner && !isFromContract"
                         label="Vybrat nabídku"
                         [type]="'primary'"
+                        [isDisabled]="offerSelected"
                         (action)="action.emit(supplyPointOffer)">
                     </lnd-button>
                 </div>

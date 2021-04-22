@@ -54,6 +54,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public isOwner = false;
 
     @Input()
+    public offerSelected = false;
+
+    @Input()
     public interactive = true;
 
     @Input()

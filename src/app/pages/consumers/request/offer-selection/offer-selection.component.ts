@@ -63,6 +63,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     public bannerObj: IBannerObj = {};
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
+    public offerSelected = false;
     public onlyOffersFromActualSupplier = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public supplyPointOffers: IOffer[];
@@ -145,6 +146,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     }
 
     public saveContract = (supplyPointOffer: IOffer) => {
+        this.offerSelected = true;
         const supplyPointId = this.supplyPoint.id;
 
         const contractAction = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
@@ -189,6 +191,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 },
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);
+                    this.offerSelected = true;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },
