@@ -101,11 +101,6 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
 
         const loginResponse: ILoginResponse = <ILoginResponse>this.route.snapshot.queryParams;
 
-        if (this.oAuthService.isSuccessRedirectURI(loginResponse)) {
-            this.oAuthService.processLogin(loginResponse);
-            this.navigateAfterLogin(loginResponse);
-        }
-
         const oAuthError = this.oAuthService.getError(loginResponse);
         if (oAuthError) {
             setTimeout( _ => {
@@ -317,26 +312,9 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
         this.formLoading = false;
     }
 
-    public routerAfterLogin = ({landingPage}) => {
-        switch (landingPage) {
-            case LANDING_PAGE.DASHBOARD:
-                return ROUTES.ROUTER_DASHBOARD;
-            case LANDING_PAGE.NEW_SUPPLY_POINT:
-                return ROUTES.ROUTER_REQUEST_SIGNBOARD;
-            case LANDING_PAGE.OFFERS:
-                return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
-            case LANDING_PAGE.WAITING_FOR_PAYMENT:
-                return ROUTES.ROUTER_REQUEST_PAYMENT;
-            case LANDING_PAGE.CONTRACT_IMPORT:
-                return ROUTES.ROUTER_ASK_FOR_OFFER_NEW;
-        }
-    }
-
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
         const extras: NavigationExtras = {
-            state: {
-                afterLogin: true,
-            },
+            ...this.authService.loginExtras,
         };
 
         if (changedPassword) {
@@ -360,6 +338,6 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
             }
         }
 
-        this.router.navigate([this.routerAfterLogin(loginResponse)], extras);
+        this.router.navigate([this.authService.routerAfterLogin(loginResponse)], extras);
     }
 }

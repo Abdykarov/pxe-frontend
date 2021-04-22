@@ -8,7 +8,7 @@ import {
     HttpClient,
     HttpHeaders,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
 import * as R from 'ramda';
@@ -49,6 +49,7 @@ import {
 } from './model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
+import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 
@@ -67,6 +68,12 @@ export class AuthService {
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
+
+    public loginExtras: NavigationExtras = {
+        state: {
+            afterLogin: true,
+        },
+    };
 
     get hashedUserId(): string {
         return this.hashUserId(this?.currentUserValue?.email);
@@ -341,6 +348,21 @@ export class AuthService {
                     logoutRequired,
                 },
             });
+        }
+    }
+
+    public routerAfterLogin = ({landingPage}) => {
+        switch (landingPage) {
+            case LANDING_PAGE.DASHBOARD:
+                return ROUTES.ROUTER_DASHBOARD;
+            case LANDING_PAGE.NEW_SUPPLY_POINT:
+                return ROUTES.ROUTER_REQUEST_SIGNBOARD;
+            case LANDING_PAGE.OFFERS:
+                return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
+            case LANDING_PAGE.WAITING_FOR_PAYMENT:
+                return ROUTES.ROUTER_REQUEST_PAYMENT;
+            case LANDING_PAGE.CONTRACT_IMPORT:
+                return ROUTES.ROUTER_ASK_FOR_OFFER_NEW;
         }
     }
 }
