@@ -16,6 +16,7 @@ import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IFaq } from 'src/common/cms/models/faq';
+import {combineLatest} from 'rxjs';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -48,24 +49,20 @@ export class FaqComponent extends AbstractFaqComponent {
             route,
         );
 
-        this.loadConfigs$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe( _ => {
-                const activeTag: string = this.getActiveTag();
-                if (!activeTag) {
-                    const firstTag = this.faqConfig[0].url;
-                    this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
-                }
-            });
-
-        this.router.events
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(event => {
+        combineLatest([this.router.events, this.loadConfigs$])
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(([event, _]) => {
                 if (event instanceof NavigationEnd) {
                     const activeTag: string = this.getActiveTag();
+
                     if (!activeTag) {
+                        const firstTag = this.faqConfig[0].url;
+                        this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
                         return;
                     }
+
                     this.faq = this.getFaqByTagType(activeTag)(this.faqSource);
                     this.breadcrumbItemsSimple[1].label = this.faq.breadcrumbTitle;
 
