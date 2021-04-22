@@ -8,7 +8,10 @@ import {
     HttpClient,
     HttpHeaders,
 } from '@angular/common/http';
-import {NavigationExtras, Router} from '@angular/router';
+import {
+    NavigationExtras,
+    Router,
+} from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
 import * as R from 'ramda';
