@@ -1,6 +1,5 @@
 import {
     ActivatedRoute,
-    NavigationExtras,
     Router,
 } from '@angular/router';
 import { Component } from '@angular/core';
@@ -8,7 +7,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { OAuthService } from 'src/app/services/OAuth.service';
-import { ROUTES} from 'src/app/app.constants';
+import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './o-auth-layout.component.html',
