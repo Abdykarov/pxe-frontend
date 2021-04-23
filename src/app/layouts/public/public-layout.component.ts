@@ -23,7 +23,7 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityTypesLowerCase,
+    CommodityTypesCsLowerCase,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
@@ -37,7 +37,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
-    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public commodityTypePower = CommodityTypesCsLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
 
