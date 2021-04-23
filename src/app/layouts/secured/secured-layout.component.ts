@@ -29,14 +29,13 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityTypesLowerCase,
+    CommodityTypesCsLowerCase,
     CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
-    INavigationItem,
     INavigationMenu,
 } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
@@ -53,7 +52,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
-    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public commodityTypePower = CommodityTypesCsLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public isMenuOpen = false;
     public itemOpened = null;
