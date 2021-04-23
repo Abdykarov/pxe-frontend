@@ -326,7 +326,7 @@ export class AuthService {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
             if (lastUrl) {
-                window.open(lastUrl, '_self');
+                this.router.navigateByUrl(lastUrl);
                 return;
             }
         }
