@@ -9,6 +9,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ALL_BLOG: 'vse',
     ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_requests:',
     APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
@@ -106,48 +107,48 @@ export const CONSTS = {
         ALERT_DANGER: 50,
     },
     PATHS: {
-        APPROVAL: 'approval',
-        ASK_FOR_OFFER : 'ask-for-offer',
-        ASK_FOR_OFFER_NEW: 'new',
-        ASK_FOR_OFFER_IN_PROGRESS: 'in-progress',
-        ASK_FOR_OFFER_PROCESSED: 'processed',
+        APPROVAL: 'schvaleni',
+        ASK_FOR_OFFER : 'nahrane-faktury',
+        ASK_FOR_OFFER_NEW: 'prijate',
+        ASK_FOR_OFFER_IN_PROGRESS: 'rozpracovane',
+        ASK_FOR_OFFER_PROCESSED: 'uzavrene',
         BLOG: 'blog',
-        CREATE_USER: 'create-user',
-        CONTRACT : 'contract',
-        COOKIES_POLICY : 'cookies-policy',
-        CHANGE_PASSWORD: 'change-password',
-        DASHBOARD : 'dashboard',
-        DELETE_ACCOUNT: 'delete-account',
-        DELETED_ACCOUNT: 'deleted-account',
+        CREATE_USER: 'vytvoreni-odberatele',
+        CONTRACT : 'smlouva',
+        COOKIES_POLICY : 'zasady-pouzivani-cookies',
+        CHANGE_PASSWORD: 'zmena-hesla',
+        DASHBOARD : 'nastenka',
+        DELETE_ACCOUNT: 'smazani-uctu',
+        DELETED_ACCOUNT: 'ucet-smazan',
         EMPTY: '',
         IMPORT: 'import',
-        FAQ: 'faq',
-        FORGOTTEN_PASSWORD : 'forgotten-password',
-        GAS: 'gas',
-        LOGIN : 'login',
-        LOGOUT : 'logout',
-        NOT_FOUND: 'not-found',
-        OFFER_SELECTION : 'offer-selection',
-        PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
-        PAYMENT : 'payment',
-        PRICES: 'prices',
-        POWER: 'power',
-        RECAPITULATION : 'recapitulation',
-        REQUEST : 'request',
-        REQUESTS : 'requests',
-        RESULT : 'result',
-        SECURED : 'secured',
-        SECURING_YOUR_DATA : 'securing-your-data',
-        SIGNBOARD: 'signboard',
-        SIGN_UP : 'sign-up',
-        SUPPLY_POINT : 'supply-point',
-        SUPPLY_POINT_SELECTION : 'supply-point-selection',
-        SUPPLY_POINTS : 'supply-points',
-        SUPPLY_OFFER: 'supply-offer',
-        SUPPLIER_CONCLUDED_CONTRACTS: 'concluded-contracts',
-        TERMS_OF_USE : 'terms-of-use',
-        UPLOAD: 'upload',
-        USER_PROFILE: 'user-profile',
+        FAQ: 'casto-kladene-otazky',
+        FORGOTTEN_PASSWORD : 'zapomenute-heslo',
+        GAS: 'plyn',
+        LOGIN : 'prihlaseni',
+        LOGOUT : 'odhlaseni',
+        NOT_FOUND: 'stranka-nenalezena',
+        OFFER_SELECTION : 'vyber-nabidky',
+        PATTERNS_OF_CONTRACTS: 'vzory-smluv',
+        PAYMENT : 'platba',
+        PRICES: 'ceny',
+        POWER: 'elektrina',
+        RECAPITULATION : 'rekapitulace',
+        REQUEST : 'rozpracovana-smlouva',
+        REQUESTS : 'rozpracovane-smlouvy',
+        RESULT : 'vysledek',
+        SECURED : 'aplikace',
+        SECURING_YOUR_DATA : 'ochrana-osobnich-udaju',
+        SIGNBOARD: 'informace',
+        SIGN_UP : 'registrace',
+        SUPPLY_POINT : 'odberne-misto',
+        SUPPLY_POINT_SELECTION : 'vyber-odberneho-mista',
+        SUPPLY_POINTS : 'uzavrene-smlouvy',
+        SUPPLY_OFFER: 'sprava-nabidek',
+        SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
+        TERMS_OF_USE : 'podminky-uzivani',
+        UPLOAD: 'nahrani',
+        USER_PROFILE: 'uzivatelsky-profil',
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
@@ -343,20 +344,25 @@ export enum CommodityTypesLowerCase {
     GAS = 'gas',
 }
 
+export enum CommodityTypesCsLowerCase {
+    POWER = 'elektrina',
+    GAS = 'plyn',
+}
+
+export const urlCommodityToCommodityType = {
+    [CONSTS.PATHS.POWER]: CommodityTypesLowerCase.POWER,
+    [CONSTS.PATHS.GAS]: CommodityTypesLowerCase.GAS,
+};
+
 export const commodityTypes = {
     [CommodityTypesLowerCase.POWER]: CommodityType.POWER,
     [CommodityTypesLowerCase.GAS]: CommodityType.GAS,
 };
 
 export enum SubjectTypeLowerCase {
-    INDIVIDUAL = 'individual',
-    BUSINESSMAN = 'business',
+    INDIVIDUAL = 'domacnost',
+    BUSINESSMAN = 'firma',
 }
-
-export const SubjectTypesTypes = {
-    [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-    [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-};
 
 export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     {

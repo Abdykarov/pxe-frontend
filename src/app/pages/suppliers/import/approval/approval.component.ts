@@ -33,6 +33,7 @@ import {
     commodityTypes,
     CONSTS,
     ROUTES,
+    urlCommodityToCommodityType,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
@@ -130,7 +131,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 .pipe(
                     takeUntil(this.destroy$),
                     filter((params) => {
-                        if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                        if (R.indexOf(urlCommodityToCommodityType[params.commodityType], R.keys(commodityTypes)) < 0) {
                             this.router.navigate([this.routePower]);
                             return false;
                         }
@@ -138,7 +139,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     }),
                 )
                 .subscribe(params => {
-                    this.commodityType = commodityTypes[params.commodityType];
+                    this.commodityType = commodityTypes[urlCommodityToCommodityType[params.commodityType]];
                     this.commodityType$.next(this.commodityType);
                 });
 

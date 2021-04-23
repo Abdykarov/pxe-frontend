@@ -54,6 +54,6 @@ export class DetailComponent extends AbstractComponent {
 
     public showAllArticle(evt): void {
         evt.preventDefault();
-        this.router.navigate([this.ROUTES.ROUTER_BLOG, 'all']);
+        this.router.navigate([this.ROUTES.ROUTER_BLOG, this.CONSTS.ALL_BLOG]);
     }
 }
