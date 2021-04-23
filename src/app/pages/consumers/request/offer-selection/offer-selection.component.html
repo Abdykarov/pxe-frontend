@@ -71,6 +71,7 @@
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         customClass="mb-3"
                         [questions]="questions"
+                        [offerSelected]="offerSelected"
                         [supplyPointOffer]="supplyPointOffer"
                         (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
                         (mouseleave)="sAnalyticsService.sFormBlur($event)"

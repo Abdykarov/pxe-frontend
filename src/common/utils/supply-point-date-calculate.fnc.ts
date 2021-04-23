@@ -59,8 +59,9 @@ export const expirationDateIsInTerminateInterval = (supplyPointInput: ISupplyPoi
         moment(),
         supplyPointInput,
     );
+    const terminateIntervalWithProcessingTime = terminateInterval.add(CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'days');
     const expirationDate = moment(supplyPointInput.expirationDate).startOf('day');
-    return terminateInterval.diff(expirationDate) >= 0;
+    return terminateIntervalWithProcessingTime.diff(expirationDate) >= 0;
 };
 
 export const contractEndTermWithProlongation = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
