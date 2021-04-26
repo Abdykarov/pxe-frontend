@@ -30,7 +30,7 @@ export class OAuthService {
 
     public tryLoginWithOAuth = (oAuthType: OAuthType): void => {
         window.open(
-            `${environment.url}/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/${CONSTS.PATHS.LOGIN}`,
+            `${environment.url}/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/${CONSTS.PATHS.O_AUTH}`,
             '_self',
         );
     }
