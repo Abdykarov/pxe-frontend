@@ -183,6 +183,23 @@
 				}
 			}
 		}
+
+		&--h3 {
+			> li::before {
+				padding-left: 0;
+				font-size: $h3-font-size-public-xs;
+				line-height: ( 30 / 24 );
+				font-weight: 700;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					font-size: $h3-font-size-public-md;
+				}
+				@include media-breakpoint-up(xl) {
+					font-size: $h3-font-size-public;
+				}
+			}
+		}
 	}
 
 	ol.upper-roman {
