@@ -1,5 +1,4 @@
 import * as R from 'ramda';
-import {Validators} from '@angular/forms';
 
 export const removeRequiredValidators = (controls) => R.mapObjIndexed((control, field) => {
     const [defaultValue, validators] = control;
@@ -8,5 +7,5 @@ export const removeRequiredValidators = (controls) => R.mapObjIndexed((control, 
         result = R.reject(fc => fc.prototype.isRequiredValidator)(validators);
     }
     return [defaultValue, result];
-})(JSON.parse(JSON.stringify(controls)));
+})(R.clone(controls));
 
