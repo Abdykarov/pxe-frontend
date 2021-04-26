@@ -8,5 +8,5 @@ export const removeRequiredValidators = (controls) => R.mapObjIndexed((control, 
         result = R.reject(fc => fc.prototype.isRequiredValidator)(validators);
     }
     return [defaultValue, result];
-})({...controls});
+})(JSON.parse(JSON.stringify(controls)));
 
