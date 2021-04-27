@@ -16,19 +16,19 @@ const routes: Routes = [
         loadChildren: () => import('./layouts/o-auth/o-auth-layout.module').then(m => m.OAuthLayoutModule),
     },
     {
-        path: CONSTS.PATHS.EMPTY,
-        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
-        resolve: {
-            cmsToken: CmsResolver,
-        },
-    },
-    {
         path: CONSTS.PATHS.SECURED,
         canActivateChild: [
             AuthGuard,
             PaymentGuard,
         ],
         loadChildren: () => import('./layouts/secured/secured-layout.module').then(m => m.SecuredLayoutModule),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
+    },
+    {
+        path: CONSTS.PATHS.EMPTY,
+        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
         resolve: {
             cmsToken: CmsResolver,
         },
