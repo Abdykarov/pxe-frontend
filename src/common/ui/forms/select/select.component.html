@@ -5,6 +5,7 @@
     [ngClass]="customClass">
     <div
         class="input-group"
+        [class.invalid-input]="(!!error && !!touched) && !inputFocused"
         [class.input-group--append]="!!appendButtonIcon"
         [class.input-group--append-button-icon]="!!appendButtonIcon">
         <label

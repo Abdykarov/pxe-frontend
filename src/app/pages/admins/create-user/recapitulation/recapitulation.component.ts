@@ -46,7 +46,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public formSent = false;
     public globalError: string[] = [];
     public codeLists = null;
-    public formFields = formFields;
+    public formFields = {...formFields};
 
     public subjectType = SubjectType;
     public supplyPoint$: Observable<ISupplyPoint> = null;
