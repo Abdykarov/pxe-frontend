@@ -37,6 +37,14 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
+        importPermanentMonthlyPay: [
+            '',
+            [
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
+                CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+            ],
+        ],
     },
     validationMessages: {
         importPricePerKwGas: {
@@ -58,6 +66,12 @@ export const formFields: IForm = {
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         importPriceTotalPerYear: {
+            decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
+            min: errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
+        },
+        importPermanentMonthlyPay: {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,

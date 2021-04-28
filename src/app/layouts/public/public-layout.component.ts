@@ -23,11 +23,12 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityTypesLowerCase,
+    CommodityTypesCsLowerCase,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -36,7 +37,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
-    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public commodityTypePower = CommodityTypesCsLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
 
@@ -47,6 +48,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent implements On
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
         private renderer: Renderer2,
+        public reCaptchaService: ReCaptchaService,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,

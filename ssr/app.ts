@@ -17,7 +17,6 @@ import router from './routes/index';
 import { AppServerModule } from '../src/app.server';
 
 const server = express();
-
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 

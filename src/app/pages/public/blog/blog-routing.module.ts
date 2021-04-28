@@ -23,7 +23,7 @@ const routes: Routes = [{
         },
         {
             path: CONSTS.PATHS.EMPTY,
-            redirectTo: 'all',
+            redirectTo: CONSTS.ALL_BLOG,
         },
     ],
 }];
