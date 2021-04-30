@@ -56,6 +56,7 @@
         <div class="col-12" *ngIf="fileUploader.queue.length && !success">
             <div class="form-container ml-0">
                 <lnd-form-field
+                    *ngIf="!email"
                     lndSFormDirective
                     lndSBiometricsDirective
                     [error]="formError.email || form.controls.email.errors"
@@ -69,6 +70,7 @@
                     [validationMessages]="formFields.validationMessages.email"
                 ></lnd-form-field>
                 <lnd-form-field
+                    *ngIf="!email"
                     lndSFormDirective
                     lndSBiometricsDirective
                     [error]="formError.consent || form.controls.consent.errors"
@@ -82,7 +84,8 @@
                     [type]="'CHECKBOX'"
                     [validationMessages]="formFields.validationMessages.consent"
                 ></lnd-form-field>
-                <div class="text-right">
+                <div *ngIf="!email"
+                     class="text-right">
                     <pxe-re-captcha #reCapcha
                                     [id]="id"
                                     (resolveAction)="submitForm($event)">
@@ -96,6 +99,18 @@
                             [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
                         </lnd-button>
                     </pxe-re-captcha>
+                </div>
+                <div *ngIf="email"
+                     class="d-flex justify-content-center">
+                    <lnd-button
+                        type="gradient-primary"
+                        class="w-50"
+                        customClass="w-100 btn-public"
+                        [isDisabled]="fileUploader.isUploading"
+                        [submit]="true"
+                        (action)="submitForm($event)"
+                        [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
+                    </lnd-button>
                 </div>
             </div>
         </div>
