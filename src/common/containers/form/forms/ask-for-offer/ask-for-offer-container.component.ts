@@ -49,7 +49,7 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public idFileUploader = 'file-upload';
 
     @Input()
-    public email: string | boolean = false;
+    public email: string = null;
 
     constructor(
         private cd: ChangeDetectorRef,
