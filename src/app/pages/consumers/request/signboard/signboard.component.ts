@@ -53,7 +53,7 @@ export class SignboardComponent extends AbstractComponent {
         );
 
     constructor(
-        private authService: AuthService,
+        public authService: AuthService,
         public cd: ChangeDetectorRef,
         private gtmService: GTMService,
         private router: Router,
