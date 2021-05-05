@@ -23,6 +23,22 @@
                 <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
             </ul>
         </div>
+        <div class="col-12 col-xl-10 offset-xl-1 bg--gradient-violet py-5 mb-5">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h2 class="h2--public text-white">Nechcete nic vyplňovat? <br> Nemusíte!
+                    </h2>
+                    <ol class="numerical-list-stepper">
+                        <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
+                        <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length > 0">Zkontrolujte si váše soubory a my vám pošleme nabídky na míru. Zdarma a nezávazně.
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <pxe-ask-for-offer-container #howItWorksFileContainer [email]="authService.currentUserValue.email"></pxe-ask-for-offer-container>
+                </div>
+            </div>
+        </div>
         <div class="col-12 col-xl-8 offset-xl-2 mb-5 text-center">
             <lnd-button
                 type="primary"

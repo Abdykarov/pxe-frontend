@@ -48,6 +48,9 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     @Input()
     public idFileUploader = 'file-upload';
 
+    @Input()
+    public email: string = null;
+
     constructor(
         private cd: ChangeDetectorRef,
         @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,
@@ -97,6 +100,10 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
             }
         };
 
+        if (this.email) {
+            this.form.controls['email'].setValue(this.email);
+            this.form.controls['consent'].setValue(true);
+        }
     }
 
     public removeFile = (item) => {
@@ -107,7 +114,7 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public submitForm = (data) => {
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
             this.fileUploader.uploadAllFiles({
-                email: this.form.getRawValue().email,
+                email: this.email || this.form.getRawValue().email,
             });
         }
         this.form.markAllAsTouched();
