@@ -12,11 +12,8 @@ import { PaymentGuard } from 'src/app/guards/payment.guard';
 
 const routes: Routes = [
     {
-        path: CONSTS.PATHS.EMPTY,
-        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
-        resolve: {
-            cmsToken: CmsResolver,
-        },
+        path: CONSTS.PATHS.O_AUTH,
+        loadChildren: () => import('./layouts/o-auth/o-auth-layout.module').then(m => m.OAuthLayoutModule),
     },
     {
         path: CONSTS.PATHS.SECURED,
@@ -25,6 +22,13 @@ const routes: Routes = [
             PaymentGuard,
         ],
         loadChildren: () => import('./layouts/secured/secured-layout.module').then(m => m.SecuredLayoutModule),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
+    },
+    {
+        path: CONSTS.PATHS.EMPTY,
+        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
         resolve: {
             cmsToken: CmsResolver,
         },

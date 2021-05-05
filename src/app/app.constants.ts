@@ -128,6 +128,7 @@ export const CONSTS = {
         LOGIN : 'prihlaseni',
         LOGOUT : 'odhlaseni',
         NOT_FOUND: 'stranka-nenalezena',
+        O_AUTH: 'o-auth',
         OFFER_SELECTION : 'vyber-nabidky',
         PATTERNS_OF_CONTRACTS: 'vzory-smluv',
         PAYMENT : 'platba',
