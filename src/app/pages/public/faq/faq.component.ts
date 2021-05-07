@@ -62,7 +62,10 @@ export class FaqComponent extends AbstractFaqComponent {
 
                 if (!activeTag) {
                     const firstTag = this.faqConfig[0].url;
-                    this.router.navigate(['/', CONSTS.PATHS.FAQ, firstTag]);
+                    this.router.navigate(
+                        ['/', CONSTS.PATHS.FAQ, firstTag],
+                        { replaceUrl: true },
+                    );
                     return;
                 }
 
