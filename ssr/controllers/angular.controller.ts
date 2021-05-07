@@ -9,7 +9,7 @@ const controller = {
     public: (req, res, next) => {
         const config = getConfig();
         // Catch secured routes as normal client side app
-        if (req.originalUrl.indexOf('/secured') === -1) {
+        if (req.originalUrl.indexOf('/secured') === 0) {
             return next();
         }
 
