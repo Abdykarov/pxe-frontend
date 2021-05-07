@@ -64,7 +64,10 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
                         if (this.questions.length) {
                             this.cd.markForCheck();
                         } else {
-                            this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url], {replaceUrl: true});
+                            this.router.navigate(
+                                [CONSTS.PATHS.FAQ, this.faqConfig[0].url],
+                                { replaceUrl: true },
+                            );
                         }
                     });
                 });
