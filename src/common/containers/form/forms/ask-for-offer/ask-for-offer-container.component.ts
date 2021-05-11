@@ -55,6 +55,9 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     @Input()
     public fileUploaderTemplate?: TemplateRef<any>;
 
+    @Input()
+    public fileUploaderWrapperCustomClass = 'drop-zone--zindex text-white';
+
     constructor(
         private cd: ChangeDetectorRef,
         @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,

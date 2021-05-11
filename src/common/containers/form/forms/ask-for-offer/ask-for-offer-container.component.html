@@ -20,7 +20,7 @@
                 secondaryTextCustomClass="small text-color--gray-200"
                 [uploader]="fileUploader"
                 [multiple]="true"
-                wrapperCustomClass="drop-zone--zindex text-white"
+                [wrapperCustomClass]="fileUploaderWrapperCustomClass"
                 mainText="Soubory přetáhněte sem nebo "
                 secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
                 [labelFromMainText]="true"

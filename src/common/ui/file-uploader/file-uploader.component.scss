@@ -59,4 +59,8 @@
 	&--zindex {
 		z-index: $zindex-drop-zone;
 	}
+
+	&--pb-small {
+		padding-bottom: $spacer;
+	}
 }
