@@ -23,7 +23,8 @@
                 wrapperCustomClass="drop-zone--zindex text-white"
                 mainText="Soubory přetáhněte sem nebo "
                 secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
-                [labelFromMainText]="true">
+                [labelFromMainText]="true"
+                [contentTemplate]="fileUploaderTemplate">
             </pxe-file-uploader>
         </div>
         <div class="col-12 mb-3">

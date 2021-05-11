@@ -4,6 +4,7 @@ import {
     Inject,
     Input,
     OnInit,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -50,6 +51,9 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
 
     @Input()
     public email: string = null;
+
+    @Input()
+    public fileUploaderTemplate?: TemplateRef<any>;
 
     constructor(
         private cd: ChangeDetectorRef,
