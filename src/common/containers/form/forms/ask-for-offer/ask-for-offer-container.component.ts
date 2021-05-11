@@ -53,6 +53,9 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public email: string = null;
 
     @Input()
+    public isPublic = true;
+
+    @Input()
     public fileUploaderTemplate?: TemplateRef<any>;
 
     @Input()

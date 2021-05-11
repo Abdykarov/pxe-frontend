@@ -39,14 +39,15 @@
                 Děkujeme po zpracování vaší žádosti se vám obratem ozveme.
             </lnd-alert>
             <ng-container *ngIf="!fileUploader.isUploading">
-                <span class="d-inline-flex align-items-center mr-4 mb-2 text-white"
+                <span class="d-inline-flex align-items-center mr-4 mb-2"
+                      [class.text-white]="isPublic"
                       *ngFor="let fileItem of fileUploader.queue">
                     <span class="icon icon--document mr-2"></span>
                     {{fileItem?.file?.name}}
                     <lnd-button
                         *ngIf="!fileUploader.isUploading"
                         (click)="removeFile(fileItem)"
-                        customClass="btn-icon--on-dark-bg"
+                        [customClass]="isPublic ? 'btn-icon--on-dark-bg' : ''"
                         icon="icon--bin"
                         variant="icon"
                         type="icon">
@@ -55,7 +56,8 @@
             </ng-container>
         </div>
         <div class="col-12" *ngIf="fileUploader.queue.length && !success">
-            <div class="form-container ml-0">
+            <div class="form-container"
+                [class.ml-0]="isPublic">
                 <lnd-form-field
                     *ngIf="!email"
                     lndSFormDirective
@@ -63,7 +65,7 @@
                     [error]="formError.email || form.controls.email.errors"
                     [formControl]="form.controls.email"
                     [id]="'email' + id"
-                    customFormGroupClass="form-group--public form-group--on-dark-bg"
+                    [customFormGroupClass]="isPublic ? 'form-group--public form-group--on-dark-bg' : 'form-group--public'"
                     label="E-mail"
                     [disabledField]="fileUploader.isUploading"
                     [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
