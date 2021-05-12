@@ -1,0 +1,8 @@
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'src/common/ui/button/button.component.variables.scss';
+
+// Bootstrap button import
+@import '~bootstrap/scss/buttons';
