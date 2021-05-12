@@ -69,8 +69,8 @@
         </div>
         <div class="row">
             <div class="col-xl-8 offset-xl-2 text text-center">
-                <a [routerLink]="['/', 'secured', 'supply-offer', commodityType | lowercase]">
-                    zpět
+                <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_OFFER, CONSTS.PATHS[commodityType] | lowercase]">
+                    Zpět
                 </a>
             </div>
         </div>
