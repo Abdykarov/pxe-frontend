@@ -99,18 +99,6 @@
 			color: $white;
 			font-weight: $font-weight-bold;
 		}
-
-		&--dark {
-			& > li,
-			& > li::before {
-				color: unset;
-			}
-
-			.active,
-			.active::before {
-				color: unset;
-			}
-		}
 	}
 
 	ol.circular-number-list {
