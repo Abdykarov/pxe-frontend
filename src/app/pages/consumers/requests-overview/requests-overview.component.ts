@@ -1,9 +1,11 @@
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
+    ElementRef,
     Inject,
     OnInit,
-    PLATFORM_ID, ViewChild,
+    PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
