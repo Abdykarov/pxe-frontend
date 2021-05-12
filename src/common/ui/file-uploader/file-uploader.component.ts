@@ -3,6 +3,7 @@ import {
     EventEmitter,
     Input,
     Output,
+    TemplateRef,
 } from '@angular/core';
 
 import { FileUploader } from 'src/third-sides/file-upload';
@@ -48,6 +49,9 @@ export class FileUploaderComponent {
 
     @Input()
     public labelFromMainText = false;
+
+    @Input()
+    public contentTemplate?: TemplateRef<any>;
 
     public hasBaseDropZoneOver = false;
 }
