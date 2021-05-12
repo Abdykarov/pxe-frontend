@@ -2,6 +2,7 @@ import * as mCache from 'memory-cache';
 import { join } from 'path';
 
 import { APP_FOLDER } from 'ssr/consts';
+import { CONSTS } from 'src/app/app.constants';
 import { getConfig } from 'ssr/utils/config';
 import { getMCacheKeyPage } from 'ssr/utils/squidex';
 
@@ -9,7 +10,7 @@ const controller = {
     public: (req, res, next) => {
         const config = getConfig();
         // Catch secured routes as normal client side app
-        if (req.originalUrl.indexOf('/secured') === -1) {
+        if (req.originalUrl.indexOf(`/${CONSTS.PATHS.SECURED}`) === 0) {
             return next();
         }
 
