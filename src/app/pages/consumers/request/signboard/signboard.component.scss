@@ -6,3 +6,8 @@
 
 // Bootstrap button import
 @import '~bootstrap/scss/buttons';
+
+.btn {
+	min-width: $btn-width;
+	min-height: $btn-height;
+}
