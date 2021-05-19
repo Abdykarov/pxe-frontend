@@ -10,9 +10,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
+import { ISupplierLogo } from 'src/common/ui/carousels/models/models';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
-import {ISupplierLogo} from '../models/models';
 
 @Component({
     selector: 'pxe-carousel-suppliers',
