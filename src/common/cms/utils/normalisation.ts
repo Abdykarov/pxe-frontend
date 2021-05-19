@@ -1,8 +1,8 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import {compareDates, operateNestedProperty} from 'src/common/utils';
-import {CONSTS} from '../../../app/app.constants';
+import { compareDates } from 'src/common/utils';
+import { CONSTS } from 'src/app/app.constants';
 
 export const normalizeNews = R.pipe(
     R.head,
