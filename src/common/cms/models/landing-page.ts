@@ -1,5 +1,8 @@
 import { ICardData } from 'src/common/ui/card/models/data.model';
-import { IReference } from 'src/common/ui/carousels/models/models';
+import {
+    IReference,
+    ISupplierLogo,
+} from 'src/common/ui/carousels/models/models';
 import { ISeo } from './seo';
 
 export interface IHelpSection {
@@ -13,6 +16,7 @@ export interface IAboutUs {
     chatText: string;
     bigText: string;
     description: string;
+    logos: ISupplierLogo[];
 }
 
 export interface IiWantToSeeTheBestOffers {

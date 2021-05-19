@@ -31,7 +31,7 @@ export class FaqService {
             .pipe(
                 map((questions: IQuestion[]) => {
                     const updatedQuestions = R.map( (question: IQuestion) => {
-                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, question.tag.url, question.url];
+                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, R.head(question.tag).url, question.url];
                         return question;
                     })([...questions]);
 
