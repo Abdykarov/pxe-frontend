@@ -1,9 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
@@ -34,6 +36,7 @@ import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 import {
     inArray,
     parseGraphQLErrors,
+    scrollToElementFnc,
 } from 'src/common/utils';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
@@ -56,6 +59,10 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
     public sourceSupplyPoints: ISupplyPoint[] = null;
+    public deletedRequest: ISupplyPoint = null;
+
+    @ViewChild('deletedRequestInfo')
+    public deletedRequestInfo: ElementRef;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -125,6 +132,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                                 const { overviewState, supplyPoints } = getOverviewState(this.sourceSupplyPoints);
                                 this.supplyPoints = supplyPoints;
                                 this.state = overviewState;
+                                this.deletedRequest = modal.data;
+                                setTimeout(() => scrollToElementFnc(this.deletedRequestInfo.nativeElement));
                                 this.cd.markForCheck();
                             },
                             (error) => {

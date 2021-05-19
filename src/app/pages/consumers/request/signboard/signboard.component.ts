@@ -44,6 +44,7 @@ export class SignboardComponent extends AbstractComponent {
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public showWelcome = false;
     public showTextUnderVideo = true;
+    public idFileUploader = 'file-upload';
 
     public isMoreThanMdResolution = false;
 
@@ -53,7 +54,7 @@ export class SignboardComponent extends AbstractComponent {
         );
 
     constructor(
-        private authService: AuthService,
+        public authService: AuthService,
         public cd: ChangeDetectorRef,
         private gtmService: GTMService,
         private router: Router,

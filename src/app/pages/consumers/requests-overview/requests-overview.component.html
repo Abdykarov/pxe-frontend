@@ -29,6 +29,14 @@
             </lnd-alert>
         </div>
     </div>
+    <div *ngIf="deletedRequest" class="row" #deletedRequestInfo>
+        <div class="col-12">
+            <lnd-alert
+                type="info">
+                Odběrné místo "{{deletedRequest?.name}}" bylo smazáno.
+            </lnd-alert>
+        </div>
+    </div>
     <ng-container *ngIf="state">
         <lnd-info-banner
             *ngIf="state == overviewStates.NO_REQUEST"

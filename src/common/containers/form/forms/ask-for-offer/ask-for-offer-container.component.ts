@@ -4,6 +4,7 @@ import {
     Inject,
     Input,
     OnInit,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -47,6 +48,18 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
 
     @Input()
     public idFileUploader = 'file-upload';
+
+    @Input()
+    public email: string = null;
+
+    @Input()
+    public isPublic = true;
+
+    @Input()
+    public fileUploaderTemplate?: TemplateRef<any>;
+
+    @Input()
+    public fileUploaderWrapperCustomClass = 'drop-zone--zindex text-white';
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -97,6 +110,10 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
             }
         };
 
+        if (this.email) {
+            this.form.controls['email'].setValue(this.email);
+            this.form.controls['consent'].setValue(true);
+        }
     }
 
     public removeFile = (item) => {
@@ -107,7 +124,7 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public submitForm = (data) => {
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
             this.fileUploader.uploadAllFiles({
-                email: this.form.getRawValue().email,
+                email: this.email || this.form.getRawValue().email,
             });
         }
         this.form.markAllAsTouched();

@@ -19,6 +19,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.smsCode.required,
             invalidSmsCode: errorFieldMessages.smsCode.invalidSmsCode,
             maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            smsCodeAttemptsExceededLimit: errorFieldMessages.smsCode.smsCodeAttemptsExceededLimit,
         },
     },
 };
