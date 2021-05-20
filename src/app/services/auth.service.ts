@@ -310,8 +310,8 @@ export class AuthService {
         [R.T, R.always(IUserTypes.CONSUMER)],
     ])(roles)
 
-    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
-        const token = this.getToken();
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*', withoutToken = false): HttpHeaders => {
+        const token = !withoutToken && this.getToken();
         return new HttpHeaders({
             ...(!!token) && {Authorization: `Bearer ${token}`},
             ...(!!contentType) && {'Content-Type': contentType},

@@ -41,7 +41,7 @@ import {
     getConfigStepper,
     inArray,
     parseViolation,
-    scrollToElementFnc,
+    scrollToElementFnc, transformHttpHeadersToFileUploaderFormat,
     TypeStepper,
 } from 'src/common/utils';
 import {
@@ -57,7 +57,7 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
     providers: [
         {
             provide: FILE_UPLOAD_CONFIG,
-            useFactory: fileUploaderFactory('offer/batch-validate', 'offers', true),
+            useFactory: fileUploaderFactory('offer/batch-validate', 'offers', false),
             deps: [
                 AuthService,
             ],
@@ -159,6 +159,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 this.fileErrors = [defaultErrorMessage];
                 this.fileUploader.clearQueue();
             } else if (countOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
+                this.fileUploader.setOptions(fileUploaderFactory('offer/batch-validate', 'offers', false)(this.authService));
                 this.fileErrors = [];
                 this.loading = true;
                 R.forEach((fileItem: FileItem) => {
