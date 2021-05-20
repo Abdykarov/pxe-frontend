@@ -1,6 +1,7 @@
 import {
     Component,
     Inject,
+    Input,
     PLATFORM_ID,
     ViewEncapsulation,
 } from '@angular/core';
@@ -9,8 +10,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
+import { ISupplierLogo } from 'src/common/ui/carousels/models/models';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
-import { supplierLogos } from 'src/common/ui/carousels/carousel-suppliers/carousel-suppliers.config';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 
 @Component({
@@ -24,7 +25,8 @@ export class CarouselSuppliersComponent extends AbstractResizeComponent {
 
     public numberOfSlides = null;
 
-    public supplierLogos = supplierLogos;
+    @Input()
+    public supplierLogos: ISupplierLogo[];
 
     public deviceCouldBeChanged = (typeOfResolution: TypeOfResolution) =>
         this.numberOfSlides = mapTypeOfDeviceToNumberOfSlides[typeOfResolution]
