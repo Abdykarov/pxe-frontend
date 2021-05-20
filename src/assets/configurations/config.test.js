@@ -7,7 +7,7 @@ window.angularDevstack = {
         "gtmId": "GTM-58VS48R",
         "production": true,
         "re_captcha": {
-            "siteKey": "6Lf2gakaAAAAAAPDsPPKvsCih_A2lGeahqlxCtuO",
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
             "size": "invisible",
             "errorMode": "handled",
             "badge": "none"
