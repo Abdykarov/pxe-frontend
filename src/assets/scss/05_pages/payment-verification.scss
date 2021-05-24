@@ -15,7 +15,19 @@
 	tbody {
 		th,
 		td {
-			padding: ( $spacer / 2 );
+			padding: 0 ( $spacer / 4 );
+		}
+
+		@include media-breakpoint-up(md) {
+			td:first-child {
+				text-align: right;
+				width: 50%;
+				opacity: 0.5;
+			}
+
+			td:last-child {
+				text-align: left;
+			}
 		}
 
 		th {

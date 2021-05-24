@@ -39,6 +39,7 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { OAuthService } from 'src/app/services/OAuth.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -66,6 +67,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private contractService: ContractService,
         private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
+        private oAuthService: OAuthService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -77,6 +79,8 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         super.ngOnInit();
         this.getSupplyPointWithPayment(this.supplyPointId);
     }
+
+    public verifyByBankId = () => this.oAuthService.tryVerifyAccount(this.supplyPointId);
 
     public getSupplyPointWithPayment = (id) => {
         this.supplyService.getSupplyPoint(id)
@@ -167,6 +171,17 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointNewVersion: ISupplyPoint) => {
+                    console.log('RESULT');
+                    const oAuthError = this.oAuthService.getError(this.route.snapshot.queryParams.error);
+                    console.log(this.route.snapshot.queryParams.error);
+                    console.log(oAuthError);
+                    if (oAuthError) {
+                        setTimeout( _ => {
+                            this.globalError = [oAuthError];
+                            this.cd.detectChanges();
+                        });
+                    }
+                    console.log(oAuthError);
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,

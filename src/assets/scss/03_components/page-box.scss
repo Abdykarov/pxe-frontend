@@ -18,6 +18,20 @@
 		font-size: 1.5rem;
 	}
 
+	&__padding {
+		padding: ( $spacer * 1.5 );
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			padding: ( $spacer * 2 );
+			height: 280px;
+		}
+
+		@include media-breakpoint-up(md) {
+			min-height: 300px;
+		}
+	}
+
 	&__inner {
 		padding: ( $spacer * 1.5 );
 		background-color: $white;
