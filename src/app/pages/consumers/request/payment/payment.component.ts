@@ -171,10 +171,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointNewVersion: ISupplyPoint) => {
-                    console.log('RESULT');
                     const oAuthError = this.oAuthService.getError(this.route.snapshot.queryParams.error);
-                    console.log(this.route.snapshot.queryParams.error);
-                    console.log(oAuthError);
                     if (oAuthError) {
                         setTimeout( _ => {
                             this.globalError = [oAuthError];
