@@ -42,7 +42,8 @@ import {
     getConfigStepper,
     inArray,
     parseViolation,
-    scrollToElementFnc, transformHttpHeadersToFileUploaderFormat,
+    scrollToElementFnc,
+    transformHttpHeadersToFileUploaderFormat,
     TypeStepper,
 } from 'src/common/utils';
 import {
