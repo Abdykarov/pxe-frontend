@@ -71,7 +71,25 @@ export const getLandingPageQuery = gql`
               buttonText,
               chatText,
               bigText,
-              description
+              description,
+              logos {
+                alt,
+                faq {
+                  flatData {
+                    tag {
+                      flatData {
+                        url
+                      }
+                    }
+                    url
+                  }
+                }
+                logo {
+                  url
+                }
+                title,
+                width
+              }
             }
           }
           iWantToSeeTheBestOffers {

@@ -7,12 +7,8 @@ import { getConfig } from 'ssr/utils/config';
 import { getMCacheKeyPage } from 'ssr/utils/squidex';
 
 const controller = {
-    public: (req, res, next) => {
+    withSSR: (req, res, next) => {
         const config = getConfig();
-        // Catch secured routes as normal client side app
-        if (req.originalUrl.indexOf(`/${CONSTS.PATHS.SECURED}`) === 0) {
-            return next();
-        }
 
         const cacheKey = getMCacheKeyPage(req.originalUrl);
         const cached = config.cacheSSR ? mCache.get(cacheKey) : false;
@@ -41,7 +37,7 @@ const controller = {
             });
         }
     },
-    secured: (req, res, next) => {
+    withoutSSR: (req, res, next) => {
         return res.sendFile(join(APP_FOLDER, 'index.html'));
     },
 };
