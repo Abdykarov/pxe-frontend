@@ -6,9 +6,9 @@ import { transformHttpHeadersToFileUploaderFormat } from 'src/common/utils';
 export const fileUploaderFactory = (
     url: string,
     itemAlias: string,
-    withHeaders: boolean,
+    withoutToken = false,
 ): Function => (authService: AuthService) => (new FileUploaderCustom( {
     url: `${environment.url_api}/v1.0/${url}`,
     itemAlias: itemAlias,
-    headers: transformHttpHeadersToFileUploaderFormat(authService.getAuthorizationHeaders()),
+    headers: transformHttpHeadersToFileUploaderFormat(authService.getAuthorizationHeaders(null, '*/*', withoutToken)),
 }));
