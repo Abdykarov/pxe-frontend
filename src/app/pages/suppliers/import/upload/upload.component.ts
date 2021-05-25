@@ -32,6 +32,7 @@ import {
     importErrorCodes,
 } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
+import { environment } from 'src/environments/environment';
 import {
     FileItem,
     FileUploader,
@@ -159,7 +160,12 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 this.fileErrors = [defaultErrorMessage];
                 this.fileUploader.clearQueue();
             } else if (countOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
-                this.fileUploader.setOptions(fileUploaderFactory('offer/batch-validate', 'offers', false)(this.authService));
+                const newSetting = {
+                    url: `${environment.url_api}/v1.0/offer/batch-validate`,
+                    itemAlias: 'offers',
+                    headers: transformHttpHeadersToFileUploaderFormat(this.authService.getAuthorizationHeaders(null, '*/*', false)),
+                };
+                this.fileUploader.setOptions(newSetting);
                 this.fileErrors = [];
                 this.loading = true;
                 R.forEach((fileItem: FileItem) => {
