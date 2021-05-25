@@ -41,7 +41,6 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import {ILoginResponse} from '../../../../services/model/auth.model';
 
 @Component({
     selector: 'pxe-contract',
