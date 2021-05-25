@@ -18,7 +18,6 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./registration-form.component.scss'],
 })
 export class RegistrationFormComponent extends AbstractFormComponent implements OnDestroy {
-    public readonly isProduction = this.environmentService.is(Environment.PROD);
     public readonly oAuthType = OAuthType;
 
     @Input()
