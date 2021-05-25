@@ -41,6 +41,7 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import {ILoginResponse} from '../../../../services/model/auth.model';
 
 @Component({
     selector: 'pxe-contract',
@@ -178,7 +179,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                             this.cd.detectChanges();
                         });
                     }
-                    console.log(oAuthError);
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
