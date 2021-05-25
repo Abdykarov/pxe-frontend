@@ -27,7 +27,6 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent extends AbstractFormComponent implements OnInit, OnDestroy {
-    public readonly isProduction = this.environmentService.is(Environment.PROD);
     public readonly LOGIN_FORM_NAME = CONSTS.LOGIN_FORM_NAME;
     public readonly oAuthType = OAuthType;
 
