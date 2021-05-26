@@ -9,30 +9,25 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .table-basic {
-	width: 100%;
-	height: 100%;
-
 	tbody {
-		th,
 		td {
 			padding: 0 ( $spacer / 4 );
 		}
 
-		@include media-breakpoint-up(md) {
-			td:first-child {
+		td:first-child {
+			// Media queries
+			@include media-breakpoint-up(md) {
 				text-align: right;
 				width: 50%;
-				opacity: 0.5;
-			}
-
-			td:last-child {
-				text-align: left;
+				opacity: .5;
 			}
 		}
 
-		th {
-			padding-right: $spacer;
-			font-weight: 400;
+		td:last-child {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				text-align: left;
+			}
 		}
 	}
 }

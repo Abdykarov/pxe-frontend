@@ -26,31 +26,31 @@
             <ng-container *ngIf="supplyPoint.contract?.contractStatus == contractStatus.WAITING_FOR_PAYMENT && paymentInfo">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3 style="font-size: 1.5rem;text-transform: none;">
+                        <h3 class="h2">
                             Nyní potřebujeme ověřit<br> vaši totožnost.
                         </h3>
                         <p>
                             Využijte jeden ze způsobů níže.
                         </p>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <div class="page-box page-box--with-inner">
-                            <div class="page-box__padding">
-                                <h2>
+                    <div class="col-md-6 d-flex">
+                        <div class="page-box page-box--with-inner d-md-flex flex-md-column justify-content-md-between">
+                            <div class="page-box__inner">
+                                <h3 class="h2">
                                     Ověřovací korunová platba
-                                </h2>
+                                </h3>
                                 <p>
                                     Na doručení této ověřovací platby čekáme do {{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}, proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.</p><p>Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.
                                 </p>
                             </div>
-                            <div class="page-box__inner page-box__inner--light">
+                            <div class="page-box__inner page-box__inner--light page-box__inner--same-height">
                                 <div class="row justify-content-center">
                                     <div class="col-12 d-none d-md-block">
-                                        <table class="table-basic">
+                                        <table class="table-basic mx-auto">
                                             <tbody>
                                             <tr>
                                                 <td>Číslo účtu</td>
-                                                <td class=" py-1text-left">
+                                                <td class="py-1 text-left">
                                                     {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
                                                 </td>
                                             </tr>
@@ -74,7 +74,7 @@
                                         </table>
                                     </div>
                                     <div class="col-auto d-block d-md-none">
-                                        <table class="table-basic">
+                                        <table class="table-basic mx-auto">
                                             <tbody>
                                             <tr>
                                                 <td class="pb-3">
@@ -117,7 +117,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-md-auto mb-5 mb-md-0 mt-md-2 text-center">
+                                    <div class="col-12 mt-3 text-center">
                                         <img
                                             *ngIf="paymentInfo.encodedQrCode"
                                             [src]="'data:image/jpeg;base64,' + paymentInfo.encodedQrCode"
@@ -128,12 +128,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 d-flex">
-                        <div class="page-box page-box--with-inner d-flex flex-column">
-                            <div class="page-box__padding">
-                                <h2>
+                    <div class="col-md-6 d-flex">
+                        <div class="page-box page-box--with-inner d-md-flex flex-md-column justify-content-md-between">
+                            <div class="page-box__inner">
+                                <h3 class="h2">
                                     Bankovní identita
-                                </h2>
+                                </h3>
                                 <p class="mb-3">
                                     Použijte stejný a bezpečný způsob přihlášení jako do vašeho internetového bankovnictví
                                 </p>
@@ -142,8 +142,8 @@
                                     <li class="pb-1">Více informací na <a href="https://bankovni-identita.cz/" target="_blank">webu</a> bankovní identity</li>
                                 </ol>
                             </div>
-                            <div class="page-box__inner page-box__inner--light flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-                                <img width="145" class="mb-3" src="/assets/images/social/bankid-transparent.svg" alt="bankid" title="bankid">
+                            <div class="page-box__inner page-box__inner--light page-box__inner--same-height d-flex flex-column justify-content-center">
+                                <img width="145" class="mb-3" src="/assets/images/social/bankid-black.svg" alt="bankid" title="bankid">
                                 <lnd-button
                                     type="primary"
                                     (action)="verifyByBankId()"
