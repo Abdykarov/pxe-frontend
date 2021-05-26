@@ -97,6 +97,8 @@ export const importErrorViolations = {
 };
 
 export const oAuthApiError = {
+    'SEC0009': 'Ověření pomocí bankovní identity se nezdařilo.',
+    'SEC0008': 'Ověření pomocí bankovní identity se nezdařilo.',
     'SEC0007': 'Přihlášení se nezdařilo. Přihlašte se přes Bankovní identitu.',
     'SEC0006': 'Přihlášení se nezdařilo. Přihlašte se přes Google.',
     'SEC0005': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',

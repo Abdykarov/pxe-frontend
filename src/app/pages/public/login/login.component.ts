@@ -101,7 +101,7 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
 
         const loginResponse: ILoginResponse = <ILoginResponse>this.route.snapshot.queryParams;
 
-        const oAuthError = this.oAuthService.getError(loginResponse);
+        const oAuthError = this.oAuthService.getError(loginResponse?.error);
         if (oAuthError) {
             setTimeout( _ => {
                 this.globalError = [oAuthError];

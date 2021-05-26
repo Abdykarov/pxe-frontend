@@ -18,7 +18,7 @@ export class OAuthService {
 
     public isSuccessRedirectURI = (loginResponse: ILoginResponse): boolean => !!loginResponse?.token && !!loginResponse?.landingPage;
 
-    public getError = (loginResponse: ILoginResponse): string => oAuthApiError[loginResponse?.error];
+    public getError = (error): string => oAuthApiError[error];
 
     public processLogin = (loginResponse: ILoginResponse): void => {
         this.authService.manageLoginResponse(loginResponse);
@@ -28,9 +28,16 @@ export class OAuthService {
         this.authService.wasRefreshCallRefreshInterval = true;
     }
 
-    public tryLoginWithOAuth = (oAuthType: OAuthType): void => {
+    public tryLogin = (oAuthType: OAuthType): void => {
         window.open(
             `${environment.url}/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/${CONSTS.PATHS.O_AUTH}`,
+            '_self',
+        );
+    }
+
+    public tryVerifyAccount = (supplyPointId: string): void => {
+        window.open(
+            `${environment.url}/oauth2/authorize/${OAuthType.BANK_ID}?redirect_uri=${environment.url}/${CONSTS.PATHS.O_AUTH}?supplyPointId=${supplyPointId}`,
             '_self',
         );
     }
