@@ -37,7 +37,7 @@ export class OAuthService {
 
     public tryVerifyAccount = (supplyPointId: string): void => {
         window.open(
-            `${environment.url}/oauth2/authorize/${OAuthType.BANK_ID}?redirect_uri=${environment.url}/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.PAYMENT}?supplyPointId=${supplyPointId}`,
+            `${environment.url}/oauth2/authorize/${OAuthType.BANK_ID}?redirect_uri=${environment.url}/${CONSTS.PATHS.O_AUTH}?supplyPointId=${supplyPointId}`,
             '_self',
         );
     }

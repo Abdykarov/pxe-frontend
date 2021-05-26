@@ -178,7 +178,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                             this.cd.detectChanges();
                         });
                     }
-                    console.log(oAuthError);
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
