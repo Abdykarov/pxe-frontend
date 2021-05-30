@@ -33,11 +33,17 @@ export class ScrollToService {
 
     public scrollToHowItWorks = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
 
-    public getFragmentFromScrollTo = (scrollTo: SCROLL_TO) => R.find(
-        (scrollSetting: IScrollSetting) => scrollSetting.SCROLL_TO === scrollTo,
+    public getFragmentFromScrollTo = (scrollTo: SCROLL_TO) => R.pipe(
+        R.find(
+            (scrollSetting: IScrollSetting) => scrollSetting.SCROLL_TO === scrollTo,
+        ),
+        R.prop('fragment'),
     )(scrollSettings)
 
-    public getScrollToFromFragment = (fragment: string) => R.find(
-        (scrollSetting: IScrollSetting) => scrollSetting.fragment === fragment,
+    public getScrollToFromFragment = (fragment: string) => R.pipe(
+        R.find(
+            (scrollSetting: IScrollSetting) => scrollSetting.fragment === fragment,
+        ),
+        R.prop('SCROLL_TO'),
     )(scrollSettings)
 }
