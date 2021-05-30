@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Subject } from 'rxjs';
 
-import { SCROLL_TO } from './model/scroll-to.model';
+import {
+    IScrollSetting,
+    SCROLL_TO,
+} from './model/scroll-to.model';
+import { scrollSettings } from 'src/app/pages/public/landing/landing.config';
 
 @Injectable({
     providedIn: 'root',
@@ -27,4 +32,12 @@ export class ScrollToService {
     public scrollToFaq = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.FAQ));
 
     public scrollToHowItWorks = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
+
+    public getFragmentFromScrollTo = (scrollTo: SCROLL_TO) => R.find(
+        (scrollSetting: IScrollSetting) => scrollSetting.SCROLL_TO === scrollTo,
+    )(scrollSettings)
+
+    public getScrollToFromFragment = (fragment: string) => R.find(
+        (scrollSetting: IScrollSetting) => scrollSetting.fragment === fragment,
+    )(scrollSettings)
 }

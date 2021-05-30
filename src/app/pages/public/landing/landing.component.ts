@@ -5,15 +5,16 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef, HostListener,
+    ElementRef,
+    HostListener,
     Inject,
     OnDestroy,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
-import {isPlatformBrowser, ViewportScroller} from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
@@ -57,10 +58,11 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISignUp } from 'src/common/cms/models/sign-up';
 import { NewsService } from 'src/common/cms/services/news.service';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { scrollSettings } from './landing.config';
 import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import {LP_SCROLL, SCROLL_TO} from 'src/app/services/model/scroll-to.model';
+import {IScrollSetting, SCROLL_TO} from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -101,6 +103,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     public fieldError: IFieldError = {};
     public formFields: IForm;
     public routes = ROUTES;
+    public scrollSettings = scrollSettings;
 
     public readonly askForOffer: IAskForOffer = this.route.snapshot.data.askForOffer;
     public readonly landingPage: ILandingPage = this.route.snapshot.data.landingPage;
@@ -165,23 +168,23 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
             .subscribe((scrollTo: SCROLL_TO) => {
                 const margin = this.isMoreThanMdResolution ? 20 : 60;
                 if (scrollTo === SCROLL_TO.BEST_PRICES_IN_THE_WORLD) {
-                    this.location.go('#vice-o-cenach');
+                    this.location.go(this.scrollToService.getFragmentFromScrollTo(scrollTo));
                     scrollToElementFnc(this.bestPricesInTheWorld.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.HELP) {
-                    this.location.go('#s-cim-vam-pomuzeme');
+                    this.location.go(this.scrollToService.getFragmentFromScrollTo(scrollTo));
                     scrollToElementFnc(this.help.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
-                    this.location.go('#jak-to-funguje');
+                    this.location.go(this.scrollToService.getFragmentFromScrollTo(scrollTo));
                     scrollToElementFnc(this.howItWorks.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.BLOG) {
-                    this.location.go('#blog');
+                    this.location.go(this.scrollToService.getFragmentFromScrollTo(scrollTo));
                     scrollToElementFnc(this.blog.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.FAQ) {
-                    this.location.go('#faq');
+                    this.location.go(this.scrollToService.getFragmentFromScrollTo(scrollTo));
                     scrollToElementFnc(this.faq.nativeElement, margin);
                 }
             });
@@ -207,11 +210,10 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     }
 
     public initScroll = () => {
-        const fragmentaaa = this.route.snapshot.fragment;
-        const result = R.find(
-            (dd) => dd.fragment === fragmentaaa,
-        )(LP_SCROLL);
+        const initFragment = this.route.snapshot.fragment;
+        const result = this.scrollToService.getScrollToFromFragment(initFragment);
 
+        // timeout 300ms is needed for some reason
         setTimeout(_ => {
             this.scrollToService.activeScrollTo(result.SCROLL_TO);
         }, 300);
