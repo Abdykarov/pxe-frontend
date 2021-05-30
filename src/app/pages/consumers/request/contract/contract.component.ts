@@ -66,9 +66,6 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
     public readonly BannerTypeImages = BannerTypeImages;
 
-    @ViewChild('pxeVerificationFormWrapper')
-    public pxeVerificationFormWrapper: ElementRef;
-
     @ViewChild('pdfInformation')
     public pdfInformation: PdfViewerComponent;
 
@@ -318,9 +315,6 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
-                    if (Object.keys(this.fieldError).length) {
-                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
-                    }
                     this.cd.markForCheck();
                 },
             );

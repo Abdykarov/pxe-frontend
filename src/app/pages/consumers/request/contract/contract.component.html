@@ -187,8 +187,7 @@
                                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>"</ng-container>.
                                 </p>
-                                <div #pxeVerificationFormWrapper
-                                     class="row">
+                                <div class="row">
                                     <div class="col-12 text-center">
                                         <pxe-verification-form
                                             *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"

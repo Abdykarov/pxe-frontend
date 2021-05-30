@@ -355,7 +355,8 @@ export const errorFieldMessages =  {
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
-        invalidSmsCode: 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
+        invalidSmsCode1: 'Vyplněný kód se neshoduje s kódem, který přišel v SMS. Zbývají 2 pokusy.',
+        invalidSmsCode2: 'Vyplněný kód se neshoduje s kódem, který přišel v SMS. Zbývá 1 pokus.',
         smsCodeAttemptsExceededLimit: 'Byl vyčerpán limit pro zadání kódu. Klikněte na "Poslat znovu" a vyplňte kód, který přijde v SMS.',
     },
     street: {
