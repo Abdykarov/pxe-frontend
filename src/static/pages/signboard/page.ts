@@ -5,16 +5,19 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import { fileUploader } from 'src/static/pages/import-upload/config';
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 import { playVideo } from 'src/common/utils';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
 export class SignboardComponent {
 
     @ViewChild('video')
     public _video: ElementRef;
+
+    public uploader = fileUploader;
 
     constructor(
         public cd: ChangeDetectorRef,
