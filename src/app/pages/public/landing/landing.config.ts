@@ -17,23 +17,23 @@ export const lpVideoModalConfig = (): IShowModal => ({
 
 export const scrollSettings: IScrollSettings = [
     {
-        SCROLL_TO: SCROLL_TO.HELP,
+        scrollTo: SCROLL_TO.HELP,
         fragment: 's-cim-vam-pomuzeme',
     },
     {
-        SCROLL_TO: SCROLL_TO.HOW_IT_WORKS,
+        scrollTo: SCROLL_TO.HOW_IT_WORKS,
         fragment: 'jak-to-funguje',
     },
     {
-        SCROLL_TO: SCROLL_TO.BEST_PRICES_IN_THE_WORLD,
+        scrollTo: SCROLL_TO.BEST_PRICES_IN_THE_WORLD,
         fragment: 'vice-o-cenach',
     },
     {
-        SCROLL_TO: SCROLL_TO.FAQ,
+        scrollTo: SCROLL_TO.FAQ,
         fragment: 'faq',
     },
     {
-        SCROLL_TO: SCROLL_TO.BLOG,
+        scrollTo: SCROLL_TO.BLOG,
         fragment: 'blog',
     },
 ];

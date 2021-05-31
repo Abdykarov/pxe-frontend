@@ -7,7 +7,7 @@ export enum SCROLL_TO {
 }
 
 export interface IScrollSetting {
-    SCROLL_TO: SCROLL_TO;
+    scrollTo: SCROLL_TO;
     fragment: string;
 }
 

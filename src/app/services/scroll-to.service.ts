@@ -35,7 +35,7 @@ export class ScrollToService {
 
     public getFragmentFromScrollTo = (scrollTo: SCROLL_TO) => R.pipe(
         R.find(
-            (scrollSetting: IScrollSetting) => scrollSetting.SCROLL_TO === scrollTo,
+            (scrollSetting: IScrollSetting) => scrollSetting.scrollTo === scrollTo,
         ),
         R.prop('fragment'),
     )(scrollSettings)
@@ -44,6 +44,6 @@ export class ScrollToService {
         R.find(
             (scrollSetting: IScrollSetting) => scrollSetting.fragment === fragment,
         ),
-        R.prop('SCROLL_TO'),
+        R.prop('scrollTo'),
     )(scrollSettings)
 }

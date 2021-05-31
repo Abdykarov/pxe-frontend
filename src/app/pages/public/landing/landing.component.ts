@@ -58,11 +58,11 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISignUp } from 'src/common/cms/models/sign-up';
 import { NewsService } from 'src/common/cms/services/news.service';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import { scrollSettings } from './landing.config';
-import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
+import { scrollSettings } from './landing.config';
+import { scrollToElementFnc } from 'src/common/utils';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -118,7 +118,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
         );
 
     @HostListener('window:popstate', ['$event'])
-    public obBackButtonInBrowser(event) {
+    public onBackButtonInBrowser(event) {
         const fragment = window.location.hash.substr(1);
         setTimeout(_ => {
             const margin = this.getMarginToScroll();
