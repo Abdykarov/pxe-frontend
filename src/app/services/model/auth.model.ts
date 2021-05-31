@@ -8,7 +8,8 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     token: string;
     landingPage: LANDING_PAGE;
-    error?: string;
+    error?: string; // from OAuth
+    supplyPointId?: string; // from OAuth
 }
 
 export enum ILoginProvider {
