@@ -332,7 +332,7 @@ export const errorFieldMessages =  {
         currentRequired: 'Vyplňte své současné heslo.',
         pattern: '	Vaše heslo musí mít minimálně 10 znaků.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
-        fieldsMustNotMatch: 'Heslo bylo již použito. Prosím zvolte jiné.',
+        fieldsMustNotMatch: 'Heslo jste již používal. Prosím zvolte jiné.',
         invalidCurrentPassword: 'Vyplněné heslo se s vaším současným heslem neshoduje.',
     },
     phone: {

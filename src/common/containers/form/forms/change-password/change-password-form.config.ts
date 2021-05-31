@@ -5,7 +5,7 @@ import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { fieldsMustMatch } from 'src/common/utils/validators/fields-must-match.fnc';
-import {fieldsMustNotMatch} from '../../../../utils/validators/fields-must-not-match.fnc';
+import { fieldsMustNotMatch } from 'src/common/utils/validators/fields-must-not-match.fnc';
 
 export const changePasswordFields: IForm = {
     controls: {
