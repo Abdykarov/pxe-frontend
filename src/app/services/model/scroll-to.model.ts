@@ -5,3 +5,10 @@ export enum SCROLL_TO {
     FAQ,
     BLOG,
 }
+
+export interface IScrollSetting {
+    scrollTo: SCROLL_TO;
+    fragment: string;
+}
+
+export interface IScrollSettings extends Array<IScrollSetting> {}

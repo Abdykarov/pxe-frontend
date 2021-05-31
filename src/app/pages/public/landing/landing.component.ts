@@ -6,11 +6,14 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    HostListener,
     Inject,
     OnDestroy,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { Location } from '@angular/common';
+
 import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
@@ -55,17 +58,17 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISignUp } from 'src/common/cms/models/sign-up';
 import { NewsService } from 'src/common/cms/services/news.service';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
+import { scrollSettings } from './landing.config';
+import { scrollToElementFnc } from 'src/common/utils';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractFaqComponent implements OnDestroy {
-
     @ViewChild('video', { static: true })
     public _video: ElementRef;
 
@@ -100,6 +103,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     public fieldError: IFieldError = {};
     public formFields: IForm;
     public routes = ROUTES;
+    public scrollSettings = scrollSettings;
 
     public readonly askForOffer: IAskForOffer = this.route.snapshot.data.askForOffer;
     public readonly landingPage: ILandingPage = this.route.snapshot.data.landingPage;
@@ -113,6 +117,15 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
             debounceTime(200),
         );
 
+    @HostListener('window:popstate', ['$event'])
+    public onBackButtonInBrowser(event) {
+        const fragment = window.location.hash.substr(1);
+        setTimeout(_ => {
+            const margin = this.getMarginToScroll();
+            scrollToElementFnc(fragment, margin);
+        });
+    }
+
     constructor(
         private apollo: Apollo,
         public authService: AuthService,
@@ -120,6 +133,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
         public faqService: FaqService,
         private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
+        private location: Location,
         private metaService: Meta,
         private newsService: NewsService,
         private modalService: ModalService,
@@ -161,23 +175,30 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
         this.scrollToService.getScrollStream()
             .pipe(takeUntil(this.destroy$))
             .subscribe((scrollTo: SCROLL_TO) => {
-                const margin = this.isMoreThanMdResolution ? 20 : 60;
+                const margin = this.getMarginToScroll();
                 if (scrollTo === SCROLL_TO.BEST_PRICES_IN_THE_WORLD) {
+                    this.location.go(`#${this.scrollToService.getFragmentFromScrollTo(scrollTo)}`);
                     scrollToElementFnc(this.bestPricesInTheWorld.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.HELP) {
+                    this.location.go(`#${this.scrollToService.getFragmentFromScrollTo(scrollTo)}`);
                     scrollToElementFnc(this.help.nativeElement, margin);
                 }
-                if (scrollTo === SCROLL_TO.BLOG) {
-                    scrollToElementFnc(this.blog.nativeElement, margin);
-                }
                 if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
+                    this.location.go(`#${this.scrollToService.getFragmentFromScrollTo(scrollTo)}`);
                     scrollToElementFnc(this.howItWorks.nativeElement, margin);
                 }
+                if (scrollTo === SCROLL_TO.BLOG) {
+                    this.location.go(`#${this.scrollToService.getFragmentFromScrollTo(scrollTo)}`);
+                    scrollToElementFnc(this.blog.nativeElement, margin);
+                }
                 if (scrollTo === SCROLL_TO.FAQ) {
+                    this.location.go(`#${this.scrollToService.getFragmentFromScrollTo(scrollTo)}`);
                     scrollToElementFnc(this.faq.nativeElement, margin);
                 }
             });
+
+        this.initScroll();
 
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
@@ -195,6 +216,18 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
             .subscribe(modal => {
                 this.modalService.closeModalData$.next(null);
             });
+    }
+
+    private getMarginToScroll = () => this.isMoreThanMdResolution ? 20 : 60;
+
+    public initScroll = () => {
+        const initFragment = this.route.snapshot.fragment;
+        const result = this.scrollToService.getScrollToFromFragment(initFragment);
+
+        // timeout 300ms is needed for some reason
+        setTimeout(_ => {
+            this.scrollToService.activeScrollTo(result);
+        }, 300);
     }
 
     ngOnDestroy() {
