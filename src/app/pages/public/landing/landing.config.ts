@@ -1,6 +1,10 @@
 import { CONSTS } from 'src/app/app.constants';
 import { IModalSize } from 'src/common/ui/modal/models/size.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import {
+    IScrollSettings,
+    SCROLL_TO,
+} from 'src/app/services/model/scroll-to.model';
 import { LpVideoModalComponent } from 'src/common/containers/modal/modals/lp-video/lp-video-modal.component';
 
 export const lpVideoModalConfig = (): IShowModal => ({
@@ -10,3 +14,26 @@ export const lpVideoModalConfig = (): IShowModal => ({
         size: IModalSize.LG,
     },
 });
+
+export const scrollSettings: IScrollSettings = [
+    {
+        scrollTo: SCROLL_TO.HELP,
+        fragment: 's-cim-vam-pomuzeme',
+    },
+    {
+        scrollTo: SCROLL_TO.HOW_IT_WORKS,
+        fragment: 'jak-to-funguje',
+    },
+    {
+        scrollTo: SCROLL_TO.BEST_PRICES_IN_THE_WORLD,
+        fragment: 'vice-o-cenach',
+    },
+    {
+        scrollTo: SCROLL_TO.FAQ,
+        fragment: 'faq',
+    },
+    {
+        scrollTo: SCROLL_TO.BLOG,
+        fragment: 'blog',
+    },
+];

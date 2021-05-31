@@ -5,8 +5,10 @@ import {
 } from '@angular/core';
 
 import * as moment from 'moment';
+import * as R from 'ramda';
 
 import { CookiesService } from 'src/app/services/cookies.service';
+import { personalizationOptions } from 'src/common/containers/lp-personalization-container/lp-personalization-container.config';
 
 @Injectable({
     providedIn: 'root',
@@ -28,7 +30,11 @@ export class LpPersonalizationService {
     }
 
     public processPersonalization = (fragment: string): string => {
-        if (!fragment) {
+        const isFragmentWhichContainsPersonalization = R.find(
+            R.propEq('fragment', fragment),
+        )(personalizationOptions);
+
+        if (!fragment || !isFragmentWhichContainsPersonalization) {
             const personalizationInCookie = this.getPersonalization();
             if (!!personalizationInCookie) {
                 return personalizationInCookie;
