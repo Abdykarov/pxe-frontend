@@ -4,6 +4,7 @@ import {
     Input,
     Output,
     TemplateRef,
+    ViewEncapsulation,
 } from '@angular/core';
 
 import { FileUploader } from 'src/third-sides/file-upload';
@@ -12,6 +13,7 @@ import { FileUploader } from 'src/third-sides/file-upload';
     selector: 'pxe-file-uploader',
     templateUrl: './file-uploader.component.html',
     styleUrls: ['./file-uploader.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class FileUploaderComponent {
     @Input()

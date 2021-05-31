@@ -1,13 +1,24 @@
 <ng-template #fileUploaderTemplate>
-    <p class="mb-1 text-body">
-        Nechcete nic vyplňovat?<br />
-        Přetáhněte sem nebo nahrejte vaši poslední fakturu za elektřinu nebo plyn a o zbytek se postaráme my.<br />
-        <ng-container>
-            <label [for]="idFileUploader" class="drop-zone__control btn btn-primary mt-2 mb-4">
-                Nahrát fakturu
-            </label>
-        </ng-container>
-    </p>
+    <div class="mb-1 text-body">
+        <p>
+            Nechcete nic vyplňovat?
+        </p>
+        <p>
+            Přetáhněte sem nebo nahrejte vaši poslední fakturu za elektřinu nebo plyn a o zbytek se postaráme my.
+        </p>
+        <p class="mb-1">
+            Do tří pracovních dnů můžete očekávat:
+        </p>
+        <ul class="no-bullets">
+            <li>vytvoříme Vám odběrné místo,</li>
+            <li>nabídky pošleme na váš e-mail,</li>
+            <li>z nabídek si stačí vybrat,</li>
+            <li class="mb-3">odběrné místo budete mít v sekci Rozpracované.</li>
+        </ul>
+        <label [for]="idFileUploader" class="cursor-pointer drop-zone__control btn btn-primary mt-2 mb-4">
+            Nahrát fakturu
+        </label>
+    </div>
     <p class="mb-0 text-body small">
         Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB.
     </p>

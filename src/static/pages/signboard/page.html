@@ -1,3 +1,29 @@
+<ng-template #fileUploaderTemplate>
+    <div class="mb-1 text-body">
+        <p>
+            Nechcete nic vyplňovat?
+        </p>
+        <p>
+            Přetáhněte sem nebo nahrejte vaši poslední fakturu za elektřinu nebo plyn a o zbytek se postaráme my.
+        </p>
+        <p class="mb-1">
+            Do tří pracovních dnů můžete očekávat:
+        </p>
+        <ul class="no-bullets">
+            <li>vytvoříme Vám odběrné místo,</li>
+            <li>nabídky pošleme na váš e-mail,</li>
+            <li>z nabídek si stačí vybrat,</li>
+            <li class="mb-3">odběrné místo budete mít v sekci Rozpracované.</li>
+        </ul>
+        <label for="file-uploader" class="cursor-pointer drop-zone__control btn btn-primary mt-2 mb-4">
+            Nahrát fakturu
+        </label>
+    </div>
+    <p class="mb-0 text-body small">
+        Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB.
+    </p>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -28,6 +54,23 @@
                 <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
                 <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
             </ul>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1 bg--gradient-violet- py-5 mb-5">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="row">
+                        <div class="col-12 text-center mb-3">
+                            <pxe-file-uploader
+                                id="file-uploader"
+                                secondaryTextCustomClass="small text-color--gray-200"
+                                [uploader]="uploader"
+                                [labelFromMainText]="true"
+                                [contentTemplate]="fileUploaderTemplate">
+                            </pxe-file-uploader>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-12 col-xl-8 offset-xl-2 text-center">
             <div class="video">
