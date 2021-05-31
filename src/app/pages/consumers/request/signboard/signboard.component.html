@@ -9,15 +9,15 @@
         <p class="mb-1">
             Do tří pracovních dnů můžete očekávat:
         </p>
-        <div>Vytvoříme Vám odběrné místo</div>
-        <div>Nabídky pošleme na váš e-mail</div>
-        <div>Z nabídek si stačí vybrat</div>
+        <ul class="no-bullets">
+            <li>Vytvoříme Vám odběrné místo</li>
+            <li>Nabídky pošleme na váš e-mail</li>
+            <li>Z nabídek si stačí vybrat</li>
+        </ul>
         <div class="mb-3">Odběrné místo budete mít v sekci Rozpracované</div>
-        <ng-container>
-            <label [for]="idFileUploader" class="drop-zone__control btn btn-primary mt-2 mb-4">
-                Nahrát fakturu
-            </label>
-        </ng-container>
+        <label [for]="idFileUploader" class="cursor-pointer drop-zone__control btn btn-primary mt-2 mb-4">
+            Nahrát fakturu
+        </label>
     </div>
     <p class="mb-0 text-body small">
         Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB.
