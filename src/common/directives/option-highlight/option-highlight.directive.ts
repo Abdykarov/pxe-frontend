@@ -3,11 +3,12 @@ import {
     Directive,
     ElementRef,
     Input,
-    OnChanges,
+    OnChanges, OnInit,
     Renderer2,
 } from '@angular/core';
 
 import * as searchHelper from './search-helper';
+import { decode } from 'html-entities';
 
 // base on https://github.com/ng-select/ng-select/tree/master/src/ng-option-highlight
 @Directive({
@@ -35,16 +36,11 @@ export class OptionHighlightDirective implements OnChanges, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.label = this.element.innerHTML;
+        this.label = decode(this.element.innerHTML);
         if (this._canHighlight) {
             this._highlightLabel();
         }
     }
-
-    private _escapeRegExp(str: string): string {
-        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
 
     private _highlightLabel() {
         const label = this.label;
