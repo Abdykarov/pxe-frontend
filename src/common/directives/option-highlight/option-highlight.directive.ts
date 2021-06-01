@@ -3,7 +3,7 @@ import {
     Directive,
     ElementRef,
     Input,
-    OnChanges, OnInit,
+    OnChanges,
     Renderer2,
 } from '@angular/core';
 
