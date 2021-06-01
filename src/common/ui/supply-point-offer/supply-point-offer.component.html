@@ -68,20 +68,22 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-md-6 supply-point-offer__block pt-0 pb-3">
-                    <div class="row">
-                        <div class="col-auto"
-                             *ngIf="!isOwner">
-                            <div class="supply-point-offer__value-box">
-                                <span class="supply-point-offer__title-label">Dodávka</span>
-                                <span class="supply-point-offer__title">{{supplyPointOffer.deliveryLength }} {{supplyPointOffer.deliveryLength | plural: 'year'}}</span>
+                <div class="col-md-6">
+                    <div class="supply-point-offer__block pt-0 pb-3">
+                        <div class="row justify-content-between">
+                            <div class="col-auto mr-4"
+                                *ngIf="!isOwner">
+                                <div class="supply-point-offer__value-box">
+                                    <span class="supply-point-offer__title-label">Dodávka</span>
+                                    <span class="supply-point-offer__title">{{supplyPointOffer.deliveryLength }} {{supplyPointOffer.deliveryLength | plural: 'year'}}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-auto"
-                             *ngIf="!isOwner && showValidityOfOffer">
-                            <div class="supply-point-offer__value-box">
-                                <span class="supply-point-offer__title-label">Platnost nabídky</span>
-                                <span class="supply-point-offer__title">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
+                            <div class="col-auto"
+                                *ngIf="!isOwner && showValidityOfOffer">
+                                <div class="supply-point-offer__value-box mr-0">
+                                    <span class="supply-point-offer__title-label">Platnost nabídky</span>
+                                    <span class="supply-point-offer__title">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
