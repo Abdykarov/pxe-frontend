@@ -46,9 +46,7 @@
                     let-index="index"
                     let-search="searchTerm">
                 <ng-container *ngIf="!templateItem">
-                    <div [lndOptionHighlight]="search">
-                        {{ item.label }}
-                    </div>
+                    <div [innerHTML]="item.label" [lndOptionHighlight]="search"></div>
                 </ng-container>
                 <ng-container *ngIf="templateItem">
                     <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>

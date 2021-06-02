@@ -30,6 +30,10 @@
 		&--light {
 			background-color: lighten($body-bg, 2%);
 		}
+
+		&--same-height {
+			min-height: 370px;
+		}
 	}
 
 	&--with-inner {

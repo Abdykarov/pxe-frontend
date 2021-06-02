@@ -87,7 +87,7 @@
                 type="facebook"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLoginWithOAuth(oAuthType.FACEBOOK)">
+                (action)="oauthService.tryLogin(oAuthType.FACEBOOK)">
             </lnd-button>
         </div>
         <div class="col-md-6 mb-3">
@@ -96,7 +96,7 @@
                 type="google"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLoginWithOAuth(oAuthType.GOOGLE)">
+                (action)="oauthService.tryLogin(oAuthType.GOOGLE)">
             </lnd-button>
         </div>
         <div class="col-12">
@@ -104,7 +104,7 @@
                 type="bankid"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLoginWithOAuth(oAuthType.BANK_ID)">
+                (action)="oauthService.tryLogin(oAuthType.BANK_ID)">
             </lnd-button>
         </div>
     </div>
