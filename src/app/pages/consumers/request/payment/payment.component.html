@@ -33,17 +33,17 @@
                             Využijte jeden ze způsobů níže.
                         </p>
                     </div>
-                    <div class="col-md-6 d-flex">
+                    <div class="d-flex col-md-6 col-xl-5 offset-xl-1">
                         <div class="page-box page-box--with-inner d-md-flex flex-md-column justify-content-md-between">
                             <div class="page-box__inner">
                                 <h3 class="h2">
                                     Ověřovací korunová platba
                                 </h3>
                                 <p>
-                                    Na doručení této ověřovací platby čekáme do {{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}, proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.</p><p>Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.
+                                    Na doručení této ověřovací platby čekáme do {{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}, proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.
                                 </p>
                             </div>
-                            <div class="page-box__inner page-box__inner--light page-box__inner--same-height">
+                            <div class="page-box__inner page-box__inner--light page-box__inner--same-height px-md-3">
                                 <div class="row justify-content-center">
                                     <div class="col-12 d-none d-md-block">
                                         <table class="table-basic mx-auto">
@@ -128,7 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex">
+                    <div class="d-flex col-md-6 col-xl-5">
                         <div class="page-box page-box--with-inner d-md-flex flex-md-column justify-content-md-between">
                             <div class="page-box__inner">
                                 <h3 class="h2">
@@ -143,12 +143,18 @@
                                 </ol>
                             </div>
                             <div class="page-box__inner page-box__inner--light page-box__inner--same-height d-flex flex-column justify-content-center">
-                                <img width="145" class="mb-3" src="/assets/images/social/bankid-black.svg" alt="bankid" title="bankid">
-                                <lnd-button
-                                    type="primary"
-                                    (action)="verifyByBankId()"
-                                    label="Podepsat pomocí Bankovní identity"
-                                ></lnd-button>
+                                <div class="row text-center">
+                                    <div class="col-12">    
+                                        <img width="145" class="mb-3" src="/assets/images/social/bankid-black.svg" alt="bankid" title="bankid">
+                                    </div>
+                                    <div class="col-12">
+                                        <lnd-button
+                                        type="primary"
+                                        (action)="verifyByBankId()"
+                                        label="Podepsat pomocí Bankovní identity"
+                                        ></lnd-button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
