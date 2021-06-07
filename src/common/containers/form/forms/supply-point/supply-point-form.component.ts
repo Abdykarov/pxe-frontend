@@ -53,7 +53,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
-    convertDateToSendFormatFnc,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
@@ -67,6 +66,7 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import {convertDateToSendFormatFnc} from '../../../../utils/without-main-js/convert-date-to-send-format.fnc';
 
 @Component({
     selector: 'pxe-supply-point-form',

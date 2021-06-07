@@ -30,7 +30,6 @@ import { formFields } from 'src/common/containers/form/forms/personal-info/perso
 import {
     getConfigStepper,
     parseGraphQLErrors,
-    removeAccent,
     transformCodeList,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -47,6 +46,7 @@ import { NavigateRequestService } from 'src/app/services/navigate-request.servic
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import {removeAccent} from '../../../../../common/utils/without-main-js/remove-accent.fnc';
 
 @Component({
     selector: 'pxe-recapitulation',

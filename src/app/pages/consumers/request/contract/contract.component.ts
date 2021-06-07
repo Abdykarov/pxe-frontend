@@ -43,8 +43,6 @@ import {
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
-    removeAccent,
-    scrollToElementFnc,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
 import {
@@ -55,6 +53,7 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import {removeAccent} from '../../../../../common/utils/without-main-js/remove-accent.fnc';
 
 @Component({
     selector: 'pxe-contract',
