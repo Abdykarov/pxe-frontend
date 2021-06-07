@@ -24,7 +24,7 @@ import {
     ISupplyPointStatistic, ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
+import { IsDatePast } from 'src/common/pipes/secured/is-date-past/is-date-past.pipe';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';

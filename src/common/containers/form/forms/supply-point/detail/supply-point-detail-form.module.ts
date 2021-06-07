@@ -15,7 +15,7 @@ import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FieldWrapperModule } from 'src/common/ui/forms/field-wrapper/field-wrapper.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoaderModule } from 'src/common/ui/loader/loader.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 import { SupplyPointDetailFormComponent } from './supply-point-detail-form.component';
 

@@ -10,7 +10,7 @@ import * as R from 'ramda';
 import { CONSTS } from 'src/app/app.constants';
 import { IArticle } from 'src/common/cms/models/blog';
 import { ICardData } from 'src/common/ui/card/models/data.model';
-import { HtmlContentPipe } from 'src/common/pipes/html-content/html-content.pipe';
+import { HtmlContentPipe } from 'src/common/pipes/common/html-content/html-content.pipe';
 import { removeHtmlFromText } from 'src/common/utils';
 
 @Injectable({

@@ -25,7 +25,7 @@ export class LpPersonalizationService {
 
     private setPersonalization = (personalization: string): string => {
         const today = new Date();
-        const newMonth = new Date(today.setMonth(today.getMonth() + 10)).getTime();
+        const newMonth = new Date(today.setMonth(today.getMonth() + 1)).getTime();
         this.cookieService.set(this.COOKIE_KEY, personalization, newMonth);
         return personalization;
     }

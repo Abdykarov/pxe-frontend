@@ -31,7 +31,7 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import { confirmDeleteRequest } from 'src/app/pages/consumers/requests-overview/requests-overview.config';
-import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 import {
     inArray,

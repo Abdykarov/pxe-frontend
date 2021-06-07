@@ -9,7 +9,7 @@ import { LayoutContainerModule } from 'src/common/containers/layout-container/la
 import { PatternsOfContractsComponent } from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts.component';
 import { PatternsOfContractsRoutingModule } from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts-routing.module';
 import { PdfViewerModule } from 'src/common/ui/pdf-viewer/pdf-viewer.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { TableModule } from 'src/common/ui/table/table.module';
 

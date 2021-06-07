@@ -11,7 +11,7 @@ import {
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOfferTableRows } from './models/supply-offer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
-import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
+import { PluralPipe } from 'src/common/pipes/common/plurar/plural.pipe';
 
 @Injectable({
     providedIn: 'root',
