@@ -21,9 +21,8 @@ import {
     CODE_LIST,
     CONSTS,
 } from 'src/app/app.constants';
-import {
-    CustomValidators,
-} from 'src/common/utils';
+import { convertDateToSendFormatFnc } from 'src/common/utils/without-main-js/convert-date-to-send-format.fnc';
+import { CustomValidators } from 'src/common/utils';
 import {
     ICodelistOption,
     ICodelistOptions,
@@ -35,7 +34,6 @@ import {
 } from 'src/common/graphql/models/personal-data.model';
 import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import {convertDateToSendFormatFnc} from '../../../../utils/without-main-js/convert-date-to-send-format.fnc';
 
 @Component({
     selector: 'pxe-personal-info-form',

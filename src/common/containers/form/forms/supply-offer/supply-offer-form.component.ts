@@ -35,6 +35,7 @@ import {
     CommodityType,
     ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
+import { convertDateToSendFormatFnc } from 'src/common/utils/without-main-js/convert-date-to-send-format.fnc';
 import {
     includesBothTariffs,
     transformCodeList,
@@ -44,7 +45,6 @@ import { IBenefit } from 'src/common/graphql/models/offer.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import {convertDateToSendFormatFnc} from '../../../../utils/without-main-js/convert-date-to-send-format.fnc';
 
 @Component({
     selector: 'pxe-supply-offer-form',
