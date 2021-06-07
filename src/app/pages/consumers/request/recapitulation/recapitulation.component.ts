@@ -44,9 +44,9 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
+import { removeAccent } from 'src/common/utils/without-main-js/remove-accent.fnc';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import {removeAccent} from '../../../../../common/utils/without-main-js/remove-accent.fnc';
 
 @Component({
     selector: 'pxe-recapitulation',
