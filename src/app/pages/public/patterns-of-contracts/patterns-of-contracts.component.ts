@@ -13,7 +13,6 @@ import {
     Title,
 } from '@angular/platform-browser';
 
-import * as moment from 'moment';
 import * as R from 'ramda';
 import { saveAs } from 'file-saver';
 import { takeUntil } from 'rxjs/operators';
@@ -151,8 +150,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                         dateTo,
                         dateFrom,
                     } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
-                    const now = moment();
-                    return moment(dateFrom) < now && moment(dateTo).add(1, 'days') < now;
+                    return false;
                 },
             ),
             R.map(
@@ -169,7 +167,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                         dateFrom,
                         dateTo,
                     } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
-                    return moment().isBetween(moment(dateFrom), moment(dateTo).add(1, 'days'));
+                    return false;
                 },
             ),
             R.head,

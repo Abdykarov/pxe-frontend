@@ -35,7 +35,6 @@ import { FaqService } from 'src/app/services/faq.service';
 import {
     getConfigStepper,
     parseGraphQLErrors,
-    removeAccent,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
@@ -51,6 +50,7 @@ import { offerValidityMessages } from 'src/common/constants/errors.constant';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
+import {removeAccent} from '../../../../../common/utils/without-main-js/remove-accent.fnc';
 
 @Component({
     templateUrl: './offer-selection.component.html',
