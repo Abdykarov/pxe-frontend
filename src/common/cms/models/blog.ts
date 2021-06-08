@@ -13,7 +13,8 @@ export interface IArticle {
     type: IType[];
     header: string;
     oneOfMostVisited: string;
-    content: string;
+    content?: string;
+    shortContent?: string;
     img: string;
     date: string;
     seo: ISeo[];

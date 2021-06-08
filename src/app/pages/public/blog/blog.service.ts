@@ -25,7 +25,7 @@ export class BlogService {
 
     public articleToCardData = (article: IArticle): ICardData => ({
         id: article.url,
-        content: article.content,
+        content: article.shortContent || article.content,
         img: article.img,
         imgAlt: article.header,
         imgTitle: article.header,

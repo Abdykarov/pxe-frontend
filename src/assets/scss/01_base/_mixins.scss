@@ -162,7 +162,7 @@
 		// url($file-name + '.svg##{$font-name}')  format('svg');
 		font-weight: $weight;
 		font-style: $style;
-		font-display: swap;
+		font-display: fallback;
 	}
 }
 
