@@ -20,6 +20,7 @@ import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
+import { userNotificationFormFields } from 'src/common/containers/form/forms/user-notification/user-notification-form.config';
 import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
 import { UserService } from 'src/common/graphql/services/user.service';
 
@@ -30,6 +31,7 @@ import { UserService } from 'src/common/graphql/services/user.service';
 export class ProfileComponent extends AbstractComponent {
     public fieldError: IFieldError = {};
     public formFields = userProfileFormFields;
+    public userNotificationFormFields = userNotificationFormFields;
     public formLoading = false;
     public formSent = false;
     public formValues: IJwtPayload;
@@ -37,6 +39,8 @@ export class ProfileComponent extends AbstractComponent {
     public oldPhone = this.authService.currentUserValue.phoneNumber;
     public smsSent = false;
     public profileChanged = false;
+
+    public formNotificationSent = false;
 
     constructor(
         private authService: AuthService,
@@ -110,6 +114,27 @@ export class ProfileComponent extends AbstractComponent {
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    public toggleWatchDog = ({watchDogNotification}) => {
+        this.userService.updateWatchDogNotification(watchDogNotification)
+            .pipe(
+                map(({data}) => data.updateWatchDog),
+                switchMap(this.authService.refreshToken),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (_) => {
+                    this.formNotificationSent = true;
+                    this.cd.markForCheck();
+                },
+                error => {
+                    this.formLoading = false;
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
                     this.cd.markForCheck();
                 },
             );

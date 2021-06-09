@@ -7,6 +7,7 @@ import {
     resetPasswordMutation,
     sendChangePhoneNumberSmsMutation,
     updateUserProfileMutation,
+    updateWatchDogNotificationMutation,
 } from 'src/common/graphql/mutation/user';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 
@@ -53,4 +54,12 @@ export class UserService {
                     phoneNumber,
                 },
             })
+
+    public updateWatchDogNotification = (withWatchDogNotification: boolean) => this.apollo
+        .mutate<any>({
+            mutation: updateWatchDogNotificationMutation,
+            variables: {
+                withWatchDogNotification,
+            },
+        })
 }

@@ -8,6 +8,7 @@ import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module'
 import { ProfileComponent } from 'src/app/pages/consumers/profile/profile.component';
 import { UserProfileFormModule } from 'src/common/containers/form/forms/user-profile/user-profile-form.module';
 import { ProfileRouting } from 'src/app/pages/consumers/profile/profile.routing';
+import { UserNotificationFormModule } from 'src/common/containers/form/forms/user-notification/user-notification-form.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { ProfileRouting } from 'src/app/pages/consumers/profile/profile.routing'
         CommonModule,
         LayoutContainerModule,
         PlaceloaderModule,
+        UserNotificationFormModule,
         UserProfileFormModule,
         ProfileRouting,
     ],

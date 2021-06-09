@@ -26,3 +26,10 @@ export const sendChangePhoneNumberSmsMutation = gql`
         sendChangePhoneNumberSms(phoneNumber: $phoneNumber)
     }
 `;
+
+export const updateWatchDogNotificationMutation = gql`
+    mutation updateWatchDogNotification($withWatchDogNotification: Boolean!) {
+        updateWatchDogNotification(withWatchDogNotification: $withWatchDogNotification)
+    }
+`;
+
