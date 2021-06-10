@@ -17,7 +17,6 @@ import { IType } from 'src/common/cms/models/blog';
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent extends AbstractComponent {
-    public readonly ARTICLE_PER_PAGE = 9;
     public readonly blogTypes$: Observable<IType[]> = this.blogFacade.blogTypes$;
     public readonly activeTag$: Observable<IType>  = this.blogFacade.activeType$;
     public readonly activeArticles$: Observable<ICardData[]>;

@@ -66,7 +66,7 @@ export class BlogFacade {
         combineLatest([this.routerParams$, this.blog$])
             .subscribe(([
                 params,
-                blog = {},
+                blog,
             ]) => {
                 if (!params?.type || !blog) {
                     return;
@@ -200,7 +200,8 @@ export class BlogFacade {
     private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 
     public fetchMoreArticles(): void {
-        this.blogService.getArticles(this.activeArticlesSubject$.getValue().length)
+        const currentCountArticle = this.activeArticlesSubject$.getValue().length;
+        this.blogService.getArticles(currentCountArticle)
             .subscribe(
             ({items}) => {
                 const currentArticles = this.activeArticlesSubject$.getValue();
