@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { TypesResolver } from 'src/app/resolvers/types.resolver';
 import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
-import { BlogResolver } from 'src/app/resolvers/blog.resolver';
 import { CONSTS } from 'src/app/app.constants';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
 import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
@@ -17,6 +17,7 @@ import { PublicLayoutComponent } from './public-layout.component';
 import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
 import { SignUpResolver } from 'src/app/resolvers/sign-up.resolver';
 import { TermsOfUseResolver } from 'src/app/resolvers/terms-of-use.resolver';
+import {ArticlesResolver} from '../../resolvers/articles.resolver';
 
 const routes = [
     {
@@ -124,7 +125,8 @@ const routes = [
                 path: CONSTS.PATHS.BLOG,
                 loadChildren: () => import('../../pages/public/blog/blog.module').then(m => m.BlogModule),
                 resolve: {
-                    blog: BlogResolver,
+                    types: TypesResolver,
+                    articlesWithTotal: ArticlesResolver,
                 },
                 data: {
                     isPublic: true,

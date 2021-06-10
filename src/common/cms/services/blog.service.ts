@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import {
-    getBlog,
+    getTypes,
+    getArticles,
     getLpArticles,
 } from 'src/common/cms/queries/blog';
 
@@ -15,10 +16,22 @@ export class BlogService {
         private apolloCmsService: ApolloCmsService,
     ) {}
 
-    public getBlog = () => this.apolloCmsService
+    public getTypes = () => this.apolloCmsService
         .fetchQuery({
-            query: getBlog,
-        })
+                query: getTypes,
+            },
+            false,
+        )
+
+    public getArticles = (skip = 0) => this.apolloCmsService
+        .fetchQuery({
+                query: getArticles,
+                variables: {
+                    skip,
+                },
+            },
+            false,
+        )
 
     public getLpArticles = () => this.apolloCmsService
         .fetchQuery({

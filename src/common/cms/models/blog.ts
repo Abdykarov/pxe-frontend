@@ -8,6 +8,11 @@ export interface IType {
     order: number;
 }
 
+export interface IArticlesWithTotals {
+    items: IArticle[];
+    total: number;
+}
+
 export interface IArticle {
     url: string;
     type: IType[];
@@ -21,6 +26,7 @@ export interface IArticle {
 }
 
 export interface IBlog {
+    total: number;
     articles: IArticle[];
-    allType: IType;
+    types: IType[];
 }
