@@ -47,8 +47,14 @@ export class BlogService {
         };
     }
 
-    public getOtherArticles = (activeArticle: IArticle): any => (articles: IArticle[]): IArticle[] => R.pipe(
-        R.filter((article: IArticle) => article?.url !== activeArticle?.url),
-        R.take(3),
-     )(articles)
+    public getOtherArticles = (activeArticle: IArticle): any => (articles: IArticle[]): IArticle[] => {
+        console.log('___');
+        console.log(articles);
+        console.log(activeArticle);
+
+        return R.pipe(
+            R.filter((article: IArticle) => article?.url !== activeArticle?.url),
+            R.take(3),
+        )(articles);
+    }
 }

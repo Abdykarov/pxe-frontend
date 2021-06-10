@@ -189,7 +189,6 @@ export class BlogFacade {
 
     private getSeoDetail = (): ISeo => {
         const activeArticle = this.activeArticleSubject$.getValue();
-
         return R.pipe(
             R.prop('seo'),
             R.head,
@@ -210,4 +209,18 @@ export class BlogFacade {
             },
         );
     }
+
+    public typeChange = (params: IRouterParams) => {
+        this.blogService.getArticles(0, params.type !== 'vse' ? params.type : undefined)
+            .subscribe(
+                ({items, total}) => {
+                    this.routerParamsSubject$.next(params);
+                    this.blogSubject$.next({
+                        types: this.blogTypesSubject$.value,
+                        total: total,
+                        articles: items,
+                    });
+                },
+            );
+       }
 }

@@ -23,11 +23,12 @@ export class BlogService {
             false,
         )
 
-    public getArticles = (skip = 0) => this.apolloCmsService
+    public getArticles = (skip = 0, type = null) => this.apolloCmsService
         .fetchQuery({
                 query: getArticles,
                 variables: {
                     skip,
+                    ...(!!type) && {filter: `data/typePlain/iv eq '${type}'`},
                 },
             },
             false,

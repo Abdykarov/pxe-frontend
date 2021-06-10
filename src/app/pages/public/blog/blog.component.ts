@@ -9,17 +9,19 @@ import {
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {filter, switchMap, takeUntil} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { BlogFacade } from './blog.facade';
 import {
+    IArticle,
     IArticlesWithTotals,
     IBlog,
     IType,
 } from 'src/common/cms/models/blog';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IRouterParams } from './blog.model';
+import {BlogService} from '../../../../common/cms/services/blog.service';
 
 @Component({
     selector: 'pxe-blog',
@@ -45,21 +47,15 @@ export class BlogComponent extends AbstractComponent implements OnDestroy {
             total,
         } = this.articlesWithTotal;
 
-        const blog: IBlog = {
-            types: this.types,
-            articles: items,
-            total: total,
-        };
+        this.blogFacade.blogTypesSubject$.next(this.types);
 
-        this.blogFacade.blogSubject$.next(blog);
         router.events
             .pipe(
                 takeUntil(this.destroy$),
+                filter(val => val instanceof NavigationEnd),
             )
-            .subscribe((val) => {
-                if (val instanceof NavigationEnd) {
-                    this.blogFacade.routerParamsSubject$.next(<IRouterParams>this.route.firstChild.snapshot.params);
-                }
+            .subscribe((_) => {
+                this.blogFacade.typeChange(<IRouterParams>this.route.firstChild.snapshot.params);
             });
     }
 

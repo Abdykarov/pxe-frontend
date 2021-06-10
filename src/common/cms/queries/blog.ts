@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const getArticles =  gql`
-    query queryArticleContentsWithTotal($skip: Int!) {
-      queryArticleContentsWithTotal (skip: $skip,top: 9, orderby:"data/date/iv desc"){
+    query queryArticleContentsWithTotal($skip: Int!, $filter: String) {
+      queryArticleContentsWithTotal (skip: $skip,top: 9, orderby:"data/date/iv desc", filter: $filter){
         items {
           flatData {
             content,
@@ -13,6 +13,13 @@ export const getArticles =  gql`
             type {
               flatData {
                 url,
+              }
+            },
+            seo {
+              flatData {
+                description,
+                keywords,
+                title
               }
             },
             oneOfMostVisited,
