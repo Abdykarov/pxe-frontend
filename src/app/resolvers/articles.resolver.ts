@@ -1,12 +1,13 @@
 import {
     ActivatedRouteSnapshot,
     Resolve,
-    RouterStateSnapshot, UrlSegment,
+    RouterStateSnapshot,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { CONSTS } from 'src/app/app.constants';
 import { BlogService } from 'src/common/cms/services/blog.service';
 import { IArticlesWithTotals } from 'src/common/cms/models/blog';
 
@@ -21,6 +22,6 @@ export class ArticlesResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IArticlesWithTotals> {
         const { path }  = route.firstChild.firstChild.url[0];
-        return this.blogService.getArticles(0, path !== 'vse' ? path : undefined );
+        return this.blogService.getArticles(0, path !== CONSTS.ALL_BLOG ? path : undefined );
     }
 }

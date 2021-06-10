@@ -35,7 +35,7 @@ import {
     CommodityType,
     ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
-import { convertDateToSendFormatFnc } from 'src/common/utils/without-main-js/convert-date-to-send-format.fnc';
+import { convertDateToSendFormatFnc } from 'src/common/utils/standalone/convert-date-to-send-format.fnc';
 import {
     includesBothTariffs,
     transformCodeList,

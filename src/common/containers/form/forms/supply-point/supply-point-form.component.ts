@@ -56,7 +56,7 @@ import {
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
-import { convertDateToSendFormatFnc } from 'src/common/utils/without-main-js/convert-date-to-send-format.fnc';
+import { convertDateToSendFormatFnc } from 'src/common/utils/standalone/convert-date-to-send-format.fnc';
 import {
     expirationConfig,
     supplyPointAllowedFields,

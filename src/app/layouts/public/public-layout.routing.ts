@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { TypesResolver } from 'src/app/resolvers/types.resolver';
+import { ArticlesResolver } from 'src/app/resolvers/articles.resolver';
 import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
 import { CONSTS } from 'src/app/app.constants';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
@@ -17,7 +17,7 @@ import { PublicLayoutComponent } from './public-layout.component';
 import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
 import { SignUpResolver } from 'src/app/resolvers/sign-up.resolver';
 import { TermsOfUseResolver } from 'src/app/resolvers/terms-of-use.resolver';
-import {ArticlesResolver} from '../../resolvers/articles.resolver';
+import { TypesResolver } from 'src/app/resolvers/types.resolver';
 
 const routes = [
     {

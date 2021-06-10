@@ -202,7 +202,7 @@ export class BlogFacade {
         const currentCountArticle = this.activeArticlesSubject$.getValue().length;
         this.blogService.getArticles(currentCountArticle)
             .subscribe(
-            ({items}) => {
+            ({ items }) => {
                 const currentArticles = this.activeArticlesSubject$.getValue();
                 const nextArticleState = [...currentArticles, ...items];
                 this.activeArticlesSubject$.next(nextArticleState);
@@ -211,7 +211,7 @@ export class BlogFacade {
     }
 
     public typeChange = (params: IRouterParams) => {
-        this.blogService.getArticles(0, params.type !== 'vse' ? params.type : undefined)
+        this.blogService.getArticles(0, params.type !== CONSTS.ALL_BLOG ? params.type : undefined)
             .subscribe(
                 ({items, total}) => {
                     this.routerParamsSubject$.next(params);

@@ -47,7 +47,7 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { offerValidityMessages } from 'src/common/constants/errors.constant';
-import { removeAccent } from 'src/common/utils/without-main-js/remove-accent.fnc';
+import { removeAccent } from 'src/common/utils/standalone/remove-accent.fnc';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';

@@ -2,7 +2,11 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 
 import * as R from 'ramda';
-import {filter, map, takeUntil} from 'rxjs/operators';
+import {
+    filter,
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';

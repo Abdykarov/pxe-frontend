@@ -39,7 +39,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
-import { removeAccent } from 'src/common/utils/without-main-js/remove-accent.fnc';
+import { removeAccent } from 'src/common/utils/standalone/remove-accent.fnc';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({

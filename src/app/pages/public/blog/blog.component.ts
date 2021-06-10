@@ -9,19 +9,19 @@ import {
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import {filter, switchMap, takeUntil} from 'rxjs/operators';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { BlogFacade } from './blog.facade';
 import {
-    IArticle,
     IArticlesWithTotals,
-    IBlog,
     IType,
 } from 'src/common/cms/models/blog';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IRouterParams } from './blog.model';
-import {BlogService} from '../../../../common/cms/services/blog.service';
 
 @Component({
     selector: 'pxe-blog',
