@@ -39,7 +39,7 @@ export class BlogFacade {
     public activeArticleSubject$: BehaviorSubject<IArticle> = new BehaviorSubject(null);
     public activeArticlesSubject$: BehaviorSubject<IArticle[]> = new BehaviorSubject(null);
     public activeTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
-    public allTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
+    public allTypesSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
     public blogSubject$: BehaviorSubject<IBlog> = new BehaviorSubject(null);
     public blogTypesSubject$: BehaviorSubject<IType[]> = new BehaviorSubject(null);
     public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> = new BehaviorSubject(null);
@@ -49,7 +49,7 @@ export class BlogFacade {
 
     public activeArticle$ = this.activeArticleSubject$.asObservable();
     public activeArticles$ = this.activeArticlesSubject$.asObservable();
-    public allType$ = this.allTypeSubject$.asObservable();
+    public allTypes$ = this.allTypesSubject$.asObservable();
     public activeType$ = this.activeTypeSubject$.asObservable();
     public blog$ = this.blogSubject$.asObservable();
     public blogTypes$ = this.blogTypesSubject$.asObservable();
@@ -80,10 +80,10 @@ export class BlogFacade {
 
                 const url = params?.type;
                 const isDetail = !!params?.article;
-                const allType = this.getAllType(types);
+                const allTypes = this.getAllTypes(types);
 
                 this.totalItemsSubject$.next(total);
-                this.allTypeSubject$.next(allType);
+                this.allTypesSubject$.next(allTypes);
                 this.isDetailSubject$.next(isDetail);
                 this.setTypes(types);
                 this.setActiveType(types, url);
@@ -96,8 +96,8 @@ export class BlogFacade {
             });
     }
 
-    private getAllType = (types: IType[]): IType => R.filter(
-        R.propEq('isAllType', true),
+    private getAllTypes = (types: IType[]): IType => R.filter(
+        R.propEq('isAllTypes', true),
     )(types)
 
     private setActiveType = (types: IType[], url: string): void => {
@@ -116,11 +116,11 @@ export class BlogFacade {
 
         const activeArticles = R.cond([
             [
-                data => this.isAllType(),
+                data => this.isAllTypes(),
                 (data) => data,
             ],
             [
-                data => !this.isAllType(),
+                data => !this.isAllTypes(),
                 R.filter(
                     R.pipe(
                         R.prop('type'),
@@ -196,7 +196,7 @@ export class BlogFacade {
     }
 
     private isDetailPage = (): boolean => this.isDetailSubject$.getValue();
-    private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
+    private isAllTypes = (): boolean => this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 
     public fetchMoreArticles(): void {
         const currentCountArticle = this.activeArticlesSubject$.getValue().length;

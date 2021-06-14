@@ -47,10 +47,8 @@ export class BlogService {
         };
     }
 
-    public getOtherArticles = (activeArticle: IArticle): any => (articles: IArticle[]): IArticle[] => {
-        return R.pipe(
+    public getOtherArticles = (activeArticle: IArticle): any => (articles: IArticle[]): IArticle[] => R.pipe(
             R.filter((article: IArticle) => article?.url !== activeArticle?.url),
             R.take(3),
-        )(articles);
-    }
+        )(articles)
 }
