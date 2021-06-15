@@ -76,7 +76,7 @@ export const contractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput)
         .add(1, 'months')
         .startOf('month');
 
-export const dateDiff = (dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff = 'days') => {
+export const dateDiff = (dateFromString: string | Moment, dateToString: string| Moment, resultUnit: unitOfTime.Diff = 'days') => {
     const from = moment(dateFromString);
     const to = moment(dateToString);
     return to.diff(from, resultUnit);
