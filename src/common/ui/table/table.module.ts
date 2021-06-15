@@ -5,7 +5,7 @@ import { TableComponent } from './table.component';
 
 // own modules
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
     declarations: [

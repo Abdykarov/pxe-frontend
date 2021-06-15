@@ -2,7 +2,11 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 
 import * as R from 'ramda';
-import {map, takeUntil} from 'rxjs/operators';
+import {
+    filter,
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -37,9 +41,10 @@ export class DetailComponent extends AbstractComponent {
         router.events
             .pipe(
                 takeUntil(this.destroy$),
+                filter(val => val instanceof NavigationEnd),
             )
             .subscribe((val) => {
-                if (val instanceof NavigationEnd) {
+                setTimeout(_ => {
                     this.otherArticles$ = this.blogFacade.blogSubject$
                         .pipe(
                             map(R.prop('articles')),
@@ -48,7 +53,7 @@ export class DetailComponent extends AbstractComponent {
                             map(R.map(this.blogService.toShortContent)),
                         );
                     this.cd.markForCheck();
-                }
+                });
             });
     }
 

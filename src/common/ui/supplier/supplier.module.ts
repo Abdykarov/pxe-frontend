@@ -5,7 +5,7 @@ import {
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { SupplierComponent } from './supplier.component';
 import { TabsModule } from 'src/common/ui/tabs/tabs.module';
 

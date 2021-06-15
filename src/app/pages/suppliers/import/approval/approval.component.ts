@@ -52,7 +52,7 @@ import {
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
+import { OffersByCommodityTypePipe } from 'src/common/pipes/common/offers-by-commodity-type/offers-by-commodity-type.pipe';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({

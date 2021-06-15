@@ -11,7 +11,7 @@
             "schematics": {},
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-builders/custom-webpack:browser",
                     "options": {
                         "aot": true,
                         "outputPath": "dist/app",
@@ -44,7 +44,10 @@
                                 "bundleName": "assets/pdfjs/web/viewer"
                             }
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "customWebpackConfig": {
+                            "path": "./custom-webpack.config.js"
+                        }
                     },
                     "configurations": {
                         "production": {

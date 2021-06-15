@@ -4,7 +4,6 @@ import {
     PLATFORM_ID,
 } from '@angular/core';
 
-import * as moment from 'moment';
 import * as R from 'ramda';
 
 import { CookiesService } from 'src/app/services/cookies.service';
@@ -25,7 +24,9 @@ export class LpPersonalizationService {
     private getPersonalization = (): string => this.cookieService.get(this.COOKIE_KEY);
 
     private setPersonalization = (personalization: string): string => {
-        this.cookieService.set(this.COOKIE_KEY, personalization, moment().add(1, 'month').valueOf());
+        const today = new Date();
+        const newMonth = new Date(today.setMonth(today.getMonth() + 1)).getTime();
+        this.cookieService.set(this.COOKIE_KEY, personalization, newMonth);
         return personalization;
     }
 

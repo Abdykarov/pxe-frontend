@@ -16,7 +16,7 @@ import {
 import { csLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 
-import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
+import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
 import { defaultDatepickerConfig } from './datepicker-range.config';
 import { IValidationMessages } from '../models/validation-messages.model';
