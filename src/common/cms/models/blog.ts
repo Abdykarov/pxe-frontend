@@ -8,18 +8,25 @@ export interface IType {
     order: number;
 }
 
+export interface IArticlesWithTotals {
+    items: IArticle[];
+    total: number;
+}
+
 export interface IArticle {
     url: string;
     type: IType[];
     header: string;
     oneOfMostVisited: string;
-    content: string;
+    content?: string;
+    shortContent?: string;
     img: string;
     date: string;
     seo: ISeo[];
 }
 
 export interface IBlog {
+    total: number;
     articles: IArticle[];
-    allType: IType;
+    types: IType[];
 }

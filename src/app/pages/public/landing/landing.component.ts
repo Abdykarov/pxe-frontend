@@ -53,7 +53,7 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILandingPage } from 'src/common/cms/models/landing-page';
-import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISignUp } from 'src/common/cms/models/sign-up';
 import { NewsService } from 'src/common/cms/services/news.service';

@@ -18,7 +18,7 @@ import {
 
 import * as R from 'ramda';
 
-import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
+import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
 import { FieldTypes } from '../models/field-types.model';
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';

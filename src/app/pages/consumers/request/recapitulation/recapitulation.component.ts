@@ -30,7 +30,6 @@ import { formFields } from 'src/common/containers/form/forms/personal-info/perso
 import {
     getConfigStepper,
     parseGraphQLErrors,
-    removeAccent,
     transformCodeList,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -45,6 +44,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
+import { removeAccent } from 'src/common/utils/standalone/remove-accent.fnc';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 

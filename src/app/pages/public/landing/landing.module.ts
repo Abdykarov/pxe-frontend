@@ -10,7 +10,7 @@ import { DirectivesModule } from 'src/common/directives/directives.module';
 import { LandingComponent } from './landing.component';
 import { LandingRoutingModule } from './landing.routing';
 import { LpPersonalizationContainerModule } from 'src/common/containers/lp-personalization-container/lp-personalization-container.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { RegistrationFormModule } from 'src/common/containers/form/forms/registration/registration-form.module';
 
 @NgModule({

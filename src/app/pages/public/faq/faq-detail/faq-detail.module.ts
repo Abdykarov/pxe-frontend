@@ -7,7 +7,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FaqDetailComponent } from './faq-detail.component';
 import { FaqDetailRoutingModule } from './faq-detail-routing.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
     declarations: [
