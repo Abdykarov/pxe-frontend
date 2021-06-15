@@ -7,6 +7,7 @@ import {
     Output,
 } from '@angular/core';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { CONSTS } from 'src/app/app.constants';
@@ -103,7 +104,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),
-            this.supplyPointOffer.validTo,
+            moment(this.supplyPointOffer.validTo).endOf('day'),
             'hours',
         );
 
