@@ -21,7 +21,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
-import {CODE_LIST_TYPES, CONSTS} from 'src/app/app.constants';
+import {
+    CODE_LIST_TYPES,
+    CONSTS,
+} from 'src/app/app.constants';
 import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {
@@ -81,7 +84,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 ...this.formFields.controls['email'][1],
                 Validators.required,
                 (formControl: FormControl) => {
-                    const result = Validators.pattern('^(?!user@email.com).*$')(formControl);
+                    const result = Validators.pattern(`^(?!${CONSTS.ASK_FOR_OFFER.MANUALLY_ADD_EMAIL}).*$`)(formControl);
                     return R.isNil(result) ? result : {'needChangeEmail': true};
                 },
             ];
