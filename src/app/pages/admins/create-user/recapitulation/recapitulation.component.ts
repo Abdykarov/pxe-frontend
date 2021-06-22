@@ -7,7 +7,12 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
+import {
+    FormControl,
+    Validators,
+} from '@angular/forms';
 
+import * as R from 'ramda';
 import { Observable } from 'rxjs';
 import {
     map,
@@ -16,7 +21,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
-import { CODE_LIST_TYPES } from 'src/app/app.constants';
+import {CODE_LIST_TYPES, CONSTS} from 'src/app/app.constants';
 import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {
@@ -68,6 +73,20 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         super();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
+
+        const isEmailFromManuallyAddAskForOffer = this.createUserFacade.getEmail() === CONSTS.ASK_FOR_OFFER.MANUALLY_ADD_EMAIL;
+        if (isEmailFromManuallyAddAskForOffer) {
+            const oldValidators = this.formFields.controls['email'][1];
+            this.formFields.controls['email'][1] = [
+                ...this.formFields.controls['email'][1],
+                Validators.required,
+                (formControl: FormControl) => {
+                    const result = Validators.pattern('^(?!user@email.com).*$')(formControl);
+                    return R.isNil(result) ? result : {'needChangeEmail': true};
+                },
+            ];
+        }
+
         this.supplyPoint$ = this.createUserFacade.activeSupplyPoint$.pipe(
             map((supplyPoint: ISupplyPoint) => {
                 if (supplyPoint?.contract && !supplyPoint.contract?.personalData?.email) {

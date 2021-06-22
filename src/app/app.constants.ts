@@ -33,6 +33,7 @@ export const CONSTS = {
         },
         MAX_FILE_COUNT: 10,
         MAX_FILE_SIZE: 10485760,
+        MANUALLY_ADD_EMAIL: 'user@email.com',
     },
     CMS: {
         CLIENT_ID: 'pxe-parc4u:default',
