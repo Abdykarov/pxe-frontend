@@ -44,7 +44,7 @@ import { ILogin } from 'src/common/cms/models/login';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { ISeo } from 'src/common/cms/models/seo';
-import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
 import {
     IUserLogin,
     LANDING_PAGE,

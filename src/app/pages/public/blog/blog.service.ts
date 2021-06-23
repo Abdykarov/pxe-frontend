@@ -10,7 +10,7 @@ import * as R from 'ramda';
 import { CONSTS } from 'src/app/app.constants';
 import { IArticle } from 'src/common/cms/models/blog';
 import { ICardData } from 'src/common/ui/card/models/data.model';
-import { HtmlContentPipe } from 'src/common/pipes/html-content/html-content.pipe';
+import { HtmlContentPipe } from 'src/common/pipes/common/html-content/html-content.pipe';
 import { removeHtmlFromText } from 'src/common/utils';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class BlogService {
 
     public articleToCardData = (article: IArticle): ICardData => ({
         id: article.url,
-        content: article.content,
+        content: article.shortContent || article.content,
         img: article.img,
         imgAlt: article.header,
         imgTitle: article.header,
@@ -48,7 +48,7 @@ export class BlogService {
     }
 
     public getOtherArticles = (activeArticle: IArticle): any => (articles: IArticle[]): IArticle[] => R.pipe(
-        R.filter((article: IArticle) => article?.url !== activeArticle?.url),
-        R.take(3),
-     )(articles)
+            R.filter((article: IArticle) => article?.url !== activeArticle?.url),
+            R.take(3),
+        )(articles)
 }

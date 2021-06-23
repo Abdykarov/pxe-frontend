@@ -53,10 +53,10 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
-    convertDateToSendFormatFnc,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
+import { convertDateToSendFormatFnc } from 'src/common/utils/standalone/convert-date-to-send-format.fnc';
 import {
     expirationConfig,
     supplyPointAllowedFields,

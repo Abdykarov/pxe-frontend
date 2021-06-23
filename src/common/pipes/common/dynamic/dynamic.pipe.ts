@@ -8,8 +8,8 @@ import {
 
 import * as R from 'ramda';
 
-import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
-import { IsLastUpdatedOfferPipe } from 'src/common/pipes/is-last-updated-offer/is-last-updated-offer.pipe';
+import { CeilPipe } from 'src/common/pipes/common/ceil-number/simple-number.pipe';
+import { IsLastUpdatedOfferPipe } from 'src/common/pipes/common/is-last-updated-offer/is-last-updated-offer.pipe';
 
 @Pipe({
     name: 'dynamic',

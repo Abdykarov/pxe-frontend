@@ -7,13 +7,14 @@ import {
     Output,
 } from '@angular/core';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
 import { IQuestion } from 'src/app/services/model/faq.model';
@@ -103,7 +104,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),
-            this.supplyPointOffer.validTo,
+            moment(this.supplyPointOffer.validTo).endOf('day'),
             'hours',
         );
 

@@ -1,59 +1,33 @@
 import gql from 'graphql-tag';
 
-export const getBlog = gql`
-    query queryBlogContents {
-      queryBlogContents {
-        flatData {
-          articles {
-            flatData {
-              content,
-              date,
-              header,
-              img {
-                url
-              },
-              oneOfMostVisited,
-              type {
-                flatData {
-                  label,
-                  seo {
-                    flatData {
-                      description,
-                      keywords,
-                      title
-                    }
-                  },
-                  url,
-                  order,
-                  title
-                }
-              },
-              url,
-              seo {
-                flatData {
-                  description,
-                  keywords,
-                  title
-                }
-              }
-            }
-          }
-          allType {
-            flatData {
-              label,
-              order,
-              title
-              seo {
-                flatData {
-                  description,
-                  keywords,
-                  title
-                }
-              }
+export const getArticles =  gql`
+    query queryArticleContentsWithTotal($skip: Int!, $filter: String) {
+      queryArticleContentsWithTotal (skip: $skip,top: 9, orderby:"data/date/iv desc", filter: $filter){
+        items {
+          flatData {
+            content,
+            header,
+            img {
               url
-            }
-          }
-        }
+            },
+            type {
+              flatData {
+                url,
+              }
+            },
+            seo {
+              flatData {
+                description,
+                keywords,
+                title
+              }
+            },
+            oneOfMostVisited,
+            url,
+            date
+          },
+        },
+        total
       }
     }
 `;
@@ -75,6 +49,26 @@ export const getLpArticles =  gql`
             oneOfMostVisited,
             url,
             date
+        }
+      }
+    }
+`;
+
+export const getTypes = gql`
+    query queryTypeContents {
+      queryTypeContents (orderby:"data/order/iv asc"){
+        flatData {
+          label,
+          order,
+          title,
+          url,
+          seo {
+            flatData {
+              description,
+              keywords,
+              title
+            }
+          }
         }
       }
     }

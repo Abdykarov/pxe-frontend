@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import * as R from 'ramda';
-import { map } from 'rxjs/operators';
-
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import { compareDates } from 'src/common/utils';
 import {
-    getBlog,
+    getTypes,
+    getArticles,
     getLpArticles,
 } from 'src/common/cms/queries/blog';
 
@@ -19,18 +16,22 @@ export class BlogService {
         private apolloCmsService: ApolloCmsService,
     ) {}
 
-    public getBlog = () => this.apolloCmsService
+    public getTypes = () => this.apolloCmsService
         .fetchQuery({
-            query: getBlog,
-        })
-        .pipe(
-            map((data: any) => {
-                data.articles = R.sort(
-                    (first, second) => compareDates(first.date, second.date, false),
-                    data.articles,
-                );
-                return data;
-            }),
+                query: getTypes,
+            },
+            false,
+        )
+
+    public getArticles = (skip = 0, type = null) => this.apolloCmsService
+        .fetchQuery({
+                query: getArticles,
+                variables: {
+                    skip,
+                    ...(!!type) && {filter: `data/typePlain/iv eq '${type}'`},
+                },
+            },
+            false,
         )
 
     public getLpArticles = () => this.apolloCmsService
