@@ -139,6 +139,9 @@ export class BlogFacade {
         const isDetail = this.isDetailPage();
         if (isDetail) {
             const activeArticle = this.activeArticleSubject$.getValue();
+            if (!activeArticle) {
+                return;
+            }
             const activeType: IType = this.activeTypeSubject$.getValue();
             const breadcrumbDefaultCopy = [...this.breadcrumbDefault];
             breadcrumbDefaultCopy[1] = {
@@ -174,6 +177,10 @@ export class BlogFacade {
         const isDetail = this.isDetailPage();
         const seo = isDetail ? this.getSeoDetail() : this.getSeoOverview();
 
+        if (!seo) {
+            return;
+        }
+
         this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
@@ -189,6 +196,9 @@ export class BlogFacade {
 
     private getSeoDetail = (): ISeo => {
         const activeArticle = this.activeArticleSubject$.getValue();
+        if (!activeArticle) {
+            return null;
+        }
         return R.pipe(
             R.prop('seo'),
             R.head,
