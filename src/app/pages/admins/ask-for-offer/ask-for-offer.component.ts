@@ -175,6 +175,26 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
         },
     })
 
+    public createAskForOffer = () => {
+        this.askForOfferService.createAskForOffer()
+            .pipe(
+                map(({data}) =>  data.createAskForOffer),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (askForOfferId: string) => {
+                    this.routerToCreateUser(askForOfferId, CONSTS.ASK_FOR_OFFER.MANUALLY_ADD_EMAIL);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.loading = false;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
     public delete = (askForOfferId: string): void => {
         this.modalsService
             .showModal$.next({

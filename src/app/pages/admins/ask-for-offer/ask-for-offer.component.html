@@ -24,7 +24,7 @@
             {{row.files[0].fileName}}
         </a>
     </ng-container>
-    <ng-container *ngIf="row.files && row.files.length !== 1">
+    <ng-container *ngIf="row.files && row.files.length > 1">
         <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
            (click)="downloadAskForOffersZipArchive(row?.id)">
             ZIP
@@ -50,6 +50,15 @@
         </div>
         <div class="col-12">
             <lnd-placeloader [loading]="loading"></lnd-placeloader>
+        </div>
+        <div
+            *ngIf="paginatedAskForOffer !== null"
+            class="col-12 text-center mb-5">
+            <lnd-button
+                label="Přidat žádost"
+                type="secondary"
+                (action)="createAskForOffer()"
+            ></lnd-button>
         </div>
         <div *ngIf="paginatedAskForOffer"
              class="col-12">
