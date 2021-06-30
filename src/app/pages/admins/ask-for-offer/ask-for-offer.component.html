@@ -52,7 +52,7 @@
             <lnd-placeloader [loading]="loading"></lnd-placeloader>
         </div>
         <div
-            *ngIf="paginatedAskForOffer !== null"
+            *ngIf="!loading && (routerParamsSubject$ | async).type === CONSTS.PATHS.ASK_FOR_OFFER_NEW"
             class="col-12 text-center mb-5">
             <lnd-button
                 label="Přidat žádost"
