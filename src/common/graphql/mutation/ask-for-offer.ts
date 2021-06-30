@@ -20,3 +20,9 @@ export const finalizeAskForOfferMutation = gql`
         )
     }
 `;
+
+export const createAskForOffer = gql`
+    mutation createAskForOffer{
+        createAskForOffer
+    }
+`;
