@@ -123,6 +123,7 @@
                                     [showErrorMessage]="false"
                                     [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
                                     label="jednotka"
+                                    [clearable]="false"
                                     [parentForm]="form"
                                     [selectName]="'annualConsumptionNTUnit'"
                                     [success]="form.controls.annualConsumptionNTUnit.valid && (form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit)"
@@ -168,6 +169,7 @@
                                     [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
                                     [parentForm]="form"
                                     [selectName]="'annualConsumptionVTUnit'"
+                                    [clearable]="false"
                                     [success]="form.controls.annualConsumptionVTUnit.valid && (form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit)"
                                     [touched]="form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit">
                                 </lnd-select>
@@ -207,6 +209,7 @@
                                     lndSFormDirective
                                     lndSBiometricsDirective
                                     label="jednotka"
+                                    [clearable]="false"
                                     [id]="'annualConsumptionUnit'"
                                     (focus)="fieldWrapperFocus('annualConsumptionUnit')"
                                     (blur)="fieldWrapperBlur()"
