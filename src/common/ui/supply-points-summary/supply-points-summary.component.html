@@ -65,7 +65,7 @@
                         Vybrat nového dodavatele
                     </ng-container>
                     <ng-template #moreSupplyPointEndingLinkTemplate>
-                        Seznam uzavřených smluv
+                        <ng-container *ngIf="!concludedPlacesCount">Seznam uzavřených smluv</ng-container>
                     </ng-template>
                 </a>
             </div>
