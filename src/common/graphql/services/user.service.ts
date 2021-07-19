@@ -6,11 +6,10 @@ import {
     changePasswordMutation,
     resetPasswordMutation,
     sendChangePhoneNumberSmsMutation,
+    updateNotificationsAllowedMutation,
     updateUserProfileMutation,
-    updateWatchDogNotificationMutation,
 } from 'src/common/graphql/mutation/user';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
-
 
 @Injectable({
     providedIn: 'root',
@@ -55,11 +54,11 @@ export class UserService {
                 },
             })
 
-    public updateWatchDogNotification = (withWatchDogNotification: boolean) => this.apollo
+    public updateNotificationsAllowed = (notificationsAllowed: boolean) => this.apollo
         .mutate<any>({
-            mutation: updateWatchDogNotificationMutation,
+            mutation: updateNotificationsAllowedMutation,
             variables: {
-                withWatchDogNotification,
+                notificationsAllowed,
             },
         })
 }

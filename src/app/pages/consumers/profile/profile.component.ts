@@ -120,9 +120,9 @@ export class ProfileComponent extends AbstractComponent {
     }
 
     public toggleWatchDog = ({watchDogNotification}) => {
-        this.userService.updateWatchDogNotification(watchDogNotification)
+        this.userService.updateNotificationsAllowed(watchDogNotification)
             .pipe(
-                map(({data}) => data.updateWatchDog),
+                map(({data}) => data.updateNotificationsAllowed),
                 switchMap(this.authService.refreshToken),
                 takeUntil(this.destroy$),
             )

@@ -27,9 +27,9 @@ export const sendChangePhoneNumberSmsMutation = gql`
     }
 `;
 
-export const updateWatchDogNotificationMutation = gql`
-    mutation updateWatchDogNotification($withWatchDogNotification: Boolean!) {
-        updateWatchDogNotification(withWatchDogNotification: $withWatchDogNotification)
+export const updateNotificationsAllowedMutation = gql`
+    mutation updateNotificationsAllowed($notificationsAllowed: Boolean!) {
+        updateNotificationsAllowed(notificationsAllowed: $notificationsAllowed)
     }
 `;
 
