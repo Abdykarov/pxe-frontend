@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
 import { FaqOverviewRoutingModule } from './faq-overview-routing.module';
 import { FaqOverviewComponent } from './faq-overview.component';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
     declarations: [

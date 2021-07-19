@@ -209,6 +209,7 @@ export const formFields: IForm = {
             email: errorFieldMessages.email.email,
             invalidEmail: errorFieldMessages.email.email,
             maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            needChangeEmail: errorFieldMessages.email.alreadyRegisteredEmail,
         },
         depositPaymentTypeId: {
             required: errorFieldMessages.depositPaymentType.required,

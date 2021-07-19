@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { saveAs } from 'file-saver';
 
 import {
+    createAskForOffer,
     deleteAskForOfferMutation,
     finalizeAskForOfferMutation,
 } from 'src/common/graphql/mutation/ask-for-offer';
@@ -58,5 +59,9 @@ export class AskForOfferService {
         variables: {
             askForOfferId,
         },
+    })
+
+    public createAskForOffer = () => this.apollo.mutate<any>({
+        mutation: createAskForOffer,
     })
 }

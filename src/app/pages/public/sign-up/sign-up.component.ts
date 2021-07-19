@@ -33,7 +33,7 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
-import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
 import { ISeo } from 'src/common/cms/models/seo';
 import { ISignUp } from 'src/common/cms/models/sign-up';
 import { parseGraphQLErrors } from 'src/common/utils';

@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 
 import { PaginationModule } from 'src/common/ui/pagination/pagination.module';
 import { SupplierConcludedContractsComponent } from './page';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { TableModule } from 'src/common/ui/table/table.module';
 
 @NgModule({

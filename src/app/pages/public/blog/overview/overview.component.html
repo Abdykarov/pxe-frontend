@@ -23,11 +23,11 @@
                 </lnd-card>
             </div>
         </div>
-        <div *ngIf="actualItemsCount < articles.length"
+        <div *ngIf="(totalItems$ | async) > articles.length"
             class="row">
             <div class="col-12 text-center">
                 <lnd-button
-                    (action)="moreArticles()"
+                    (action)="blogFacade.fetchMoreArticles();"
                     type="gradient-primary"
                     customClass="btn-public btn--icon-right"
                     icon="icon--arrow-down"

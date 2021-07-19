@@ -15,7 +15,7 @@ import {
 import { ISupplyPointInput } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
-  name: 'newSupplyWillBegin',
+    name: 'newSupplyWillBegin',
 })
 export class NewSupplyWillBeginPipe implements PipeTransform {
     isContractEndDefault = (supplyPointInput: ISupplyPointInput) =>

@@ -32,7 +32,7 @@ import { environment } from 'src/environments/environment';
 import { FileUploadModule } from 'src/third-sides/file-upload';
 import { GlobalErrorHandler } from './errors/global.error.handler';
 import { InterceptorProviders } from './interceptors';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
 
 @NgModule({

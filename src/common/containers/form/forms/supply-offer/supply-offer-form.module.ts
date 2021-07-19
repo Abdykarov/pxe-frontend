@@ -10,7 +10,7 @@ import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DatepickerRangeModule } from 'src/common/ui/forms/datepicker-range/datepicker-range.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 import { SupplyOfferFormComponent } from './supply-offer-form.component';
 

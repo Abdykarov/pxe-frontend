@@ -2,7 +2,7 @@ import {
     Pipe,
     PipeTransform,
 } from '@angular/core';
-import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
+import { PluralPipe } from 'src/common/pipes/common/plurar/plural.pipe';
 
 @Pipe({
     name: 'logoutInInformation',
