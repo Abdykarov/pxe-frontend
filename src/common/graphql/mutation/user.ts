@@ -26,3 +26,10 @@ export const sendChangePhoneNumberSmsMutation = gql`
         sendChangePhoneNumberSms(phoneNumber: $phoneNumber)
     }
 `;
+
+export const updateNotificationsAllowedMutation = gql`
+    mutation updateNotificationsAllowed($notificationsAllowed: Boolean!) {
+        updateNotificationsAllowed(notificationsAllowed: $notificationsAllowed)
+    }
+`;
+

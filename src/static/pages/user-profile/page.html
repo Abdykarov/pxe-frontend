@@ -1,3 +1,17 @@
+<ng-template #systemLabelTemplate xmlns="http://www.w3.org/1999/html">
+    <p class="mb-2">
+        <b>Notifikace ke stávajícím smlouvám </b><br>
+        (např. upozornění o vypršení smlouvy)
+    </p>
+</ng-template>
+
+<ng-template #watchDogLabelTemplate>
+    <p class="mb-2">
+        <b>Notifikace k novým smlouvám</b><br>
+        (např. upozornění o rozpracování odběrného místa)
+    </p>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -75,6 +89,48 @@
                             (action)="submitForm($event)"
                             label="Uložit">
                         </lnd-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 col-xl-6 offset-xl-3 text-center">
+            <h1>
+                Nastavení notifikací
+            </h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <form
+                    [formGroup]="notificationForm"
+                    autocomplete="off"
+                    class="form-container">
+                    <lnd-form-field
+                        [formControl]="notificationForm.controls.systemNotification"
+                        [disabledField]="true"
+                        customFormGroupClass="mb-0"
+                        [id]="'systemNotification'"
+                        [labelTemplate]="systemLabelTemplate"
+                        [type]="'CHECKBOX'"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                        customFormGroupClass="mb-0"
+                        [formControl]="notificationForm.controls.watchdogNotification"
+                        [type]="'CHECKBOX'"
+                        [id]="'watchDogNotification'"
+                        [labelTemplate]="watchDogLabelTemplate"
+                    ></lnd-form-field>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <lnd-button
+                                type="primary"
+                                label="Uložit"
+                                (action)="submitForm($event)">
+                            </lnd-button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -1,0 +1,64 @@
+<ng-template #systemLabelTemplate>
+    <p class="mb-2">
+        <b>Notifikace ke stávajícím smlouvám </b><br>
+        (např. upozornění o vypršení smlouvy)
+    </p>
+</ng-template>
+
+<ng-template #watchDogLabelTemplate>
+    <p class="mb-2">
+        <b>Notifikace k novým smlouvám</b><br>
+        (např. upozornění o rozpracování odběrného místa)
+    </p>
+</ng-template>
+
+
+<form
+    [formGroup]="form"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()"
+    autocomplete="off"
+    class="form-container">
+    <div *ngIf="formSent"
+         class="row">
+        <div class="col">
+            <lnd-alert type="info"
+                       hasIcon="true">
+                Změny byly úspěšně uloženy
+            </lnd-alert>
+        </div>
+    </div>
+    <lnd-form-field
+        [error]="formError.systemNotification || form.controls.systemNotification.errors"
+        [formControl]="form.controls.systemNotification"
+        [disabledField]="true"
+        customFormGroupClass="mb-0"
+        [id]="'systemNotification'"
+        [labelTemplate]="systemLabelTemplate"
+        [type]="'CHECKBOX'"
+        [success]="form.controls.systemNotification.valid && (form.controls.systemNotification.touched || formError.systemNotification)"
+        [touched]="form.controls.systemNotification.touched || formError.systemNotification"
+        [validationMessages]="formFields.validationMessages.systemNotification"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.watchDogNotification || form.controls.watchDogNotification.errors"
+        customFormGroupClass="mb-0"
+        [formControl]="form.controls.watchDogNotification"
+        [type]="'CHECKBOX'"
+        [id]="'watchDogNotification'"
+        [labelTemplate]="watchDogLabelTemplate"
+        [success]="form.controls.watchDogNotification.valid && (form.controls.watchDogNotification.touched || formError.watchDogNotification)"
+        [touched]="form.controls.watchDogNotification.touched || formError.watchDogNotification"
+        [validationMessages]="formFields.validationMessages.watchDogNotification"
+    ></lnd-form-field>
+    <div class="row">
+        <div class="col-12 text-center">
+            <lnd-button
+                type="primary"
+                [isDisabled]="formLoading"
+                label="Uložit"
+            (action)="submitForm($event)">
+            </lnd-button>
+        </div>
+    </div>
+</form>
