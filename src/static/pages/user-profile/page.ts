@@ -13,7 +13,7 @@ export class UserProfilePageComponent {
 
     public notificationForm: FormGroup = new FormGroup({
         systemNotification: new FormControl(true),
-        watchdogNotification: new FormControl(),
+        notificatiosAllowed: new FormControl(),
     });
 
     public form: FormGroup = new FormGroup({

@@ -39,6 +39,7 @@ export class ProfileComponent extends AbstractComponent {
     public oldPhone = this.authService.currentUserValue.phoneNumber;
     public smsSent = false;
     public profileChanged = false;
+    public isNotificationsAllowed = false;
 
     public formNotificationSent = false;
 
@@ -119,8 +120,8 @@ export class ProfileComponent extends AbstractComponent {
             );
     }
 
-    public toggleWatchDog = ({watchDogNotification}) => {
-        this.userService.updateNotificationsAllowed(watchDogNotification)
+    public toggleWatchDog = ({notificatiosAllowed}) => {
+        this.userService.updateNotificationsAllowed(notificatiosAllowed)
             .pipe(
                 map(({data}) => data.updateNotificationsAllowed),
                 switchMap(this.authService.refreshToken),
@@ -128,6 +129,7 @@ export class ProfileComponent extends AbstractComponent {
             )
             .subscribe(
                 (_) => {
+                    this.isNotificationsAllowed = notificatiosAllowed;
                     this.formNotificationSent = true;
                     this.cd.markForCheck();
                 },
