@@ -24,7 +24,7 @@
         <div class="col">
             <lnd-alert type="info"
                        hasIcon="true">
-                Změny byly úspěšně uloženy
+                Notifikace byly úspěšně {{(isNotificationsAllowed ? 'zapnuty' : 'vypnuty')}}.
             </lnd-alert>
         </div>
     </div>
@@ -41,15 +41,15 @@
         [validationMessages]="formFields.validationMessages.systemNotification"
     ></lnd-form-field>
     <lnd-form-field
-        [error]="formError.watchDogNotification || form.controls.watchDogNotification.errors"
+        [error]="formError.notificatiosAllowed || form.controls.notificatiosAllowed.errors"
         customFormGroupClass="mb-0"
-        [formControl]="form.controls.watchDogNotification"
+        [formControl]="form.controls.notificatiosAllowed"
         [type]="'CHECKBOX'"
-        [id]="'watchDogNotification'"
+        [id]="'notificatiosAllowed'"
         [labelTemplate]="watchDogLabelTemplate"
-        [success]="form.controls.watchDogNotification.valid && (form.controls.watchDogNotification.touched || formError.watchDogNotification)"
-        [touched]="form.controls.watchDogNotification.touched || formError.watchDogNotification"
-        [validationMessages]="formFields.validationMessages.watchDogNotification"
+        [success]="form.controls.notificatiosAllowed.valid && (form.controls.notificatiosAllowed.touched || formError.notificatiosAllowed)"
+        [touched]="form.controls.notificatiosAllowed.touched || formError.notificatiosAllowed"
+        [validationMessages]="formFields.validationMessages.notificatiosAllowed"
     ></lnd-form-field>
     <div class="row">
         <div class="col-12 text-center">

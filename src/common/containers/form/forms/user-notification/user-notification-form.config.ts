@@ -5,7 +5,7 @@ export const userNotificationFormFields: IForm = {
         systemNotification: [
             true,
         ],
-        watchDogNotification: [
+        notificatiosAllowed: [
             true,
         ],
     },

@@ -32,7 +32,7 @@ export interface IJwtPayload {
     role: any;
     sid: string;
     smsConfirmed: boolean;
-    watchDogNotification: boolean;
+    notificatiosAllowed: boolean;
     subjectId: number;
     subjectName: string;
     surname: string;
