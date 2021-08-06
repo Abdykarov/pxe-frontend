@@ -545,7 +545,7 @@ textarea.form-control--not-empty {
 		}
 	}
 
-	&.is-valid + .custom-control-label {
+	&.is-valid:not([disabled]) + .custom-control-label {
 		color: $font-text;
 
 		&:hover {
