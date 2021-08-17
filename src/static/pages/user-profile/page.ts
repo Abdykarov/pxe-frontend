@@ -11,6 +11,11 @@ import { CONSTS } from 'src/app/app.constants';
 })
 export class UserProfilePageComponent {
 
+    public notificationForm: FormGroup = new FormGroup({
+        systemNotification: new FormControl(true),
+        notificatiosAllowed: new FormControl(),
+    });
+
     public form: FormGroup = new FormGroup({
         firstName: new FormControl(),
         lastName: new FormControl(),

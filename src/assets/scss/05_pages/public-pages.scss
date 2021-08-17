@@ -16,6 +16,7 @@
 
 .section {
 	position: relative;
+	overflow: hidden;
 
 	&:first-child {
 		padding-top: ( $header-height + ( $spacer * .75 ) );

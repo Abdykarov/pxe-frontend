@@ -32,6 +32,7 @@ export interface IJwtPayload {
     role: any;
     sid: string;
     smsConfirmed: boolean;
+    notificatiosAllowed: boolean;
     subjectId: number;
     subjectName: string;
     surname: string;
