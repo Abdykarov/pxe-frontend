@@ -4,11 +4,11 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
     OnDestroy,
     OnInit,
     QueryList,
-    ViewChildren, ViewContainerRef, ViewRef,
+    ViewChildren,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -22,7 +22,7 @@ import {
     map,
     startWith,
     switchMap,
-    takeUntil, tap,
+    takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';

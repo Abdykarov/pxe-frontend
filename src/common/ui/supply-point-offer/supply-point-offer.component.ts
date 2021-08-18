@@ -4,7 +4,8 @@ import {
     EventEmitter,
     Input,
     OnInit,
-    Output, QueryList, ViewChild, ViewChildren,
+    Output,
+    ViewChild,
 } from '@angular/core';
 
 import * as moment from 'moment';
