@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,

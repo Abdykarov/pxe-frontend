@@ -45,7 +45,11 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import {IOffer, ISupplyPointImportPrices, ISupplyPointOffers} from 'src/common/graphql/models/offer.model';
+import {
+    IOffer,
+    ISupplyPointImportPrices,
+    ISupplyPointOffers,
+} from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
