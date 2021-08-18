@@ -61,16 +61,26 @@
                         </ng-container>
                     </h2>
                 </div>
+                <div *ngIf="existsCurrentOffer"
+                     class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-right">
+                    <lnd-button
+                        label="Zobrazit současnou smlouvu"
+                        type="white"
+                        (action)="scrollToCurrentOffer()">
+                    </lnd-button>
+                </div>
             </div>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
                 <div class="supply-points-offer">
                     <pxe-supply-point-offer
+                        #supplyPointOffers
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         customClass="mb-3"
                         [questions]="questions"
+                        [isOwner]="!supplyPointOffer.id"
                         [offerSelected]="offerSelected"
                         [supplyPointOffer]="supplyPointOffer"
                         (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
