@@ -47,6 +47,7 @@ export interface IJwtPayload {
     phoneNumber?: string;
     firstContract: boolean;
     evaluatedSupplyPoint: number;
+    testingAccount?: boolean;
 }
 
 export enum IUserTypes {
