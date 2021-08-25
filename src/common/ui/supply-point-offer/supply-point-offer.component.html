@@ -277,8 +277,11 @@
                     *ngIf="personalInfo?.deposit || supplyPointOffer.totalPrice"
                     class="row">
                     <div class="col-12">
-                        <span class="supply-point-offer__title-label">
+                        <span *ngIf="!isOwner" class="supply-point-offer__title-label">
                             {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
+                        </span>
+                        <span *ngIf="isOwner" class="supply-point-offer__title-label">
+                            Vaše měsíční záloha
                         </span>
                     </div>
                     <div class="col-12">
