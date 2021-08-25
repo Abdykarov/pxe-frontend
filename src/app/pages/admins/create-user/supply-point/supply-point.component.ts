@@ -41,7 +41,7 @@ export class SupplyPointComponent extends AbstractComponent {
 
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
-    public formFields = {...formFields};
+    public formFields = {...formFields(false)};
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];

@@ -47,7 +47,7 @@ export const expirationConfig: IExpirationConfig = {
     },
 };
 
-export const formFields: IForm = {
+export const formFields = (isTestingUser: boolean): IForm => ({
     controls: {
         id: [
             null,
@@ -81,16 +81,16 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.ean,
-                CustomValidators.eanFormat,
+                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.ean,
+                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.eanFormat,
             ],
         ],
         eic: [
             null,
             [
                 Validators.required,
-                CustomValidators.eic,
-                CustomValidators.eicFormat,
+                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.eic,
+                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.eicFormat,
             ],
         ],
         address: [
@@ -329,7 +329,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.timeToContractEndPeriodId.required,
         },
     },
-};
+});
 
 export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
     [CommodityType.POWER]: [
