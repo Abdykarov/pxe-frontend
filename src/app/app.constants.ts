@@ -370,12 +370,12 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     {
         key: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
         value: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-        label: 'domácnost',
+        label: 'Domácnost',
     },
     {
         key: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
         value: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-        label: 'firma',
+        label: 'Firma',
     },
 ];
 
@@ -393,11 +393,11 @@ export const OWN_TERMINATE_OPTIONS: Array<IOption> = [
 export const COMMODITY_TYPE_OPTIONS: Array<IOption> = [
     {
         key: CommodityType.POWER,
-        label: 'elektřina',
+        label: 'Elektřina',
     },
     {
         key: CommodityType.GAS,
-        label: 'plyn',
+        label: 'Plyn',
     },
 ];
 
