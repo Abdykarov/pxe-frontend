@@ -89,7 +89,9 @@
             </div>
             <div
                 *ngIf="!showPriceDecomposition && !isOwner"
-                class="row justify-content-between">
+                class="row"
+                [class.justify-content-between]="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+                [class.justify-content-end]="!(supplyPointOffer.benefits && supplyPointOffer.benefits.length)">
                 <div
                     *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
                     class="col">
