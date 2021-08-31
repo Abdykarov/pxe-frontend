@@ -57,6 +57,8 @@ $info:                             $secondary;                   // Info color
 $light:                            #eef2f6;                    // Light color
 $light-dark:                       darken($light, 15%);
 $light-darken:                     darken($light, 25%);
+$dark:                             #2b4762;                    // Dark color
+$dark-darken:                      darken($dark, 10%);           // Dark color
 $disabled:                         #f7f9fb;                    // Disabled color
 
 $gradient-blue-light:              $primary;                     // Gradient blue light
