@@ -3,7 +3,9 @@ import {
     INavigationItemType,
     ROUTES,
 } from 'src/app/app.constants';
+
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
+import { ILoginProvider } from 'src/app/services/model/auth.model';
 
 export const navigationMenuUsers: INavigationMenu = [
     {
@@ -12,6 +14,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'label': 'Přehled',
         'icon': 'notice-board',
         'type': INavigationItemType.NORMAL,
+        'allowedLoginProviders': null,
         'children': [],
         __typename : 'secured',
     },
@@ -20,6 +23,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'url': '',
         'label': 'Smlouvy',
         'type': INavigationItemType.ONLY_LABEL,
+        'allowedLoginProviders': null,
         'icon': '',
         'children': [],
         __typename : 'secured',
@@ -29,6 +33,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'url': ROUTES.ROUTER_REQUESTS,
         'label': 'Rozpracované',
         'type': INavigationItemType.NORMAL,
+        'allowedLoginProviders': null,
         'icon': 'star',
         'children': [
             {
@@ -68,6 +73,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'class': '',
         'url': ROUTES.ROUTER_SUPPLY_POINTS,
         'label': 'Uzavřené',
+        'allowedLoginProviders': null,
         'type': INavigationItemType.NORMAL,
         'icon': 'document',
         'children': [],
@@ -77,11 +83,45 @@ export const navigationMenuUsers: INavigationMenu = [
 
 export const navigationMenuSuppliers: INavigationMenu = [];
 
+export const navigationMenuAdmins: INavigationMenu = [
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_NEW,
+        'label': 'Přijaté',
+        'allowedLoginProviders': null,
+        'icon': 'document-warning',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_IN_PROGRESS,
+        'allowedLoginProviders': null,
+        'label': 'Rozpracované',
+        'icon': 'document-down',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED,
+        'allowedLoginProviders': null,
+        'label': 'Uzavřené',
+        'icon': 'document-success',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+];
+
 export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'd-lg-none',
         'url': '',
         'label': 'Účet',
+        'allowedLoginProviders': null,
         'type': INavigationItemType.ONLY_LABEL,
         'icon': '',
         'children': [],
@@ -92,6 +132,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Profil uživatele',
         'type': INavigationItemType.NORMAL,
         'icon': 'user',
+        'allowedLoginProviders': null,
         'url': ROUTES.ROUTER_USER_PROFILE,
         'children': [],
         __typename: 'profile',
@@ -101,6 +142,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Změna hesla',
         'type': INavigationItemType.NORMAL,
         'icon': 'lock-close',
+        'allowedLoginProviders': [ILoginProvider.LOCAL],
         'url': ROUTES.ROUTER_USER_CHANGE_PASSWORD,
         'children': [],
         __typename: 'change-password',
@@ -111,6 +153,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Odhlášení',
         'type': INavigationItemType.NORMAL,
         'icon': 'power',
+        'allowedLoginProviders': null,
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
         'children': [],
         __typename: 'logout',
@@ -132,6 +175,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'label': 'Nabídky',
         'type': INavigationItemType.NORMAL,
         'icon': 'star',
+        'allowedLoginProviders': null,
         'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
         'children': [],
         __typename: 'supply-offers',
@@ -139,6 +183,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Smlouvy',
+        'allowedLoginProviders': null,
         'type': INavigationItemType.NORMAL,
         'icon': 'document',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
@@ -148,6 +193,20 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'link--logout',
         'label': 'Odhlášení',
+        'allowedLoginProviders': null,
+        'type': INavigationItemType.NORMAL,
+        'icon': 'power',
+        'url' : `/${CONSTS.PATHS.LOGOUT}`,
+        'children': [],
+        __typename: 'logout',
+    },
+];
+
+export const navigationMenuAdminsActions: INavigationMenu = [
+    {
+        'class': 'navigation-main__item--second link--logout',
+        'label': 'Odhlášení',
+        'allowedLoginProviders': null,
         'type': INavigationItemType.NORMAL,
         'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,

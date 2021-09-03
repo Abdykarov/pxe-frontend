@@ -1,0 +1,10 @@
+<div class="container-fluid container-fluid--max-width">
+    <div class="container-content container-content--public">
+        <pxe-layout-container *ngIf="faq"
+          [pageTitle]="faq.title"
+          [withHeader]="!breadcrumbItemsSimple[1].url"
+          [breadcrumbItemsSimple]="breadcrumbItemsSimple">
+            <router-outlet></router-outlet>
+        </pxe-layout-container>
+    </div>
+</div>

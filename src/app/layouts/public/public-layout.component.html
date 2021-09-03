@@ -3,22 +3,25 @@
     class="body-inner full-layout"
     [class.body-inner--overlay]="showOverlay">
     <lnd-header
-        [sticked]="wasLastTimeScrolledToTop"
         [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
         (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
+        (howItWorksAction)="scrollToService.scrollToHowItWorks()"
+        (helpAction)="scrollToService.scrollToHelp()"
+        (faqAction)="scrollToService.scrollToFaq()"
+        (blogAction)="scrollToService.scrollToBlog()"
+        (bestPricesInTheWorldAction)="scrollToService.scrollToBestPricesInTheWorld()"
         (landingPageRedirect)="landingPageRedirect()"
-        (faqAction)="scrollToFaq()"
-        (aboutServiceAction)="scrollToAboutService()"
-        (aboutUsAction)="scrollToAboutUs()"
         (loginAction)="login()"
         (signUpAction)="signUp()"
         (toggleMenu)="toggleMenuOpen($event)"
         (logoutAction)="logout()">
     </lnd-header>
     <main class="main">
+        <pxe-re-captcha-initializer></pxe-re-captcha-initializer>
         <router-outlet></router-outlet>
+        <lnd-modal-dynamic></lnd-modal-dynamic>
     </main>
     <div *ngIf="(authService.currentUserValue | isLogged) && !isLogouting"
          class="fixed-bottom fixed-bottom--footer-indentation">
@@ -39,11 +42,12 @@
                 <a [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
                    class="footer-navigation__link"
                 >
-                    Obchodní podmínky PARC4U
+                    Obchodní podmínky parc4u
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual, commodityTypePower]"
+                <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual]"
+                   [fragment]="commodityTypePower"
                    class="footer-navigation__link"
                 >
                     Vzory smluv o dodávce
@@ -61,6 +65,13 @@
                    class="footer-navigation__link"
                 >
                     Cookies policy
+                </a>
+            </li>
+            <li class="footer-navigation__item">
+                <a [routerLink]="['/', CONSTS.PATHS.BLOG, CONSTS.ALL_BLOG]"
+                   class="footer-navigation__link"
+                >
+                    Blog
                 </a>
             </li>
             <li class="footer-navigation__item">

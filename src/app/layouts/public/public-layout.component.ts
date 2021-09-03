@@ -5,9 +5,11 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    HostListener,
     Inject,
+    OnDestroy,
+    OnInit,
     PLATFORM_ID,
+    Renderer2,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -21,36 +23,23 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityTypesLowerCase,
-    CONSTS,
+    CommodityTypesCsLowerCase,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './public-layout.component.html',
     styleUrls: ['./public-layout.component.scss'],
 })
-export class PublicLayoutComponent extends AbstractLayoutComponent {
-    public commodityTypePower = CommodityTypesLowerCase.POWER;
+export class PublicLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
+    public commodityTypePower = CommodityTypesCsLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
-    public wasLastTimeScrolledToTop = false;
-
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-        const scrollTop =
-            window.scrollY ||
-            window.pageYOffset ||
-            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER ||
-            scrollTop === this.lastScrollTop && this.wasLastTimeScrolledToTop;
-        this.lastScrollTop = scrollTop;
-    }
 
     constructor(
         protected apollo: Apollo,
@@ -58,10 +47,12 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
+        private renderer: Renderer2,
+        public reCaptchaService: ReCaptchaService,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
-        protected scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         @Inject(DOCUMENT) private document: any,
         @Inject(PLATFORM_ID) public platformId: string,
     ) {
@@ -86,6 +77,16 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
                 this.showOverlay = current;
                 this.cd.markForCheck();
             });
+    }
+
+    public ngOnInit() {
+        super.ngOnInit();
+        this.renderer.addClass(document.body, 'public');
+    }
+
+    public ngOnDestroy() {
+        super.ngOnDestroy();
+        this.renderer.removeClass(document.body, 'public');
     }
 
     public logout = () => this.authService.logoutForced(false);

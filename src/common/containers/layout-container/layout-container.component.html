@@ -1,11 +1,11 @@
-<div class="row text-center mb-md-6">
+<div *ngIf="withHeader" class="row text-center mb-md-1">
     <div class="col-12 col-xl-6 offset-xl-3">
-        <h1>{{pageTitle}}</h1>
+        <h1 [innerHTML]="pageTitle"></h1>
     </div>
 </div>
 <div *ngIf="breadcrumbItemsSimple"
         class="row">
-    <div class="col">
+    <div class="col mb-3">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
@@ -23,7 +23,7 @@
 <lnd-banner-ui
     *ngIf="logoutRequired"
     [data]="{
-        text: 'Jste přihlášen jako '  + authService.currentUserValue.userLogin + (logoutRequired === LogoutRequired.LOGIN ?
+        text: 'Jste přihlášen jako '  + authService.currentUserValue.username + (logoutRequired === LogoutRequired.LOGIN ?
         ', pro přihlášení pod jiným uživatelem se prosím odhlašte.' : ', pro registraci se prosím odhlašte.')
     }"
     [showButtonLabel]="false"

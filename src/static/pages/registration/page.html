@@ -1,61 +1,109 @@
 <ng-template #agreementTemplate>
-    Souhlasím se <a [routerLink]="['/full/registration']">Obchodními podmínkami účasti na Trhu PARC4U</a> a beru na vědomí
-    <a [routerLink]="['/full/registration']">Informaci o zpracování osobních údajů</a>.
+    Souhlasím s <a target="_blank">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank">Ochraně osobních údajů</a>.
 </ng-template>
 
 <ng-template #supplierTemplate>
     <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
 </ng-template>
 
-<div class="registration-page container-content container-content--public">
+<div class="section section--bg-two-half section--gradient-violet-right-half">
     <div class="container-fluid container-fluid--max-width">
-        <div class="row text-center mb-md-6">
-            <div class="col-12 col-md-6 offset-md-3">
-                <h1>Registrace</h1>
-            </div>
-        </div>
-        <div class="row mb-6">
-            <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-0 order-xl-last">
-                <div class="page-box">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="section__half">
                     <div class="row">
-                        <div class="col-12">
-                            <form class="form-container">
+                        <div class="col-md-8 offset-md-2 col-xl-10 offset-xl-0">
+                            <h1 class="h2--public mb-2">Založte si účet zdarma</h1>
+                            <p>
+                                Nemusíte se bát, ani my nemáme rádi spam. Máte již účet?
+                                <a class="d-inline-block">Přihlaste se zde.</a>
+                            </p>
+                            <form class="form-container form-container--large ml-0">
                                 <lnd-form-field
                                     id="email"
+                                    customFormGroupClass="form-group--public"
+                                    infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
+                                    [lightField]="true"
                                     label="E-mail">
                                 </lnd-form-field>
                                 <lnd-form-field
                                     [id]="'Agreement'"
+                                    customFormGroupClass="form-group--public"
                                     [labelTemplate]="agreementTemplate"
                                     [type]="'CHECKBOX'">
                                 </lnd-form-field>
-                                <div class="text-right">
-                                    <lnd-button
-                                        type="primary"
-                                        (action)="submitForm($event)"
-                                        label="Registrovat se">
-                                    </lnd-button>
+                                <lnd-button
+                                    type="gradient-primary"
+                                    class="w-100 mb-5"
+                                    customClass="btn-public btn--icon-right w-100"
+                                    (action)="submitForm($event)"
+                                    label="Založit účet"
+                                    icon="icon--arrow-right"
+                                    iconPosition="right">
+                                </lnd-button>
+                                <p class="mb-2">
+                                    Nebo si založte účet pomocí
+                                </p>
+                                <div class="row mb-5">
+                                    <div class="col-md-6 mb-3">
+                                        <lnd-button
+                                            label="Facebook"
+                                            type="facebook"
+                                            class="w-100"
+                                            customClass="btn-public w-100">
+                                        </lnd-button>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <lnd-button
+                                            label="Google"
+                                            type="google"
+                                            class="w-100"
+                                            customClass="btn-public w-100">
+                                        </lnd-button>
+                                    </div>
+                                    <div class="col-12">
+                                        <lnd-button
+                                            type="bankid"
+                                            class="w-100"
+                                            customClass="btn-public w-100">
+                                        </lnd-button>
+                                    </div>
                                 </div>
+                                <p class="font-size-14">
+                                    Založením účtu souhlasím s <a href="#">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a href="#">Ochraně osobních údajů</a>.
+                                </p>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-10 offset-1 col-md-8 offset-md-2 col-xl-5 offset-xl-1 order-xl-first">
-                <div class="check-list-wrapper">
-                    <h2 class="h3--public">Nakupujte elektřinu a plyn přímo na burze</h2>
-                    <ul class="check-list">
-                        <li>Měňte dodavatele na jedno kliknutí</li>
-                        <li>Neřešte papírování a chození na pobočky</li>
-                        <li>Buďte chráněni před nekalostmi ve smlouvě</li>
-                        <li>Dostávejte férové ceny bez skrytých poplatků</li>
-                    </ul>
+            <div class="col-xl-6">
+                <div class="section__half section__half--gradient-violet">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h2 class="h3--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                            <ol class="numerical-list-stepper text-white">
+                                <li class="active">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
+                                <li>Zadejte váš email a my vám pošleme nabídky na míru. Zdarma a nezávazně.</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-8 offset-md-2 col-xl-10">
+                            <div class="row">
+                                <div class="col-12 text-center mb-3">
+                                    <pxe-file-uploader
+                                        secondaryTextCustomClass="small text-color--gray-200"
+                                        [uploader]="fileUploader"
+                                        [multiple]="true"
+                                        wrapperCustomClass="drop-zone--zindex text-white"
+                                        mainText="Soubory přetáhněte sem nebo "
+                                        secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                                        [labelFromMainText]="true">
+                                    </pxe-file-uploader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1 text-center">
-                <ng-container *ngTemplateOutlet="supplierTemplate"></ng-container>
             </div>
         </div>
     </div>

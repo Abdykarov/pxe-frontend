@@ -17,7 +17,7 @@
             <div class="col-12 mb-4 col-md-10 offset-md-2 col-xl-11 offset-xl-1 mb-xl-0 order-xl-3">
                 <div class="row">
                     <div *ngIf="(supplyPoint.progressStatus | progressStatus: supplyPoint.subject) as stateDescription"
-                            class="col-12 mb-2 col-md-auto mb-md-0 mr-md-2">
+                            class="col-12 mb-2 col-md-7 pr-md-3 mb-md-0 col-xl-5">
                         Stav – {{stateDescription}}
                     </div>
                     <div class="col-12 col-md-5 col-xl-4">
@@ -39,12 +39,19 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="col-12 col-md-10 offset-md-2 col-xl-4 offset-xl-0 order-xl-2">
+            <div class="col-12 col-md-auto offset-md-2 offset-xl-0 order-xl-2 ml-xl-auto">
                 <div class="request-card__addon">
                     <lnd-button
                         label="Pokračovat"
                         type="primary"
-                        (click)="action.emit(supplyPoint)">
+                        customClass="mb-2"
+                        (click)="continueAction.emit(supplyPoint)">
+                    </lnd-button>
+                    <lnd-button
+                        *ngIf="!supplyPoint.contract?.previousContractId"
+                        label="Smazat"
+                        type="link-danger"
+                        (click)="removeAction.emit(supplyPoint)">
                     </lnd-button>
                 </div>
             </div>

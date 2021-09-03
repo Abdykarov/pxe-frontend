@@ -8,8 +8,13 @@ import {
     HttpClient,
     HttpHeaders,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {
+    NavigationExtras,
+    Router,
+} from '@angular/router';
 
+import * as CryptoJS from 'crypto-js';
+import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
@@ -37,14 +42,17 @@ import {
 } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
+import { GTMService } from './gtm.service';
 import {
     IJwtPayload,
     ILoginRequest,
     ILoginResponse,
     IUserRoles,
+    IUserTypes,
 } from './model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
-import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
+import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
+import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 
@@ -63,6 +71,16 @@ export class AuthService {
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
+
+    public loginExtras: NavigationExtras = {
+        state: {
+            afterLogin: true,
+        },
+    };
+
+    get hashedUserId(): string {
+        return this.hashUserId(this?.currentUserValue?.email);
+    }
 
     public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
@@ -96,6 +114,7 @@ export class AuthService {
 
     constructor(
         private cookiesService: CookiesService,
+        private gtmService: GTMService,
         private http: HttpClient,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
@@ -106,6 +125,10 @@ export class AuthService {
         this.currentUser$ = this.currentUserSubject$.asObservable();
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
+
+            this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
+                this.gtmService.setUserId(this.hashUserId(jwtPayloadSubjectSubject?.email));
+            });
         }
     }
 
@@ -115,6 +138,8 @@ export class AuthService {
         const { role } = jwtPayload;
         return R_.containsAny(role, accessRole);
     }
+
+    public hashUserId = (id: string): string => (id ? CryptoJS.SHA3(id).toString() : null);
 
     public refreshTokenInterval = () => {
         this.startRefreshTokenInterval();
@@ -153,11 +178,11 @@ export class AuthService {
     }
 
     public needSmsConfirm(): boolean {
-        return this.currentUserValue.needSmsConfirm;
+        return this.currentUserValue?.needSmsConfirm;
     }
 
     public passwordChangeRequired(): boolean {
-        return this.currentUserValue.passwordReset;
+        return this.currentUserValue?.passwordReset;
     }
 
     public login = ({login, password}: ILoginRequest) => {
@@ -267,7 +292,7 @@ export class AuthService {
                 const jwtHelper = new JwtHelperService();
                 jwtPayload = jwtHelper.decodeToken(token);
                 const { role } = jwtPayload;
-                jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
+                jwtPayload.type = this.getUserType(role);
                 jwtPayload.needSmsConfirm = role.indexOf(IUserRoles.NEEDS_SMS_CONFIRMATION) !== -1;
             } catch (e) {
                 this.token = null;
@@ -278,8 +303,15 @@ export class AuthService {
         return jwtPayload;
     }
 
-    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
-        const token = this.getToken();
+    private getUserType = (roles: string[]): IUserTypes => R.cond([
+        [(rolesParam) => R.indexOf(IUserRoles.ROLE_CONTRACT_IMPORTER)(roles) !== -1, R.always(IUserTypes.CONTRACT_IMPORTER)],
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_SUPPLIER_P4R)(roles) !== -1, R.always(IUserTypes.SUPPLIER)],
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_CONSUMER_P_4_R)(roles) !== -1, R.always(IUserTypes.CONSUMER)],
+        [R.T, R.always(IUserTypes.CONSUMER)],
+    ])(roles)
+
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*', withoutToken = false): HttpHeaders => {
+        const token = !withoutToken && this.getToken();
         return new HttpHeaders({
             ...(!!token) && {Authorization: `Bearer ${token}`},
             ...(!!contentType) && {'Content-Type': contentType},
@@ -288,18 +320,27 @@ export class AuthService {
         });
     }
 
+    public isCurrentUser = (userType: IUserTypes) => this.currentUserValue && this.currentUserValue.type === userType;
+
     public homeRedirect = (forceRedirectToLastUrl = false, logoutRequired: ILogoutRequired = null) => {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
             if (lastUrl) {
-                window.open(lastUrl, '_self');
+                this.router.navigateByUrl(lastUrl);
                 return;
             }
         }
+
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
-        } else if (this.currentUserValue.supplier) {
+        } else if (this.isCurrentUser(IUserTypes.SUPPLIER)) {
             this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
+                state: {
+                    logoutRequired,
+                },
+            });
+        } else if (this.isCurrentUser(IUserTypes.CONTRACT_IMPORTER)) {
+            this.router.navigate([ROUTES.ROUTER_ASK_FOR_OFFER_NEW], {
                 state: {
                     logoutRequired,
                 },
@@ -310,6 +351,21 @@ export class AuthService {
                     logoutRequired,
                 },
             });
+        }
+    }
+
+    public routerAfterLogin = ({landingPage}) => {
+        switch (landingPage) {
+            case LANDING_PAGE.DASHBOARD:
+                return ROUTES.ROUTER_DASHBOARD;
+            case LANDING_PAGE.NEW_SUPPLY_POINT:
+                return ROUTES.ROUTER_REQUEST_SIGNBOARD;
+            case LANDING_PAGE.OFFERS:
+                return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
+            case LANDING_PAGE.WAITING_FOR_PAYMENT:
+                return ROUTES.ROUTER_REQUEST_PAYMENT;
+            case LANDING_PAGE.CONTRACT_IMPORT:
+                return ROUTES.ROUTER_ASK_FOR_OFFER_NEW;
         }
     }
 }

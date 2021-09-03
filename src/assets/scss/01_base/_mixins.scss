@@ -162,6 +162,7 @@
 		// url($file-name + '.svg##{$font-name}')  format('svg');
 		font-weight: $weight;
 		font-style: $style;
+		font-display: fallback;
 	}
 }
 
@@ -272,10 +273,32 @@
 
 
 /*
+ - Mixin for link
+ */
+
+@mixin link() {
+	&,
+	&:visited {
+		@content;
+	}
+}
+
+@mixin link-interactive() {
+	&.focus,
+	&:focus,
+	&:hover {
+		@content;
+	}
+}
+
+
+/*
  - Mixin for link without [href]
  */
 
 @mixin link-without-href() {
+	&,
+	&:visited,
 	&:not([href]):not([tabindex]),
 	&:not([href]):not([tabindex]):visited {
 		@content;
@@ -293,6 +316,9 @@
 }
 
 @mixin link-without-href-interactive() {
+	&.focus,
+	&:focus,
+	&:hover,
 	&:not([href]):not([tabindex]):not(.active).focus,
 	&:not([href]):not([tabindex]):not(.active):focus,
 	&:not([href]):not([tabindex]):not(.active):hover {

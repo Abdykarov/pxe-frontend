@@ -67,8 +67,14 @@ export class CustomValidators {
         '\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE' +
         '\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC';
 
+    static alwaysValid = () => null;
+
     static accountNumber = (acountNumber) => {
         if (acountNumber.pristine) {
+            return null;
+        }
+
+        if (!acountNumber.value) {
             return null;
         }
 
@@ -124,6 +130,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!acountBankCode.value) {
+            return null;
+        }
+
         const ACOUNT_BANK_NUMBER = /^\d{4}$/;
         if (ACOUNT_BANK_NUMBER.test(acountBankCode.value)) {
             return null;
@@ -165,6 +175,10 @@ export class CustomValidators {
 
     static mobilePhoneNumber = (phoneNumber) => {
         if (phoneNumber.pristine) {
+            return null;
+        }
+
+        if (!phoneNumber.value) {
             return null;
         }
 
@@ -266,6 +280,12 @@ export class CustomValidators {
     }
 
     static ean = (ean) => {
+        if (!ean.value) {
+            return {
+                ean: true,
+            };
+        }
+
         if (ean.pristine) {
             return null;
         }
@@ -294,8 +314,27 @@ export class CustomValidators {
 
     }
 
+    static email = (email) => {
+        if (email.pristine) {
+            return null;
+        }
+        email.markAsTouched();
+        const EMAIL_REGEXP = new RegExp('(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])');
+        if (EMAIL_REGEXP.test(email.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
     static ico = (ico): {} => {
         if (ico.pristine || R_.isNilOrEmpty(ico.value)) {
+            return null;
+        }
+
+        if (!ico.value) {
             return null;
         }
 
@@ -314,6 +353,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!dic.value) {
+            return null;
+        }
+
         switch (verifyDIC(dic.value)) {
             case DICError.NONE:
                 return null;
@@ -329,6 +372,12 @@ export class CustomValidators {
     }
 
     static eic = (eic) => {
+        if (!eic.value) {
+            return {
+                eic: true,
+            };
+        }
+
         if (eic.pristine) {
             return null;
         }
@@ -347,6 +396,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!eic.value) {
+            return null;
+        }
+
         const EIC_REGEXP = /^27Z|zG|g.{12}$/;
         if (EIC_REGEXP.test(eic.value)) {
             return null;
@@ -359,6 +412,10 @@ export class CustomValidators {
 
     static eanFormat = (ean) => {
         if (ean.pristine) {
+            return null;
+        }
+
+        if (!ean.value) {
             return null;
         }
 
@@ -376,6 +433,10 @@ export class CustomValidators {
         const expresion = maxDecimals === 0 ? new RegExp(/^(0|-?[1-9]\d*)$/) : new RegExp(/^-?\d+([\.\,]?\d+)?$/);
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
+                return null;
+            }
+
+            if (!control.value) {
                 return null;
             }
 
@@ -408,6 +469,10 @@ export class CustomValidators {
                 return null;
             }
 
+            if (!control.value) {
+                return null;
+            }
+
             if (!allowEqual &&
                 (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min)) {
                 return null;
@@ -425,9 +490,18 @@ export class CustomValidators {
         };
     }
 
-    static maxValue = (max: number, allowEqual = false, plainError = true): ValidatorFn => {
+    static maxValue = (
+        max: number,
+        allowEqual = false,
+        plainError = true,
+        nameOfError: string = 'max',
+    ): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
+                return null;
+            }
+
+            if (!control.value) {
                 return null;
             }
 
@@ -442,7 +516,7 @@ export class CustomValidators {
             }
 
             return {
-                max: plainError ? true : {max, actual: control.value},
+                [nameOfError]: plainError ? true : {[nameOfError]: nameOfError, actual: control.value},
             };
         };
     }

@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FileUploaderModule } from 'src/common/ui/file-uploader/file-uploader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SignboardComponent } from 'src/static/pages/signboard/page';
 
@@ -18,6 +19,7 @@ import { SignboardComponent } from 'src/static/pages/signboard/page';
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
+        FileUploaderModule,
         ProgressBarModule,
     ],
 })
@@ -27,5 +29,8 @@ export const signboardPageRoutes: Routes = [
     {
         path: 'signboard',
         component: SignboardComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

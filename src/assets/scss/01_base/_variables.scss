@@ -11,7 +11,7 @@ $blue-100:                         #00b7ff;                    // Blue level 2
 $blue-200:                         #00a6ea;                    // Blue level 3
 $blue-300:                         #0096d1;                    // Blue level 4
 $blue-400:                         #00719e;                    // Blue level 5
-$blue-500:                         #004d6b;                    // Blue level 6
+$blue-500:                         #000b30;                    // Blue level 6
 
 $gray-000:                         #fff;                       // Gray level 0
 $gray-050:                         #fafafa;                    // Gray level 1
@@ -30,10 +30,13 @@ $font-header:                      #2b4762;
 $font-text:                        #2b4762;
 $font-secondary:                   #919191;
 
+$font-text-public:                 #496480;
+
 $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary color
 $primary-dark:                     #0088e5;
+$primary-darken:                   #0353ce;
 $secondary-lighten:                #926ece;                    // Secondary color
 $secondary:                        #7355a6;
 $secondary-dark:                   darken($secondary, 5%);
@@ -54,16 +57,17 @@ $info:                             $secondary;                   // Info color
 $light:                            #eef2f6;                    // Light color
 $light-dark:                       darken($light, 15%);
 $light-darken:                     darken($light, 25%);
+$dark:                             #2b4762;                    // Dark color
+$dark-darken:                      darken($dark, 10%);           // Dark color
 $disabled:                         #f7f9fb;                    // Disabled color
 
-$gradient-green-light:             $primary;                     // Gradient green light
-$gradient-green-dark:              $primary-dark;                // Gradient green dark
-$gradient-blue-light:              $secondary;                   // Gradient blue light
-$gradient-blue-dark:               $secondary-dark;              // Gradient blue dark, cold
-$gradient-orange-light:            $warning;                     // Gradient orange light, normal
-$gradient-orange-dark:             $warning-dark;                // Gradient orange dark, normal
-$gradient-red-light:               $danger;                      // Gradient red light, warm
-$gradient-red-dark:                $danger-dark;                 // Gradient red dark, warm
+$gradient-blue-light:              $primary;                     // Gradient blue light
+$gradient-blue:                    #0583da;                    // Gradient blue
+$gradient-blue-dark:               $primary-darken;              // Gradient blue dark
+$gradient-blue-darken:             $blue-500;                    // Gradient blue darken
+$gradient-violet-light:            $secondary;                   // Gradient violet light
+
+$gradient-bg-violet:               linear-gradient(143deg, $gradient-violet-light 0%, $gradient-blue-darken 100%);                   // Gradient violet light
 
 $icons-primary:                    $secondary;
 $icons-secondary:                  #bdcad6;
@@ -74,9 +78,11 @@ $icons-green:                      #39b76e;
 
 $body-bg:                          #eef2f6;
 $body-bg-lp:                       #f3f4f5;
+$body-bg-lp-second:                #f8f8f8;
 $body-color:                       $font-text;
 
 $border-color:                     #bdcad6;
+$box-shadow-color:                 #000d16;
 
 // Config global
 $enable-shadows:                   true;
@@ -128,31 +134,38 @@ $body-max-width:                   1366px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'space_mono', arial;
+$font-family-sans-serif:           'roboto', arial;
+$font-size-base-public:            1rem;
+$line-height-base-public:          ( 28 / 16 );
+
+$font-family-sans-serif-secured:   'roboto_mono', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
+
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
+$large-font-size:                  1rem;
+$line-height-lg:                   ( 16 / 16 );
 $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;
 $h1-font-size-snd:                 1rem;
 $h1-font-size-public-xs:           2.25rem;
 $h1-font-size-public-md:           2.25rem;
-$h1-font-size-public:              3rem;
+$h1-font-size-public:              3.75rem;
 $h2-font-size:                     1.125rem;
 $h2-font-size-snd:                 .8125rem;
-$h2-font-size-public-xs:           1.5rem;
+$h2-font-size-public-xs:           1.875rem;
 $h2-font-size-public-md:           1.875rem;
 $h2-font-size-public:              2.25rem;
 $h3-font-size:                     .875rem;
 $h3-font-size-public-xs:           1.125rem;
-$h3-font-size-public-md:           1.5rem;
+$h3-font-size-public-md:           1.25rem;
 $h3-font-size-public:              1.5rem;
 $h4-font-size:                     .8125rem;
 $h5-font-size:                     .8125rem;
 $h6-font-size:                     .8125rem;
+$h4-font-size-public:              1rem;
 $headings-color:                   $font-header;
 $headings-line-height:             ( 40 / 30 );
 $headings-font-weight:             400;
@@ -167,11 +180,16 @@ $list-bullet-size:                 3px;
 $lists-margin-bottom:              $spacer;
 $list-decimal-padding-left:        ( $spacer * 2.25 );
 
+$circular-number-list-size:        48px;
+
 $checklist-lp-before-size:         50px;
 
 $border-radius:                    5px;
 $box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
+$box-shadow-interactive:           0 10px 30px 0 rgba($body-color, .2);
+$box-shadow-circle:                -10px 20px 56px 0 rgba($box-shadow-color, .15);
 
+$box-shadow-carousel:              -15px 20px 30px 0 rgba(0, 9, 16, .1);
 
 // Links
 $link-color:                       $primary;
@@ -243,6 +261,9 @@ $zindex-alert:                       1000;
 $zindex-body-overlayer:              2000;
 $zindex-body-overlayer-full:         3000;
 $zindex-body-overlayer-visible:      3010;
+$zindex-header:                      2010;
+$zindex-footer:                      2;
+$zindex-lp:                          1020;
 $zindex-modal-backdrop:              3000;
 $zindex-modal:                       3010;
 $zindex-datepicker-content:          3020;
@@ -256,34 +277,19 @@ $zindex-placeloader-holder:          10;
 $zindex-form-file-input:             -1;
 $zindex-field-wrapper-control-label: 5;
 $zindex-graph-tabs-active-after:     99;
+$zindex-graphs-svg:                  1995;
 $zindex-tooltip-content:             3000;
 $zindex-tooltip-beak:                3001;
 $zindex-drop-zone-bg-image:          -1;
 $zindex-tr-detail:                   1;
-$zindex-lp-picture-bg-overlap:       1;
-$zindex-lp-picture-bg:               -1;
 $zindex-lp-video-text:               10;
 $zindex-lp-video-control:            1;
-
-
-
-// Card
-$card-bg:                           $white;
-$card-border-width:                 0;
-$card-border-radius:                0;
-$card-spacer-x:                     0;
-$card-spacer-y:                     $spacer;
-$card-img-max-height:               168px;
-$card-img-border-width-md:          8px;
-$card-img-border-width-xl:          10px;
-$card-img-border-color:             $gray-050;
-
-$card-tile-height:                  180px;
-$card-tile-img-max-height:          80px;
-$card-widget-img-max-width:         215px;
-$card-widget-img-small-max-width:   90px;
-
-$card-list-item-dot-size:           10px;
+$zindex-lp-bg-two-half:              1;
+$zindex-lp-bg-two-half-after:        -1;
+$zindex-lp-picure-section:           1;
+$zindex-lp-picture-bg:               -1;
+$zindex-drop-zone:                   1;
+$zindex-card-blog-img:               -1;
 
 
 // Pagination
@@ -317,11 +323,14 @@ $tip-min-height-big:                180px;
 $landing-page-video-content-height-mobil:            180px;
 $landing-page-video-content-height-tablet:           340px;
 $landing-page-video-content-height-desktop:          680px;
+
 $landing-page-picture-bg-height-mobile:              125%;
-$landing-page-picture-bg-height-tablet:              830px;
+$landing-page-picture-bg-height-tablet:              750px;
 $landing-page-picture-bg-height-laptop:              720px;
-$landing-page-picture-bg-height-desktop:             1160px;
+$landing-page-picture-bg-height-desktop:             1000px;
+
 $numerical-list-lp-numb-size:                        26px;
+$landing-page-link-next-section-size:                48px;
 
 
 // Drop zone
@@ -331,9 +340,20 @@ $drop-zone-border-dash-width:  15px;
 $drop-zone-border-gap-width:   15px;
 
 
+// Carousel compare
+$carousel-compare-price:       $secondary;
+$carousel-compare-border-left: 1px solid rgba(151, 151, 151, .3);
+
 // Accordion
 $accordion-active-shadow:      0 10px 30px 0 rgba($body-color, .2);
 $accordion-toggle-icon-size:   20px;
+
 $accordion-padding:            ( $spacer * 2 );
 $accordion-padding-right-xs:   ( $spacer + $accordion-toggle-icon-size + $spacer );
 $accordion-padding-right:      ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding );
+
+
+// Accordion
+$loader-color:                 #2b4762;
+$loader-size:                  20px;
+

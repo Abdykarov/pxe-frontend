@@ -1,0 +1,24 @@
+<lnd-modal
+    [isVideo]="true"
+    [isModalOpen]="modalOpen"
+    [size]="this.instanceData.size"
+    (close)="closeModal.emit()">
+    <div (lndOffClick)="closeModal.emit()"
+        class="modal-body">
+        <video
+            #video
+            class="w-100 cursor-pointer"
+            [muted]="false"
+            controls
+            disablePictureInPicture
+            preload="auto"
+            (pause)="cd.detectChanges()"
+            (play)="cd.detectChanges()"
+            (ended)="closeModal.emit()"
+            (click)="isVideoPlaying ? pause($event) : play($event)">
+            <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
+            <img src="/assets/images/landing-page/picture-fallback.jpg" alt="parc4u - obrázek laptopu s aplikací">
+            Váš prohlížeč nepodporuje zobrazení videa
+        </video>
+    </div>
+</lnd-modal>

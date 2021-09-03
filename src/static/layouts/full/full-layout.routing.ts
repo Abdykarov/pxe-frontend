@@ -7,6 +7,7 @@ import {
 import { FullLayoutComponent } from './full-layout.component';
 
 import { AccountDeletedPageModule, accountDeletedPageRoutes } from 'src/static/pages/account-deleted/page.module';
+import { CarouselPageModule, carouselPageRoutes } from 'src/static/organisms/carousel/page.module';
 import { CookiesPageModule, cookiesPageRoutes } from 'src/static/pages/cookies/page.module';
 import { ChangePasswordPageModule, changePasswordPageRoutes } from 'src/static/pages/change-password/page.module';
 import { FaqPageModule, faqPageRoutes } from 'src/static/pages/faq/page.module';
@@ -28,6 +29,7 @@ const routes: Routes = [
         component: FullLayoutComponent,
         children: [
             ...accountDeletedPageRoutes,
+            ...carouselPageRoutes,
             ...cookiesPageRoutes,
             ...changePasswordPageRoutes,
             ...faqPageRoutes,
@@ -53,6 +55,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         AccountDeletedPageModule,
+        CarouselPageModule,
         CookiesPageModule,
         ChangePasswordPageModule,
         Error404PageModule,

@@ -1,20 +1,24 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,
     Output,
+    ViewChild,
 } from '@angular/core';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { removeHtmlFromText } from 'src/common/utils';
 
@@ -24,6 +28,7 @@ import { removeHtmlFromText } from 'src/common/utils';
     styleUrls: ['./supply-point-offer.component.scss'],
 })
 export class SupplyPointOfferComponent extends AbstractComponent implements OnInit {
+
     private static readonly MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 72;
     private static readonly MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 1;
     private static readonly ZERO_HOURS_VALIDITY_OF_OFFER = 0;
@@ -44,10 +49,16 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public questions: IQuestion[] = null;
 
     @Input()
+    public personalInfo: IPersonalData = null;
+
+    @Input()
     public supplyPointOffer: IOffer;
 
     @Input()
     public isOwner = false;
+
+    @Input()
+    public offerSelected = false;
 
     @Input()
     public interactive = true;
@@ -55,8 +66,17 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     @Input()
     public isFromContract = false;
 
+    @Input()
+    public customClass = '';
+
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public togglePriceDecompositionAction: EventEmitter<any> = new EventEmitter();
+
+    @ViewChild('supplyPointOfferWrapper', { read: ElementRef })
+    public supplyPointOfferWrapper: ElementRef;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -66,6 +86,10 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit () {
+        if (this.isFromContract) {
+            this.showPriceDecomposition = true;
+        }
+
         if ( this.questions) {
             const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
             this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
@@ -78,11 +102,15 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
                     (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
                 )(textWithoutHTML);
             }
+
+            if (this.isFromContract) {
+                this.showPriceDecomposition = true;
+            }
         }
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),
-            this.supplyPointOffer.validTo,
+            moment(this.supplyPointOffer.validTo).endOf('day'),
             'hours',
         );
 
@@ -108,5 +136,6 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
         event.preventDefault();
         event.cancelBubble = true;
         this.showPriceDecomposition = !this.showPriceDecomposition;
+        this.togglePriceDecompositionAction.emit(this.showPriceDecomposition);
     }
 }

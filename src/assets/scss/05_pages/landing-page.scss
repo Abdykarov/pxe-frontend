@@ -5,126 +5,21 @@
  */
 
 .landing-page {
-	padding-top: $header-height;
-	background-color: $white;
-
-	// Media queries
-	@include media-breakpoint-up(xl) {
-		padding-top: 0;
-	}
-
-	.section {
-		position: relative;
-		padding: ( $spacer * 3 ) 0;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 3 ) 0 ( $spacer * 4 );
-		}
-		@include media-breakpoint-up(lg) {
-			padding: ( $spacer * 4.5 ) 0 ( $spacer * 5.5 );
-		}
-
-		&--picture-half {
-			padding: 0 0 ( $spacer * 4.5 );
-
-			.section-picture-text {
-				padding-top: ( $spacer * 4 );
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-					padding-top: ( $spacer * 6 );
-				}
-				@include media-breakpoint-up(xl) {
-					padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
-				}
-			}
-		}
-
-		&--picture-bg {
-			position: relative;
-			padding-bottom: ( $spacer * 13 );
-			z-index: $zindex-lp-picture-bg-overlap;
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				padding-top: ( $spacer * 6 );
-			}
-			@include media-breakpoint-up(xl) {
-				padding: ( $spacer * 7 ) 0 ( $spacer * 5 );
-			}
-
-			&::after {
-				content: '';
-				position: absolute;
-				top: 20%;
-				left: -10px;
-				width: calc( 100% + #{$spacer});
-				height: $landing-page-picture-bg-height-mobile;
-				background-image: url(/assets/images/landing-page/lp-picture-socket.png);
-				background-repeat: no-repeat;
-				background-position: right center;
-				background-size: $landing-page-picture-bg-height-mobile auto;
-				z-index: $zindex-lp-picture-bg;
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-					top: 32%;
-					height: $landing-page-picture-bg-height-tablet;
-					background-position-y: top;
-					background-size: 90%;
-				}
-				@include media-breakpoint-up(xl) {
-					top: 10%;
-					height: $landing-page-picture-bg-height-laptop;
-					background-size: 70%;
-				}
-				@include media-breakpoint-up(lg) {
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: $landing-page-picture-bg-height-desktop;
-					background-position-x: 270px;
-					background-size: $landing-page-picture-bg-height-desktop;
-				}
-			}
-		}
-
-		&--picture-bg-overlap {
-			z-index: $zindex-lp-picture-bg-overlap;
-		}
-
-		&--video {
-			padding: 0 0 ( $spacer * 4.5 );
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				padding-bottom: ( $spacer / 2 );
-			}
-			@include media-breakpoint-up(xl) {
-				padding-bottom: 0;
-			}
-		}
-	}
-
 	// Section Video
 	.section-video-text {
-		padding-top: $spacer;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding-top: 0;
+		z-index: $zindex-lp-video-text;
+		pointer-events: none;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			position: absolute;
-			display: flex;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			padding-top: 0;
-			z-index: $zindex-lp-video-text;
-			pointer-events: none;
-		}
-		@include media-breakpoint-up(md) {
-			align-items: center;
 			padding-top: 0;
 			background-color: transparent;
 		}
@@ -234,7 +129,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			margin: 0 -$spacer;
+			margin: 0 ( -$spacer );
 		}
 		@include media-breakpoint-up(lg) {
 			margin: 0 ( -$spacer * 1.5 );
@@ -262,7 +157,6 @@
 				padding-left: ( $spacer / 10 );
 				background-color: $secondary;
 				color: $white;
-				font-family: $font-family-sans-serif-public;
 				letter-spacing: -2px;
 				text-align: center;
 				border-radius: $numerical-list-lp-numb-size;
@@ -275,6 +169,30 @@
 					left: 30px;
 				}
 			}
+		}
+	}
+
+	.link-next-section {
+		@include link-without-href {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: $landing-page-link-next-section-size;
+			height: $landing-page-link-next-section-size;
+			background-color: $body-bg-lp;
+			color: $font-text;
+			border-radius: $landing-page-link-next-section-size;
+			box-shadow: $box-shadow-circle;
+		}
+
+		@include link-without-href-interactive {
+			background-color: darken($body-bg-lp, 5%);
+			color: $font-text;
+			text-decoration: none;
+		}
+
+		&__icon {
+			transform: rotate(90deg);
 		}
 	}
 }

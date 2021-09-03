@@ -96,6 +96,8 @@ export class FileUploader {
   }
 
   public addToQueue(files: File[], options?: FileUploaderOptions, filters?: FilterFunction[] | string): void {
+    this._onBeforeAddingFiles(files);
+
     const list: File[] = [];
     for (const file of files) {
       list.push(file);
@@ -132,9 +134,11 @@ export class FileUploader {
   public removeFromQueue(value: FileItem): void {
     const index = this.getIndexOfItem(value);
     const item = this.queue[ index ];
-    if (item.isUploading) {
-      item.cancel();
-    }
+    try {
+        if (item.isUploading) {
+            item.cancel();
+        }
+    } catch (exception) {}
     this.queue.splice(index, 1);
     this.progress = this._getTotalProgress();
   }
@@ -217,6 +221,10 @@ export class FileUploader {
 
   public onAfterAddingFile(fileItem: FileItem): any {
     return { fileItem };
+  }
+
+  public onBeforeAddingFiles(files: File[]): any {
+    return { files };
   }
 
   public onWhenAddingFileFailed(item: FileLikeObject, filter: any, options: any): any {
@@ -464,7 +472,11 @@ export class FileUploader {
     this.onAfterAddingFile(item);
   }
 
-  protected _onAfterAddingAll(items: any): void {
+    protected _onBeforeAddingFiles(items: File[]): void {
+        this.onBeforeAddingFiles(items);
+    }
+
+    protected _onAfterAddingAll(items: any): void {
     this.onAfterAddingAll(items);
   }
 

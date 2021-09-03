@@ -8,6 +8,15 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     token: string;
     landingPage: LANDING_PAGE;
+    error?: string; // from OAuth
+    supplyPointId?: string; // from OAuth
+}
+
+export enum ILoginProvider {
+    LOCAL = 'local',
+    GOOGLE = 'google',
+    FACEBOOK = 'facebook',
+    BANK_ID = 'bankid',
 }
 
 export interface IJwtPayload {
@@ -19,30 +28,39 @@ export interface IJwtPayload {
     manageOffers: boolean;
     manageOrders: boolean;
     manageUsers: boolean;
+    provider?: ILoginProvider;
     role: any;
     sid: string;
     smsConfirmed: boolean;
+    notificatiosAllowed: boolean;
     subjectId: number;
     subjectName: string;
     surname: string;
     token: string;
+    uuid: string;
     username: string;
     email?: string;
-    supplier?: boolean;
+    type?: IUserTypes;
     needSmsConfirm?: boolean;
     passwordReset?: boolean;
     userStatus: UserStatus;
     phoneNumber?: string;
     firstContract: boolean;
     evaluatedSupplyPoint: number;
-    userLogin: string;
+}
+
+export enum IUserTypes {
+    'CONSUMER' = 'CONSUMER',
+    'SUPPLIER' = 'SUPPLIER',
+    'CONTRACT_IMPORTER' = 'CONTRACT_IMPORTER',
 }
 
 export enum IUserRoles {
-    'PARC_MANAGER' = 'PARC_MANAGER',
+    'ROLE_CONTRACT_IMPORTER' = 'CONTRACT_IMPORTER',
     'PARC_SUPPLIER_P4R' = 'PARC_SUPPLIER_P_4_R',
     'NEEDS_SMS_CONFIRMATION' = 'NEEDS_SMS_CONFIRMATION',
     'RESET_PASSWORD' = 'RESET_PASSWORD',
+    'PARC_CONSUMER_P_4_R' = 'PARC_CONSUMER_P_4_R',
 }
 
 export enum UserStatus {

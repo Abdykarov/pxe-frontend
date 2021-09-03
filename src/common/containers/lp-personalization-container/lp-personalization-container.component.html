@@ -1,0 +1,40 @@
+<div *ngIf="currentPersonalizationOption"
+    class="row align-items-md-center">
+    <div class="col-12 col-md-5 col-xl-6 order-md-2 mb-3 mb-md-0">
+        <div class="section-video-holder text-center">
+            <img class="img-fluid" [alt]="currentPersonalizationOption.fragment" [src]="currentPersonalizationOption.img" />
+        </div>
+        <div class="section-video-text order-md-1">
+            <div class="row w-100 ml-0 text-center">
+                <div class="col-12">
+                    <lnd-button
+                        type="icon"
+                        icon="icon--triangle-right"
+                        variant="icon"
+                        customClass="btn-video-play mb-2"
+                        (action)="playVideoInModal($event)"
+                    >
+                    </lnd-button>
+                    <h2 class="h3--public mb-0">
+                        Co je parc4u
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 offset-md-1 offset-xl-0">
+        <h1 class="h1--public mb-4" [innerHTML]="currentPersonalizationOption.header"></h1>
+        <p [innerHTML]="currentPersonalizationOption.description"></p>
+        <div class="text-center text-md-left">
+            <lnd-button
+                [label]="currentPersonalizationOption.buttonText"
+                type="gradient-primary"
+                customClass="btn-public btn--icon-right"
+                icon="icon--arrow-right"
+                iconPosition="right"
+                (action)="routeToSignUp($event)"
+            >
+            </lnd-button>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,14 @@
-<div class="news">
+<div *ngIf="news" class="news">
     <div class="news__inner">
         <div class="row">
             <div class="col-12">
-                <div class="row mb-4" *ngFor="let novelty of news; let i = index">
+                <div class="row mb-4" *ngFor="let oneNew of news; let i = index">
                     <div class="col-xl-auto text-xl-right">
-                        {{novelty.date | date:'d.&nbsp;M.&nbsp;y'}}
+                        {{oneNew.date | date:'d.&nbsp;M.&nbsp;y'}}
                     </div>
                     <div class="col"
                          [class.perex]="i === 0">
-                        {{novelty.text}}
+                        {{oneNew.new}}
                     </div>
                 </div>
             </div>

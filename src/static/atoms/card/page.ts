@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import {
-    defaultFirstCard,
-    defaultSecondCard,
-    defaultListCard,
     defaultTileCard,
+    defaultBlogCard,
 } from './config';
 
 @Component({
@@ -12,10 +11,8 @@ import {
 })
 
 export class CardPageComponent {
-    public firstCard = defaultFirstCard;
-    public secondCard = defaultSecondCard;
-    public listCard = defaultListCard;
     public tileCard = defaultTileCard;
+    public blogCard = defaultBlogCard;
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public goSomewhere() {
         alert('SOMEWHERE');

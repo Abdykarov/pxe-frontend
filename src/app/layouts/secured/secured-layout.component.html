@@ -39,6 +39,61 @@
                 </main>
             </div>
         </div>
-        <lnd-footer [isSimpleFooter]="settings.isSimpleFooter"></lnd-footer>
+        <lnd-footer
+            [isSimpleFooter]="settings.isSimpleFooter">
+            <ul class="footer-navigation__list">
+                <li class="footer-navigation__item">
+                    <a [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
+                       class="footer-navigation__link"
+                    >
+                        Obchodní podmínky parc4u
+                    </a>
+                </li>
+                <li class="footer-navigation__item">
+                    <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual]"
+                       [fragment]="commodityTypePower"
+                       class="footer-navigation__link"
+                    >
+                        Vzory smluv o dodávce
+                    </a>
+                </li>
+                <li class="footer-navigation__item">
+                    <a [routerLink]="['/', CONSTS.PATHS.FAQ]"
+                       class="footer-navigation__link"
+                    >
+                        Často kladené otázky
+                    </a>
+                </li>
+                <li class="footer-navigation__item">
+                    <a [routerLink]="['/', CONSTS.PATHS.COOKIES_POLICY]"
+                       class="footer-navigation__link"
+                    >
+                        Cookies policy
+                    </a>
+                </li>
+                <li class="footer-navigation__item">
+                    <a [routerLink]="['/', CONSTS.PATHS.BLOG, CONSTS.ALL_BLOG]"
+                       class="footer-navigation__link"
+                    >
+                        Blog
+                    </a>
+                </li>
+                <li class="footer-navigation__item">
+                    <a [routerLink]="['/', CONSTS.PATHS.SECURING_YOUR_DATA]"
+                       class="footer-navigation__link"
+                    >
+                        Ochrana osobních údajů
+                    </a>
+                </li>
+                <li class="footer-navigation__item">
+                    <a href="https://www.pxe.cz/"
+                       target="_blank"
+                       class="footer-navigation__link"
+                    >
+                        O PXE
+                    </a>
+                </li>
+            </ul>
+        </lnd-footer>
     </div>
 </div>

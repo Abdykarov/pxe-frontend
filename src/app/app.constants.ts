@@ -9,8 +9,42 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ALL_BLOG: 'vse',
+    ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_requests:',
+    APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    ASK_FOR_OFFER: {
+        ALLOWED_MINE_TYPE: [
+            'image/bmp',
+            'application/bmp',
+            'image/jpg',
+            'image/jpeg',
+            'application/pdf',
+            'image/png',
+            'application/png',
+            'image/tiff',
+            'application/wps-office.pdf',
+        ],
+        ERROR_CODES: {
+            FILE_TYPE: 'FILE_TYPE',
+            FILE_COUNT: 'FILE_COUNT',
+            FILE_SIZE: 'FILE_SIZE',
+        },
+        MAX_FILE_COUNT: 10,
+        MAX_FILE_SIZE: 10485760,
+        MANUALLY_ADD_EMAIL: 'user@email.com',
+    },
+    CMS: {
+        CLIENT_ID: 'pxe-parc4u:default',
+        CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
+        GRAND_TYPE: 'client_credentials',
+        REFRESH_TOKEN_URL: 'identity-server/connect/token',
+        REGEX_CONTAIN_CMS: 'cms-api',
+        REGEX_CONTAIN_CMS_DIRECT: 'content/pxe-parc4u/graphql',
+        SCOPE: 'squidex-api',
+    },
+    CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);
@@ -19,7 +53,6 @@ export const CONSTS = {
             return CryptoJS.lib.WordArray.random(128 / 8);
         },
     },
-    CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -44,64 +77,81 @@ export const CONSTS = {
         NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
     },
     INTERVAL_RXJS: 5000,
+    IS_LAST_UPDATED_OFFER: 'is-last-updated-offer',
     LOCAL_STORAGE: {
         PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
         SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
     },
     LOGIN_FORM_NAME: 'login',
     MAX_LENGTH_SUPPLIER_DESCRIPTION: 100,
+    MAX_LENGTH_BLOG_DESCRIPTION: 100,
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'moreTabs',
+        CONFIRM_INFO_DELETE_ASK_FOR_OFFER: 'confirmAskForOfferOffer',
+        CONFIRM_INFO_OFFER: 'confirmInfoOffer',
+        CONFIRM_INFO_SUPPLY_POINT_IMPORT_ADDED: 'confirmInfoSupplyPointImportAdded',
+        CONFIRM_DELETE_ASK_FOR_OFFER: 'confirmDeleteAskForOffer',
+        CONFIRM_DELETE_SUPPLY_POINT_IMPORT: 'confirmSupplyPointImport',
+        CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+        LP_VIDEO: 'lpVideo',
+        MORE_TABS: 'moreTabs',
     },
     OFFSET_ERRORS: {
         INVALID_INPUT: 40,
         ALERT_DANGER: 50,
     },
     PATHS: {
-        APPROVAL: 'approval',
-        CONTRACT : 'contract',
-        COOKIES_POLICY : 'cookies-policy',
-        CHANGE_PASSWORD: 'change-password',
-        DASHBOARD : 'dashboard',
-        DELETE_ACCOUNT: 'delete-account',
-        DELETED_ACCOUNT: 'deleted-account',
+        APPROVAL: 'schvaleni',
+        ASK_FOR_OFFER : 'nahrane-faktury',
+        ASK_FOR_OFFER_NEW: 'prijate',
+        ASK_FOR_OFFER_IN_PROGRESS: 'rozpracovane',
+        ASK_FOR_OFFER_PROCESSED: 'uzavrene',
+        BLOG: 'blog',
+        CREATE_USER: 'vytvoreni-odberatele',
+        CONTRACT : 'smlouva',
+        COOKIES_POLICY : 'zasady-pouzivani-cookies',
+        CHANGE_PASSWORD: 'zmena-hesla',
+        DASHBOARD : 'nastenka',
+        DELETE_ACCOUNT: 'smazani-uctu',
+        DELETED_ACCOUNT: 'ucet-smazan',
         EMPTY: '',
         IMPORT: 'import',
-        FAQ: 'faq',
-        FORGOTTEN_PASSWORD : 'forgotten-password',
-        GAS: 'gas',
-        LOGIN : 'login',
-        LOGOUT : 'logout',
-        NOT_FOUND: 'not-found',
-        OFFER_SELECTION : 'offer-selection',
-        PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
-        PAYMENT : 'payment',
-        POWER: 'power',
-        RECAPITULATION : 'recapitulation',
-        REQUEST : 'request',
-        REQUESTS : 'requests',
-        RESULT : 'result',
-        SECURED : 'secured',
-        SECURING_YOUR_DATA : 'securing-your-data',
-        SIGNBOARD: 'signboard',
-        SIGN_UP : 'sign-up',
-        SUPPLY_POINT : 'supply-point',
-        SUPPLY_POINT_SELECTION : 'supply-point-selection',
-        SUPPLY_POINTS : 'supply-points',
-        SUPPLY_OFFER: 'supply-offer',
-        SUPPLIER_CONCLUDED_CONTRACTS: 'concluded-contracts',
-        TERMS_OF_USE : 'terms-of-use',
-        UPLOAD: 'upload',
-        USER_PROFILE: 'user-profile',
-        SUPPLIER_PROFILE: 'supplier-profile',
+        FAQ: 'casto-kladene-otazky',
+        FORGOTTEN_PASSWORD : 'zapomenute-heslo',
+        GAS: 'plyn',
+        LOGIN : 'prihlaseni',
+        LOGOUT : 'odhlaseni',
+        NOT_FOUND: 'stranka-nenalezena',
+        O_AUTH: 'o-auth',
+        OFFER_SELECTION : 'vyber-nabidky',
+        PATTERNS_OF_CONTRACTS: 'vzory-smluv',
+        PAYMENT : 'platba',
+        PRICES: 'ceny',
+        POWER: 'elektrina',
+        RECAPITULATION : 'rekapitulace',
+        REQUEST : 'rozpracovana-smlouva',
+        REQUESTS : 'rozpracovane-smlouvy',
+        RESULT : 'vysledek',
+        SECURED : 'aplikace',
+        SECURING_YOUR_DATA : 'ochrana-osobnich-udaju',
+        SIGNBOARD: 'informace',
+        SIGN_UP : 'registrace',
+        SUPPLY_POINT : 'odberne-misto',
+        SUPPLY_POINT_SELECTION : 'vyber-odberneho-mista',
+        SUPPLY_POINTS : 'uzavrene-smlouvy',
+        SUPPLY_OFFER: 'sprava-nabidek',
+        SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
+        TERMS_OF_USE : 'podminky-uzivani',
+        UPLOAD: 'nahrani',
+        USER_PROFILE: 'uzivatelsky-profil',
+        SUPPLIER_PROFILE: 'dodavatelsky-profil',
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
@@ -117,12 +167,13 @@ export const CONSTS = {
         REASON_FOR_LOGOUT_USER: 'reason_for_logout_user',
     },
     REASON_FOR_LOGOUT_USER: {
-        BY_SELF: 'Byl jste úspěšně odhlášen',
-        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+        BY_SELF: 'Byl jste úspěšně odhlášen.',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity.',
     },
     TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
+        MAX_ANNUAL_CONSUMPTION_IN_MWH: 63,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT: 7,
         MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
@@ -161,22 +212,25 @@ export const CONSTS = {
     TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS: 30,
     TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
-        COOKIES_POLICY: 'Cookies policy | PARC4U',
-        DEFAULT: 'PARC4U',
-        LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
-        LOGIN: 'Přihlášení | PARC4U',
-        FAQ: 'Často kladené otázky | PARC4U',
-        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
-        TERMS_OF_USE: 'Podmínky užívání | PARC4U',
-        SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
-        SIGN_UP: 'Registrace | PARC4U',
+        DEFAULT: 'parc4u',
     },
+    LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
+    SM_RESOLUTION: 576,
 };
 
 export const ROUTES = {
     ROUTER_ROOT: '/',
+    ROUTER_ASK_FOR_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}`,
+    ROUTER_ASK_FOR_OFFER_NEW: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_NEW}`,
+    ROUTER_ASK_FOR_OFFER_IN_PROGRESS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_IN_PROGRESS}`,
+    ROUTER_ASK_FOR_OFFER_PROCESSED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_PROCESSED}`,
+    ROUTER_BLOG: `/${CONSTS.PATHS.BLOG}`,
+    ROUTER_CREATE_USER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}`,
+    ROUTER_CREATE_USER_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.SUPPLY_POINT}`,
+    ROUTER_CREATE_USER_RECAPITULATION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.RECAPITULATION}`,
+    ROUTER_CREATE_USER_PRICES: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.PRICES}`,
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
     ROUTER_IMPORT_UPLOAD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.UPLOAD}`,
@@ -208,73 +262,6 @@ export const ROUTES = {
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
     ROUTER_SUPPLIER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_PROFILE}`,
 
-};
-
-export const SEO = {
-    META_KEYWORDS: {
-        COOKIES_POLICY: [
-            'funkční cookies',
-            'trvalé cookies',
-            'informace',
-        ],
-        LANDING_PAGE: [
-            'elektřina',
-            'plyn',
-            'dodavatel',
-            'dodavateli',
-            'nabídka',
-            'komoditní burza',
-            'odběrné místo',
-            'změna dodavatele',
-            'cena plynu',
-            'cena elektřiny',
-            'cena za kwh',
-            'nejlevnějši elektřina',
-            'nejlevnějši plyn',
-            'distribuce plynu',
-            'distribuce elektřiny',
-            'parc4u',
-            'pxe',
-        ],
-        FAQ: [
-            'nápověda',
-            'obecné',
-            'často kladené otázky',
-        ],
-        LOGIN: [
-            'přihlášení',
-            'kliknutí',
-        ],
-        PATTERNS_OF_CONTRACTS: [
-            'komodita',
-            'nabídka',
-        ],
-        TERMS_OF_USE: [
-            'obchodní podmínky',
-            'PARC4U',
-        ],
-        SECURING_YOUR_DATA: [
-            'chráníme',
-            'zpracování údajů',
-        ],
-        SIGN_UP: [
-            'registrace',
-            'kliknutí',
-            'obchodními podmínkami',
-        ],
-    },
-    META_DESCRIPTION: {
-        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
-        LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
-            ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
-        FAQ: 'Odpovědi na často kladené otázky služby PARC4U.',
-        LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
-        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
-        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
-        SECURING_YOUR_DATA: 'Jak v PARC4U pracujeme s osobními údaji a jak je chráníme.',
-        SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
-            ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
-    },
 };
 
 export enum INavigationItemType {
@@ -363,20 +350,25 @@ export enum CommodityTypesLowerCase {
     GAS = 'gas',
 }
 
+export enum CommodityTypesCsLowerCase {
+    POWER = 'elektrina',
+    GAS = 'plyn',
+}
+
+export const urlCommodityToCommodityType = {
+    [CONSTS.PATHS.POWER]: CommodityTypesLowerCase.POWER,
+    [CONSTS.PATHS.GAS]: CommodityTypesLowerCase.GAS,
+};
+
 export const commodityTypes = {
     [CommodityTypesLowerCase.POWER]: CommodityType.POWER,
     [CommodityTypesLowerCase.GAS]: CommodityType.GAS,
 };
 
 export enum SubjectTypeLowerCase {
-    INDIVIDUAL = 'individual',
-    BUSINESSMAN = 'business',
+    INDIVIDUAL = 'domacnost',
+    BUSINESSMAN = 'firma',
 }
-
-export const SubjectTypesTypes = {
-    [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-    [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-};
 
 export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     {
@@ -583,3 +575,37 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
+
+// czech is required by marketing agenture
+export const GTM_CONSTS = {
+    ACTIONS: {
+        SIGN: 'sign the offer',
+        SIGNED: 'offer signed',
+        CONTINUE: 'continue',
+        SELECT_OFFER: 'select offer',
+        SENT: 'sent',
+        VIEW: 'view',
+        START: 'start',
+        SAVE: 'save',
+        SHOW_DETAIL: 'show detail',
+    },
+    BRAND: 'pxe',
+    CATEGORIES: {
+        REGISTRATION: 'sign up',
+        FORM: 'form',
+    },
+    EVENTS: {
+        EVENT_TRACKING: 'eventTracking',
+        CHECKOUT: 'checkout',
+        PURCHASE: 'purchase',
+    },
+    LABELS: {
+        REGISTRATION: 'registration',
+        STEP_ONE: 'step 1',
+        STEP_TWO: 'step 2',
+        STEP_THREE: 'step 3',
+        STEP_FOUR: 'step 4',
+        STEP_FIVE: 'step 5',
+        STEP_SIX: 'step 6',
+    },
+};

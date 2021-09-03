@@ -5,7 +5,6 @@ import {
     OnInit,
     Output,
     SimpleChanges,
-    Directive,
 } from '@angular/core';
 import {
     FormArray,
@@ -202,5 +201,20 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public fieldWrapperBlur = () => {
         this.fieldWrapperFocused$.next(null);
+    }
+
+    public submitCustomActionValidFormForm = (data = null) => {
+        this.resetCustomFieldError();
+        this.triggerValidation();
+        if (this.form.valid) {
+            this.customAction.emit({
+                value: this.form.value,
+                data,
+            });
+        } else {
+            setTimeout(() => {
+                scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+            });
+        }
     }
 }

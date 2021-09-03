@@ -29,5 +29,8 @@ export const paymentVerificationPageRoutes: Routes = [
     {
         path: 'payment-verification',
         component: PaymentVerificationPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

@@ -3,7 +3,7 @@ import {
     Input,
 } from '@angular/core';
 
-import { INews } from 'src/common/ui/news/model/news.model';
+import { INew } from 'src/common/ui/news/model/news.model';
 
 @Component({
     selector: 'pxe-news',
@@ -12,5 +12,5 @@ import { INews } from 'src/common/ui/news/model/news.model';
 })
 export class NewsComponent {
     @Input()
-    public news: INews;
+    public news: INew[];
 }

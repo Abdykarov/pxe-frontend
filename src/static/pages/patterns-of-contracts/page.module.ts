@@ -3,13 +3,16 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 // own classes
+import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { PatternsOfContractsPageComponent } from './page';
+import { ButtonModule } from 'src/common/ui/button/button.module';
 import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { PatternsOfContractsPageComponent } from './page';
+import { PdfViewerModule } from 'src/common/ui/pdf-viewer/pdf-viewer.module';
+import { TableModule } from 'src/common/ui/table/table.module';
 
 @NgModule({
     declarations: [
@@ -19,9 +22,12 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
         PatternsOfContractsPageComponent,
     ],
     imports: [
-        CommonModule,
+        BannerUIModule,
         BreadcrumbModule,
-        PdfJsViewerModule,
+        ButtonModule,
+        CommonModule,
+        PdfViewerModule,
+        TableModule,
     ],
 })
 export class PatternsOfContractsPageModule {}

@@ -5,6 +5,7 @@
     [ngClass]="customClass">
     <div
         class="input-group"
+        [class.invalid-input]="(!!error && !!touched) && !inputFocused"
         [class.input-group--append]="!!appendButtonIcon"
         [class.input-group--append-button-icon]="!!appendButtonIcon">
         <label
@@ -45,9 +46,7 @@
                     let-index="index"
                     let-search="searchTerm">
                 <ng-container *ngIf="!templateItem">
-                    <div [lndOptionHighlight]="search">
-                        {{ item.label }}
-                    </div>
+                    <div [innerHTML]="item.label" [lndOptionHighlight]="search"></div>
                 </ng-container>
                 <ng-container *ngIf="templateItem">
                     <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>

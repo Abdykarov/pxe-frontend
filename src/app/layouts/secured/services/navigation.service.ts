@@ -11,12 +11,22 @@ import {
 } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import {
+    IMenuByUserTypeMapping,
+    INavigationConfig,
+    INavigationItem,
+} from 'src/common/ui/navigation/models/navigation.model';
+import {
+    ILoginProvider,
+    IUserTypes,
+} from 'src/app/services/model/auth.model';
 import {
     navigationMenuUsers,
     navigationMenuUserActions,
     navigationMenuSuppliers,
     navigationMenuSuppliersActions,
+    navigationMenuAdmins,
+    navigationMenuAdminsActions,
 } from './navigation.config';
 import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 
@@ -25,10 +35,24 @@ import { NavigationService as NavigationApolloService } from 'src/common/graphql
 })
 export class NavigationService {
 
+    public readonly MENU_BY_USER_TYPE_MAPPING: IMenuByUserTypeMapping = {
+        [IUserTypes.CONSUMER]: {
+            navigationMenu: navigationMenuUsers,
+            navigationMenuActions: navigationMenuUserActions,
+        },
+        [IUserTypes.SUPPLIER]: {
+            navigationMenu: navigationMenuSuppliers,
+            navigationMenuActions: navigationMenuSuppliersActions,
+        },
+        [IUserTypes.CONTRACT_IMPORTER]: {
+            navigationMenu: navigationMenuAdmins,
+            navigationMenuActions: navigationMenuAdminsActions,
+        },
+    };
+
     get = (): Observable<INavigationConfig> => {
-        const currentUser = this.authService.currentUserValue;
-        const navigationMenu = currentUser && currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers;
-        const navigationMenuActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
+        const currentUserType = this.authService.currentUserValue?.type;
+        const { navigationMenu, navigationMenuActions} = this.MENU_BY_USER_TYPE_MAPPING[currentUserType];
 
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
             R.concat(navigationMenu, navigationMenuActions),
@@ -53,4 +77,21 @@ export class NavigationService {
     public saveConfigToStore = (config: INavigationConfig) => {
         this.navigationApolloService.saveConfig(config).subscribe();
     }
+
+    public filterNavigationByProvider = (
+        navigationItems: INavigationItem[],
+        userLoginProvider: ILoginProvider,
+    ) => (
+        R.reject(
+            (navigationItem: INavigationItem) => {
+                if (!navigationItem.allowedLoginProviders) {
+                    return false;
+                }
+
+                return !R.find(
+                    R.equals(userLoginProvider),
+                )(navigationItem.allowedLoginProviders);
+            },
+        )(navigationItems)
+    )
 }

@@ -10,13 +10,16 @@ import {
     DOCUMENT,
     isPlatformBrowser,
 } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
 import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
@@ -25,14 +28,16 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'lnd-root',
-    template: '<router-outlet></router-outlet>',
+    templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent extends AbstractComponent implements OnInit {
     constructor(
+        private authService: AuthService,
         private elementRef: ElementRef,
         private gtmService: GTMService,
+        private metaService: Meta,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
@@ -40,6 +45,7 @@ export class AppComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+
         if (isPlatformBrowser(this.platformId)) {
             this.sAnalyticsService.init();
             this.sAnalyticsService.installSForm();

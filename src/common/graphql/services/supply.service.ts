@@ -26,6 +26,7 @@ import {
     createPowerSupplyPointMutation,
     updatePowerSupplyPointMutation,
     updatePowerSupplyPointWithContractMutation,
+    deleteUnfinishedSupplyPointMutation,
 } from 'src/common/graphql/mutation/supply';
 
 @Injectable({
@@ -161,13 +162,18 @@ export class SupplyService {
         })
         .valueChanges
 
-    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], identificationNumber: string = null) => this.apollo
+    public findSupplyPointsByContractStatus = (
+        contractStatus: ContractStatus[],
+        identificationNumber: string = null,
+        skipOfferValidity = false,
+    ) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'no-cache',
             query: findSupplyPointsByContractStatusQuery,
             variables: {
                 identificationNumber,
                 contractStatus,
+                skipOfferValidity,
             },
         })
         .valueChanges
@@ -188,4 +194,12 @@ export class SupplyService {
             },
         })
         .valueChanges
+
+    public deleteUnfinishedSupplyPoint = (supplyPointId: string) => this.apollo
+        .mutate<any>({
+            mutation: deleteUnfinishedSupplyPointMutation,
+            variables: {
+                supplyPointId,
+            },
+        })
 }

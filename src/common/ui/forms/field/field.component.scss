@@ -18,6 +18,13 @@
 .form-container {
 	max-width: $input-width;
 	margin: 0 auto;
+
+	&--large {
+		&,
+		.form-control-case {
+			max-width: $input-width-large;
+		}
+	}
 }
 
 .form-control-info-wrapper {
@@ -43,6 +50,33 @@
 
 .form-group {
 	position: relative;
+
+	&--public {
+		.form-control-case {
+			padding-top: ( $spacer * 1.5 );
+		}
+
+		.control-label,
+		.form-control {
+			font-size: $font-size-base-public;
+		}
+
+
+		.form-control {
+			height: $input-height-public;
+			padding: $input-padding-y-public $input-padding-x-public;
+		}
+
+		.input-subtext {
+			font-size: $font-size-base;
+		}
+	}
+
+	&--on-dark-bg {
+		.control-label {
+			color: $white;
+		}
+	}
 
 	&--with-currency {
 		.input-group-append {
@@ -104,6 +138,10 @@
 			z-index: $zindex-custom-control;
 		}
 	}
+
+	.is-disabled {
+		opacity: .3;
+	}
 }
 
 .form-control {
@@ -160,6 +198,10 @@
 		&:focus {
 			background-color: $white;
 		}
+	}
+
+	&--with-placeholder {
+		@include placeholder(rgba($input-color, .5));
 	}
 }
 
@@ -503,7 +545,7 @@ textarea.form-control--not-empty {
 		}
 	}
 
-	&.is-valid + .custom-control-label {
+	&.is-valid:not([disabled]) + .custom-control-label {
 		color: $font-text;
 
 		&:hover {

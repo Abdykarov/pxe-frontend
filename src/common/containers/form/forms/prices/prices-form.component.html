@@ -1,0 +1,101 @@
+<div class="col-12">
+    <lnd-alert
+        *ngIf="globalError.length"
+        type="danger">
+        <ng-container *ngFor="let error of globalError">
+            {{ error }}<br>
+        </ng-container>
+    </lnd-alert>
+</div>
+
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off"
+    (keydown)="resetCustomFieldError()"
+    (keydown.enter)="submitForm($event);false">
+    <lnd-form-field
+        *ngIf="form.controls.importPricePerKwPowerNT.status !== 'DISABLED'"
+        [error]="formError.importPricePerKwPowerNT || form.controls.importPricePerKwPowerNT.errors"
+        [formControl]="form.controls.importPricePerKwPowerNT"
+        [id]="'importPricePerKwPowerNT'"
+        label="Cena za nízký tarif"
+        appendText="Kč/MWh (bez DPH)"
+        [success]="form.controls.importPricePerKwPowerNT.valid && (form.controls.importPricePerKwPowerNT.touched || formError.importPricePerKwPowerNT)"
+        [touched]="form.controls.importPricePerKwPowerNT.touched || formError.importPricePerKwPowerNT"
+        [validationMessages]="formFields.validationMessages.importPricePerKwPowerNT"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.importPricePerKwPowerVT.status !== 'DISABLED'"
+        [error]="formError.importPricePerKwPowerVT || form.controls.importPricePerKwPowerVT.errors"
+        [formControl]="form.controls.importPricePerKwPowerVT"
+        [id]="'importPricePerKwPowerVT'"
+        label="Cena za vysoký tarif"
+        appendText="Kč/MWh (bez DPH)"
+        [success]="form.controls.importPricePerKwPowerVT.valid && (form.controls.importPricePerKwPowerVT.touched || formError.importPricePerKwPowerVT)"
+        [touched]="form.controls.importPricePerKwPowerVT.touched || formError.importPricePerKwPowerVT"
+        [validationMessages]="formFields.validationMessages.importPricePerKwPowerVT"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.importPricePerKwGas.status !== 'DISABLED'"
+        [error]="formError.importPricePerKwGas || form.controls.importPricePerKwGas.errors"
+        [formControl]="form.controls.importPricePerKwGas"
+        [id]="'importPricePerKwGas'"
+        label="Cena"
+        appendText="Kč/MWh (bez DPH)"
+        [success]="form.controls.importPricePerKwGas.valid && (form.controls.importPricePerKwGas.touched || formError.importPricePerKwGas)"
+        [touched]="form.controls.importPricePerKwGas.touched || formError.importPricePerKwGas"
+        [validationMessages]="formFields.validationMessages.importPricePerKwGas"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.importPriceTotalPerYear.status !== 'DISABLED'"
+        [error]="formError.importPriceTotalPerYear || form.controls.importPriceTotalPerYear.errors"
+        [formControl]="form.controls.importPriceTotalPerYear"
+        [id]="'importPriceTotalPerYear'"
+        appendText="Kč/MWh (bez DPH)"
+        label="Cena celkem za rok"
+        [success]="form.controls.importPriceTotalPerYear.valid && (form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear)"
+        [touched]="form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear"
+        [validationMessages]="formFields.validationMessages.importPriceTotalPerYear"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.importPermanentMonthlyPay || form.controls.importPermanentMonthlyPay.errors"
+        [formControl]="form.controls.importPermanentMonthlyPay"
+        [id]="'importPermanentMonthlyPay'"
+        appendText="Kč/MWh (bez DPH)"
+        label="Stálá měsíční platba"
+        [success]="form.controls.importPermanentMonthlyPay.valid && (form.controls.importPermanentMonthlyPay.touched || formError.importPermanentMonthlyPay)"
+        [touched]="form.controls.importPermanentMonthlyPay.touched || formError.importPermanentMonthlyPay"
+        [validationMessages]="formFields.validationMessages.importPermanentMonthlyPay"
+    ></lnd-form-field>
+    <div class="row">
+        <div class="col-12 text-center">
+            <lnd-button
+                type="primary"
+                [submit]="true"
+                (action)="submitForm($event)"
+                [isDisabled]="!!formLoading"
+                label="Uložit a odeslat nabídky e-mailem">
+            </lnd-button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <lnd-button
+                type="secondary"
+                [submit]="true"
+                (action)="submitCustomActionValidFormForm(false)"
+                [isDisabled]="!!formLoading"
+                label="Uložit a přidat odběrné místo">
+            </lnd-button>
+            <lnd-button
+                class="mt-3"
+                type="secondary"
+                [submit]="true"
+                (action)="submitCustomActionValidFormForm(true)"
+                [isDisabled]="!!formLoading"
+                label="Uložit jako rozpracované">
+            </lnd-button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,121 @@
+<ng-template #fileUploaderTemplate>
+    <div class="mb-1 text-body">
+        <p>
+            Nechcete nic vyplňovat?
+        </p>
+        <p>
+            Přetáhněte sem nebo nahrejte vaši poslední fakturu za elektřinu nebo plyn a o zbytek se postaráme my.
+        </p>
+        <p class="mb-1">
+            Do tří pracovních dnů můžete očekávat:
+        </p>
+        <ul class="check-list check-list--centered check-list--medium-offset">
+            <li>vytvoříme za vás odběrné místo,</li>
+            <li>nabídky pošleme na váš e-mail,</li>
+            <li class="mb-3">odběrné místo budete mít<br> v sekci Rozpracované.</li>
+        </ul>
+        <label [for]="idFileUploader" class="cursor-pointer drop-zone__control btn btn-primary mt-2 mb-4">
+            Nahrát fakturu
+        </label>
+    </div>
+    <p class="mb-0 text-body small">
+        Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB.
+    </p>
+</ng-template>
+<pxe-layout-container pageTitle="Nové odběrné místo">
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 text-center mb-4">
+            <img
+                src="/assets/images/illustrations/sign.svg"
+                class="mb-2"
+                alt="sign">
+            <h2 *ngIf="showWelcome"
+                class="mb-0">
+                Vítejte v aplikaci parc4u
+            </h2>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 text-center">
+            <p>V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli nabídnout ty nejlepší nabídky. Pro vyplnění všech potřebných informací vám doporučujeme připravit si následující dokumenty.</p>
+            <ul class="check-list ml-xl-5 text-left">
+                <li>Fakturu se současným dodavatelem (jedno jakého data).</li>
+                <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
+                <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
+            </ul>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 mb-5 text-center">
+            <lnd-button
+                type="primary"
+                (action)="routerToNextStep($event);"
+                label="Vyplnit">
+            </lnd-button>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1 bg--gradient-violet- py-5 mb-5">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <pxe-ask-for-offer-container
+                        [email]="authService.currentUserValue.email"
+                        [idFileUploader]="idFileUploader"
+                        [fileUploaderTemplate]="fileUploaderTemplate"
+                        fileUploaderWrapperCustomClass="drop-zone--zindex pb-3 text-white"
+                        [isPublic]="false"
+                    ></pxe-ask-for-offer-container>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 text-center">
+            <div class="video">
+                <div class="video__holder">
+                    <video
+                        #video
+                        controls
+                        disablePictureInPicture
+                        [class.cursor-pointer]="isVideoPlaying"
+                        (click)="isVideoPlaying && pause($event)"
+                        class="w-100"
+                        poster="/assets/images/landing-page/picture-fallback.jpg"
+                        [muted]="false"
+                        (pause)="cd.detectChanges()"
+                        (play)="showTextUnderVideo = false;cd.detectChanges()"
+                        (ended)="videoEnded($event)"
+                        preload="none">
+                        <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
+                        Váš prohlížeč nepodporuje zobrazení videa
+                    </video>
+                    <div class="video__control d-md-none" lndDisplayNoneOnFirefox>
+                        <lnd-button
+                            *ngIf="!isVideoPlaying"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play"
+                            (action)="play()"
+                        >
+                        </lnd-button>
+                    </div>
+                </div>
+                <div lndDisplayNoneOnFirefox class="video__text">
+                    <div class="video__control d-none d-md-block">
+                        <lnd-button
+                            *ngIf="!isVideoPlaying && showTextUnderVideo"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play"
+                            (action)="play()"
+                        >
+                        </lnd-button>
+                    </div>
+<!--                    <p *ngIf="showTextUnderVideo">-->
+<!--                        Je-li vše jasné pokračujte tlačítkem "Vyplnit".-->
+<!--                    </p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</pxe-layout-container>
+

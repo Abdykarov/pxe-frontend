@@ -1,4 +1,4 @@
-FROM docker.lnd.bz/nodejs:9
+FROM docker.lnd.bz/nodejs:10
 
 LABEL maintainer="devops@lundegaard.eu"
 LABEL author="ondrej.kopal@lundegaard.eu"

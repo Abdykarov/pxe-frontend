@@ -1,5 +1,5 @@
 /*
- -  Form fields
+ -  Carousel
  -
  -
  */
@@ -9,3 +9,14 @@
 
 // Bootstrap alert and close import
 @import '~bootstrap/scss/carousel';
+
+.carousel {
+	&__left-right--disabled {
+		.left {
+			display: none;
+		}
+		.right {
+			display: none;
+		}
+	}
+}

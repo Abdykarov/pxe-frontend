@@ -1,0 +1,78 @@
+<pxe-layout-container pageTitle="Nastavení uživatelského účtu">
+    <div class="row">
+        <div class="col-12">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <pxe-user-form
+                    [oldPhone]="oldPhone"
+                    [smsSent]="smsSent"
+                    [formFields]="formFields"
+                    [formLoading]="formLoading"
+                    [formSent]="formSent"
+                    [formValues]="formValues"
+                    [globalError]="globalError"
+                    [fieldError]="fieldError"
+                    (submitAction)="submitForm($event)"
+                    (customAction)="sendChangePhoneNumberSmsMutation($event)">
+                </pxe-user-form>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 col-xl-6 offset-xl-3 text-center">
+            <h1>
+                Nastavení notifikací
+            </h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <pxe-user-notification-form
+                    [isNotificationsAllowed]="isNotificationsAllowed"
+                    [formFields]="userNotificationFormFields"
+                    [formLoading]="formLoading"
+                    [formSent]="formNotificationSent"
+                    [formValues]="formValues"
+                    [globalError]="globalError"
+                    [fieldError]="fieldError"
+                    (submitAction)="toggleWatchDog($event)">
+                </pxe-user-notification-form>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 col-xl-6 offset-xl-3 text-center">
+            <h1>Zrušení uživatelského účtu</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        Chci zrušit svůj uživatelský účet a přestat využívat aplikaci parc4u.
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <lnd-button
+                        type="primary"
+                        (action)="redirectToDeleteProfile()"
+                        [isDisabled]="formLoading"
+                        label="Zrušit účet">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</pxe-layout-container>

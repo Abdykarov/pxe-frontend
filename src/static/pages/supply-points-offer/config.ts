@@ -6,7 +6,7 @@ export const offerConfig1: IOffer = {
     supplier: {
         id: '',
         name: 'PRE',
-        vatNumber: '',
+        vatNumber: '27386732',
         logoPath: '',
         sampleDocuments: [],
     },

@@ -1,28 +1,32 @@
-<carousel
-    #carousel
-    (mouseenter)="setPause()"
-    (mouseup)="setPause()"
-    (activeSlideChange)="activeSlideChange.emit($event)"
-    [noPause]="false"
-    [interval]="interval">
-	<slide *ngFor="let item of carouselItems">
-		<div class="row no-gutters align-items-center">
-			<div class="col-12 col-md-6 offset-md-1 order-md-2 overflow-hidden">
-				<img
-					class="carousel-item-img"
-					[src]="item.src"
-					[alt]="item.alt">
-			</div>
-			<div class="col-12 col-md-4 offset-md-1 order-md-1">
-				<div class="carousel-item-content">
-					<h3 class="h3--public">{{item.title}}</h3>
-					<p 
-						*ngIf="item && item.label"
-						class="mb-0">
-						{{item.label}}
-					</p>
-				</div>
-			</div>
-		</div>
-	</slide>
-</carousel>
+<div #parent>
+    <carousel
+        #carousel
+        [class.carousel__left-right--disabled]="!showLeftAndRightIndicators"
+        (mouseenter)="setPause()"
+        (mouseup)="setPause()"
+        [itemsPerSlide]="itemsPerSlide"
+        [noWrap]="noWrap"
+        (activeSlideChange)="activeSlideChangeAction.emit($event)"
+        (slideRangeChange)="activeSlideRange = $event"
+        [noPause]="false"
+        [(activeSlide)]="activeSlide"
+        [singleSlideOffset]="singleSlideOffset"
+        [showIndicators]="showIndicators"
+        [interval]="interval">
+        <ng-container *ngIf="customBeforeAppendTemplate">
+            <ng-container *ngTemplateOutlet="customBeforeAppendTemplate; context: {activeSlide: activeSlide, setActiveSlide: setActiveSlide}"></ng-container>
+        </ng-container>
+        <div class="row no-gutters justify-content-center w-100 justify-content-md-start">
+            <div class="d-flex" [ngClass]="customSlideWrapper">
+                <div class="carousel-items__wrapper">
+                    <slide *ngFor="let item of carouselItems; let i = index" [attr.data-index]="i">
+                        <ng-container *ngTemplateOutlet="slideTemplate; context: {$implicit: item, index: i,activeSlide: activeSlide, activeSlideRange: activeSlideRange}"></ng-container>
+                    </slide>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="customAfterAppendTemplate">
+            <ng-container *ngTemplateOutlet="customAfterAppendTemplate; context: {activeSlide: activeSlide, setActiveSlide: setActiveSlide}"></ng-container>
+        </ng-container>
+    </carousel>
+</div>

@@ -23,5 +23,8 @@ export const listOfNotificationsPageRoutes: Routes = [
     {
         path: 'list-of-notifications',
         component: ListOfNotificationsComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

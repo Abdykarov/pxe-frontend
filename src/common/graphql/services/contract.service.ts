@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
-import {
-    AllowedOperations,
-    ISupplyPoint,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
+import { AllowedOperations } from 'src/common/graphql/models/supply.model';
 import {
     concludeContractMutation,
     confirmFirstContractViewMutation,
-    deleteContractMutation,
     deleteSelectedOfferFromContractMutation,
     deleteSignedContractMutation,
     saveContractMutation,
@@ -29,8 +23,6 @@ import {
     getContractTermsQuery,
     getPaymentInfoQuery,
 } from 'src/common/graphql/queries/contract';
-import { IOffer } from 'src/common/graphql/models/offer.model';
-import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 
 @Injectable({
@@ -99,14 +91,6 @@ export class ContractService {
     public updateContract = (contractId: number) => this.apollo
         .mutate<any>({
             mutation: updateContractMutation,
-            variables: {
-                contractId,
-            },
-        })
-
-    public deleteContract = (contractId: string) => this.apollo
-        .mutate<any>({
-            mutation: deleteContractMutation,
             variables: {
                 contractId,
             },

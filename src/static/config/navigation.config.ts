@@ -31,10 +31,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Buttons',
                     'url': '/basic/buttons',
                 },
-                // {
-                //     'label': 'Cards',
-                //     'url': '/card',
-                // },
+                {
+                    'label': 'Card',
+                    'url': '/basic/card',
+                },
                 {
                     'label': 'Colors',
                     'url': '/basic/colors',
@@ -54,6 +54,14 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Indicators',
                     'url': '/basic/indicators',
+                },
+                {
+                    'label': 'Loader',
+                    'url': '/basic/loader',
+                },
+                {
+                    'label': 'Micro table',
+                    'url': '/basic/micro-table',
                 },
                 {
                     'label': 'Pagination',
@@ -95,8 +103,20 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-middle',
             'children': [
                 {
+                    'label': 'Ask for offer',
+                    'url': '/basic/ask-for-offer-file-uploader',
+                },
+                {
                     'label': 'Breadcrumb',
                     'url': '/basic/breadcrumb',
+                },
+                {
+                    'label': 'Carousel',
+                    'url': '/full/carousel',
+                },
+                {
+                    'label': 'Graphs',
+                    'url': '/basic/graphs',
                 },
                 {
                     'label': 'Info banner',

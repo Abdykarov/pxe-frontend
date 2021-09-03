@@ -1,21 +1,13 @@
 <div class="row mb-4">
     <div class="col-12 col-md-6 offset-md-3 text-center">
         <h1>
-            Odběrná místa
+            Detail smlouvy
         </h1>
     </div>
 </div>
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
-        <lnd-banner-ui
-            [data]="bannerObj"
-            buttonLabel="Najít dodavatele"
-        ></lnd-banner-ui>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-xl-10 offset-xl-1">
-        <div class="page-box">
+        <div class="page-box mb-3">
             <div class="row">
                 <div class="col-12 col-md-6 offset-md-3">
                     <lnd-alert type="info"
@@ -24,144 +16,178 @@
                     </lnd-alert>
                 </div>
             </div>
-            <h2 class="h1 mb-3 text-center">Byt – Praha</h2>
-            <div class="text-with-icon justify-content-center">
-                <span class="icon icon--flash text-with-icon__icon"></span>
-                <span class="text-with-icon__text">Odběr elektřiny</span>
-            </div>
-            <div class="green-energy justify-content-center mb-5">
-                <span class="icon icon--leaf green-energy__icon"></span>
-                <span class="green-energy__text">Zelená energie</span>
-            </div>
             <div class="form-container">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <img alt="Identifikace a spotřeba" class="w-25 mb-3" src="/assets/images/illustrations/house-point.svg" title="">
+                        <h2 class="page-box__title mb-3">
+                            Identifikace a&nbsp;spotřeba
+                        </h2>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Odběr</p>
+                        <span class="perex">Elektřina</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1">EAN</p>
+                        <span class="perex">451982465165</span>
+                    </div>
+                </div>
                 <form>
                     <lnd-form-field
                         id="name"
                         label="Název"
-                        subtext="Pomocný text"
+                        subtext="Cokoliv, podle čeho chcete místo identifikovat"
                         value="Byt – Praha">
                     </lnd-form-field>
                     <lnd-form-field
                         id="annual-electricity-consumption"
                         label="Roční spotřeba elektřiny"
                         appendText="MWh"
-                        value="1,125">
+                        value="1,125">F
                     </lnd-form-field>
                 </form>
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>EAN</small>
-                        </div>
-                        <span class="perex">451982465165</span>
-                    </div>
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Typ odběru</small>
-                        </div>
-                        <span class="perex">Domácnost</span>
-                    </div>
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Dodavatel</small>
-                        </div>
-                        <span class="perex">PRE</span>
-                    </div>
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Území</small>
-                        </div>
-                        <span class="perex">Praha</span>
-                    </div>
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Distribuční sazba</small>
-                        </div>
-                        <span class="perex">D45d</span>
-                    </div>
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Jistič – fáze</small>
-                        </div>
-                        <span class="perex">3×</span>
-                    </div>
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Jistič – velikost</small>
-                        </div>
-                        <span class="perex">10 A</span>
-                    </div>
-                    <div class="col-12">
-                        <div class="mb-1">
-                            <small>Dodávka do</small>
-                        </div>
-                        <span class="perex">31. 12. 2019</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row no-gutters align-items-end mb-5">
-                    <div class="col-12 col-md-6">
-                        <small>Zrušení automatické prodloužení smlouvy</small>
-                    </div>
-                    <div class="col-12 col-md-6 pl-3 text-right">
-                        <lnd-button
-                            label="Zrušit"
-                            type="link-danger"
-                            size="sm">
-                        </lnd-button>
-                    </div>
-                </div>
-                <div class="row no-gutters align-items-end mb-5">
-                    <div class="col-12 col-md-6">
-                        <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
-                    </div>
-                    <div class="col-12 col-md-6 pl-3 text-right">
-                        <lnd-button
-                            label="Odstoupit"
-                            type="link-danger"
-                            size="sm">
-                        </lnd-button>
-                    </div>
-                </div>
-                <div class="row no-gutters align-items-end mb-5">
-                    <div class="col-12 col-md-6">
-                        <small>Vypovědět smlouvu</small>
-                    </div>
-                    <div class="col-12 col-md-6 pl-3 text-right">
-                        <lnd-button
-                            label="Vypovědět"
-                            type="link-danger"
-                            size="sm">
-                        </lnd-button>
-                    </div>
-                </div>
-                <!--<div class="row no-gutters align-items-end mb-5">-->
-                    <!--<div class="col-12 col-md-6">-->
-                        <!--<small>Převést na jiné odběrné místo</small>-->
-                    <!--</div>-->
-                    <!--<div class="col-12 col-md-6 pl-3 text-right">-->
-                        <!--<lnd-button-->
-                            <!--label="Převést"-->
-                            <!--type="link-danger"-->
-                            <!--size="sm">-->
-                        <!--</lnd-button>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <div class="row text-center">
+                <div class="row no-gutters text-center">
                     <div class="col-12 mb-2">
                         <lnd-button
                             label="Uložit"
                             type="primary">
                         </lnd-button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box mb-3">
+            <div class="form-container">
+                <div class="row no-gutters">
                     <div class="col-12">
-                        <lnd-button
-                            label="Storno"
-                            type="link">
-                        </lnd-button>
+                        <img alt="Identifikace a spotřeba" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
+                        <h2 class="page-box__title mb-3">
+                            Parametry odběrného místa
+                        </h2>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Typ odběru</p>
+                        <span class="perex">Domácnost</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Dodavatel</p>
+                        <span class="perex">PRE</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Území</p>
+                        <span class="perex">Praha</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Distribuční sazba</p>
+                        <span class="perex">D45d</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Jistič – fáze</p>
+                        <span class="perex">3×</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Jistič – velikost</p>
+                        <span class="perex">10 A</span>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+            <div class="form-container">
+                <div class="row no-gutters">
+                    <div class="col-12 mb-5">
+                        <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-accepted.svg" title="">
+                        <h2 class="page-box__title mb-1">
+                            Současná smlouva
+                        </h2>
+                        <a href="#">Stáhnout</a> (PDF)
+                        <div class="loader">
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                            <span class="loader__circle-item"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-1 text-uppercase">Dodávka do</p>
+                        <p class="perex mb-1">31. 12. 2019</p>
+                        <p class="mb-3 small">Smlouva na dobu určitou s automatickou  prolongací</p>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <lnd-button
+                            class="w-100"
+                            customClass="p-2 w-100"
+                            label="Zrušit automatickou prolongaci"
+                            type="secondary">
+                        </lnd-button>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">Výpovědní lhůta</div>
+                        <span class="perex">30 dní</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <lnd-button
+                            class="w-100 mb-1"
+                            customClass="p-2 w-100"
+                            label="Odstoupit od smlouvy"
+                            type="secondary">
+                        </lnd-button>
+                        <p class="input-subtext">
+                            Podle občanského zákoníku (§ 1829) můžete odstoupit od smlouvy do 14 dní od data
+                            podpisu smlouvy. Účinky nastávají okamžikem, kdy je toto právní jednání doručeno dodavateli.
+                            Smlouva se zruší od počátku a vy nemusíte udávat žádný důvod odstoupení.
+                        </p>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <lnd-button
+                            class="w-100 mb-1"
+                            customClass="p-2 w-100"
+                            label="Vypovědět smlouvu"
+                            type="secondary">
+                        </lnd-button>
+                        <p class="input-subtext">
+                            Energetický zákon (§ 11 a odst. 3) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
+                            do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
+                            následujícího. Jediná částka, kterou zaplatíte, je za energii, kterou jste už stihli odebrat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-12 col-lg-4 offset-lg-4">
+        <p class="perex mb-3">Máte jednu rozpracovanou navazující smlouvu, nechcete ji dokončit?</p>
+    </div>
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+            <h2 class="h1 mb-1">Byt - babička</h2>
+            <p class="mb-3">Navazující smlouva pro dodávku elektřiny v období 1.1.2020 - 31.12.2020</p>
+            <lnd-button
+                label="Dokončit žádost"
+                type="primary">
+            </lnd-button>
         </div>
     </div>
 </div>

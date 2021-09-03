@@ -48,8 +48,10 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
     public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
         if (includesBothTariffs(distributionRateId, codeLists)) {
             this.setEnableField('annualConsumptionNT');
+            this.setEnableField('annualConsumptionNTUnit');
         } else {
             this.setDisableField('annualConsumptionNT');
+            this.setDisableField('annualConsumptionNTUnit');
         }
     }
 
@@ -60,17 +62,24 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,
         typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
         annualConsumptionUnit: UNIT_OF_PRICES,
+        withoutValidators = false,
     ) => {
         const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
         if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
             this.form.controls[typeOfAnnualConsumption]
                 .setValidators(
                     [
-                        Validators.required,
+                        (withoutValidators ? CustomValidators.alwaysValid : Validators.required),
                         CustomValidators.isNumber(),
                         CustomValidators.minValue(0),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(
                             CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                        ),
+                        CustomValidators.maxValue(
+                            CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
+                            true,
+                            true,
+                            'maxKWh',
                         ),
                     ]);
             const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
@@ -79,10 +88,16 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
             this.form.controls[typeOfAnnualConsumption]
                 .setValidators(
                     [
-                        Validators.required,
+                        (withoutValidators ? CustomValidators.alwaysValid : Validators.required),
                         CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
                         CustomValidators.minValue(0),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                        CustomValidators.maxValue(
+                            CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH,
+                            true,
+                            true,
+                            'maxMWh',
+                        ),
                     ]);
             const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000);
             this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);

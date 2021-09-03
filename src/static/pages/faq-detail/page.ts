@@ -15,7 +15,12 @@ export class FaqDetailPageComponent {
 
     public question: IQuestion = {
         id: 1,
-        tag: Tag.GENERAL,
+        tag: {
+            type: Tag.GENERAL,
+            url: 'general',
+            label: 'Obecné',
+            title: 'Dodavatel',
+        },
         url: 'price-length',
         header: 'Opravdu budu mít vybranou cenu po celou dobu zvoleného období?',
         shortContent: 'Ano, dodavatel vám cenu za silovou elektřinu nebo za odebraný zemní plyn nemůže změnit. ' +
@@ -31,9 +36,9 @@ export class FaqDetailPageComponent {
     },
         {
             label: 'Mohu někde dostat lepší cenu?',
-            data: 'Nedá se vyloučit, že někteří dodavatelé, mimo PARC4U, mohou z ' +
+            data: 'Nedá se vyloučit, že někteří dodavatelé, mimo parc4u, mohou z ' +
                 'nějakého důvodu poskytnout lepší cenové podmínky. Ty ale budou, s největší pravděpodobností,' +
-                ' vykoupeny nějakými „kličkami a háčky“ v podmínkách dodávky, které v PARC4U nechceme.',
+                ' vykoupeny nějakými „kličkami a háčky“ v podmínkách dodávky, které v parc4u nechceme.',
             isActive: false,
         },
         {

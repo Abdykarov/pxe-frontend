@@ -5,6 +5,8 @@ import {
     FormGroup,
 } from '@angular/forms';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
+import { IOption } from 'src/common/ui/forms/models/option.model';
+import { OWN_TERMINATE_OPTIONS } from 'src/app/app.constants';
 
 import { NewSupplyPointPageConfig } from './config';
 
@@ -12,6 +14,7 @@ import { NewSupplyPointPageConfig } from './config';
     templateUrl: './page.html',
 })
 export class NewSupplyPointPageComponent {
+
     public form: FormGroup = new FormGroup({
         supplierId: new FormControl(),
         distributionRateId: new FormControl(),
@@ -23,6 +26,8 @@ export class NewSupplyPointPageComponent {
         timeToContractEndPeriodId: new FormControl(),
         ownTerminate: new FormControl(),
     });
+
+    public ownTerminateOptions: Array<IOption> = OWN_TERMINATE_OPTIONS;
 
     constructor(
         public config: NewSupplyPointPageConfig,

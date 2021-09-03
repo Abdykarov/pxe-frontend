@@ -1,0 +1,18 @@
+/*
+ -  Progress bar
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.progress-bar {
+	position: relative;
+	z-index: $zindex-graphs-svg;
+
+	svg {
+		overflow: visible;
+	}
+}
+

@@ -58,12 +58,13 @@
 	}
 
 	&__addon {
-		text-align: left;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			padding-top: ( ( $supply-point-title-line-height-px - $btn-height ) / 2 );
-			text-align: right;
 		}
 	}
 }

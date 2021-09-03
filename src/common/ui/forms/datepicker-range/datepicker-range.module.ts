@@ -6,7 +6,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { DatepickerRangeComponent } from './datepicker-range.component';
 import { DirectivesModule } from 'src/common/directives/directives.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
     declarations: [

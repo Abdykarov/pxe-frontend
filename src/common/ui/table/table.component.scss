@@ -169,6 +169,10 @@
 			}
 		}
 
+		&--without-border {
+			border-top-color: transparent;
+		}
+
 		&--detail {
 			display: none;
 

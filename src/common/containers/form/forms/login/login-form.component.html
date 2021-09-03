@@ -9,7 +9,7 @@
             Heslo jsme vám zaslali na {{login}}
         </ng-container>
     </lnd-alert>
-    <div class="text-right">
+    <div class="text-right mb-3">
         <a (click)="handleReSentAction()">
             <ng-container *ngIf="wasSentToPhone">
                 Poslat sms znovu
@@ -35,12 +35,14 @@
 <form
     [formGroup]="form"
     (keydown.enter)="submitForm($event);false"
-    class="form-container"
+    class="form-container form-container--large"
     autocomplete="off">
     <lnd-form-field
         lndSFormDirective
         lndSBiometricsDirective
         (change)="setLoginValidator(LOGIN_FORM_NAME, $event)"
+        customFormGroupClass="form-group--public"
+        [lightField]="true"
         [error]="form.controls.login.errors"
         [formControl]="form.controls.login"
         [id]="'login'"
@@ -52,8 +54,10 @@
     <lnd-form-field
         lndSFormDirective
         lndSBiometricsDirective
+        customFormGroupClass="form-group--public"
         [error]="form.controls.password.errors"
         [formControl]="form.controls.password"
+        [lightField]="true"
         [id]="'password'"
         label="Heslo"
         [success]="form.controls.password.valid && form.controls.password.touched"
@@ -62,13 +66,50 @@
         [validationMessages]="formFields.validationMessages.password"
         [subtextTemplate]="forgottenPassword"
     ></lnd-form-field>
-    <div class="text-right">
-        <lnd-button
-            type="primary"
-            [submit]="true"
-            (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
-            [isDisabled]="!!formLoading"
-            label="Přihlásit se">
-        </lnd-button>
+    <lnd-button
+        type="gradient-primary"
+        class="w-100 mb-5"
+        customClass="btn-public btn--icon-right w-100"
+        [submit]="true"
+        (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
+        [isDisabled]="!!formLoading"
+        label="Přihlásit se"
+        icon="icon--arrow-right"
+        iconPosition="right">
+    </lnd-button>
+    <p class="mb-2">
+        Nebo se přihlaště pomocí
+    </p>
+    <div class="row mb-5">
+        <div class="col-md-6 mb-3">
+            <lnd-button
+                label="Facebook"
+                type="facebook"
+                class="w-100"
+                customClass="btn-public w-100"
+                (action)="oauthService.tryLogin(oAuthType.FACEBOOK)">
+            </lnd-button>
+        </div>
+        <div class="col-md-6 mb-3">
+            <lnd-button
+                label="Google"
+                type="google"
+                class="w-100"
+                customClass="btn-public w-100"
+                (action)="oauthService.tryLogin(oAuthType.GOOGLE)">
+            </lnd-button>
+        </div>
+        <div class="col-12">
+            <lnd-button
+                type="bankid"
+                class="w-100"
+                customClass="btn-public w-100"
+                (action)="oauthService.tryLogin(oAuthType.BANK_ID)">
+            </lnd-button>
+        </div>
     </div>
+    <p class="font-size-14">
+        Založením účtu souhlasím s <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
+    </p>
 </form>
+

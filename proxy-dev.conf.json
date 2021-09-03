@@ -1,14 +1,14 @@
-[
-    {
-        "context": "/api",
-        "logLevel": "debug",
+{
+    "/api": {
         "target": "http://localhost:8080",
-        "secure": false
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
     },
-    {
-        "context": "/graphql",
-        "logLevel": "debug",
+    "/graphql": {
         "target": "http://localhost:8080",
-        "secure": false
+        "logLevel": "debug",
+        "secure": false,
+        "changeOrigin": true
     }
-]
+}

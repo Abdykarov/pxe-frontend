@@ -80,7 +80,7 @@
                 *ngSwitchDefault
                 #field
                 type="text"
-                (blur)="inputFocused = false;blur.emit($event)"
+                (blur)="blurAction($event, true)"
                 class="form-control"
                 [class.form-control--light]="lightField"
                 [class.form-control--not-empty]="!!value"
@@ -90,7 +90,7 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [disabled]="disabledField"
-                (focus)="inputFocused = true;focus.emit($event)"
+                (focus)="focusAction($event)"
                 [id]="id"
                 [name]="name"
                 [ngClass]="customFieldClass"
@@ -105,7 +105,7 @@
                 *ngSwitchCase="'NUMBER'"
                 #field
                 type="number"
-                (blur)="inputFocused = false;blur.emit($event)"
+                (blur)="blurAction($event)"
                 class="form-control"
                 [class.form-control--light]="lightField"
                 [class.form-control--not-empty]="!!value"
@@ -115,7 +115,7 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [disabled]="disabledField"
-                (focus)="inputFocused = true;focus.emit($event)"
+                (focus)="focusAction($event)"
                 [id]="id"
                 [name]="name"
                 [ngClass]="customFieldClass"
@@ -129,7 +129,7 @@
                 *ngSwitchCase="'PASSWORD'"
                 #field
                 type="password"
-                (blur)="inputFocused = false;blur.emit($event)"
+                (blur)="blurAction($event, true)"
                 class="form-control"
                 [class.form-control--light]="lightField"
                 [class.form-control--not-empty]="!!value"
@@ -139,7 +139,7 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [disabled]="disabledField"
-                (focus)="inputFocused = true;focus.emit($event)"
+                (focus)="focusAction($event)"
                 [id]="id"
                 [name]="name"
                 [ngClass]="customFieldClass"
@@ -161,7 +161,7 @@
             *ngSwitchCase="'FILE'"
             #field
             type="file"
-            (blur)="inputFocused = false;blur.emit($event)"
+            (blur)="blurAction($event)"
             class="custom-file-input"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -171,7 +171,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
-            (focus)="inputFocused = true;focus.emit($event)"
+            (focus)="focusAction($event)"
             [id]="id"
             [ngClass]="customFieldClass"
             [(ngModel)]="value"
@@ -198,7 +198,7 @@
                 [ngClass]="radioGroupItemClass">
                 <input
                     type="radio"
-                    (blur)="inputFocused = false;blur.emit($event)"
+                    (blur)="blurAction($event)"
                     class="custom-control-input"
                     [class.form-control--light]="lightField"
                     [class.form-control--not-empty]="value === option.key"
@@ -209,7 +209,7 @@
                     [class.is-warning]="warning"
                     (change)="changeRadioGroupAction(option.key)"
                     [disabled]="option.disabled"
-                    (focus)="inputFocused = true;focus.emit($event)"
+                    (focus)="focusAction($event)"
                     [checked]="value === option.key"
                     [ngClass]="customFieldClass"
                     [readonly]="readonly"
@@ -227,7 +227,7 @@
             *ngSwitchCase="'CHECKBOX'"
             #field
             type="checkbox"
-            (blur)="inputFocused = false;blur.emit($event)"
+            (blur)="blurAction($event)"
             class="custom-control-input"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -237,7 +237,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
-            (focus)="inputFocused = true;focus.emit($event)"
+            (focus)="focusAction($event)"
             [checked]="checked"
             [id]="id"
             [ngClass]="customFieldClass"
@@ -249,7 +249,7 @@
             *ngSwitchCase="'SWITCH'"
             #field
             type="checkbox"
-            (blur)="inputFocused = false;blur.emit($event)"
+            (blur)="blurAction($event)"
             class="custom-control-input"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -258,7 +258,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
-            (focus)="inputFocused = true;focus.emit($event)"
+            (focus)="focusAction($event)"
             [checked]="checked"
             [id]="id"
             [ngClass]="customFieldClass"
@@ -286,7 +286,7 @@
                 class="custom-control custom-radio custom-radio--switch">
                 <input
                     type="radio"
-                    (blur)="inputFocused = false;blur.emit($event)"
+                    (blur)="blurAction($event)"
                     class="custom-control-input"
                     [class.form-control--light]="lightField"
                     [class.form-control--not-empty]="value === option.key"
@@ -296,7 +296,7 @@
                     [class.is-valid]="success"
                     [class.is-warning]="warning"
                     [disabled]="option.disabled"
-                    (focus)="inputFocused = true;focus.emit($event)"
+                    (focus)="focusAction($event)"
                     (change)="changeRadioGroupAction(option.key)"
                     [checked]="value === option.key"
                     [ngClass]="customFieldClass"
@@ -314,7 +314,7 @@
         <textarea
             *ngSwitchCase="'TEXTAREA'"
             #field
-            (blur)="inputFocused = false;blur.emit($event)"
+            (blur)="blurAction($event, true)"
             class="form-control"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -324,7 +324,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
-            (focus)="inputFocused = true;focus.emit($event)"
+            (focus)="focusAction($event)"
             [id]="id"
             [ngClass]="customFieldClass"
             [(ngModel)]="value"
@@ -338,7 +338,7 @@
         <select
             *ngSwitchCase="'SELECT'"
             #field
-            (blur)="inputFocused = false;blur.emit($event)"
+            (blur)="blurAction($event)"
             class="form-control"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -347,7 +347,7 @@
             [class.focus]="inputFocused"
             [class.is-valid]="success"
             [class.is-warning]="warning"
-            (focus)="inputFocused = true;focus.emit($event)"
+            (focus)="focusAction($event)"
             [disabled]="disabledField"
             (change)="changeSelect($event)"
             [id]="id"
@@ -363,9 +363,25 @@
                 {{ option.label }}
             </option>
         </select>
-
         <label
-            *ngIf="label || labelTemplate"
+            *ngIf="(label || labelTemplate) && type === 'CHECKBOX'"
+            [class.control-label]="type !== 'CHECKBOX' && type !== 'FILE' && !hideLabel && type !== 'SWITCH'"
+            [class.custom-control-label]="!!hideLabel || type === 'CHECKBOX' && !hideLabel || type === 'SWITCH' && !hideLabel"
+            [class.custom-file-label]="type === 'FILE' && !hideLabel"
+            [class.sr-only]="!!hideLabel || type === 'RADIOGROUP' || type === 'SELECT'"
+            (click)="labelClick()"
+            [for]="id"
+            (mousedown)="$event.preventDefault()"
+        >
+            <ng-container *ngIf="label">
+                {{label}}
+            </ng-container>
+            <ng-container *ngIf="labelTemplate">
+                <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+            </ng-container>
+        </label>
+        <label
+            *ngIf="(label || labelTemplate) && type !== 'CHECKBOX'"
             [class.control-label]="type !== 'CHECKBOX' && type !== 'FILE' && !hideLabel && type !== 'SWITCH'"
             [class.custom-control-label]="!!hideLabel || type === 'CHECKBOX' && !hideLabel || type === 'SWITCH' && !hideLabel"
             [class.custom-file-label]="type === 'FILE' && !hideLabel"

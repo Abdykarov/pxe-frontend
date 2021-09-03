@@ -21,10 +21,8 @@ import {
     CODE_LIST,
     CONSTS,
 } from 'src/app/app.constants';
-import {
-    convertDateToSendFormatFnc,
-    CustomValidators,
-} from 'src/common/utils';
+import { convertDateToSendFormatFnc } from 'src/common/utils/standalone/convert-date-to-send-format.fnc';
+import { CustomValidators } from 'src/common/utils';
 import {
     ICodelistOption,
     ICodelistOptions,
@@ -48,6 +46,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     @Input()
     public supplyPoint: ISupplyPoint;
+
+    @Input()
+    public withPrefillFromProfile = true;
 
     @Input()
     public isIndividual = false;
@@ -96,9 +97,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
+                        CustomValidators.isNumber(),
                         CustomValidators.minValue(
-                            this.supplyPoint.contract.offer.totalPrice,
+                            Math.ceil(this.supplyPoint.contract?.offer?.totalPrice),
                             true,
                             false,
                         ),
@@ -109,25 +110,29 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.formValues) {
             this.prefillFormData();
         } else {
-            const email = this.authService.currentUserValue.email;
-            const deposit = this.supplyPoint.contract.offer.totalPrice;
-            this.form.controls['email'].setValue(email);
-            this.form.controls['deposit'].setValue(Math.ceil(deposit));
-
-            let personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
-            if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
-                if (personalInfoUnfinished.birthDate) {
-                    personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
+            if (this.withPrefillFromProfile) {
+                const email = this.authService.currentUserValue.email;
+                const deposit = this.supplyPoint.contract?.offer?.totalPrice;
+                this.form.controls['email'].setValue(email);
+                if (deposit) {
+                    this.form.controls['deposit'].setValue(Math.ceil(deposit));
                 }
-                personalInfoUnfinished = AddressWhispererComponent.removeAddressNotFoundUnique(personalInfoUnfinished);
-                this.form.setValue(personalInfoUnfinished);
-            }
 
-            this.form.valueChanges
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(_ => {
-                    this.personalInfoLocalStorageService.addPersonalInfo(this.supplyPoint.id, this.form.getRawValue());
-                });
+                let personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
+                if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
+                    if (personalInfoUnfinished.birthDate) {
+                        personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
+                    }
+                    personalInfoUnfinished = AddressWhispererComponent.removeAddressNotFoundUnique(personalInfoUnfinished);
+                    this.form.setValue(personalInfoUnfinished);
+                }
+
+                this.form.valueChanges
+                    .pipe(takeUntil(this.destroy$))
+                    .subscribe(_ => {
+                        this.personalInfoLocalStorageService.addPersonalInfo(this.supplyPoint.id, this.form.getRawValue());
+                    });
+            }
         }
     }
 
@@ -175,8 +180,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
             email = this.formValues.email;
-            depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType.code;
-            deposit = this.formValues.deposit;
+            depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType?.code;
+            deposit = Math.ceil(this.formValues.deposit);
             address1 = this.formValues.address1 && R.omit(['__typename'], this.formValues.address1);
             address2 = this.formValues.address2 && R.omit(['__typename'], this.formValues.address2);
         }
@@ -191,7 +196,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['phone'].setValue(phone);
         this.form.controls['email'].setValue(email);
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
-        this.form.controls['deposit'].setValue(deposit);
+        if (deposit) {
+            this.form.controls['deposit'].setValue(deposit);
+        }
         this.form.controls['address1'].setValue(address1);
         this.form.controls['signatoryName'].setValue(signatoryName);
         this.form.controls['signatorySurname'].setValue(signatorySurname);
@@ -232,11 +239,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public submitValidForm = () => {
         const form: IPersonalDataInputForm = {
             ...this.form.value,
-            phone: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
-            deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
+            phone: this.form.value?.phone ? R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone) : null,
+            deposit: this.form.value?.deposit ?  parseFloat(String(this.form.value.deposit).replace(',', '.')) : null,
         };
         if (form.birthDate) {
-            form.birthDate = convertDateToSendFormatFnc(this.form.value.birthDate);
+            form.birthDate = convertDateToSendFormatFnc(this.form.value?.birthDate);
         }
         delete form.phonePrefix;
         delete form['address1' + AddressWhispererComponent.UNIQUE_FIELD_NAME_END];

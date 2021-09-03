@@ -1,8 +1,12 @@
-import { INews } from 'src/common/ui/news/model/news.model';
+import { INew } from 'src/common/ui/news/model/news.model';
 
-export const newsConfig: INews = [
+export const newsConfig: INew[] = [
     {
         date: new Date('2019-11-20'),
-        text: 'Spustili jsme pro vás pilotní provoz aplikace parc4u.cz, která vám pomůže zajistit toho správného dodavatele.',
+        new: 'Spustili jsme pro vás pilotní provoz aplikace parc4u.cz, která vám pomůže zajistit toho správného dodavatele.',
+    },
+    {
+        date: new Date('2019-11-20'),
+        new: 'Spustili jsme pro vás pilotní provoz aplikace parc4u.cz, která vám pomůže zajistit toho správného dodavatele.',
     },
 ];

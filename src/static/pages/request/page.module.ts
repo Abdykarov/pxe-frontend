@@ -27,5 +27,8 @@ export const requestPageRoutes: Routes = [
     {
         path: 'request',
         component: RequestComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

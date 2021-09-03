@@ -16,6 +16,10 @@
             type="secondary">
         </lnd-button>
         <lnd-button
+            label="Dark"
+            type="dark">
+        </lnd-button>
+        <lnd-button
             label="Success"
             type="success">
         </lnd-button>
@@ -23,6 +27,14 @@
             label="Danger"
             type="danger"
             hasOutline="true">
+        </lnd-button>
+    </div>
+    <h4>Gradient public</h4>
+    <div class="btn-holder mb-4">
+        <lnd-button
+            label="Gradient Primary"
+            type="gradient-primary"
+            customClass="btn-public">
         </lnd-button>
     </div>
     <h4>Disable</h4>
@@ -65,14 +77,19 @@
             </div>
         </div>
     </div>
-    <!-- <lnd-button label="Success"
-                    type="success">
-    </lnd-button>
+    <h4>Button with icon</h4>
+    <div class="btn-holder mb-4">
+        <lnd-button
+            label="Gradient Primary"
+            type="gradient-primary"
+            customClass="btn-public btn--icon-right"
+            icon="icon--arrow-right"
+            iconPosition="right">
+        </lnd-button>
+    </div>
+    <!--
     <lnd-button label="Warning"
                     type="warning">
-    </lnd-button>
-    <lnd-button label="Danger"
-                    type="danger">
     </lnd-button>
     <lnd-button label="Light"
                     type="light">
@@ -144,47 +161,62 @@
                      size="sm">
         </lnd-button>
     </div>
-</div>
+</div> -->
 <h3>With icon</h3>
 <div class="static-pages">
     <h4>Normal size</h4>
     <div class="btn-holder">
         <lnd-button label="With icon"
-                     type="secondary"
-                     icon="icon--phone-call">
+                    type="primary"
+                    icon="icon--map">
         </lnd-button>
         <lnd-button label="Outline with icon"
-                     type="secondary"
-                     icon="icon--phone-call"
-                     hasOutline="true">
+                    type="secondary"
+                    icon="icon--map"
+                    iconPosition="right">
         </lnd-button>
         <lnd-button label="Disabled with icon"
-                     type="secondary"
-                     icon="icon--phone-call"
-                     isDisabled="true">
+                    type="secondary"
+                    icon="icon--map"
+                    isDisabled="true">
         </lnd-button>
     </div>
-    <h4>Small size</h4>
+    <!-- <h4>Small size</h4>
     <div class="btn-holder">
         <lnd-button label="With icon"
-                     size="sm"
-                     type="secondary"
-                     icon="icon--phone-call">
+                    size="sm"
+                    type="secondary"
+                    icon="icon--phone-call">
         </lnd-button>
         <lnd-button label="Outline with icon"
-                     size="sm"
-                     type="secondary"
-                     icon="icon--phone-call"
-                     hasOutline="true">
+                    size="sm"
+                    type="secondary"
+                    icon="icon--phone-call"
+                    hasOutline="true">
         </lnd-button>
         <lnd-button label="Disabled with icon"
-                     size="sm"
-                     type="secondary"
-                     icon="icon--phone-call"
-                     isDisabled="true">
+                    size="sm"
+                    type="secondary"
+                    icon="icon--phone-call"
+                    isDisabled="true">
+        </lnd-button>
+    </div> -->
+</div>
+<h3>Social</h3>
+<div class="static-pages">
+    <h4>Normal size</h4>
+    <div class="btn-holder pt-3 pl-3 bg--body">
+        <lnd-button label="facebook"
+                    type="facebook">
+        </lnd-button>
+        <lnd-button label="Google"
+                    type="google">
+        </lnd-button>
+        <lnd-button
+            type="bankid">
         </lnd-button>
     </div>
-</div> -->
+</div>
 <h3>Simple</h3>
 <div class="static-pages">
     <h4>Normal</h4>
@@ -233,7 +265,7 @@
     <h4>Disable</h4>
     <div class="btn-holder">
         <lnd-button
-        type="icon"
+            type="icon"
             icon="icon--star"
             variant="icon"
             isDisabled="true">

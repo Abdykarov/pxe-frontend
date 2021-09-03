@@ -1,225 +1,352 @@
-<ng-template #supplierTemplate>
-    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
-</ng-template>
-
-<ng-template #agreementTemplate>
-    Souhlasím se <a target="_blank" [href]="">Obchodními podmínkami účasti na Trhu PARC4U</a> a beru na vědomí
-    <a target="_blank" [href]="">Informaci o zpracování osobních údajů</a>.
-</ng-template>
-
 <div class="landing-page">
-    <div class="container-fluid container-fluid--max-width container-fluid--light">
-        <div class="section section--picture-bg">
-            <div class="section-picture-text">
-                <div class="row px-3 px-md-0">
-                    <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
-                        <h1 class="h1--public mb-4">
-                            Přechod k novému dodavateli energií je konečně jednoduchý
-                        </h1>
-                        <p>
-                            S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba&nbsp;zajišťuje i navazující smlouvy bez starostí.
-                        </p>
+    <div class="section">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row align-items-md-center">
+                <div class="col-12 col-md-5 col-xl-6 order-md-2 mb-3 mb-md-0">
+                    <div class="section-video-holder text-center">
+                        <img class="img-fluid" src="/assets/images/landing-page/lp-picture-home.png" alt="prezencni video" title="Prezenční video" />
+                    </div>
+                    <div class="section-video-text order-md-1">
+                        <div class="row w-100 ml-0 text-center">
+                            <div class="col-12">
+                                <lnd-button
+                                    type="icon"
+                                    icon="icon--triangle-right"
+                                    variant="icon"
+                                    customClass="btn-video-play mb-2"
+                                >
+                                </lnd-button>
+                                <h2 class="h3--public mb-0">
+                                    Co je parc4u
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 offset-md-1 offset-xl-0">
+                    <h1 class="h1--public mb-4">Neplýtvejte energií na převody energií!</h1>
+                    <p>
+                        Vyřešíme to za vás. Nabídneme vám jen solidní dodavatele, výhodnou cenu a postaráme se o smlouvu i převod. A příští rok zase. <br><span class="text-secondary">parc4u = elektřina a plyn bez starostí.</span>
+                    </p>
+                    <div class="text-center text-md-left">
                         <lnd-button
-                            label="Založit účet"
-                            type="primary">
+                            label="Chci vidět nabídky"
+                            type="gradient-primary"
+                            customClass="btn-public btn--icon-right"
+                            icon="icon--arrow-right"
+                            iconPosition="right"
+                        >
                         </lnd-button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid container-fluid--max-width container-fluid--light">
-        <div class="section how-it-work section--picture-bg-overlap">
-            <div class="row px-3 px-md-0">
-                <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
-                    <h2 class="h2--public mb-5">
-                        Jak to funguje
-                    </h2>
+    <div class="section pt-3 pt-md-0 pb-xl-6">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row text-center mb-xl-6 text-md-left">
+                <div class="col-md-4 mb-6 mb-md-0">
+                    <div class="row">
+                        <div class="col-xl-3 mb-3">
+                            <img class="img-fluid" src="/assets/images/illustrations/papers.svg" alt="PARC4U - O smlouvy se už nikdy nemusíte starat" title="PARC4U - O smlouvy se už nikdy nemusíte starat">
+                        </div>
+                        <div class="col-xl-9">
+                            <h3 class="h3--public">O smlouvy se už nikdy nemusíte starat</h3>
+                            <a href="#">S čím vám parc4u pomůže?</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
-                    <ol class="numerical-list-lp">
-                        <li>
-                            <h3 class="h3--public mb-3">Zaregistrujete si své odběrné místo</h3>
-                            <p>Stačí zadat základní informace o vašem odběrném místě a současném dodavateli.</p>
-                        </li>
-                        <li>
-                            <h3 class="h3--public mb-3">Vyberete si nejvýhodnější nabídku</h3>
-                            <p>PARC4U vám ukáže přehledný seznam nejvýhodnějších nabídek od námi prověřených společností.</p>
-                        </li>
-                        <li>
-                            <h3 class="h3--public mb-3">Vše vyřídíte on-line na pár kliknutí</h3>
-                            <p>Novou smlouvu uzavřete SMS podpisem a zasláním ověřovací platby ve výši 1 Kč.</p>
-                        </li>
-                        <li>
-                            <h3 class="h3--public mb-3">Služba PARC4U vám bude sloužit i nadále</h3>
-                            <p>Ceny za energie se stále mění. PARC4U vám kdykoliv pomůže dodavatele znovu změnit.</p>
-                        </li>
-                    </ol>
+                <div class="col-md-4 mb-6 mb-md-0">
+                    <div class="row">
+                        <div class="col-xl-3 mb-3">
+                            <img class="img-fluid" src="/assets/images/illustrations/computer.svg" alt="PARC4U - Vše zdarma, z domu a bez papírování" title="PARC4U - Vše zdarma, z domu a bez papírování">
+                        </div>
+                        <div class="col-xl-9">
+                            <h3 class="h3--public">Vše zdarma, z domu a bez papírování</h3>
+                            <a href="#">Jak to funguje?</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-6 mb-md-0">
+                    <div class="row">
+                        <div class="col-xl-3 mb-3">
+                            <img class="img-fluid" src="/assets/images/illustrations/calendar.svg" alt="PARC4U - Každý rok vám zajistíme výhodnou cenu" title="PARC4U - Každý rok vám zajistíme výhodnou cenu">
+                        </div>
+                        <div class="col-xl-9">
+                            <h3 class="h3--public">Každý rok vám zajistíme výhodnou cenu</h3>
+                            <a href="#">Více o cenách</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-none d-xl-flex">
+                <div class="col-12 text-center">
+                    <a class="link-next-section">
+                        <span class="icon icon--arrow-right link-next-section__icon"></span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section section--picture-half pb-xl-0">
+    <div class="section section--light-gray">
+        <div class="container-fluid container-fluid--max-width">
+            <h2 class="h4--public text-secondary text-center text-xl-left">S čím vám pomůžeme</h2>
+            <div class="card-tiles">
+                <div class="row no-gutters card-tiles__inner">
+                    <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
+                        <lnd-card
+                            type="block"
+                            [data]="item"
+                        >
+                        </lnd-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section--white">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12 col-xl-6">
-                    <div class="section-picture-holder">
-                        <img
-                            class="section-picture"
-                            src="/assets/images/landing-page/picture-dog.jpg"
-                            srcset="
-                                /assets/images/landing-page/picture-dog.jpg,
-                                /assets/images/landing-page/picture-dog@2x.jpg 2x"
-                            title="Účty za energii si prostě ochočíte"
-                            alt="Účty za energii si prostě ochočíte">
-                    </div>
-                </div>
-                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
-                    <div class="section-picture-text px-3 px-md-0">
-                        <h2 class="h2--public">
-                            Účty za energii si prostě ochočíte
-                        </h2>
-                        <p class="mb-4">S PARC4U si spolehlivého dodavatele vybere každý. Je to účinný nástroj, pomocí kterého je velmi jednoduché najít tu nejlepší nabídku.
-                            S PARC4U mají uživatelé také jistotu, že se vyhnou tzv. energošmejdům, nepoctivým obchodníkům s energiemi, kteří výhody sice slibují,
-                            ale nakonec nabídnou jen nevýhodné smlouvy se skrytými poplatky.</p>
-                        <lnd-button
-                            label="Založit účet"
-                            type="primary">
-                        </lnd-button>
-                    </div>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
+                    <pxe-carousel-references></pxe-carousel-references>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid container-fluid--max-width">
-        <div class="section section--video">
-            <div class="section-video-holder"
-                 [class.cursor-pointer]="isVideoPlaying">
-                <video
-                    #video
-                    (click)="isVideoPlaying && toggleVideo($event)"
-                    poster="/assets/images/landing-page/picture-fallback.jpg"
-                    class="section-video"
-                    loop
-                    muted
-                    preload="auto">
-                    <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
-                    <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
-                    <img src="/assets/images/landing-page/picture-fallback.jpg" alt="parc4u - obrázek laptopu s aplikací">
-                    Váš prohlížeč nepodporuje zobrazení videa
-                </video>
-                <div class="section-video-control d-md-none">
-                    <lnd-button
-                        *ngIf="!isVideoPlaying"
-                        type="icon"
-                        icon="icon--triangle-right"
-                        variant="icon"
-                        customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
-                    >
-                    </lnd-button>
+    <div class="section section--bg-two-half section--dark-gray-left-half section--gradient-violet-right-half">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row no-gutters">
+                <div class="col-xl-6">
+                    <div class="section__half section__half--dark-gray">
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2 col-xl-10 offset-xl-0">
+                                <h2 class="h4--public text-secondary">Jak to funguje</h2>
+                                <h3 class="h2--public">3 snadné kroky</h3>
+                                <ol class="circular-number-list">
+                                    <li>
+                                        <h4 class="h3--public">Registrace</h4>
+                                        <p class="mb-0">K registraci stačí jen e-mailová adresa, nic víc. Pošleme vám heslo do mailu a tím se přihlásíte.</p>
+                                    </li>
+                                    <li>
+                                        <h4 class="h3--public">Výběr nabídky</h4>
+                                        <p class="mb-0">Služba parc4u vám ukáže přehledný seznam nejvýhodnějších nabídek od námi prověřených společností.</p>
+                                    </li>
+                                    <li>
+                                        <h4 class="h3--public">Smlouva</h4>
+                                        <p class="mb-0">Novou smlouvu uzavřete SMS podpisem a zasláním ověřovací platby ve výši 1 Kč. Smlouvu lze kdykoli vypovědět.</p>
+                                    </li>
+                                </ol>
+                                <lnd-button
+                                    label="Chci vidět nabídky"
+                                    type="gradient-primary"
+                                    customClass="btn-public btn--icon-right"
+                                    icon="icon--arrow-right"
+                                    iconPosition="right">
+                                </lnd-button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div> 
-            <div class="section-video-text">
-                <div class="row w-100 ml-0 text-center">
-                    <div *ngIf="!isVideoPlaying"
-                         class="col-12 col-md-6 offset-md-3">
-                        <h2 class="h2--public mb-4">
-                            PARC4U – snadná cesta<br class="d-none d-xl-block">
-                            k&nbsp;novému dodavateli energií
-                        </h2>
-                        <div class="section-video-control d-none d-md-block">
-                            <lnd-button
-                                type="icon"
-                                icon="icon--triangle-right"
-                                variant="icon"
-                                customClass="btn-video-play"
-                                (action)="toggleVideo($event)"
-                            >
-                            </lnd-button>
+                <div class="col-xl-6">
+                    <div class="section__half section__half--gradient-violet">
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                                <ol class="numerical-list-stepper">
+                                    <li class="active">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
+                                    <li>Zadejte váš e-mail a my vám pošleme nabídky na míru.
+                                        Zdarma a nezávazně.</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-8 offset-md-2 col-xl-10">
+                                <div class="row">
+                                    <div class="col-12 text-center mb-3">
+                                        <pxe-file-uploader
+                                            secondaryTextCustomClass="small text-color--gray-200"
+                                            [uploader]="fileUploader"
+                                            [multiple]="true"
+                                            wrapperCustomClass="drop-zone--zindex text-white"
+                                            mainText="Soubory přetáhněte sem nebo "
+                                            secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                                            [labelFromMainText]="true">
+                                        </pxe-file-uploader>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section section--picture-half shortcut">
+    <div class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12 col-xl-6 offset-xl-1 order-xl-2">
-                    <div class="section-picture-holder">
-                        <img
-                            class="section-picture"
-                            src="/assets/images/landing-page/picture-man.jpg"
-                            srcset="
-                                /assets/images/landing-page/picture-man.jpg,
-                                /assets/images/landing-page/picture-man@2x.jpg 2x"
-                            title="Přečtěte si o naší filosofii"
-                            alt="Přečtěte si o naší filosofii">
-                            <span class="section-picture-overflow-text-holder">
-                                <blockquote class="section-picture-overflow-text h3--public">
-                                    &bdquo;Ochráníme vás&nbsp;<br>
-                                    &nbsp;před energošmejdy&ldquo;
-                                </blockquote>
-                            </span>
-                    </div>
+                <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
+                    <h2 class="h4--public text-secondary">Férové ceny energií</h2>
+                    <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
+                    <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
+                    <ul class="link-list link-list--lp">
+                        <li class="link-list__item">
+                            <a
+                               class="link-list__link link-list__link--active">
+                                Elektřina
+                            </a>
+                        </li>
+                        <li class="link-list__item">
+                            <a class="link-list__link">
+                                Plyn
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1 order-xl-1">
-                    <div class="section-picture-text px-3 px-md-0">
-                        <h2 class="h2--public">
-                            Přečtěte si o naší filosofii
-                        </h2>
-                        <p>Na českém trhu poskytovatelů energií se opravdu vyznáme. PXE je komoditní burza a naše platforma PARC,
-                            na které vybírají nejvýhodnější nabídky tzv. velcí hráči - firmy, města a obce, funguje již několik let.
-                            Chtěli jsme stejné výhody poskytnout všem, proto jsme pro vás připravili službu PARC4U.</p>
-                        <blockquote class="mb-1">&bdquo;PXE reaguje na četné žádosti lidí, kteří chtěli nakupovat elektřinu a plyn přímo na burze. To nám sice stávající legislativa neumožňuje,
-                            ale vyhověli jsme zákazníkům pomocí neburzovní služby, která zaručuje transparentnost nákupu i praktické výhody pro fyzické odběratele a živnostníky.&ldquo;</blockquote>
-                            <p>David Kučera, generální sekretář PXE</p>
-                    </div>
+                <div class="col-12 mb-5">
+                    <pxe-carousel-compare></pxe-carousel-compare>
                 </div>
-            </div>
-        </div>
-    </div>
-    <pxe-map-coverage
-        [supplierTemplate]="supplierTemplate"
-    >
-    </pxe-map-coverage>
-    <div class="container-fluid container-fluid--max-width container-fluid--light">
-        <div class="section section-help">
-            <div class="row px-3">
-                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
-                    <h2 class="h2--public">Často kladené dotazy</h2>
-                </div>
-                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
-                    <lnd-accordion [accordionItems]="accordionItems" title="Často kladené dotazy"></lnd-accordion>
-                </div>
-                <div class="col-12 text-center">
+                <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
+                    <p class="mb-6">Úspora je vypočítána na základě průměrné spotřeby elektřiny domácností a firem vůči cenám majoritního dodavatele v daném kraji.</p>
                     <lnd-button
-                        label="Další dotazy"
-                        type="secondary">
+                        label="Chci vidět nabídky"
+                        type="gradient-primary"
+                        customClass="btn-public btn--icon-right"
+                        icon="icon--arrow-right"
+                        iconPosition="right">
                     </lnd-button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section stay-in-touch pb-0">
+    <div class="section section--dark-blue section--picture-bg">
         <div class="container-fluid container-fluid--max-width">
+            <div class="row no-gutters">
+                <div class="mb-6 col-md-4 offset-md-1 mb-md-0 col-xl-3 offset-xl-2">
+                    <span class="info-flag">
+                        <img class="info-flag__img d-block" src="/assets/images/layout/logo-pxe-white.svg" alt="logo pxe" title="pxe">
+                        <span class="text-white">Komoditní burza energií</span>
+                        <svg width="20px" height="17px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="info-flag__beak">
+                            <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Video-LP-fallback" transform="translate(-1024.000000, -4326.000000)" fill="#7355A6"><path d="M1024,4326 L1041,4326 L1041,4338.17157 C1041,4339.27614 1040.10457,4340.17157 1039,4340.17157 C1038.46957,4340.17157 1037.96086,4339.96086 1037.58579,4339.58579 L1024,4326 L1024,4326 Z" id="Rectangle-Copy-12" transform="translate(1032.500000, 4334.500000) scale(-1, 1) translate(-1032.500000, -4334.500000) "></path></g>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+                <div class="mb-6 col-md-4 offset-md-1 mb-md-5 col-xl-6 mb-xl-6">
+                    <div class="row">
+                        <div class="col-12 mb-6">
+                            <h2 class="h4--public text-white">O nás</h2>
+                            <h3 class="h2--public text-white mb-3 mb-xl-6">PXE — jsme burza. Elektřinu a plyn prodáváme již více jak 10 let.</h3>
+                            <p class="text-white">Na českém trhu poskytovatelů energií se opravdu vyznáme. Již několik let velkoodběratelé (firmy, města, obce) využívají naší velkoobchodní aplikaci PARC.
+                                Její mladší sestra - aplikace parc4u teď nabízí stejné výhody i domácnostem a maloodběratelům. Přitom vás ochráníme před nevýhodnými
+                                podmínkami a nepoctivými prodejci - energošmejdy.</p>
+                            <lnd-button
+                                label="Chci vidět nabídky"
+                                type="gradient-primary"
+                                customClass="btn-public btn--icon-right"
+                                icon="icon--arrow-right"
+                                iconPosition="right"
+                            >
+                            </lnd-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-6">
+                    <pxe-carousel-suppliers></pxe-carousel-suppliers>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-blog">
+        <div class="container-fluid container-fluid--max-width">
+            <h2 class="h2--public text-md-center">Blog</h2>
             <div class="row">
-                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
-                    <div class="px-3 px-md-0">
-                        <h2 class="h2--public">
-                            Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
-                        </h2>
-                        <pxe-registration-form
-                            [agreementTemplate]="agreementTemplate"
-                            [formFields]="formFields"
-                            [formLoading]="formLoading"
-                            [formSent]="formSent"
-                            [globalError]="globalError"
-                            [fieldError]="fieldError"
-                            (submitAction)="submitForm($event)"
-                            [lightTheme]="true"
-                        ></pxe-registration-form>
+                <div class="col-12 card-blogs mb-4">
+                    <div class="row card-blogs__inner">
+                        <div
+                            *ngFor="let item of cardBlogConfig"
+                            class="col-md-4 card-blog__item"
+                        >
+                            <lnd-card
+                                type="link"
+                                [data]="item"
+                            >
+                            </lnd-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <a class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-4 mb-md-0">
+                        <span class="text-with-icon__text text-body">Zobrazit všechny články</span>
+                        <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-help">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row px-3">
+                <div class="col-xl-8 offset-xl-2 mb-3 text-md-center">
+                    <h2 class="h2--public">Často kladené dotazy</h2>
+                </div>
+                <div class="col-xl-8 offset-xl-2 mb-3">
+                    <lnd-accordion [accordionItems]="accordionItems" title="Často kladené dotazy"></lnd-accordion>
+                </div>
+                <div class="col-xl-8 offset-xl-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-4 mb-md-0">
+                                <span class="text-with-icon__text text-body">Další dotazy</span>
+                                <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
+                            </a>
+                        </div>
+                        <div class="col-md-6 text-md-right">
+                            Nenašli jste odpověď? Napište nám na <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section--gradient-blue">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row no-gutters">
+                <div class="col-12 col-md-8 offset-md-2 text-center">
+                    <h2 class="h2--public text-white">Chci každý rok tu nejlepší nabídku s dobrou cenou, ale&nbsp;nechci se starat o převody smluv.</h2>
+                    <lnd-button
+                        label="Chci vidět nabídky"
+                        type="gradient-primary"
+                        customClass="btn-public btn--icon-right"
+                        icon="icon--arrow-right"
+                        iconPosition="right">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section--gradient-violet">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row no-gutters">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
+                    <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                    <ol class="numerical-list-stepper">
+                        <li class="active">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
+                        <li>Zadejte váš e-mail a my vám pošleme nabídky na míru.
+                            Zdarma a nezávazně.</li>
+                    </ol>
+                </div>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
+                    <div class="row">
+                        <div class="col-12 text-center mb-3">
+                            <pxe-file-uploader
+                                secondaryTextCustomClass="small text-color--gray-200"
+                                [uploader]="fileUploader"
+                                [multiple]="true"
+                                wrapperCustomClass="drop-zone--zindex text-white"
+                                mainText="Soubory přetáhněte sem nebo "
+                                secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                                [labelFromMainText]="true">
+                            </pxe-file-uploader>
+                        </div>
                     </div>
                 </div>
             </div>

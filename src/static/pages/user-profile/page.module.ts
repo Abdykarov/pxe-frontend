@@ -38,5 +38,8 @@ export const userProfilePageRoutes: Routes = [
     {
         path: 'user-profile',
         component: UserProfilePageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

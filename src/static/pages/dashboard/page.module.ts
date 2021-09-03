@@ -31,5 +31,8 @@ export const dashboardPageRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

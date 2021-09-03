@@ -1,0 +1,94 @@
+<pxe-layout-container pageTitle="Rozpracované smlouvy">
+    <lnd-banner-ui
+        *ngIf="requestsOverviewBannerShow === RequestsOverviewBannersShow.TERMINATE_CONTRACT"
+        class="mb-2"
+        [data]="{
+            text: 'Smlouvu jste vypověděli. Výpověď byla odeslána na e-mail dodavatele a rovněž na váš e-mail.'
+        }"
+        buttonLabel=""
+        [showButtonLabel]="false"
+    ></lnd-banner-ui>
+    <lnd-banner-ui
+        *ngIf="requestsOverviewBannerShow === RequestsOverviewBannersShow.LEAVE_CONTRACT"
+        class="mb-2"
+        [data]="{
+            text: 'Odstoupili jste od smlouvy. Odstoupení od smlouvy bylo odesláno na e-mail dodavatele a rovněž na váš e-mail.'
+        }"
+        buttonLabel=""
+        [showButtonLabel]="false"
+    ></lnd-banner-ui>
+    <lnd-placeloader [loading]="loadingRequests && !globalError.length"></lnd-placeloader>
+    <div class="row">
+        <div class="col-12">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <div *ngIf="deletedRequest" class="row" #deletedRequestInfo>
+        <div class="col-12">
+            <lnd-alert
+                type="info">
+                Odběrné místo "{{deletedRequest?.name}}" bylo smazáno.
+            </lnd-alert>
+        </div>
+    </div>
+    <ng-container *ngIf="state">
+        <lnd-info-banner
+            *ngIf="state == overviewStates.NO_REQUEST"
+            [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
+            [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
+            [buttonLabel]="'Nové odběrné místo'"
+            (buttonAction)="createSupplyPoint($event)"
+        ></lnd-info-banner>
+        <lnd-info-banner
+            *ngIf="state == overviewStates.NO_REQUEST_WITH_VALID_CONTRACT"
+            [bannerType]="BANNER_TYPE_ACCEPTED"
+            [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
+            [bannerDescription]="'Všechna zadaná odběrná místa mají pokrytou dodávku na déle než 3 měsíce.<br> Pokud máte nové odběrné místo, můžete založit žádost pro novou dodávku.'"
+            [buttonLabel]="'Nové odběrné místo'"
+            (buttonAction)="createSupplyPoint($event)"
+        ></lnd-info-banner>
+        <!--<ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ARE_ENDING ">-->
+            <!--<lnd-info-banner-->
+                <!--[bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"-->
+                <!--bannerDescription="Ale pro {{supplyPoints.length === 1 ? 'toto odběrné místo' : 'tato odběrná místa'}} konční v následujcích 2 měsích dodávka energie"-->
+                <!--[showButton]="false"-->
+            <!--&gt;</lnd-info-banner>-->
+            <!--<lnd-banner-ui-->
+                <!--*ngFor="let supplyPoint of supplyPoints"-->
+                <!--[data]="{-->
+                    <!--linkType: '',-->
+                    <!--linkValue: '',-->
+                    <!--linkData: 'Nová poptávka',-->
+                    <!--text: supplyPoint.name + ' - ' + 'můžeme získat již od ' + (supplyPoint.contract.offer.mountlyPaymentPrice | number) + ' Kč',-->
+                    <!--title: ''-->
+                <!--}"-->
+                <!--buttonLabel="Nová poptávka"-->
+            <!--&gt;</lnd-banner-ui>-->
+        <!--</ng-container>-->
+        <ng-container *ngIf="state == overviewStates.REQUESTS">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu již nemáte uzavřenou smlouvu.</p>
+                    <p>Pokud ne, pokračujte založením nového odběrného místa.</p>
+                    <lnd-button
+                        label="ZALOŽIT NOVÉ ODBĚRNÉ MÍSTO"
+                        type="secondary"
+                        (action)="newRequestAction($event)"
+                    ></lnd-button>
+                </div>
+            </div>
+            <pxe-request-card
+                *ngFor="let supplyPoint of supplyPoints"
+                [supplyPoint]="supplyPoint"
+                (continueAction)="completeRequestAction(supplyPoint)"
+                (removeAction)="removeRequestAction(supplyPoint)">
+            </pxe-request-card>
+        </ng-container>
+    </ng-container>
+</pxe-layout-container>

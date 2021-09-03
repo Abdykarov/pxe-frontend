@@ -5,6 +5,8 @@ import {
     SimpleChanges,
     OnDestroy,
     TemplateRef,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -19,6 +21,10 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./verification-form.component.scss'],
 })
 export class VerificationFormComponent extends AbstractFormComponent implements OnChanges, OnDestroy {
+
+    @Input()
+    public showForm = false;
+
     @Input()
     public smsSent: number = null;
 
@@ -26,13 +32,7 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public contract: IContract;
 
     @Input()
-    public classMainWrapper = 'row justify-content-end';
-
-    @Input()
-    public classFirstField = 'col';
-
-    @Input()
-    public classSecondField = 'col-md-auto mt-md-4';
+    public customSubmitButtonClass = 'w-100';
 
     @Input()
     public infoTemplate: TemplateRef<any>;
@@ -41,25 +41,37 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public labelInput = 'Kód z SMS';
 
     @Input()
+    public enableVerificationLabel = 'Podepsat smlouvu';
+
+    @Input()
+    public enableVerificationSubText: string = null;
+
+    @Input()
+    public enableButtonType = 'primary';
+
+    @Input()
     public submitLabelText = 'Podepsat smlouvu';
 
     @Input()
-    public showDisabledInput = true;
+    public sendSmsLabel = 'Získat ověřovací SMS kód';
 
     @Input()
-    public showSentSmsLabelUnderFirstField = true;
-
-    @Input()
-    public sendSmsLabel = 'Odeslat SMS kód';
+    public textInfoAboutVerificationPassword = '';
 
     @Input()
     public phone = null;
+
+    @Output()
+    public enableVerificationAction = new EventEmitter<any>();
+
+    @Input()
+    public toggleEnabledBySelf = true;
 
     public formFields = formFields;
 
     constructor(
         protected fb: FormBuilder,
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
         sAnalyticsService.sFormStart();
@@ -86,4 +98,6 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
         this.resetFormError(false);
         this.customAction.emit();
     }
+
+    public enableVerification = () => this.showForm = true;
 }

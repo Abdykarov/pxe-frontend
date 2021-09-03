@@ -14,6 +14,8 @@
     <lnd-form-field
         lndSFormDirective
         lndSBiometricsDirective
+        customFormGroupClass="form-group--public"
+        [lightField]="true"
         [error]="form.controls.confirmationCode.errors"
         [formControl]="form.controls.confirmationCode"
         [id]="'confirmationCode'"
@@ -25,11 +27,15 @@
     ></lnd-form-field>
     <div class="text-right">
         <lnd-button
-            type="primary"
+            type="gradient-primary"
+            class="w-100"
+            customClass="btn-public btn--icon-right w-100"
             [submit]="true"
             (action)="submitForm($event)"
             [isDisabled]="!!formLoading"
-            label="Přihlásit se">
+            label="Přihlásit se"
+            icon="icon--arrow-right"
+            iconPosition="right">
         </lnd-button>
     </div>
 </form>

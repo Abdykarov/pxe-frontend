@@ -8,4 +8,5 @@ export interface ISupplierLogo {
     alt: string;
     name?: string;
     width: number;
+    faqUrl?: string;
 }

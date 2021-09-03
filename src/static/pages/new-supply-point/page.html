@@ -26,145 +26,197 @@
         </div>
     </div>
     <div class="row mb-6">
+        <div class="col-12 text-center">
+            <h2>Odběrné místo: U budky</h2>
+        </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-progress-bar [config]="config.stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <h2>
+            <p class="perex mb-4">
                 Zadejte údaje k odběrnému místu
-            </h2>
+            </p>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <lnd-banner-ui
+            <!-- <lnd-banner-ui
                 [buttonsTemplate]="bannerButtonsTemplate"
                 [data]="bannerObj"
             >
-            </lnd-banner-ui>
-            <div class="page-box">
-                <form
-                    [formGroup]="form"
-                    class="form-container">
-                    <lnd-form-field
-                        [id]="'commodityType'"
-                        label="Druh energie"
-                        [type]="'RADIOGROUP'"
-                        [customFormGroupClass]="'mb-3'"
-                        [radioGroupItemClass]="'custom-control-inline'"
-                        [options]="config.commodityTypeOptions"
-                    ></lnd-form-field>
-                    <lnd-form-field
-                        [id]="'subscriberType'"
-                        label="Odběratel"
-                        [type]="'RADIOGROUP'"
-                        [customFormGroupClass]="'mb-3'"
-                        [radioGroupItemClass]="'custom-control-inline'"
-                        [options]="config.subscriberTypeOptions"
-                    ></lnd-form-field>
-                    <lnd-select
-                        [bindValue]="null"
-                        label="Současný dodavatel"
-                        [options]="config.suppliersOptions"
-                        [parentForm]="form"
-                        [selectName]="'supplierId'"
-                        subtext="Začněte psát a my vám poradíme."
-                        searchable="true">
-                    </lnd-select>
-                    <lnd-form-field
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [id]="'name'"
-                        label="Vaše pojmenování odběrného místa"
-                        subtext="Cokoliv, podle čeho chcete místo identifikovat."
-                    ></lnd-form-field>
-                    <lnd-form-field
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [id]="'ean'"
-                        label="EAN"
-                        subtext="Unikátní identifikační číslo odběrného místa."
-                    ></lnd-form-field>
-                    <pxe-address-whisperer
-                        [label]="'Adresa'"
-                        [parentForm]="form"
-                        [whispererName]="'address'">
-                    </pxe-address-whisperer>
-                    <lnd-select
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        label="Distribuční sazba"
-                        [options]="config.distributionRateOptions"
-                        [parentForm]="form"
-                        [selectName]="'distributionRateId'">
-                    </lnd-select>
-                    <pxe-field-wrapper
-                        labelFor="phasesId"
-                        [subtextTemplate]="phraseHelpTemplate">
-                        <div class="row no-gutters">
-                            <div class="col-12 mb-2">
-                                <small>Jistič</small>
-                            </div>
-                            <div class="col-12 col-md-6 pr-md-1">
-                                <lnd-select
-                                    label="fáze"
-                                    [options]="config.circuitBreakerPhaseOptions"
-                                    [parentForm]="form"
-                                    [selectName]="'phasesId'">
-                                </lnd-select>
-                            </div>
-                            <div class="col-12 col-md-6 pl-md-1">
-                                <lnd-select
-                                    [appendButtonIcon]="'icon--info'"
-                                    (appendButtonAction)="openModal()"
-                                    label="velikost"
-                                    [options]="config.circuitBreakerSizeOptions"
-                                    [parentForm]="form"
-                                    [selectName]="'circuitBreakerId'">
-                                </lnd-select>
+            </lnd-banner-ui> -->
+            <form
+                [formGroup]="form">
+                <div class="page-box mb-3">
+                    <div class="form-container">
+                        <div class="row no-gutters mb-2">
+                            <div class="col-12">
+                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/light.svg" title="">
+                                <h2 class="page-box__title">
+                                    Komodita <br />a současný dodavatel
+                                </h2>
                             </div>
                         </div>
-                    </pxe-field-wrapper>
-                    <lnd-form-field
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [id]="'annualConsumptionNT'"
-                        label="Roční spotřeba elektřiny (nízký tarif)"
-                        appendText="MWh"
-                    ></lnd-form-field>
-                    <lnd-form-field
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [id]="'annualConsumptionVT'"
-                        label="Roční spotřeba elektřiny (vysoký tarif)"
-                        appendText="MWh"
-                    ></lnd-form-field>
-                    <label class="control-label radiogroup-control-label">
-                        Jak vypovíte stávající smlouvu?
-                    </label>
-                    <lnd-form-field
-                        [id]="'ownTerminate'"
-                        label="Vypovím si sám (sama)"
-                        [type]="'CHECKBOX'"
-                        [customFormGroupClass]="'mb-5'">
-                    ></lnd-form-field>
-                    <lnd-form-field
-                        [id]="'contractEndTypeId'"
-                        label="Ukončení platnosti aktuální smlouvy"
-                        [type]="'RADIOGROUP'"
-                        [customFormGroupClass]="'mb-3'"
-                        [radioGroupItemClass]="'custom-control-inline'"
-                        [options]="config.contractEndTypeOptions"
-                    ></lnd-form-field>
-                    <div class="text-center">
-                        <lnd-button
-                            type="primary"
-                            (action)="submitAction()"
-                            label="Uložit a vybrat nabídku">
-                        </lnd-button>
+                        <lnd-form-field
+                            [id]="'commodityType'"
+                            label="Druh energie"
+                            [type]="'RADIOGROUP'"
+                            [customFormGroupClass]="'mb-3'"
+                            [radioGroupItemClass]="'custom-control-inline'"
+                            [options]="config.commodityTypeOptions"
+                        ></lnd-form-field>
+                        <lnd-form-field
+                            [id]="'subscriberType'"
+                            label="Odběratel"
+                            [type]="'RADIOGROUP'"
+                            [customFormGroupClass]="'mb-3'"
+                            [radioGroupItemClass]="'custom-control-inline'"
+                            [options]="config.subscriberTypeOptions"
+                        ></lnd-form-field>
+                        <lnd-select
+                            [bindValue]="null"
+                            label="Současný dodavatel"
+                            [options]="config.suppliersOptions"
+                            [parentForm]="form"
+                            [selectName]="'supplierId'"
+                            subtext="Začněte psát a my vám poradíme."
+                            searchable="true">
+                        </lnd-select>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="page-box mb-3">
+                    <div class="form-container">
+                        <div class="row no-gutters mb-2">
+                            <div class="col-12">
+                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-point.svg" title="">
+                                <h2 class="page-box__title">
+                                    Identifikace a adresa odběrného místa
+                                </h2>
+                            </div>
+                        </div>
+                        <lnd-form-field
+                            [appendButtonIcon]="'icon--info'"
+                            (appendButtonAction)="openModal()"
+                            [id]="'name'"
+                            label="Vaše pojmenování odběrného místa"
+                            subtext="Cokoliv, podle čeho chcete místo identifikovat."
+                        ></lnd-form-field>
+                        <lnd-form-field
+                            [appendButtonIcon]="'icon--info'"
+                            (appendButtonAction)="openModal()"
+                            [id]="'ean'"
+                            label="EAN"
+                            subtext="Unikátní identifikační číslo odběrného místa."
+                        ></lnd-form-field>
+                        <pxe-address-whisperer
+                            [label]="'Adresa'"
+                            [parentForm]="form"
+                            [whispererName]="'address'">
+                        </pxe-address-whisperer>
+                    </div>
+                </div>
+                <div class="page-box mb-3">
+                    <div class="form-container">
+                        <div class="row no-gutters mb-2">
+                            <div class="col-12">
+                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
+                                <h2 class="page-box__title">
+                                    Parametry odběru elekřiny
+                                </h2>
+                            </div>
+                        </div>
+                        <lnd-select
+                            [appendButtonIcon]="'icon--info'"
+                            (appendButtonAction)="openModal()"
+                            label="Distribuční sazba"
+                            [options]="config.distributionRateOptions"
+                            [parentForm]="form"
+                            [selectName]="'distributionRateId'">
+                        </lnd-select>
+                        <pxe-field-wrapper
+                            labelFor="phasesId"
+                            [subtextTemplate]="phraseHelpTemplate">
+                            <div class="row no-gutters">
+                                <div class="col-12 mb-2">
+                                    <small>Jistič</small>
+                                </div>
+                                <div class="col-12 col-md-6 pr-md-1">
+                                    <lnd-select
+                                        label="fáze"
+                                        [options]="config.circuitBreakerPhaseOptions"
+                                        [parentForm]="form"
+                                        [selectName]="'phasesId'">
+                                    </lnd-select>
+                                </div>
+                                <div class="col-12 col-md-6 pl-md-1">
+                                    <lnd-select
+                                        [appendButtonIcon]="'icon--info'"
+                                        (appendButtonAction)="openModal()"
+                                        label="velikost"
+                                        [options]="config.circuitBreakerSizeOptions"
+                                        [parentForm]="form"
+                                        [selectName]="'circuitBreakerId'">
+                                    </lnd-select>
+                                </div>
+                            </div>
+                        </pxe-field-wrapper>
+                        <lnd-form-field
+                            [appendButtonIcon]="'icon--info'"
+                            (appendButtonAction)="openModal()"
+                            [id]="'annualConsumptionNT'"
+                            label="Roční spotřeba elektřiny (nízký tarif)"
+                            appendText="MWh"
+                        ></lnd-form-field>
+                        <lnd-form-field
+                            [appendButtonIcon]="'icon--info'"
+                            (appendButtonAction)="openModal()"
+                            [id]="'annualConsumptionVT'"
+                            label="Roční spotřeba elektřiny (vysoký tarif)"
+                            appendText="MWh"
+                        ></lnd-form-field>
+                    </div>
+                </div>
+                <div class="page-box mb-3">
+                    <div class="form-container">
+                        <div class="row no-gutters mb-2">
+                            <div class="col-12">
+                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
+                                <h2 class="page-box__title">
+                                    Výpověď současné smlouvy
+                                </h2>
+                            </div>
+                        </div>
+                        <label class="control-label radiogroup-control-label">
+                            Jak vypovíte stávající smlouvu?
+                        </label>
+                        <lnd-form-field
+                            [formControl]="form.controls.ownTerminate"
+                            lndSFormDirective
+                            lndSBiometricsDirective
+                            [id]="'ownTerminate'"
+                            label=""
+                            [type]="'RADIOGROUP'"
+                            [customFormGroupClass]="'mb-5'"
+                            [options]="ownTerminateOptions"
+                        ></lnd-form-field>
+                        <lnd-form-field
+                            [id]="'contractEndTypeId'"
+                            label="Ukončení platnosti aktuální smlouvy"
+                            [type]="'RADIOGROUP'"
+                            [customFormGroupClass]="'mb-3'"
+                            [radioGroupItemClass]="'custom-control-inline'"
+                            [options]="config.contractEndTypeOptions"
+                        ></lnd-form-field>
+                        <div class="text-center">
+                            <lnd-button
+                                type="primary"
+                                (action)="submitAction()"
+                                label="Uložit a zobrazit nabídky">
+                            </lnd-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

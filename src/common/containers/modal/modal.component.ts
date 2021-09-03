@@ -1,7 +1,7 @@
 import {
     Component,
     ComponentFactoryResolver,
-    ComponentRef,
+    ComponentRef, HostListener,
     Inject,
     Input,
     PLATFORM_ID,
@@ -18,6 +18,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
+import { IShowModal } from './modals/model/modal.model';
 import { ModalService } from './modal.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
@@ -27,6 +28,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
     styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent extends AbstractComponent {
+
     @ViewChild(AddModalDirective, { static: true })
     public addModal: AddModalDirective;
 
@@ -37,6 +39,13 @@ export class ModalComponent extends AbstractComponent {
     public modalTitle: string;
 
     public component: ComponentRef<any>;
+
+    @HostListener('document:keydown.escape', ['$event'])
+    public onKeydownHandler(event: KeyboardEvent) {
+        if (R.path(['instance', 'closeModal'])(this.component)) {
+            this.component.instance.closeModal.next();
+        }
+    }
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver,
@@ -88,7 +97,7 @@ export class ModalComponent extends AbstractComponent {
         });
     }
 
-    private closeModal = (modal, val = null, offsetY = null) => {
+    private closeModal = (modal: IShowModal, val = null, offsetY = null) => {
         this.modalLoaderService.setCloseModalData({
             modalType: modal.modalType,
             confirmed: val,
@@ -101,7 +110,9 @@ export class ModalComponent extends AbstractComponent {
             )
             .subscribe();
         if (offsetY) {
-            setTimeout(() => window.scrollBy(0, offsetY));
+            if (!modal.withoutScroll) {
+                setTimeout(() => window.scrollBy(0, offsetY));
+            }
         }
     }
 

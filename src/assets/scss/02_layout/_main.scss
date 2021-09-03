@@ -39,6 +39,12 @@
 				background-color: $font-text;
 			}
 		}
+
+		&.no-bullets > li {
+			&::before {
+				content: none;
+			}
+		}
 	}
 
 	ol {
@@ -62,10 +68,12 @@
 
 			> li {
 				counter-increment: ol-list-2;
+				padding-left: 0;
 			}
 
 			> li::before {
 				content: counter(ol-list-2, lower-latin) ')';
+				padding-right: ( $spacer / 4 );
 			}
 
 			ol {
@@ -82,6 +90,57 @@
 		}
 	}
 
+	ol.numerical-list-stepper {
+		& > li,
+		& > li::before {
+			color: rgba($white, .7);
+		}
+
+		& > li {
+			padding-bottom: ( $spacer * .75 );
+		}
+
+		.active,
+		.active::before {
+			color: $white;
+			font-weight: $font-weight-bold;
+		}
+	}
+
+	ol.circular-number-list {
+		& > li {
+			padding-top: ( $circular-number-list-size + ( $spacer * .25 ) );
+			padding-left: 0;
+			padding-bottom: ( $spacer * 2 );
+			line-height: ( 24 / 16 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-top: 0;
+				padding-left: ( $circular-number-list-size + ( $spacer * .75 ) );
+			}
+		}
+
+		& > li::before {
+			content: counter(ol-list-1, decimal);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: $circular-number-list-size;
+			height: $circular-number-list-size;
+			top: 0;
+			background-color: $white;
+			border-radius: $circular-number-list-size;
+			box-shadow: $box-shadow-circle;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				top: 12px;
+				transform: translateY(-50%);
+			}
+		}
+	}
+
 	.decimal-list {
 		&,
 		ol {
@@ -92,6 +151,7 @@
 					content: counters(item, '.') '.';
 					counter-increment: item;
 					font-weight: 400;
+					position: static;
 				}
 			}
 		}
@@ -103,17 +163,46 @@
 			&::before {
 				font-size: $h2-font-size;
 				line-height: ( 24 / 18 );
+				padding-left: $list-decimal-padding-left;
 			}
 
-			h3 {
-				padding-left: $list-decimal-padding-left;
+			.decimal-list__item-title {
+				padding-left: ( $spacer * .5 );
 				margin-bottom: $spacer;
+				display: inline-block;
 			}
 
 			> ol {
 				> li {
 					display: block;
 					padding-left: $list-decimal-padding-left;
+				}
+
+				> li::before {
+					position: absolute;
+				}
+
+				h3,
+				.h3 {
+					display: inline-block;
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		&--h3 {
+			> li::before {
+				padding-left: 0;
+				font-size: $h3-font-size-public-xs;
+				line-height: ( 30 / 24 );
+				font-weight: 700;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					font-size: $h3-font-size-public-md;
+				}
+				@include media-breakpoint-up(xl) {
+					font-size: $h3-font-size-public;
 				}
 			}
 		}
@@ -127,11 +216,25 @@
 		}
 	}
 
+	ol.lower-roman {
+		> li {
+			counter-increment: ol-lower-roman-list;
+			padding-left: ( $spacer * 1.5 );
+		}
+
+		> li::before {
+			position: absolute;
+			content: '(' counter(ol-lower-roman-list, lower-roman) ')';
+		}
+	}
+
 	ol.lower-alpha {
 		> li {
+			position: relative;
 			padding-left: ( $spacer * 1.5 );
 
 			&::before {
+				position: absolute;
 				content: counter(item, lower-alpha) '/';
 			}
 		}
@@ -156,18 +259,41 @@
 			}
 		}
 
+		&--centered {
+			li {
+				&::before {
+					top: 1px;
+					left: -5px;
+					position: relative;
+				}
+			}
+		}
+
 		&--less-offset {
 			li {
 				padding-bottom: ( $spacer * .25 );
 			}
 		}
+
+		&--medium-offset {
+			li {
+				padding-bottom: ( $spacer * .5 );
+			}
+		}
 	}
 
 	.link-list {
+		margin: 0 ( -$spacer * .75 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin: 0 ( -$spacer * 1.25 );
+		}
+
 		&__item {
 			display: inline-flex;
 			padding: 0 ( $spacer * .75 );
-			margin-bottom: ( $spacer / 2 );
+			margin-bottom: $spacer;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
@@ -180,32 +306,95 @@
 		}
 
 		&__link {
-			&,
-			&:visited {
-				padding: ( $spacer / 4 ) 0;
+			@include link-without-href {
 				color: $font-text;
 				font-size: $perex-font-size;
 				text-transform: uppercase;
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-					padding: ( $spacer / 2 ) 0;
-				}
 			}
 
-			&:focus,
-			&:hover {
+			@include link-without-href-interactive {
+				color: $font-text;
 				text-decoration: none;
+				border-bottom: 2px solid rgba($primary, .6);
 			}
 
 			&--active {
 				border-bottom: 2px solid $primary;
 			}
 		}
+
+		&--small {
+			margin: 0 ( -$spacer / 2 );
+
+			.link-list__item {
+				// Media queries
+				@include media-breakpoint-up(md) {
+					padding: 0 ( $spacer / 2 );
+				}
+			}
+
+			.link-list__link {
+				&,
+				&:visited {
+					font-size: $font-size-base;
+					line-height: $line-height-base;
+					text-transform: initial;
+				}
+			}
+		}
+	}
+
+	.link-list--lp {
+		margin: 0;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin: 0;
+		}
+
+		.link-list__item {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		.link-list__item + .link-list__item {
+			margin-left: ( $spacer * 2 );
+
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				margin-left: $spacer;
+			}
+		}
+
+		.link-list__link {
+			@include link-without-href {
+				padding-bottom: ( $spacer / 4 );
+				font-size: $font-size-base-public;
+				text-transform: none;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					padding-left: ( $spacer / 2 );
+					padding-right: ( $spacer / 2 );
+				}
+				@include media-breakpoint-up(xl) {
+					padding-left: ( $spacer * 2 );
+					padding-right: ( $spacer * 2 );
+				}
+			}
+
+			@include link-without-href-interactive {
+				border-bottom: 2px solid rgba($font-text-public, .6);
+			}
+
+			&--active {
+				border-color: $font-text-public;
+			}
+		}
 	}
 
 	.qr-code-img {
-		width: 240px;
+		width: 100px;
 		max-width: 100%;
 		height: auto;
 	}

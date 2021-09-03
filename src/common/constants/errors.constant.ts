@@ -1,4 +1,5 @@
 import { CONSTS } from 'src/app/app.constants';
+import { bytesToSize } from '../utils/bytes-to-size.fnc';
 
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
@@ -6,6 +7,12 @@ export const importErrorCodes = {
     [CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]: 'Vložit můžete pouze csv formát.',
     [CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]: 'Vložit můžeze pouze jeden soubor.',
     [CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]: 'Pro zvolenou komoditu nebyl nalezen žádný záznam.',
+};
+
+export const askForOfferCodes = {
+    [CONSTS.ASK_FOR_OFFER.ERROR_CODES.FILE_TYPE]: 'Soubory s nepodporovanými formáty nebyly nahrány.',
+    [CONSTS.ASK_FOR_OFFER.ERROR_CODES.FILE_COUNT]: `Maximální počet souborů je ${CONSTS.ASK_FOR_OFFER.MAX_FILE_COUNT}.`,
+    [CONSTS.ASK_FOR_OFFER.ERROR_CODES.FILE_SIZE]: `Maximální velikost souboru je ${bytesToSize(CONSTS.ASK_FOR_OFFER.MAX_FILE_SIZE)}.`,
 };
 
 export const defaultErrorMessageViolation  = 'Neznáma chyba.';
@@ -89,6 +96,18 @@ export const importErrorViolations = {
     'deliveryFromMustBeBeforeDeliveryTo': 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
 };
 
+export const oAuthApiError = {
+    'SEC0009': 'Ověření pomocí bankovní identity se nezdařilo.',
+    'SEC0008': 'Ověření pomocí bankovní identity se nezdařilo.',
+    'SEC0007': 'Přihlášení se nezdařilo. Přihlašte se přes Bankovní identitu.',
+    'SEC0006': 'Přihlášení se nezdařilo. Přihlašte se přes Google.',
+    'SEC0005': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',
+    'SEC0005#_=_': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',
+    'SEC0004': 'Přihlášení se nezdařilo. Přihlašte se pomocí e-mailu (přihlašovacího jména) a hesla.',
+    'SEC0003': 'Přihlášení se nezdařilo.',
+    'SEC0003#_=_': 'Přihlášení se nezdařilo.',
+};
+
 export const restAPIErrorCodes = {
     'CLI0001': 'Špatné přihlašovací údaje.',
     'VAL00001': 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
@@ -108,6 +127,8 @@ export const graphQLMessages = {
     obsoleteSupplyPointVersion: 'Kontrakt lze uzavřít pouze na nejnovější verzi OM.',
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     duplicateOffer: 'Nabídka nebyla založena, protože totožná nabídka již existuje.',
+    mustBeValidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
+    notValidOffer: 'Platnost nabídka vypršela.',
 };
 
 export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
@@ -134,12 +155,18 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
@@ -177,7 +204,7 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas s Obchodními podmínkami PARC4U a na vzetí na ' +
+            required: 'Nezapomeňte na souhlas s Obchodními podmínkami parc4u a na vzetí na ' +
                 'vědomí informací o Ochraně osobních údajů.',
         },
         newsSubscription: {
@@ -221,8 +248,6 @@ export const errorFieldMessages =  {
     email: {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
-        emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
-        usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
@@ -310,6 +335,7 @@ export const errorFieldMessages =  {
         currentRequired: 'Vyplňte své současné heslo.',
         pattern: '	Vaše heslo musí mít minimálně 10 znaků.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
+        fieldsMustNotMatch: 'Heslo se shoduje s aktuálně nastaveným heslem. Prosím, zvolte jíné.',
         invalidCurrentPassword: 'Vyplněné heslo se s vaším současným heslem neshoduje.',
     },
     phone: {
@@ -333,7 +359,9 @@ export const errorFieldMessages =  {
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
-        invalidSmsCode: 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
+        invalidSmsCode1: 'Vyplněný kód se neshoduje s kódem, který přišel v SMS. Zbývají 2 pokusy.',
+        invalidSmsCode2: 'Vyplněný kód se neshoduje s kódem, který přišel v SMS. Zbývá 1 pokus.',
+        smsCodeAttemptsExceededLimit: 'Byl vyčerpán limit pro zadání kódu. Klikněte na "Poslat znovu" a vyplňte kód, který přijde v SMS.',
     },
     street: {
         required: 'Vyplňte ulici.',

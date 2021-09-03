@@ -1,0 +1,145 @@
+<ng-template #columnTemplateGreenEnergy let-row="row">
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-auto">
+    </span>
+</ng-template>
+<ng-template #columnTemplatePriceVT let-row="row">
+    {{row.offer.powerAttributes.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+</ng-template>
+<ng-template #columnTemplatePriceNT let-row="row">
+    <ng-container *ngIf="row.offer.powerAttributes.priceNT !== null">
+        {{row.offer.powerAttributes.priceNT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    </ng-container>
+</ng-template>
+<ng-template #columnTemplatePriceGas let-row="row">
+    {{row.offer.gasAttributes.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+</ng-template>
+<ng-template #columnTemplateValidFromTo let-row="row">
+    {{row.offer.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offer.validTo | date:'d.&nbsp;M.&nbsp;y'}}
+</ng-template>
+<ng-template #columnTemplateDeliveryFromTo let-row="row">
+    {{row.offer.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offer.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+</ng-template>
+<ng-template #actionColumnTemplate let-row="row" let-index="index">
+    <span>{{row.offer.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
+    <div class="row no-gutters action-area-div"
+         *ngIf="!row.duplicity">
+        <div class="col-12">
+            <ng-template #tooltipDelete let-toggle="toggle">
+                <lnd-button
+                    icon="icon--delete"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();delete(row,index)"
+                ></lnd-button>
+            </ng-template>
+            <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
+                Smazat
+            </lnd-tooltip>
+        </div>
+    </div>
+</ng-template>
+<div class="row"
+     *ngIf="tableRows && tableRows.length">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        <lnd-alert
+            *ngIf="globalError.length"
+            type="danger">
+            <ng-container *ngFor="let error of globalError">
+                {{ error }}<br>
+            </ng-container>
+        </lnd-alert>
+        <div class="mt-5">
+            <lnd-info-banner
+                *ngIf="!offerDeleted"
+                bannerTitle="Úspěšně jsme nahráli {{tableRows.length}} {{tableRows.length | plural: 'new_offer'}}. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
+                [showButton]="false"
+                [bannerType]="bannerTypeImages.ACCEPTED"
+            >
+            </lnd-info-banner>
+        </div>
+        <lnd-alert
+            *ngIf="offerDeleted || countOfDuplicateOffers"
+            customClass="text-center"
+            type="info"
+        >
+            {{(offerDeleted ? ('Nabídka ' + offerDeleted + ' byla smazána.') : '')}}
+                <br *ngIf="offerDeleted && countOfDuplicateOffers" />
+                {{
+                    countOfDuplicateOffers ?
+                        ('Seznam nabídek obsahuje ' +
+                            countOfDuplicateOffers +
+                            ' ' +
+                            (countOfDuplicateOffers | plural: 'duplicity') +
+                            (countOfDuplicateOffers | plural: 'willNotImported')+
+                            '.'
+                        ) : ''}}
+        </lnd-alert>
+    </div>
+</div>
+<ul class="text-center link-list">
+    <li *ngIf="countOfPowerOffers"
+        class="link-list__item">
+        <a class="link-list__link"
+            routerLinkActive="link-list__link--active"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[routePower]"
+            [state]="{
+                offers: tableRows,
+                commodityTypeAfterApprove: commodityTypeAfterApprove
+            }">Elektřina</a>
+    </li>
+    <li *ngIf="countOfGasOffers"
+        class="link-list__item">
+        <a class="link-list__link"
+            routerLinkActive="link-list__link--active"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[routeGas]"
+            [state]="{
+                offers: tableRows,
+                commodityTypeAfterApprove: commodityTypeAfterApprove
+            }">Plyn</a>
+    </li>
+</ul>
+<div class="row mb-4">
+    <div class="col-12 col-lg-10 offset-lg-1">
+        <lnd-table
+            #table
+            [cols]="tableCols"
+            [rows]="tableRows | offersByCommodityType: commodityType"
+            [showHead]="true"
+            [isStatic]="false"
+            [tableWrapperClass]="['table-wrapper--advanced']"
+            [tableClass]="['table--advanced', 'mb-0']"
+            [actionColTriggersDetail]="false"
+            [dangerBackgroundPropertyCondition]="'duplicity'"
+            [columnTemplates]="{
+                    actionColumnTemplate: actionColumnTemplate,
+                    columnTemplateGreenEnergy: columnTemplateGreenEnergy,
+                    columnTemplatePriceVT: columnTemplatePriceVT,
+                    columnTemplatePriceNT: columnTemplatePriceNT,
+                    columnTemplatePriceGas: columnTemplatePriceGas,
+                    columnTemplateValidFromTo: columnTemplateValidFromTo,
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                }">
+            >
+        </lnd-table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <lnd-button
+            customClass="ml-5"
+            label="Zpět"
+            type="link"
+            (action)="backAction($event)">>
+        </lnd-button>
+        <lnd-button
+            customClass="ml-5"
+            label="Schválit nabídky"
+            type="primary"
+            (action)="approvalAction($event)">>
+        </lnd-button>
+    </div>
+</div>

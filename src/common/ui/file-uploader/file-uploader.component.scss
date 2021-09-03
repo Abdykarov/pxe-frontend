@@ -16,7 +16,7 @@
 .drop-zone {
 	position: relative;
 	width: 100%;
-	padding: ( $spacer * 2.5 ) 0;
+	padding: ( $spacer * 2.5 ) $spacer;
 
 	&::after {
 		content:'';
@@ -45,10 +45,18 @@
 	&__control {
 		box-shadow: none;
 		cursor: pointer;
+
+		&:focus,
+		&:hover {
+			text-decoration: $link-hover-decoration;
+		}
 	}
 
 	&--interactive {
 		background-color: rgba($light-dark, .3);
 	}
-}
 
+	&--zindex {
+		z-index: $zindex-drop-zone;
+	}
+}

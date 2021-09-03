@@ -9,6 +9,7 @@ import {
     OnDestroy,
     OnInit,
     PLATFORM_ID,
+    Renderer2,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -28,8 +29,9 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
+    CommodityTypesCsLowerCase,
     CONSTS,
-    SEO,
+    SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
@@ -39,10 +41,6 @@ import {
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
-import {
-    navigationMenuSuppliersActions,
-    navigationMenuUserActions,
-} from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
@@ -54,6 +52,8 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
+    public commodityTypePower = CommodityTypesCsLowerCase.POWER;
+    public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
@@ -70,10 +70,11 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         private navigationService: NavigationService,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         protected overlayService: OverlayService,
+        private renderer: Renderer2,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
-        protected scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) public platformId: string,
     ) {
@@ -89,15 +90,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             scrollToService,
         );
         this.titleService.setTitle(CONSTS.TITLES.DEFAULT);
-        this.metaService.updateTag({
-            name: 'description',
-            content: SEO.META_DESCRIPTION.LANDING_PAGE,
-        });
-        this.metaService.updateTag({
-            name: 'keywords',
-            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
-        });
-
         this.navigationService.getNavigationConfig();
 
         this.navigationApolloService.getConfig()
@@ -107,7 +99,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             )
             .subscribe((current: IStoreUi)  => {
                 if (current.securedLayout) {
-                    this.navConfig = current.securedLayout.navigationConfig;
+                    const userLoginProvider = authService.currentUserValue.provider;
+                    const sourceConfig = current.securedLayout.navigationConfig[0];
+                    this.navConfig = [this.navigationService.filterNavigationByProvider(sourceConfig, userLoginProvider)];
                     this.showOverlay = current.showOverlay;
                     this.cd.markForCheck();
                 }
@@ -119,6 +113,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
             this.modalsService.closeModalData$
                 .pipe(
+                    takeUntil(this.destroy$),
                     filter(R_.isNotNil),
                 )
                 .subscribe(modal => {
@@ -154,12 +149,17 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
-        const currentUser = this.authService.currentUserValue;
-        this.navigationMenuUserActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
+
+        this.renderer.addClass(document.body, 'secured');
+        const userType = this.authService.currentUserValue.type;
+        const userLoginProvider = this.authService.currentUserValue.provider;
+        const sourceConfig = this.navigationService.MENU_BY_USER_TYPE_MAPPING[userType].navigationMenuActions;
+        this.navigationMenuUserActions = this.navigationService.filterNavigationByProvider(sourceConfig, userLoginProvider);
     }
 
     ngOnDestroy() {
         super.ngOnDestroy();
+        this.renderer.removeClass(document.body, 'secured');
         if (isPlatformBrowser(this.platformId)) {
             window.removeEventListener('storage', this.handleStoreChange);
         }

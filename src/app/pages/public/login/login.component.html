@@ -1,0 +1,68 @@
+<div class="login-page container-content container-content--public">
+    <div class="section-picture-text">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row">
+                <div class="col-md-8 offset-md-1 col-xl-4 offset-xl-1 col-lg-3 offset-lg-0">
+                    <h1 class="h2--public mb-2">
+                        Přihlaste se
+                    </h1>
+                    <p>Ještě nemáte účet? <a class="d-inline-block" [routerLink]="ROUTES.ROUTER_SIGN_UP">Založte si jej zde</a>.</p>
+                    <div class="form-container form-container--large ml-0">
+                        <lnd-alert
+                            *ngIf="globalError.length"
+                            type="danger">
+                            <ng-container *ngFor="let error of globalError">
+                                {{ error }}<br>
+                            </ng-container>
+                        </lnd-alert>
+                        <pxe-re-captcha #reCapcha
+                                        id="login"
+                                        (resolveAction)="submitFormLogin($event)">
+                            <pxe-login-form
+                                *ngIf="[LOGIN_STATE.LOGIN, LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) !== -1"
+                                [formFields]="formFieldsLogin.loginFormFields"
+                                [formLoading]="formLoading"
+                                [globalError]="globalError"
+                                [login]="login"
+                                [reasonForLogoutUser]="reasonForLogoutUser"
+                                [wasSentToPhone]="wasSentToPhone"
+                                [passwordWasSent]="passwordWasSent"
+                                (customAction)="forgottenPasswordAction($event)"
+                                (reSentAction)="resetPassword($event)"
+                                (submitAction)="reCapcha.execute($event)"
+                            ></pxe-login-form>
+                        </pxe-re-captcha>
+                        <pxe-login-supply-auth-form
+                            *ngIf="state === LOGIN_STATE.CHANGE_SEND_SMS"
+                            [formFields]="formFieldsLogin.loginSupplyAuthFields"
+                            [formLoading]="formLoading"
+                            [globalError]="globalError"
+                            [telephoneNumber]="phoneNumber"
+                            (submitAction)="submitSupplierLoginSms($event)"
+                            (customAction)="resendSupplierLoginSms($event)"
+                        ></pxe-login-supply-auth-form>
+                        <pxe-re-captcha #reCapchaResetPassword
+                                        id="reset-password"
+                                        (resolveAction)="submitResetPassword($event)">
+                            <pxe-reset-password-form
+                                *ngIf="state === LOGIN_STATE.RESET"
+                                [formFields]="formFieldsLogin.resetPasswordFields"
+                                [formLoading]="formLoading"
+                                [fieldError]="fieldError"
+                                [globalError]="globalError"
+                                (submitAction)="reCapchaResetPassword.execute($event)">
+                            </pxe-reset-password-form>
+                        </pxe-re-captcha>
+                        <pxe-change-password-form
+                            *ngIf="state === LOGIN_STATE.CHANGE_PASSWORD"
+                            [formFields]="formFieldsLogin.changePasswordFields"
+                            [formLoading]="formLoading"
+                            [globalError]="globalError"
+                            (submitAction)="submitChangePassword($event)">
+                        </pxe-change-password-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

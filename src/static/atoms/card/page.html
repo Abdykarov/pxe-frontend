@@ -3,62 +3,105 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
-<lnd-card
-    alignment="center"
-    [data]="firstCard"
-    [hasButton]="true"
-    buttonLabel="Go somewhere"
-    hasButtonOutline="true"
-    (action)="goSomewhere()">
-</lnd-card>
-<lnd-card
-    [data]="secondCard"
-    imgPosition="bottom">
-</lnd-card>
-<h3>Card list</h3>
-<div class="static-pages">
-    <div class="row">
-        <div class="col-md-4">
+
+<h3>Card tiles</h3>
+<div class="card-tiles mb-7">
+    <div class="row no-gutters card-tiles__inner">
+        <div class="col-md-4 card-tile__item">
             <lnd-card
-                [data]="listCard"
-                type="list">
+                type="block"
+                [data]="tileCard"
+            >
             </lnd-card>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card-tile__item">
             <lnd-card
-                [data]="listCard"
-                type="list">
+                type="block"
+                [data]="tileCard"
+            >
             </lnd-card>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 card-tile__item">
             <lnd-card
-                [data]="listCard"
-                type="list">
+                type="block"
+                [data]="tileCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-tile__item">
+            <lnd-card
+                type="block"
+                [data]="tileCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-tile__item">
+            <lnd-card
+                type="block"
+                [data]="tileCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-tile__item">
+            <lnd-card
+                type="block"
+                [data]="tileCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-tile__item card-tile__item--last-item">
+            <lnd-card
+                type="block"
+                [data]="tileCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-tile__item card-tile__item--last-item">
+            <lnd-card
+                type="block"
+                [data]="tileCard"
+            >
             </lnd-card>
         </div>
     </div>
 </div>
-<h3>Card tiles</h3>
-<div class="row mb-4">
-    <div class="col-md-6 col-xl-3">
-        <lnd-card
-            [data]="tileCard"
-            type="tile"
-            (action)="tileAction()">
-        </lnd-card>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <lnd-card
-            [data]="tileCard"
-            type="tile"
-            (action)="tileAction()">
-        </lnd-card>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <lnd-card
-            [data]="tileCard"
-            type="tile"
-            (action)="tileAction()">
-        </lnd-card>
+<h3>Card blogs</h3>
+<div class="card-blogs">
+    <div class="row card-blogs__inner">
+        <div class="col-md-4 card-blog__item">
+            <lnd-card
+                type="link"
+                [data]="blogCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-blog__item">
+            <lnd-card
+                type="link"
+                [data]="blogCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-blog__item">
+            <lnd-card
+                type="link"
+                [data]="blogCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-blog__item">
+            <lnd-card
+                type="link"
+                [data]="blogCard"
+            >
+            </lnd-card>
+        </div>
+        <div class="col-md-4 card-blog__item">
+            <lnd-card
+                type="link"
+                [data]="blogCard"
+            >
+            </lnd-card>
+        </div>
     </div>
 </div>

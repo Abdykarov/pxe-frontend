@@ -1,6 +1,6 @@
 <ng-template #confirmCodeInfoTemplate>
-    <div class="col-12 small">
-        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací sms kód.
+    <div class="small mb-3">
+        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací SMS kód.
     </div>
 </ng-template>
 
@@ -111,18 +111,19 @@
 
     <div class="text-center">
         <pxe-verification-form
-            [showDisabledInput]="false"
-            sendSmsLabel="Uložit"
-            classMainWrapper="row justify-content-center"
+            enableVerificationLabel="Uložit"
             [phone]="form.controls.phonePrefix.value + '' + form.controls.phone.value"
             [fieldError]="fieldError"
             [formLoading]="formLoading"
             [globalError]="globalError"
             [smsSent]="smsSent"
-            submitLabelText="Uložit"
+            [showForm]="showForm"
+            textInfoAboutVerificationPassword="Změnu telefonního čísla je nutné potvrdit ověřovacím SMS kódem"
+            [submitLabelText]="'Uložit'"
             [infoTemplate]="confirmCodeInfoTemplate"
             (submitAction)="processSaveButton($event, true)"
             (customAction)="processSaveButton($event, false)"
+            (enableVerificationAction)="enableVerification($event)"
         >
         ></pxe-verification-form>
     </div>

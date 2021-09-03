@@ -1,0 +1,37 @@
+<ng-template #accordionTemplate let-data>
+    <div [innerHTML]="data.shortContent | htmlContent"></div>
+    <div *ngIf="data.fullContent">
+        <a class="link mt-4"
+           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag[0].url, data.url]">
+            Zobrazit více
+        </a>
+    </div>
+</ng-template>
+
+<ng-container *ngIf="activeTag">
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 mb-3">
+            <ul class="text-center link-list">
+                <li class="link-list__item" *ngFor="let tag of faqConfig">
+                    <a class="link-list__link"
+                       [class.link-list__link--active]="tag.type === activeTag"
+                       (click)="changeTag($event, tag.url)">
+                        {{tag.label}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 mb-3">
+            <lnd-accordion
+                [accordionContentTemplate]="accordionTemplate"
+                [accordionItems]="questions | questionsToAccordions: faqConfig"
+                title="">
+            </lnd-accordion>
+            <div class="col-12 text-md-right">
+                Nenašli jste odpověď? Napište nám na <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>
+            </div>
+        </div>
+    </div>
+</ng-container>

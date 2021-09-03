@@ -2,30 +2,49 @@
     ng2FileDrop
     class="drop-zone"
     [class.drop-zone--interactive]="hasBaseDropZoneOver"
+    [ngClass]="wrapperCustomClass"
     (fileOver)="hasBaseDropZoneOver = $event"
     (fileDrop)="fileSelectAction.emit(uploader)"
     [uploader]="uploader"
 >
-    <img 
-        class="drop-zone__svg mb-2" 
-        src="/assets/images/illustrations/upload.svg" 
-        alt="upload ikona" 
+    <img
+        class="drop-zone__svg mb-3"
+        src="/assets/images/illustrations/upload.svg"
+        alt="upload ikona"
         title="upload ikona"
     >
-    <p class="mb-1">
-        Přetáhněte vyplněnou excelovskou tabulku
-    </p>
-    <p class="mb-3">
-        nebo
-    </p>
-    <input id="file-upload"
+    <ng-container *ngIf="!contentTemplate">
+        <p
+            [ngClass]="mainTextCustomClass"
+            class="mb-1">
+            {{mainText}}
+            <ng-container *ngIf="labelFromMainText">
+                <label [for]="id" class="drop-zone__control link"
+                       [ngClass]="labelCustomClass">
+                    nahrajte
+                </label>.
+            </ng-container>
+        </p>
+        <p class="mb-0"
+        [ngClass]="secondaryTextCustomClass">
+            {{secondaryText}}
+        </p>
+    </ng-container>
+    <ng-container *ngIf="contentTemplate">
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </ng-container>
+    <input [id]=id
         ng2FileSelect
         type="file"
+        [ngClass]="inputCustomClass"
+        [multiple]="multiple"
         [uploader]="uploader"
         (fileSelected)="fileSelectAction.emit(uploader)"
         hidden
     />
-    <label for="file-upload" class="btn btn-primary drop-zone__control">
+    <label [for]="id" class="btn btn-primary drop-zone__control"
+        [ngClass]="labelCustomClass"
+        *ngIf="!labelFromMainText">
         nahrát ze zařízení
     </label>
 </div>

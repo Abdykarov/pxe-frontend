@@ -7,202 +7,127 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-::ng-deep .card {
-	position: relative;
-	display: block;
-	margin-bottom: $spacer;
-	padding: $spacer ( $spacer / 2 );
-	background-color: $white;
+// Component variables
+@import 'card.component.variables.scss';
+
+
+// Bootstrap button import
+@import '~bootstrap/scss/card';
+
+
+.card {
+	align-items: center;
 	text-align: center;
+	border: none;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
+		align-items: flex-start;
 		text-align: left;
-		padding: $spacer;
 	}
-
-	img {
-		width: auto;
-		max-height: $card-img-max-height;
-		height: 100%;
-	}
-}
-
-.card-img-top {
-	margin-bottom: $spacer;
-
-	& + .card-body {
-		margin-bottom: 0;
-	}
-}
-
-.card-img--border {
-	// Media queries
-	@include media-breakpoint-up(md) {
-		border: $card-img-border-width-md solid $card-img-border-color;
-	}
-	@include media-breakpoint-up(xl) {
-		border-width: $card-img-border-width-xl;
-	}
-}
-
-.card-img--normal {
-	max-width: $card-widget-img-max-width;
-}
-
-.card-img--small {
-	max-width: $card-widget-img-small-max-width;
 }
 
 ::ng-deep .card-tiles {
-	.card {
-		height: calc(100% - 30px);
-		min-height: $card-tile-height;
-		padding: ( $spacer / 2 );
+	&__inner {
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			margin-left: -$card-tile-item-spacer;
+		}
+	}
 
-		.card-body {
-			display: flex;
-			flex-direction: column;
-			min-height: inherit;
+	.card-tile__item {
+		margin-bottom: ( $spacer * 2 );
 
-			.card-text {
-				position: relative;
-				margin-bottom: $spacer;
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: 0 ( $card-tile-item-spacer / 5 );
+		}
+		@include media-breakpoint-up(xl) {
+			padding: $card-tile-item-spacer;
+			margin-bottom: 0;
+			border-right: $card-border;
+			border-bottom: $card-border;
+		}
+
+		&:nth-child(-n + 3) {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				padding-top: ( $card-tile-item-spacer / 6 );
 			}
 		}
 
-		lnd-button {
-			margin-top: auto;
-			align-self: center;
+		&:nth-child(3n + 3) {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				border-right: none;
+			}
+		}
+
+		&--last-item {
+			padding-bottom: ( $spacer / 2 );
+			border-bottom: none;
+		}
+
+		.card {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				align-items: flex-start;
+				text-align: left;
+			}
+			@include media-breakpoint-up(md) {
+				max-width: $card-max-width;
+			}
+		}
+
+		.card-img-top {
+			width: $card-tile-img-size;
+			height: $card-tile-img-size;
+			margin-bottom: $card-spacer-y;
+			border-radius: $card-tile-img-size;
+			box-shadow: $card-tile-img-box-shadow;
 		}
 	}
 }
 
-.card-tile__item {
-	&,
-	&:visited {
-		min-height: $card-tile-height;
-		padding: ( $spacer / 2 );
-		text-decoration: none;
+::ng-deep .card-blogs {
+	.card-blog__item {
+		margin-bottom: $spacer;
+	}
 
-		// Media queries
-		@include media-breakpoint-up(md) {
-			text-align: center;
+	.card {
+		@include link {
+			height: 100%;
+			color: $font-text;
+			overflow: hidden;
+			border-radius: $border-radius;
+			box-shadow: $box-shadow;
+		}
+
+		@include link-interactive {
+			color: $font-text;
+			text-decoration: none;
+			box-shadow: $box-shadow-interactive;
+
+			.card__title {
+				color: $primary;
+			}
 		}
 	}
 
-	&:focus,
-	&:hover,
-	&:active {
-		cursor: pointer;
-
-		.card-title {
-			text-decoration: underline;
-		}
+	.card__img-holder {
+		position: relative;
+		width: 100%;
+		height: $card-tile-height-size;
+		overflow: hidden;
 	}
 
-	img {
-		max-height: $card-tile-img-max-height;
-		margin-bottom: 0;
+	.card-img-top {
+		@include absolute-center(true, false);
+		z-index: $zindex-card-blog-img;
 	}
 
 	.card-body {
-		position: relative;
-		height: 100%;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			text-align: left;
-		}
-	}
-
-	.card-text {
-		width: 100%;
-		margin-top: auto;
-	}
-
-	.card-img-top {
-		& + .card-body {
-			position: absolute;
-			top: auto;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			height: auto;
-			padding: ( $spacer / 2 );
-
-			.card-text {
-				position: relative;
-			}
-		}
-	}
-
-	.card-title {
-		margin-bottom: ( $spacer / 2 );
-	}
-
-	.card-text {
-		margin-bottom: 0;
-	}
-
-	&--status {
-		.card-title {
-			padding-right: ( $icon-size-px + ( $spacer / 2 ) );
-		}
-	}
-}
-
-.card-tile__item-status-icon {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: $icon-size-px;
-	height: $icon-size-px;
-	line-height: $icon-size-px;
-	text-align: center;
-	border-radius: 100%;
-}
-
-.card-list__item {
-	padding: 0 0 0 $spacer;
-
-	// Media queries
-	@include media-breakpoint-up(md) {
-		padding-left: 0;
-	}
-
-	&::before {
-		content: '';
-		position: absolute;
-		top: 6px;
-		left: 0;
-		width: $card-list-item-dot-size;
-		height: $card-list-item-dot-size;
-		background-color: $blue-200;
-		border-radius: 50%;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			display: none;
-		}
-	}
-
-	img {
-		max-height: 100%;
-		height: auto;
-	}
-
-	.card-img-top {
-		display: none;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			display: block;
-			margin-bottom: ( $spacer / 2 );
-		}
-	}
-
-	.card-text {
-		text-align: left;
+		padding: $card-blog-item-spacer;
+		background-color: $white;
 	}
 }

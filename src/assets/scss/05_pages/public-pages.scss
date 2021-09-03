@@ -1,0 +1,213 @@
+/*
+ -  Public pages
+ -
+ -
+ */
+
+
+.section:not(.section--bg-two-half) {
+	padding: ( $spacer * 2.5 ) 0;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		padding: ( $spacer * 5 ) 0;
+	}
+}
+
+.section {
+	position: relative;
+	overflow: hidden;
+
+	&:first-child {
+		padding-top: ( $header-height + ( $spacer * .75 ) );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding-top: ( $header-height + ( $spacer * 3 ) );
+		}
+		@include media-breakpoint-up(xl) {
+			padding-top: ( $header-height + ( $spacer * 1.5 ) );
+		}
+	}
+
+	&__half {
+		padding: ( $spacer * 2.5 ) 0;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: ( $spacer * 5 ) 0;
+		}
+
+		&::before {
+			// Media queries
+			@include media-breakpoint-down(md) {
+				content: '';
+				@include absolute-center(false);
+				top: 0;
+				width: 100vw;
+				height: 100%;
+			}
+		}
+
+		&--fix-height {
+			position: relative;
+
+			&::before {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 50vw;
+					height: 100%;
+				}
+			}
+		}
+
+		&--dark-gray {
+			&::before {
+				background-color: $body-bg-lp;
+			}
+		}
+
+		&--gradient-violet {
+			&::before {
+				background: $gradient-bg-violet;
+			}
+		}
+	}
+
+	.h4--public {
+		margin-bottom: ( $spacer * 2.5 );
+	}
+
+	&--white {
+		background-color: $white;
+	}
+
+	&--light-gray {
+		background-color: $body-bg-lp-second;
+	}
+
+	&--dark-blue {
+		background-color: $blue-500;
+	}
+
+	&--gradient-blue {
+		background: linear-gradient(143deg, $gradient-blue 0%, $gradient-blue-dark 100%);
+	}
+
+	&--gradient-violet {
+		background: $gradient-bg-violet;
+	}
+
+	&--bg-two-half {
+		overflow: hidden;
+		z-index: $zindex-lp-bg-two-half;
+
+		&::before,
+		&::after {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				content: '';
+				position: absolute;
+				top: 0;
+				width: 50%;
+				height: 100%;
+				transform: none;
+			}
+		}
+
+		&::before {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				right: 50%;
+			}
+		}
+
+		&::after {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				left: 50%;
+				z-index: $zindex-lp-bg-two-half-after;
+			}
+		}
+	}
+
+	&--dark-gray-left-half {
+		&::before {
+			background-color: $body-bg-lp;
+		}
+	}
+
+	&--gradient-violet-right-half {
+		&::after {
+			background: $gradient-bg-violet;
+		}
+	}
+
+	&--picture-half {
+		padding: 0 0 ( $spacer * 4.5 );
+
+		.section-picture-text {
+			padding-top: ( $spacer * 4 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-top: ( $spacer * 6 );
+			}
+			@include media-breakpoint-up(xl) {
+				padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
+			}
+		}
+	}
+
+	&--picture-bg {
+		position: relative;
+		overflow: hidden;
+		z-index: $zindex-lp-picure-section;
+
+		&::before,
+		&::after {
+			z-index: $zindex-lp-picture-bg;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 40px;
+			right: 20%;
+			width: 1000px;
+			height: 825px;
+			background-image: url(/assets/images/landing-page/lp-picture-globe.png);
+			background-repeat: no-repeat;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				left: -270px;
+				right: auto;
+			}
+			@include media-breakpoint-up(xl) {
+				left: -160px;
+			}
+			@include media-breakpoint-up(lg) {
+				left: auto;
+				right: 51%;
+				transform: translateX(20%);
+			}
+		}
+	}
+
+	&--video {
+		padding: 0 0 ( $spacer * 4.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding-bottom: ( $spacer / 2 );
+		}
+		@include media-breakpoint-up(xl) {
+			padding-bottom: 0;
+		}
+	}
+}

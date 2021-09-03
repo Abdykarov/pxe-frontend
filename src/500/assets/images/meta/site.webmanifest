@@ -1,6 +1,6 @@
 {
-    "name": "PARC4U",
-    "short_name": "PARC4U",
+    "name": "parc4u",
+    "short_name": "parc4u",
     "icons": [
         {
             "src": "/android-chrome-192x192.png?v2=GvmlPmXRoW",

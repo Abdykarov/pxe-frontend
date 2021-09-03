@@ -44,6 +44,7 @@
 	}
 
 	&.btn-primary,
+	&.btn-dark,
 	&.btn-success,
 	&.btn-warning,
 	&.btn-danger,
@@ -75,6 +76,23 @@
 			color: inherit;
 			background-color: $btn-secondary-bg-hover;
 			border-color: inherit;
+		}
+	}
+
+	&.btn-dark {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $dark-darken;
+			border-color: $dark-darken;
+		}
+
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			&:focus {
+				box-shadow: $btn-focus-box-shadow-size $dark-darken;
+			}
 		}
 	}
 
@@ -292,6 +310,30 @@
 		@include button-ghost-color($gray-200);
 	}
 
+	&.btn-gradient-primary {
+		color: $white;
+		background: linear-gradient(143deg, $gradient-blue-light 0%, $gradient-blue-dark 100%);
+		border: none;
+
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active,
+		&:focus:active,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			background: linear-gradient(143deg, darken($gradient-blue-light, 5%) 0%, darken($gradient-blue-dark, 5%) 100%);
+		}
+	}
+
+	&.btn-public {
+		justify-content: space-between;
+		min-width: $btn-width-public;
+		min-height: $btn-height-public;
+		padding: $spacer ( $spacer * 2 );
+		font-size: $font-size-base-public;
+	}
+
 	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;
@@ -303,11 +345,27 @@
 			font-size: $icon-size-small-px;
 
 			&--left {
-				padding-left: ( $spacer / 3 );
+				margin-left: ( $spacer / 3 );
 			}
 
 			&--right {
-				padding-right: ( $spacer / 3 );
+				margin-right: ( $spacer / 3 );
+			}
+		}
+	}
+
+	&-lg {
+		min-height: $btn-height-large;
+		padding: ( $spacer * 1.25 ) ( $spacer * 2 );
+		font-size: $large-font-size;
+
+		.btn__icon {
+			&--left {
+				margin-left: ( $spacer * 2 );
+			}
+
+			&--right {
+				margin-right: ( $spacer * 2 );
 			}
 		}
 	}
@@ -345,15 +403,8 @@
 			}
 
 			&--right {
-				padding-right: 0;
+				margin-right: 0;
 			}
-		}
-	}
-
-	&.btn-long {
-		// Media queries
-		@include media-breakpoint-up(sm) {
-			text-align: left;
 		}
 	}
 
@@ -366,31 +417,49 @@
 	}
 
 	&__icon {
-		width: $btn-width-icon;
 		position: absolute;
-		top: 0;
-		height: 100%;
 		display: flex;
 		align-items: center;
+		justify-content: center;
+		top: 0;
+		width: $btn-width-icon;
+		height: 100%;
 
 		& + .btn__text {
 			text-align: left;
 		}
 
 		&--left {
-			left: 0;
-			padding-left: ( $spacer / 2 );
+			left: 10px;
+
+			& + .btn__text {
+				margin-left: ( $spacer / 2 );
+			}
 		}
 
 		&--right {
-			right: 0;
-			padding-right: ( $spacer / 2 );
+			right: 10px;
+
+			& + .btn__text {
+				margin-right: ( $spacer / 2 );
+			}
 		}
 
 		&--alone {
 			position: relative;
-			padding: ( $spacer / 3 );
-			text-align: center;
+			width: $btn-width-icon-alone;
+			padding: ( $spacer / 4 );
+		}
+	}
+
+	&.btn--icon-right {
+		display: flex;
+		flex-direction: row-reverse;
+
+		.btn__icon {
+			position: static;
+			margin-left: ( $spacer / 2 );
+			margin-right: 0;
 		}
 	}
 
@@ -415,8 +484,9 @@
 	}
 
 	&.btn-icon {
-		width: $btn-width-icon;
+		width: $btn-width-icon-alone;
 		color: $icons-secondary;
+		border-width: 0;
 
 		&:focus,
 		&.focus,
@@ -425,6 +495,18 @@
 		&:not(:disabled):not(.disabled):active:focus {
 			color: $icons-hover;
 			box-shadow: none;
+		}
+
+		&--on-dark-bg {
+			color: $white;
+
+			&:focus,
+			&.focus,
+			&:hover,
+			&:active,
+			&:not(:disabled):not(.disabled):active:focus {
+				color: darken($white, 25%);
+			}
 		}
 	}
 
@@ -439,6 +521,96 @@
 			justify-content: center;
 			width: $btn-video-play-size;
 			color: $white;
+		}
+	}
+
+	&.btn-facebook,
+	&.btn-google,
+	&.btn-bankid {
+		height: $btn-social-height;
+		min-height: auto;
+		padding: $spacer;
+		line-height: 1;
+	}
+
+
+	&.btn-facebook,
+	&.btn-google {
+		text-align: left;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: $btn-padding-x;
+			width: $btn-width-icon;
+			height: 100%;
+			background-size: $btn-width-icon;
+			background-repeat: no-repeat;
+			background-position-y: center;
+		}
+	}
+
+	&.btn-facebook,
+	&.btn-bankid {
+		color: $white;
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			color: $white;
+		}
+	}
+
+	&.btn-facebook {
+		background-color: $btn-social-facebook-bg;
+
+		&::after {
+			background-image: url(../../../assets/images/social/fb.svg);
+		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: darken($btn-social-facebook-bg, 5%);
+		}
+	}
+
+	&.btn-google {
+		background-color: $white;
+		color: $font-text;
+
+		&::after {
+			content: '';
+			background-image: url(../../../assets/images/social/google.svg);
+		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: darken($white, 2%);
+		}
+	}
+
+	&.btn-bankid {
+		background-color: $black;
+		text-align: center;
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: lighten($black, 20%);
+		}
+
+		&::after {
+			content: '';
+			display: inline-block;
+			width: 73px;
+			height: 14px;
+			background-image: url(../../../assets/images/social/bankid.svg);
+			background-size: auto;
+			background-repeat: no-repeat;
+			background-position: center;
 		}
 	}
 }

@@ -78,13 +78,17 @@
 }
 
 .text-with-icon {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	margin-bottom: $spacer;
 
 	& &__icon {
 		color: $icons-primary;
 		font-size: $icon-size-large;
+
+		&--public {
+			font-size: $font-size-base-public;
+		}
 	}
 
 	&__text {
@@ -101,8 +105,18 @@
 		}
 
 		.text-with-icon__icon {
-			font-size: $small-font-size;
 			color: $font-text;
+		}
+
+		.text-with-icon__icon:not(.text-with-icon__icon--public) {
+			font-size: $small-font-size;
+		}
+	}
+
+	&--icon-right {
+		.text-with-icon__text {
+			margin-left: 0;
+			margin-right: ( $spacer / 2 );
 		}
 	}
 }
@@ -124,6 +138,18 @@
 		line-height: $line-height-sm;
 		text-transform: uppercase;
 		text-align: center;
+	}
+}
+
+.loader__wrapper-text {
+	position: relative;
+	display: inline-block;
+	padding-right: ( $loader-size + $spacer );
+
+	.loader {
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 }
 
@@ -226,18 +252,15 @@ $colors: (
 	light-dark:                    $light-dark,
 	light-darken:                  $light-darken,
 	body:                          $body-bg,
+	body-lp:                       $body-bg-lp,
 	disabled:                      $disabled,
 	icons-primary:                 $icons-primary,
 	icons-active:                  $icons-active,
 	icons-inactive:                $icons-inactive,
 	gradient-blue-light:           $gradient-blue-light,
 	gradient-blue-dark:            $gradient-blue-dark,
-	gradient-green-light:          $gradient-green-light,
-	gradient-green-dark:           $gradient-green-dark,
-	gradient-orange-light:         $gradient-orange-light,
-	gradient-orange-dark:          $gradient-orange-dark,
-	gradient-red-light:            $gradient-red-light,
-	gradient-red-dark:             $gradient-red-dark
+	gradient-blue-darken:          $gradient-blue-darken,
+	gradient-violet-light:         $gradient-violet-light,
 );
 
 @each $name, $value in $colors {
@@ -248,10 +271,11 @@ $colors: (
 	.text-color--#{$name} {
 		color: $value;
 	}
+
+	.fill--#{$name} {
+		fill: $value;
+	}
 }
-
-
-
 
 /*
  *	Gradients mixins
@@ -259,15 +283,12 @@ $colors: (
 
 @mixin generate-gradient($name-color, $start-color, $end-color) {
 	.bg--gradient-#{$name-color} {
-		background: linear-gradient(90deg, $start-color 10%, $end-color 90%);
+		background: linear-gradient(143deg, $start-color 0%, $end-color 100%);
 	}
 }
 
 @include generate-gradient(blue, $gradient-blue-light, $gradient-blue-dark);
-@include generate-gradient(green, $gradient-green-light, $gradient-green-dark);
-@include generate-gradient(orange, $gradient-orange-light, $gradient-orange-dark);
-@include generate-gradient(red, $gradient-red-light, $gradient-red-dark);
-
+@include generate-gradient(violet, $gradient-violet-light, $gradient-blue-darken);
 
 
 /*
@@ -328,4 +349,86 @@ $colors: (
 	left: 50%;
 	right: auto;
 	transform: translateX(-50%);
+}
+
+.bg-body {
+	background-color: $body-bg;
+}
+
+.box-shadow {
+	box-shadow: $box-shadow;
+}
+
+.video {
+	position: relative;
+
+	&__holder {
+		position: relative;
+		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__text {
+		pointer-events: none;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			@include absolute-center;
+			margin-top: 0;
+		}
+	}
+
+	&__control {
+		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			@include absolute-center;
+		}
+	}
+}
+
+.info-flag {
+	position: relative;
+	display: inline-block;
+	padding: $spacer ( $spacer * 1.25 );
+	background-color: $secondary;
+	border-radius: $border-radius;
+	border-bottom-left-radius: 0;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		margin-top: ( $spacer * 2 );
+	}
+
+	&__beak {
+		position: absolute;
+		top: calc( 100% - 1px );
+		left: 0;
+	}
+
+	&__img {
+		width: 92px;
+	}
+}
+
+.table-layout-fixed {
+	table-layout: fixed;
+}
+
+.text-overflow-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.link-color {
+	color: $link-color;
+}
+
+.mt-suppy-point-import {
+	margin-top: 80px;
 }

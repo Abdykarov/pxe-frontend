@@ -1,5 +1,6 @@
 // Forms
 $input-width:                        300px;
+$input-width-large:                  320px;
 $input-height:                       50px;
 $input-padding-y:                    ( $spacer / 4 );
 $input-padding-x:                    $spacer;
@@ -27,6 +28,10 @@ $form-group-margin-bottom:           ( $spacer * 2 );
 $input-label-active-font-size:       .75rem;
 $input-textarea-min-height:          175px;
 $input-textarea-line-height:         24px;
+
+$input-height-public:                60px;
+$input-padding-y-public:             $spacer;
+$input-padding-x-public:             ( $spacer * 1.5 );
 
 $custom-control-gutter:                                  0;
 $custom-control-indicator-top:                           2px;

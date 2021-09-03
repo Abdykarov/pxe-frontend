@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
-import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
-
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { FormModule } from 'src/common/ui/forms/form.module';
 import { ContractSigningPageComponent } from './page';
+import { FormModule } from 'src/common/ui/forms/form.module';
+import { PdfViewerModule } from 'src/common/ui/pdf-viewer/pdf-viewer.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 
@@ -21,7 +20,7 @@ import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-
         ButtonModule,
         CommonModule,
         FormModule,
-        PdfJsViewerModule,
+        PdfViewerModule,
         ProgressBarModule,
         SupplyPointOfferModule,
     ],
@@ -32,5 +31,8 @@ export const contractSigningPageRoutes: Routes = [
     {
         path: 'contract-signing',
         component: ContractSigningPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

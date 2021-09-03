@@ -41,25 +41,28 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public userMenu: INavigationMenu = [];
 
     @Input()
-    public sticked = false;
-
-    @Input()
     public settings: ISettings;
 
     @Input()
     public isMenuOpen: boolean;
 
     @Output()
+    public faqAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public helpAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public howItWorksAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
     public loginAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
-    public aboutServiceAction: EventEmitter<any> = new EventEmitter<any>();
+    public bestPricesInTheWorldAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
-    public aboutUsAction: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
-    public faqAction: EventEmitter<any> = new EventEmitter<any>();
+    public blogAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public logoutAction: EventEmitter<any> = new EventEmitter<any>();

@@ -2,6 +2,7 @@ export enum IButtonType {
     DANGER = 'danger',
     DROPDOWN = 'dropdown',
     LIGHT = 'light',
+    DARK = 'dark',
     LINK = 'link',
     LINK_DANGER = 'link-danger',
     LINK_TEXT = 'link-text',
@@ -10,4 +11,5 @@ export enum IButtonType {
     SUCCESS = 'success',
     WARNING = 'warning',
     WHITE = 'white',
+    GRADIENT_PRIMARY = 'gradient-primary',
 }

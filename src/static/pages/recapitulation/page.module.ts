@@ -41,5 +41,8 @@ export const recapitulationPageRoutes: Routes = [
     {
         path: 'recapitulation',
         component: RecapitulationPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

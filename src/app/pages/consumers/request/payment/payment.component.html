@@ -1,0 +1,185 @@
+<pxe-layout-container [pageTitle]="supplyPoint?.contract?.contractStatus == contractStatus.CONCLUDED ? 'Potvrzení' : 'Platba'">
+    <div class="row mb-6">
+        <div *ngIf="supplyPoint && supplyPoint.name" class="col-12 text-center">
+            <h2>Odběrné místo: {{supplyPoint.name}}</h2>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
+        </div>
+        <ng-container *ngIf="supplyPoint">
+            <ng-container *ngIf="supplyPoint.contract?.contractStatus == contractStatus.WAITING_FOR_PAYMENT && paymentInfo">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3 class="h2">
+                            Nyní potřebujeme ověřit<br> vaši totožnost.
+                        </h3>
+                        <p>
+                            Využijte jeden ze způsobů níže.
+                        </p>
+                    </div>
+                    <div class="d-flex col-md-6 col-xl-5 offset-xl-1">
+                        <div class="page-box page-box--with-inner d-md-flex flex-md-column justify-content-md-between">
+                            <div class="page-box__inner">
+                                <h3 class="h2">
+                                    Ověřovací korunová platba
+                                </h3>
+                                <p>
+                                    Na doručení této ověřovací platby čekáme do {{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}, proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.
+                                </p>
+                            </div>
+                            <div class="page-box__inner page-box__inner--light page-box__inner--same-height px-md-3">
+                                <div class="row justify-content-center no-gutters">
+                                    <div class="col-12 d-none d-md-block">
+                                        <table class="table-basic mx-auto">
+                                            <tbody>
+                                            <tr>
+                                                <td>Číslo účtu</td>
+                                                <td class="py-1 text-left">
+                                                    {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1 text-right">Banka</td>
+                                                <td>{{paymentInfo.accountNumber.bankCode}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1 text-right">Částka</td>
+                                                <td>{{paymentInfo.amount | currency:paymentInfo.currency.currencyCode:'symbol':'1.0'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1 text-right">Splatnost</td>
+                                                <td>{{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1 text-right">Variabilní symbol</td>
+                                                <td>{{paymentInfo.variableSymbol.value | simpleNumber}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-auto d-block d-md-none">
+                                        <table class="table-basic mx-auto">
+                                            <tbody>
+                                            <tr>
+                                                <td class="pb-3">
+                                                    Číslo účtu
+                                                    <span class="d-block">
+                                                      {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pb-3">
+                                                    Banka
+                                                    <span class="d-block">
+                                                        {{paymentInfo.accountNumber.bankCode}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pb-3">
+                                                    Částka
+                                                    <span class="d-block">
+                                                        {{paymentInfo.amount | currency:paymentInfo.currency.currencyCode:'symbol':'1.0'}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pb-3">
+                                                    Splatnost
+                                                    <span class="d-block">
+                                                        {{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pb-3">
+                                                    Variabilní symbol
+                                                    <span class="d-block">{{paymentInfo.variableSymbol.value | simpleNumber}}</span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-12 mt-3 text-center">
+                                        <img
+                                            *ngIf="paymentInfo.encodedQrCode"
+                                            [src]="'data:image/jpeg;base64,' + paymentInfo.encodedQrCode"
+                                            alt="qr-code"
+                                            class="qr-code-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex col-md-6 col-xl-5">
+                        <div class="page-box page-box--with-inner d-md-flex flex-md-column justify-content-md-between">
+                            <div class="page-box__inner">
+                                <h3 class="h2">
+                                    Bankovní identita
+                                </h3>
+                                <p class="mb-3">
+                                    Použijte stejný a bezpečný způsob přihlášení jako do vašeho internetového bankovnictví
+                                </p>
+                                <ol class="check-list">
+                                    <li class="pb-1">Služba je zaštítěna Českou národní bankou</li>
+                                    <li class="pb-1">Více informací na <a href="https://bankovni-identita.cz/" target="_blank">webu</a> bankovní identity</li>
+                                </ol>
+                            </div>
+                            <div class="page-box__inner page-box__inner--light page-box__inner--same-height d-flex flex-column justify-content-center">
+                                <div class="row text-center">
+                                    <div class="col-12">    
+                                        <img width="145" class="mb-3" src="/assets/images/social/bankid-black.svg" alt="bankid" title="bankid">
+                                    </div>
+                                    <div class="col-12">
+                                        <lnd-button
+                                        type="primary"
+                                        (action)="verifyByBankId()"
+                                        label="Podepsat pomocí Bankovní identity"
+                                        ></lnd-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CONCLUDED"
+                 class="col-12 col-xl-10 offset-xl-1">
+                <lnd-info-banner
+                        [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem parc4u!'"
+                        [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
+                        [buttonLabel]="'Přejít na přehled uzavřených smluv'"
+                        [bannerType]="bannerTypeImages.ACCEPTED"
+                        (buttonAction)="navigateToContracts()"
+                ></lnd-info-banner>
+            </div>
+            <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CANCELED || supplyPoint.contract?.contractStatus == contractStatus.TO_BE_CANCELED"
+                 class="col-12 col-xl-10 offset-xl-1">
+                <lnd-info-banner
+                        [bannerTitle]="'Bohužel jsme neobdrželi vaši platbu. Smlouva byla stornována.'"
+                        [bannerDescription]="'Pokud máte stále zájem o dodávku elektřiny nebo plynu, vyberte si prosím novou nabídku.'"
+                        [buttonLabel]="'Pokračovat zadáním odběrného místa'"
+                        [bannerType]="bannerTypeImages.REJECTED"
+                        (buttonAction)="navigateToRequest(supplyPointNewVersion)"
+                ></lnd-info-banner>
+            </div>
+        </ng-container>
+    </div>
+</pxe-layout-container>

@@ -13,6 +13,10 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
+    AskForOfferFilePageModule,
+    askForOfferFilePageRoutes,
+} from 'src/static/organisms/ask-for-offer-file-uploader/page.module';
+import {
     BadgesPageModule,
     badgesPageRoutes,
 } from 'src/static/atoms/badges/page.module';
@@ -39,6 +43,10 @@ import {
     ButtonsPageModule,
     buttonsPageRoutes,
 } from 'src/static/atoms/buttons/page.module';
+import {
+    CardPageModule,
+    cardPageRoutes,
+} from 'src/static/atoms/card/page.module';
 import {
     ColorsPageModule,
     colorsPageRoutes,
@@ -72,6 +80,10 @@ import {
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
 import {
+    graphsPageRoutes,
+    GraphsPageModule,
+} from 'src/static/organisms/graphs/page.module';
+import {
     ChangePasswordBannerPageModule,
     changePasswordBannerPageRoutes,
 } from 'src/static/pages/change-password-banner/page.module';
@@ -96,6 +108,10 @@ import {
     listSupplyPointsPageRoutes,
 } from 'src/static/pages/list-supply-points/page.module';
 import {
+    LoaderPageModule,
+    loaderPageRoutes,
+} from 'src/static/atoms/loader/page.module';
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -107,6 +123,10 @@ import {
     NewSupplyPointPageModule,
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
+import {
+    microTablePageRoutes,
+    MicroTablePageModule,
+} from 'src/static/atoms/micro-table/page.module';
 import {
     PaginationPageModule,
     paginationPageRoutes,
@@ -203,10 +223,12 @@ const routes: Routes = [
         children: [
             ...accordionPageRoutes,
             ...alertsPageRoutes,
+            ...askForOfferFilePageRoutes,
             ...badgesPageRoutes,
             ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
+            ...cardPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
             ...dashboardPageRoutes,
@@ -215,6 +237,7 @@ const routes: Routes = [
             ...deleteAccountOkWithPhonePageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
+            ...graphsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
             ...importUploadPageRoutes,
@@ -222,7 +245,9 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...listOfNotificationsPageRoutes,
             ...listSupplyPointsPageRoutes,
+            ...loaderPageRoutes,
             ...modalsPageRoutes,
+            ...microTablePageRoutes,
             ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...paginationPageRoutes,
@@ -260,10 +285,12 @@ const routes: Routes = [
     imports: [
         AccordionPageModule,
         AlertsPageModule,
+        AskForOfferFilePageModule,
         BadgesPageModule,
         BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
+        CardPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
         DeleteAccountFailedPageModule,
@@ -272,6 +299,7 @@ const routes: Routes = [
         DashboardPageModule,
         DropdownPageModule,
         FormsPageModule,
+        GraphsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
         ImportUploadPageModule,
@@ -279,6 +307,8 @@ const routes: Routes = [
         InfoBannerPageModule,
         ListOfNotificationsPageModule,
         ListSupplyPointsPageModule,
+        LoaderPageModule,
+        MicroTablePageModule,
         ModalsPageModule,
         NewsPageModule,
         NewSupplyPointPageModule,

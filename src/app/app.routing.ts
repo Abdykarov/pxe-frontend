@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import {
-    PreloadAllModules,
     Routes,
     RouterModule,
 } from '@angular/router';
 
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { CmsResolver } from './resolvers/cms.resolver';
 import { CONSTS } from './app.constants';
-import { environment } from 'src/environments/environment';
 import { PaymentGuard } from 'src/app/guards/payment.guard';
 
 const routes: Routes = [
     {
-        path: CONSTS.PATHS.EMPTY,
-        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
+        path: CONSTS.PATHS.O_AUTH,
+        loadChildren: () => import('./layouts/o-auth/o-auth-layout.module').then(m => m.OAuthLayoutModule),
     },
     {
         path: CONSTS.PATHS.SECURED,
@@ -23,6 +22,16 @@ const routes: Routes = [
             PaymentGuard,
         ],
         loadChildren: () => import('./layouts/secured/secured-layout.module').then(m => m.SecuredLayoutModule),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
+    },
+    {
+        path: CONSTS.PATHS.EMPTY,
+        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
     },
     {
         path: CONSTS.PATHS.WILD_CART,
@@ -33,11 +42,10 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-        enableTracing: false,
-        preloadingStrategy: PreloadAllModules,
-        initialNavigation: 'enabled',
-        scrollPositionRestoration: 'top',
-    }),
+            enableTracing: false,
+            initialNavigation: 'enabled',
+            scrollPositionRestoration: 'top',
+        }),
     ],
     exports: [
         RouterModule,

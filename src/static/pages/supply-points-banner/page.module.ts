@@ -27,5 +27,8 @@ export const supplyPointsBannerPageRoutes: Routes = [
     {
         path: 'supply-points-banner',
         component: SupplyPointsBannerPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

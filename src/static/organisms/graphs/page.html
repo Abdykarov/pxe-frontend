@@ -1,0 +1,108 @@
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+        <div class="col-12 mb-3">
+            <h2>
+                Line
+            </h2>
+            <pxe-progress-price-of-power></pxe-progress-price-of-power>
+        </div>
+        <div class="col-12 mb-3">
+            <h2>
+                Gaussian distribution
+            </h2>
+            <div class="bg-white">
+                <lnd-gaussian-distribution
+                    leftTittle="nejlevnější"
+                    rightTittle="nejdrazší"
+                    [active]="{
+                        frequency: 12,
+                        value: 230
+                    }"
+                    titleText="Počet nabídek"
+                   [data]="gaussianDistribution">
+                </lnd-gaussian-distribution>
+            </div>
+        </div>
+        <div class="col-12 mb-3">
+            <h2>
+                Barplot
+            </h2>
+            <div class="static-pages">
+                <lnd-bar-plot
+                    [data]="barData2">
+                </lnd-bar-plot>
+            </div>
+            <div class="static-pages">
+                <lnd-bar-plot
+                    [data]="barData">
+                </lnd-bar-plot>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <h2>
+                        Progress bar
+                    </h2>
+                </div>
+                <div class="col-12">
+                    <div class="row no-gutters d-flex justify-content-around text-center">
+                        <div class="col-3">
+                            <h2>Default</h2>
+                        </div>
+                        <div class="col-3">
+                            <h2>Custom</h2>
+                        </div>
+                        <div class="col-3">
+                            <h2>Custom</h2>
+                        </div>
+                        <div class="col-3">
+                            <h2>Hover</h2>
+                        </div>
+                    </div>
+                    <div class="row bg-white no-gutters pt-5 pb-5 d-flex justify-content-around">
+                        <div class="col-2">
+                            <lnd-progress-bar
+                                customClassOfProgressCirce="fill--blue-dark"
+                                customClassOrtfMainCirce="fill--light"
+                                percent="10"
+                            ></lnd-progress-bar>
+                        </div>
+                        <div class="col-2">
+                            <lnd-progress-bar
+                                customClassOfProgressCirce="fill--blue-dark"
+                                customClassOfMainCirce="fill--light"
+                                percent="70"
+                                arcWidth="5"
+                                cornerRadius="0">
+                            </lnd-progress-bar>
+                        </div>
+                        <div class="col-2">
+                            <lnd-progress-bar
+                                customClassOfProgressCirce="fill--primary"
+                                customClassOfMainCirce="fill--light"
+                                customClassLabel="h1 fill--primary"
+                                percent="30"
+                                cornerRadius="20"
+                                arcWidth="15">
+                            </lnd-progress-bar>
+                        </div>
+                        <div class="col-2">
+                            <lnd-progress-bar
+                                customClassOfProgressCirce="fill--blue-dark"
+                                customClassOfMainCirce="fill--light"
+                                percent="30"
+                                (mouseMove)="mouseMove($event)">
+                            </lnd-progress-bar>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

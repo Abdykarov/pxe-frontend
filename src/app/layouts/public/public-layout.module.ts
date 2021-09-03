@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { HeaderModule } from 'src/common/ui/header/header.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
+import { ModalModule } from 'src/common/containers/modal/modal.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { PublicLayoutComponent } from './public-layout.component';
 import { PublicLayoutRoutingModule } from './public-layout.routing';
+import { ReCaptchaModule } from 'src/common/containers/re-captcha/re-captcha.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { PublicLayoutRoutingModule } from './public-layout.routing';
         CommonModule,
         FooterModule,
         HeaderModule,
+        ModalModule,
         PipesModule,
+        ReCaptchaModule,
         PublicLayoutRoutingModule,
     ],
 })

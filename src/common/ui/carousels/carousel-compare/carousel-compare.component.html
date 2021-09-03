@@ -1,0 +1,29 @@
+<ng-template #slideTemplate let-item let-activeSlideRange="activeSlideRange" let-index="index">
+    <div class="carousel-item__inner h-100"
+         [class.carousel-item__inner--none]="index === activeSlideRange[0]">
+        <h4 class="carousel-compare__title h3--public mb-3">
+            {{item.region}}
+        </h4>
+        <div class="carousel-compare__savings">
+            <p class="mb-1">
+                Roční úspora
+            </p>
+            <span class="carousel-compare__price">{{(commodityType === CommodityType.POWER ? item.savingPower : item.savingGas) | number}}&nbsp;KČ</span>
+        </div>
+    </div>
+</ng-template>
+
+<div class="carousel-compare">
+    <lnd-carousel
+        *ngIf="showCarousel"
+        [carouselItems]="supplierCompares"
+        [withCountHeight]="false"
+        customSlideWrapper="col-md-8 offset-md-2 col-xl-12 offset-xl-0"
+        [itemsPerSlide]="numberOfSlides"
+        [singleSlideOffset]="true"
+        [showIndicators]="false"
+        [showLeftAndRightIndicators]="true"
+        [slideTemplate]="slideTemplate"
+        (maxHeightChangeAction)="maxHeightChangeAction($event)">
+    </lnd-carousel>
+</div>

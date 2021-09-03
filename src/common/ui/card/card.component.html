@@ -1,54 +1,40 @@
+<ng-template #content>
+   <div class="card__img-holder">
+       <img
+           loading="lazy"
+           [src]="data.img"
+           [attr.title]="data.imgTitle"
+           [attr.alt]="data.imgAlt"
+           class="card-img-top">
+   </div>
+   <div
+       class="card-body w-100">
+       <div
+           *ngIf="data.title"
+           class="card-text-prefix mb-1">
+           {{ data.textPrefix }}
+       </div>
+       <h3 *ngIf="data.title"
+           class="h3--public card__title mb-1">
+           {{ data.title }}
+       </h3>
+       <p
+           *ngIf="data.content"
+           class="card-text"
+           [innerHTML]="data.content">
+       </p>
+   </div>
+</ng-template>
+
 <div
-     class="card"
-     [ngClass]="[
-        type && type !== 'card' ? 'card-' + type + '__item' : '',
-        alignment === 'center' ? 'text-center' : ''
-     ]">
-    <img
-        *ngIf="data.imgSrc && imgPosition === 'top'"
-        [src]="domSanitizer.bypassSecurityTrustUrl(data.imgSrc)"
-        [attr.title]="data.imgTitle"
-        [attr.alt]="data.imgAlt"
-        class="img-fluid card-img-top"
-        [ngClass]="[
-            type === 'list' ? 'card-img--border' : '',
-            type === 'widget' ? 'card-img-widget' : '',
-            imgSize ? 'card-img--' + imgSize : ''
-        ]">
-    <div
-        class="card-body"
-        [ngClass]="{ 'mb-4' : data.footerContent }">
-        <h3 *ngIf="type !== 'list' && data.title "
-            class="card-title">
-            {{ data.title }}
-        </h3>
-        <p
-            *ngIf="data.content"
-            class="card-text"
-            [innerHTML]="data.content">
-        </p>
-        <lnd-button
-            *ngIf="hasButton"
-            [label]="buttonLabel"
-            [type]="buttonType"
-            [hasOutline]="hasButtonOutline"
-            (action)="action.emit($event)">
-        </lnd-button>
-    </div>
-    <img
-        *ngIf="data.imgSrc && imgPosition === 'bottom'"
-        [src]="domSanitizer.bypassSecurityTrustUrl(data.imgSrc)"
-        [attr.title]="data.imgTitle"
-        [attr.alt]="data.imgAlt"
-        class="img-fluid card-img-bottom"
-        [ngClass]="[
-            type === 'list' ? 'card-img--border' : '',
-            type === 'widget' ? 'card-img-widget' : '',
-            imgSize ? 'card-img--' + imgSize : ''
-        ]">
-    <div
-        *ngIf="data.footerContent"
-        class="card-footer"
-        [innerHTML]="data.footerContent">
-    </div>
+    *ngIf="type === 'block'"
+    class="card"
+>
+   <ng-container *ngTemplateOutlet="content"></ng-container>
 </div>
+
+<a *ngIf="type === 'link'"
+   class="card"
+   [routerLink]="linkUrl">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+</a>

@@ -14,21 +14,28 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.h1--public,
-.h2--public,
-.h3--public {
-	font-family: $font-family-sans-serif-public;
-	font-variant-ligatures: none;
+.secured {
+	font-family: $font-family-sans-serif-secured;
+}
+
+.public {
+	font-size: $font-size-base-public;
+	line-height: $line-height-base-public;
+	background-color: $body-bg-lp;
+	color: $font-text-public;
 }
 
 .h1--public,
+.h2--public,
 .h3--public {
+	font-weight: $font-weight-bold;
+	font-variant-ligatures: none;
 	text-transform: none;
 }
 
 .h1--public {
 	font-size: $h1-font-size-public-xs;
-	line-height: ( 40 / 36 );
+	line-height: ( 43 / 36 );
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -53,6 +60,7 @@ body {
 }
 
 .h3--public {
+	margin-bottom: ( $spacer / 2 );
 	font-size: $h3-font-size-public-xs;
 	line-height: ( 30 / 24 );
 
@@ -61,8 +69,14 @@ body {
 		font-size: $h3-font-size-public-md;
 	}
 	@include media-breakpoint-up(xl) {
+		margin-bottom: $spacer;
 		font-size: $h3-font-size-public;
 	}
+}
+
+.h4--public {
+	font-size: $h4-font-size-public;
+	text-transform: uppercase;
 }
 
 h1,

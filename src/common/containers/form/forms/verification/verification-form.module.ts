@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { VerificationFormComponent } from './verification-form.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { VerificationFormComponent } from './verification-form.component';
         CommonModule,
         FormModule,
         FormsModule,
+        PipesModule,
         ReactiveFormsModule,
     ],
 })

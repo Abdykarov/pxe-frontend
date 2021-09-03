@@ -1,6 +1,4 @@
 export enum ICardType {
-    CARD = 'card',
-    LIST = 'list',
-    TILE = 'tile',
-    WIDGET = 'widget',
+    BLOCK = 'block',
+    LINK = 'link',
 }

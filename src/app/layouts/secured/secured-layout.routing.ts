@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 import {
     LoginType,
     SignType,
-} from '../models/router-data.model';
+} from 'src/app/layouts/models/router-data.model';
 import { SecuredLayoutComponent } from './secured-layout.component';
 import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
@@ -16,46 +17,47 @@ const routes = [
         children: [
             {
                 path: CONSTS.PATHS.DASHBOARD,
-                loadChildren: () => import('../../pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+                loadChildren: () => import('../../pages/consumers/dashboard/dashboard.module').then(m => m.DashboardModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
             {
                 path: CONSTS.PATHS.REQUEST,
-                loadChildren: () => import('../../pages/request/request.module').then(m => m.RequestModule),
+                loadChildren: () => import('../../pages/consumers/request/request.module').then(m => m.RequestModule),
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
             {
                 path: CONSTS.PATHS.REQUESTS,
-                loadChildren: () => import('../../pages/requests-overview/requests-overview.module').then(m => m.RequestsOverviewModule),
+                loadChildren: () => import('../../pages/consumers/requests-overview/requests-overview.module')
+                    .then(m => m.RequestsOverviewModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                loadChildren: () => import('../../pages/supply-point-selection/supply-point-selection.module').then(
+                loadChildren: () => import('../../pages/consumers/supply-point-selection/supply-point-selection.module').then(
                     m => m.SupplyPointSelectionModule,
                 ),
                 resolve: {
@@ -64,35 +66,51 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
+                path: CONSTS.PATHS.CREATE_USER,
+                loadChildren: () => import('../../pages/admins/create-user/create-user.module').then(
+                    m => m.CreateUserModule,
+                ),
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    userType: IUserTypes.CONTRACT_IMPORTER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINTS,
-                loadChildren: () => import('../../pages/supply-points/supply-points.module').then(m => m.SupplyPointsModule),
+                loadChildren: () => import('../../pages/consumers/supply-points/supply-points.module').then(m => m.SupplyPointsModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
             {
                 path: CONSTS.PATHS.USER_PROFILE,
-                loadChildren: () => import('../../pages/user-profile/user-profile.module').then(m => m.UserProfileModule),
+                loadChildren: () => import('../../pages/consumers/profile/profile.module').then(m => m.UserProfileModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
@@ -114,25 +132,25 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.DELETE_ACCOUNT,
-                loadChildren: () => import('../../pages/delete-account/delete-account.module').then(m => m.DeleteAccountModule),
+                loadChildren: () => import('../../pages/consumers/delete-account/delete-account.module').then(m => m.DeleteAccountModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
             {
                 path: CONSTS.PATHS.IMPORT,
-                loadChildren: () => import('../../pages/import/import.module').then(m => m.ImportModule),
+                loadChildren: () => import('../../pages/suppliers/import/import.module').then(m => m.ImportModule),
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: true,
+                    userType: IUserTypes.SUPPLIER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                     hideLeftNavigation: true,
@@ -140,8 +158,8 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.CHANGE_PASSWORD,
-                loadChildren: () => import('../../pages/user-change-password/user-change-password.module').then(
-                    m => m.UserChangePasswordModule,
+                loadChildren: () => import('../../pages/consumers/change-password/change-password.module').then(
+                    m => m.ChangePasswordModule,
                 ),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
@@ -149,7 +167,7 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: false,
+                    userType: IUserTypes.CONSUMER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
@@ -160,14 +178,14 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_OFFER + '/:commodityType',
-                loadChildren: () => import('../../pages/supply-offer/supply-offer.module').then(m => m.SupplyOfferModule),
+                loadChildren: () => import('../../pages/suppliers/supply-offer/supply-offer.module').then(m => m.SupplyOfferModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: true,
+                    userType: IUserTypes.SUPPLIER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                     hideLeftNavigation: true,
@@ -180,8 +198,8 @@ const routes = [
             {
                 path: CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS + '/:commodityType',
                 loadChildren:
-                    () => import('../../pages/supplier-concluded-contracts/supplier-concluded-contracts.module').then(
-                        m => m.SupplierConcludedContractsModule,
+                    () => import('../../pages/suppliers/concluded-contracts/concluded-contracts.module').then(
+                        m => m.ConcludedContractsModule,
                     ),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
@@ -189,10 +207,21 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    isSupplier: true,
+                    userType: IUserTypes.SUPPLIER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                     hideLeftNavigation: true,
+                },
+            },
+            {
+                path: CONSTS.PATHS.ASK_FOR_OFFER + '/:type',
+                loadChildren: () => import('../../pages/admins/ask-for-offer/ask-for-offer.module').then(m => m.AskForOfferModule),
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    userType: IUserTypes.CONTRACT_IMPORTER,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
             {

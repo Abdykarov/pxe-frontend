@@ -7,18 +7,21 @@
 
 .container-fluid {
 	&--max-width {
+		padding-left: ( $spacer * 2 );
+		padding-right: ( $spacer * 2 );
+
 		// Media queries
-		@media (min-width: ( $body-max-width ) ) {
+		@include media-breakpoint-up(md) {
+			padding-left: $spacer;
+			padding-right: $spacer;
+		}
+		@media (min-width: ( $body-max-width + $spacer ) ) {
 			max-width: $body-max-width;
 			padding-left: 0;
 			padding-right: 0;
 			margin-left: auto;
 			margin-right: auto;
 		}
-	}
- 
-	&--light {
-		background-color: $body-bg-lp;
 	}
 }
 

@@ -86,6 +86,7 @@ export interface ISupplyPointInput {
 export interface ISupplyPointGasAttributes {
     eic: string;
     annualConsumption: number;
+    annualConsumptionUnit?: string;
 }
 
 export interface ISupplyPointUpdateGasAttributes {
@@ -99,6 +100,8 @@ export interface ISupplyPointPowerAttributes {
     distributionRateId: string;
     annualConsumptionNT: number;
     annualConsumptionVT: number;
+    annualConsumptionNTUnit?: string;
+    annualConsumptionVTUnit?: string;
 }
 
 export interface ISupplyPointUpdatePowerAttributes {
@@ -134,6 +137,12 @@ export interface ISupplyPoint {
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
     annualConsumptionUnit?: string;
+    importPricePerKwPowerVT?: number;
+    importPricePerKwPowerNT?: number;
+    importPricePerKwGas?: number;
+    importPriceTotalPerYear?: number;
+    importPermanentMonthlyPay?: number;
+    imported?: boolean;
 }
 
 export enum ProgressStatus {
@@ -144,6 +153,7 @@ export enum ProgressStatus {
     READY_FOR_SIGN = 'READY_FOR_SIGN',
     SUPPLY_POINT = 'SUPPLY_POINT',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
+    PRICES = 'PRICES',
 }
 
 export interface ISupplyPointFormData {

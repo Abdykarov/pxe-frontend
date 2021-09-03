@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="78px" viewBox="0 0 64 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>C59B28CF-1AF0-4A7C-AE11-4BBE60E54268</title>
+    <defs>
+        <path d="M3.15427651,23.8824725 L24.6542765,2.11707753 C26.2067624,0.545427843 28.7393746,0.529892502 30.3110243,2.08237837 C30.3226616,2.0938737 30.3342282,2.1054403 30.3457235,2.11707753 L51.8457235,23.8824725 C52.5852803,24.6311584 53,25.6411307 53,26.6934969 L53,63 C53,65.209139 51.209139,67 49,67 L6,67 C3.790861,67 2,65.209139 2,63 L2,26.6934969 C2,25.6411307 2.41471974,24.6311584 3.15427651,23.8824725 Z" id="path-1"></path>
+        <filter x="-16.7%" y="-8.3%" width="133.3%" height="124.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.170084227   0 0 0 0 0.299500553   0 0 0 0 0.428916879  0 0 0 0.161175272 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Supply-Point" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Vytvareni-OM" transform="translate(-805.000000, -981.000000)">
+            <g id="Group-4-Copy" transform="translate(810.000000, 984.000000)">
+                <g id="Group-5-Copy-2">
+                    <g id="Rectangle-Copy-14">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#F6FAFD" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M21.7976873,0.15068427 C24.636046,-2.58255001 29.0899152,-2.64466897 32.0017062,-0.0356726129 L32.2023127,0.15068427 L58.9488667,25.9066252 L54.0933748,30.9488667 L27.3468208,5.19292576 C27.1773994,5.02977922 26.9216398,5.0093859 26.7306338,5.13174581 L26.6531792,5.19292576 L-0.0933748425,30.9488667 L-4.94886665,25.9066252 L21.7976873,0.15068427 Z" id="Line-4" fill="#DDE4EB" fill-rule="nonzero"></path>
+                </g>
+                <path d="M27,27 C22.0242857,27 18,30.8582435 18,35.6286595 C18,40.7688752 23.6828571,47.8567026 26.0228571,50.5562404 C26.5371429,51.1479199 27.4757143,51.1479199 27.99,50.5562404 C30.3171429,47.8567026 36,40.7688752 36,35.6286595 C36,30.8582435 31.9757143,27 27,27 Z M27,39 C25.344,39 24,37.656 24,36 C24,34.344 25.344,33 27,33 C28.656,33 30,34.344 30,36 C30,37.656 28.656,39 27,39 Z" id="Shape-Copy" fill="#2B4762" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

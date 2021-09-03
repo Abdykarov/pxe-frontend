@@ -18,7 +18,7 @@
                 type="text"
                 (blur)="inputFocused = false;change.emit($event);blur.emit($event)"
                 (focus)="inputFocused = true;focus.emit($event)"
-                class="form-control"
+                class="form-control form-control--with-placeholder"
                 [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
                 [id]="id"
                 [placeholder]="placeholder"

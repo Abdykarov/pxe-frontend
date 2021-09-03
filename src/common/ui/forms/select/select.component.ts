@@ -16,7 +16,7 @@ import {
 } from '@ng-select/ng-select';
 
 import { defaultSelectConfig } from './select.config';
-import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
+import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
 import {
     getErrorMessage,
     normalizeString,
@@ -96,7 +96,7 @@ export class SelectComponent {
     public options?: Array<IOption>;
 
     @Input()
-    public placeholder?: string;
+    public placeholder = 'Vyberte';
 
     @Input()
     public searchable = false;

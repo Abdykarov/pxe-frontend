@@ -8,6 +8,8 @@ import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { HeaderModule } from 'src/common/ui/header/header.module';
 import { NavigationModule } from 'src/common/ui/navigation/navigation.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
+import { SecuredPipesModule } from 'src/common/pipes/secured/secured-pipes.module';
 
 @NgModule({
     declarations: [
@@ -21,6 +23,8 @@ import { NavigationModule } from 'src/common/ui/navigation/navigation.module';
         HeaderModule,
         HttpClientModule,
         NavigationModule,
+        PipesModule,
+        SecuredPipesModule,
     ],
 })
 export class BasicLayoutModule {}

@@ -13,19 +13,26 @@ $btn-active-box-shadow:            $btn-focus-box-shadow;
 $btn-disabled-opacity:             .3;
 $btn-link-disabled-color:          $disabled;
 $btn-width:                        140px;
-$btn-width-icon:                   30px;
+$btn-width-icon:                   20px;
+$btn-width-icon-alone:             30px;
 $btn-height:                       40px;
 $btn-height-small:                 30px;
+$btn-height-large:                 68px;
 $btn-padding-y:                    ( $spacer / 2 );
-$btn-padding-x:                    ( $spacer * 1.5 );
+$btn-padding-x:                    $spacer;
 $btn-line-height:                  $line-height-sm;
 $btn-border-radius:                4px;
 $btn-padding-y-sm:                 ( $spacer / 6 );
 $btn-padding-x-sm:                 ( $spacer / 3 );
 $font-size-sm:                     .688rem;
 $btn-line-height-sm:               ( 18 / 11 );
+$btn-font-family:                  'roboto', arial;
 $btn-border-width:                 2px;
 $btn-border-radius-sm:             $btn-border-radius;
+
+$btn-width-public:                 auto;
+$btn-height-public:                64px;
+$btn-width-icon-public:            18px;
 
 $btn-padding-y-lg-mobile:          ( $spacer * 1.5 );
 $btn-padding-x-lg-mobile:          ( $spacer * 1.5 );
@@ -42,3 +49,6 @@ $btn-secondary-shadow:             0 2px 4px 0 #c8d3df;
 $btn-back-to-app-icon-size:        20px;
 
 $btn-video-play-size:              50px;
+
+$btn-social-height:                58px;
+$btn-social-facebook-bg:           #4267b2;

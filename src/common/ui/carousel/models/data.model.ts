@@ -1,6 +1,2 @@
-export interface ICarouselItem {
-    src: string;
-    alt: string;
-    title: string;
-    label: string;
-}
+// tslint:disable-next-line:no-empty-interface
+export interface IDefaultCarouselItem {}

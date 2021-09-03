@@ -12,12 +12,6 @@ export const updateContractMutation = gql`
     }
 `;
 
-export const deleteContractMutation = gql`
-    mutation deleteContract($contractId: ID!){
-        deleteContract(contractId: $contractId)
-    }
-`;
-
 export const concludeContractMutation = gql`
     mutation concludeContract($contractId: ID!){
         concludeContract(contractId: $contractId)

@@ -1,8 +1,11 @@
 export interface ICardData {
-    content?: string;
-    footerContent?: string;
-    imgSrc?: string;
-    imgAlt?: string;
-    imgTitle?: string;
-    title?: string;
+    id?: string;
+    content: string;
+    img: string;
+    imgAlt: string;
+    imgTitle: string;
+    textPrefix?: string;
+    title: string;
+    customClasses?: string;
+    customData?: any;
 }

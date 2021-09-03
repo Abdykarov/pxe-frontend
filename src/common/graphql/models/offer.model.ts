@@ -2,6 +2,20 @@ import { ICodelistItem } from './supply.model';
 import { ISupplier } from 'src/common/graphql/models/supply.model';
 import { IQuestion } from 'src/app/services/model/faq.model';
 
+export interface ISupplyPointImportPrices {
+    importPricePerKwPowerVT: number;
+    importPricePerKwPowerNT: number;
+    importPricePerKwGas: number;
+    importPriceTotalPerYear: number;
+    importPermanentMonthlyPay: number;
+}
+
+export interface ISupplyPointOffers {
+    offers: IOffer[];
+    pastOffer: IOffer;
+    supplyPointImportPrices: ISupplyPointImportPrices;
+}
+
 export interface IOffer {
     id: string;
     supplier?: ISupplier;
@@ -41,10 +55,11 @@ export interface IOffer {
     systemServicesRegulatedPrice?: number;
     totalPrice?: number;
     unit?: string;
-    prepayment?: number;
     marked?: boolean;
+    isLastUpdated?: boolean;
     greenEnergy: boolean;
     question?: IQuestion;
+    isOwnOffer?: boolean;
     __typename?: string;
 }
 

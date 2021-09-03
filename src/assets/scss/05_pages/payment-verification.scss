@@ -9,18 +9,25 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .table-basic {
-	width: 100%;
-	height: 100%;
-
 	tbody {
-		th,
 		td {
-			padding: ( $spacer / 2 );
+			padding: 0 ( $spacer / 4 );
 		}
 
-		th {
-			padding-right: $spacer;
-			font-weight: 400;
+		td:first-child {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				text-align: right;
+				width: 50%;
+				opacity: .5;
+			}
+		}
+
+		td:last-child {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				text-align: left;
+			}
 		}
 	}
 }

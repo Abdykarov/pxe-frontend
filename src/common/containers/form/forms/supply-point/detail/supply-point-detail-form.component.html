@@ -4,16 +4,34 @@
              class="row">
             <div class="col-12 col-xl-10 offset-xl-1">
                 <lnd-banner-ui
-                        buttonLabel="Najít dodavatele"
-                        [data]="{
+                    buttonLabel="Najít dodavatele"
+                    [data]="{
                             text: 'Platnost smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day')
                         }"
-                        (customBannerAction)="findNewSupplier(supplyPoint)"
+                    (customBannerAction)="findNewSupplier(supplyPoint)"
                 ></lnd-banner-ui>
             </div>
         </div>
     </ng-container>
 </ng-container>
+
+<ng-container *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo']) && supplyPoint.contract.nextContractId &&
+                     !supplyPoint.contract.isNextContractConcluded && (today | dateDiff: supplyPoint.contract.deliveryTo) as contractEndInDays">
+    <div *ngIf="contractEndInDays >= 0"
+         class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                buttonLabel="Dokončit"
+                [data]="{
+                    text: 'Platnost vaší stávající smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day') + ', ale ' +
+                     'máte jednu navazující smlouvu rozpracovanou, chcete jí dokončit?'
+                }"
+                (customBannerAction)="finallyNextContractAction.emit()"
+            ></lnd-banner-ui>
+        </div>
+    </div>
+</ng-container>
+
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="page-box">
@@ -26,40 +44,49 @@
                     </lnd-alert>
                 </div>
             </div>
-
-            <h2 class="h1 mb-3 text-center">{{supplyPoint.name}}</h2>
-            <div class="text-with-icon justify-content-center"
-                 [class.mb-5]="!supplyPoint?.contract?.offer?.greenEnergy">
-                <span class="icon icon--flash text-with-icon__icon"
-                      [class.icon--flame]="supplyPoint.commodityType === commodityType.GAS"
-                      [class.icon--flash]="supplyPoint.commodityType === commodityType.POWER"
-                ></span>
-                <span class="text-with-icon__text">
-                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">Odběr elektřiny</ng-container>
-                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">Odběr plynu</ng-container>
-                </span>
-            </div>
-            <div *ngIf="supplyPoint?.contract?.offer?.greenEnergy"
-                 class="green-energy justify-content-center mb-5">
-                <span class="icon icon--leaf green-energy__icon"></span>
-                <span class="green-energy__text">Zelená energie</span>
-            </div>
             <div class="form-container">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <img alt="Identifikace a spotřeba" class="w-25 mb-3" src="/assets/images/illustrations/house-point.svg" title="">
+                        <h2 class="page-box__title mb-3">
+                            Identifikace <br /> a spotřeba
+                        </h2>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Odběr</p>
+                        <span class="perex">
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">Elektřina</ng-container>
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">Plyn</ng-container>
+                        </span>
+                    </div>
+                    <div *ngIf="supplyPoint?.contract?.offer?.greenEnergy"
+                         class="green-energy justify-content-center mb-5">
+                        <span class="icon icon--leaf green-energy__icon"></span>
+                        <span class="green-energy__text">Zelená energie</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <p class="mb-1">
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">EAN</ng-container>
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">EIC</ng-container>
+                        </p>
+                        <span class="perex">{{supplyPoint.identificationNumber}}</span>
+                    </div>
+                </div>
                 <form
                     [formGroup]="form"
                     (keydown)="resetCustomFieldError()"
                     (change)="resetCustomFieldError()"
                     autocomplete="off">
                     <lnd-form-field
-                            [error]="formError.name || form.controls.name.errors"
-                            [formControl]="form.controls.name"
-                            [id]="'name'"
-                            label="Vaše pojmenování odběrného místa"
-                            subtext="Cokoliv, podle čeho chcete místo identifikovat."
-                            [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
-                            [touched]="form.controls.name.touched || formError.name"
-                            [validationMessages]="formFields.validationMessages.name"
-                            [value]="form.controls.name.value"
+                        [error]="formError.name || form.controls.name.errors"
+                        [formControl]="form.controls.name"
+                        [id]="'name'"
+                        label="Vaše pojmenování odběrného místa"
+                        subtext="Cokoliv, podle čeho chcete místo identifikovat."
+                        [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+                        [touched]="form.controls.name.touched || formError.name"
+                        [validationMessages]="formFields.validationMessages.name"
+                        [value]="form.controls.name.value"
                     ></lnd-form-field>
                     <pxe-field-wrapper
                         *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
@@ -95,8 +122,8 @@
                                     [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionNT'"
                                     [showErrorMessage]="false"
                                     [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
-                                    [clearable]="false"
                                     label="jednotka"
+                                    [clearable]="false"
                                     [parentForm]="form"
                                     [selectName]="'annualConsumptionNTUnit'"
                                     [success]="form.controls.annualConsumptionNTUnit.valid && (form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit)"
@@ -140,9 +167,9 @@
                                     [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
                                     [showErrorMessage]="false"
                                     [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
-                                    [clearable]="false"
                                     [parentForm]="form"
                                     [selectName]="'annualConsumptionVTUnit'"
+                                    [clearable]="false"
                                     [success]="form.controls.annualConsumptionVTUnit.valid && (form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit)"
                                     [touched]="form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit">
                                 </lnd-select>
@@ -154,7 +181,7 @@
                         labelFor="annualConsumptionUnit"
                         [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
                         [error]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors)) ||
-                     ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
+                        ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
                         [validationMessages]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors) && formFields.validationMessages.annualConsumptionUnit) ||
                                   ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
                         <div class="row no-gutters">
@@ -182,15 +209,13 @@
                                     lndSFormDirective
                                     lndSBiometricsDirective
                                     label="jednotka"
-                                    [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
-                                    (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
+                                    [clearable]="false"
                                     [id]="'annualConsumptionUnit'"
                                     (focus)="fieldWrapperFocus('annualConsumptionUnit')"
                                     (blur)="fieldWrapperBlur()"
                                     [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
                                     [showErrorMessage]="false"
                                     [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
-                                    [clearable]="false"
                                     [parentForm]="form"
                                     [selectName]="'annualConsumptionUnit'"
                                     [success]="form.controls.annualConsumptionUnit.valid && (form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit)"
@@ -199,127 +224,92 @@
                             </div>
                         </div>
                     </pxe-field-wrapper>
-                </form>
-                <div class="row">
-                    <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small *ngIf="supplyPoint.commodityType === commodityType.POWER">EAN</small>
-                            <small *ngIf="supplyPoint.commodityType === commodityType.GAS">EIC</small>
+                    <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
+                         class="row text-center">
+                        <div class="col-12 mb-2">
+                            <lnd-button
+                                label="Uložit"
+                                type="primary"
+                                [isDisabled]="formLoading"
+                                (action)="submitForm()">
+                            </lnd-button>
                         </div>
-                        <span class="perex">{{supplyPoint.identificationNumber}}</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-box">
+            <div class="form-container">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <img alt="Identifikace a spotřeba" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
+                        <h2 class="page-box__title mb-3">
+                            Parametry odběrného místa
+                        </h2>
                     </div>
                     <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Typ odběru</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Typ odběru</p>
                         <span class="perex text-capitalize">{{subjectName}}</span>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'offer', 'supplier', 'name'])"
                          class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Dodavatel</small>
-                        </div>
-                        <span class="perex">{{supplyPoint.contract.offer.supplier.name}}</span>
+                        <p class="mb-1 text-uppercase">Dodavatel</p>
+                        <span class="perex">{{supplyPoint.contract?.offer?.supplier?.name}}</span>
                     </div>
                     <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Území</small>
-                        </div>
-                        <span class="perex">{{supplyPoint.address.city}}</span>
+                        <p class="mb-1 text-uppercase">Území</p>
+                        <span class="perex">{{supplyPoint.address?.city}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Distribuční sazba</small>
                         </div>
-                        <span class="perex">{{supplyPoint.distributionRate.help || supplyPoint.distributionRate.description}}</span>
+                        <span class="perex">{{supplyPoint.distributionRate?.help || supplyPoint.distributionRate?.description}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Jistič – fáze</small>
-                        </div>
-                        <span class="perex">{{supplyPoint.phases.help || supplyPoint.phases.description}}</span>
+                        <p class="mb-1 text-uppercase">Jistič – fáze</p>
+                        <span class="perex">{{supplyPoint.phases?.help || supplyPoint.phases?.description}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Jistič – velikost</small>
-                        </div>
-                        <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
-                    </div>
-                    <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
-                         [class.mb-5]="supplyPoint.contract.deliveryTo"
-                         class="col-12">
-                        <div class="mb-1">
-                            <small>Dodávka do</small>
-                        </div>
-                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{contractEndTypeTranslateMap[
-                            !supplyPoint?.contract?.isNextContractConcluded ?
-                                supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
-                                supplyPointContractEndTypes.CONTRACT_END_TERM
-                            ]}}</span>
-                    </div>
-                    <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
-                         class="col-12">
-                        <div class="mb-1">
-                            <small>Výpovědní lhůta</small>
-                        </div>
-                        <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
-                    </div>
-                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"
-                         class="col-12">
-                        <div class="mb-1">
-                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.id, supplyPoint.contract.nextContractId]">smlouvou budoucí</a>.</small>
-                        </div>
-                    </div>
-                    <div *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"
-                         class="col-12">
-                        <div class="mb-1">
-                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.id, supplyPoint.contract.nextContractId)">navazující smlouvu</a>.</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Jistič – velikost</p>
+                        <span class="perex">{{supplyPoint.circuitBreaker?.help || supplyPoint.circuitBreaker?.description}}</span>
                     </div>
                 </div>
-                <hr>
-                <ng-container *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
-                    <div class="row no-gutters align-items-end mb-5">
-                        <div class="col-12 col-md-6">
-                            <small>
-                                Dodávka do<br>{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
-                            </small>
-                        </div>
-                        <div class="col-12 col-md-6 pl-3 text-right">
-                            <lnd-button
-                                    label="Najít dodavatele"
-                                    type="link"
-                                    size="sm"
-                                    [isDisabled]="formLoading"
-                                    (action)="findNewSupplier(supplyPoint)">
-                            </lnd-button>
-                        </div>
+            </div>
+        </div>
+        <div class="page-box">
+            <div class="form-container">
+                <div class="row no-gutters">
+                    <div class="col-12 mb-5">
+                        <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-accepted.svg" title="">
+                        <h2 class="page-box__title mb-1">
+                            Současná smlouva
+                        </h2>
+                        <a [class.link--disabled]="formLoading"
+                           (click)="downloadPdf()">
+                            Stáhnout
+                        </a> (PDF)
+                        <lnd-loader *ngIf="formLoading"></lnd-loader>
                     </div>
-                </ng-container>
-                <ng-container *ngIf="contractActionsTemplate">
-                    <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
-                </ng-container>
-                <div class="row text-center">
-                    <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
-                         class="col-12 mb-2">
-                        <lnd-button
-                                label="Uložit"
-                                type="primary"
-                                [isDisabled]="formLoading"
-                                (action)="submitForm()">
-                        </lnd-button>
+                    <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
+                         [class.mb-2]="supplyPoint.contract.deliveryTo"
+                         class="col-12">
+                        <p class="mb-1 text-uppercase">Dodávka do</p>
+                        <span class="perex mb-1">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
+                        <p class="small mb-3">{{
+                            contractEndTypeTranslateMap[
+                                supplyPoint?.contract?.prolong ?
+                                    supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
+                                    supplyPointContractEndTypes.CONTRACT_END_TERM
+                            ]}}
+                        </p>
                     </div>
-                    <div class="col-12">
-                        <lnd-button
-                                label="Storno"
-                                type="link"
-                                [isDisabled]="formLoading"
-                                (action)="customAction.emit()">
-                        </lnd-button>
-                    </div>
+                    <ng-container *ngIf="contractActionsTemplate">
+                        <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
+                    </ng-container>
                 </div>
             </div>
         </div>

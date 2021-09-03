@@ -29,9 +29,7 @@ import {
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { Tag } from 'src/app/services/model/faq.model';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;
@@ -66,7 +64,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
-        protected scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
     ) {
         super();
         this.router.events
@@ -113,21 +111,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         });
     }
 
-    public signUp = () => {
-        if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
-        } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
-        }
-    }
-
-    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
-
-    public scrollToAboutUs = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_US));
-
-    public scrollToAboutService = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_SERVICE));
-
-
     public login = () => {
         if (R.indexOf(this.settings.loginType, [LoginType.RELOAD, LoginType.NAVIGATE]) >= 0) {
             let extras: NavigationExtras = {};
@@ -155,4 +138,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             )
             .subscribe();
     }
+
+    public signUp = () => this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
 }

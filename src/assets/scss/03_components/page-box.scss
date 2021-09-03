@@ -13,4 +13,35 @@
 	@include media-breakpoint-up(lg) {
 		padding: ( $spacer * 2 );
 	}
+
+	&__title {
+		font-size: 1.5rem;
+	}
+
+	&__inner {
+		padding: ( $spacer * 1.5 );
+		background-color: $white;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 2 );
+		}
+
+		&--light {
+			background-color: lighten($body-bg, 2%);
+		}
+
+		&--same-height {
+			min-height: 370px;
+		}
+	}
+
+	&--with-inner {
+		padding: 0;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: 0;
+		}
+	}
 }

@@ -1,0 +1,40 @@
+/*
+ -  Gaussian distribution graph
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.gaussian-distribution {
+	position: relative;
+	z-index: $zindex-graphs-svg;
+
+	svg {
+		overflow: visible;
+
+		.graph {
+			fill: $light;
+			stroke: $gray-1000;
+			stroke-width: 0;
+			stroke-linejoin: round;
+		}
+
+		.text-end {
+			text-anchor: end;
+		}
+
+		text {
+			color: $gray-400;
+			fill: $gray-400;
+			font-size: $font-size-base;
+		}
+
+		.active-line {
+			stroke-width: 3;
+			stroke: $secondary;
+		}
+	}
+}
+
