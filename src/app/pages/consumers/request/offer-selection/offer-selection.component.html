@@ -44,22 +44,22 @@
     <div class="row"
         *ngIf="supplyPointOffers && questions">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="row align-items-center mb-3">
+            <div class="row justify-content-md-between mb-md-3 text-center text-md-left">
                 <div *ngIf="supplyPointOffers && supplyPointOffers.length"
-                     class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                     class="col-12 mb-5 col-md-auto mb-md-0">
                     <lnd-button
                         label="Krok zpět"
                         type="secondary"
                         (action)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS)">
                     </lnd-button>
                 </div>
-                <div class="col-12 text-center"
-                     [class.col-md-6]="supplyPointOffers && supplyPointOffers.length">
-                    <h2 class="mb-0">
-                        <ng-container *ngIf="supplyPointOffers && supplyPointOffers.length; else noOfferTextTemplate">
-                            Vyberte si nabídku
-                        </ng-container>
-                    </h2>
+                <div *ngIf="existsCurrentOffer"
+                     class="col-12 mb-5 col-md-auto mb-md-0">
+                    <lnd-button
+                        label="Zobrazit současnou smlouvu"
+                        type="dark"
+                        (action)="scrollToCurrentOffer()">
+                    </lnd-button>
                 </div>
             </div>
         </div>
@@ -67,10 +67,12 @@
             <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
                 <div class="supply-points-offer">
                     <pxe-supply-point-offer
+                        #supplyPointOffers
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         customClass="mb-3"
                         [questions]="questions"
+                        [isOwner]="!supplyPointOffer.id"
                         [offerSelected]="offerSelected"
                         [supplyPointOffer]="supplyPointOffer"
                         (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"

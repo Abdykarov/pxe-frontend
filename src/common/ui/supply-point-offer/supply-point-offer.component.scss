@@ -20,17 +20,10 @@
 		color: inherit;
 		border-radius: $border-radius;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
-		pointer-events: none;
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			padding: ( $spacer * 2.5 );
-		}
-	}
-
-	&:not(.supply-point-offer--owner) {
-		@include link-without-href-self {
-			pointer-events: auto;
 		}
 	}
 
@@ -48,27 +41,11 @@
 
 	&.supply-point-offer--owner {
 		@include link-without-href-self {
-			background-color: transparent;
-			text-align: center;
-			box-shadow: none;
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				text-align: left;
-			}
-		}
-
-		.supply-point-offer__title-label {
-			width: 100%;
+			background-color: rgba($body-bg, .5);
 		}
 
 		.supply-point-offer__title {
-			margin-bottom: 0;
 			font-size: $supply-point-title-font-size;
-		}
-
-		.supply-point-offer__info-icon {
-			display: none;
 		}
 	}
 

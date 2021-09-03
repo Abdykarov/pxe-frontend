@@ -139,12 +139,12 @@ type Supplier {
 }
 
 type Address {
-    region: String!
-    street: String!
+    region: String
+    street: String
     orientationNumber: String
-    descriptiveNumber: String!
-    city: String!
-    postCode: String!
+    descriptiveNumber: String
+    city: String
+    postCode: String
 }
 
 input AddressInput {
@@ -255,6 +255,20 @@ type Offer {
     accountingRegulatedPrice: Float
     unit: String,
     prepayment: Float
+}
+
+type SupplyPointImportPrices {
+    importPricePerKwPowerVT: Float
+    importPricePerKwPowerNT: Float
+    importPricePerKwGas: Float
+    importPriceTotalPerYear: Float
+    importPermanentMonthlyPay: Float
+}
+
+type SupplyPointOffers {
+    offers: [Offer]!
+    pastOffer: Offer
+    supplyPointImportPrices: SupplyPointImportPrices
 }
 
 enum OfferStatus {
@@ -588,7 +602,7 @@ type Query {
     getSupplyPoint(supplyPointId: ID!, contractId: ID): SupplyPoint
     findSupplyPoints(identificationNumber: String): [SupplyPoint]
     findSupplierOffers: [Offer]
-    findSupplyPointOffers(identificationNumber: String!): [Offer]
+    findSupplyPointOffers(identificationNumber: String!): SupplyPointOffers
     getPersonalData(contractId: ID!): PersonalData
     getContractById(contractId: ID!): ContractResponseDto
     getContractTerms(contractId: ID!): ContractTerms
@@ -599,7 +613,7 @@ type Query {
     listAskForOffer(filter: AskForOfferFilter): PaginatedAskForOffer
     listContractsBasedOnSupplyPointAndStatus(filter: ContractBasedOnSupplyPointFilter!): [ContractResponseDto]!
     getPersonalDataImport(input: PersonalDataInputImport): ID
-    findSupplyPointImports(askForOfferId: ID!): SupplyPoint
+    findSupplyPointImports(askForOfferId: ID!): [SupplyPoint]!
 }
 
 
@@ -627,7 +641,7 @@ type Mutation {
     createSupplyPointImport(
         askForOfferId: ID!
         supplyPoint: SupplyPointInputImport!
-    ): ID
+    ): SupplyPoint
 
     updateGasSupplyPoint(
         supplyPointId: ID!
@@ -641,6 +655,9 @@ type Mutation {
     ): ID
     deleteUnfinishedSupplyPoint(
         supplyPointId: ID!
+    ): Boolean,
+    updateNotificationsAllowed(
+        notificationsAllowed: Boolean!
     ): Boolean,
     makeRegistration(
         email: String!
@@ -686,4 +703,6 @@ type Mutation {
     confirmFirstContractView: Boolean
     deleteAskForOffer(askForOfferId: ID): ID
     finalizeAskForOffer(askForOfferId: ID): ID
+    deleteSupplyPointImport(supplyPointImportId: ID): ID
+    createAskForOffer: ID
 }

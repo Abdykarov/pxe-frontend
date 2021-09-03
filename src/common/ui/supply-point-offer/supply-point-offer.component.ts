@@ -1,10 +1,12 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,
     Output,
+    ViewChild,
 } from '@angular/core';
 
 import * as moment from 'moment';
@@ -26,6 +28,7 @@ import { removeHtmlFromText } from 'src/common/utils';
     styleUrls: ['./supply-point-offer.component.scss'],
 })
 export class SupplyPointOfferComponent extends AbstractComponent implements OnInit {
+
     private static readonly MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 72;
     private static readonly MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 1;
     private static readonly ZERO_HOURS_VALIDITY_OF_OFFER = 0;
@@ -71,6 +74,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
     @Output()
     public togglePriceDecompositionAction: EventEmitter<any> = new EventEmitter();
+
+    @ViewChild('supplyPointOfferWrapper', { read: ElementRef })
+    public supplyPointOfferWrapper: ElementRef;
 
     constructor(
         private cd: ChangeDetectorRef,

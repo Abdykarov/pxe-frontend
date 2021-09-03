@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderModule } from 'src/common/ui/header/header.module';
+import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { FullLayoutComponent } from './full-layout.component';
 import { FullLayoutRoutingModule } from './full-layout.routing';
-import { FooterModule } from 'src/common/ui/footer/footer.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { FooterModule } from 'src/common/ui/footer/footer.module';
         FullLayoutRoutingModule,
         FooterModule,
         HttpClientModule,
+        PipesModule,
     ],
 })
 export class FullLayoutModule {}
