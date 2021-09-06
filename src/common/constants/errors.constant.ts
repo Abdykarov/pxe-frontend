@@ -1,5 +1,6 @@
 import { CONSTS } from 'src/app/app.constants';
 import { bytesToSize } from '../utils/bytes-to-size.fnc';
+import {cannotBeNullIfFieldIsFilled} from '../utils';
 
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
@@ -392,4 +393,5 @@ export const errorFieldMessages =  {
     numberSeriesVariable: {
         pattern: 'Použít můžete pouze číslice.',
     },
+    cannotBeNullIfFieldIsFilled: 'Nemůže být vyplněno.',
 };

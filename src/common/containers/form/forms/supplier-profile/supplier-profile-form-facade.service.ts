@@ -48,7 +48,7 @@ export class SupplierProfileFormFacade {
         this.isUploadingSubject$.next(true);
         this.supplierService.updateSupplierProfile(supplyInput)
             .subscribe(
-                _ => this.successResultSubject$.next(true),
+                () => this.successResultSubject$.next(true),
                 error => {
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalErrorSubject$.next(globalError);

@@ -38,11 +38,13 @@ export class SupplierProfileFormComponent extends AbstractFormComponent implemen
 
     ngOnInit() {
         super.ngOnInit();
+        this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         this.supplierProfileFormFacade.findSupplierProfileData$
             .pipe(
                 takeUntil(this.destroy$),
                 filter(data => !R.isNil(data)),
-            ).subscribe(this.prefillFormWithSameKeys);
+            )
+            .subscribe(this.prefillFormWithSameKeys);
     }
 
     public submitValidForm = () => this.supplierProfileFormFacade.updateSupplierProfile(this.form.value);
