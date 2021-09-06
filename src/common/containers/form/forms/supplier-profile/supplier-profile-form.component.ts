@@ -1,16 +1,21 @@
 import {
     Component,
-    Input,
     OnChanges,
     OnInit,
-    SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { takeUntil } from 'rxjs/operators';
+import * as R from 'ramda';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
+import { ISupplierInput } from 'src/common/graphql/models/suppplier.model';
+import { mapNullValuesToEmptyString } from 'src/common/utils';
+import { supplierProfileFormFields } from './supplier-profile-form.config';
+import { SupplierProfileFormFacade } from './supplier-profile-form-facade.service';
 
 @Component({
     selector: 'pxe-supplier-profile-form',
@@ -18,38 +23,29 @@ import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.
     styleUrls: ['./supplier-profile-form.component.scss'],
 })
 export class SupplierProfileFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+    public readonly successResult$ = this.supplierProfileFormFacade.successResult$;
+    public readonly isLoading$ = this.supplierProfileFormFacade.isLoading$;
+    public readonly fieldError$ = this.supplierProfileFormFacade.fieldError$;
+    public readonly globalError$ = this.supplierProfileFormFacade.globalError$;
 
-    @Input()
-    public formValues;
+    public readonly formFields = supplierProfileFormFields;
 
     constructor(
+        public supplierProfileFormFacade: SupplierProfileFormFacade,
         protected fb: FormBuilder,
     ) {
         super(fb);
+        this.supplierProfileFormFacade.resetState();
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.prefillForm();
+        this.supplierProfileFormFacade.findSupplierProfileData$
+            .pipe(
+                takeUntil(this.destroy$),
+                filter(data => !R.isNil(data)),
+            ).subscribe(this.prefillFormWithSameKeys);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
-        if (changes.formValues && this.form) {
-            this.prefillForm();
-        }
-    }
-
-    public prefillForm = () => {
-        this.form.get('companyName').setValue(this.formValues.companyName);
-        this.form.get('email').setValue(this.formValues.email);
-    }
-
-
-    public submitValidForm = (smsCode) => {
-        const form: IPersonalDataInputForm = {
-            ...this.form.value,
-        };
-        this.submitAction.emit(form);
-    }
+    public submitValidForm = () => this.supplierProfileFormFacade.updateSupplierProfile(this.form.value);
 }

@@ -6,58 +6,37 @@ import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const supplierProfileFormFields: IForm = {
     controls: {
-        email: [
+        numberSeriesPrefix: [
+            null,
+            [
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_SERIES),
+            ],
+        ],
+        numberSeriesVariable: [
             null,
             [
                 Validators.required,
-                Validators.email,
+                Validators.pattern(`^\\d+$`),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_NUMBER_SERIES),
             ],
         ],
-        companyName: [
+        numberSeriesSuffix: [
             null,
             [
-                Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.COMPANY_NAME),
-            ],
-        ],
-        numericalSeriesPrefix: [
-            null,
-            [
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.COMPANY_NAME),
-            ],
-        ],
-        numericalSeries: [
-            null,
-            [
-                Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.COMPANY_NAME),
-            ],
-        ],
-        numericalSeriesSufix: [
-            null,
-            [
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.COMPANY_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_SERIES),
             ],
         ],
     },
     validationMessages: {
-        email: {
-            required: errorFieldMessages.email.required,
-            email: errorFieldMessages.email.email,
-            invalidEmail: errorFieldMessages.email.email,
-        },
-        companyName: {
-            required: errorFieldMessages.fullName.requiredPersonLastName,
+        numberSeriesPrefix: {
             maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
-        numericalSeriesPrefix: {
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
-        },
-        numericalSeries: {
+        numberSeriesVariable: {
             required: errorFieldMessages.numericalSeries.required,
+            pattern: errorFieldMessages.numberSeriesVariable.pattern,
             maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
-        numericalSeriesSufix: {
+        numberSeriesSuffix: {
             maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
     },

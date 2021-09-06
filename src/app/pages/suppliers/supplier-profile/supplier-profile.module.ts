@@ -7,8 +7,8 @@ import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
-import { SupplierProfileComponent } from 'src/app/pages/supplier-profile/supplier-profile.component';
-import { SupplierProfileRouting } from 'src/app/pages/supplier-profile/supplier-profile.routing';
+import { SupplierProfileComponent } from 'src/app/pages/suppliers/supplier-profile/supplier-profile.component';
+import { SupplierProfileRouting } from 'src/app/pages/suppliers/supplier-profile/supplier-profile.routing';
 
 @NgModule({
     declarations: [

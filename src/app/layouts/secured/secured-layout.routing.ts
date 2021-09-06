@@ -117,7 +117,8 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLIER_PROFILE,
-                loadChildren: () => import('../../pages/supplier-profile/supplier-profile.module').then(m => m.SupplierProfileModule),
+                loadChildren: () =>
+                    import('../../pages/suppliers/supplier-profile/supplier-profile.module').then(m => m.SupplierProfileModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

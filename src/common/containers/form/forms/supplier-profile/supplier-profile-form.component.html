@@ -1,59 +1,91 @@
-<form
-    [formGroup]="form"
-    (keydown)="resetCustomFieldError()"
-    (change)="resetCustomFieldError()"
-    autocomplete="off"
-    class="form-container">
-    <lnd-form-field
-        [error]="formError.companyName || form.controls.companyName.errors"
-        [formControl]="form.controls.companyName"
-        [id]="'company-name'"
-        label="Název společnosti"
-        [success]="form.controls.companyName.valid && (form.controls.companyName.touched || formError.companyName)"
-        [touched]="form.controls.companyName.touched || formError.companyName"
-        [validationMessages]="formFields.validationMessages.companyName"
-    ></lnd-form-field>
-    <lnd-form-field
-        [error]="formError.email || form.controls.email.errors"
-        [formControl]="form.controls.email"
-        [id]="'email'"
-        label="E-mail"
-        [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
-        [touched]="form.controls.email.touched || formError.email"
-        [validationMessages]="formFields.validationMessages.email"
-    ></lnd-form-field>
-    <lnd-form-field
-        [error]="formError.numericalSeriesPrefix || form.controls.numericalSeriesPrefix.errors"
-        [formControl]="form.controls.numericalSeriesPrefix"
-        [id]="'numerical-series-prefix'"
-        label="Číselná řada prefix"
-        [success]="form.controls.numericalSeriesPrefix.valid && (form.controls.numericalSeriesPrefix.touched || formError.numericalSeriesPrefix)"
-        [touched]="form.controls.numericalSeriesPrefix.touched || formError.numericalSeriesPrefix"
-        [validationMessages]="formFields.validationMessages.numericalSeriesPrefix"
-    ></lnd-form-field>
-    <lnd-form-field
-        [error]="formError.numericalSeries || form.controls.numericalSeries.errors"
-        [formControl]="form.controls.numericalSeries"
-        [id]="'numerical-series'"
-        label="Číselná řada"
-        [success]="form.controls.numericalSeries.valid && (form.controls.numericalSeries.touched || formError.numericalSeries)"
-        [touched]="form.controls.numericalSeries.touched || formError.numericalSeries"
-        [validationMessages]="formFields.validationMessages.numericalSeries"
-    ></lnd-form-field>
-    <lnd-form-field
-        [error]="formError.numericalSeriesSufix || form.controls.numericalSeriesSufix.errors"
-        [formControl]="form.controls.numericalSeriesSufix"
-        [id]="'numerical-series-sufix'"
-        label="Číselná řada sufix"
-        [success]="form.controls.numericalSeriesSufix.valid && (form.controls.numericalSeriesSufix.touched || formError.numericalSeriesSufix)"
-        [touched]="form.controls.numericalSeriesSufix.touched || formError.numericalSeriesSufix"
-        [validationMessages]="formFields.validationMessages.numericalSeriesSufix"
-    ></lnd-form-field>
-    <div class="text-center">
-        <lnd-button
-            type="primary"
-            (action)="submitForm($event)"
-            label="Uložit">
-        </lnd-button>
+<ng-template #tooltipBottom let-toggle="toggle">
+    <span (click)="toggle()" class="icon icon--info"></span>
+</ng-template>
+<ng-container *ngIf="globalError$ | async as globalError">
+    <div class="row">
+        <div *ngIf="globalError?.length !== 0"
+             class="col-12">
+            <lnd-alert
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
     </div>
-</form>
+</ng-container>
+<ng-container *ngIf="isLoading$ | async; else formRefTemplate" >
+    <lnd-placeloader [loading]="true"></lnd-placeloader>
+</ng-container>
+<ng-template #formRefTemplate>
+    <div *ngIf="successResult$ | async"
+         class="row">
+        <div class="col-12 col-xl-8 offset-xl-2">
+            <lnd-alert type="info"
+                       hasIcon="true">
+                Změny byly úspěšně uloženy
+            </lnd-alert>
+        </div>
+    </div>
+    <form
+        *ngIf="!(isLoading$ | async)"
+        [formGroup]="form"
+        (keydown)="resetCustomFieldError()"
+        (change)="resetCustomFieldError()"
+        autocomplete="off"
+        class="form-container form-container--big">
+        <div class="row no-gutters">
+            <div class="col-12 mb-2">
+                <small>Číselná řada</small>
+                <lnd-tooltip
+                    [actionTemplate]="tooltipBottom"
+                    direction="bottom"
+                    class="tooltip-supplier-profile-numbers">
+                    Údaje z číselné řady se propisují do uzavřených smluv. <br>
+                    Např. EL001CK (EL - prefix, 001 - proměnná, CK - sufix). <br>
+                    K proměnní se vždy bude přičítat +1 musí tedy být číselného formátu.
+                </lnd-tooltip>
+            </div>
+            <div class="col-12 col-md-4 pr-md-2">
+                <lnd-form-field
+                    [error]="formError.numberSeriesPrefix || form.controls.numberSeriesPrefix.errors"
+                    [formControl]="form.controls.numberSeriesPrefix"
+                    [id]="'numerical-series-prefix'"
+                    label="Prefix"
+                    [success]="form.controls.numberSeriesPrefix.valid && (form.controls.numberSeriesPrefix.touched || formError.numberSeriesPrefix)"
+                    [touched]="form.controls.numberSeriesPrefix.touched || formError.numberSeriesPrefix"
+                    [validationMessages]="formFields.validationMessages.numberSeriesPrefix"
+                ></lnd-form-field>
+            </div>
+            <div class="col-12 col-md-4 pr-md-2">
+                <lnd-form-field
+                    [error]="formError.numberSeriesVariable || form.controls.numberSeriesVariable.errors"
+                    [formControl]="form.controls.numberSeriesVariable"
+                    [id]="'numerical-series'"
+                    label="Proměnná"
+                    [success]="form.controls.numberSeriesVariable.valid && (form.controls.numberSeriesVariable.touched || formError.numberSeriesVariable)"
+                    [touched]="form.controls.numberSeriesVariable.touched || formError.numberSeriesVariable"
+                    [validationMessages]="formFields.validationMessages.numberSeriesVariable"
+                ></lnd-form-field>
+            </div>
+            <div class="col-12 col-md-4">
+                <lnd-form-field
+                    [error]="formError.numberSeriesSuffix || form.controls.numberSeriesSuffix.errors"
+                    [formControl]="form.controls.numberSeriesSuffix"
+                    [id]="'numerical-series-sufix'"
+                    label="Sufix"
+                    [success]="form.controls.numberSeriesSuffix.valid && (form.controls.numberSeriesSuffix.touched || formError.numberSeriesSuffix)"
+                    [touched]="form.controls.numberSeriesSuffix.touched || formError.numberSeriesSuffix"
+                    [validationMessages]="formFields.validationMessages.numberSeriesSuffix"
+                ></lnd-form-field>
+            </div>
+        </div>
+        <div class="text-center">
+            <lnd-button
+                type="primary"
+                (action)="submitForm($event)"
+                label="Uložit">
+            </lnd-button>
+        </div>
+    </form>
+</ng-template>

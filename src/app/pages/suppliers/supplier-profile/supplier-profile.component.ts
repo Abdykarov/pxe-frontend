@@ -30,7 +30,6 @@ import { UserService } from 'src/common/graphql/services/user.service';
 export class SupplierProfileComponent extends AbstractComponent {
     public fieldError: IFieldError = {};
     public userProfileFormFields = userProfileFormFields;
-    public supplierProfileFormFields = supplierProfileFormFields;
     public formLoading = false;
     public formSent = false;
     public formValues: IJwtPayload;
@@ -39,11 +38,6 @@ export class SupplierProfileComponent extends AbstractComponent {
     public oldPhone = this.authService.currentUserValue.phoneNumber;
     public smsSent = false;
     public profileChanged = false;
-
-    public supplierInfo = {
-        companyName: 'Lundegaard a.s.',
-        email: '500_tvrdy@lundegaard.eu',
-    };
 
     constructor(
         private authService: AuthService,
@@ -120,14 +114,5 @@ export class SupplierProfileComponent extends AbstractComponent {
                     this.cd.markForCheck();
                 },
             );
-    }
-
-    // typ podle toho od kad bude chodit
-    public saveSupplierProfile = (validData: any) => {
-        this.formLoading = true;
-        this.formSent = false;
-        this.fieldError = {};
-        this.globalError = [];
-        console.log(validData);
     }
 }

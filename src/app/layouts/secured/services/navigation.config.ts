@@ -166,6 +166,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'label': 'Profil',
         'type': INavigationItemType.NORMAL,
         'icon': 'user',
+        'allowedLoginProviders': null,
         'url': ROUTES.ROUTER_SUPPLIER_PROFILE,
         'children': [],
         __typename: 'supplier-profile',

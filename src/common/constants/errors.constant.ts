@@ -389,4 +389,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte PSČ.',
         pattern: 'Použít můžete pouze 5 číslic.',
     },
+    numberSeriesVariable: {
+        pattern: 'Použít můžete pouze číslice.',
+    },
 };

@@ -1,4 +1,4 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {CommodityType, ISupplierSampleDocument} from 'src/common/graphql/models/supply.model';
 import { IContract } from 'src/common/graphql/models/contract';
 
 export interface IPaginatedContractsWithNameAndSupplyPoint {
@@ -24,4 +24,10 @@ export interface IContractsBasedOnOffersFilter {
 export interface IPagination {
     first: number;
     offset: number;
+}
+
+export interface ISupplierInput {
+    numberSeriesPrefix: String;
+    numberSeriesVariable: String;
+    numberSeriesSuffix: String;
 }

@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
-import { SupplierProfileComponent } from 'src/app/pages/supplier-profile/supplier-profile.component';
+import { SupplierProfileComponent } from 'src/app/pages/suppliers/supplier-profile/supplier-profile.component';
 
 const routes: Routes = [
     {
