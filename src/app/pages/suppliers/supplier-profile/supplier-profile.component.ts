@@ -14,13 +14,12 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
-import { supplierProfileFormFields } from 'src/common/containers/form/forms/supplier-profile/supplier-profile-form.config';
-import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
 import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({

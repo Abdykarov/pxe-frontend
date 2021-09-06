@@ -1,4 +1,4 @@
-import {CommodityType, ISupplierSampleDocument} from 'src/common/graphql/models/supply.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IContract } from 'src/common/graphql/models/contract';
 
 export interface IPaginatedContractsWithNameAndSupplyPoint {
