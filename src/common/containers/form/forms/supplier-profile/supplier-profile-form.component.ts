@@ -12,8 +12,6 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { ISupplierInput } from 'src/common/graphql/models/suppplier.model';
-import { mapNullValuesToEmptyString } from 'src/common/utils';
 import { supplierProfileFormFields } from './supplier-profile-form.config';
 import { SupplierProfileFormFacade } from './supplier-profile-form-facade.service';
 

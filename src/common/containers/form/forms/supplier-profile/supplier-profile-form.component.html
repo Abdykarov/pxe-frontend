@@ -1,4 +1,4 @@
-<ng-template #tooltipBottom let-toggle="toggle">
+<ng-template #tooltipSeries let-toggle="toggle">
     <span (click)="toggle()" class="icon icon--info"></span>
 </ng-template>
 <ng-container *ngIf="globalError$ | async as globalError">
@@ -38,7 +38,7 @@
             <div class="col-12 mb-2">
                 <small>Číselná řada</small>
                 <lnd-tooltip
-                    [actionTemplate]="tooltipBottom"
+                    [actionTemplate]="tooltipSeries"
                     direction="bottom"
                     class="tooltip-supplier-profile-numbers">
                     Údaje z číselné řady se propisují do uzavřených smluv. <br>
