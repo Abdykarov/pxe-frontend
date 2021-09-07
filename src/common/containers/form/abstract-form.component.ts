@@ -71,6 +71,15 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         }
     }
 
+    public prefillFormWithSameKeys = (data: object) => {
+        Object.keys(this.form.controls).forEach(key => {
+            const prefillingValueForKey = data[key];
+            if (!!prefillingValueForKey) {
+                this.form.controls[key].setValue(prefillingValueForKey);
+            }
+        });
+    }
+
     public handleCustomAction = ($event) => this.customAction.emit($event);
 
     public setLoginValidator = (formName, $event) => {

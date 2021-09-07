@@ -25,3 +25,9 @@ export interface IPagination {
     first: number;
     offset: number;
 }
+
+export interface ISupplierInput {
+    numberSeriesPrefix: String;
+    numberSeriesVariable: String;
+    numberSeriesSuffix: String;
+}

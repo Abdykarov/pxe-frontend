@@ -23,6 +23,7 @@
 	&__content {
 		position: absolute;
 		display: none;
+		min-width: 290px;
 		padding: ( $spacer / 4 ) ( $spacer * .75 );
 		background-color: $font-text;
 		color: $white;
@@ -34,7 +35,6 @@
 		z-index: $zindex-tooltip-content;
 	}
 
-	&--top,
 	&--bottom {
 		.tooltip__toggle {
 			&::after {
@@ -43,67 +43,9 @@
 		}
 
 		.tooltip__content {
+			top: calc(100% + #{$spacer * .75});
 			left: 50%;
 			transform: translateX(-50%);
-		}
-	}
-
-	&--top {
-		.tooltip__toggle {
-			&::after {
-				bottom: calc(100% + 15px);
-				transform: translateX(-50%) rotate(-45deg);
-			}
-		}
-
-		.tooltip__content {
-			bottom: 100%;
-		}
-	}
-
-	&--bottom {
-		.tooltip__content {
-			top: calc(100% + #{$spacer * .75});
-		}
-	}
-
-	&--left,
-	&--right {
-		.tooltip__toggle {
-			&::after {
-				top: 50%;
-			}
-		}
-
-		.tooltip__content {
-			top: 50%;
-			transform: translateY(-50%);
-		}
-	}
-
-	&--left {
-		.tooltip__toggle {
-			&::after {
-				right: calc(100% + 15px);
-				transform: translateY(-50%) rotate(-135deg);
-			}
-		}
-
-		.tooltip__content {
-			right: 100%;
-		}
-	}
-
-	&--right {
-		.tooltip__toggle {
-			&::after {
-				left: calc(100% + 15px);
-				transform: translateY(-50%) rotate(45deg);
-			}
-		}
-
-		.tooltip__content {
-			left: 100%;
 		}
 	}
 

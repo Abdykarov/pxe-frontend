@@ -60,6 +60,9 @@ export interface ISupplier {
     vatNumber: string;
     logoPath?: string;
     sampleDocuments: ISupplierSampleDocument[];
+    numberSeriesPrefix?: string;
+    numberSeriesVariable?: string;
+    numberSeriesSuffix?: string;
     __typename?: string;
 }
 
