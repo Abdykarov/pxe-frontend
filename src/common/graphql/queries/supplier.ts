@@ -21,3 +21,15 @@ export const listSupplierContractsBasedOnOffersQuery = gql`
         }
     }
 `;
+
+
+export const findSupplierProfileQuery = gql`
+    query findSupplierProfile{
+        findSupplierProfile {
+            numberSeriesPrefix,
+            numberSeriesVariable,
+            numberSeriesSuffix
+        }
+    }
+`;
+

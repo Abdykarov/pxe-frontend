@@ -44,6 +44,7 @@
 	}
 
 	&.btn-primary,
+	&.btn-dark,
 	&.btn-success,
 	&.btn-warning,
 	&.btn-danger,
@@ -75,6 +76,23 @@
 			color: inherit;
 			background-color: $btn-secondary-bg-hover;
 			border-color: inherit;
+		}
+	}
+
+	&.btn-dark {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $dark-darken;
+			border-color: $dark-darken;
+		}
+
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			&:focus {
+				box-shadow: $btn-focus-box-shadow-size $dark-darken;
+			}
 		}
 	}
 

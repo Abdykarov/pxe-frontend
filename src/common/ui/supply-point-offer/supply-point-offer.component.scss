@@ -42,25 +42,10 @@
 	&.supply-point-offer--owner {
 		@include link-without-href-self {
 			background-color: rgba($body-bg, .5);
-			text-align: center;
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				text-align: left;
-			}
-		}
-
-		.supply-point-offer__title-label {
-			width: 100%;
 		}
 
 		.supply-point-offer__title {
-			margin-bottom: 0;
 			font-size: $supply-point-title-font-size;
-		}
-
-		.supply-point-offer__info-icon {
-			display: none;
 		}
 	}
 

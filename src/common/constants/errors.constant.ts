@@ -1,5 +1,5 @@
+import { bytesToSize } from 'src/common/utils/bytes-to-size.fnc';
 import { CONSTS } from 'src/app/app.constants';
-import { bytesToSize } from '../utils/bytes-to-size.fnc';
 
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
@@ -282,6 +282,9 @@ export const errorFieldMessages =  {
         positiveInteger: 'Použijte pouze celá a kladná čísla.',
         totalDigitLengthBeforeDecimalPoint: 'Použít můžete maximálně {maxLength} čísel před desetinnou čárkou.',
     },
+    numericalSeries: {
+        required: 'Vyplňte časovou řadu.',
+    },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
     },
@@ -386,4 +389,8 @@ export const errorFieldMessages =  {
         required: 'Vyplňte PSČ.',
         pattern: 'Použít můžete pouze 5 číslic.',
     },
+    numberSeriesVariable: {
+        pattern: 'Použít můžete pouze číslice.',
+    },
+    cannotBeNullIfFieldIsFilled: 'Nemůže být vyplněno.',
 };

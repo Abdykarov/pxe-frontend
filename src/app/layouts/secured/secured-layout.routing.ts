@@ -116,6 +116,22 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.SUPPLIER_PROFILE,
+                loadChildren: () =>
+                    import('../../pages/suppliers/supplier-profile/supplier-profile.module').then(m => m.SupplierProfileModule),
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: true,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                    hideLeftNavigation: true,
+                },
+            },
+            {
                 path: CONSTS.PATHS.DELETE_ACCOUNT,
                 loadChildren: () => import('../../pages/consumers/delete-account/delete-account.module').then(m => m.DeleteAccountModule),
                 resolve: {

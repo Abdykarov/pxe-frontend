@@ -8,17 +8,20 @@
      [class.supply-point-offer--owner]="isOwner"
      [class.supply-point-offer--not-interactive]="!interactive">
     <div class="row">
-        <div
-            class="col-12 col-md-6 order-md-1"
-            *ngIf="!isOwner">
-            <div class="supply-point-offer__block px-0">
+        <div class="col-12 col-md-6 order-md-1">
+            <div
+                [class.supply-point-offer__block]="!isOwner"
+                [class.px-0]="!isOwner"
+                [class.mb-5]="isOwner">
                 <div class="row">
                     <div class="col-12">
-                        <span class="supply-point-offer__title-label">Název nabídky</span>
+                        <span class="supply-point-offer__title-label">
+                            {{isOwner ? 'Vaše stávající smlouva' : 'Název nabídky'}}
+                        </span>
                         <span class="supply-point-offer__title text-break">{{supplyPointOffer?.name}}</span>
                     </div>
                     <div
-                        *ngIf="supplyPointOffer.greenEnergy"
+                        *ngIf="!isOwner && supplyPointOffer.greenEnergy"
                         class="col-12">
                         <div class="green-energy">
                             <span class="icon icon--leaf green-energy__icon"></span>
@@ -29,24 +32,20 @@
             </div>
         </div>
         <div
-            class="col-12 order-md-3"
-            [class.supply-point-offer__block]="isOwner"
-            [class.col-12]="!isOwner"
+            class="col-12"
+            [class.pt-0]="!isOwner"
+            [class.pb-3]="!isOwner"
             [class.col-md-6]="isOwner"
             [class.order-md-3]="!isOwner"
-            [class.order-md-1]="isOwner"
-            [class.pt-0]="!isOwner"
+            [class.order-md-2]="isOwner"
             [class.pt-md-4]="!isOwner"
-            [class.pb-3]="!isOwner"
-            [class.pb-0]="isOwner"
             [class.pb-md-0]="!isOwner">
             <div class="row">
-                <div class="col-12"
-                     [class.col-md-6]="!isOwner"
-                     [class.pr-md-6]="!isOwner">
+                <div class="col-12 pr-md-6"
+                     [class.col-md-6]="!isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price mb-5">
                         <span class="supply-point-offer__title-label">
-                            {{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}
+                            Dodavatel
                             <lnd-tooltip
                                 *ngIf="question && (question | keyvalue)?.length"
                                 [actionTemplate]="tooltipBottom"
@@ -68,18 +67,18 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6"
+                    *ngIf="!isOwner">
                     <div class="supply-point-offer__block pt-0 pb-3">
                         <div class="row justify-content-between">
-                            <div class="col-auto mr-4"
-                                *ngIf="!isOwner">
+                            <div class="col-auto mr-4">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__title-label">Dodávka</span>
                                     <span class="supply-point-offer__title">{{supplyPointOffer.deliveryLength }} {{supplyPointOffer.deliveryLength | plural: 'year'}}</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                *ngIf="!isOwner && showValidityOfOffer">
+                                *ngIf="showValidityOfOffer">
                                 <div class="supply-point-offer__value-box mr-0">
                                     <span class="supply-point-offer__title-label">Platnost nabídky</span>
                                     <span class="supply-point-offer__title">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
@@ -91,7 +90,19 @@
             </div>
             <div
                 *ngIf="!showPriceDecomposition && !isOwner"
-                class="row justify-content-end">
+                class="row"
+                [class.justify-content-between]="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+                [class.justify-content-end]="!(supplyPointOffer.benefits && supplyPointOffer.benefits.length)">
+                <div
+                    *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+                    class="col">
+                    <div class="supply-point-offer__benefits-description-wrapper">
+                        <div class="supply-point-offer__benefits-description">
+                            <span class="icon icon--star mr-2"></span>
+                            <span class="supply-point-offer__benefits-text">S touto nabídkou získáte zajímavé výhody.</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-auto d-none d-md-block">
                     <lnd-button
                         *ngIf="!isOwner && !isFromContract"
@@ -107,16 +118,6 @@
                         [isDisabled]="offerSelected"
                         (action)="action.emit(supplyPointOffer)">
                     </lnd-button>
-                </div>
-                <div
-                    *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
-                    class="col-12 mt-md-4">
-                    <div class="supply-point-offer__benefits-description-wrapper">
-                        <div class="supply-point-offer__benefits-description">
-                            <span class="icon icon--star mr-2"></span>
-                            <span class="supply-point-offer__benefits-text">S touto nabídkou získáte zajímavé výhody.</span>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div
@@ -271,8 +272,12 @@
         <div class="
                 col
                 order-md-2"
-            [class.pb-0]="isOwner">
-            <div class="supply-point-offer__block" [class.supply-point-offer__block--second]="!isOwner">
+            [class.offset-md-6]="isOwner">
+            <div 
+                [class.supply-point-offer__block]="!isOwner"
+                [class.supply-point-offer__block--second]="!isOwner"
+                [class.py-0]="isOwner"
+                [class.px-0]="isOwner">
                 <div
                     *ngIf="personalInfo?.deposit || supplyPointOffer.totalPrice"
                     class="row">
@@ -281,7 +286,7 @@
                             {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
                         </span>
                         <span *ngIf="isOwner" class="supply-point-offer__title-label">
-                            Vaše měsíční záloha
+                            Měsíční platba
                         </span>
                     </div>
                     <div class="col-12">

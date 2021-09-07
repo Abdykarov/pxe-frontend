@@ -309,6 +309,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Error 500',
                     'url': '/full/error-500',
                 },
+                {
+                    'label': 'Supplier profil',
+                    'url': '/full/supplier-profile',
+                },
             ],
         },
         {
