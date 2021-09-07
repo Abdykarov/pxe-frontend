@@ -1,6 +1,5 @@
+import { bytesToSize } from 'src/common/utils/bytes-to-size.fnc';
 import { CONSTS } from 'src/app/app.constants';
-import { bytesToSize } from '../utils/bytes-to-size.fnc';
-import {cannotBeNullIfFieldIsFilled} from '../utils';
 
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 

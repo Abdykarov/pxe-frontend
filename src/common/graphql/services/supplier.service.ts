@@ -11,7 +11,6 @@ import {
     listSupplierContractsBasedOnOffersQuery,
 } from 'src/common/graphql/queries/supplier';
 import { updateSupplierProfileMutation } from '../mutation/supplier';
-import {listAskForOfferQuery} from '../queries/ask-for-offer';
 
 
 @Injectable({
