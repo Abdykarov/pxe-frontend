@@ -22,7 +22,7 @@ import {
     map,
     startWith,
     switchMap,
-    takeUntil,
+    takeUntil, tap,
 } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
@@ -122,11 +122,17 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
+                tap(console.log),
                 switchMap(this.setCurrentStateAndFindSupplyPointOffers),
+                tap(console.log),
                 map(({data}) => data.findSupplyPointOffers),
+                tap(console.log),
                 map(this.addPastOfferToFindSupplyPointOffers),
+                tap(console.log),
                 map(this.sortByTotalPriceAscend),
+                tap(console.log),
                 map(this.ifCurrentIsTheBestRemoveIt),
+                tap(console.log),
                 takeUntil(this.destroy$),
             )
             .subscribe(
@@ -238,6 +244,10 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     }
 
     private ifCurrentIsTheBestRemoveIt = (offers: IOffer[]): IOffer[] => {
+        if (offers.length === 0) {
+            return [];
+        }
+
         const firstOffer = R.head(offers);
         const isFirstTheBestOffer = this.isCurrentOffer(firstOffer);
         if (isFirstTheBestOffer) {
