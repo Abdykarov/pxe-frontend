@@ -8,7 +8,6 @@ export const cannotBeNullIfFieldIsFilled = (cannotBeFilledControlName: string, i
         const isFilledValue = isFilledControl.value;
 
         cannotBeFilled.setErrors(null);
-        isFilledControl.setErrors(null);
 
         if (!isFilledValue && cannotBeValue) {
             cannotBeFilled.setErrors({cannotBeNullIfFieldIsFilled: true});
