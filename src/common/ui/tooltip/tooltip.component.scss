@@ -23,7 +23,6 @@
 	&__content {
 		position: absolute;
 		display: none;
-		min-width: 290px;
 		padding: ( $spacer / 4 ) ( $spacer * .75 );
 		background-color: $font-text;
 		color: $white;
@@ -33,6 +32,11 @@
 		border-radius: $tooltip-content-border-radius;
 		box-shadow: $tooltip-content-box-shadow;
 		z-index: $zindex-tooltip-content;
+
+		&--fixed-width {
+			min-width: 290px;
+			text-transform: none;
+		}
 	}
 
 	&--bottom {
@@ -73,9 +77,7 @@
 			}
 
 			&__content {
-				min-width: 290px;
 				padding: $spacer;
-				text-transform: none;
 			}
 		}
 	}
