@@ -122,17 +122,11 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
-                tap(console.log),
                 switchMap(this.setCurrentStateAndFindSupplyPointOffers),
-                tap(console.log),
                 map(({data}) => data.findSupplyPointOffers),
-                tap(console.log),
                 map(this.addPastOfferToFindSupplyPointOffers),
-                tap(console.log),
                 map(this.sortByTotalPriceAscend),
-                tap(console.log),
                 map(this.ifCurrentIsTheBestRemoveIt),
-                tap(console.log),
                 takeUntil(this.destroy$),
             )
             .subscribe(
