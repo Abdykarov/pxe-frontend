@@ -30,6 +30,7 @@ import {
     SubjectType,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
@@ -66,7 +67,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public documentLoading = false;
     public documentType = IDocumentType;
     public fieldError: IFieldError = {};
-    public formFields = formFields;
+    public formFields = formFields(this.authService.currentUserValue.testingAccount);
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
@@ -91,6 +92,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private documentService: DocumentService,

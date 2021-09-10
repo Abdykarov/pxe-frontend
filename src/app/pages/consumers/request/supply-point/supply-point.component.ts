@@ -64,7 +64,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     private deteledContractId = null;
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
-    public formFields = formFields;
+    public formFields = formFields(this.authService.currentUserValue.testingAccount);
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
