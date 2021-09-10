@@ -390,7 +390,7 @@ export const errorFieldMessages =  {
         pattern: 'Použít můžete pouze 5 číslic.',
     },
     numberSeriesVariable: {
-        pattern: 'Nepovolený formát, zadejte pouze čísla.',
+        pattern: 'Zadejte pouze čísla.',
     },
-    cannotBeNullIfFieldIsFilled: 'Nepovolený formát, zadejte pouze čísla.',
+    cannotBeNullIfFieldIsFilled: 'Vyplňte nejdříve proměnnou.',
 };
