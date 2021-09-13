@@ -151,6 +151,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'podminky-uzivani',
         UPLOAD: 'nahrani',
         USER_PROFILE: 'uzivatelsky-profil',
+        SUPPLIER_PROFILE: 'dodavatelsky-profil',
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
@@ -178,6 +179,9 @@ export const CONSTS = {
         MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
         MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION: 3,
         MAX_LENGTH: {
+            SUPPLIER_PROFILE_SERIES: 10,
+            SUPPLIER_PROFILE_NUMBER_SERIES: 15,
+            COMPANY_NAME: 150,
             NUMBER_INPUT_WITH_HINT: 10,
             BENEFIT_NAME: 100,
             BENEFIT_URL: 5000,
@@ -258,6 +262,8 @@ export const ROUTES = {
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
+    ROUTER_SUPPLIER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_PROFILE}`,
+
 };
 
 export enum INavigationItemType {
@@ -370,12 +376,12 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     {
         key: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
         value: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-        label: 'domácnost',
+        label: 'Domácnost',
     },
     {
         key: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
         value: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-        label: 'firma',
+        label: 'Firma',
     },
 ];
 
@@ -393,11 +399,11 @@ export const OWN_TERMINATE_OPTIONS: Array<IOption> = [
 export const COMMODITY_TYPE_OPTIONS: Array<IOption> = [
     {
         key: CommodityType.POWER,
-        label: 'elektřina',
+        label: 'Elektřina',
     },
     {
         key: CommodityType.GAS,
-        label: 'plyn',
+        label: 'Plyn',
     },
 ];
 

@@ -39,6 +39,9 @@ export class TooltipComponent extends AbstractComponent {
     public customClass?: string;
 
     @Input()
+    public customContentClass?: string;
+
+    @Input()
     public direction?: ITooltipDirection;
 
     @Input()

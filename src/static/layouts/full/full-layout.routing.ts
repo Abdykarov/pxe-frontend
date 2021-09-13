@@ -15,6 +15,7 @@ import { FaqDetailPageModule, faqDetailPageRoutes } from 'src/static/pages/faq-d
 import { ImportApprovalModule, importApprovalPageRoutes } from 'src/static/pages/import-approval/page.module';
 import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landing.module';
 import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.module';
+import { SupplierProfilePageModule, supplierProfilePageRoutes } from 'src/static/pages/supplier-profile/page.module';
 import { LoginAfterRegistrationPageModule, loginAfterRegistrationPageRoutes } from 'src/static/pages/login-after-registration/page.module';
 import { PatternsOfContractsPageModule, patternsOfContractsPageRoutes } from 'src/static/pages/patterns-of-contracts/page.module';
 import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
@@ -44,6 +45,7 @@ const routes: Routes = [
             ...registrationPageRoutes,
             ...supplyOfferPageRoutes,
             ...supplyOfferEmptyPageRoutes,
+            ...supplierProfilePageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -69,6 +71,7 @@ const routes: Routes = [
         PatternsOfContractsPageModule,
         RegistrationPageModule,
         RouterModule.forChild(routes),
+        SupplierProfilePageModule,
         SupplyOfferEmptyPageModule,
         SupplyOfferPageModule,
     ],

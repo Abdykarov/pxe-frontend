@@ -238,6 +238,10 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     }
 
     private ifCurrentIsTheBestRemoveIt = (offers: IOffer[]): IOffer[] => {
+        if (offers.length === 0) {
+            return [];
+        }
+
         const firstOffer = R.head(offers);
         const isFirstTheBestOffer = this.isCurrentOffer(firstOffer);
         if (isFirstTheBestOffer) {

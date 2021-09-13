@@ -25,6 +25,13 @@
 			max-width: $input-width-large;
 		}
 	}
+
+	&--big {
+		&,
+		.form-control-case {
+			max-width: $input-width-big;
+		}
+	}
 }
 
 .form-control-info-wrapper {
