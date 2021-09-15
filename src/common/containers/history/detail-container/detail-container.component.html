@@ -1,1 +1,33 @@
-<h3>detail</h3>
+<ng-container *ngIf="globalError$ | async as globalError">
+    <div class="row">
+        <div *ngIf="globalError?.length !== 0"
+             class="col-12">
+            <lnd-alert
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="isLoading$ | async; else dataTemplate" >
+    <lnd-placeloader [loading]="true"></lnd-placeloader>
+</ng-container>
+<ng-template #dataTemplate>
+    <div *ngIf="supplyPoint$ | async as supplyPoint" class="row">
+        <div class="col-12 col-xl-10 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+            <lnd-button
+                label="Krok zpět"
+                type="secondary"
+                (action)="backStep()">
+            </lnd-button>
+        </div>
+        <div class="col-12 col-xl-10">
+            <pxe-supply-point-detail-form
+                [supplyPoint]="supplyPoint"
+                [isForm]="false"
+            ></pxe-supply-point-detail-form>
+        </div>
+    </div>
+</ng-template>

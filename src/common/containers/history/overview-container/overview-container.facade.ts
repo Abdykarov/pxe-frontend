@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { AbstractFacade } from 'src/common/abstract.facade';
-import { concludedSupplyPointsToHistory } from 'src/common/containers/history/utils/utils';
+import { concludedSupplyPointsToHistory } from 'src/common/containers/history/overview-container/overview-container.utils';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IHistory } from 'src/common/containers/history/models/history';
 import { isDataAvailable } from 'src/common/utils';

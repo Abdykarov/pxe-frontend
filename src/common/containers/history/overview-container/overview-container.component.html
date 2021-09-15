@@ -17,7 +17,13 @@
 <ng-template #dataTemplate>
     <ng-container *ngFor="let historyOfSupplyPoints of history$ | async | keyvalue">
         <h2 class="text-center">Odběrná místa s ukončenou dodávkou energií za rok {{historyOfSupplyPoints.key}}</h2>
-        <pxe-supply-point *ngFor="let supplyPoint of historyOfSupplyPoints.value" [data]="supplyPoint"></pxe-supply-point>
+        <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">
+            <pxe-supply-point
+                [data]="supplyPoint"
+                (action)="navigateToHistoryDetail($event)"
+            >
+            </pxe-supply-point>
+        </div>
     </ng-container>
 </ng-template>
 

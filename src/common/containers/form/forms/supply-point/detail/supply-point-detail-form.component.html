@@ -35,7 +35,7 @@
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="page-box">
-            <div *ngIf="formSent"
+            <div *ngIf="formSent && !isForm"
                  class="row">
                 <div class="col-12 col-md-6 offset-md-3">
                     <lnd-alert type="info"
@@ -71,8 +71,38 @@
                         </p>
                         <span class="perex">{{supplyPoint.identificationNumber}}</span>
                     </div>
+                    <div *ngIf="supplyPoint?.contract?.offer?.greenEnergy"
+                         class="green-energy justify-content-center mb-5">
+                        <span class="icon icon--leaf green-energy__icon"></span>
+                        <span class="green-energy__text">Zelená energie</span>
+                    </div>
+                    <div *ngIf="!isForm" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Vaše pojmenování odběrného místa</p>
+                        <span class="perex">
+                            {{supplyPoint.name}}
+                        </span>
+                    </div>
+                    <div *ngIf="!isForm && supplyPoint.annualConsumptionNT" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Roční spotřeba - nízký tarif</p>
+                        <span class="perex">
+                            {{supplyPoint.annualConsumptionNT}} {{supplyPoint.annualConsumptionNTUnit}}
+                        </span>
+                    </div>
+                    <div *ngIf="!isForm && supplyPoint.annualConsumptionVT" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Roční spotřeba - vysoký tarif</p>
+                        <span class="perex">
+                            {{supplyPoint.annualConsumptionVT}} {{supplyPoint.annualConsumptionVTUnit}}
+                        </span>
+                    </div>
+                    <div *ngIf="!isForm && supplyPoint.annualConsumption" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Roční spotřeba</p>
+                        <span class="perex">
+                            {{supplyPoint.annualConsumption}} {{supplyPoint.annualConsumptionUnit}}
+                        </span>
+                    </div>
                 </div>
                 <form
+                    *ngIf="isForm"
                     [formGroup]="form"
                     (keydown)="resetCustomFieldError()"
                     (change)="resetCustomFieldError()"
@@ -286,15 +316,15 @@
                     <div class="col-12 mb-5">
                         <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-accepted.svg" title="">
                         <h2 class="page-box__title mb-1">
-                            Současná smlouva
+                            <ng-container *ngIf="isForm">Současná smlouva</ng-container>
+                            <ng-container *ngIf="!isForm">Uzavřená smlouva</ng-container>
                         </h2>
                         <a [class.link--disabled]="formLoading"
                            (click)="downloadPdf()">
-                            Stáhnout
-                        </a> (PDF)
+                            Stáhnout</a> (PDF)
                         <lnd-loader *ngIf="formLoading"></lnd-loader>
                     </div>
-                    <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
+                    <div *ngIf="isForm && (supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-2]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <p class="mb-1 text-uppercase">Dodávka do</p>
@@ -307,6 +337,16 @@
                             ]}}
                         </p>
                     </div>
+                    <div *ngIf="!isForm"
+                         [class.mb-2]="supplyPoint.contract.deliveryTo"
+                         class="col-12">
+                        <p class="mb-1 text-uppercase">Dodávka od – do</p>
+                        <span class="perex mb-1">{{supplyPoint.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
+                        <p class="small mb-3">{{
+                                contractEndTypeTranslateMap[supplyPointContractEndTypes.CONTRACT_END_TERM]
+                            }}
+                        </p>
+                    </div>
                     <ng-container *ngIf="contractActionsTemplate">
                         <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
                     </ng-container>
@@ -315,3 +355,5 @@
         </div>
     </div>
 </div>
+
+<lnd-form-field></lnd-form-field>

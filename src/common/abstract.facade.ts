@@ -7,7 +7,7 @@ import {
 import * as R from 'ramda';
 
 import { IFieldError } from './containers/form/models/form-definition.model';
-import {map, tap} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export abstract class AbstractFacade {
     public successResultSubject$: BehaviorSubject<boolean> =  new BehaviorSubject(false);
@@ -29,7 +29,6 @@ export abstract class AbstractFacade {
         this.isUploading$,
     ])
         .pipe(
-            tap(console.log),
             map(([observableVal, uploading]) => !!observableVal || !!uploading),
         )
 }

@@ -102,7 +102,7 @@ const routes = [
                 },
             },
             {
-                path: `${CONSTS.PATHS.HISTORY}/:supplyPointId`,
+                path: `${CONSTS.PATHS.HISTORY}/:supplyPointId/:contractId`,
                 loadChildren: () => import('../../pages/consumers/history/detail/history-detail.module')
                     .then(m => m.HistoryDetailModule),
                 resolve: {

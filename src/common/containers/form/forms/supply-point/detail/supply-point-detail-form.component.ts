@@ -72,10 +72,13 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public supplyPoint: ISupplyPoint;
 
     @Input()
-    public contractActionsTemplate: TemplateRef<any>;
+    public contractActionsTemplate?: TemplateRef<any>;
+
+    @Input()
+    public isForm = true;
 
     @Output()
-    public finallyNextContractAction: EventEmitter<any> = new EventEmitter<any>();
+    public finallyNextContractAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
@@ -105,85 +108,91 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     }
 
     ngOnInit() {
-        super.ngOnInit();
-        this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
-        this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;
+        if (this.form) {
+            super.ngOnInit();
+            this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
+            this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;
 
-        this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(({data}) => {
-                this.codeLists = transformCodeList(data.findCodelistsByTypes);
-                this.setAnnualConsumptionNTState(
-                    this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code,
-                    this.codeLists,
-                );
-                this.prefillFormData();
-                this.cd.markForCheck();
-            });
+            this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(({data}) => {
+                    this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                    this.setAnnualConsumptionNTState(
+                        this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code,
+                        this.codeLists,
+                    );
+                    this.prefillFormData();
+                    this.cd.markForCheck();
+                });
 
-        this.form.get('annualConsumptionNTUnit')
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
-                this.detectChangesForAnnualConsumption(
-                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
-                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
-                    annualConsumptionNTUnit,
-                );
-            });
+            this.form.get('annualConsumptionNTUnit')
+                .valueChanges
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+                    this.detectChangesForAnnualConsumption(
+                        ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
+                        ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
+                        annualConsumptionNTUnit,
+                    );
+                });
 
-        this.form.get('annualConsumptionUnit')
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
-                this.detectChangesForAnnualConsumption(
-                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
-                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
-                    annualConsumptionUnit,
-                );
-            });
+            this.form.get('annualConsumptionUnit')
+                .valueChanges
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                    this.detectChangesForAnnualConsumption(
+                        ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                        ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                        annualConsumptionUnit,
+                    );
+                });
 
-        this.form.get('annualConsumptionVTUnit')
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
-                this.detectChangesForAnnualConsumption(
-                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
-                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
-                    annualConsumptionVTUnit,
-                );
-            });
+            this.form.get('annualConsumptionVTUnit')
+                .valueChanges
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
+                    this.detectChangesForAnnualConsumption(
+                        ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
+                        ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
+                        annualConsumptionVTUnit,
+                    );
+                });
 
-        this.modalsService.closeModalData$
-            .pipe(
-                takeUntil(this.destroy$),
-                filter(R_.isNotNil),
-                filter((modal: ICloseModalData) => modal.confirmed),
-            )
-            .subscribe(modal => {
-                if (modal.modalType === confirmFindNewSupplyPoint) {
-                    this.navigateToSupplyPoint(modal.data);
-                }
+            this.modalsService.closeModalData$
+                .pipe(
+                    takeUntil(this.destroy$),
+                    filter(R_.isNotNil),
+                    filter((modal: ICloseModalData) => modal.confirmed),
+                )
+                .subscribe(modal => {
+                    if (modal.modalType === confirmFindNewSupplyPoint) {
+                        this.navigateToSupplyPoint(modal.data);
+                    }
 
-                if (modal.modalType === confirmSaveSupplyPoint) {
-                    this.saveSubmittedData();
-                }
+                    if (modal.modalType === confirmSaveSupplyPoint) {
+                        this.saveSubmittedData();
+                    }
 
-                this.modalsService.closeModalData$.next(null);
-            });
+                    this.modalsService.closeModalData$.next(null);
+                });
+        } else {
+            this.fixAnnualConsumptionByUnit();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
+        if (this.form) {
+            super.ngOnChanges(changes);
 
-        if (changes.formSent && changes.formSent.currentValue === true) {
-            this.setOriginalFormValues(this.form.value);
+            if (changes.formSent && changes.formSent.currentValue === true) {
+                this.setOriginalFormValues(this.form.value);
+            }
         }
     }
 
@@ -204,6 +213,23 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             },
         };
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
+    }
+
+    public fixAnnualConsumptionByUnit = () => {
+        const annualConsumptionUnit = this.supplyPoint.annualConsumptionUnit;
+        const annualConsumptionNTUnit = this.supplyPoint.annualConsumptionNTUnit;
+        const annualConsumptionVTUnit = this.supplyPoint.annualConsumptionVTUnit;
+        if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            this.supplyPoint.annualConsumption *= 1000;
+        }
+
+        if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+            this.supplyPoint.annualConsumptionVT *= 1000;
+        }
+
+        if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            this.supplyPoint.annualConsumptionNT *= 1000;
+        }
     }
 
     public prefillFormData = () => {
