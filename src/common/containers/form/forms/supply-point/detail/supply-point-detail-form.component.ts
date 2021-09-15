@@ -187,7 +187,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (this.form) {
+        if (this.isForm) {
             super.ngOnChanges(changes);
 
             if (changes.formSent && changes.formSent.currentValue === true) {

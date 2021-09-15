@@ -17,22 +17,22 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     providedIn: 'root',
 })
 export class OverviewContainerFacade extends AbstractFacade {
-    public historySupplyPoints$ = this.supplyService.findSupplyPointsByContractStatus(
+    public readonly historySupplyPoints$ = this.supplyService.findSupplyPointsByContractStatus(
         [ContractStatus.CONCLUDED],
     ).pipe(this.catchError);
 
-    public historySupplyPointsData$: Observable<IHistory> = this.historySupplyPoints$
+    public readonly historySupplyPointsData$: Observable<IHistory> = this.historySupplyPoints$
         .pipe(
             filter(isDataAvailable),
             map(({data}) => data.findSupplyPointsByContractStatus),
             map(concludedSupplyPointsToHistory(new Date().getFullYear())),
         );
 
+    public readonly isLoading$: Observable<boolean> = this.createIsLoading(this.historySupplyPoints$);
+
     constructor(
         private supplyService: SupplyService,
     ) {
         super();
     }
-
-    isLoading$: Observable<boolean> = this.createIsLoading(this.historySupplyPoints$);
 }
