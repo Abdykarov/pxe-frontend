@@ -175,6 +175,7 @@ export class SupplyService {
                 contractStatus,
                 skipOfferValidity,
             },
+            useInitialLoading: true,
         })
         .valueChanges
 

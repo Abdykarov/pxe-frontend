@@ -1,0 +1,23 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
+import { DetailContainerModule } from 'src/common/containers/history/detail-container/detail-container.module';
+import { HistoryDetailComponent } from './history-detail.component';
+import { HistoryDetailRouting } from './history-detail.routing';
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+
+@NgModule({
+    declarations: [
+        HistoryDetailComponent,
+    ],
+    exports: [
+        HistoryDetailComponent,
+    ],
+    imports: [
+        CommonModule,
+        LayoutContainerModule,
+        HistoryDetailRouting,
+        DetailContainerModule,
+    ],
+})
+export class HistoryDetailModule { }

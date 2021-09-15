@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import {
-    BehaviorSubject,
     combineLatest,
     Observable,
 } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { AbstractFacade } from 'src/common/abstract.facade';
 import { ISupplierInput } from 'src/common/graphql/models/suppplier.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
@@ -16,20 +15,8 @@ import { SupplierService } from 'src/common/graphql/services/supplier.service';
 @Injectable({
     providedIn: 'root',
 })
-export class SupplierProfileFormFacade {
+export class SupplierProfileFormFacade extends AbstractFacade {
     private findSupplierProfile$ = this.supplierService.findSupplierProfile();
-
-    public successResultSubject$: BehaviorSubject<boolean> =  new BehaviorSubject(false);
-    public successResult$ = this.successResultSubject$.asObservable();
-
-    public globalErrorSubject$: BehaviorSubject<string[]> =  new BehaviorSubject(null);
-    public globalError$ = this.globalErrorSubject$.asObservable();
-
-    public fieldErrorSubject$: BehaviorSubject<IFieldError> =  new BehaviorSubject(null);
-    public fieldError$ = this.fieldErrorSubject$.asObservable();
-
-    public isUploadingSubject$: BehaviorSubject<boolean> =  new BehaviorSubject(false);
-    public isUploading$ = this.isUploadingSubject$.asObservable();
 
     public isLoading$: Observable<boolean> = combineLatest([
         this.findSupplierProfile$.pipe(map(R.prop('loading'))),
@@ -68,5 +55,7 @@ export class SupplierProfileFormFacade {
 
     constructor(
         private supplierService: SupplierService,
-    ) {}
+    ) {
+        super();
+    }
 }
