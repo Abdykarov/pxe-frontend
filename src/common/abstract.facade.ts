@@ -2,12 +2,17 @@ import {
     BehaviorSubject,
     combineLatest,
     Observable,
+    of,
 } from 'rxjs';
 
 import * as R from 'ramda';
+import {
+    catchError,
+    map,
+} from 'rxjs/operators';
 
 import { IFieldError } from './containers/form/models/form-definition.model';
-import { map } from 'rxjs/operators';
+import { parseGraphQLErrors } from './utils';
 
 export abstract class AbstractFacade {
     public successResultSubject$: BehaviorSubject<boolean> =  new BehaviorSubject(false);
@@ -23,6 +28,14 @@ export abstract class AbstractFacade {
     public isUploading$ = this.isUploadingSubject$.asObservable();
 
     public abstract isLoading$: Observable<boolean>;
+
+    public catchError = catchError((error) => {
+        const { globalError, fieldError } = parseGraphQLErrors(error);
+        this.globalErrorSubject$.next(globalError);
+        this.fieldErrorSubject$.next(fieldError);
+        this.isUploadingSubject$.next(false);
+        return of(null);
+    });
 
     public createIsLoading = (observable: Observable<any>): Observable<boolean> => combineLatest([
         observable.pipe(map(R.prop('loading'))),

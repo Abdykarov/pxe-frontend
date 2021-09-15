@@ -108,7 +108,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     }
 
     ngOnInit() {
-        if (this.form) {
+        if (this.isForm) {
             super.ngOnInit();
             this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
             this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;

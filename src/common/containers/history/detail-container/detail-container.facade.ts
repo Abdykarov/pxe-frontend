@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {
     filter,
     map,
+    tap,
 } from 'rxjs/operators';
 
 import { AbstractFacade } from 'src/common/abstract.facade';
@@ -17,10 +18,16 @@ export class DetailContainerFacade extends AbstractFacade {
         this.supplyPointId,
         this.contractId,
         true,
-    );
+    ).pipe(this.catchError);
 
     public historySupplyPointData$: Observable<ISupplyPoint> = this.historySupplyPoint$
         .pipe(
+            tap(
+                aa => {
+                    console.log('___tap___');
+                    console.log(aa);
+                },
+            ),
             filter(isDataAvailable),
             map(({data}) => data.getSupplyPoint),
         );
@@ -31,9 +38,6 @@ export class DetailContainerFacade extends AbstractFacade {
         protected supplyPointService: SupplyService,
     ) {
         super();
-        console.log('__INIT__');
-        console.log(supplyPointId);
-        console.log(contractId);
     }
 
     isLoading$: Observable<boolean> = this.createIsLoading(this.historySupplyPoint$);
