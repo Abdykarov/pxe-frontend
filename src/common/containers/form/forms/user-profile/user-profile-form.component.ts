@@ -78,7 +78,6 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
             if (this.phoneChanged() && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
                 this.customAction.emit(this.form.value.phone);
             } else {
-                this.showForm = false;
                 this.submitValidForm(value);
             }
         }
