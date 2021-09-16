@@ -5,7 +5,8 @@ import { Apollo } from 'apollo-angular';
 import {
     changePasswordMutation,
     resetPasswordMutation,
-    sendChangePhoneNumberSmsMutation, unsubscribeNotificationsMutation,
+    sendChangePhoneNumberSmsMutation,
+    unsubscribeNotificationsMutation,
     updateNotificationsAllowedMutation,
     updateUserProfileMutation,
 } from 'src/common/graphql/mutation/user';

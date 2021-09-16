@@ -7,7 +7,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
-import {UnsubscribeNewsComponent} from './pages/public/unsubscribe-news/unsubscribe-news.component';
 
 export const CONSTS = {
     ALL_BLOG: 'vse',

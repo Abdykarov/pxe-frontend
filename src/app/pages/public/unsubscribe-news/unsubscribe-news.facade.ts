@@ -28,7 +28,6 @@ export class UnsubscribeNewsFacade extends AbstractFacade {
                 () => this.successResultSubject$.next(true),
                 error => {
                     this.processError(error);
-                    this.isUploadingSubject$.next(false);
                 },
                 () => this.isUploadingSubject$.next(false),
             );
