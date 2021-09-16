@@ -35,6 +35,7 @@ import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe'
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 import {
     inArray,
+    isDataAvailable,
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
@@ -88,6 +89,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             ])
             .pipe(
                 takeUntil(this.destroy$),
+                filter(isDataAvailable),
                 map(({data}) =>  data.findSupplyPointsByContractStatus),
             )
             .subscribe(
