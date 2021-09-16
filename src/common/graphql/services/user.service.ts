@@ -5,7 +5,7 @@ import { Apollo } from 'apollo-angular';
 import {
     changePasswordMutation,
     resetPasswordMutation,
-    sendChangePhoneNumberSmsMutation,
+    sendChangePhoneNumberSmsMutation, unsubscribeNotificationsMutation,
     updateNotificationsAllowedMutation,
     updateUserProfileMutation,
 } from 'src/common/graphql/mutation/user';
@@ -34,6 +34,14 @@ export class UserService {
             variables: {
                 oldPassword,
                 newPassword,
+            },
+        })
+
+    public unsubscribeNotification = (userProfileId: string) => this.apollo
+        .mutate<any>({
+            mutation: unsubscribeNotificationsMutation,
+            variables: {
+                userProfileId,
             },
         })
 

@@ -167,7 +167,7 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.UNSUBSCRIBE_NEWS,
+                path: `${CONSTS.PATHS.UNSUBSCRIBE_NEWS}/:userProfileId`,
                 loadChildren: () =>
                     import('../../pages/public/unsubscribe-news/unsubscribe-news.module').then(m => m.UnsubscribeNewsModule),
                 data: {

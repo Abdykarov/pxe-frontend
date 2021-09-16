@@ -12,6 +12,7 @@ import {
 
 import { IFieldError } from './containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from './utils';
+import {ErrorResponse} from 'apollo-link-error';
 
 export abstract class AbstractFacade {
     public successResultSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -28,13 +29,17 @@ export abstract class AbstractFacade {
 
     public abstract isLoading$: Observable<boolean>;
 
-    public catchError = catchError((error) => {
+    public catchError = catchError((error: ErrorResponse) => {
+        this.processError(error);
+        return of(null);
+    });
+
+    public processError = (error: ErrorResponse): void => {
         const { globalError, fieldError } = parseGraphQLErrors(error);
         this.globalErrorSubject$.next(globalError);
         this.fieldErrorSubject$.next(fieldError);
         this.isUploadingSubject$.next(false);
-        return of(null);
-    });
+    }
 
     public createIsLoading = (observable: Observable<any>): Observable<boolean> => combineLatest([
         observable.pipe(map(R.prop('loading'))),

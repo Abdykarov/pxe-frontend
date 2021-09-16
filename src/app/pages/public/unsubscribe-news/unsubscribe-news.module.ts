@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
-import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { UnsubscribeNewsComponent } from './unsubscribe-news.component';
+import { UnsubscribeNewsContainerModule } from 'src/common/containers/unsubscribe-news-container/unsubscribe-news-container.module';
 import { UnsubscribeRoutingModule } from './unsubcribe-news.routing';
-import {AlertModule} from '../../../../common/ui/alert/alert.module';
 
 @NgModule({
     declarations: [
@@ -16,9 +14,7 @@ import {AlertModule} from '../../../../common/ui/alert/alert.module';
         CommonModule,
         UnsubscribeRoutingModule,
         LayoutContainerModule,
-        PlaceloaderModule,
-        BannerUIModule,
-        AlertModule,
+        UnsubscribeNewsContainerModule,
     ],
 })
 export class UnsubscribeNewsModule {}

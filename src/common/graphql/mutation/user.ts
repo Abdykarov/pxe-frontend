@@ -21,6 +21,16 @@ export const updateUserProfileMutation = gql`
     }
 `;
 
+export const unsubscribeNotificationsMutation = gql`
+    mutation unsubscribeNotifications(
+        $userProfileId: ID!,
+    ){
+        unsubscribeNotifications(
+            userProfileId: $userProfileId,
+        )
+    }
+`;
+
 export const sendChangePhoneNumberSmsMutation = gql`
     mutation sendChangePhoneNumberSms($phoneNumber: String!) {
         sendChangePhoneNumberSms(phoneNumber: $phoneNumber)
