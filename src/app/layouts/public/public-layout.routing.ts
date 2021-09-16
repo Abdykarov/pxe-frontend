@@ -166,6 +166,17 @@ const routes = [
                     signUpType: SignType.NONE,
                 },
             },
+            {
+                path: CONSTS.PATHS.UNSUBSCRIBE_NEWS,
+                loadChildren: () =>
+                    import('../../pages/public/unsubscribe-news/unsubscribe-news.module').then(m => m.UnsubscribeNewsModule),
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
         ],
     },
 ];

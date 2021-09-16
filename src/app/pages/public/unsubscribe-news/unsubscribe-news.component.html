@@ -1,0 +1,18 @@
+<div class="container-fluid container-fluid--max-width">
+    <div class="container-content container-content--public">
+        <pxe-layout-container pageTitle="Odhlášení z novinek">
+            <lnd-placeloader [loading]="true" label="Právě probíhá odhlašování"></lnd-placeloader>
+            <lnd-banner-ui
+                [data]="{
+                    text: 'Odhlášení z odběru novinek proběhlo úspěšně.'
+                }"
+                [showButtonLabel]="false"
+                icon="icon--check"
+            ></lnd-banner-ui>
+            <lnd-alert [type]="'danger'">
+                Odhlášení z novinek se bohužel nepovedlo. Pro odhlášení nás kontaktujte na <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>.
+            </lnd-alert>
+
+        </pxe-layout-container>
+    </div>
+</div>

@@ -7,6 +7,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
+import {UnsubscribeNewsComponent} from './pages/public/unsubscribe-news/unsubscribe-news.component';
 
 export const CONSTS = {
     ALL_BLOG: 'vse',
@@ -149,6 +150,7 @@ export const CONSTS = {
         SUPPLY_OFFER: 'sprava-nabidek',
         SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
         TERMS_OF_USE : 'podminky-uzivani',
+        UNSUBSCRIBE_NEWS : 'odhlaseni-z-novinek',
         UPLOAD: 'nahrani',
         USER_PROFILE: 'uzivatelsky-profil',
         SUPPLIER_PROFILE: 'dodavatelsky-profil',
@@ -260,6 +262,7 @@ export const ROUTES = {
     ROUTER_IMPORT_APPROVAL_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.APPROVAL}/${CONSTS.PATHS.POWER}`,
     ROUTER_IMPORT_APPROVAL_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.APPROVAL}/${CONSTS.PATHS.GAS}`,
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
+    ROUTER_UNSUBSCRIBE_NEWS: `/${CONSTS.PATHS.UNSUBSCRIBE_NEWS}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
     ROUTER_SUPPLIER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_PROFILE}`,
