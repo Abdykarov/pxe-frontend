@@ -3,6 +3,7 @@ import {
     BehaviorSubject,
     combineLatest,
     Observable,
+    Observer,
     of,
 } from 'rxjs';
 import {
@@ -10,9 +11,10 @@ import {
     map,
 } from 'rxjs/operators';
 
+import { ErrorResponse } from 'apollo-link-error';
+
 import { IFieldError } from './containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from './utils';
-import {ErrorResponse} from 'apollo-link-error';
 
 export abstract class AbstractFacade {
     public successResultSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -34,7 +36,15 @@ export abstract class AbstractFacade {
         return of(null);
     });
 
-    public processError = (error: ErrorResponse): void => {
+    public updateObserver: Observer<null> = {
+        next: () =>  this.successResultSubject$.next(true),
+        error: (error: ErrorResponse) => {
+            this.processError(error);
+        },
+        complete: () => this.isUploadingSubject$.next(false),
+    };
+
+    private processError = (error: ErrorResponse): void => {
         const { globalError, fieldError } = parseGraphQLErrors(error);
         this.globalErrorSubject$.next(globalError);
         this.fieldErrorSubject$.next(fieldError);

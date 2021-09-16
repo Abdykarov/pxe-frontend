@@ -24,13 +24,6 @@ export class UnsubscribeNewsFacade extends AbstractFacade {
     public unsubscribe = (userProfileId: string): void => {
         this.isUploadingSubject$.next(true);
         this.userService.unsubscribeNotification(userProfileId)
-            .subscribe(
-                () => this.successResultSubject$.next(true),
-                error => {
-                    this.processError(error);
-                },
-                () => this.isUploadingSubject$.next(false),
-            );
-
+            .subscribe(this.updateObserver);
     }
 }

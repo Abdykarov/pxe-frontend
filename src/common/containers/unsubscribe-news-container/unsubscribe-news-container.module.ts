@@ -15,10 +15,10 @@ import { UnsubscribeNewsContainerComponent } from './unsubscribe-news-container.
         UnsubscribeNewsContainerComponent,
     ],
     imports: [
+        AlertModule,
+        BannerUIModule,
         CommonModule,
         PlaceloaderModule,
-        BannerUIModule,
-        AlertModule,
     ],
 })
 export class UnsubscribeNewsContainerModule {}

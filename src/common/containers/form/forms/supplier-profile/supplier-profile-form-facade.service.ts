@@ -34,16 +34,7 @@ export class SupplierProfileFormFacade extends AbstractFacade {
         this.resetState();
         this.isUploadingSubject$.next(true);
         this.supplierService.updateSupplierProfile(supplyInput)
-            .subscribe(
-                () => this.successResultSubject$.next(true),
-                error => {
-                    const { globalError, fieldError } = parseGraphQLErrors(error);
-                    this.globalErrorSubject$.next(globalError);
-                    this.fieldErrorSubject$.next(fieldError);
-                    this.isUploadingSubject$.next(false);
-                },
-                () => this.isUploadingSubject$.next(false),
-            );
+            .subscribe(this.updateObserver);
     }
 
     public resetState = (): void => {
