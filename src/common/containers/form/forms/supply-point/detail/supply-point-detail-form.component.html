@@ -125,7 +125,7 @@
                         [error]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors)) ||
                         ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors))"
                         [validationMessages]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors) && formFields.validationMessages.annualConsumptionNTUnit) ||
-                                  ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors) && formFields.validationMessages.annualConsumptionNT)">
+                        ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors) && formFields.validationMessages.annualConsumptionNT)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
                                 <small>Roční spotřeba - nízký tarif</small>
@@ -167,9 +167,9 @@
                         labelFor="annualConsumptionVTUnit"
                         [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
                         [error]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors)) ||
-                     ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors))"
+                        ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors))"
                         [validationMessages]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors) && formFields.validationMessages.annualConsumptionVTUnit) ||
-                                  ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
+                        ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
                                 <small>Roční spotřeba - vysoký tarif</small>
@@ -213,7 +213,7 @@
                         [error]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors)) ||
                         ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
                         [validationMessages]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors) && formFields.validationMessages.annualConsumptionUnit) ||
-                                  ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
+                        ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
                                 <small>Roční spotřeba</small>
@@ -255,7 +255,7 @@
                         </div>
                     </pxe-field-wrapper>
                     <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
-                         class="row text-center">
+                            class="row text-center">
                         <div class="col-12 mb-2">
                             <lnd-button
                                 label="Uložit"
@@ -355,5 +355,3 @@
         </div>
     </div>
 </div>
-
-<lnd-form-field></lnd-form-field>

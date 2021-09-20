@@ -15,15 +15,18 @@
     <lnd-placeloader [loading]="true"></lnd-placeloader>
 </ng-container>
 <ng-template #dataTemplate>
-    <ng-container *ngFor="let historyOfSupplyPoints of history$ | async | keyvalue">
-        <h2 class="text-center">Odběrná místa s ukončenou dodávkou energií za rok {{historyOfSupplyPoints.key}}</h2>
-        <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">
-            <pxe-supply-point
-                [data]="supplyPoint"
-                (action)="navigateToHistoryDetail($event)"
-            >
-            </pxe-supply-point>
-        </div>
-    </ng-container>
+    <div class="row">
+        <ng-container *ngFor="let historyOfSupplyPoints of history$ | async | keyvalue">
+            <div class="col-12 col-xl-10 offset-xl-1 mb-5">
+                <h2 class="text-center">Odběrná místa s ukončenou dodávkou energií za rok {{historyOfSupplyPoints.key}}</h2>
+                <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">
+                    <pxe-supply-point
+                        [data]="supplyPoint"
+                        (action)="navigateToHistoryDetail($event)"
+                    >
+                    </pxe-supply-point>
+                </div>
+            </div>
+        </ng-container>
+    </div>
 </ng-template>
-
