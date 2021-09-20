@@ -159,7 +159,7 @@ export class SupplyService {
                 supplyPointId,
                 ...(!!contractId) && {contractId},
             },
-            useInitialLoading: useInitialLoading,
+            useInitialLoading,
         })
         .valueChanges
 

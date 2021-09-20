@@ -15,11 +15,11 @@ import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.modul
         OverviewContainerComponent,
     ],
     imports: [
+        AlertModule,
         CommonModule,
         LogoutInformationModule,
-        SupplyPointModule,
-        AlertModule,
         PlaceloaderModule,
+        SupplyPointModule,
     ],
 })
-export class OverviewContainerModule { }
+export class OverviewContainerModule {}

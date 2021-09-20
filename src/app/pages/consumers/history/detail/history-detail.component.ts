@@ -1,6 +1,4 @@
-import {
-    Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 

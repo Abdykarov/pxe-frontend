@@ -1,11 +1,10 @@
+import * as R from 'ramda';
 import {
     BehaviorSubject,
     combineLatest,
     Observable,
     of,
 } from 'rxjs';
-
-import * as R from 'ramda';
 import {
     catchError,
     map,
@@ -15,13 +14,13 @@ import { IFieldError } from './containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from './utils';
 
 export abstract class AbstractFacade {
-    public successResultSubject$: BehaviorSubject<boolean> =  new BehaviorSubject(false);
+    public successResultSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public successResult$ = this.successResultSubject$.asObservable();
 
-    public globalErrorSubject$: BehaviorSubject<string[]> =  new BehaviorSubject(null);
+    public globalErrorSubject$: BehaviorSubject<string[]> = new BehaviorSubject(null);
     public globalError$ = this.globalErrorSubject$.asObservable();
 
-    public fieldErrorSubject$: BehaviorSubject<IFieldError> =  new BehaviorSubject(null);
+    public fieldErrorSubject$: BehaviorSubject<IFieldError> = new BehaviorSubject(null);
     public fieldError$ = this.fieldErrorSubject$.asObservable();
 
     public isUploadingSubject$: BehaviorSubject<boolean> =  new BehaviorSubject(false);
