@@ -15,8 +15,19 @@
     <lnd-placeloader [loading]="true"></lnd-placeloader>
 </ng-container>
 <ng-template #dataTemplate>
+    <div class="row mb-5">
+        <div class="col text-center">
+            <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou smlouvu.</p>
+            <p>Pokud ne, pokračujte založením nového odběrného místa.</p>
+            <lnd-button
+                label="ZALOŽIT NOVÉ ODBĚRNÉ MÍSTO"
+                type="secondary"
+                (action)="createSupplyPoint($event)"
+            ></lnd-button>
+        </div>
+    </div>
     <div class="row">
-        <ng-container *ngFor="let historyOfSupplyPoints of history$ | async | keyvalue">
+        <ng-container *ngFor="let historyOfSupplyPoints of history$ | async | keyvalue: orderKeyValueByKeyDest">
             <div class="col-12 col-xl-10 offset-xl-1 mb-5">
                 <h2 class="text-center">Odběrná místa s ukončenou dodávkou energií za rok {{historyOfSupplyPoints.key}}</h2>
                 <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">

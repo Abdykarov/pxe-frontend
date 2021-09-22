@@ -5,9 +5,8 @@ import { IHistory } from 'src/common/containers/history/models/history';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 const removeNonHistorySupplyPoints = (currentYear: number) => (supplyPoints: ISupplyPoint[]) => R.filter(
-    (supplyPoint: ISupplyPoint) => moment(supplyPoint.contract.deliveryTo).year() < currentYear,
+    (supplyPoint: ISupplyPoint) => moment(supplyPoint.contract.deliveryTo).toDate().getTime() < currentYear,
 )(supplyPoints);
-
 
 const groupByDeliveryTo = (supplyPoints: ISupplyPoint[]): IHistory =>
     R.groupBy((supplyPoint: ISupplyPoint) => moment(supplyPoint.contract.deliveryTo).year(), supplyPoints);

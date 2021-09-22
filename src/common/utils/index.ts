@@ -43,3 +43,4 @@ export * from './download-file.fnc';
 export * from './omit-typename.fnc';
 export * from './validators/cannot-be-null-if-field-is-filled.fnc';
 export * from './is-data-avaible.fnc';
+export * from './order-key-value-by-key-dest.fnc';

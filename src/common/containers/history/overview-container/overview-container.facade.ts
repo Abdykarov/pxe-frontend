@@ -25,7 +25,7 @@ export class OverviewContainerFacade extends AbstractFacade {
         .pipe(
             filter(isDataAvailable),
             map(({data}) => data.findSupplyPointsByContractStatus),
-            map(concludedSupplyPointsToHistory(new Date().getFullYear())),
+            map(concludedSupplyPointsToHistory(new Date().getTime())),
         );
 
     public readonly isLoading$: Observable<boolean> = this.createIsLoading(this.historySupplyPoints$);
