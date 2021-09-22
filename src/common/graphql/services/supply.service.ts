@@ -151,7 +151,7 @@ export class SupplyService {
             },
         })
 
-    public getSupplyPoint = (supplyPointId: string, contractId: string = null) => this.apollo
+    public getSupplyPoint = (supplyPointId: string, contractId: string = null, useInitialLoading = false) => this.apollo
         .watchQuery<any>({
             fetchPolicy: contractId ? 'no-cache' : 'network-only',
             query: getSupplyPointQuery,
@@ -159,6 +159,7 @@ export class SupplyService {
                 supplyPointId,
                 ...(!!contractId) && {contractId},
             },
+            useInitialLoading,
         })
         .valueChanges
 
@@ -175,6 +176,7 @@ export class SupplyService {
                 contractStatus,
                 skipOfferValidity,
             },
+            useInitialLoading: true,
         })
         .valueChanges
 

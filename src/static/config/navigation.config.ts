@@ -210,6 +210,18 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/faq-detail',
                 },
                 {
+                    'label': 'History',
+                    'url': '/basic/history',
+                },
+                {
+                    'label': 'History detail',
+                    'url': '/basic/history-detail',
+                },
+                {
+                    'label': 'Cookies policy',
+                    'url': '/full/cookies',
+                },
+                {
                     'label': 'Import approval',
                     'url': '/full/import-approval',
                 },

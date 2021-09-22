@@ -432,3 +432,22 @@ $colors: (
 .mt-suppy-point-import {
 	margin-top: 80px;
 }
+
+.form-container {
+	max-width: $input-width;
+	margin: 0 auto;
+
+	&--large {
+		&,
+		.form-control-case {
+			max-width: $input-width-large;
+		}
+	}
+
+	&--big {
+		&,
+		.form-control-case {
+			max-width: $input-width-big;
+		}
+	}
+}
