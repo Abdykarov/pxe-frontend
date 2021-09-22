@@ -1,0 +1,32 @@
+<ng-container *ngIf="globalError$ | async as globalError">
+    <div class="row">
+        <div *ngIf="globalError?.length !== 0"
+             class="col-12">
+            <lnd-alert
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="isLoading$ | async; else dataTemplate" >
+    <lnd-placeloader [loading]="true"></lnd-placeloader>
+</ng-container>
+<ng-template #dataTemplate>
+    <div class="row">
+        <ng-container *ngFor="let historyOfSupplyPoints of history$ | async | keyvalue">
+            <div class="col-12 col-xl-10 offset-xl-1 mb-5">
+                <h2 class="text-center">Odběrná místa s ukončenou dodávkou energií za rok {{historyOfSupplyPoints.key}}</h2>
+                <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">
+                    <pxe-supply-point
+                        [data]="supplyPoint"
+                        (action)="navigateToHistoryDetail($event)"
+                    >
+                    </pxe-supply-point>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>

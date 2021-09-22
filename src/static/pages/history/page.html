@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Historie
+            </h1>
+        </div>
+    </div>
+    <ng-container *ngFor="let historyOfSupplyPoints of history | keyvalue">
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1 mb-5">
+                <h2 class="text-center">Odběrná místa s ukončenou dodávkou energií za rok {{historyOfSupplyPoints.key}}</h2>
+                <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">
+                    <pxe-supply-point [data]="supplyPoint"></pxe-supply-point>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

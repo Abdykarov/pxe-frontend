@@ -79,6 +79,16 @@ export const navigationMenuUsers: INavigationMenu = [
         'children': [],
         __typename : 'secured',
     },
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_HISTORY,
+        'label': 'Historie',
+        'allowedLoginProviders': null,
+        'type': INavigationItemType.NORMAL,
+        'icon': 'document',
+        'children': [],
+        __typename : 'secured',
+    },
 ];
 
 export const navigationMenuSuppliers: INavigationMenu = [];
