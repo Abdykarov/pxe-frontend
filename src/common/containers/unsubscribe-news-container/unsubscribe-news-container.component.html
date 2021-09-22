@@ -13,7 +13,10 @@
     <lnd-placeloader [loading]="true" label="Právě probíhá odhlašování"></lnd-placeloader>
 </ng-container>
 <ng-template #dataTemplate>
-    <lnd-alert type="info" [hasIcon]="true">
+    <lnd-alert
+        *ngIf="successResult$ | async"
+        type="info"
+        [hasIcon]="true">
         Odhlášení z odběru novinek proběhlo úspěšně.
     </lnd-alert>
 </ng-template>
