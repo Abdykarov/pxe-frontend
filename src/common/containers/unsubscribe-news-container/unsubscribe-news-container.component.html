@@ -4,7 +4,7 @@
              class="col-12">
             <lnd-alert
                 type="danger">
-                Odhlášení z novinek se bohužel nepovedlo. Pro odhlášení nás kontaktujte na <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>.
+                Odhlášení z novinek se bohužel nepovedlo. Pro odhlášení nás kontaktujte na <a class="link--interactive-revert text-white" href="mailto:info@parc4u.cz">info@parc4u.cz</a>.
             </lnd-alert>
         </div>
     </div>
@@ -13,12 +13,7 @@
     <lnd-placeloader [loading]="true" label="Právě probíhá odhlašování"></lnd-placeloader>
 </ng-container>
 <ng-template #dataTemplate>
-    <lnd-banner-ui
-        *ngIf="successResult$ | async"
-        [data]="{
-                    text: 'Odhlášení z odběru novinek proběhlo úspěšně.'
-                }"
-        [showButtonLabel]="false"
-        icon="icon--check"
-    ></lnd-banner-ui>
+    <lnd-alert type="info" [hasIcon]="true">
+        Odhlášení z odběru novinek proběhlo úspěšně.
+    </lnd-alert>
 </ng-template>
