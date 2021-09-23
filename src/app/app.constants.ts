@@ -68,8 +68,8 @@ export const CONSTS = {
         TYPE: 'csv',
     },
     EXAMPLE_OF_IMPORT_OFFER_FILE: {
-        PATH: '/assets/csv/example_import_offers.csv',
-        FILE_NAME: 'example_import_offers.csv',
+        PATH: '/assets/csv/Možnosti nabídek.xlsx',
+        FILE_NAME: 'Možnosti nabídek.xlsx',
     },
     IMPORT_ERROR_CODES: {
         FILE_TYPE: 'FILE_TYPE',

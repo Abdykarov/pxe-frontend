@@ -19,6 +19,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class OverviewContainerFacade extends AbstractFacade {
     public readonly historySupplyPoints$ = this.supplyService.findSupplyPointsByContractStatus(
         [ContractStatus.CONCLUDED],
+        null,
+        false,
+        true,
     ).pipe(this.catchError);
 
     public readonly historySupplyPointsData$: Observable<IHistory> = this.historySupplyPoints$

@@ -58,11 +58,14 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
+                    console.log('SUCCESS');
                     this.loadingSupplyPoints = false;
                     this.supplyPoints = supplyPoints;
                     this.cd.markForCheck();
                 },
                 error => {
+                    console.log('ERROR');
+                    console.log(error);
                     this.supplyPoints = null;
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
