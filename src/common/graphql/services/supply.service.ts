@@ -167,6 +167,7 @@ export class SupplyService {
         contractStatus: ContractStatus[],
         identificationNumber: string = null,
         skipOfferValidity = false,
+        useInitialLoading = false,
     ) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'no-cache',
@@ -176,7 +177,7 @@ export class SupplyService {
                 contractStatus,
                 skipOfferValidity,
             },
-            useInitialLoading: true,
+            useInitialLoading,
         })
         .valueChanges
 
