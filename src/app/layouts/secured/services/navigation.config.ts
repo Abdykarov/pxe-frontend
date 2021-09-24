@@ -85,7 +85,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'label': 'Historie',
         'allowedLoginProviders': null,
         'type': INavigationItemType.NORMAL,
-        'icon': 'document',
+        'icon': 'clock',
         'children': [],
         __typename : 'secured',
     },
