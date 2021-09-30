@@ -150,7 +150,7 @@ export const CONSTS = {
         SUPPLY_OFFER: 'sprava-nabidek',
         SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
         TERMS_OF_USE : 'podminky-uzivani',
-        UNSUBSCRIBE_NEWS : 'odhlaseni-z-novinek',
+        UNSUBSCRIBE_NEWS : 'odhlaseni-z-odberu',
         UPLOAD: 'nahrani',
         USER_PROFILE: 'uzivatelsky-profil',
         SUPPLIER_PROFILE: 'dodavatelsky-profil',
