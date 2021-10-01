@@ -253,7 +253,7 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
-        isInTerminateInterval: 'Vaši aktuální smlouvu už máte automaticky prodlouženou. Vložte správné datum.',
+        isInTerminateInterval: 'V takto krátké době nejsme schopni zajistit přepis smlouvy.',
         expirationAtLeast30DaysBeforeNewDelivery: 'Nejsme schopni v takto kratké době uzavřít navazující smlouvu.',
         notEnoughDaysToProcessContract: 'Smlouva nemůže být změněna, protože nezbývá dostatek času ke zpracování.',
     },
