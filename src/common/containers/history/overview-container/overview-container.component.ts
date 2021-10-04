@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+    Component,
+    OnDestroy,
+} from '@angular/core';
 import {
     ActivatedRoute,
     Router,
@@ -14,7 +17,7 @@ import { ROUTES } from 'src/app/app.constants';
     templateUrl: './overview-container.component.html',
     styleUrls: ['./overview-container.component.scss'],
 })
-export class OverviewContainerComponent {
+export class OverviewContainerComponent implements OnDestroy {
     public readonly orderKeyValueByKeyDest = orderKeyValueByKeyDest;
 
     public readonly history$ = this.overviewContainerFacade.historySupplyPointsData$;
@@ -40,5 +43,9 @@ export class OverviewContainerComponent {
     public createSupplyPoint(event): void {
         event.preventDefault();
         this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
+    }
+
+    ngOnDestroy(): void {
+        this.overviewContainerFacade.resetState();
     }
 }

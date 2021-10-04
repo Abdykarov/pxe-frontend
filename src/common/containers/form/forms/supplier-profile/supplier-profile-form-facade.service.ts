@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { ISupplierInput } from 'src/common/graphql/models/suppplier.model';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
 
 @Injectable({
@@ -35,13 +34,6 @@ export class SupplierProfileFormFacade extends AbstractFacade {
         this.isUploadingSubject$.next(true);
         this.supplierService.updateSupplierProfile(supplyInput)
             .subscribe(this.updateObserver);
-    }
-
-    public resetState = (): void => {
-        this.isUploadingSubject$.next(false);
-        this.globalErrorSubject$.next([]);
-        this.fieldErrorSubject$.next(null);
-        this.successResultSubject$.next(false);
     }
 
     constructor(
