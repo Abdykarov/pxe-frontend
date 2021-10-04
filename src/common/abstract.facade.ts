@@ -58,11 +58,4 @@ export abstract class AbstractFacade {
         .pipe(
             map(([observableVal, uploading]) => !!observableVal || !!uploading),
         )
-
-    public resetState = (): void => {
-        this.successResultSubject$.next(false);
-        this.globalErrorSubject$.next(null);
-        this.fieldErrorSubject$.next(null);
-        this.isUploadingSubject$.next(false);
-    }
 }

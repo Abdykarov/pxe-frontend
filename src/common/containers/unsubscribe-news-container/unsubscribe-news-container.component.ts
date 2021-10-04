@@ -1,8 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import {
-    Component,
-    OnDestroy,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { UnsubscribeNewsFacade } from 'src/app/pages/public/unsubscribe-news/unsubscribe-news.facade';
 
@@ -11,7 +8,7 @@ import { UnsubscribeNewsFacade } from 'src/app/pages/public/unsubscribe-news/uns
     templateUrl: './unsubscribe-news-container.component.html',
     styleUrls: ['./unsubscribe-news-container.component.scss'],
 })
-export class UnsubscribeNewsContainerComponent implements OnDestroy {
+export class UnsubscribeNewsContainerComponent {
     public readonly successResult$ = this.unsubscribeNewsFacade.successResult$;
     public readonly isLoading$ = this.unsubscribeNewsFacade.isLoading$;
     public readonly globalError$ = this.unsubscribeNewsFacade.globalError$;
@@ -21,9 +18,5 @@ export class UnsubscribeNewsContainerComponent implements OnDestroy {
         private unsubscribeNewsFacade: UnsubscribeNewsFacade,
     ) {
         this.unsubscribeNewsFacade.unsubscribe(route.snapshot.params['userProfileId']);
-    }
-
-    ngOnDestroy(): void {
-        this.unsubscribeNewsFacade.resetState();
     }
 }
