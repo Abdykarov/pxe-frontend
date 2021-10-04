@@ -16,6 +16,7 @@ import { ROUTES } from 'src/app/app.constants';
     selector: 'pxe-history-overview-container',
     templateUrl: './overview-container.component.html',
     styleUrls: ['./overview-container.component.scss'],
+    providers: [OverviewContainerFacade],
 })
 export class OverviewContainerComponent implements OnDestroy {
     public readonly orderKeyValueByKeyDest = orderKeyValueByKeyDest;
