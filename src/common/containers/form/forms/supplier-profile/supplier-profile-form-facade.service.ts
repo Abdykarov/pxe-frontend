@@ -36,6 +36,13 @@ export class SupplierProfileFormFacade extends AbstractFacade {
             .subscribe(this.updateObserver);
     }
 
+    public resetState = (): void => {
+        this.isUploadingSubject$.next(false);
+        this.globalErrorSubject$.next([]);
+        this.fieldErrorSubject$.next(null);
+        this.successResultSubject$.next(false);
+    }
+
     constructor(
         private supplierService: SupplierService,
     ) {
