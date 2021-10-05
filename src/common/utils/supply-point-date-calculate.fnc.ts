@@ -54,14 +54,15 @@ export const addTerminateInterval = (from: Moment | string | Date, supplyPointIn
 export const getNextDayFromExpirationDate = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
     supplyPointInput.expirationDate && addOneDay(supplyPointInput.expirationDate);
 
-export const expirationDateIsInTerminateInterval = (supplyPointInput: ISupplyPointInput | ISupplyPoint) => {
+export const expirationDateIsInTerminateInterval = (supplyPointInput: ISupplyPointInput | ISupplyPoint, withProcessPeriod = true) => {
     const terminateInterval: Moment = addTerminateInterval(
         moment(),
         supplyPointInput,
     );
-    const terminateIntervalWithProcessingTime = terminateInterval.add(CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'days');
+    const terminateIntervalWithProcessingTimeIfNeeded = withProcessPeriod ?
+        terminateInterval.add(CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'days') : terminateInterval;
     const expirationDate = moment(supplyPointInput.expirationDate).startOf('day');
-    return terminateIntervalWithProcessingTime.diff(expirationDate) >= 0;
+    return terminateIntervalWithProcessingTimeIfNeeded.diff(expirationDate) >= 0;
 };
 
 export const contractEndTermWithProlongation = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
