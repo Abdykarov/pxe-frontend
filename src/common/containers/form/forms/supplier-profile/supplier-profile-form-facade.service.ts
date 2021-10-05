@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { ISupplierInput } from 'src/common/graphql/models/suppplier.model';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
 
 @Injectable({
