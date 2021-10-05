@@ -104,8 +104,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
         this.editMode = supplyPointCopy || supplyPointIdCopy ? SUPPLY_POINT_EDIT_TYPE.PROLONG : SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
-        console.log('supplyPointCopy', supplyPointCopy);
-
         if (this.supplyPointId || supplyPointIdCopy) {
             let supplyPointFound: ISupplyPoint = null;
             this.supplyService.getSupplyPoint(this.supplyPointId || supplyPointIdCopy)

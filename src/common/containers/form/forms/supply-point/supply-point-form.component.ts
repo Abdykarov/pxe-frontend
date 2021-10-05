@@ -359,8 +359,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let annualConsumptionVTUnit = null;
         let annualConsumptionUnit = null;
 
-        console.log(this.formValues);
-
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
             const supplier = R.find(R.propEq('id', this.formValues.supplier?.id))(this.suppliers[commodityType]);
