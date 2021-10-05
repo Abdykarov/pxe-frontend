@@ -13,9 +13,7 @@ import { IHistory } from 'src/common/containers/history/models/history';
 import { isDataAvailable } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class OverviewContainerFacade extends AbstractFacade {
     public readonly historySupplyPoints$ = this.supplyService.findSupplyPointsByContractStatus(
         [ContractStatus.CONCLUDED],
