@@ -17,14 +17,21 @@ export const timeToContractEndProlonged = () => {
         let updatedErrors;
 
         if (supplyPointInput.contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION &&
-            isAllRequiredFilled(supplyPointInput) &&
-            expirationDateIsInTerminateInterval(supplyPointInput)
+            isAllRequiredFilled(supplyPointInput)
         ) {
-            expirationDateControl.markAsTouched({
-                onlySelf: true,
-            });
-            updatedErrors = R.assoc('isInTerminateInterval', true, currentErrors);
+            if (expirationDateIsInTerminateInterval(supplyPointInput, false)) {
+                expirationDateControl.markAsTouched({
+                    onlySelf: true,
+                });
+                updatedErrors = R.assoc('isInProlongInterval', true, currentErrors);
+            } else if (expirationDateIsInTerminateInterval(supplyPointInput)) {
+                expirationDateControl.markAsTouched({
+                    onlySelf: true,
+                });
+                updatedErrors = R.assoc('isInTerminateInterval', true, currentErrors);
+            }
         } else  {
+            updatedErrors = R.omit(['isInProlongInterval'], currentErrors);
             updatedErrors = R.omit(['isInTerminateInterval'], currentErrors);
         }
 
