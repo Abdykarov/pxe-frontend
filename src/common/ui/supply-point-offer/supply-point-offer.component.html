@@ -302,7 +302,7 @@
                     </div>
                 </div>
                 <div
-                    *ngIf="isOwner"
+                    *ngIf="isOwner && supplyPointOffer?.priceNTWithVAT"
                     class="row mt-5">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">
@@ -311,7 +311,7 @@
                     </div>
                     <div class="col-12">
                         <span class="supply-point-offer__title text-break">
-                                450{{supplyPointOffer.priceNTWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
+                            {{supplyPointOffer.priceNTWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
                         </span>
                     </div>
                 </div>
@@ -325,7 +325,7 @@
                     </div>
                     <div class="col-12">
                         <span class="supply-point-offer__title text-break">
-                                {{supplyPointOffer.priceVTWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
+                            {{supplyPointOffer.priceVTWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
                         </span>
                     </div>
                 </div>
@@ -339,8 +339,8 @@
                     </div>
                     <div class="col-12">
                         <span class="supply-point-offer__title text-break">
-                                {{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
-                            </span>
+                            {{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
+                        </span>
                     </div>
                 </div>
             </div>

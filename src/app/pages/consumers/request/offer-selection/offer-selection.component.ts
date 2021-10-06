@@ -1,29 +1,71 @@
-import {ActivatedRoute, Router, } from '@angular/router';
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren, } from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    QueryList,
+    ViewChildren,
+} from '@angular/core';
 
 import * as R from 'ramda';
-import {interval, Observable, of, } from 'rxjs';
-import {filter, map, startWith, switchMap, takeUntil, } from 'rxjs/operators';
+import {
+    interval,
+    Observable,
+    of,
+} from 'rxjs';
+import {
+    filter,
+    map,
+    startWith,
+    switchMap,
+    takeUntil,
+} from 'rxjs/operators';
 
-import {AbstractFaqComponent} from 'src/app/pages/public/faq/abstract-faq.component';
-import {AuthService} from 'src/app/services/auth.service';
-import {CONSTS, GTM_CONSTS, ROUTES, S_ANALYTICS, } from 'src/app/app.constants';
-import {ContractService} from 'src/common/graphql/services/contract.service';
-import {FaqService} from 'src/app/services/faq.service';
-import {getConfigStepper, parseGraphQLErrors, } from 'src/common/utils';
-import {GTMService} from 'src/app/services/gtm.service';
-import {IBannerObj} from 'src/common/ui/banner/models/banner-object.model';
-import {ISupplyPoint, ProgressStatus, } from 'src/common/graphql/models/supply.model';
-import {IOffer, ISupplyPointImportPrices, ISupplyPointOffers, } from 'src/common/graphql/models/offer.model';
-import {IStepperProgressItem} from 'src/common/ui/progress-bar/models/progress.model';
-import {NavigateRequestService} from 'src/app/services/navigate-request.service';
-import {OfferService} from 'src/common/graphql/services/offer.service';
-import {offerValidityMessages} from 'src/common/constants/errors.constant';
-import {removeAccent} from 'src/common/utils/standalone/remove-accent.fnc';
-import {SAnalyticsService} from 'src/app/services/s-analytics.service';
-import {SupplyPointOfferComponent} from 'src/common/ui/supply-point-offer/supply-point-offer.component';
-import {SupplyService} from 'src/common/graphql/services/supply.service';
-import {ValidityService} from 'src/app/services/validity.service';
+import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
+import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    GTM_CONSTS,
+    ROUTES,
+    S_ANALYTICS,
+} from 'src/app/app.constants';
+import { ContractService } from 'src/common/graphql/services/contract.service';
+import { FaqService } from 'src/app/services/faq.service';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+} from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
+import {
+    IOffer,
+    ISupplyPointOffers,
+} from 'src/common/graphql/models/offer.model';
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { OfferService } from 'src/common/graphql/services/offer.service';
+import { offerValidityMessages } from 'src/common/constants/errors.constant';
+import { removeAccent } from 'src/common/utils/standalone/remove-accent.fnc';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { SupplyPointOfferComponent } from 'src/common/ui/supply-point-offer/supply-point-offer.component';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ValidityService } from 'src/app/services/validity.service';
+import {
+    addPastOfferToFindSupplyPointOffers,
+    filterOffersOnlyActualSupplier,
+    ifCurrentIsTheBestRemoveIt,
+    isCurrentOffer,
+    setTotalPriceWithAnnualConsumption,
+    sortByTotalPriceAscend,
+} from './offer-selection.utils';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -73,8 +115,6 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             filter(() => !this.onlyOffersFromActualSupplier),
         );
 
-    private sortByTotalPriceAscend = R.sort(R.ascend(R.prop('totalPrice')));
-
     ngOnInit() {
         this.sAnalyticsService.installSForm();
 
@@ -89,21 +129,27 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 map(({data}) => data.getSupplyPoint),
                 switchMap(this.setCurrentStateAndFindSupplyPointOffers),
                 map(({data}) => data.findSupplyPointOffers),
-                map(this.addPastOfferToFindSupplyPointOffers),
-                map(this.sortByTotalPriceAscend),
-                map(this.ifCurrentIsTheBestRemoveIt),
+                map((supplyPointOffers: ISupplyPointOffers) =>
+                        setTotalPriceWithAnnualConsumption(this.supplyPoint, supplyPointOffers),
+                ),
+                map(
+                    (supplyPointOffers: ISupplyPointOffers) =>
+                        addPastOfferToFindSupplyPointOffers(this.supplyPoint, supplyPointOffers),
+                ),
+                map(sortByTotalPriceAscend),
+                map(ifCurrentIsTheBestRemoveIt),
                 takeUntil(this.destroy$),
             )
             .subscribe(
                 (findSupplyPointOffers: IOffer[]) => {
-                    this.existsCurrentOffer = R.find(this.isCurrentOffer)(findSupplyPointOffers);
+                    this.existsCurrentOffer = R.find(isCurrentOffer)(findSupplyPointOffers);
                     this.supplyPointOffers = findSupplyPointOffers;
                     this.loadingSupplyPointOffers = false;
                     this.setTextBannerByContractEndType();
                     this.checkOfferSelectionConstraint$.subscribe(() => {
                         this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
                         if (this.onlyOffersFromActualSupplier) {
-                            this.filterOffersOnlyActualSupplier();
+                            this.supplyPointOffers = filterOffersOnlyActualSupplier(this.supplyPoint, this.supplyPointOffers);
                         }
                         this.cd.markForCheck();
                     });
@@ -119,7 +165,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
 
     public scrollToCurrentOffer = () => {
         const supplyPointOfferComponentCurrent = R.find(
-            ({supplyPointOffer}) => this.isCurrentOffer(supplyPointOffer))
+            ({supplyPointOffer}) => isCurrentOffer(supplyPointOffer))
         (this.supplyPointOfferComponentChildren);
         const elementToScroll = supplyPointOfferComponentCurrent.supplyPointOfferWrapper.nativeElement;
         elementToScroll.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
@@ -130,94 +176,6 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         this.supplyPoint = supplyPoint;
         return this.offerService.findSupplyPointOffers(this.supplyPoint.identificationNumber);
     }
-
-    public filterOffersOnlyActualSupplier = (): void => {
-        if (!R.isNil(this.supplyPointOffers) && !R.isNil(this.supplyPoint)) {
-            this.supplyPointOffers = R.filter((supplyPointOffers: IOffer) =>
-                supplyPointOffers.supplier.id === this.supplyPoint?.supplier?.id)
-            (this.supplyPointOffers);
-        }
-    }
-
-    private addPastOfferToFindSupplyPointOffers = (supplyPointOffers: ISupplyPointOffers): IOffer[] => {
-        const pastOffer: IOffer = this.supplyPoint?.contract?.offer ||
-            supplyPointOffers.pastOffer ||
-            this.supplyPointImportPricesToOffer(this.supplyPoint, supplyPointOffers.supplyPointImportPrices);
-
-        return R.pipe(
-            R.prop('offers'),
-            R.append(pastOffer),
-            R.reject(R.isNil),
-        )(supplyPointOffers);
-    }
-
-    private supplyPointImportPricesToOffer = (supplyPoint: ISupplyPoint, supplyPointImportPrices: ISupplyPointImportPrices): IOffer => {
-        if (supplyPointImportPrices?.importPermanentMonthlyPay != null) {
-            return {
-                __typename: '',
-                accountingRegulatedPrice: 0,
-                annualConsumption: undefined,
-                benefits: undefined,
-                circuitBreaker: undefined,
-                commodityType: '',
-                consumptionPriceGas: 0,
-                consumptionPriceNT: 0,
-                consumptionPriceVT: 0,
-                deliveryFrom: '',
-                deliveryLength: 0,
-                deliveryTo: '',
-                distributionLocation: '',
-                distributionPriceByCapacity: 0,
-                distributionPriceByConsumptionGas: 0,
-                distributionPriceByConsumptionNT: 0,
-                distributionPriceByConsumptionVT: 0,
-                distributionRate: undefined,
-                energyTaxRegulatedPrice: 0,
-                greenEnergy: false,
-                id: '',
-                isLastUpdated: false,
-                isOwnOffer: false,
-                marked: false,
-                marketOrganizerRegulatedPrice: 0,
-                monthlyConsumptionFee: 0,
-                name: this.supplyPoint?.contract?.offer?.name,
-                permanentPaymentPrice: 0,
-                priceGas: 0,
-                priceGasWithVAT: supplyPointImportPrices?.importPricePerKwGas,
-                priceNT: 0,
-                priceNTWithVAT: supplyPointImportPrices?.importPricePerKwPowerNT,
-                priceVT: 0,
-                priceVTWithVAT: supplyPointImportPrices?.importPricePerKwPowerVT,
-                question: undefined,
-                renewableEnergyRegulatedPrice: 0,
-                status: '',
-                subject: undefined,
-                supplier: this.supplyPoint?.supplier,
-                systemServicesRegulatedPrice: 0,
-                totalPrice: supplyPointImportPrices?.importPermanentMonthlyPay,
-                unit: '',
-                validFrom: '',
-                validTo: '',
-            };
-        }
-        return null;
-    }
-
-    private ifCurrentIsTheBestRemoveIt = (offers: IOffer[]): IOffer[] => {
-        if (offers.length === 0) {
-            return [];
-        }
-
-        const firstOffer = R.head(offers);
-        const isFirstTheBestOffer = this.isCurrentOffer(firstOffer);
-        if (isFirstTheBestOffer) {
-            return R.drop(1, offers);
-        }
-        return offers;
-    }
-
-    // We dont load offer id to apollo, because of cache problem
-    private isCurrentOffer = (paramOffer: IOffer): boolean => !paramOffer.id;
 
     public saveContract = (supplyPointOffer: IOffer): void => {
         this.offerSelected = true;
