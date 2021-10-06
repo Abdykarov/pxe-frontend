@@ -132,7 +132,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = moment().add(this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'day').toDate();
+        const firstDateWitchContractAreNotInProcessTime = this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS + 1;
+        this.minDate = moment().add(firstDateWitchContractAreNotInProcessTime, 'day').toDate();
     }
 
     ngOnInit() {
