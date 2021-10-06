@@ -11,6 +11,7 @@ import {
 import * as moment from 'moment';
 import * as R from 'ramda';
 import {
+    filter,
     map,
     switchMap,
     takeUntil,
@@ -21,12 +22,16 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     AllowedOperations,
     ISupplyPoint,
-    ISupplyPointStatistic, ISupplyPointStatisticView,
+    ISupplyPointStatistic,
+    ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
+import {
+    isDataAvailable,
+    parseGraphQLErrors,
+} from 'src/common/utils';
 import { IsDatePast } from 'src/common/pipes/secured/is-date-past/is-date-past.pipe';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -68,6 +73,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 true,
             )
             .pipe(
+                filter(isDataAvailable),
                 map( ({data}) => data.findSupplyPointsByContractStatus),
                 switchMap((supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;

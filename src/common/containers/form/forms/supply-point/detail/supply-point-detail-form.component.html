@@ -35,7 +35,7 @@
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="page-box">
-            <div *ngIf="formSent"
+            <div *ngIf="formSent && !isForm"
                  class="row">
                 <div class="col-12 col-md-6 offset-md-3">
                     <lnd-alert type="info"
@@ -71,8 +71,38 @@
                         </p>
                         <span class="perex">{{supplyPoint.identificationNumber}}</span>
                     </div>
+                    <div *ngIf="supplyPoint?.contract?.offer?.greenEnergy"
+                         class="green-energy justify-content-center mb-5">
+                        <span class="icon icon--leaf green-energy__icon"></span>
+                        <span class="green-energy__text">Zelená energie</span>
+                    </div>
+                    <div *ngIf="!isForm" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Vaše pojmenování odběrného místa</p>
+                        <span class="perex">
+                            {{supplyPoint.name}}
+                        </span>
+                    </div>
+                    <div *ngIf="!isForm && supplyPoint.annualConsumptionNT" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Roční spotřeba - nízký tarif</p>
+                        <span class="perex">
+                            {{supplyPoint.annualConsumptionNT}} {{supplyPoint.annualConsumptionNTUnit}}
+                        </span>
+                    </div>
+                    <div *ngIf="!isForm && supplyPoint.annualConsumptionVT" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Roční spotřeba - vysoký tarif</p>
+                        <span class="perex">
+                            {{supplyPoint.annualConsumptionVT}} {{supplyPoint.annualConsumptionVTUnit}}
+                        </span>
+                    </div>
+                    <div *ngIf="!isForm && supplyPoint.annualConsumption" class="col-12 mb-5">
+                        <p class="mb-1 text-uppercase">Roční spotřeba</p>
+                        <span class="perex">
+                            {{supplyPoint.annualConsumption}} {{supplyPoint.annualConsumptionUnit}}
+                        </span>
+                    </div>
                 </div>
                 <form
+                    *ngIf="isForm"
                     [formGroup]="form"
                     (keydown)="resetCustomFieldError()"
                     (change)="resetCustomFieldError()"
@@ -95,7 +125,7 @@
                         [error]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors)) ||
                         ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors))"
                         [validationMessages]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors) && formFields.validationMessages.annualConsumptionNTUnit) ||
-                                  ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors) && formFields.validationMessages.annualConsumptionNT)">
+                        ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors) && formFields.validationMessages.annualConsumptionNT)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
                                 <small>Roční spotřeba - nízký tarif</small>
@@ -137,9 +167,9 @@
                         labelFor="annualConsumptionVTUnit"
                         [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
                         [error]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors)) ||
-                     ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors))"
+                        ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors))"
                         [validationMessages]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors) && formFields.validationMessages.annualConsumptionVTUnit) ||
-                                  ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
+                        ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
                                 <small>Roční spotřeba - vysoký tarif</small>
@@ -183,7 +213,7 @@
                         [error]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors)) ||
                         ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
                         [validationMessages]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors) && formFields.validationMessages.annualConsumptionUnit) ||
-                                  ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
+                        ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
                                 <small>Roční spotřeba</small>
@@ -225,7 +255,7 @@
                         </div>
                     </pxe-field-wrapper>
                     <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
-                         class="row text-center">
+                            class="row text-center">
                         <div class="col-12 mb-2">
                             <lnd-button
                                 label="Uložit"
@@ -286,15 +316,15 @@
                     <div class="col-12 mb-5">
                         <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-accepted.svg" title="">
                         <h2 class="page-box__title mb-1">
-                            Současná smlouva
+                            <ng-container *ngIf="isForm">Současná smlouva</ng-container>
+                            <ng-container *ngIf="!isForm">Uzavřená smlouva</ng-container>
                         </h2>
                         <a [class.link--disabled]="formLoading"
                            (click)="downloadPdf()">
-                            Stáhnout
-                        </a> (PDF)
+                            Stáhnout</a> (PDF)
                         <lnd-loader *ngIf="formLoading"></lnd-loader>
                     </div>
-                    <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
+                    <div *ngIf="isForm && (supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-2]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <p class="mb-1 text-uppercase">Dodávka do</p>
@@ -305,6 +335,16 @@
                                     supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
                                     supplyPointContractEndTypes.CONTRACT_END_TERM
                             ]}}
+                        </p>
+                    </div>
+                    <div *ngIf="!isForm"
+                         [class.mb-2]="supplyPoint.contract.deliveryTo"
+                         class="col-12">
+                        <p class="mb-1 text-uppercase">Dodávka od – do</p>
+                        <span class="perex mb-1">{{supplyPoint.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
+                        <p class="small mb-3">{{
+                                contractEndTypeTranslateMap[supplyPointContractEndTypes.CONTRACT_END_TERM]
+                            }}
                         </p>
                     </div>
                     <ng-container *ngIf="contractActionsTemplate">

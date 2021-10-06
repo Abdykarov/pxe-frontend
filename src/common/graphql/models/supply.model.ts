@@ -7,8 +7,8 @@ export enum CommodityType {
 }
 
 export enum SubjectType {
-    SUBJECT_TYPE_INDIVIDUAL = '1',
-    SUBJECT_TYPE_BUSINESSMAN = '2',
+    SUBJECT_TYPE_INDIVIDUAL = 'Domácnost',
+    SUBJECT_TYPE_BUSINESSMAN = 'Firma',
 }
 
 export enum TimeToContractEndPeriod {

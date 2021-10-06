@@ -705,4 +705,5 @@ type Mutation {
     finalizeAskForOffer(askForOfferId: ID): ID
     deleteSupplyPointImport(supplyPointImportId: ID): ID
     createAskForOffer: ID
+    unsubscribeNotifications(userProfileId: ID): Boolean
 }

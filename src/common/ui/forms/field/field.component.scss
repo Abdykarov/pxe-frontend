@@ -15,24 +15,6 @@
 @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/input-group';
 
-.form-container {
-	max-width: $input-width;
-	margin: 0 auto;
-
-	&--large {
-		&,
-		.form-control-case {
-			max-width: $input-width-large;
-		}
-	}
-
-	&--big {
-		&,
-		.form-control-case {
-			max-width: $input-width-big;
-		}
-	}
-}
 
 .form-control-info-wrapper {
 	width: 100%;

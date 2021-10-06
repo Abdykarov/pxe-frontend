@@ -112,6 +112,14 @@ import {
     loaderPageRoutes,
 } from 'src/static/atoms/loader/page.module';
 import {
+    HistoryModule,
+    historyRoutes,
+} from 'src/static/pages/history/page.module';
+import {
+    HistoryDetailModule,
+    historyDetailPageRoutes,
+} from 'src/static/pages/history-detail/page.module';
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -238,6 +246,8 @@ const routes: Routes = [
             ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...graphsPageRoutes,
+            ...historyRoutes,
+            ...historyDetailPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
             ...importUploadPageRoutes,
@@ -300,6 +310,8 @@ const routes: Routes = [
         DropdownPageModule,
         FormsPageModule,
         GraphsPageModule,
+        HistoryModule,
+        HistoryDetailModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
         ImportUploadPageModule,
