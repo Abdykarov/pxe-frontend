@@ -1,64 +1,29 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnDestroy,
-    OnInit,
-    QueryList,
-    ViewChildren,
-} from '@angular/core';
+import {ActivatedRoute, Router, } from '@angular/router';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren, } from '@angular/core';
 
 import * as R from 'ramda';
-import {
-    interval,
-    Observable,
-    of,
-} from 'rxjs';
-import {
-    filter,
-    map,
-    startWith,
-    switchMap,
-    takeUntil,
-} from 'rxjs/operators';
+import {interval, Observable, of, } from 'rxjs';
+import {filter, map, startWith, switchMap, takeUntil, } from 'rxjs/operators';
 
-import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
-import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    GTM_CONSTS,
-    ROUTES,
-    S_ANALYTICS,
-} from 'src/app/app.constants';
-import { ContractService } from 'src/common/graphql/services/contract.service';
-import { FaqService } from 'src/app/services/faq.service';
-import {
-    getConfigStepper,
-    parseGraphQLErrors,
-} from 'src/common/utils';
-import { GTMService } from 'src/app/services/gtm.service';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
-import {
-    ISupplyPoint,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
-import {
-    IOffer,
-    ISupplyPointImportPrices,
-    ISupplyPointOffers,
-} from 'src/common/graphql/models/offer.model';
-import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { OfferService } from 'src/common/graphql/services/offer.service';
-import { offerValidityMessages } from 'src/common/constants/errors.constant';
-import { removeAccent } from 'src/common/utils/standalone/remove-accent.fnc';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SupplyPointOfferComponent } from 'src/common/ui/supply-point-offer/supply-point-offer.component';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { ValidityService } from 'src/app/services/validity.service';
+import {AbstractFaqComponent} from 'src/app/pages/public/faq/abstract-faq.component';
+import {AuthService} from 'src/app/services/auth.service';
+import {CONSTS, GTM_CONSTS, ROUTES, S_ANALYTICS, } from 'src/app/app.constants';
+import {ContractService} from 'src/common/graphql/services/contract.service';
+import {FaqService} from 'src/app/services/faq.service';
+import {getConfigStepper, parseGraphQLErrors, } from 'src/common/utils';
+import {GTMService} from 'src/app/services/gtm.service';
+import {IBannerObj} from 'src/common/ui/banner/models/banner-object.model';
+import {ISupplyPoint, ProgressStatus, } from 'src/common/graphql/models/supply.model';
+import {IOffer, ISupplyPointImportPrices, ISupplyPointOffers, } from 'src/common/graphql/models/offer.model';
+import {IStepperProgressItem} from 'src/common/ui/progress-bar/models/progress.model';
+import {NavigateRequestService} from 'src/app/services/navigate-request.service';
+import {OfferService} from 'src/common/graphql/services/offer.service';
+import {offerValidityMessages} from 'src/common/constants/errors.constant';
+import {removeAccent} from 'src/common/utils/standalone/remove-accent.fnc';
+import {SAnalyticsService} from 'src/app/services/s-analytics.service';
+import {SupplyPointOfferComponent} from 'src/common/ui/supply-point-offer/supply-point-offer.component';
+import {SupplyService} from 'src/common/graphql/services/supply.service';
+import {ValidityService} from 'src/app/services/validity.service';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -180,9 +145,10 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             this.supplyPointImportPricesToOffer(this.supplyPoint, supplyPointOffers.supplyPointImportPrices);
 
         return R.pipe(
+            R.prop('offers'),
             R.append(pastOffer),
             R.reject(R.isNil),
-        )(supplyPointOffers.offers);
+        )(supplyPointOffers);
     }
 
     private supplyPointImportPricesToOffer = (supplyPoint: ISupplyPoint, supplyPointImportPrices: ISupplyPointImportPrices): IOffer => {
@@ -217,18 +183,18 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 name: this.supplyPoint?.contract?.offer?.name,
                 permanentPaymentPrice: 0,
                 priceGas: 0,
-                priceGasWithVAT: 0,
+                priceGasWithVAT: supplyPointImportPrices?.importPricePerKwGas,
                 priceNT: 0,
-                priceNTWithVAT: 0,
+                priceNTWithVAT: supplyPointImportPrices?.importPricePerKwPowerNT,
                 priceVT: 0,
-                priceVTWithVAT: 0,
+                priceVTWithVAT: supplyPointImportPrices?.importPricePerKwPowerVT,
                 question: undefined,
                 renewableEnergyRegulatedPrice: 0,
                 status: '',
                 subject: undefined,
                 supplier: this.supplyPoint?.supplier,
                 systemServicesRegulatedPrice: 0,
-                totalPrice: supplyPointImportPrices.importPermanentMonthlyPay,
+                totalPrice: supplyPointImportPrices?.importPermanentMonthlyPay,
                 unit: '',
                 validFrom: '',
                 validTo: '',
