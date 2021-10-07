@@ -19,10 +19,7 @@ import {
     IQRCodeSetting,
 } from 'src/common/graphql/models/contract';
 import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
-import {
-    getContractTermsQuery,
-    getPaymentInfoQuery,
-} from 'src/common/graphql/queries/contract';
+import { getPaymentInfoQuery } from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 
 @Injectable({
@@ -61,15 +58,6 @@ export class ContractService {
             //     });
             // },
         })
-
-    public getContractTerms = (contractId: string) => this.apollo
-        .watchQuery<any>({
-            query: getContractTermsQuery,
-            variables: {
-                contractId,
-            },
-        })
-        .valueChanges
 
     public signContract = (contractId: string, smsCode: string) => this.apollo
         .mutate<any>({
