@@ -25,10 +25,10 @@ export class CmsService {
     public getNewToken = () => {
         if (!this.tokenJwtResponse) {
             const body = new URLSearchParams();
-            body.append('grant_type', CONSTS.CMS.GRAND_TYPE);
-            body.append('client_id', CONSTS.CMS.CLIENT_ID);
-            body.append('client_secret', CONSTS.CMS.CLIENT_SECRET);
-            body.append('scope', CONSTS.CMS.SCOPE);
+            body.append('grant_type', environment['cms']['grand_type']);
+            body.append('client_id', environment['cms']['client_id']);
+            body.append('client_secret', environment['cms']['client_secret']);
+            body.append('scope',  environment['cms']['scope']);
 
             return this.http.post(
                 `${environment.url_cms_local}/${CONSTS.CMS.REFRESH_TOKEN_URL}`,

@@ -36,13 +36,9 @@ export const CONSTS = {
         MANUALLY_ADD_EMAIL: 'user@email.com',
     },
     CMS: {
-        CLIENT_ID: 'pxe-parc4u:default',
-        CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
-        GRAND_TYPE: 'client_credentials',
         REFRESH_TOKEN_URL: 'identity-server/connect/token',
         REGEX_CONTAIN_CMS: 'cms-api',
         REGEX_CONTAIN_CMS_DIRECT: 'content/pxe-parc4u/graphql',
-        SCOPE: 'squidex-api',
     },
     CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CRYPTO: {
