@@ -60,6 +60,7 @@ export interface IOffer {
     greenEnergy: boolean;
     question?: IQuestion;
     isOwnOffer?: boolean;
+    totalPriceIncludeAnnualConsumption?: number;
     __typename?: string;
 }
 
