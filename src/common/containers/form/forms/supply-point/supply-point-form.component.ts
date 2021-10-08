@@ -399,7 +399,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
             annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
 
-            if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL) {
+            if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL || this.formValues?.id) {
                 expirationDate = expirationDateFromSupplyPoint;
                 contractEndTypeId = this.formValues?.contractEndType && this.formValues.contractEndType.code;
                 timeToContractEnd = this.formValues?.timeToContractEnd;
