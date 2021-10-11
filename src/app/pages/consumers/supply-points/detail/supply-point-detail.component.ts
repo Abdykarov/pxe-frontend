@@ -31,6 +31,13 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CODE_LIST,
+    CONSTS, CONTRACT_END_TYPE,
+    RequestsOverviewBannerShow,
+    ROUTES,
+    TIME_TO_CONTRACT_END_PERIOD_MAP,
+} from 'src/app/app.constants';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
@@ -48,12 +55,7 @@ import {
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import {
-    CONSTS,
-    RequestsOverviewBannerShow,
-    ROUTES,
-    TIME_TO_CONTRACT_END_PERIOD_MAP,
-} from 'src/app/app.constants';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -90,6 +92,10 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             this.contractActionsWrapper = contractActionsWrapper;
         }
     }
+
+    @ViewChild('supplyPointDetailForm')
+    public supplyPointDetailForm: SupplyPointFormComponent;
+
 
     constructor(
         private authService: AuthService,
@@ -277,6 +283,10 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                         this.supplyPoint.allowedOperations = this.supplyPoint.allowedOperations.filter(
                             (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
                         );
+
+                        this.supplyPoint.contractEndType = R.find(
+                            R.propEq('code', CONTRACT_END_TYPE.CONTRACT_END_TERM),
+                        )(this.supplyPointDetailForm.codeLists[CODE_LIST.CONTRACT_END_TYPE]);
 
                         this.globalError = [];
                         this.formSent = true;
