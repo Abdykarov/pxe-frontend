@@ -33,7 +33,8 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST,
-    CONSTS, CONTRACT_END_TYPE,
+    CONSTS,
+    CONTRACT_END_TYPE,
     RequestsOverviewBannerShow,
     ROUTES,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
