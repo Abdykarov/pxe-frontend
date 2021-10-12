@@ -196,13 +196,13 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         }
     }
 
-    public findNewSupplier = (supplyPoint: ISupplyPoint) => {
+    public findNewSupplier = () => {
         const isDifferentForm = this.isDifferentForm();
         if (isDifferentForm) {
             this.modalsService
-                .showModal$.next(confirmFindNewSupplyPointConfig(supplyPoint));
+                .showModal$.next(confirmFindNewSupplyPointConfig(this.supplyPoint));
         } else {
-            this.navigateToSupplyPoint(supplyPoint);
+            this.navigateToSupplyPoint(this.supplyPoint);
         }
     }
 

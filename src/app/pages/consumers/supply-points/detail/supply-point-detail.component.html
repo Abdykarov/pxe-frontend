@@ -160,6 +160,7 @@
     <lnd-placeloader [loading]="dataLoading && !globalError.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoint && !dataLoading">
         <pxe-supply-point-detail-form
+            #supplyPointDetailForm
             [formFields]="formFields"
             [formLoading]="formLoading"
             [formSent]="formSent"
