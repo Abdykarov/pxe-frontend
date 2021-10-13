@@ -302,6 +302,21 @@
                     </div>
                 </div>
                 <div
+                    *ngIf="isOwner && supplyPointOffer?.permanentPaymentPrice"
+                    class="row mt-5">
+                    <div class="col-12">
+                        <span class="supply-point-offer__title-label">
+                            Poplatek za odberne misto
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="supply-point-offer__title text-break">
+                            {{supplyPointOffer.permanentPaymentPrice | number: '1.0-2'}} Kč/měsíc&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div
                     *ngIf="isOwner && supplyPointOffer?.priceNTWithVAT"
                     class="row mt-5">
                     <div class="col-12">
