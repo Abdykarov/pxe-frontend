@@ -4,6 +4,38 @@
     </p>
 </ng-template>
 
+<ng-template #tooltipBottom let-toggle="toggle">
+    <span (click)="toggle()"><span class="icon icon--info"></span></span>
+</ng-template>
+
+<ng-template #tooltipTemplate let-toggle="toggle">
+    <lnd-tooltip
+        [actionTemplate]="tooltipBottom"
+        direction="bottom"
+        class="tooltip-supply-point-info-holder"
+        customClass="ml-2 tooltip-supply-point-info"
+        customContentClass="tooltip__content--fixed-width">
+        <p class="mb-2">
+            Jste odberatelem Bohemia energy? Zprostredkovavame vam funkci na miru. Vybrat si dodavatele, ktery zkrachuje zachvilku take!!! To se vyplati. Zaskrtni !!!
+        </p>
+    </lnd-tooltip>
+</ng-template>
+
+
+<ng-template #withoutSupplierForm>
+    <lnd-form-field
+        class="w-100 my-1"
+        [id]="'withoutSupplier'"
+        label="Bez dodavatele"
+        [labelTemplate]="tooltipTemplate"
+        customFormGroupClass="form-group"
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.withoutSupplier"
+    ></lnd-form-field>
+</ng-template>
+
+{{form.getRawValue() |json}}
+
 <lnd-alert
     *ngIf="globalError.length"
     type="danger">
@@ -65,7 +97,7 @@
                 <lnd-select
                     lndSFormDirective
                     lndSBiometricsDirective
-                    *ngIf="form.controls.supplierId.status !== 'DISABLED'"
+                    [templateLabelAfterLabel]="withoutSupplierForm"
                     [bindValue]="null"
                     [error]="formError.supplierId || form.controls.supplierId.errors"
                     label="Současný dodavatel"
@@ -396,112 +428,116 @@
             <div class="form-container">
                 <div class="row no-gutters mb-2">
                     <div class="col-12">
-                        <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
+                        <img
+                            *ngIf="!form.controls['withoutSupplier'].value"
+                            alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
                         <h2 class="page-box__title">
-                            Výpověď současné smlouvy
+                            {{form.controls['withoutSupplier'].value ? 'Zahájení dodávky' : 'Výpověď současné smlouvy'}}
                         </h2>
                     </div>
                 </div>
-                <label class="control-label radiogroup-control-label" [for]="'ownTerminate'">
-                    Jak vypovíte stávající smlouvu?
-                </label>
-                <lnd-form-field
-                    [formControl]="form.controls.ownTerminate"
-                    lndSFormDirective
-                    lndSBiometricsDirective
-                    [id]="'ownTerminate'"
-                    label=""
-                    [type]="'RADIOGROUP'"
-                    [customFormGroupClass]="'mb-5'"
-                    [options]="ownTerminateOptions"
-                ></lnd-form-field>
-                <lnd-form-field
-                    lndSFormDirective
-                    lndSBiometricsDirective
-                    *ngIf="form.controls.contractEndTypeId.status !== 'DISABLED'"
-                    [error]="formError.contractEndTypeId || form.controls.contractEndTypeId.errors"
-                    [id]="'contractEndTypeId'"
-                    label="Ukončení platnosti aktuální smlouvy"
-                    [type]="'RADIOGROUP'"
-                    [customFormGroupClass]="'mb-5'"
-                    [options]="codeLists && codeLists[codeList.CONTRACT_END_TYPE]"
-                    [formControl]="form.controls.contractEndTypeId"
-                    [success]="form.controls.contractEndTypeId.valid && (form.controls.contractEndTypeId.touched || formError.contractEndTypeId)"
-                    [touched]="form.controls.contractEndTypeId.touched || formError.contractEndTypeId"
-                    [validationMessages]="formFields.validationMessages.contractEndTypeId">
-                ></lnd-form-field>
-                <lnd-datepicker
-                    lndSFormDirective
-                    lndSBiometricsDirective
-                    *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
-                    [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-                    (appendButtonAction)="showHelp('expirationDate', 'Ukončení platnosti stávající smlouvy')"
-                    [datepickerName]="'expirationDate'"
-                    [error]="formError.expirationDate || form.controls.expirationDate.errors"
-                    id="datepicker-1"
-                    label="Ukončení platnosti stávající smlouvy"
-                    [parentForm]="form"
-                    [placeholder]="'dd.mm.rrrr'"
-                    [minDate]="minDate"
-                    [success]="form.controls.expirationDate.valid && (form.controls.expirationDate.touched || formError.expirationDate)"
-                    [touched]="form.controls.expirationDate.touched || formError.expirationDate"
-                    [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
-                >
-                </lnd-datepicker>
-                <pxe-field-wrapper
-                        *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED' && form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
-                        label="Jak dlouhou máte výpovědní lhůtu?"
-                        labelFor="timeToContractEnd"
-                        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
-                        [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
-                                 ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
-                        [validationMessages]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors) && formFields.validationMessages.timeToContractEnd) ||
-                                              ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors) && formFields.validationMessages.timeToContractEndPeriodId)">
-                    <div class="row align-items-end no-gutters">
-                        <div class="col-4 pr-1">
-                            <lnd-form-field
-                                lndSFormDirective
-                                lndSBiometricsDirective
-                                *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
-                                [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('timeToContractEnd', 'Výpovědní lhůta')"
-                                [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
-                                [formControl]="form.controls.timeToContractEnd"
-                                [id]="'timeToContractEnd'"
-                                (focus)="fieldWrapperFocus('timeToContractEnd')"
-                                (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
-                                label="Jak dlouhou máte výpovědní lhůtu?"
-                                [showErrorMessage]="false"
-                                [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
-                                [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
-                                [validationMessages]="formFields.validationMessages.timeToContractEnd"
-                            ></lnd-form-field>
+                <ng-container *ngIf="!form.controls['withoutSupplier'].value">
+                    <label class="control-label radiogroup-control-label" [for]="'ownTerminate'">
+                        Jak vypovíte stávající smlouvu?
+                    </label>
+                    <lnd-form-field
+                        [formControl]="form.controls.ownTerminate"
+                        lndSFormDirective
+                        lndSBiometricsDirective
+                        [id]="'ownTerminate'"
+                        label=""
+                        [type]="'RADIOGROUP'"
+                        [customFormGroupClass]="'mb-5'"
+                        [options]="ownTerminateOptions"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                        lndSFormDirective
+                        lndSBiometricsDirective
+                        *ngIf="form.controls.contractEndTypeId.status !== 'DISABLED'"
+                        [error]="formError.contractEndTypeId || form.controls.contractEndTypeId.errors"
+                        [id]="'contractEndTypeId'"
+                        label="Ukončení platnosti aktuální smlouvy"
+                        [type]="'RADIOGROUP'"
+                        [customFormGroupClass]="'mb-5'"
+                        [options]="codeLists && codeLists[codeList.CONTRACT_END_TYPE]"
+                        [formControl]="form.controls.contractEndTypeId"
+                        [success]="form.controls.contractEndTypeId.valid && (form.controls.contractEndTypeId.touched || formError.contractEndTypeId)"
+                        [touched]="form.controls.contractEndTypeId.touched || formError.contractEndTypeId"
+                        [validationMessages]="formFields.validationMessages.contractEndTypeId">
+                    ></lnd-form-field>
+                    <lnd-datepicker
+                        lndSFormDirective
+                        lndSBiometricsDirective
+                        *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
+                        [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
+                        (appendButtonAction)="showHelp('expirationDate', 'Ukončení platnosti stávající smlouvy')"
+                        [datepickerName]="'expirationDate'"
+                        [error]="formError.expirationDate || form.controls.expirationDate.errors"
+                        id="datepicker-1"
+                        label="Ukončení platnosti stávající smlouvy"
+                        [parentForm]="form"
+                        [placeholder]="'dd.mm.rrrr'"
+                        [minDate]="minDate"
+                        [success]="form.controls.expirationDate.valid && (form.controls.expirationDate.touched || formError.expirationDate)"
+                        [touched]="form.controls.expirationDate.touched || formError.expirationDate"
+                        [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
+                    >
+                    </lnd-datepicker>
+                    <pxe-field-wrapper
+                            *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED' && form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
+                            label="Jak dlouhou máte výpovědní lhůtu?"
+                            labelFor="timeToContractEnd"
+                            [wrapperFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
+                            [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
+                                     ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
+                            [validationMessages]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors) && formFields.validationMessages.timeToContractEnd) ||
+                                                  ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors) && formFields.validationMessages.timeToContractEndPeriodId)">
+                        <div class="row align-items-end no-gutters">
+                            <div class="col-4 pr-1">
+                                <lnd-form-field
+                                    lndSFormDirective
+                                    lndSBiometricsDirective
+                                    *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
+                                    [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
+                                    (appendButtonAction)="showHelp('timeToContractEnd', 'Výpovědní lhůta')"
+                                    [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
+                                    [formControl]="form.controls.timeToContractEnd"
+                                    [id]="'timeToContractEnd'"
+                                    (focus)="fieldWrapperFocus('timeToContractEnd')"
+                                    (blur)="fieldWrapperBlur()"
+                                    [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
+                                    label="Jak dlouhou máte výpovědní lhůtu?"
+                                    [showErrorMessage]="false"
+                                    [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
+                                    [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
+                                    [validationMessages]="formFields.validationMessages.timeToContractEnd"
+                                ></lnd-form-field>
+                            </div>
+                            <div class="col-8 pl-1">
+                                <lnd-select
+                                    lndSFormDirective
+                                    lndSBiometricsDirective
+                                    *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
+                                    [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
+                                    (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
+                                    [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
+                                    label=""
+                                    (focus)="fieldWrapperFocus('timeToContractEndPeriodId')"
+                                    (blur)="fieldWrapperBlur()"
+                                    [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
+                                    [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
+                                    [parentForm]="form"
+                                    [clearable]="false"
+                                    [selectName]="'timeToContractEndPeriodId'"
+                                    [showErrorMessage]="false"
+                                    [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
+                                    [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
+                                    [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">
+                                </lnd-select>
+                            </div>
                         </div>
-                        <div class="col-8 pl-1">
-                            <lnd-select
-                                lndSFormDirective
-                                lndSBiometricsDirective
-                                *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
-                                [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
-                                [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
-                                label=""
-                                (focus)="fieldWrapperFocus('timeToContractEndPeriodId')"
-                                (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
-                                [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
-                                [parentForm]="form"
-                                [clearable]="false"
-                                [selectName]="'timeToContractEndPeriodId'"
-                                [showErrorMessage]="false"
-                                [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
-                                [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
-                                [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">
-                            </lnd-select>
-                        </div>
-                    </div>
-                </pxe-field-wrapper>
+                    </pxe-field-wrapper>
+                </ng-container>
                 <div class="row mb-5"
                      *ngIf="form.getRawValue() | newSupplyWillBegin as newSupplyWillBegin">
                     <div *ngIf="newSupplyWillBegin" class="col-12">

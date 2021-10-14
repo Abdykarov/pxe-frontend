@@ -8,7 +8,10 @@ import {
     SimpleChanges,
     ViewChild,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+    FormBuilder,
+    Validators,
+} from '@angular/forms';
 
 import * as moment from 'moment';
 import * as R from 'ramda';
@@ -140,6 +143,24 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         this.sAnalyticsService.sFormStart();
+
+        this.form.get('withoutSupplier')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((withoutSupplier: boolean) => {
+                if (withoutSupplier) {
+                    this.form.controls['supplierId'].setValidators([]);
+                    this.form.controls['ownTerminate'].setValue(true);
+                    this.form.controls['expirationDate'].setValue(convertDateToSendFormatFnc(new Date()));
+                } else {
+                    this.form.controls['ownTerminate'].setValue(false);
+                    this.form.controls['supplierId'].setValidators([Validators.required]);
+                }
+                this.form.controls['supplierId']
+                    .updateValueAndValidity();
+            });
 
         this.form.get('annualConsumptionNTUnit')
             .valueChanges

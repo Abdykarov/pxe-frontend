@@ -13,6 +13,9 @@
             class="ng-select-label">
             {{ label }}
         </label>
+        <ng-container *ngIf="templateLabelAfterLabel">
+            <ng-container *ngTemplateOutlet="templateLabelAfterLabel"></ng-container>
+        </ng-container>
         <ng-select
             #select
             [addTag]="addTag"

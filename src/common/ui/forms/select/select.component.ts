@@ -120,6 +120,9 @@ export class SelectComponent {
     public templateLabel?: TemplateRef<any>;
 
     @Input()
+    public templateLabelAfterLabel?: TemplateRef<any>;
+
+    @Input()
     public templateNotFound?: TemplateRef<any>;
 
     @Input()

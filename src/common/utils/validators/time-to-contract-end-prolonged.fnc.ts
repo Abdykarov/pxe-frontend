@@ -11,6 +11,7 @@ export const isAllRequiredFilled = (supplyPoint: ISupplyPointInput): boolean =>
 
 export const timeToContractEndProlonged = () => {
     return (formGroup: FormGroup) => {
+        const withoutSupplier = formGroup.controls['withoutSupplier'].value;
         const supplyPointInput: ISupplyPointInput = formGroup.value;
         const expirationDateControl = formGroup.controls['expirationDate'];
         const currentErrors = expirationDateControl.errors;
@@ -31,6 +32,11 @@ export const timeToContractEndProlonged = () => {
                 updatedErrors = R.assoc('isInTerminateInterval', true, currentErrors);
             }
         } else  {
+            updatedErrors = R.omit(['isInProlongInterval'], currentErrors);
+            updatedErrors = R.omit(['isInTerminateInterval'], currentErrors);
+        }
+
+        if (withoutSupplier) {
             updatedErrors = R.omit(['isInProlongInterval'], currentErrors);
             updatedErrors = R.omit(['isInTerminateInterval'], currentErrors);
         }
