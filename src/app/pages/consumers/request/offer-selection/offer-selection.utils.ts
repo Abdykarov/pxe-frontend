@@ -9,7 +9,6 @@ import {
     ISupplyPointImportPrices,
     ISupplyPointOffers,
 } from 'src/common/graphql/models/offer.model';
-import {of} from 'rxjs';
 
 export const countTotalPriceIncludeAnnualConsumption = (
     {
@@ -27,12 +26,15 @@ export const countTotalPriceIncludeAnnualConsumption = (
         priceVTWithVAT = 0,
         priceNTWithVAT = 0,
         priceGasWithVAT = 0,
-        totalPrice = 0,
+        monthlyConsumptionFee = 0,
     }: IOffer,
-): number => annualConsumptionVT * (importPricePerKwPowerVT || priceVTWithVAT) +
-    annualConsumptionNT * (importPricePerKwPowerNT || priceNTWithVAT) +
-    annualConsumption * (importPricePerKwGas || priceGasWithVAT) +
-    (importPermanentMonthlyPay || totalPrice) * 12;
+): number => {
+    const vtCount = annualConsumptionVT * (importPricePerKwPowerVT || priceVTWithVAT);
+    const ntCount = annualConsumptionNT * (importPricePerKwPowerNT || priceNTWithVAT);
+    const gasCount = annualConsumption * (importPricePerKwGas || priceGasWithVAT);
+    const totalPriceCount = (importPermanentMonthlyPay || monthlyConsumptionFee) * 12;
+    return vtCount + ntCount + gasCount + totalPriceCount;
+};
 
 export const emptySupplyPointImportPrices: ISupplyPointImportPrices = {
     importPermanentMonthlyPay: 0,
@@ -122,7 +124,7 @@ export const supplyPointImportPricesToOffer = (
             marketOrganizerRegulatedPrice: 0,
             monthlyConsumptionFee: 0,
             name: supplyPoint?.contract?.offer?.name,
-            permanentPaymentPrice: 0,
+            permanentPaymentPrice: supplyPointImportPrices.importPriceTotalPerYear / 12,
             priceGas: 0,
             priceGasWithVAT: supplyPointImportPrices?.importPricePerKwGas,
             priceNT: 0,
