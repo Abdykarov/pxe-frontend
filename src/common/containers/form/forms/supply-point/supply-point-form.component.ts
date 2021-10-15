@@ -382,6 +382,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let annualConsumptionNTUnit = null;
         let annualConsumptionVTUnit = null;
         let annualConsumptionUnit = null;
+        let withoutSupplier = null;
 
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
@@ -406,6 +407,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionVT = this.formValues.annualConsumptionVT;
             annualConsumptionNT = this.formValues.annualConsumptionNT;
             annualConsumption = this.formValues.annualConsumption;
+            withoutSupplier = this.formValues.withoutSupplier;
 
             if (annualConsumptionVT && annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionVT *= 1000;
@@ -464,6 +466,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
         this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
         this.form.controls['annualConsumption'].setValue(annualConsumption);
+        this.form.controls['withoutSupplier'].setValue(withoutSupplier);
         this.form.controls['expirationDate'].setValue(expirationDate);
         this.form.controls['contractEndTypeId'].setValue(filteredContractEndTypeId);
         this.form.controls['timeToContractEnd'].setValue(timeToContractEnd);
@@ -498,6 +501,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitValidForm = () => {
         const form = {
             ...this.form.value,
+            withoutSupplier: this.form.getRawValue()['withoutSupplier'],
             supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
             expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
         };

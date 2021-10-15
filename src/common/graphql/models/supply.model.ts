@@ -146,6 +146,7 @@ export interface ISupplyPoint {
     importPriceTotalPerYear?: number;
     importPermanentMonthlyPay?: number;
     imported?: boolean;
+    withoutSupplier?: string;
 }
 
 export enum ProgressStatus {
@@ -175,6 +176,7 @@ export interface ISupplyPointFormData {
     annualConsumption?: number;
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
+    withoutSupplier?: string;
 }
 
 export interface ISupplyPointStatistic {
