@@ -1,5 +1,5 @@
 <div
-    [hidden]="disabledField"
+    [hidden]="disabledField && hiddenOnDisable"
     [formGroup]="parentForm"
     class="form-group ng-select-custom"
     [ngClass]="customClass">

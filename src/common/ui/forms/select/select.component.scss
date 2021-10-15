@@ -25,6 +25,7 @@
 
 	.ng-select,
 	.ng-select-opened {
+		//todo
 		&.ng-select-focused .ng-select-container,
 		&.focus .ng-select-container {
 			&,
@@ -49,6 +50,7 @@
 			cursor: pointer;
 
 			&::after {
+				//todo
 				left: 0;
 				bottom: 0;
 				height: $input-border-width;
@@ -57,6 +59,7 @@
 			}
 
 			&:hover {
+				//todo
 				&::after {
 					background-color: $input-border-color-interactive;
 				}

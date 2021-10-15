@@ -56,6 +56,9 @@ export class SelectComponent {
     @Input()
     public disabledField = false;
 
+    @Input()
+    public hiddenOnDisable = true;
+
     @Output()
     public change?: EventEmitter<any> = new EventEmitter();
 

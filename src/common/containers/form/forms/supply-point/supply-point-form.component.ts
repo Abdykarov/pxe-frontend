@@ -152,10 +152,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe((withoutSupplier: boolean) => {
                 if (withoutSupplier) {
                     this.form.controls['supplierId'].setValidators([]);
+                    this.form.controls['supplierId'].disable();
                     this.form.controls['ownTerminate'].setValue(true);
                     this.form.controls['expirationDate'].setValue(convertDateToSendFormatFnc(new Date()));
                 } else {
                     this.form.controls['ownTerminate'].setValue(false);
+                    this.form.controls['supplierId'].enable();
                     this.form.controls['supplierId'].setValidators([Validators.required]);
                 }
                 this.form.controls['supplierId']

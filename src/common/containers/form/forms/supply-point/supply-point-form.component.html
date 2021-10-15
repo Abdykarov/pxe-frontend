@@ -8,33 +8,32 @@
     <span (click)="toggle()"><span class="icon icon--info"></span></span>
 </ng-template>
 
-<ng-template #tooltipTemplate let-toggle="toggle">
+<ng-template #tooltipTemplate>
     <lnd-tooltip
         [actionTemplate]="tooltipBottom"
         direction="bottom"
-        class="tooltip-supply-point-info-holder"
-        customClass="ml-2 tooltip-supply-point-info"
+        customClass="ml-2"
         customContentClass="tooltip__content--fixed-width">
         <p class="mb-2">
-            Jste odberatelem Bohemia energy? Zprostredkovavame vam funkci na miru. Vybrat si dodavatele, ktery zkrachuje zachvilku take!!! To se vyplati. Zaskrtni !!!
+            Vyberte tuto možnost pokud nemáte smlouvu se současným dodavatelem, například z důvodu bankrotu, nezasmluvnění atd.
         </p>
     </lnd-tooltip>
 </ng-template>
 
 
-<ng-template #withoutSupplierForm>
+<ng-template #withoutSupplierTemplate>
     <lnd-form-field
         class="w-100 my-1"
         [id]="'withoutSupplier'"
-        label="Bez dodavatele"
-        [labelTemplate]="tooltipTemplate"
-        customFormGroupClass="form-group"
+        label="Bez současného dodavatele"
+        [subtextTemplate]="tooltipTemplate"
+        customInputSubtextClass="d-inline"
+        customFormGroupClass="form-group mb-0"
+        customTypeClass="mb-1"
         [type]="'CHECKBOX'"
         [formControl]="form.controls.withoutSupplier"
     ></lnd-form-field>
 </ng-template>
-
-{{form.getRawValue() |json}}
 
 <lnd-alert
     *ngIf="globalError.length"
@@ -97,8 +96,10 @@
                 <lnd-select
                     lndSFormDirective
                     lndSBiometricsDirective
-                    [templateLabelAfterLabel]="withoutSupplierForm"
                     [bindValue]="null"
+                    [hiddenOnDisable]="false"
+                    [disabledField]="form.controls['withoutSupplier'].value"
+                    [templateLabelAfterLabel]="withoutSupplierTemplate"
                     [error]="formError.supplierId || form.controls.supplierId.errors"
                     label="Současný dodavatel"
                     [options]="suppliers && suppliers[form.controls.commodityType.value]"
@@ -432,7 +433,7 @@
                             *ngIf="!form.controls['withoutSupplier'].value"
                             alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
                         <h2 class="page-box__title">
-                            {{form.controls['withoutSupplier'].value ? 'Zahájení dodávky' : 'Výpověď současné smlouvy'}}
+                            {{form.controls['withoutSupplier'].value ? 'Zahájení nové dodávky od' : 'Výpověď současné smlouvy'}}
                         </h2>
                     </div>
                 </div>
@@ -541,7 +542,7 @@
                 <div class="row mb-5"
                      *ngIf="form.getRawValue() | newSupplyWillBegin as newSupplyWillBegin">
                     <div *ngIf="newSupplyWillBegin" class="col-12">
-                        <small>Předpokládané zahájení nové dodávky od:</small>
+                        <small *ngIf="!form.controls['withoutSupplier'].value">Předpokládané zahájení nové dodávky od:</small>
                         {{newSupplyWillBegin | date:'d.&nbsp;M.&nbsp;y'}}
                     </div>
                 </div>
