@@ -21,26 +21,27 @@
     <span (click)="toggle()"><span class="icon icon--info"></span></span>
 </ng-template>
 
-<ng-template #tooltipTemplate let-toggle="toggle">
+<ng-template #tooltipTemplate>
     <lnd-tooltip
         [actionTemplate]="tooltipBottom"
         direction="bottom"
-        class="tooltip-supply-point-info-holder"
-        customClass="ml-2 tooltip-supply-point-info"
+        customClass="ml-2"
         customContentClass="tooltip__content--fixed-width">
         <p class="mb-2">
-            Jste odberatelem Bohemia energy? Zprostredkovavame vam funkci na miru. Vybrat si dodavatele, ktery zkrachuje zachvilku take!!! To se vyplati. Zaskrtni !!!
+            Vyberte tuto možnost pokud nemáte smlouvu se současným dodavatelem, například z důvodu bankrotu, nezasmluvnění atd.
         </p>
     </lnd-tooltip>
 </ng-template>
 
-<ng-template #withoutSupplierForm>
+<ng-template #withoutSupplierTemplate>
     <lnd-form-field
         class="w-100 my-1"
         [id]="'withoutSupplier'"
-        label="Bez dodavatele"
-        [labelTemplate]="tooltipTemplate"
-        customFormGroupClass="form-group"
+        label="Bez současného dodavatele"
+        [subtextTemplate]="tooltipTemplate"
+        customInputSubtextClass="d-inline"
+        customFormGroupClass="form-group mb-0"
+        customTypeClass="mb-1"
         [type]="'CHECKBOX'"
         [formControl]="form.controls.withoutSupplier"
     ></lnd-form-field>
@@ -105,7 +106,7 @@
                         <lnd-select
                             [bindValue]="null"
                             label="Současný dodavatel"
-                            [templateLabelAfterLabel]="withoutSupplierForm"
+                            [templateLabelAfterLabel]="withoutSupplierTemplate"
                             [options]="config.suppliersOptions"
                             [parentForm]="form"
                             [selectName]="'supplierId'"

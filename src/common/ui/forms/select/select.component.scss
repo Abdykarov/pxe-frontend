@@ -42,18 +42,20 @@
 			padding-bottom: 0;
 		}
 
-		.ng-select:not(.is-disabled) {
-			.ng-select-container {
-				&:hover {
-					//todo
-					&::after {
-						background-color: $input-border-color-interactive;
-					}
-	
-					.ng-arrow-wrapper,
-					.ng-clear-wrapper {
-						color: $input-color;
-					}
+		.ng-select:not(.is-disabled) .ng-select-container {
+			&,
+			.ng-input > input {
+				cursor: pointer;
+			}
+
+			&:hover {
+				&::after {
+					background-color: $input-border-color-interactive;
+				}
+
+				.ng-arrow-wrapper,
+				.ng-clear-wrapper {
+					color: $input-color;
 				}
 			}
 		}
@@ -63,7 +65,6 @@
 			min-height: auto;
 			background-color: $input-bg;
 			border-radius: $input-border-radius;
-			cursor: pointer;
 
 			&::after {
 				//todo
@@ -90,7 +91,6 @@
 				.ng-input > input {
 					height: 100%;
 					padding: 0;
-					cursor: pointer;
 				}
 			}
 
