@@ -593,6 +593,7 @@ textarea.form-control--not-empty {
 }
 
 .custom-control-label {
+	display: inline-flex;
 	padding-left: ( $custom-control-indicator-size-px + ( $spacer / 2 ) );
 	color: $input-color;
 	font-size: $input-font-size;

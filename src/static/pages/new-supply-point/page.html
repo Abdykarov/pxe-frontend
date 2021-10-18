@@ -17,6 +17,35 @@
     </p>
 </ng-template>
 
+<ng-template #tooltipBottom let-toggle="toggle">
+    <span (click)="toggle()"><span class="icon icon--info"></span></span>
+</ng-template>
+
+<ng-template #tooltipTemplate let-toggle="toggle">
+    <lnd-tooltip
+        [actionTemplate]="tooltipBottom"
+        direction="bottom"
+        class="tooltip-supply-point-info-holder"
+        customClass="ml-2 tooltip-supply-point-info"
+        customContentClass="tooltip__content--fixed-width">
+        <p class="mb-2">
+            Jste odberatelem Bohemia energy? Zprostredkovavame vam funkci na miru. Vybrat si dodavatele, ktery zkrachuje zachvilku take!!! To se vyplati. Zaskrtni !!!
+        </p>
+    </lnd-tooltip>
+</ng-template>
+
+<ng-template #withoutSupplierForm>
+    <lnd-form-field
+        class="w-100 my-1"
+        [id]="'withoutSupplier'"
+        label="Bez dodavatele"
+        [labelTemplate]="tooltipTemplate"
+        customFormGroupClass="form-group"
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.withoutSupplier"
+    ></lnd-form-field>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -76,10 +105,13 @@
                         <lnd-select
                             [bindValue]="null"
                             label="Současný dodavatel"
+                            [templateLabelAfterLabel]="withoutSupplierForm"
                             [options]="config.suppliersOptions"
                             [parentForm]="form"
                             [selectName]="'supplierId'"
                             subtext="Začněte psát a my vám poradíme."
+                            [disabledField]="true"
+                            [hiddenOnDisable]="false"
                             searchable="true">
                         </lnd-select>
                     </div>

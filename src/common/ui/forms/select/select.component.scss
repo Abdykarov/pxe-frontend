@@ -23,7 +23,7 @@
 		width: 100%;
 	}
 
-	.ng-select,
+	.ng-select:not(.is-disabled),
 	.ng-select-opened {
 		//todo
 		&.ng-select-focused .ng-select-container,
@@ -42,6 +42,22 @@
 			padding-bottom: 0;
 		}
 
+		.ng-select:not(.is-disabled) {
+			.ng-select-container {
+				&:hover {
+					//todo
+					&::after {
+						background-color: $input-border-color-interactive;
+					}
+	
+					.ng-arrow-wrapper,
+					.ng-clear-wrapper {
+						color: $input-color;
+					}
+				}
+			}
+		}
+
 		.ng-select-container {
 			height: $input-height;
 			min-height: auto;
@@ -56,18 +72,6 @@
 				height: $input-border-width;
 				background-color: $input-border-color;
 				border: 0;
-			}
-
-			&:hover {
-				//todo
-				&::after {
-					background-color: $input-border-color-interactive;
-				}
-
-				.ng-arrow-wrapper,
-				.ng-clear-wrapper {
-					color: $input-color;
-				}
 			}
 
 			.ng-placeholder,
@@ -262,6 +266,14 @@
 
 		&.ng-select-focused ~ .invalid-feedback {
 			display: none;
+		}
+	}
+
+	.is-disabled {
+		.ng-select-container {
+			&:after {
+				background-image: none;
+			}
 		}
 	}
 
