@@ -70,6 +70,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public customFormGroupClass?: string;
 
     @Input()
+    public customInputSubtextClass = '';
+
+    @Input()
     public  customTypeClass?: string;
 
     @Input()
