@@ -146,13 +146,17 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                     this.supplyPointOffers = findSupplyPointOffers;
                     this.loadingSupplyPointOffers = false;
                     this.setTextBannerByContractEndType();
-                    this.checkOfferSelectionConstraint$.subscribe(() => {
-                        this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
-                        if (this.onlyOffersFromActualSupplier) {
-                            this.supplyPointOffers = filterOffersOnlyActualSupplier(this.supplyPoint, this.supplyPointOffers);
-                        }
+                    if (!this.supplyPoint.withoutSupplier) {
+                        this.checkOfferSelectionConstraint$.subscribe(() => {
+                            this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
+                            if (this.onlyOffersFromActualSupplier) {
+                                this.supplyPointOffers = filterOffersOnlyActualSupplier(this.supplyPoint, this.supplyPointOffers);
+                            }
+                            this.cd.markForCheck();
+                        });
+                    } else {
                         this.cd.markForCheck();
-                    });
+                    }
                 },
                 (error) => {
                     this.supplyPointOffers = null;

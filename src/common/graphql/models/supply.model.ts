@@ -146,7 +146,7 @@ export interface ISupplyPoint {
     importPriceTotalPerYear?: number;
     importPermanentMonthlyPay?: number;
     imported?: boolean;
-    withoutSupplier?: string;
+    withoutSupplier?: boolean;
 }
 
 export enum ProgressStatus {

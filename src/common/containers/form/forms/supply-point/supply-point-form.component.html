@@ -432,9 +432,9 @@
                         <img
                             *ngIf="!form.controls['withoutSupplier'].value"
                             alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
-                        <h2 class="page-box__title">
-                            {{form.controls['withoutSupplier'].value ? 'Zahájení nové dodávky od' : 'Výpověď současné smlouvy'}}
-                        </h2>
+                        <h2 class="page-box__title" [innerHTML]="
+                            form.controls['withoutSupplier'].value ? 'Zahájení<br>nové dodávky od' : 'Výpověď současné smlouvy'
+                        "></h2>
                     </div>
                 </div>
                 <ng-container *ngIf="!form.controls['withoutSupplier'].value">
