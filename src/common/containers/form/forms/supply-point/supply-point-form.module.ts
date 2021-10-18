@@ -17,6 +17,7 @@ import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module'
 import { SecuredPipesModule } from 'src/common/pipes/secured/secured-pipes.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 import { SupplyPointFormComponent } from './supply-point-form.component';
+import {TooltipModule} from '../../../../ui/tooltip/tooltip.module';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { SupplyPointFormComponent } from './supply-point-form.component';
         SecuredPipesModule,
         ReactiveFormsModule,
         SelectModule,
+        TooltipModule,
     ],
     exports: [
         SupplyPointFormComponent,

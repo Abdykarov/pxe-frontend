@@ -56,6 +56,9 @@ export class SelectComponent {
     @Input()
     public disabledField = false;
 
+    @Input()
+    public hiddenOnDisable = true;
+
     @Output()
     public change?: EventEmitter<any> = new EventEmitter();
 
@@ -118,6 +121,9 @@ export class SelectComponent {
 
     @Input()
     public templateLabel?: TemplateRef<any>;
+
+    @Input()
+    public templateLabelAfterLabel?: TemplateRef<any>;
 
     @Input()
     public templateNotFound?: TemplateRef<any>;

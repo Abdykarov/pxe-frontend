@@ -424,6 +424,7 @@
         <div
             *ngIf="!!subtext || subtextTemplate"
             class="input-subtext"
+            [ngClass]="customInputSubtextClass"
             [class.input-subtext--disabled]="!!disabledField">
             {{ subtext }}
             <ng-container *ngIf="subtextTemplate">

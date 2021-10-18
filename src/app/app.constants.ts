@@ -103,6 +103,7 @@ export const CONSTS = {
         INVALID_INPUT: 40,
         ALERT_DANGER: 50,
     },
+    BOHEMIA_ENERGY_VAT_NUMBER: '27386732',
     PATHS: {
         APPROVAL: 'schvaleni',
         ASK_FOR_OFFER : 'nahrane-faktury',

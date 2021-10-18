@@ -90,6 +90,7 @@ type SupplyPoint {
     annualConsumption: Float
     annualConsumptionUnit: String
     expirationDate: Date
+    withoutSupplier: Boolean
     subject: CodelistItem!
     lastAnnualConsumptionNT: Float
     lastAnnualConsumptionVT: Float

@@ -186,6 +186,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'contractEndTypeId',
             'timeToContractEnd',
             'timeToContractEndPeriodId',
+            'withoutSupplier',
         ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
