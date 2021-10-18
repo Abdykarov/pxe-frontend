@@ -155,6 +155,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     this.form.controls['supplierId'].disable();
                     this.form.controls['ownTerminate'].setValue(true);
                     this.form.controls['expirationDate'].setValue(convertDateToSendFormatFnc(new Date()));
+                    const sampleDocuments = R.pipe(
+                        R.prop(this.commodityType),
+                        R.filter(R.propEq('vatNumber', this.CONSTS.BOHEMIA_ENERGY_VAT_NUMBER)),
+                        R.head,
+                        R.prop('sampleDocuments'),
+                    )(this.suppliers);
+                    this.helpDocuments = sampleDocuments ?
+                        convertArrayToObject(
+                            sampleDocuments,
+                            'type',
+                            (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
+                        ) : {};
                 } else {
                     this.form.controls['ownTerminate'].setValue(false);
                     this.form.controls['supplierId'].enable();
@@ -278,12 +290,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                this.helpDocuments = val && val.sampleDocuments ?
-                    convertArrayToObject(
-                        val.sampleDocuments,
-                        'type',
-                        (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
-                    ) : {};
+                // handled by withoutSupplier valueChanges
+                if (!this.form.controls['withoutSupplier'].value) {
+                    this.helpDocuments = val && val.sampleDocuments ?
+                        convertArrayToObject(
+                            val.sampleDocuments,
+                            'type',
+                            (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
+                        ) : {};
+                }
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
