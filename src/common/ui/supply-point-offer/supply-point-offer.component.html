@@ -300,26 +300,11 @@
                 </div>
             </div>
         </div>
-
         <div *ngIf="isOwner" class="col-md-6 order-md-4">
-            <div class="supply-point-offer__block supply-point-offer__block--second supply-point-offer__block--small-offset bg-white">
-                <div
-                    *ngIf="supplyPointOffer?.permanentPaymentPrice"
-                    class="row">
-                    <div class="col-12">
-                        <span class="supply-point-offer__title-label">
-                            Poplatek za odběrné místo
-                        </span>
-                    </div>
-                    <div class="col-12">
-                        <span class="supply-point-offer__title text-break">
-                            {{supplyPointOffer.permanentPaymentPrice | number: '1.0-2'}} Kč/měsíc&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
-                        </span>
-                    </div>
-                </div>
+            <div class="supply-point-offer__block supply-point-offer__block--second supply-point-offer__block--small-offset bg-white pb-0">
                 <div
                     *ngIf="supplyPointOffer?.priceNTWithVAT"
-                    class="row mt-5">
+                    class="row mb-3">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">
                             Cena za nízký tarif
@@ -333,7 +318,7 @@
                 </div>
                 <div
                     *ngIf="supplyPointOffer.priceVTWithVAT"
-                    class="row mt-5">
+                    class="row mb-3">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">
                             Cena za vysoký tarif
@@ -347,7 +332,7 @@
                 </div>
                 <div
                     *ngIf="supplyPointOffer.priceGasWithVAT"
-                    class="row mt-5">
+                    class="row mb-3">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">
                             Cena
@@ -356,6 +341,20 @@
                     <div class="col-12">
                         <span class="supply-point-offer__title text-break">
                             {{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}} Kč/MWh&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
+                        </span>
+                    </div>
+                </div>
+                <div
+                    *ngIf="supplyPointOffer?.monthlyConsumptionFee"
+                    class="row mb-3">
+                    <div class="col-12">
+                        <span class="supply-point-offer__title-label">
+                            Poplatek za odběrné místo
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="supply-point-offer__title text-break">
+                            {{supplyPointOffer.monthlyConsumptionFee | number: '1.0-2'}} Kč/měsíc&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
                         </span>
                     </div>
                 </div>
