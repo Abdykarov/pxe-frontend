@@ -46,6 +46,7 @@ export const getCreateUserQuery = gql`
                     description,
                     help
                 },
+                withoutSupplier,
                 annualConsumptionNT,
                 annualConsumptionVT,
                 annualConsumption,
