@@ -167,7 +167,7 @@ export const sortByTotalPriceAscend = R.sort(R.ascend(R.prop('totalPriceIncludeA
 export const addPastOfferToFindSupplyPointOffers =
     (supplyPoint: ISupplyPoint, supplyPointOffers: ISupplyPointOffers): IOffer[] => {
 
-    if (supplyPointOffers.pastOffer) {
+    if (supplyPointOffers?.pastOffer) {
         supplyPointOffers.pastOffer.totalPriceIncludeAnnualConsumption =
             countTotalPriceIncludeAnnualConsumption(
                 supplyPoint,
