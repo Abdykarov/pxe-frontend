@@ -17,6 +17,36 @@
     </p>
 </ng-template>
 
+<ng-template #tooltipBottom let-toggle="toggle">
+    <span (click)="toggle()"><span class="icon icon--info"></span></span>
+</ng-template>
+
+<ng-template #tooltipTemplate>
+    <lnd-tooltip
+        [actionTemplate]="tooltipBottom"
+        direction="bottom"
+        customClass="ml-2"
+        customContentClass="tooltip__content--fixed-width">
+        <p class="mb-2">
+            Vyberte tuto možnost pokud nemáte smlouvu se současným dodavatelem, například z důvodu bankrotu, nezasmluvnění atd.
+        </p>
+    </lnd-tooltip>
+</ng-template>
+
+<ng-template #withoutSupplierTemplate>
+    <lnd-form-field
+        class="w-100 my-1"
+        [id]="'withoutSupplier'"
+        label="Bez současného dodavatele"
+        [subtextTemplate]="tooltipTemplate"
+        customInputSubtextClass="d-inline"
+        customFormGroupClass="form-group mb-0"
+        customTypeClass="mb-1"
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.withoutSupplier"
+    ></lnd-form-field>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -76,10 +106,13 @@
                         <lnd-select
                             [bindValue]="null"
                             label="Současný dodavatel"
+                            [templateLabelAfterLabel]="withoutSupplierTemplate"
                             [options]="config.suppliersOptions"
                             [parentForm]="form"
                             [selectName]="'supplierId'"
                             subtext="Začněte psát a my vám poradíme."
+                            [disabledField]="true"
+                            [hiddenOnDisable]="false"
                             searchable="true">
                         </lnd-select>
                     </div>

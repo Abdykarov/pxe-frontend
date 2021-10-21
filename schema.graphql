@@ -90,6 +90,7 @@ type SupplyPoint {
     annualConsumption: Float
     annualConsumptionUnit: String
     expirationDate: Date
+    withoutSupplier: Boolean
     subject: CodelistItem!
     lastAnnualConsumptionNT: Float
     lastAnnualConsumptionVT: Float
@@ -605,14 +606,12 @@ type Query {
     findSupplyPointOffers(identificationNumber: String!): SupplyPointOffers
     getPersonalData(contractId: ID!): PersonalData
     getContractById(contractId: ID!): ContractResponseDto
-    getContractTerms(contractId: ID!): ContractTerms
     findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, identificationNumber: String): [SupplyPoint]
     getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     computeAndGetSupplyPointStatistics: SupplyPointStatistic
     listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPointEan
     listAskForOffer(filter: AskForOfferFilter): PaginatedAskForOffer
     listContractsBasedOnSupplyPointAndStatus(filter: ContractBasedOnSupplyPointFilter!): [ContractResponseDto]!
-    getPersonalDataImport(input: PersonalDataInputImport): ID
     findSupplyPointImports(askForOfferId: ID!): [SupplyPoint]!
 }
 

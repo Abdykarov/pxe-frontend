@@ -8,7 +8,10 @@ import {
     SimpleChanges,
     ViewChild,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+    FormBuilder,
+    Validators,
+} from '@angular/forms';
 
 import * as moment from 'moment';
 import * as R from 'ramda';
@@ -132,13 +135,46 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = moment().add(this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'day').toDate();
+        const firstDateWitchContractAreNotInProcessTime = this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS + 1;
+        this.minDate = moment().add(firstDateWitchContractAreNotInProcessTime, 'day').toDate();
     }
 
     ngOnInit() {
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         this.sAnalyticsService.sFormStart();
+
+        this.form.get('withoutSupplier')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((withoutSupplier: boolean) => {
+                if (withoutSupplier) {
+                    this.form.controls['supplierId'].setValidators([]);
+                    this.form.controls['supplierId'].disable();
+                    this.form.controls['ownTerminate'].setValue(true);
+                    this.form.controls['expirationDate'].setValue(convertDateToSendFormatFnc(new Date()));
+                    const sampleDocuments = R.pipe(
+                        R.prop(this.commodityType),
+                        R.filter(R.propEq('vatNumber', this.CONSTS.BOHEMIA_ENERGY_VAT_NUMBER)),
+                        R.head,
+                        R.prop('sampleDocuments'),
+                    )(this.suppliers);
+                    this.helpDocuments = sampleDocuments ?
+                        convertArrayToObject(
+                            sampleDocuments,
+                            'type',
+                            (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
+                        ) : {};
+                } else {
+                    this.form.controls['ownTerminate'].setValue(false);
+                    this.form.controls['supplierId'].enable();
+                    this.form.controls['supplierId'].setValidators([Validators.required]);
+                }
+                this.form.controls['supplierId']
+                    .updateValueAndValidity();
+            });
 
         this.form.get('annualConsumptionNTUnit')
             .valueChanges
@@ -254,12 +290,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                this.helpDocuments = val && val.sampleDocuments ?
-                    convertArrayToObject(
-                        val.sampleDocuments,
-                        'type',
-                        (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
-                    ) : {};
+                // handled by withoutSupplier valueChanges
+                if (!this.form.controls['withoutSupplier'].value) {
+                    this.helpDocuments = val && val.sampleDocuments ?
+                        convertArrayToObject(
+                            val.sampleDocuments,
+                            'type',
+                            (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
+                        ) : {};
+                }
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
@@ -358,6 +397,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let annualConsumptionNTUnit = null;
         let annualConsumptionVTUnit = null;
         let annualConsumptionUnit = null;
+        let withoutSupplier = null;
 
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
@@ -382,6 +422,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionVT = this.formValues.annualConsumptionVT;
             annualConsumptionNT = this.formValues.annualConsumptionNT;
             annualConsumption = this.formValues.annualConsumption;
+            withoutSupplier = this.formValues.withoutSupplier;
 
             if (annualConsumptionVT && annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionVT *= 1000;
@@ -399,7 +440,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
             annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
 
-            if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL) {
+            if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL || this.formValues?.id) {
                 expirationDate = expirationDateFromSupplyPoint;
                 contractEndTypeId = this.formValues?.contractEndType && this.formValues.contractEndType.code;
                 timeToContractEnd = this.formValues?.timeToContractEnd;
@@ -440,6 +481,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
         this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
         this.form.controls['annualConsumption'].setValue(annualConsumption);
+        this.form.controls['withoutSupplier'].setValue(withoutSupplier);
         this.form.controls['expirationDate'].setValue(expirationDate);
         this.form.controls['contractEndTypeId'].setValue(filteredContractEndTypeId);
         this.form.controls['timeToContractEnd'].setValue(timeToContractEnd);
@@ -474,6 +516,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitValidForm = () => {
         const form = {
             ...this.form.value,
+            withoutSupplier: this.form.getRawValue()['withoutSupplier'],
             supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
             expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
         };

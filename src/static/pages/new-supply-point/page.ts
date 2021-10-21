@@ -25,13 +25,16 @@ export class NewSupplyPointPageComponent {
         timeToContractEnd: new FormControl(),
         timeToContractEndPeriodId: new FormControl(),
         ownTerminate: new FormControl(),
+        withoutSupplier: new FormControl(),
     });
 
     public ownTerminateOptions: Array<IOption> = OWN_TERMINATE_OPTIONS;
 
     constructor(
         public config: NewSupplyPointPageConfig,
-    ) {}
+    ) {
+        this.form.controls['supplierId'].disable();
+    }
 
     public bannerObj: IBannerObj = {
         text: 'Evidujeme u vás nedokončené odběrné místo, chcete načíst tyto údaje?',

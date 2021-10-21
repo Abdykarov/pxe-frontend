@@ -14,6 +14,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { NewSupplyPointPageComponent } from './page';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
+import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
         ProgressBarModule,
         ReactiveFormsModule,
         SelectModule,
+        TooltipModule,
     ],
 })
 export class NewSupplyPointPageModule {}

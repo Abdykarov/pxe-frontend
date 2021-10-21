@@ -58,6 +58,12 @@ export const formFields = (isTestingUser: boolean): IForm => ({
                 Validators.required,
             ],
         ],
+        withoutSupplier: [
+            false,
+            [
+                Validators.required,
+            ],
+        ],
         subjectTypeId: [
             SubjectType.SUBJECT_TYPE_INDIVIDUAL,
             [
