@@ -165,6 +165,7 @@ export class SupplyPointImportService {
             contractEndTypeId: supplyPoint.contractEndType?.code,
             subjectTypeId: supplyPoint.subject?.code,
             supplierId: supplyPoint.supplier?.id,
+            withoutSupplier: supplyPoint?.withoutSupplier,
             ...(!!personalData) && {
                 personalData: this.mapPersonalInfoToPersonalInfoInput(personalData),
             },

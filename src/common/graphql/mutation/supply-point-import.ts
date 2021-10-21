@@ -77,6 +77,7 @@ export const createSupplyPointImportMutation = gql`
                 description,
                 help
             },
+            withoutSupplier,
             contractEndType {
                 type,
                 code,
