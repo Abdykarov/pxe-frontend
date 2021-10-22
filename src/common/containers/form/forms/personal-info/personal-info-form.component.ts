@@ -34,6 +34,7 @@ import {
 } from 'src/common/graphql/models/personal-data.model';
 import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { UserStatus } from 'src/app/services/model/auth.model';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -62,9 +63,10 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public depositPaymentTypeId: ICodelistOption;
     public maxDate: Date = moment().add(-CONSTS.VALIDATORS.ADULTHOOD_AGE, 'years').toDate();
     public minDate: Date = new Date(CONSTS.VALIDATORS.MIN_BIRTH_DATE);
+    public UserStatus = UserStatus;
 
     constructor(
-        private authService: AuthService,
+        public authService: AuthService,
         protected fb: FormBuilder,
         private personalInfoLocalStorageService: PersonalInfoLocalStorageService,
         public sAnalyticsService: SAnalyticsService,
