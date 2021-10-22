@@ -167,8 +167,7 @@ export const sortByTotalPriceAscend = R.sort(R.ascend(R.prop('totalPriceIncludeA
 export const addPastOfferToFindSupplyPointOffers =
     (supplyPoint: ISupplyPoint, supplyPointOffers: ISupplyPointOffers): IOffer[] => {
 
-    const pastOffer: IOffer = supplyPoint?.contract?.offer ||
-    supplyPointOffers.pastOffer ||
+    const pastOffer: IOffer =  supplyPointOffers.pastOffer ||
     supplyPointImportPricesToOffer(supplyPoint, supplyPointOffers.supplyPointImportPrices);
 
     return R.pipe(
