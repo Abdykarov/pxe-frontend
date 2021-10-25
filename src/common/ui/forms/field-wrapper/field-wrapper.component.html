@@ -17,8 +17,8 @@
     </div>
     <div
         *ngIf="!!subtext || subtextTemplate"
-        class="input-subtext">
-        {{ subtext }}
+        class="input-subtext"
+        [innerHTML]="subtext">
         <ng-container *ngIf="subtextTemplate">
             <ng-container *ngTemplateOutlet="subtextTemplate"></ng-container>
         </ng-container>
