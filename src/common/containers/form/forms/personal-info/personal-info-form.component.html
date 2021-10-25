@@ -168,7 +168,7 @@
     <pxe-field-wrapper
         label="Bankovní účet"
         labelFor="bankAccountNumber"
-        subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX."
+        subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX. {{authService.currentUserValue.userStatus === UserStatus.NEW ? '<b>Pro ověření vaší identity bude následně vyžadována korunová platba z tohoto účtu.</b>' : ''}}"
         [wrapperFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
         [error]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors)) ||
                  ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
@@ -183,7 +183,6 @@
                     [formControl]="form.controls.bankAccountNumber"
                     [id]="'bankAccountNumber'"
                     label="Bankovní účet"
-                    subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX."
                     (focus)="fieldWrapperFocus('bankAccountNumber')"
                     (blur)="fieldWrapperBlur()"
                     [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
