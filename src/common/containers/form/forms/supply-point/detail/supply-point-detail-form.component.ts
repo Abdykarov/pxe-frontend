@@ -12,6 +12,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
@@ -91,7 +92,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public subjectName = '';
     public supplyPointContractEndTypes = CONTRACT_END_TYPE;
     public setFormByCommodity = this.setFormFields;
-    public today = new Date().toISOString();
+    public today = moment().startOf('days');
     public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
 
     constructor(
