@@ -176,17 +176,8 @@ export const addPastOfferToFindSupplyPointOffers =
             );
     }
 
-    if (supplyPoint?.contract?.offer) {
-        supplyPoint.contract.offer.totalPriceIncludeAnnualConsumption =
-            countTotalPriceIncludeAnnualConsumption(
-                supplyPoint,
-                emptySupplyPointImportPrices,
-                supplyPoint.contract.offer,
-            );
-    }
 
-    const pastOffer: IOffer = supplyPoint?.contract?.offer ||
-    supplyPointOffers.pastOffer ||
+    const pastOffer: IOffer = supplyPointOffers.pastOffer ||
     supplyPointImportPricesToOffer(supplyPoint, supplyPointOffers.supplyPointImportPrices);
 
     return R.pipe(
