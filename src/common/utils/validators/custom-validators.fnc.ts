@@ -1,7 +1,9 @@
 import {
-    AbstractControl, FormControl,
+    AbstractControl,
+    FormControl,
     ValidationErrors,
-    ValidatorFn, Validators,
+    ValidatorFn,
+    Validators,
 } from '@angular/forms';
 
 import * as R_ from 'ramda-extension';
