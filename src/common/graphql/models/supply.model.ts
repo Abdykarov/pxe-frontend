@@ -84,6 +84,7 @@ export interface ISupplyPointInput {
     timeToContractEnd?: number;
     timeToContractEndPeriodId?: String;
     ownTerminate?: boolean;
+    withoutSupplier?: boolean;
 }
 
 export interface ISupplyPointGasAttributes {

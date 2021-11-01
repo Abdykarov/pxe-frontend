@@ -49,6 +49,7 @@ import { SupplyPointFormComponent } from 'src/common/containers/form/forms/suppl
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import * as moment from 'moment';
 
 @Component({
     templateUrl: './supply-point.component.html',
@@ -188,6 +189,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'timeToContractEndPeriodId',
             'withoutSupplier',
         ], supplyPointFormData);
+
+        if (supplyPoint.withoutSupplier) {
+            supplyPoint.expirationDate = moment().format('YYYY-MM-DD');
+        }
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: ISupplyPointPowerAttributes =
