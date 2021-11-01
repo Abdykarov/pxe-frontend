@@ -89,7 +89,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_RECAPITULATION),
-                Validators.email,
+                CustomValidators.email,
             ],
         ],
         depositPaymentTypeId: [
