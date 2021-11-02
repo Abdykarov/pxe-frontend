@@ -3,8 +3,8 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import * as moment from 'moment';
+import * as R from 'ramda';
 
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import {
