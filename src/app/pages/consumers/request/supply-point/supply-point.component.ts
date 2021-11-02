@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import {
     concatMap,
@@ -188,6 +189,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'timeToContractEndPeriodId',
             'withoutSupplier',
         ], supplyPointFormData);
+
+        if (supplyPoint.withoutSupplier) {
+            supplyPoint.expirationDate = moment().format('YYYY-MM-DD');
+        }
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: ISupplyPointPowerAttributes =
