@@ -7,6 +7,7 @@ import {
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { OverviewContainerFacade } from './overview-container.facade';
 import { orderKeyValueByKeyDest } from 'src/common/utils';
+import { restoreContractAction } from 'src/common/utils/standalone/remove-contract-action.fnc';
 import { ROUTES } from 'src/app/app.constants';
 
 @Component({
@@ -17,6 +18,7 @@ import { ROUTES } from 'src/app/app.constants';
 })
 export class OverviewContainerComponent {
     public readonly orderKeyValueByKeyDest = orderKeyValueByKeyDest;
+    public readonly restoreContractAction = restoreContractAction;
 
     public readonly history$ = this.overviewContainerFacade.historySupplyPointsData$;
     public readonly isLoading$ = this.overviewContainerFacade.isLoading$;
@@ -26,7 +28,7 @@ export class OverviewContainerComponent {
     constructor(
         public overviewContainerFacade: OverviewContainerFacade,
         private route: ActivatedRoute,
-        private router: Router,
+        public router: Router,
     ) {}
 
     public navigateToHistoryDetail({contract: {contractId}, id}: ISupplyPoint): void {
@@ -37,6 +39,7 @@ export class OverviewContainerComponent {
             },
         );
     }
+
 
     public createSupplyPoint(event): void {
         event.preventDefault();

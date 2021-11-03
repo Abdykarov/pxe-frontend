@@ -7,6 +7,7 @@ import { DetailContainerComponent } from './detail-container.component';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SupplyPointDetailFormModule } from 'src/common/containers/form/forms/supply-point/detail/supply-point-detail-form.module';
+import {BannerUIModule} from '../../../ui/banner/banner-ui.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { SupplyPointDetailFormModule } from 'src/common/containers/form/forms/su
         FormModule,
         PlaceloaderModule,
         SupplyPointDetailFormModule,
+        BannerUIModule,
     ],
 })
 export class DetailContainerModule {}

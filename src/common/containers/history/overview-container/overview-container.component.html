@@ -1,3 +1,15 @@
+<ng-template #additionalInfoTemplate let-data="data">
+    <div class="row">
+        <div class="col-12">
+            <pxe-badge (action)="restoreContractAction($event, data, router)"
+                       type="info"
+                       [isLink]="true">
+                Obnovit smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+</ng-template>
+
 <div *ngIf="globalError$ | async as globalError"
      class="row">
     <div *ngIf="globalError?.length !== 0"
@@ -56,6 +68,7 @@
                     <div *ngFor="let supplyPoint of historyOfSupplyPoints.value" class="supply-points">
                         <pxe-supply-point
                             [data]="supplyPoint"
+                            [additionalInfoTemplate]="additionalInfoTemplate"
                             (action)="navigateToHistoryDetail($event)"
                         >
                         </pxe-supply-point>

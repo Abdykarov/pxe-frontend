@@ -8,6 +8,7 @@ import { LogoutInformationModule } from 'src/common/ui/logout-informationation/l
 import { OverviewContainerComponent } from './overview-container.component';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
+import {BadgeModule} from '../../../ui/badge/badge.module';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.modul
         LogoutInformationModule,
         PlaceloaderModule,
         SupplyPointModule,
+        BadgeModule,
     ],
 })
 export class OverviewContainerModule {}
