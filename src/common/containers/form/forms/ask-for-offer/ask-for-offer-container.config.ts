@@ -26,9 +26,10 @@ export const formFields = {
     validationMessages: {
         email: {
             required: errorFieldMessages.email.required,
-                email: errorFieldMessages.email.email,
-                invalidEmail: errorFieldMessages.email.email,
-                maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            pattern: errorFieldMessages.email.email,
+            email: errorFieldMessages.email.email,
+            invalidEmail: errorFieldMessages.email.email,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         consent: {
             required: R.path(
