@@ -26,9 +26,10 @@ const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                enableTracing: false,
-                scrollPositionRestoration: 'top',
-            },
+    enableTracing: false,
+    scrollPositionRestoration: 'top',
+    relativeLinkResolution: 'legacy',
+},
         ),
         CarouselModule.forRoot(),
     ],
