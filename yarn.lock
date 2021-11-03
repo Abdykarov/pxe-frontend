@@ -2109,12 +2109,12 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-select/ng-select@^4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-4.0.4.tgz#fe4ba82f4ab6110627fefb072e81bfb3eb79fafb"
-  integrity sha512-KaVlVdt7DWZBfmL6nc16i80l1dDx0cO3eGjW+grQPnhZ9KurapioQUYVf6dSmYyWyBXihvt4I3SWkCzqSWFJbQ==
+"@ng-select/ng-select@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-5.1.0.tgz#ef9f850e9aa58a03b9fce340e74ee1383a311e95"
+  integrity sha512-VcdZtr68PVsboUEFXfGF844qyYKPIrDNTGiLbQTEw593axCXO9GEL9YPD5QSangg+41w8F7/7ymkrrLpxfyRpw==
   dependencies:
-    tslib "^1.10.0"
+    tslib "^2.0.0"
 
 "@ngtools/webpack@10.2.3":
   version "10.2.3"
@@ -2148,17 +2148,20 @@
     rxjs "^6.5.3"
     tree-kill "^1.2.1"
 
-"@nguniversal/common@9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@nguniversal/common/-/common-9.1.0.tgz#01ac2d2c47c6d04f955f1713697377afcaa1ad91"
-  integrity sha512-Pvb3KhuV44PxLmVOf1dqnuckdaNdfT5tbiUu2/vVbdtyFdQpF40D1Zx4RumRymK0ZzTJGQsJtJSi2DJvvGgwMg==
-
-"@nguniversal/express-engine@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-9.1.0.tgz#ddc1cecb4134a365142a9ba6ebb6ae8f99cb2ad1"
-  integrity sha512-uRb8dJD3huk42eY1iOpmr8yfq/LTSOoUfKY4eVREE7nMePyZNSRQHNCEybHDTNh43FvTN38u+cA4dTlmMFD5GQ==
+"@nguniversal/common@10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@nguniversal/common/-/common-10.1.0.tgz#7104f598b2a6eee078dfc1e0309cb9ea261e7da7"
+  integrity sha512-AIfLORs+LLHx9d+8kRNDq+GZj/2ToyXgg5Boi2RfgUhV5Rywey082XRlFmPwyVHxltYJzoMPeNWxzV6hrSMCzA==
   dependencies:
-    "@nguniversal/common" "9.1.0"
+    tslib "^2.0.0"
+
+"@nguniversal/express-engine@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-10.1.0.tgz#b1595751eb6acfa02b65e25e9c9ffbe66baab2f5"
+  integrity sha512-UYQB8662Qnx9Y2TblZmC8QbfAZtiCE6OeLNdwWIz8rVY9jhWi4P5SFb0slvcPMyPL5JAb+FHHOKjsH1NJztsCQ==
+  dependencies:
+    "@nguniversal/common" "10.1.0"
+    tslib "^2.0.0"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
