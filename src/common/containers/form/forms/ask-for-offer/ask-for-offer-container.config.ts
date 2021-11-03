@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import * as R from 'ramda';
 
 import { CONSTS } from 'src/app/app.constants';
+import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 
 export const formFields = {
@@ -12,7 +13,7 @@ export const formFields = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN),
-                Validators.email,
+                CustomValidators.email,
             ],
         ],
         consent: [
@@ -25,9 +26,10 @@ export const formFields = {
     validationMessages: {
         email: {
             required: errorFieldMessages.email.required,
-                email: errorFieldMessages.email.email,
-                invalidEmail: errorFieldMessages.email.email,
-                maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            pattern: errorFieldMessages.email.email,
+            email: errorFieldMessages.email.email,
+            invalidEmail: errorFieldMessages.email.email,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         consent: {
             required: R.path(

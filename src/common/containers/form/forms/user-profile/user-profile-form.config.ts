@@ -11,7 +11,7 @@ export const userProfileFormFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.email,
+                CustomValidators.email,
             ],
         ],
         firstName: [
