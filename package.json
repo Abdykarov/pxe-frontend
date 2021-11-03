@@ -68,7 +68,7 @@
     "d3": "^5.16.0",
     "express": "^4.15.2",
     "file-saver": "^2.0.2",
-    "graphql": "^15.0.0",
+    "graphql": "^14.0.0",
     "graphql-tag": "^2.10.1",
     "html-entities": "^2.3.2",
     "latinize": "^0.4.1",
