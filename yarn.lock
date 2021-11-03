@@ -2296,10 +2296,10 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/grecaptcha@^2.0.33":
-  version "2.0.36"
-  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-2.0.36.tgz#c5eaf271ac8a170f073f85aa2e28f2ca3b61df40"
-  integrity sha512-SfzcAJPls94/Lz1FznWe6Vm9NLkakhGmk3EO7g2QdkDDR2OU4FH63YILnDpGIU6l7gPnsf5WQ81Kr05JOYAlZw==
+"@types/grecaptcha@^3.0.1":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-3.0.3.tgz#9b487b1d20f7813ea382e8cf7a4b621ae61782c4"
+  integrity sha512-osLqWRzsRsDtCfiCl1lbtUY8ANGCQsG/hhht3E7g1pVT7fD5SXgAg53S2grKjjSkXcm0fvMDbhUeL9NyAJvzGQ==
 
 "@types/http-proxy@^1.17.3":
   version "1.17.4"
@@ -9682,14 +9682,13 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
-ng-recaptcha@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/ng-recaptcha/-/ng-recaptcha-6.1.0.tgz#035eda6974191dd44a406a00d42addc135d7c6d0"
-  integrity sha512-qAIHKqvqxKzDy9gcVgJuCp7C/i0EuXLjXPcLL/sLo5wp9QbKLnc4+mhqbJ3K3DIWlQjtp91a7of+iSaSftERUQ==
+ng-recaptcha@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/ng-recaptcha/-/ng-recaptcha-8.0.1.tgz#4068eabf34caffbf9e1aa6db1e5310f380705909"
+  integrity sha512-Urc/0iGof9gqdXJ3HydpDrDlS3qLnjYLHqabCexpci8H3g6fYPeVWCKa2/haDHPUiyGc/+SXUaf7qTHlzJjObg==
   dependencies:
-    tslib "^1.9.0 || ^2.0.0"
-  optionalDependencies:
-    "@types/grecaptcha" "^2.0.33"
+    "@types/grecaptcha" "^3.0.1"
+    tslib "^2.0.0"
 
 ngx-bootstrap@^4.3.0:
   version "4.3.0"
@@ -14384,11 +14383,6 @@ tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
-
-"tslib@^1.9.0 || ^2.0.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
-  integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
 
 tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0:
   version "2.3.1"
