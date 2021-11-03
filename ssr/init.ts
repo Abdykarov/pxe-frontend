@@ -1,4 +1,4 @@
-import 'zone.js/dist/zone-node';
+import 'zone.js/node';
 import 'cross-fetch/polyfill';
 
 import { enableProdMode } from '@angular/core';
