@@ -1,4 +1,5 @@
 import { AbstractComponent } from './abstract.component';
+import { Directive } from '@angular/core';
 
 import {
     debounceTime,
@@ -9,6 +10,7 @@ import { fromEvent } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
 import { TypeOfResolution } from './models/type-of-resolution';
 
+@Directive()
 export abstract class AbstractResizeComponent extends AbstractComponent {
     public typeOfDevice = null;
 

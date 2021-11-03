@@ -5,7 +5,7 @@ import {
     Router,
 } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -31,6 +31,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
+@Directive()
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;
     public isMenuOpen = false;

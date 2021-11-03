@@ -1,9 +1,4 @@
-import {
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-} from '@angular/core';
+import { EventEmitter, Input, OnInit, Output, Directive } from '@angular/core';
 
 import {
     debounceTime,
@@ -15,6 +10,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { ABSTRACT_GRAPH_VALUES } from 'src/common/ui/graphs/abstract.graph.config';
 import { IMargin } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
+@Directive()
 export abstract class AbstractGraphComponent extends AbstractComponent implements OnInit {
 
     public viewPortWidth = 0;

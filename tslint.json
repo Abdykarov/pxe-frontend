@@ -159,7 +159,6 @@
         "use-lifecycle-interface": true,
         "use-pipe-transform-interface": true,
         "component-class-suffix": true,
-        "directive-class-suffix": true,
         "rxjs-collapse-imports": true,
         "rxjs-pipeable-operators-only": true,
         "rxjs-no-static-observable-methods": true,

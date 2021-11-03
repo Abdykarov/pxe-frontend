@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { Directive } from '@angular/core';
 
 import { combineLatest } from 'rxjs';
 import {
@@ -13,6 +14,7 @@ import {
     ITagConfigItem,
 } from 'src/app/services/model/faq.model';
 
+@Directive()
 export class AbstractFaqComponent extends AbstractComponent {
     public activeTag = null;
     public faqConfig: ITagConfigItem[] = null;

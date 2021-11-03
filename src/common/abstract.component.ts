@@ -1,8 +1,4 @@
-import {
-    AfterViewInit,
-    OnDestroy,
-    OnInit,
-} from '@angular/core';
+import { AfterViewInit, OnDestroy, OnInit, Directive } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import {
@@ -10,6 +6,7 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 
+@Directive()
 export abstract class AbstractComponent implements OnInit, OnDestroy, AfterViewInit {
     public readonly CONSTS = CONSTS;
     public readonly ROUTES = ROUTES;
