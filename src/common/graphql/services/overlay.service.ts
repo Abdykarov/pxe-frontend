@@ -1,6 +1,7 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
+
 
 import { showOverlayQuery } from 'src/common/graphql/queries/overlay';
 import { toggleOverlayMutation } from 'src/common/graphql/mutation/overlay';

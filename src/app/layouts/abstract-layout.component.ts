@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {
     ActivatedRoute,
     NavigationEnd,
@@ -8,7 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { OnInit, Directive } from '@angular/core';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+
 import {
     debounceTime,
     takeUntil,

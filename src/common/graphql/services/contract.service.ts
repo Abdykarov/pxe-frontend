@@ -1,6 +1,7 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
+
 
 import { AllowedOperations } from 'src/common/graphql/models/supply.model';
 import {

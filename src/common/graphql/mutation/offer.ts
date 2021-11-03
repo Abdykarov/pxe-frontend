@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import {gql} from 'apollo-angular';
+
 
 import { offerFragment } from 'src/common/graphql/queries/offer';
 

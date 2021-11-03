@@ -1,3 +1,4 @@
+import {ErrorResponse} from '@apollo/client/link/error';
 import * as R from 'ramda';
 import {
     BehaviorSubject,
@@ -11,7 +12,7 @@ import {
     map,
 } from 'rxjs/operators';
 
-import { ErrorResponse } from 'apollo-link-error';
+
 
 import { IFieldError } from './containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from './utils';

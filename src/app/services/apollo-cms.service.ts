@@ -1,9 +1,11 @@
+import {Apollo} from 'apollo-angular';
+import {QueryOptions} from '@apollo/client/core';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+
 import { map } from 'rxjs/operators';
-import { QueryOptions } from 'apollo-client';
+
 import { WatchQueryOptions } from 'apollo-angular/types';
 
 import { apolloGetOperationName } from 'src/common/utils';

@@ -1,10 +1,11 @@
+import {Apollo} from 'apollo-angular';
 import {
     Component,
     OnInit,
 } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Apollo } from 'apollo-angular';
+
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ApolloService } from 'src/app/services/apollo.service';

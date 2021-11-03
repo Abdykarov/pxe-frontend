@@ -1,19 +1,17 @@
+import {APOLLO_OPTIONS} from 'apollo-angular';
+import {ApolloLink, from, NextLink, Observable, Operation, InMemoryCache} from '@apollo/client/core';
+import {BatchHttpLink} from '@apollo/client/link/batch-http';
+import {onError} from '@apollo/client/link/error';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import {
-    ApolloLink,
-    from,
-    NextLink,
-    Observable,
-    Operation,
-} from 'apollo-link';
-import { BatchHttpLink } from 'apollo-link-batch-http';
+
+
+
 import fetch from 'unfetch';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { onError } from 'apollo-link-error';
+
+
 
 import { AuthService } from 'src/app/services/auth.service';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';

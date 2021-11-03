@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import {gql} from 'apollo-angular';
+
 
 export const getArticles =  gql`
     query queryArticleContentsWithTotal($skip: Int!, $filter: String) {

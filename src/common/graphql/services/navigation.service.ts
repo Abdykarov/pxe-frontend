@@ -1,6 +1,7 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
+
 
 import { getConfigQuery } from 'src/common/graphql/queries/navigation';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';

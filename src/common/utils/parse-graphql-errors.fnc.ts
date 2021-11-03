@@ -1,7 +1,8 @@
+import {ErrorResponse} from '@apollo/client/link/error';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { ErrorResponse } from 'apollo-link-error';
+
 
 import {
     defaultErrorMessage,

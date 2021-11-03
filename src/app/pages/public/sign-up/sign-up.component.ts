@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {
     Component,
     ChangeDetectorRef,
@@ -13,7 +14,7 @@ import {
 } from '@angular/router';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+
 import { CookieService } from 'ngx-cookie';
 import { takeUntil } from 'rxjs/operators';
 

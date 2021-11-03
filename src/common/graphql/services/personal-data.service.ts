@@ -1,6 +1,7 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
+
 
 import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';

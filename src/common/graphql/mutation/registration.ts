@@ -1,4 +1,5 @@
-import gql from 'graphql-tag';
+import {gql} from 'apollo-angular';
+
 
 export const makeRegistrationMutation = gql`
     mutation makeRegistration($email: String!, $consent: Boolean!, $preregistration: Boolean) {

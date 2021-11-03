@@ -13,10 +13,10 @@ import {
 } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 
-import { ApolloModule } from 'apollo-angular';
+
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CookieModule } from 'ngx-cookie';
-import { HttpLinkModule } from 'apollo-angular-link-http';
+
 import {
     RECAPTCHA_LANGUAGE,
     RECAPTCHA_SETTINGS,
@@ -40,7 +40,6 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         AppComponent,
     ],
     imports: [
-        ApolloModule,
         AppRoutingModule,
         BrowserModule.withServerTransition({
             appId: 'pxe-pacr4retail',
@@ -50,7 +49,6 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         PdfJsViewerModule.forRoot(),
         FileUploadModule,
         HttpClientModule,
-        HttpLinkModule,
         PipesModule,
         ReactiveFormsModule,
         TransferHttpCacheModule,

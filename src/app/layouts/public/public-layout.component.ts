@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {
     ActivatedRoute,
     Router,
@@ -14,7 +15,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+
 import {
     map,
     takeUntil,

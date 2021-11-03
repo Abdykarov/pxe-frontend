@@ -1,7 +1,8 @@
+import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+
 
 import {
     createSupplyPointImportMutation,

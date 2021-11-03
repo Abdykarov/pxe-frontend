@@ -1,17 +1,14 @@
-import { APOLLO_NAMED_OPTIONS } from 'apollo-angular';
-import {
-    ApolloLink,
-    from,
-    NextLink,
-    Observable,
-    Operation,
-} from 'apollo-link';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import {APOLLO_NAMED_OPTIONS} from 'apollo-angular';
+import {ApolloLink, from, NextLink, Observable, Operation, InMemoryCache} from '@apollo/client/core';
+import {HttpLink} from 'apollo-angular/http';
+
+
+
 
 import { CmsService } from 'src/app/services/cms.service';
 import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
-import { HttpLink } from 'apollo-angular-link-http';
+
 
 const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
     const Authorization = cmsService.getAuthorizationHeaders();

@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {
     ChangeDetectorRef,
     Component,
@@ -8,7 +9,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { Apollo } from 'apollo-angular';
+
 import { first } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';

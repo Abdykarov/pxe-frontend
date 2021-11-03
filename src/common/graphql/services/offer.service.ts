@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {
     HttpClient,
     HttpResponse,
@@ -5,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+
 import {
     catchError,
     map,
