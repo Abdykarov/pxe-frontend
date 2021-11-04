@@ -16,8 +16,8 @@ $modal-inner-padding-md:             $spacer;
 
 $modal-content-border-width:         0;
 $modal-content-border-radius:        $border-radius;
-$modal-content-box-shadow-xs:        0 ( $spacer / 2 ) ( $spacer * 1.5 ) 0 rgba($font-text, .2);
-$modal-content-box-shadow-sm-up:     0 ( $spacer / 2 ) ( $spacer * 1.5 ) 0 rgba($font-text, .2);
+$modal-content-box-shadow-xs:        0 ( $spacer * 0.5 ) ( $spacer * 1.5 ) 0 rgba($font-text, .2);
+$modal-content-box-shadow-sm-up:     0 ( $spacer * 0.5 ) ( $spacer * 1.5 ) 0 rgba($font-text, .2);
 
 $modal-header-padding:               $modal-inner-padding;
 $modal-header-padding-md:            $modal-inner-padding-md;

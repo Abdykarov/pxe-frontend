@@ -5,6 +5,8 @@
  */
 
 // Core component import
+@use "sass:math";
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
@@ -216,7 +218,7 @@
 
 	&-dropdown {
 		min-width: auto;
-		padding-left: ( $spacer / 2 );
+		padding-left: ( $spacer * 0.5 );
 		text-transform: uppercase;
 
 		&:focus,
@@ -337,7 +339,7 @@
 	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;
-		padding: ( $spacer / 4 ) ( $spacer / 2 );
+		padding: ( $spacer * 0.25 ) ( $spacer * 0.5 );
 		font-size: $small-font-size;
 		line-height: $line-height-sm;
 
@@ -345,11 +347,11 @@
 			font-size: $icon-size-small-px;
 
 			&--left {
-				margin-left: ( $spacer / 3 );
+				margin-left:  math.div($spacer, 3) ;
 			}
 
 			&--right {
-				margin-right: ( $spacer / 3 );
+				margin-right:  math.div($spacer, 3) ;
 			}
 		}
 	}
@@ -433,7 +435,7 @@
 			left: 10px;
 
 			& + .btn__text {
-				margin-left: ( $spacer / 2 );
+				margin-left: ( $spacer * 0.5 );
 			}
 		}
 
@@ -441,14 +443,14 @@
 			right: 10px;
 
 			& + .btn__text {
-				margin-right: ( $spacer / 2 );
+				margin-right: ( $spacer * 0.5 );
 			}
 		}
 
 		&--alone {
 			position: relative;
 			width: $btn-width-icon-alone;
-			padding: ( $spacer / 4 );
+			padding: ( $spacer * 0.25 );
 		}
 	}
 
@@ -458,7 +460,7 @@
 
 		.btn__icon {
 			position: static;
-			margin-left: ( $spacer / 2 );
+			margin-left: ( $spacer * 0.5 );
 			margin-right: 0;
 		}
 	}

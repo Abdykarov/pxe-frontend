@@ -45,7 +45,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
     const http = new BatchHttpLink({
         uri: `${environment.url_graphql}/`,
-        fetch: fetch,
+        fetch: <any>fetch,
         batchMax: CONSTS.MAX_REQUEST_IN_BATCH_LINK,
     });
 

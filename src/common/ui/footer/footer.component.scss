@@ -30,7 +30,7 @@
 
 	.copy-holder,
 	.logo-holder {
-		margin-bottom: ( $spacer / 2 );
+		margin-bottom: ( $spacer * 0.5 );
 	}
 
 	.logo {
@@ -55,7 +55,7 @@
 
 	&__item {
 		&:nth-child(n + 2) {
-			margin-top: ( $spacer / 2 );
+			margin-top: ( $spacer * 0.5 );
 
 			// Media queries
 			@include media-breakpoint-up(md) {

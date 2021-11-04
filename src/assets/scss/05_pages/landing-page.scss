@@ -36,7 +36,7 @@
 	.section-video-holder {
 		position: relative;
 		width: calc( 100% + #{$spacer} );
-		margin: 0 ( -$spacer / 2 );
+		margin: 0 ( -$spacer * 0.5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -45,7 +45,7 @@
 		}
 		@include media-breakpoint-up(xl) {
 			width: calc( 100% + #{$spacer} );
-			margin: 0 ( -$spacer / 2 );
+			margin: 0 ( -$spacer * 0.5 );
 		}
 		@include media-breakpoint-up(lg) {
 			width: 100%;
@@ -68,7 +68,7 @@
 	// Section Picture
 	.section-picture-holder {
 		width: calc( 100% + #{$spacer} );
-		margin: 0 ( -$spacer / 2 );
+		margin: 0 ( -$spacer * 0.5 );
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
@@ -117,7 +117,7 @@
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			display: inline;
-			padding: ( $spacer / 4 ) ( $spacer / 2 );
+			padding: ( $spacer * 0.25 ) ( $spacer * 0.5 );
 			background-color: $white;
 			line-height: 1.5;
 		}
@@ -154,7 +154,7 @@
 			&::before {
 				width: $numerical-list-lp-numb-size;
 				height: $numerical-list-lp-numb-size;
-				padding-left: ( $spacer / 10 );
+				padding-left: ( $spacer * 0.1 );
 				background-color: $secondary;
 				color: $white;
 				letter-spacing: -2px;

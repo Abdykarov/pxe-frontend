@@ -46,7 +46,7 @@
 	}
 
 	thead {
-		border-bottom: ( $spacer / 2 ) solid $table-bg;
+		border-bottom: ( $spacer * 0.5 ) solid $table-bg;
 	}
 
 	thead,
@@ -113,7 +113,7 @@
 			top: 0;
 			visibility: hidden; // temp
 			width: ( ( 30px * 4 ) + $spacer ); // $btn-width-icon:
-			padding: 0 ( $spacer / 2 );
+			padding: 0 ( $spacer * 0.5 );
 			height: 100%;
 
 			&::before {

@@ -32,13 +32,13 @@
 	}
 
 	.icon {
-		font-size: ( $indicator-font-size-mobil / 2 );
+		font-size: ( $indicator-font-size-mobil * 0.5 );
 		line-height: $indicator-line-height-mobil;
 		padding-right: ( $spacer * .75 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			font-size: ( $indicator-font-size-tablet / 2 );
+			font-size: ( $indicator-font-size-tablet * 0.5 );
 			line-height: $indicator-line-height-tablet;
 		}
 	}

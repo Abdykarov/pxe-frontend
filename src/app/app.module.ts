@@ -90,5 +90,5 @@ export class AppModule {
         registerLocaleData(localeCs, localeCsExtra);
     }
 }
-
-Validators.required.prototype.isRequiredValidator = true;
+// todo
+// Validators.required.prototype.isRequiredValidator = true;

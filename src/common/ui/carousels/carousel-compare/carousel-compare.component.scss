@@ -32,7 +32,7 @@
 	}
 
 	.carousel-inner {
-		padding: 0 ( $carousel-control-size + ( $spacer / 2 ) );
+		padding: 0 ( $carousel-control-size + ( $spacer * 0.5 ) );
 
 		// Media queries
 		@include media-breakpoint-up(md) {

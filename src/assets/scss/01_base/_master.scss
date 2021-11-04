@@ -5,6 +5,8 @@
  */
 
 
+@use "sass:math";
+
 html {
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -35,7 +37,7 @@ body {
 
 .h1--public {
 	font-size: $h1-font-size-public-xs;
-	line-height: ( 43 / 36 );
+	line-height:  math.div(43, 36) ;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -48,7 +50,7 @@ body {
 
 .h2--public {
 	font-size: $h2-font-size-public-xs;
-	line-height: ( 36 / 30 );
+	line-height:  math.div(36, 30) ;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -60,9 +62,9 @@ body {
 }
 
 .h3--public {
-	margin-bottom: ( $spacer / 2 );
+	margin-bottom: ( $spacer * 0.5 );
 	font-size: $h3-font-size-public-xs;
-	line-height: ( 30 / 24 );
+	line-height:  math.div(30, 24) ;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -93,7 +95,7 @@ h6,
 .h6 {
 	& > span {
 		color: $text-muted;
-		padding-left: ( $spacer / 3 );
+		padding-left:  math.div($spacer, 3) ;
 		text-transform: none;
 	}
 }
@@ -121,7 +123,7 @@ h1,
 
 h2,
 .h2 {
-	line-height: ( 24 / 18 );
+	line-height:  math.div(24, 18) ;
 	text-transform: none;
 
 	& > .h2__sub-text {
@@ -131,12 +133,12 @@ h2,
 
 h3,
 .h3 {
-	line-height: ( 20 / 14 );
+	line-height:  math.div(20, 14) ;
 }
 
 .perex {
 	font-size: $perex-font-size;
-	line-height: ( 28 / 18 );
+	line-height:  math.div(28, 18) ;
 }
 
 hr {
@@ -167,24 +169,24 @@ blockquote,
 
 .buttons-holder {
 	> :not(:last-child) {
-		margin-bottom: ( $spacer / 2 );
+		margin-bottom: ( $spacer * 0.5 );
 		margin-right: 0;
 
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			margin-bottom: 0;
-			margin-right: ( $spacer / 3 );
+			margin-right:  math.div($spacer, 3) ;
 		}
 	}
 
 	> :not(:first-child) {
-		margin-top: ( $spacer / 2 );
+		margin-top: ( $spacer * 0.5 );
 		margin-left: 0;
 
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			margin-top: 0;
-			margin-left: ( $spacer / 3 );
+			margin-left:  math.div($spacer, 3) ;
 		}
 	}
 }

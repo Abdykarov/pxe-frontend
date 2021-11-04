@@ -6,6 +6,8 @@
 
 
 // Colors pallete
+@use "sass:math";
+
 $blue-050:                         #56cefe;                    // Blue level 1
 $blue-100:                         #00b7ff;                    // Blue level 2
 $blue-200:                         #00a6ea;                    // Blue level 3
@@ -101,8 +103,8 @@ $spacer:                           $grid-gutter-width;
 $spacers: () !default;
 $spacers: map-merge((
   0: 0,
-  1: ( $spacer / 4 ),
-  2: ( $spacer / 2 ),
+  1: ( $spacer * 0.25 ),
+  2: ( $spacer * 0.5 ),
   3: $spacer,
   4: ( $spacer * 1.5 ),
   5: ( $spacer * 2 ),
@@ -136,16 +138,16 @@ $body-max-width:                   1366px;
 // Typography
 $font-family-sans-serif:           'roboto', arial;
 $font-size-base-public:            1rem;
-$line-height-base-public:          ( 28 / 16 );
+$line-height-base-public:           math.div(28, 16) ;
 
 $font-family-sans-serif-secured:   'roboto_mono', arial;
 $font-size-base:                   .875rem;
-$line-height-base:                 ( 24 / 14 );
+$line-height-base:                  math.div(24, 14) ;
 
 $small-font-size:                  .75rem;
-$line-height-sm:                   ( 16 / 12 );
+$line-height-sm:                    math.div(16, 12) ;
 $large-font-size:                  1rem;
-$line-height-lg:                   ( 16 / 16 );
+$line-height-lg:                    math.div(16, 16) ;
 $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;
@@ -167,7 +169,7 @@ $h5-font-size:                     .8125rem;
 $h6-font-size:                     .8125rem;
 $h4-font-size-public:              1rem;
 $headings-color:                   $font-header;
-$headings-line-height:             ( 40 / 30 );
+$headings-line-height:              math.div(40, 30) ;
 $headings-font-weight:             400;
 $headings-margin-bottom:           ( $spacer * 1.5 );
 
@@ -199,7 +201,7 @@ $link-hover-decoration:            underline;
 
 
 // Icons
-$icon-path:                        '../fonts/icons';
+$icon-path:                        '../../fonts/icons';
 $icon-size:                        1.25rem;
 $icon-size-small:                  .625rem;
 $icon-size-large:                  1.625rem;
@@ -208,7 +210,7 @@ $icon-size-small-px:               10px;
 $icon-size-large-px:               26px;
 
 
-$images-path:                      '../../../assets/images/';
+$images-path:                      '../../images/';
 
 
 // Header
@@ -229,7 +231,7 @@ $menu-toggle-line-width:           24px;
 $menu-toggle-line-width-rotate:    20px;
 $menu-toggle-line-height:          4px;
 $menu-toggle-line-offset:          5px;
-$menu-toggle-line-center:          ( ( $menu-width - $menu-toggle-line-width ) / 2 );
+$menu-toggle-line-center:          ( ( $menu-width - $menu-toggle-line-width ) * 0.5 );
 
 
 // Footer
@@ -240,8 +242,8 @@ $footer-height-tablet:             220px;
 // Badges
 $badge-font-size:                  .75rem;
 $badge-font-weight:                400;
-$badge-padding-y:                  ( $spacer / 7.5 );
-$badge-padding-x:                  ( $spacer / 4 );
+$badge-padding-y:                   math.div($spacer, 7.5) ;
+$badge-padding-x:                  ( $spacer * 0.25 );
 
 
 // Close
@@ -293,8 +295,8 @@ $zindex-card-blog-img:               -1;
 
 
 // Pagination
-$pagination-padding-y:              ( $spacer / 4 );
-$pagination-padding-x:              ( $spacer / 4 );
+$pagination-padding-y:              ( $spacer * 0.25 );
+$pagination-padding-x:              ( $spacer * 0.25 );
 $pagination-color:                  $link-color;
 $pagination-bg:                     transparent;
 $pagination-border-width:           0;

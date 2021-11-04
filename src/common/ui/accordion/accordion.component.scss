@@ -8,7 +8,7 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .accordion {
-	margin-bottom: ( $spacer / 2 );
+	margin-bottom: ( $spacer * 0.5 );
 
 	&__item {
 		margin-bottom: $spacer;
@@ -70,7 +70,7 @@
 		right: $spacer;
 		width: $accordion-toggle-icon-size;
 		height: $accordion-toggle-icon-size;
-		padding-top: ( $spacer / 10 );
+		padding-top: ( $spacer * 0.1 );
 		background-color: $primary;
 		color: $white;
 		font-size: $icon-size-small;

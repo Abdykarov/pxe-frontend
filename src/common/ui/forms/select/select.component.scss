@@ -1,4 +1,6 @@
 // Core component import
+@use "sass:math";
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
@@ -14,7 +16,7 @@
 	margin-bottom: ( $spacer * 2 );
 
 	.ng-select-label {
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * 0.25 );
 		font-size: $input-font-size;
 		cursor: pointer;
 	}
@@ -193,7 +195,7 @@
 		}
 
 		.ng-dropdown-panel-items {
-			padding: ( $spacer / 2.5 ) 0;
+			padding:  math.div($spacer, 2.5)  0;
 			max-height: $select-dropdown-panel-height;
 			background-color: $input-bg;
 			border-radius: $input-border-radius;
@@ -219,7 +221,7 @@
 		}
 
 		.ng-option {
-			padding: ( $spacer / 2 ) $input-padding-x;
+			padding: ( $spacer * 0.5 ) $input-padding-x;
 			line-height: $line-height-sm;
 
 			&.ng-option-selected {

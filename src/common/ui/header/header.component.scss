@@ -33,7 +33,7 @@
 			// Media queries
 			@include media-breakpoint-down(xl) {
 				width: calc( 100% + #{$spacer} );
-				margin-left: -( $spacer / 2 );
+				margin-left: -( $spacer * 0.5 );
 				background-color: $body-bg-lp;
 			}
 		}

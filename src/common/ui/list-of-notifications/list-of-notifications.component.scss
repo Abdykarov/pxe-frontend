@@ -17,7 +17,7 @@
 	&__item {
 		counter-increment: items;
 		padding-left: ( $spacer * 1.5 );
-		padding-bottom: ( $spacer / 5 );
+		padding-bottom: ( $spacer * 0.2 );
 		font-size: $small-font-size;
 
 		&::before {

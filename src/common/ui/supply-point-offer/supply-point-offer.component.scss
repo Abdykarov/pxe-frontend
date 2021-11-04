@@ -5,6 +5,8 @@
  */
 
 // Core component import
+@use "sass:math";
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
@@ -140,19 +142,19 @@
 	&__value-name {
 		display: flex;
 		align-items: center;
-		line-height: ( 18 / 14 );
+		line-height:  math.div(18, 14) ;
 		text-transform: uppercase;
 		width: 100%;
 	}
 
 	&__title-label {
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * 0.25 );
 	}
 
 	&__title {
 		display: block;
 		width: 100%;
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * 0.25 );
 	}
 
 	&__info-icon {
@@ -182,7 +184,7 @@
 	}
 
 	&__value-name {
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * 0.25 );
 		color: rgba($font-text, .5);
 	}
 
@@ -205,7 +207,7 @@
 	}
 
 	&__addon {
-		margin-top: ( $spacer / 2 );
+		margin-top: ( $spacer * 0.5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -243,7 +245,7 @@
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				width: calc(50% - #{ $spacer / 2 } );
+				width: calc(50% - #{ $spacer * 0.5 } );
 			}
 
 			&::before {

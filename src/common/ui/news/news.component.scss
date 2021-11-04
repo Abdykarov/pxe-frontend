@@ -13,7 +13,7 @@
 	box-shadow: $box-shadow;
 
 	&__inner {
-		padding: ( $spacer * 1.5 ) $spacer ( $spacer / 2 );
+		padding: ( $spacer * 1.5 ) $spacer ( $spacer * 0.5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {

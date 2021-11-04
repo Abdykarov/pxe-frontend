@@ -6,6 +6,6 @@ $progress-bar-line-bg-active:           $primary;
 $progress-bar-line-height:              6px;
 $progress-bar-bullet-size:              20px;
 $progress-bar-bullet-size-inner:        10px;
-$progress-bar-margin-bottom:            ( $spacer / 2 );
+$progress-bar-margin-bottom:            ( $spacer * 0.5 );
 $progress-bar-icon-color:               $white;
 $progress-bar-icon-size:                $icon-size-small-px;

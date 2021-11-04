@@ -23,7 +23,7 @@
 	&__content {
 		position: absolute;
 		display: none;
-		padding: ( $spacer / 4 ) ( $spacer * .75 );
+		padding: ( $spacer * 0.25 ) ( $spacer * .75 );
 		background-color: $font-text;
 		color: $white;
 		font-size: $font-size-base;

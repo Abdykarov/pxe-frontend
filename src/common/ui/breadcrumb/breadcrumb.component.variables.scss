@@ -6,6 +6,6 @@
 
 
 $breadcrumb-bg:                     transparent;
-$breadcrumb-item-padding:           ( $spacer / 2 );
-$breadcrumb-margin-bottom:          ( $spacer / 2 );
+$breadcrumb-item-padding:           ( $spacer * 0.5 );
+$breadcrumb-margin-bottom:          ( $spacer * 0.5 );
 $breadcrumb-divider-color:          $font-text;

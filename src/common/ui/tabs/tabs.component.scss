@@ -77,11 +77,11 @@
 			text-align: center;
 			text-transform: uppercase;
 			text-decoration: none;
-			padding: ( $spacer / 4 ) 0;
+			padding: ( $spacer * 0.25 ) 0;
 
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				padding: ( $spacer / 2 ) 0;
+				padding: ( $spacer * 0.5 ) 0;
 			}
 			// display: inline-block;
 			// width: 100%;

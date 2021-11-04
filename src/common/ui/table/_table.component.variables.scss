@@ -5,9 +5,11 @@
  */
 
 
-$table-cell-padding:             ( $spacer / 2 );
-$table-cell-padding-vert:        ( $spacer / 3 );
-$table-cell-padding-sm:          ( $spacer / 4 );
+@use "sass:math";
+
+$table-cell-padding:             ( $spacer * 0.5 );
+$table-cell-padding-vert:         math.div($spacer, 3) ;
+$table-cell-padding-sm:          ( $spacer * 0.25 );
 $table-bg:                       transparent;
 $table-font-size:                .75rem;
 $table-accent-bg:                $gray-100;
@@ -26,5 +28,5 @@ $table-striped-order:            odd;
 $table-danger-bg:                rgba($danger, .3);
 
 $table-adv-cell-padding-hor:     ( $spacer * .75 );
-$table-adv-cell-padding-vert:    ( $spacer / 2 );
+$table-adv-cell-padding-vert:    ( $spacer * 0.5 );
 $table-adv-detail-bg:            $white;

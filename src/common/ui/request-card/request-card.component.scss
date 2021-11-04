@@ -34,7 +34,7 @@
 
 	&__icon {
 		display: block;
-		padding-top: ( ( $supply-point-title-line-height-px - $supply-point-icon-font-size ) / 2 );
+		padding-top: ( ( $supply-point-title-line-height-px - $supply-point-icon-font-size ) * 0.5 );
 		color: $icons-primary;
 		font-size: $supply-point-icon-font-size;
 	}
@@ -64,7 +64,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			padding-top: ( ( $supply-point-title-line-height-px - $btn-height ) / 2 );
+			padding-top: ( ( $supply-point-title-line-height-px - $btn-height ) * 0.5 );
 		}
 	}
 }

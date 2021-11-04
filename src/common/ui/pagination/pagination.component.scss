@@ -30,7 +30,7 @@
 	.pagination-next,
 	.pagination-last {
 		.page-link {
-			height: ( ( $spacer / 2 ) + $icon-size-small-px );
+			height: ( ( $spacer * 0.5 ) + $icon-size-small-px );
 			color: $font-text;
 			font-size: $icon-size-small-px;
 

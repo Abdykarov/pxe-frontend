@@ -1,6 +1,8 @@
 // Forms
+@use 'sass:math';
+
 $input-height:                       50px;
-$input-padding-y:                    ( $spacer / 4 );
+$input-padding-y:                    ( $spacer * .25 );
 $input-padding-x:                    $spacer;
 $input-font-size:                    12px;
 $input-line-height:                  1;
@@ -33,7 +35,7 @@ $input-padding-x-public:             ( $spacer * 1.5 );
 
 $custom-control-gutter:                                  0;
 $custom-control-indicator-top:                           2px;
-$custom-control-indicator-size:                          ( 16 / 16 ) + rem;
+$custom-control-indicator-size:                          1rem;
 $custom-control-indicator-size-px:                       16px;
 $custom-control-indicator-bg:                            $white;
 $custom-control-indicator-box-shadow:                    none;

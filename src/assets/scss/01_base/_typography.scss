@@ -11,13 +11,13 @@
  */
 
 // Font weight: Regular
-@include font-face('roboto', '../fonts/roboto/roboto-regular', 400);
+@include font-face('roboto', '../../fonts/roboto/roboto-regular', 400);
 
 // Font weight: Italic
-@include font-face('roboto', '../fonts/roboto/roboto-italic', 400, italic);
+@include font-face('roboto', '../../fonts/roboto/roboto-italic', 400, italic);
 
 // Font weight: Bold
-@include font-face('roboto', '../fonts/roboto/roboto-bold', 700);
+@include font-face('roboto', '../../fonts/roboto/roboto-bold', 700);
 
 
 /*
@@ -25,4 +25,4 @@
  */
 
 // Font weight: Regular
-@include font-face('roboto_mono', '../fonts/roboto_mono/roboto_mono-regular', 400);
+@include font-face('roboto_mono', '../../fonts/roboto_mono/roboto_mono-regular', 400);

@@ -5,7 +5,7 @@
  */
 
 $badge-min-height:                  30px;
-$badge-padding-y:                   ( $spacer / 4 );
+$badge-padding-y:                   ( $spacer * 0.25 );
 $badge-padding-x:                   $spacer;
 $badge-border-radius:               $border-radius;
 $badge-beak-size:                   20px;
