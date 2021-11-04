@@ -8,6 +8,7 @@ import {
     OverviewState,
     OverviewStateWrapper,
 } from 'src/app/pages/consumers/requests-overview/requests-overview.model';
+import {DateDiffPipe} from '../pipes/secured/date-diff/date-diff.pipe';
 
 export const isSupplyPointInRequestState = (supplyPoint: ISupplyPoint): boolean =>
     supplyPoint.contract === null || supplyPoint.contract.contractStatus === ContractStatus.NOT_CONCLUDED || supplyPoint.imported;
@@ -15,20 +16,20 @@ export const isSupplyPointInRequestState = (supplyPoint: ISupplyPoint): boolean 
 export const hasAnyRequest = (supplyPoints: ISupplyPoint[]): boolean =>
     R.find((supplyPoint: ISupplyPoint) => (isSupplyPointInRequestState(supplyPoint)), supplyPoints);
 
-export const contractEnding = (supplyPoint: ISupplyPoint) =>
+export const contractEnding = (supplyPoint: ISupplyPoint, dateDiffPipe: DateDiffPipe) =>
     supplyPoint.contract &&
-    this.dateDiffPipe
+    dateDiffPipe
         .transform(
             supplyPoint.contract.deliveryTo,
             moment().add(CONSTS.MONTHS_TO_CONTRACT_END , 'month').toISOString(), 'seconds',
         ) <= 0 &&
-    this.dateDiffPipe.transform(
+    dateDiffPipe.transform(
             moment().toISOString(),
             supplyPoint.contract.deliveryTo, 'seconds',
         ) >= 0;
 
-export const isAnyContractEnding = (supplyPoints: ISupplyPoint[]): boolean =>
-    R.find((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints);
+export const isAnyContractEnding = (supplyPoints: ISupplyPoint[], dateDiffPipe): boolean =>
+    R.find((supplyPoint: ISupplyPoint) => contractEnding(supplyPoint, dateDiffPipe), supplyPoints);
 
 export const getOverviewState = (supplyPointsInput: ISupplyPoint[]): OverviewStateWrapper =>
     R.cond([

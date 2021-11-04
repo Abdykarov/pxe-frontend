@@ -11,8 +11,8 @@ import {
     catchError,
     map,
 } from 'rxjs/operators';
-import { Observable } from 'apollo-client/lib/util/Observable';
 import {
+    Observable,
     Observable as ObservableRxjs,
     of,
 } from 'rxjs';

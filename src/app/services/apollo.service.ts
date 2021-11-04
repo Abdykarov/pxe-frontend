@@ -16,8 +16,8 @@ export class ApolloService {
     public resetStore = (): Promise<any> =>
         this.apollo.getClient().resetStore()
             .then(() => {
-                this.apollo.getClient().cache.writeData({
-                    data: defaults,
-                });
+                // this.apollo.getClient().cache.writeData({
+                //     data: defaults,
+                // });
             })
 }

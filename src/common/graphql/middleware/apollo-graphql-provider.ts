@@ -124,9 +124,9 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         // response.errors = null;
     });
 
-    cache.writeData({
-        data: defaults,
-    });
+    // cache.write({
+    //     data: defaults,
+    // });
 
     const link = from([error, auth, http]);
     return {

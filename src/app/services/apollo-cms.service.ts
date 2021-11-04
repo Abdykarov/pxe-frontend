@@ -6,8 +6,6 @@ import * as R from 'ramda';
 
 import { map } from 'rxjs/operators';
 
-import { WatchQueryOptions } from 'apollo-angular/types';
-
 import { apolloGetOperationName } from 'src/common/utils';
 import { CONSTS } from 'src/app/app.constants';
 import {
@@ -24,7 +22,7 @@ export class ApolloCmsService {
         private apollo: Apollo,
     ) {}
 
-    public watchQuery = (options: WatchQueryOptions<any>): any =>
+    public watchQuery = (options: any): any =>
         this.apollo.use(CONSTS.APOLLO_CMS_KEY)
             .watchQuery(options)
             .valueChanges
