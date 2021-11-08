@@ -1,8 +1,6 @@
 // TODO update static
 import { Injectable } from '@angular/core';
-
 import * as R from 'ramda';
-
 import {
     ANNUAL_CONSUMPTION_OPTIONS,
     DELIVERY_LENGTH_OPTIONS,
@@ -42,7 +40,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(R.propEq('value', row.subject.code))(
+                                    SUBJECT_TYPE_OPTIONS
+                                ).label
+                            }`,
                     },
                 ],
             },
@@ -52,7 +55,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation ? row.distributionLocation.code : ''}`,
+                        content: (row) =>
+                            `${
+                                row.distributionLocation
+                                    ? row.distributionLocation.code
+                                    : ''
+                            }`,
                     },
                 ],
             },
@@ -62,7 +70,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.distributionRate.code))(this.distributionRateOptions).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(
+                                    R.propEq('value', row.distributionRate.code)
+                                )(this.distributionRateOptions).label
+                            }`,
                     },
                 ],
             },
@@ -72,7 +85,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.circuitBreaker.code))(this.circuitBreakerOptions).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(
+                                    R.propEq('value', row.circuitBreaker.code)
+                                )(this.circuitBreakerOptions).label
+                            }`,
                     },
                 ],
             },
@@ -122,7 +140,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(R.propEq('value', row.deliveryLength))(
+                                    DELIVERY_LENGTH_OPTIONS
+                                ).label
+                            }`,
                     },
                 ],
             },
@@ -131,7 +154,10 @@ export class SupplyOfferOrganismConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -154,7 +180,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(R.propEq('value', row.subject.code))(
+                                    SUBJECT_TYPE_OPTIONS
+                                ).label
+                            }`,
                     },
                 ],
             },
@@ -164,7 +195,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation ? row.distributionLocation.code : ''}`,
+                        content: (row) =>
+                            `${
+                                row.distributionLocation
+                                    ? row.distributionLocation.code
+                                    : ''
+                            }`,
                     },
                 ],
             },
@@ -175,8 +211,16 @@ export class SupplyOfferOrganismConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row) => {
-                            return row.annualConsumption ?
-                                `${R.find(R.propEq('value', row.annualConsumption.code))(ANNUAL_CONSUMPTION_OPTIONS).label}` : '';
+                            return row.annualConsumption
+                                ? `${
+                                      R.find(
+                                          R.propEq(
+                                              'value',
+                                              row.annualConsumption.code
+                                          )
+                                      )(ANNUAL_CONSUMPTION_OPTIONS).label
+                                  }`
+                                : '';
                         },
                     },
                 ],
@@ -217,7 +261,12 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(R.propEq('value', row.deliveryLength))(
+                                    DELIVERY_LENGTH_OPTIONS
+                                ).label
+                            }`,
                     },
                 ],
             },
@@ -226,7 +275,10 @@ export class SupplyOfferOrganismConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -502,7 +554,5 @@ export class SupplyOfferOrganismConfig {
         },
     ];
 
-    constructor(
-        public newSupplyPointPageConfig: NewSupplyPointPageConfig,
-    ) {}
+    constructor(public newSupplyPointPageConfig: NewSupplyPointPageConfig) {}
 }

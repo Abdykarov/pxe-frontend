@@ -5,17 +5,16 @@
         isDismissible ? 'alert-dismissible' : '',
         hasIcon ? 'alert--with-icon' : '',
         customClass ? customClass : ''
-    ]">
-    <span
-        *ngIf="hasIcon"
-        class="alert__common-icon icon icon--check">
-    </span>
+    ]"
+>
+    <span *ngIf="hasIcon" class="alert__common-icon icon icon--check"> </span>
     <ng-content></ng-content>
     <button
         *ngIf="isDismissible"
         type="button"
         class="close"
-        (click)="close.emit($event)">
+        (click)="close.emit($event)"
+    >
         <span class="icon icon--remove"></span>
     </button>
 </div>

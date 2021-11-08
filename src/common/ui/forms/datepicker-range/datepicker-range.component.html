@@ -1,24 +1,26 @@
-<div
-    class="form-group"
-    [formGroup]="parentForm">
+<div class="form-group" [formGroup]="parentForm">
     <div
         class="form-control-case input-group--append"
         [class.input-group]="!!appendButtonIcon"
         [class.input-group--append]="!!appendButtonIcon"
-        [class.input-group--append-button-icon]="!!appendButtonIcon">
+        [class.input-group--append-button-icon]="!!appendButtonIcon"
+    >
         <div
             class="form-control-wrapper"
             [class.focused-input]="inputFocused"
             [class.invalid-input]="!!error && !!touched"
-            [class.disabled-input]="!!disabledField">
+            [class.disabled-input]="!!disabledField"
+        >
             <input
                 bsDaterangepicker
                 #datepicker="bsDaterangepicker"
                 type="text"
-                (blur)="inputFocused = false;focus.emit($event)"
-                (focus)="inputFocused = true;blur.emit($event)"
+                (blur)="inputFocused = false; focus.emit($event)"
+                (focus)="inputFocused = true; blur.emit($event)"
                 class="form-control"
-                [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
+                [class.form-control--not-empty]="
+                    !!parentForm.controls[datepickerName].value
+                "
                 [id]="id"
                 [placeholder]="placeholder"
                 [formControl]="parentForm.controls[datepickerName]"
@@ -31,35 +33,35 @@
                 [attr.disabled]="!!disabledField ? 'disabled' : null"
                 [attr.autocomplete]="'off'"
                 (onShown)="onShowPicker($event)"
-                (onHidden)="onHidePicker($event)">
-                <div class="input-group-append">
-                    <span class="icon icon--calendar input-group-icon"></span>
-                </div>
+                (onHidden)="onHidePicker($event)"
+            />
+            <div class="input-group-append">
+                <span class="icon icon--calendar input-group-icon"></span>
+            </div>
         </div>
         <label
             class="control-label"
             (click)="datepicker.toggle()"
             [attr.aria-expanded]="datepicker.isOpen"
-            [for]="id">
+            [for]="id"
+        >
             {{ label }}
         </label>
-        <div
-            *ngIf="!!appendButtonIcon"
-            class="input-group-append-help">
+        <div *ngIf="!!appendButtonIcon" class="input-group-append-help">
             <button
                 (click)="appendButtonAction.emit()"
                 type="button"
-                class="btn">
-                <span
-                    class="icon"
-                    [ngClass]="appendButtonIcon">
-                </span>
+                class="btn"
+            >
+                <span class="icon" [ngClass]="appendButtonIcon"> </span>
             </button>
         </div>
         <div
-            *ngIf="!!getErrorMessage() && showErrorMessage && !datepicker.isOpen"
+            *ngIf="
+                !!getErrorMessage() && showErrorMessage && !datepicker.isOpen
+            "
             [innerHtml]="getErrorMessage()"
-            class="invalid-feedback">
-        </div>
+            class="invalid-feedback"
+        ></div>
     </div>
 </div>

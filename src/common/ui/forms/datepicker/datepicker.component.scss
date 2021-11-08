@@ -44,15 +44,15 @@ bs-years-calendar-view,
 bs-month-calendar-view {
 	.bs-datepicker-head {
 		.current {
-			margin-left: -(math.div($spacer, 2.5));
+			margin-left: -(math.div( $spacer, 2.5) );
 		}
 	}
 }
 
 .bs-datepicker {
-	margin-top: ($spacer * 0.5);
+	margin-top: ( $spacer * .5 );
 	background: transparent;
-	box-shadow: 0 0 10px 0 rgba($black, 0.09);
+	box-shadow: 0 0 10px 0 rgba($black, .09);
 
 	.bs-datepicker-head,
 	.bs-datepicker-body {
@@ -64,7 +64,7 @@ bs-month-calendar-view {
 		th .is-highlighted:not(.disabled),
 		td .is-highlighted:not(.disabled) {
 			&:hover {
-				background-color: rgba($input-color, 0.1);
+				background-color: rgba($input-color, .1);
 				border-radius: $border-radius;
 			}
 		}
@@ -131,7 +131,7 @@ bs-month-calendar-view {
 	.bs-datepicker-body table td {
 		span {
 			&.is-highlighted:not(.disabled) {
-				background-color: rgba($input-color, 0.1);
+				background-color: rgba($input-color, .1);
 				border-radius: $border-radius;
 			}
 

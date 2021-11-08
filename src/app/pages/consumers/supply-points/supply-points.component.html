@@ -1,28 +1,48 @@
 <ng-template #additionalInfoTemplate let-data="data">
-    <div *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)"
-         class="row">
-        <div *ngIf="(data | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: data.contract.deliveryTo) as contractEndInDays"
-             class="col-12">
-            <pxe-badge type="info"
-                       [isLink]="true"
-                       (action)="restoreContractAction($event, data)">
-                Platnost končí za {{contractEndInDays}} {{contractEndInDays | plural: 'day'}} - Obnovit smlouvu
+    <div
+        *ngIf="
+            data?.allowedOperations
+                | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO
+        "
+        class="row"
+    >
+        <div
+            *ngIf="
+                (data | pathValue: ['contract', 'deliveryTo']) &&
+                (today
+                    | dateDiff: data.contract.deliveryTo) as contractEndInDays
+            "
+            class="col-12"
+        >
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="restoreContractAction($event, data)"
+            >
+                Platnost končí za {{ contractEndInDays }} {{ contractEndInDays |
+                plural: "day" }} - Obnovit smlouvu
             </pxe-badge>
         </div>
     </div>
 </ng-template>
 
 <pxe-layout-container pageTitle="Uzavřené smlouvy">
-    <lnd-alert
-            [type]="'danger'"
-            [isDismissible]="false"
-            *ngIf="error">
+    <lnd-alert [type]="'danger'" [isDismissible]="false" *ngIf="error">
         <ng-container *ngFor="let message of errorMessages">
-            {{ message }}<br>
+            {{ message }}<br />
         </ng-container>
     </lnd-alert>
-    <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
-    <ng-container *ngIf="!dataLoading && supplyPoints && !supplyPoints.length && supplyPointStatistic">
+    <lnd-placeloader
+        [loading]="dataLoading && !errorMessages.length"
+    ></lnd-placeloader>
+    <ng-container
+        *ngIf="
+            !dataLoading &&
+            supplyPoints &&
+            !supplyPoints.length &&
+            supplyPointStatistic
+        "
+    >
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu'"
             [showButton]="false"
@@ -30,28 +50,51 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <p>
-                        V případě zájmu o dodávku energií pro nové odběrné místo, pokračujte prosím zadáním odběrného místa<ng-container *ngIf="supplyPointStatistic.notConcludedCount"></ng-container>
-                        <ng-container *ngIf="supplyPointStatistic.notConcludedCount">
-                            Pokud už máte vytvořené odběrné místo, můžete se vrátit k vaší rozpracované smlouvě a dokončit proces
+                        V případě zájmu o dodávku energií pro nové odběrné
+                        místo, pokračujte prosím zadáním odběrného
+                        místa<ng-container
+                            *ngIf="supplyPointStatistic.notConcludedCount"
+                        ></ng-container>
+                        <ng-container
+                            *ngIf="supplyPointStatistic.notConcludedCount"
+                        >
+                            Pokud už máte vytvořené odběrné místo, můžete se
+                            vrátit k vaší rozpracované smlouvě a dokončit proces
                         </ng-container>
                     </p>
                 </div>
             </div>
             <div class="row">
-                <div *ngIf="supplyPointStatistic.notConcludedCount"
-                     class="col-md-4 offset-md-2">
+                <div
+                    *ngIf="supplyPointStatistic.notConcludedCount"
+                    class="col-md-4 offset-md-2"
+                >
                     <lnd-button
-                        (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"
-                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"
-                        type="link">
+                        (action)="
+                            completeRequestAction(
+                                supplyPointStatistic.notConcludedItems
+                            )
+                        "
+                        [label]="
+                            supplyPointStatistic.notConcludedCount > 1
+                                ? 'Zobrazit rozpracované smlouvy'
+                                : 'Dokončit rozpracovanou smlouvu'
+                        "
+                        type="link"
+                    >
                     </lnd-button>
                 </div>
-                <div class="col-md-4"
-                     [class.offset-md-4]="!supplyPointStatistic.notConcludedCount">
+                <div
+                    class="col-md-4"
+                    [class.offset-md-4]="
+                        !supplyPointStatistic.notConcludedCount
+                    "
+                >
                     <lnd-button
                         (action)="createSupplyPoint($event)"
                         label="Nové odběrné místo"
-                        type="primary">
+                        type="primary"
+                    >
                     </lnd-button>
                 </div>
             </div>
@@ -60,7 +103,11 @@
     <ng-container *ngIf="!dataLoading && supplyPoints && supplyPoints.length">
         <div class="row mb-5">
             <div class="col text-center">
-                <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou smlouvu.</p>
+                <p class="mb-2">
+                    Pokud máte zájem o dodávku energií pro další odběrné místo,
+                    doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou
+                    smlouvu.
+                </p>
                 <p>Pokud ne, pokračujte založením nového odběrného místa.</p>
                 <lnd-button
                     label="ZALOŽIT NOVÉ ODBĚRNÉ MÍSTO"
@@ -69,8 +116,12 @@
                 ></lnd-button>
             </div>
         </div>
-        <ng-container *ngIf="supplyPointsActual && supplyPointsActual.length !== 0">
-            <p class="perex text-center mb-3">Odběrná místa s aktivní dodávkou energií</p>
+        <ng-container
+            *ngIf="supplyPointsActual && supplyPointsActual.length !== 0"
+        >
+            <p class="perex text-center mb-3">
+                Odběrná místa s aktivní dodávkou energií
+            </p>
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsActual"
@@ -80,8 +131,12 @@
                 ></pxe-supply-point>
             </div>
         </ng-container>
-        <ng-container *ngIf="supplyPointsFuture && supplyPointsFuture.length !== 0">
-            <p class="perex text-center mb-3 mt-5">Odběrná místa s budoucí dodávkou energií</p>
+        <ng-container
+            *ngIf="supplyPointsFuture && supplyPointsFuture.length !== 0"
+        >
+            <p class="perex text-center mb-3 mt-5">
+                Odběrná místa s budoucí dodávkou energií
+            </p>
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsFuture"

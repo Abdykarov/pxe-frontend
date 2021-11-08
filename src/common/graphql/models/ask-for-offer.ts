@@ -35,4 +35,3 @@ export interface IPaginatedAskForOffer {
     page: [ContractUploadResponse];
     totalRecords: number;
 }
-

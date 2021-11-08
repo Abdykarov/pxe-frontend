@@ -1,16 +1,11 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
-
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import * as R from 'ramda';
-
 import { AbstractComponent } from 'src/common/abstract.component';
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ICookiePolicy } from 'src/common/cms/models/cookie.policy';
 import { ISeo } from 'src/common/cms/models/seo';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
     selector: 'pxe-cookies-policy',
@@ -18,7 +13,8 @@ import { ISeo } from 'src/common/cms/models/seo';
     styleUrls: ['./cookies-policy.component.scss'],
 })
 export class CookiesPolicyComponent extends AbstractComponent {
-    public readonly cookiePolicy: ICookiePolicy = this.route.snapshot.data.cookiePolicy;
+    public readonly cookiePolicy: ICookiePolicy =
+        this.route.snapshot.data.cookiePolicy;
     public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
         {
             label: 'Domů',
@@ -32,7 +28,7 @@ export class CookiesPolicyComponent extends AbstractComponent {
     constructor(
         private metaService: Meta,
         private route: ActivatedRoute,
-        private titleService: Title,
+        private titleService: Title
     ) {
         super();
         const seo: ISeo = R.head(this.cookiePolicy.seo);

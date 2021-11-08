@@ -3,12 +3,5 @@ import { IListOfNotifications } from 'src/common/ui/list-of-notifications/models
 export const listOfNotifications: IListOfNotifications = {
     maxShowNotifications: 5,
     headerText: 'Pozdravy',
-    notifications: [
-        'Ahoj',
-        'Čau',
-        'Nazdar',
-        'Dobrý den',
-        'Hi',
-        'Hello',
-    ],
+    notifications: ['Ahoj', 'Čau', 'Nazdar', 'Dobrý den', 'Hi', 'Hello'],
 };

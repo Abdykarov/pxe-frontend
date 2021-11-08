@@ -23,7 +23,7 @@
 .form-control-info {
 	position: relative;
 	display: inline-block;
-	padding: ($spacer * 0.5) $spacer;
+	padding: ( $spacer * .5  ) $spacer;
 	background-color: $secondary;
 	color: $white;
 	border-radius: 3px 3px 3px 0;
@@ -41,7 +41,7 @@
 
 	&--public {
 		.form-control-case {
-			padding-top: ($spacer * 1.5);
+			padding-top: ( $spacer * 1.5 );
 		}
 
 		.control-label,
@@ -121,13 +121,13 @@
 		}
 
 		.custom-control-label {
-			padding-right: ($icon-size-px + ($spacer * 0.5));
+			padding-right: ($icon-size-px + ( $spacer * .5) );
 			z-index: $zindex-custom-control;
 		}
 	}
 
 	.is-disabled {
-		opacity: 0.3;
+		opacity: .3;
 	}
 }
 
@@ -188,7 +188,7 @@
 	}
 
 	&--with-placeholder {
-		@include placeholder(rgba($input-color, 0.5));
+		@include placeholder(rgba($input-color, .5));
 	}
 }
 
@@ -199,7 +199,7 @@
 
 textarea.form-control {
 	min-height: $input-textarea-min-height;
-	padding: (($spacer * 2) + $input-border-width);
+	padding: (( $spacer * 2) + $input-border-width );
 	line-height: $input-textarea-line-height;
 	border-color: $input-border-color;
 	border-width: $input-border-width;
@@ -208,14 +208,14 @@ textarea.form-control {
 	&:focus,
 	&.focus,
 	&:hover {
-		padding: ($spacer * 2);
+		padding: ( $spacer * 2 );
 	}
 
 	& + .control-label {
 		top: (
-			$form-group-padding-top + $spacer + ($input-border-width * 2)
+			$form-group-padding-top + $spacer + ($input-border-width * 2 )
 		); // 26px
-		left: (($spacer * 2) + ($input-border-width * 2));
+		left: (( $spacer * 2) + ($input-border-width * 2) );
 	}
 
 	&[disabled] {
@@ -227,7 +227,7 @@ textarea.form-control:focus,
 textarea.form-control.focus,
 textarea.form-control--not-empty {
 	& + .control-label {
-		top: ($spacer * 1.5);
+		top: ( $spacer * 1.5 );
 		left: 0;
 	}
 }
@@ -247,7 +247,7 @@ textarea.form-control--not-empty {
 	position: relative;
 	display: block;
 	top: 0;
-	margin-bottom: ($spacer * 0.5);
+	margin-bottom: ( $spacer * .5 );
 }
 
 // States
@@ -327,7 +327,7 @@ textarea.form-control--not-empty {
 
 	& ~ .invalid-feedback {
 		display: none;
-		margin-top: ($spacer * 0.25);
+		margin-top: ( $spacer * .25 );
 		font-size: $small-font-size;
 		max-width: $input-width;
 	}
@@ -350,7 +350,7 @@ textarea.form-control--not-empty {
 }
 
 .form-control--with-indentation {
-	padding: 0 ($spacer * 4.5) 0 ($spacer * 1.5);
+	padding: 0 ( $spacer * 4.5) 0 ( $spacer * 1.5 );
 
 	&:focus,
 	&.focus,
@@ -363,7 +363,7 @@ textarea.form-control--not-empty {
 .input-group {
 	&--append {
 		.form-control {
-			padding-right: ($spacer * 2.5);
+			padding-right: ( $spacer * 2.5 );
 		}
 	}
 
@@ -402,7 +402,7 @@ textarea.form-control--not-empty {
 	align-items: center;
 	position: absolute;
 	top: 0;
-	padding: 0 ($spacer * 0.75);
+	padding: 0 ( $spacer * .75 );
 	height: ($input-height - $input-border-width);
 	line-height: ($input-height - $input-border-width + 1);
 	color: $gray-100;
@@ -475,11 +475,11 @@ textarea.form-control--not-empty {
 
 .input-group-switch__text {
 	&--prepend {
-		margin-right: ($spacer * 5);
+		margin-right: ( $spacer * 5 );
 	}
 
 	&--append {
-		margin-left: ($spacer * 5);
+		margin-left: ( $spacer * 5 );
 	}
 
 	&--active {
@@ -593,7 +593,7 @@ textarea.form-control--not-empty {
 }
 
 .custom-control-label {
-	padding-left: ($custom-control-indicator-size-px + ($spacer * 0.5));
+	padding-left: ($custom-control-indicator-size + ( $spacer * .5) );
 	color: $input-color;
 	font-size: $input-font-size;
 	cursor: pointer;
@@ -613,7 +613,7 @@ textarea.form-control--not-empty {
 
 th {
 	.custom-control-label {
-		color: rgba($font-header, 0.5);
+		color: rgba($font-header, .5);
 	}
 }
 
@@ -642,12 +642,12 @@ th {
 
 		&::after {
 			top: (
-				$custom-control-indicator-size-px / 2 -
+				$custom-control-indicator-size / 2 -
 					$custom-radio-filling-size / 2 +
 					$custom-control-indicator-top
 			);
 			left: (
-				$custom-control-indicator-size-px / 2 -
+				$custom-control-indicator-size / 2 -
 					$custom-radio-filling-size / 2
 			);
 			width: $custom-radio-filling-size;
@@ -689,7 +689,7 @@ th {
 
 // Radio group
 .custom-radio-group__item {
-	margin-bottom: ($spacer * 2.5);
+	margin-bottom: ( $spacer * 2.5 );
 }
 
 // Checkbox
@@ -737,7 +737,7 @@ th {
 			@include icon;
 			content: '\e906';
 			font-size: $custom-checkbox-icon-size;
-			line-height: $custom-control-indicator-size-px;
+			line-height: $custom-control-indicator-size;
 			text-align: center;
 		}
 	}
@@ -802,8 +802,8 @@ th {
 			}
 
 			&::after {
-				width: $custom-control-indicator-size-px;
-				height: $custom-control-indicator-size-px;
+				width: $custom-control-indicator-size;
+				height: $custom-control-indicator-size;
 				top: 50%;
 				right: 30px;
 				left: auto;
@@ -897,7 +897,7 @@ th {
 		&:nth-of-type(1) {
 			.custom-control-input {
 				& + .custom-control-label {
-					padding-right: ($spacer * 6) + ($custom-switch-width * 0.5);
+					padding-right: ( $spacer * 6) + ($custom-switch-width * .5 );
 				}
 			}
 		}
@@ -907,7 +907,7 @@ th {
 			margin-left: -$spacer * 7;
 
 			.custom-control-input + .custom-control-label {
-				padding-left: ($spacer * 6) + ($custom-switch-width * 0.5);
+				padding-left: ( $spacer * 6) + ($custom-switch-width * .5 );
 
 				&::before {
 					display: block;
@@ -925,8 +925,8 @@ th {
 					display: block;
 					border: none;
 					background-color: $white;
-					width: $custom-control-indicator-size-px;
-					height: $custom-control-indicator-size-px;
+					width: $custom-control-indicator-size;
+					height: $custom-control-indicator-size;
 					top: 50%;
 					left: 4px;
 					transform: translate(0, -50%);
@@ -953,8 +953,7 @@ th {
 		&:focus-within {
 			&,
 			& + .custom-radio--switch {
-				.custom-control-input:not([disabled])
-					+ .custom-control-label::before {
+				.custom-control-input:not([disabled]) + .custom-control-label::before {
 					background-color: $custom-switch-bg-interactive;
 				}
 			}
@@ -968,9 +967,9 @@ th {
 
 	.select-icon {
 		position: absolute;
-		top: ($input-height * 0.5);
+		top: ($input-height * .5);
 		right: 0;
-		padding-right: ($spacer * 0.5);
+		padding-right: ( $spacer * .5 );
 		font-weight: $font-weight-bold;
 		pointer-events: none;
 	}
@@ -980,7 +979,7 @@ th {
 	}
 
 	.form-control {
-		padding-right: ($spacer * 1.25);
+		padding-right: ( $spacer * 1.25 );
 		appearance: none;
 
 		&,
@@ -1007,7 +1006,7 @@ th {
 // File input
 .custom-file {
 	width: auto;
-	margin-bottom: ($spacer * 0.5);
+	margin-bottom: ( $spacer * .5 );
 }
 
 .custom-file-input {
@@ -1051,7 +1050,7 @@ th {
 }
 
 .input-subtext {
-	margin-top: ($spacer * 0.25);
+	margin-top: ( $spacer * .25 );
 	font-size: $small-font-size;
 	text-align: justify;
 

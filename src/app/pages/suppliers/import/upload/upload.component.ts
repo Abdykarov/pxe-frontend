@@ -1,7 +1,4 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -11,33 +8,27 @@ import {
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
-import * as R from 'ramda';
+import { ActivatedRoute, Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS, FILE_UPLOAD_CONFIG, ROUTES } from 'src/app/app.constants';
 import { ApprovalConfig } from 'src/app/pages/suppliers/import/approval/approval.config';
-import { AuthService } from 'src/app/services/auth.service';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
-    CONSTS,
-    FILE_UPLOAD_CONFIG,
-    ROUTES,
-} from 'src/app/app.constants';
+    ImportProgressStep,
+    IOfferImportInput,
+} from 'src/app/pages/suppliers/import/import.model';
+import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
+import { AuthService } from 'src/app/services/auth.service';
+import { DocumentService } from 'src/app/services/document.service';
+import { AbstractComponent } from 'src/common/abstract.component';
 import {
     defaultErrorMessage,
     importErrorCodes,
 } from 'src/common/constants/errors.constant';
-import { DocumentService } from 'src/app/services/document.service';
-import { environment } from 'src/environments/environment';
-import {
-    FileItem,
-    FileUploader,
-} from 'src/third-sides/file-upload';
-import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
+import { ModalService } from 'src/common/containers/modal/modal.service';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     getConfigStepper,
     inArray,
@@ -46,11 +37,8 @@ import {
     transformHttpHeadersToFileUploaderFormat,
     TypeStepper,
 } from 'src/common/utils';
-import {
-    ImportProgressStep,
-    IOfferImportInput,
-} from 'src/app/pages/suppliers/import/import.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
+import { environment } from 'src/environments/environment';
+import { FileItem, FileUploader } from 'src/third-sides/file-upload';
 
 @Component({
     selector: 'pxe-upload',
@@ -59,16 +47,22 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
     providers: [
         {
             provide: FILE_UPLOAD_CONFIG,
-            useFactory: fileUploaderFactory('offer/batch-validate', 'offers', false),
-            deps: [
-                AuthService,
-            ],
+            useFactory: fileUploaderFactory(
+                'offer/batch-validate',
+                'offers',
+                false
+            ),
+            deps: [AuthService],
         },
     ],
 })
 export class UploadComponent extends AbstractComponent implements OnInit {
     public readonly bannerTypeImages = BannerTypeImages;
-    public readonly configStepper = getConfigStepper(ImportProgressStep.UPLOAD, false, TypeStepper.IMPORT);
+    public readonly configStepper = getConfigStepper(
+        ImportProgressStep.UPLOAD,
+        false,
+        TypeStepper.IMPORT
+    );
     public commodityType = CommodityType.POWER;
     public fileErrors: string[] = [];
     public globalError: string[] = [];
@@ -81,7 +75,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     @ViewChild('listOfNotificationsRow')
     public listOfNotificationsRow: ElementRef;
 
-    constructor (
+    constructor(
         private approvalConfig: ApprovalConfig,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
@@ -90,14 +84,12 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploader,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
         this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => {
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((params) => {
                 this.commodityType = params['commodityType'];
                 if (!this.commodityType || !CommodityType[this.commodityType]) {
                     this.commodityType = CommodityType.POWER;
@@ -110,8 +102,13 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.globalError = [];
             const fileName = fileItem._file.name;
             const type = fileName.substr(fileName.lastIndexOf('.') + 1);
-            if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES) || type === fileName) {
-                this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]];
+            if (
+                !inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES) ||
+                type === fileName
+            ) {
+                this.fileErrors = [
+                    importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE],
+                ];
                 this.fileUploader.clearQueue();
                 this.tryToUploadFile = false;
             } else {
@@ -129,15 +126,23 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                     this.isInitState = false;
                 } else {
                     if (!offers.length) {
-                        this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
+                        this.globalError = [
+                            importErrorCodes[
+                                CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT
+                            ],
+                        ];
                         this.isInitState = true;
                     } else {
-                        this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL_POWER], {
-                            state: {
-                                offers,
-                                commodityTypeAfterApprove: this.commodityType,
-                            },
-                        });
+                        this.router.navigate(
+                            [ROUTES.ROUTER_IMPORT_APPROVAL_POWER],
+                            {
+                                state: {
+                                    offers,
+                                    commodityTypeAfterApprove:
+                                        this.commodityType,
+                                },
+                            }
+                        );
                     }
                 }
             } else if (status === 401) {
@@ -156,7 +161,8 @@ export class UploadComponent extends AbstractComponent implements OnInit {
 
     public uploadFile = (fileUploader: FileUploader) => {
         if (this.tryToUploadFile) {
-            const countOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
+            const countOfFiles: number =
+                R.path(['queue', 'length'], fileUploader) || 0;
             if (countOfFiles === 0) {
                 this.fileErrors = [defaultErrorMessage];
                 this.fileUploader.clearQueue();
@@ -164,7 +170,13 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 const newSetting = {
                     url: `${environment.url_api}/v1.0/offer/batch-validate`,
                     itemAlias: 'offers',
-                    headers: transformHttpHeadersToFileUploaderFormat(this.authService.getAuthorizationHeaders(null, '*/*', false)),
+                    headers: transformHttpHeadersToFileUploaderFormat(
+                        this.authService.getAuthorizationHeaders(
+                            null,
+                            '*/*',
+                            false
+                        )
+                    ),
                 };
                 this.fileUploader.setOptions(newSetting);
                 this.fileErrors = [];
@@ -173,35 +185,50 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                     fileUploader.uploadItem(fileItem);
                 }, fileUploader.queue);
             } else {
-                this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];
+                this.fileErrors = [
+                    importErrorCodes[
+                        CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES
+                    ],
+                ];
                 this.fileUploader.clearQueue();
             }
             this.cd.markForCheck();
         }
-    }
+    };
 
     public downloadExampleImportFile = (evt) => {
         evt.preventDefault();
         if (isPlatformBrowser(this.platformId)) {
-            saveAs(CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.PATH, CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.FILE_NAME);
+            saveAs(
+                CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.PATH,
+                CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.FILE_NAME
+            );
         }
-    }
+    };
 
     public scrollToErrors = (evt) => {
         evt.preventDefault();
         scrollToElementFnc(this.listOfNotificationsRow.nativeElement);
-    }
+    };
 
-    public getErrorsViolations = (offersImportInput: IOfferImportInput[]): string[] => {
+    public getErrorsViolations = (
+        offersImportInput: IOfferImportInput[]
+    ): string[] => {
         let row = 2;
-        return R.reduce((listOfErrors: string[], offerImportInput: IOfferImportInput) => {
-            if (offerImportInput.violations.length) {
-                R.forEachObjIndexed((violation: string) => {
-                    listOfErrors.push(`Řádek ${row}: ${parseViolation(violation)}`);
-                })(offerImportInput.violations);
-            }
-            row++;
-            return listOfErrors;
-        }, [], offersImportInput);
-    }
+        return R.reduce(
+            (listOfErrors: string[], offerImportInput: IOfferImportInput) => {
+                if (offerImportInput.violations.length) {
+                    R.forEachObjIndexed((violation: string) => {
+                        listOfErrors.push(
+                            `Řádek ${row}: ${parseViolation(violation)}`
+                        );
+                    })(offerImportInput.violations);
+                }
+                row++;
+                return listOfErrors;
+            },
+            [],
+            offersImportInput
+        );
+    };
 }

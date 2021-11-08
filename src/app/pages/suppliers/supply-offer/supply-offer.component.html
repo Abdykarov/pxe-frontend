@@ -4,7 +4,8 @@
         label="Označit"
         [value]="tableRows.length === numberOfMarked"
         (click)="markAll($event)"
-        [type]="'CHECKBOX'">
+        [type]="'CHECKBOX'"
+    >
     </lnd-form-field>
 </ng-template>
 <ng-template #columnTemplateMark let-row="row">
@@ -13,39 +14,46 @@
         customFormGroupClass="form-group form-group--in-table"
         [value]="!!row.marked"
         (click)="markOne(row.id, $event)"
-        [type]="'CHECKBOX'">
+        [type]="'CHECKBOX'"
+    >
     </lnd-form-field>
-    <span *ngIf="row.greenEnergy"
-          class="icon icon--leaf icon--green ml-2 align-bottom">
+    <span
+        *ngIf="row.greenEnergy"
+        class="icon icon--leaf icon--green ml-2 align-bottom"
+    >
     </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
-    {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    {{ row.priceVT | number: "1.0-2" }}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplatePriceNT let-row="row">
     <ng-container *ngIf="row.priceNT !== null">
-        {{row.priceNT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+        {{ row.priceNT | number: "1.0-2" }}&nbsp;Kč/MWh (bez&nbsp;DPH)
     </ng-container>
 </ng-template>
 <ng-template #columnTemplatePriceGas let-row="row">
-    {{row.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    {{ row.priceGas | number: "1.0-2" }}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
-    {{row.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.validTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{ row.validFrom | date: "d.&nbsp;M.&nbsp;y" }} - {{ row.validTo | date:
+    "d.&nbsp;M.&nbsp;y" }}
 </ng-template>
 <ng-template #columnTemplateDeliveryFromTo let-row="row">
-    {{row.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{ row.deliveryFrom | date: "d.&nbsp;M.&nbsp;y" }} - {{ row.deliveryTo |
+    date: "d.&nbsp;M.&nbsp;y" }}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
-    <div *ngIf="table.openedRow !== row"
-         class="action-area-div">
+    <span
+        >{{ row.permanentPaymentPrice | number: "1.0-2" }}&nbsp;Kč/měsíc
+        (bez&nbsp;DPH)</span
+    >
+    <div *ngIf="table.openedRow !== row" class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
             <lnd-button
-                    icon="icon--edit"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();edit(table, row)"
+                icon="icon--edit"
+                type="icon"
+                variant="icon"
+                (action)="toggle(); edit(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipEdit" direction="bottom">
@@ -54,10 +62,10 @@
 
         <ng-template #tooltipNew let-toggle="toggle">
             <lnd-button
-                    icon="icon--add-new"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();create(table, row)"
+                icon="icon--add-new"
+                type="icon"
+                variant="icon"
+                (action)="toggle(); create(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipNew" direction="bottom">
@@ -66,10 +74,10 @@
 
         <ng-template #tooltipDuplicate let-toggle="toggle">
             <lnd-button
-                    icon="icon--copy"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();duplicate(table, row)"
+                icon="icon--copy"
+                type="icon"
+                variant="icon"
+                (action)="toggle(); duplicate(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipDuplicate" direction="bottom">
@@ -78,11 +86,11 @@
 
         <ng-template #tooltipDelete let-toggle="toggle">
             <lnd-button
-                    icon="icon--delete"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();delete(table, row)"
-                    [isDisabled]="deleteDisabled[row.id]"
+                icon="icon--delete"
+                type="icon"
+                variant="icon"
+                (action)="toggle(); delete(table, row)"
+                [isDisabled]="deleteDisabled[row.id]"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
@@ -96,11 +104,11 @@
         <div class="col text-right">
             <ng-template #tooltipNewDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--add-new"
-                        type="icon"
-                        variant="icon"
-                        (action)="toggle();create(table, row)"
-                        [isDisabled]="false"
+                    icon="icon--add-new"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle(); create(table, row)"
+                    [isDisabled]="false"
                 ></lnd-button>
             </ng-template>
             <lnd-tooltip [actionTemplate]="tooltipNewDetail" direction="bottom">
@@ -108,43 +116,51 @@
             </lnd-tooltip>
             <ng-template #tooltipDuplicateDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--copy"
-                        type="icon"
-                        variant="icon"
-                        (action)="toggle();duplicate(table, row)"
-                        [isDisabled]="!formValues.id"
+                    icon="icon--copy"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle(); duplicate(table, row)"
+                    [isDisabled]="!formValues.id"
                 ></lnd-button>
             </ng-template>
-            <lnd-tooltip [actionTemplate]="tooltipDuplicateDetail" direction="bottom">
+            <lnd-tooltip
+                [actionTemplate]="tooltipDuplicateDetail"
+                direction="bottom"
+            >
                 Duplikovat
             </lnd-tooltip>
             <ng-template #tooltipDeleteDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--delete"
-                        type="icon"
-                        variant="icon"
-                        (action)="toggle();delete(table, row, currentOfferFormValues)"
-                        [isDisabled]="false"
+                    icon="icon--delete"
+                    type="icon"
+                    variant="icon"
+                    (action)="
+                        toggle(); delete(table, row, currentOfferFormValues)
+                    "
+                    [isDisabled]="false"
                 ></lnd-button>
             </ng-template>
-            <lnd-tooltip [actionTemplate]="tooltipDeleteDetail" direction="bottom">
+            <lnd-tooltip
+                [actionTemplate]="tooltipDeleteDetail"
+                direction="bottom"
+            >
                 Smazat
             </lnd-tooltip>
         </div>
     </div>
     <div class="row">
         <pxe-supply-offer-form
-                class="w-100"
-                [commodityType]="row.commodityType"
-                [formValues]="formValues"
-                [formFields]="formFields"
-                [formLoading]="formLoading"
-                [formSent]="formSent"
-                [globalError]="globalFormError"
-                [fieldError]="fieldError"
-                (submitAction)="submitForm($event, table, row)"
-                (customAction)="cancel($event, table, row)"
-                (currentFormValues)="getCurrentFormValues($event)"
+            class="w-100"
+            [commodityType]="row.commodityType"
+            [formValues]="formValues"
+            [formFields]="formFields"
+            [formLoading]="formLoading"
+            [formSent]="formSent"
+            [globalError]="globalFormError"
+            [fieldError]="fieldError"
+            (submitAction)="submitForm($event, table, row)"
+            (customAction)="cancel($event, table, row)"
+            (currentFormValues)="getCurrentFormValues($event)"
         ></pxe-supply-offer-form>
     </div>
 </ng-template>
@@ -152,27 +168,33 @@
 <pxe-layout-container pageTitle="Přehled nabídek">
     <ul class="text-center link-list">
         <li class="link-list__item">
-            <a class="link-list__link"
+            <a
+                class="link-list__link"
                 routerLinkActive="link-list__link--active"
-                [routerLinkActiveOptions]="{exact: true}"
-                [routerLink]="[routePower]">Elektřina</a>
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[routePower]"
+                >Elektřina</a
+            >
         </li>
         <li class="link-list__item">
-            <a class="link-list__link"
+            <a
+                class="link-list__link"
                 routerLinkActive="link-list__link--active"
-                [routerLinkActiveOptions]="{exact: true}"
-                [routerLink]="[routeGas]">Plyn</a>
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[routeGas]"
+                >Plyn</a
+            >
         </li>
     </ul>
     <ng-container>
-        <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
+        <lnd-placeloader
+            [loading]="loadingOffers && !globalError.length"
+        ></lnd-placeloader>
         <div class="row">
             <div class="col-12">
-                <lnd-alert
-                    *ngIf="globalError.length"
-                    type="danger">
+                <lnd-alert *ngIf="globalError.length" type="danger">
                     <ng-container *ngFor="let error of globalError">
-                        {{ error }}<br>
+                        {{ error }}<br />
                     </ng-container>
                 </lnd-alert>
             </div>
@@ -181,8 +203,11 @@
             <div class="row mt-5">
                 <div class="col-12">
                     <lnd-info-banner
-                        [bannerTitle]="this.commodityType === commodityTypeOptions.POWER ?
-                                            'Nemáte žádnou nabídku elektřiny.' : 'Nemáte žádnou nabídku plynu.'"
+                        [bannerTitle]="
+                            this.commodityType === commodityTypeOptions.POWER
+                                ? 'Nemáte žádnou nabídku elektřiny.'
+                                : 'Nemáte žádnou nabídku plynu.'
+                        "
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
                         bannerDescription="Proveďte import nabídek nahráním CSV souboru nebo přidejte nabídku ručně."
                         buttonLabel="Import nabídek"
@@ -194,55 +219,72 @@
             <div class="row mt-2 mb-2">
                 <div class="col-12 text-center">
                     <lnd-button
-                        label="{{offerFormInEmptyPage ? 'Skrýt formulář' : 'Přidat nabídku'}}"
+                        label="{{
+                            offerFormInEmptyPage
+                                ? 'Skrýt formulář'
+                                : 'Přidat nabídku'
+                        }}"
                         type="secondary"
-                        (action)="toggleOfferFormInEmptyPage($event)">
+                        (action)="toggleOfferFormInEmptyPage($event)"
+                    >
                     </lnd-button>
                 </div>
             </div>
         </ng-container>
-        <div *ngIf="!loadingOffers && offerFormInEmptyPage && tableRows && tableRows.length === 0" class="page-box">
+        <div
+            *ngIf="
+                !loadingOffers &&
+                offerFormInEmptyPage &&
+                tableRows &&
+                tableRows.length === 0
+            "
+            class="page-box"
+        >
             <pxe-supply-offer-form
-                    [commodityType]="commodityType"
-                    [formValues]="null"
-                    [formFields]="formFields"
-                    [formLoading]="formLoading"
-                    [formSent]="formSent"
-                    [globalError]="globalFormError"
-                    [fieldError]="fieldError"
-                    [showCancel]="false"
-                    (submitAction)="submitForm($event)"
-                    (customAction)="cancel($event)"
+                [commodityType]="commodityType"
+                [formValues]="null"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [globalError]="globalFormError"
+                [fieldError]="fieldError"
+                [showCancel]="false"
+                (submitAction)="submitForm($event)"
+                (customAction)="cancel($event)"
             ></pxe-supply-offer-form>
         </div>
-        <div
-            class="mb-4"
-            [hidden]="loadingOffers || tableRows.length === 0">
-            <div class="row"
-                 *ngIf="showDeletedOfferBanner">
+        <div class="mb-4" [hidden]="loadingOffers || tableRows.length === 0">
+            <div class="row" *ngIf="showDeletedOfferBanner">
                 <div class="col-12 text-center">
                     <lnd-alert type="info">
-                        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
+                        Odstranili jste {{ numberOfDeletedOffers }} {{
+                        numberOfDeletedOffers | plural: "offer_delete" }}.
                     </lnd-alert>
                 </div>
             </div>
-            <div class="row"
-                 *ngIf="countOfImportedOffers && !showDeletedOfferBanner">
+            <div
+                class="row"
+                *ngIf="countOfImportedOffers && !showDeletedOfferBanner"
+            >
                 <div class="col-12">
-                    <lnd-alert
-                        type="info"
-                        [hasIcon]="true">Přidali jsme {{countOfImportedOffers}} {{(countOfImportedOffers | plural: 'new_offer')}}.
+                    <lnd-alert type="info" [hasIcon]="true"
+                        >Přidali jsme {{ countOfImportedOffers }} {{
+                        countOfImportedOffers | plural: "new_offer" }}.
                     </lnd-alert>
                 </div>
             </div>
         </div>
-        <div class="row"
-             [hidden]="loadingOffers || tableRows.length === 0">
+        <div class="row" [hidden]="loadingOffers || tableRows.length === 0">
             <div class="col-12">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
                         <div class="supply-offer-controls">
-                            <div class="supply-offer-controls__btn-holder mb-2 mb-md-0">
+                            <div
+                                class="
+                                    supply-offer-controls__btn-holder
+                                    mb-2 mb-md-0
+                                "
+                            >
                                 <lnd-button
                                     label="Přidat nabídku"
                                     type="secondary"
@@ -276,7 +318,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 text-center">
-                        Počet označených nabídek: {{numberOfMarked}}
+                        Počet označených nabídek: {{ numberOfMarked }}
                     </div>
                 </div>
                 <lnd-table
@@ -297,10 +339,12 @@
                         columnTemplatePriceNT: columnTemplatePriceNT,
                         columnTemplatePriceGas: columnTemplatePriceGas,
                         columnTemplateValidFromTo: columnTemplateValidFromTo,
-                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                        columnTemplateDeliveryFromTo:
+                            columnTemplateDeliveryFromTo,
                         columnTemplateMark: columnTemplateMark,
                         columnTemplateMarkAll: columnTemplateMarkAll
-                    }">
+                    }"
+                >
                 </lnd-table>
             </div>
         </div>

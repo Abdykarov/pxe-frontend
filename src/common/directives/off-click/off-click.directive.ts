@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
     Directive,
     ElementRef,
@@ -7,18 +8,13 @@ import {
     OnDestroy,
     Output,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import {
-    fromEvent,
-    Subscription,
-} from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Directive({
     selector: '[lndOffClick]',
 })
 export class OffClickDirective implements OnDestroy {
-
     @Input()
     offClickEnabled = true;
 
@@ -31,19 +27,22 @@ export class OffClickDirective implements OnDestroy {
 
     constructor(
         private el: ElementRef,
-        @Inject(DOCUMENT) private document: Document,
+        @Inject(DOCUMENT) private document: Document
     ) {
         this.baseElement = this.el.nativeElement;
         this.documentBodyElement = this.document.body;
         this.subscription$ = fromEvent(this.document, 'mousedown')
-            .pipe(
-                filter(() => this.offClickEnabled),
-            )
-            .subscribe((event: Event) => this.clickHandler(event.target, event));
+            .pipe(filter(() => this.offClickEnabled))
+            .subscribe((event: Event) =>
+                this.clickHandler(event.target, event)
+            );
     }
 
     private clickHandler(currentElement: any, event: Event): void {
-        if (currentElement === this.documentBodyElement || currentElement == null) {
+        if (
+            currentElement === this.documentBodyElement ||
+            currentElement == null
+        ) {
             this.lndOffClick.emit(event);
             return;
         }

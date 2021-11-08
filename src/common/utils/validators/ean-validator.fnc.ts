@@ -5,12 +5,18 @@ export class EanValidator {
         const validChars = /^\d+$/;
         const validLength = 18;
 
-        if (validChars.exec(barcode) === null || barcode.length !== validLength) {
+        if (
+            validChars.exec(barcode) === null ||
+            barcode.length !== validLength
+        ) {
             return false;
         }
 
-        return EanValidator.validateGtin(barcode) && EanValidator.validateCharInTenthPosition(barcode);
-    }
+        return (
+            EanValidator.validateGtin(barcode) &&
+            EanValidator.validateCharInTenthPosition(barcode)
+        );
+    };
 
     static validateGtin = (value): boolean => {
         const barcode = value.substring(0, value.length - 1);
@@ -31,10 +37,10 @@ export class EanValidator {
         });
 
         calcSum %= 10;
-        calcChecksum = (calcSum === 0) ? 0 : (10 - calcSum);
+        calcChecksum = calcSum === 0 ? 0 : 10 - calcSum;
 
         return calcChecksum === checksum;
-    }
+    };
 
     static validateCharInTenthPosition = (ean: string): boolean => {
         if (ean.length < 10) {
@@ -44,5 +50,5 @@ export class EanValidator {
         const tenPosition = 9;
         const chatAtTenPostion = ean.charAt(tenPosition);
         return !forbiddenCharAtTenPosition.includes(Number(chatAtTenPostion));
-    }
+    };
 }

@@ -1,13 +1,8 @@
-import {
-    Component,
-    Input,
-    TemplateRef,
-} from '@angular/core';
-
-import { configSupplier } from 'src/static/config/suppliers.config';
-import { FileUploader } from 'src/third-sides/file-upload';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 import { SupplierComponent } from 'src/common/ui/supplier/supplier.component';
+import { configSupplier } from 'src/static/config/suppliers.config';
+import { FileUploader } from 'src/third-sides/file-upload';
 
 @Component({
     templateUrl: './page.html',

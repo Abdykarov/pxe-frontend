@@ -1,16 +1,18 @@
 <div class="breadcrumb-holder">
     <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"
-                *ngFor="let item of breadcrumbItems">
-                <a *ngIf="item.url && !item.hasTemplate"
-                   [routerLink]="item.url ? item.url : null">
-                    <span class="breadcrumb__text">{{item.label}}</span>
+            <li class="breadcrumb-item" *ngFor="let item of breadcrumbItems">
+                <a
+                    *ngIf="item.url && !item.hasTemplate"
+                    [routerLink]="item.url ? item.url : null"
+                >
+                    <span class="breadcrumb__text">{{ item.label }}</span>
                 </a>
                 <span
-                    *ngIf="(!item.url && !item.hasTemplate) || (item.hasTemplate)"
-                    class="breadcrumb__text">
-                        {{item.label}}
+                    *ngIf="(!item.url && !item.hasTemplate) || item.hasTemplate"
+                    class="breadcrumb__text"
+                >
+                    {{ item.label }}
                 </span>
             </li>
         </ul>

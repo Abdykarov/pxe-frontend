@@ -1,5 +1,5 @@
-import { ISupplierCompare } from 'src/common/ui/carousels/models/models';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
+import { ISupplierCompare } from 'src/common/ui/carousels/models/models';
 
 export const mapTypeOfDeviceToNumberOfSlides = {
     [TypeOfResolution.DESKTOP]: 4,

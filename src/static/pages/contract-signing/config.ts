@@ -1,5 +1,5 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 export const offerConfig: IOffer = {
     greenEnergy: false,
@@ -25,7 +25,7 @@ export const offerConfig: IOffer = {
     deliveryLength: 1,
     id: '0',
     name: '',
-    permanentPaymentPrice: 823.00,
+    permanentPaymentPrice: 823.0,
     priceGas: 0,
     priceNT: 0,
     priceVT: 3.54,

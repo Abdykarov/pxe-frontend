@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { OverviewContainerFacade } from './overview-container.facade';
-import { orderKeyValueByKeyDest } from 'src/common/utils';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ROUTES } from 'src/app/app.constants';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { orderKeyValueByKeyDest } from 'src/common/utils';
+import { OverviewContainerFacade } from './overview-container.facade';
 
 @Component({
     selector: 'pxe-history-overview-container',
@@ -18,7 +14,8 @@ import { ROUTES } from 'src/app/app.constants';
 export class OverviewContainerComponent {
     public readonly orderKeyValueByKeyDest = orderKeyValueByKeyDest;
 
-    public readonly history$ = this.overviewContainerFacade.historySupplyPointsData$;
+    public readonly history$ =
+        this.overviewContainerFacade.historySupplyPointsData$;
     public readonly isLoading$ = this.overviewContainerFacade.isLoading$;
     public readonly fieldError$ = this.overviewContainerFacade.fieldError$;
     public readonly globalError$ = this.overviewContainerFacade.globalError$;
@@ -26,16 +23,16 @@ export class OverviewContainerComponent {
     constructor(
         public overviewContainerFacade: OverviewContainerFacade,
         private route: ActivatedRoute,
-        private router: Router,
+        private router: Router
     ) {}
 
-    public navigateToHistoryDetail({contract: {contractId}, id}: ISupplyPoint): void {
-        this.router.navigate(
-            [id, contractId],
-            {
-                relativeTo: this.route,
-            },
-        );
+    public navigateToHistoryDetail({
+        contract: { contractId },
+        id,
+    }: ISupplyPoint): void {
+        this.router.navigate([id, contractId], {
+            relativeTo: this.route,
+        });
     }
 
     public createSupplyPoint(event): void {

@@ -1,17 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
-import { DatepickerComponent } from './datepicker.component';
 import { DirectivesModule } from 'src/common/directives/directives.module';
 import { PipesModule } from 'src/common/pipes/common/pipes.module';
+import { DatepickerComponent } from './datepicker.component';
 
 @NgModule({
-    declarations: [
-        DatepickerComponent,
-    ],
+    declarations: [DatepickerComponent],
     imports: [
         BsDatepickerModule.forRoot(),
         CommonModule,
@@ -19,8 +15,6 @@ import { PipesModule } from 'src/common/pipes/common/pipes.module';
         PipesModule,
         ReactiveFormsModule,
     ],
-    exports: [
-        DatepickerComponent,
-    ],
+    exports: [DatepickerComponent],
 })
 export class DatepickerModule {}

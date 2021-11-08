@@ -1,30 +1,28 @@
-import {gql} from 'apollo-angular';
-
+import { gql } from 'apollo-angular';
 
 export const getConfigQuery = gql`
     query {
-        ui @client{
+        ui @client {
             securedLayout {
                 navigationConfig {
-                    label,
-                    icon,
-                    url,
-                    class,
-                    type,
+                    label
+                    icon
+                    url
+                    class
+                    type
                     children {
-                        label,
-                        url,
-                    },
+                        label
+                        url
+                    }
                     allowedLoginProviders
                 }
-                navigationItemOpened{
-                    label,
-                    icon,
-                    url,
+                navigationItemOpened {
+                    label
+                    icon
+                    url
                 }
             }
             showOverlay
         }
     }
 `;
-

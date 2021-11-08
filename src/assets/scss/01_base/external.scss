@@ -21,7 +21,7 @@ body {
 	font-size: $font-size-base;
 	line-height: $line-height-base;
 	@include reset-pa-ma;
-	padding: $spacer ( $spacer * 0.5 ) ( $spacer * 0.5 );
+	padding: $spacer ( $spacer * .5 ) ( $spacer * .5  );
 
 	// Media queries
 	@include media-breakpoint-up(md) {

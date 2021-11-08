@@ -37,7 +37,7 @@
 			content: '';
 			position: absolute;
 			left: 50%;
-			margin-left: -($dropdown-beak-border-width * 0.5);
+			margin-left: -($dropdown-beak-border-width * .5);
 			width: 0;
 			height: 0;
 			border-bottom: $dropdown-beak-border-width
@@ -137,7 +137,7 @@
 			position: relative;
 			display: block;
 			padding: $dropdown-item-padding-y $dropdown-item-padding-x
-				$dropdown-item-padding-y ($spacer * 3);
+				$dropdown-item-padding-y ( $spacer * 3 );
 			clear: both;
 			width: 100%;
 			background-color: transparent;
@@ -173,7 +173,7 @@
 		position: absolute;
 		top: 50%;
 		left: $spacer;
-		margin-top: -($icon-size-px * 0.5);
+		margin-top: -($icon-size-px * .5);
 		color: $secondary;
 	}
 }

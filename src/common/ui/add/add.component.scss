@@ -34,7 +34,7 @@
 	}
 
 	&__holder {
-		padding: ($spacer * 0.5);
+		padding: ( $spacer * .5 );
 	}
 
 	&__icon,
@@ -43,7 +43,7 @@
 	}
 
 	&__icon {
-		margin-bottom: math.div($spacer, 6);
+		margin-bottom: math.div( $spacer, 6 );
 	}
 
 	&__text {
@@ -52,14 +52,14 @@
 }
 
 .add-table-holder {
-	padding: math.div($spacer, 1.5) 0;
+	padding: math.div( $spacer, 1.5 ) 0;
 	margin-bottom: $spacer;
 	border-top: 1px solid $table-border-color;
 	border-bottom: 1px solid $table-border-color;
 }
 
 .add-table {
-	margin-left: ($spacer * 0.5);
+	margin-left: ( $spacer * .5 );
 
 	@include link-without-href {
 		color: $primary;
@@ -79,13 +79,13 @@
 	}
 
 	&__icon-holder {
-		margin-right: ($spacer * 0.5);
+		margin-right: ( $spacer * .5 );
 		border: 1px solid $link-color;
 		border-radius: 100%;
 	}
 
 	&__text {
-		font-size: 0.75rem;
+		font-size: .75rem;
 		vertical-align: middle;
 	}
 }

@@ -14,7 +14,7 @@
 
 	&__wrapper {
 		position: relative;
-		min-height: ($spacer * 2.5);
+		min-height: ( $spacer * 2.5 );
 	}
 
 	&__holder {
@@ -26,7 +26,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: $spacer ($spacer * 0.5);
+		padding: $spacer ( $spacer * .5 );
 		z-index: $zindex-placeloader-holder;
 		background-color: $white;
 		background: linear-gradient(
@@ -45,7 +45,7 @@
 
 	&__symbol {
 		position: relative;
-		width: (3 * $placeloader-circle-size) + (math.div($spacer, 3) * 2);
+		width: (3 * $placeloader-circle-size) + (math.div( $spacer, 3) * 2 );
 		height: $placeloader-circle-size;
 	}
 
@@ -56,9 +56,9 @@
 		height: $placeloader-circle-size;
 		border-radius: $placeloader-circle-radius;
 		border: 1px solid $placeloader-circle-color;
-		animation: loading 0.9s ease-in infinite;
-		opacity: 0.5;
-		transform: scale(0.5);
+		animation: loading .9s ease-in infinite;
+		opacity: .5;
+		transform: scale(.5);
 
 		&:nth-child(1) {
 			left: 0;
@@ -66,27 +66,27 @@
 		}
 
 		&:nth-child(2) {
-			left: $placeloader-circle-size + math.div($spacer, 3);
-			animation-delay: 0.3s;
+			left: $placeloader-circle-size + math.div( $spacer, 3 );
+			animation-delay: .3s;
 		}
 
 		&:nth-child(3) {
-			left: $placeloader-circle-size + math.div($spacer, 3) +
-				$placeloader-circle-size + math.div($spacer, 3);
-			animation-delay: 0.6s;
+			left: $placeloader-circle-size + math.div( $spacer, 3 ) +
+				$placeloader-circle-size + math.div( $spacer, 3 );
+			animation-delay: .6s;
 		}
 	}
 
 	&__text {
 		max-width: 90%;
-		padding: math.div($spacer, 3) ($spacer * 0.5);
+		padding: math.div( $spacer, 3) ( $spacer * .5 );
 	}
 }
 
 @keyframes loading {
 	0% {
-		opacity: 0.5;
-		transform: scale(0.5);
+		opacity: .5;
+		transform: scale(.5);
 	}
 
 	50% {

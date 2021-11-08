@@ -5,11 +5,17 @@
                 [type]="'danger'"
                 [isDismissible]="false"
                 [hasIcon]="true"
-                *ngIf="error">
-                Při odhlašování došlo k chybě. Zkuste to <a href="" (click)="reload($event)" class="text-white font-weight-bold">znovu</a>.
+                *ngIf="error"
+            >
+                Při odhlašování došlo k chybě. Zkuste to
+                <a
+                    href=""
+                    (click)="reload($event)"
+                    class="text-white font-weight-bold"
+                    >znovu</a
+                >.
             </lnd-alert>
-            <div *ngIf="!error"
-                 class="row">
+            <div *ngIf="!error" class="row">
                 <div class="col mb-2">
                     <lnd-placeloader [loading]="true"></lnd-placeloader>
                 </div>

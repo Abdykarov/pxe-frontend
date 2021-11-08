@@ -1,7 +1,7 @@
 import {
     AfterContentInit,
-    Component,
     ChangeDetectorRef,
+    Component,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -9,18 +9,12 @@ import {
     Output,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation,
 } from '@angular/core';
-import {
-    ControlValueAccessor,
-    NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as R from 'ramda';
-
 import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
-import { FieldTypes } from '../models/field-types.model';
 import { getErrorMessage } from 'src/common/utils';
+import { FieldTypes } from '../models/field-types.model';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
 
@@ -28,7 +22,7 @@ import { IValidationMessages } from '../models/validation-messages.model';
     selector: 'lnd-form-field',
     templateUrl: 'field.component.html',
     styleUrls: ['./field.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    // encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -73,7 +67,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public customInputSubtextClass = '';
 
     @Input()
-    public  customTypeClass?: string;
+    public customTypeClass?: string;
 
     @Input()
     public defaultRadioGroupValue?: IOption;
@@ -204,7 +198,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     constructor(
         private cd: ChangeDetectorRef,
-        private dynamicPipe: DynamicPipe,
+        private dynamicPipe: DynamicPipe
     ) {}
 
     ngAfterContentInit() {
@@ -232,16 +226,16 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     public changeSelect = (event) => {
         this.writeValue(event.target.value);
-    }
+    };
 
     public changeRadioAction = () => {
         this.checked = true;
         this.writeValue(this.checked);
-    }
+    };
 
     public changeRadioGroupAction = (value) => {
         this.writeValue(value);
-    }
+    };
 
     public labelClick = (value = null) => {
         this.field.nativeElement.focus();
@@ -255,22 +249,23 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
                 this.changeRadioGroupAction(value);
                 break;
         }
-    }
+    };
 
-    public trim = (): void => this.value = R.trim(this._value || '');
+    public trim = (): void => (this.value = R.trim(this._value || ''));
 
     public focusAction = (evt): void => {
         this.inputFocused = true;
         this.focus.emit(evt);
-    }
+    };
 
     public blurAction = (evt, withTrim = false): void => {
         this.inputFocused = false;
         this.blur.emit(evt);
-        if ( withTrim) {
+        if (withTrim) {
             this.trim();
         }
-    }
+    };
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
+    public getErrorMessage = () =>
+        getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

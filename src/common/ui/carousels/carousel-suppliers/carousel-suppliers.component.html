@@ -7,14 +7,14 @@
                     [src]="item.logoUrl"
                     [title]="item.title"
                     [alt]="item.alt"
-                    [width]="item.width">
+                    [width]="item.width"
+                />
             </a>
         </div>
     </div>
 </ng-template>
 
-<div *ngIf="showCarousel"
-    class="carousel-suppliers">
+<div *ngIf="showCarousel" class="carousel-suppliers">
     <lnd-carousel
         [carouselItems]="supplierLogos"
         customSlideWrapper="col-md-8 offset-md-2"
@@ -24,6 +24,7 @@
         [showLeftAndRightIndicators]="true"
         [slideTemplate]="slideTemplate"
         [withCountHeight]="false"
-        (deviceCouldChangedAction)="deviceCouldChanged($event)">
+        (deviceCouldChangedAction)="deviceCouldChanged($event)"
+    >
     </lnd-carousel>
 </div>

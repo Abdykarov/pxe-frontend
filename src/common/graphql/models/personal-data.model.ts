@@ -1,7 +1,4 @@
-import {
-    IAddress,
-    ICodelistItem,
-} from './supply.model';
+import { IAddress, ICodelistItem } from './supply.model';
 
 export interface IPersonalDataInput {
     name: string;
@@ -40,7 +37,6 @@ export interface IPersonalDataInputForm {
     signatorySurname?: string;
     signatoryPosition?: string;
 }
-
 
 export interface IPersonalData {
     name: string;

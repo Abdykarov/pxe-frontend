@@ -5,7 +5,7 @@
  */
 
 
-@use "sass:math";
+@use 'sass:math';
 
 html {
 	-ms-overflow-style: -ms-autohiding-scrollbar;
@@ -62,7 +62,7 @@ body {
 }
 
 .h3--public {
-	margin-bottom: ( $spacer * 0.5 );
+	margin-bottom: ( $spacer * .5  );
 	font-size: $h3-font-size-public-xs;
 	line-height:  math.div(30, 24) ;
 
@@ -95,7 +95,7 @@ h6,
 .h6 {
 	& > span {
 		color: $text-muted;
-		padding-left:  math.div($spacer, 3) ;
+		padding-left:  math.div( $spacer, 3 ) ;
 		text-transform: none;
 	}
 }
@@ -142,7 +142,7 @@ h3,
 }
 
 hr {
-	margin: ( $spacer * 2 ) 0;
+	margin: ( $spacer * 2  ) 0;
 	border-color: $border-color;
 }
 
@@ -169,24 +169,24 @@ blockquote,
 
 .buttons-holder {
 	> :not(:last-child) {
-		margin-bottom: ( $spacer * 0.5 );
+		margin-bottom: ( $spacer * .5  );
 		margin-right: 0;
 
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			margin-bottom: 0;
-			margin-right:  math.div($spacer, 3) ;
+			margin-right:  math.div( $spacer, 3 ) ;
 		}
 	}
 
 	> :not(:first-child) {
-		margin-top: ( $spacer * 0.5 );
+		margin-top: ( $spacer * .5  );
 		margin-left: 0;
 
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			margin-top: 0;
-			margin-left:  math.div($spacer, 3) ;
+			margin-left:  math.div( $spacer, 3 ) ;
 		}
 	}
 }

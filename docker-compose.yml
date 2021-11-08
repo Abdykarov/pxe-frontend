@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      ENV:              # list of allowed values: production, mock; keep empty for default
-      YARN_RUN: start   # available commands are defined in packege.json
-    container_name: "angular-apollo-devstack"
+      ENV: # list of allowed values: production, mock; keep empty for default
+      YARN_RUN: start # available commands are defined in packege.json
+    container_name: 'angular-apollo-devstack'
     ports:
-    - "4200:4200"
+      - '4200:4200'
     volumes:
-    - .:/opt/
+      - .:/opt/

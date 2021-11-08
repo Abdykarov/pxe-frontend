@@ -16,9 +16,9 @@
 .table-wrapper {
 	&--advanced {
 		overflow-x: auto;
-		width: calc(100% + (#{$spacer} * 2));
-		margin: 0 ($spacer * (-1));
-		padding: 0 $spacer ($spacer * 2);
+		width: calc(100% + (#{$spacer} * 2) );
+		margin: 0 ( $spacer * (-1) );
+		padding: 0 $spacer ( $spacer * 2 );
 	}
 }
 
@@ -47,7 +47,7 @@
 	}
 
 	thead {
-		border-bottom: ($spacer * 0.5) solid $table-bg;
+		border-bottom: ( $spacer * .5 ) solid $table-bg;
 	}
 
 	thead,
@@ -69,7 +69,7 @@
 
 			th,
 			td {
-				color: rgba($font-header, 0.5);
+				color: rgba($font-header, .5);
 				font-weight: 400;
 				background-color: transparent;
 				padding: $table-adv-cell-padding-hor
@@ -89,7 +89,7 @@
 			.table__tr--detail {
 				th,
 				td {
-					padding: ($spacer * 2) ($spacer * 2.75) ($spacer * 3.25);
+					padding: ( $spacer * 2) ( $spacer * 2.75) ( $spacer * 3.25 );
 				}
 			}
 		}
@@ -99,11 +99,11 @@
 			th,
 			td {
 				&:first-child {
-					padding-left: ($spacer * 1.5);
+					padding-left: ( $spacer * 1.5 );
 				}
 
 				&:last-child {
-					padding-right: ($spacer * 1.5);
+					padding-right: ( $spacer * 1.5 );
 				}
 			}
 		}
@@ -115,16 +115,16 @@
 			right: 0;
 			top: 0;
 			visibility: hidden; // temp
-			width: ((30px * 4) + $spacer); // $btn-width-icon:
-			padding: 0 ($spacer * 0.5);
+			width: ((30px * 4) + $spacer ); // $btn-width-icon:
+			padding: 0 ( $spacer * .5 );
 			height: 100%;
 
 			&::before {
 				content: '';
 				position: absolute;
 				top: 0;
-				left: -($spacer * 2);
-				width: ($spacer * 2);
+				left: -( $spacer * 2 );
+				width: ( $spacer * 2 );
 				height: 100%;
 				background: linear-gradient(
 					90deg,

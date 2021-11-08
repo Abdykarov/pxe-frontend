@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
 import { BarPlotComponent } from 'src/common/ui/graphs/bar-plot/bar-plot.component';
 import { GaussianDistributionComponent } from 'src/common/ui/graphs/gaussian-distribution/gaussian-distribution.component';
 import { LineGraphComponent } from 'src/common/ui/graphs/line-graph/line-graph.component';
@@ -19,8 +18,6 @@ import { ProgressBarComponent } from 'src/common/ui/graphs/progress-bar/progress
         LineGraphComponent,
         ProgressBarComponent,
     ],
-    imports: [
-        CommonModule,
-    ],
+    imports: [CommonModule],
 })
-export class GraphsModule { }
+export class GraphsModule {}

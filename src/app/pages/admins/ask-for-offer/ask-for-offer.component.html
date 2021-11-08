@@ -1,11 +1,16 @@
 <ng-template #actionColumnFill let-row="row">
-    <div *ngIf="row.status !== ContractUploadStatus.PROCESSED"
-        class="d-flex justify-content-end">
+    <div
+        *ngIf="row.status !== ContractUploadStatus.PROCESSED"
+        class="d-flex justify-content-end"
+    >
         <lnd-button
             customClass="mr-3"
             (action)="routerToCreateUser(row.id, row.email)"
-            [label]="row.status === ContractUploadStatus.NEW ? 'Vyplnit' : 'Dokončit'"
-            type="primary">
+            [label]="
+                row.status === ContractUploadStatus.NEW ? 'Vyplnit' : 'Dokončit'
+            "
+            type="primary"
+        >
         </lnd-button>
         <lnd-button
             type="icon"
@@ -19,32 +24,39 @@
 
 <ng-template #actionColumnPDF let-row="row">
     <ng-container *ngIf="row.files && row.files.length === 1">
-        <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
-           (click)="downloadAskForOffer(row?.id, row.files[0].id)">
-            {{row.files[0].fileName}}
+        <a
+            [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
+            (click)="downloadAskForOffer(row?.id, row.files[0].id)"
+        >
+            {{ row.files[0].fileName }}
         </a>
     </ng-container>
     <ng-container *ngIf="row.files && row.files.length > 1">
-        <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
-           (click)="downloadAskForOffersZipArchive(row?.id)">
+        <a
+            [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
+            (click)="downloadAskForOffersZipArchive(row?.id)"
+        >
             ZIP
         </a>
     </ng-container>
-    <lnd-loader *ngIf="row.id | inArray: downloadingAskForOfferIds" class="ml-1"></lnd-loader>
+    <lnd-loader
+        *ngIf="row.id | inArray: downloadingAskForOfferIds"
+        class="ml-1"
+    ></lnd-loader>
 </ng-template>
 
 <ng-template #columnCreatedAt let-row="row">
-    {{row.createdAt | date:'d.&nbsp;M.&nbsp;y'}}
+    {{ row.createdAt | date: "d.&nbsp;M.&nbsp;y" }}
 </ng-template>
 
-<pxe-layout-container [pageTitle]="titleMapping[(routerParamsSubject$ | async).type]">
+<pxe-layout-container
+    [pageTitle]="titleMapping[(routerParamsSubject$ | async).type]"
+>
     <div class="row">
         <div class="col-12">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
@@ -52,16 +64,20 @@
             <lnd-placeloader [loading]="loading"></lnd-placeloader>
         </div>
         <div
-            *ngIf="!loading && (routerParamsSubject$ | async).type === CONSTS.PATHS.ASK_FOR_OFFER_NEW"
-            class="col-12 text-center mb-5">
+            *ngIf="
+                !loading &&
+                (routerParamsSubject$ | async).type ===
+                    CONSTS.PATHS.ASK_FOR_OFFER_NEW
+            "
+            class="col-12 text-center mb-5"
+        >
             <lnd-button
                 label="Přidat žádost"
                 type="secondary"
                 (action)="createAskForOffer()"
             ></lnd-button>
         </div>
-        <div *ngIf="paginatedAskForOffer"
-             class="col-12">
+        <div *ngIf="paginatedAskForOffer" class="col-12">
             <ng-container *ngIf="paginatedAskForOffer.page.length > 0">
                 <lnd-table
                     *ngIf="!loading"
@@ -69,15 +85,20 @@
                     [rows]="paginatedAskForOffer.page"
                     [showHead]="true"
                     [tableWrapperClass]="['table-wrapper--advanced']"
-                    [tableClass]="['table--advanced', 'mb-0','table-layout-fixed']"
+                    [tableClass]="[
+                        'table--advanced',
+                        'mb-0',
+                        'table-layout-fixed'
+                    ]"
                     [columnTemplates]="{
                         actionColumnFill: actionColumnFill,
                         actionColumnPDF: actionColumnPDF,
                         columnCreatedAt: columnCreatedAt
-                    }">
-                    ></lnd-table>
-                <div [class.d-none]="loading"
-                     class="float-right">
+                    }"
+                >
+                    ></lnd-table
+                >
+                <div [class.d-none]="loading" class="float-right">
                     <lnd-pagination
                         [showBoundaryLinks]="paginationConfig.showBoundaryLinks"
                         [itemsPerPage]="paginationConfig.itemsPerPage"
@@ -91,14 +112,15 @@
                     ></lnd-pagination>
                 </div>
             </ng-container>
-            <ng-container *ngIf="paginatedAskForOffer.page.length === 0 && !loading">
+            <ng-container
+                *ngIf="paginatedAskForOffer.page.length === 0 && !loading"
+            >
                 <lnd-info-banner
                     [bannerType]="BannerTypeImages.LOADING"
                     [bannerTitle]="'Nejsou zde žádné faktury.'"
                     [showButton]="false"
                 ></lnd-info-banner>
             </ng-container>
-
         </div>
     </div>
 </pxe-layout-container>

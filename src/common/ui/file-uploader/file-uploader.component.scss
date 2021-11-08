@@ -16,7 +16,7 @@
 .drop-zone {
 	position: relative;
 	width: 100%;
-	padding: ($spacer * 2.5) $spacer;
+	padding: ( $spacer * 2.5 ) $spacer;
 
 	&::after {
 		content: '';
@@ -33,16 +33,16 @@
 				top left no-repeat,
 			linear-gradient(
 					90deg,
-					transparent ($drop-zone-border-gap-width * 0.5),
-					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					transparent ($drop-zone-border-gap-width * .5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * .5),
 					$drop-zone-border-color
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						),
 					transparent
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						)
 				)
@@ -61,16 +61,16 @@
 				top left no-repeat,
 			linear-gradient(
 					0deg,
-					transparent ($drop-zone-border-gap-width * 0.5),
-					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					transparent ($drop-zone-border-gap-width * .5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * .5),
 					$drop-zone-border-color
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						),
 					transparent
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						)
 				)
@@ -89,16 +89,16 @@
 				bottom left no-repeat,
 			linear-gradient(
 					90deg,
-					transparent ($drop-zone-border-gap-width * 0.5),
-					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					transparent ($drop-zone-border-gap-width * .5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * .5),
 					$drop-zone-border-color
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						),
 					transparent
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						)
 				)
@@ -117,16 +117,16 @@
 				top right no-repeat,
 			linear-gradient(
 					0deg,
-					transparent ($drop-zone-border-gap-width * 0.5),
-					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					transparent ($drop-zone-border-gap-width * .5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * .5),
 					$drop-zone-border-color
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						),
 					transparent
 						(
-							$drop-zone-border-gap-width * 0.5 +
+							$drop-zone-border-gap-width * .5 +
 								$drop-zone-border-dash-width
 						)
 				)
@@ -159,7 +159,7 @@
 	}
 
 	&--interactive {
-		background-color: rgba($light-dark, 0.3);
+		background-color: rgba($light-dark, .3);
 	}
 
 	&--zindex {

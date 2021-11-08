@@ -1,6 +1,5 @@
 <ng-template #columnTemplateGreenEnergy let-row="row">
-    <span *ngIf="row.greenEnergy"
-          class="icon icon--leaf icon--green ml-auto">
+    <span *ngIf="row.greenEnergy" class="icon icon--leaf icon--green ml-auto">
     </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
@@ -15,27 +14,32 @@
     {{row.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
-    {{row.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.validTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.validTo |
+    date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #columnTemplateDeliveryFromTo let-row="row">
-    {{row.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.deliveryTo |
+    date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
+    <span
+        >{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc
+        (bez&nbsp;DPH)</span
+    >
     <div class="row no-gutters action-area-div">
         <div class="col-12">
-        <ng-template #tooltipDelete let-toggle="toggle">
-            <lnd-button
-                icon="icon--delete"
-                type="icon"
-                variant="icon"
-                (action)="click($event)"
-            ></lnd-button>
-        </ng-template>
-        <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
-            Smazat
-        </lnd-tooltip>
-    </div>
+            <ng-template #tooltipDelete let-toggle="toggle">
+                <lnd-button
+                    icon="icon--delete"
+                    type="icon"
+                    variant="icon"
+                    (action)="click($event)"
+                ></lnd-button>
+            </ng-template>
+            <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
+                Smazat
+            </lnd-tooltip>
+        </div>
     </div>
 </ng-template>
 
@@ -43,9 +47,7 @@
     <div class="container-fluid">
         <div class="row mb-4">
             <div class="col-12 col-md-6 offset-md-3 text-center">
-                <h1>
-                    Import nabídek
-                </h1>
+                <h1>Import nabídek</h1>
             </div>
         </div>
         <div class="row mb-5">
@@ -72,9 +74,7 @@
                         </a>
                     </li>
                     <li class="link-list__item">
-                        <a class="link-list__link">
-                            Plyn
-                        </a>
+                        <a class="link-list__link"> Plyn </a>
                     </li>
                 </ul>
             </div>
@@ -99,8 +99,9 @@
                         columnTemplatePriceGas: columnTemplatePriceGas,
                         columnTemplateValidFromTo: columnTemplateValidFromTo,
                         columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
-                    }">
+                    }"
                 >
+                    >
                 </lnd-table>
             </div>
         </div>
@@ -111,7 +112,8 @@
                     customClass="ml-5"
                     label="Schválit nabídky"
                     type="primary"
-                    (action)="click($event)">>
+                    (action)="click($event)"
+                    >>
                 </lnd-button>
             </div>
         </div>

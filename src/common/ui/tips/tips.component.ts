@@ -1,11 +1,6 @@
-import {
-    Component,
-    Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import * as R from 'ramda';
-
 // own models
 import { ITipsType } from './models/type.model';
 
@@ -28,7 +23,8 @@ export class TipsComponent {
     public type?: ITipsType;
 
     constructor(public domSanitizer: DomSanitizer) {
-        this.type = R.contains(this.type, Object.values(ITipsType)) ? this.type : ITipsType.SMALL;
+        this.type = R.contains(this.type, Object.values(ITipsType))
+            ? this.type
+            : ITipsType.SMALL;
     }
 }
-

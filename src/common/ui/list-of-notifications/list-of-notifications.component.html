@@ -1,35 +1,46 @@
 <ng-template #defaultHeaderTemplate>
     <div class="text-center mt-4 mb-2">
-        <h2 class="mb-2">{{headerText}}</h2>
+        <h2 class="mb-2">{{ headerText }}</h2>
     </div>
 </ng-template>
 
 <div class="list-of-notifications">
     <div class="row mb-2">
         <div [ngClass]="customColClass">
-            <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { headerText: headerText }"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="
+                    headerTemplate || defaultHeaderTemplate;
+                    context: { headerText: headerText }
+                "
+            ></ng-container>
         </div>
     </div>
-    <div class="row"
-         [ngClass]="customRowClass">
-        <div *ngIf="notifications.length"
-             [ngClass]="customColClass">
-            <ol class="list-of-notifications__list"
+    <div class="row" [ngClass]="customRowClass">
+        <div *ngIf="notifications.length" [ngClass]="customColClass">
+            <ol
+                class="list-of-notifications__list"
                 [class.check-list]="type === TypeOfList.CHECKLIST"
-                [ngClass]="customLinkClass">
-                <li 
-                    class="list-of-notifications__item" 
-                    *ngFor="let notification of notifications | slice:0:maxShowNotifications">
-                    {{notification}}
-                </li>
-                <li 
+                [ngClass]="customLinkClass"
+            >
+                <li
                     class="list-of-notifications__item"
-                    *ngIf="notifications.length > maxShowNotifications">a další</li>
+                    *ngFor="
+                        let notification of notifications
+                            | slice: 0:maxShowNotifications
+                    "
+                >
+                    {{ notification }}
+                </li>
+                <li
+                    class="list-of-notifications__item"
+                    *ngIf="notifications.length > maxShowNotifications"
+                >
+                    a další
+                </li>
             </ol>
         </div>
-        <div *ngIf="!notifications.length"
-             [ngClass]="customColClass">
-            {{emptyNotifications}}
+        <div *ngIf="!notifications.length" [ngClass]="customColClass">
+            {{ emptyNotifications }}
         </div>
     </div>
 </div>

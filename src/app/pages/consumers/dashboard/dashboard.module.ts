@@ -1,20 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
-import { DashboardComponent } from './dashboard.component';
-import { DashboardRoutingModule } from './dashboard.routing';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
-import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { NewsModule } from 'src/common/ui/news/news.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SupplyPointsSummaryModule } from 'src/common/ui/supply-points-summary/supply-points-summary.module';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardRoutingModule } from './dashboard.routing';
 
 @NgModule({
-    declarations: [
-        DashboardComponent,
-    ],
+    declarations: [DashboardComponent],
     imports: [
         AlertModule,
         BannerUIModule,
@@ -27,4 +24,4 @@ import { SupplyPointsSummaryModule } from 'src/common/ui/supply-points-summary/s
         SupplyPointsSummaryModule,
     ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

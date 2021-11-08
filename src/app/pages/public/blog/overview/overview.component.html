@@ -2,11 +2,18 @@
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 mb-3">
             <ul class="text-center link-list">
-                <li *ngFor="let type of blogTypes$ | async" class="link-list__item">
-                    <a class="link-list__link"
-                       [class.link-list__link--active]="type.url === activeTag.url"
-                       (click)="changeArticleType($event ,type.url)">
-                        {{type.label}}
+                <li
+                    *ngFor="let type of blogTypes$ | async"
+                    class="link-list__item"
+                >
+                    <a
+                        class="link-list__link"
+                        [class.link-list__link--active]="
+                            type.url === activeTag.url
+                        "
+                        (click)="changeArticleType($event, type.url)"
+                    >
+                        {{ type.label }}
                     </a>
                 </li>
             </ul>
@@ -14,25 +21,32 @@
     </div>
     <div class="card-blogs" *ngIf="activeArticles$ | async as articles">
         <div class="row card-blogs__inner">
-            <div class="col-md-4 card-blog__item" *ngFor="let article of articles | slice: 0: actualItemsCount">
+            <div
+                class="col-md-4 card-blog__item"
+                *ngFor="let article of articles | slice: 0:actualItemsCount"
+            >
                 <lnd-card
                     type="link"
                     [data]="article"
-                    [linkUrl]="[this.ROUTES.ROUTER_BLOG, article.customData, article.id]"
+                    [linkUrl]="[
+                        this.ROUTES.ROUTER_BLOG,
+                        article.customData,
+                        article.id
+                    ]"
                 >
                 </lnd-card>
             </div>
         </div>
-        <div *ngIf="(totalItems$ | async) > articles.length"
-            class="row">
+        <div *ngIf="(totalItems$ | async) > articles.length" class="row">
             <div class="col-12 text-center">
                 <lnd-button
-                    (action)="blogFacade.fetchMoreArticles();"
+                    (action)="blogFacade.fetchMoreArticles()"
                     type="gradient-primary"
                     customClass="btn-public btn--icon-right"
                     icon="icon--arrow-down"
                     iconPosition="right"
-                    label="Zobrazit starší články">
+                    label="Zobrazit starší články"
+                >
                 </lnd-button>
             </div>
         </div>

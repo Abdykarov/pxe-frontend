@@ -1,7 +1,5 @@
 <ng-template #forgottenPassword>
-    <a (click)="action($event)">
-        Zapomněli jste heslo?
-    </a>
+    <a (click)="action($event)"> Zapomněli jste heslo? </a>
 </ng-template>
 
 <ng-template #supplierTemplate>
@@ -12,15 +10,27 @@
     <div class="section-picture-text">
         <div class="container-fluid container-fluid--max-width">
             <div class="row">
-                <div class="col-md-8 offset-md-1 col-xl-4 offset-xl-1 col-lg-3 offset-lg-0">
-                    <h1 class="h2--public mb-2">
-                        Přihlaste se
-                    </h1>
-                    <p>Ještě nemáte účet? <a class="d-inline-block" routerLink="/secured/registration">Založte si jej zde</a>.</p>
+                <div
+                    class="
+                        col-md-8
+                        offset-md-1
+                        col-xl-4
+                        offset-xl-1
+                        col-lg-3
+                        offset-lg-0
+                    "
+                >
+                    <h1 class="h2--public mb-2">Přihlaste se</h1>
+                    <p>
+                        Ještě nemáte účet?
+                        <a
+                            class="d-inline-block"
+                            routerLink="/secured/registration"
+                            >Založte si jej zde</a
+                        >.
+                    </p>
                     <div class="form-container ml-0">
-                        <lnd-alert
-                            type="info"
-                            customClass="mb-2">
+                        <lnd-alert type="info" customClass="mb-2">
                             Heslo jsme vám zaslali na pepa@email.cz
                         </lnd-alert>
                         <div class="text-right mb-3">
@@ -33,13 +43,15 @@
                                 id="email"
                                 customFormGroupClass="form-group--public"
                                 label="E-mail (přihlašovací jméno)"
-                                [lightField]="true">
+                                [lightField]="true"
+                            >
                             </lnd-form-field>
                             <lnd-form-field
                                 id="password"
                                 customFormGroupClass="form-group--public"
                                 label="Heslo"
-                                [lightField]="true">
+                                [lightField]="true"
+                            >
                             </lnd-form-field>
                             <lnd-button
                                 type="gradient-primary"
@@ -48,7 +60,8 @@
                                 (action)="submitForm($event)"
                                 label="Přihlásit se"
                                 icon="icon--arrow-right"
-                                iconPosition="right">
+                                iconPosition="right"
+                            >
                             </lnd-button>
                         </form>
                     </div>

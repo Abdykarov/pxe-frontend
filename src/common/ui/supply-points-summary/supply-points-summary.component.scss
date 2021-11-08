@@ -16,12 +16,12 @@
 	box-shadow: $box-shadow;
 
 	&__inner {
-		padding: ($spacer * 1.5) $spacer ($spacer * 0.5);
+		padding: ( $spacer * 1.5) $spacer ( $spacer * .5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ($spacer * 2.5) ($spacer * 3) ($spacer * 1.5)
-				($spacer * 1.5);
+			padding: ( $spacer * 2.5) ( $spacer * 3) ( $spacer * 1.5 )
+				( $spacer * 1.5 );
 		}
 	}
 
@@ -29,7 +29,7 @@
 		display: block;
 		padding-top: (
 			($supply-point-title-line-height-px - $supply-point-icon-font-size) *
-				0.5
+				.5
 		);
 		color: $icons-primary;
 		font-size: $supply-point-icon-font-size;
@@ -38,7 +38,7 @@
 	&__product-holder {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: ($spacer * 2);
+		margin-bottom: ( $spacer * 2 );
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
@@ -47,11 +47,11 @@
 	}
 
 	&__type {
-		margin-bottom: ($spacer * 0.75);
+		margin-bottom: ( $spacer * .75 );
 	}
 
 	&__value {
-		margin-bottom: ($spacer * 0.5);
+		margin-bottom: ( $spacer * .5 );
 		font-size: 3rem;
 	}
 
@@ -72,12 +72,12 @@
 	}
 
 	&__info-icon {
-		margin-bottom: ($spacer * 0.5);
+		margin-bottom: ( $spacer * .5 );
 		color: $icons-secondary;
 	}
 
 	&__info-description {
-		margin-bottom: ($spacer * 1.25);
+		margin-bottom: ( $spacer * 1.25 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {

@@ -6,7 +6,7 @@
 
 
 // Colors pallete
-@use "sass:math";
+@use 'sass:math';
 
 $blue-050:                         #56cefe;                    // Blue level 1
 $blue-100:                         #00b7ff;                    // Blue level 2
@@ -100,17 +100,17 @@ $grid-breakpoints: (
 $grid-columns:                     12;
 $grid-gutter-width:                20px;
 $spacer:                           $grid-gutter-width;
-$spacers: () !default;
+$spacers: ( ) !default;
 $spacers: map-merge((
   0: 0,
-  1: ( $spacer * 0.25 ),
-  2: ( $spacer * 0.5 ),
+  1: ( $spacer * .25  ),
+  2: ( $spacer * .5  ),
   3: $spacer,
-  4: ( $spacer * 1.5 ),
-  5: ( $spacer * 2 ),
-  6: ( $spacer * 3 ),
-  7: ( $spacer * 4 )
-), $spacers);
+  4: ( $spacer * 1.5  ),
+  5: ( $spacer * 2  ),
+  6: ( $spacer * 3  ),
+  7: ( $spacer * 4  )
+), $spacers );
 $sizes: () !default;
 $sizes: map-merge((
   10: 10%,
@@ -171,16 +171,16 @@ $h4-font-size-public:              1rem;
 $headings-color:                   $font-header;
 $headings-line-height:              math.div(40, 30) ;
 $headings-font-weight:             400;
-$headings-margin-bottom:           ( $spacer * 1.5 );
+$headings-margin-bottom:           ( $spacer * 1.5  );
 
 $blockquote-small-color:           $gray-300 !default;
 $blockquote-font-size:             $font-size-base !default;
 
-$paragraph-margin-bottom:          ( $spacer * 2 );
+$paragraph-margin-bottom:          ( $spacer * 2  );
 
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              $spacer;
-$list-decimal-padding-left:        ( $spacer * 2.25 );
+$list-decimal-padding-left:        ( $spacer * 2.25  );
 
 $circular-number-list-size:        48px;
 
@@ -231,7 +231,7 @@ $menu-toggle-line-width:           24px;
 $menu-toggle-line-width-rotate:    20px;
 $menu-toggle-line-height:          4px;
 $menu-toggle-line-offset:          5px;
-$menu-toggle-line-center:          ( ( $menu-width - $menu-toggle-line-width ) * 0.5 );
+$menu-toggle-line-center:          ( ( $menu-width - $menu-toggle-line-width ) * .5 );
 
 
 // Footer
@@ -242,8 +242,8 @@ $footer-height-tablet:             220px;
 // Badges
 $badge-font-size:                  .75rem;
 $badge-font-weight:                400;
-$badge-padding-y:                   math.div($spacer, 7.5) ;
-$badge-padding-x:                  ( $spacer * 0.25 );
+$badge-padding-y:                   math.div( $spacer, 7.5 ) ;
+$badge-padding-x:                  ( $spacer * .25  );
 
 
 // Close
@@ -295,8 +295,8 @@ $zindex-card-blog-img:               -1;
 
 
 // Pagination
-$pagination-padding-y:              ( $spacer * 0.25 );
-$pagination-padding-x:              ( $spacer * 0.25 );
+$pagination-padding-y:              ( $spacer * .25  );
+$pagination-padding-x:              ( $spacer * .25  );
 $pagination-color:                  $link-color;
 $pagination-bg:                     transparent;
 $pagination-border-width:           0;
@@ -351,8 +351,8 @@ $carousel-compare-border-left: 1px solid rgba(151, 151, 151, .3);
 $accordion-active-shadow:      0 10px 30px 0 rgba($body-color, .2);
 $accordion-toggle-icon-size:   20px;
 
-$accordion-padding:            ( $spacer * 2 );
-$accordion-padding-right-xs:   ( $spacer + $accordion-toggle-icon-size + $spacer );
+$accordion-padding:            ( $spacer * 2  );
+$accordion-padding-right-xs:   ( $spacer + $accordion-toggle-icon-size + $spacer  );
 $accordion-padding-right:      ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding );
 
 

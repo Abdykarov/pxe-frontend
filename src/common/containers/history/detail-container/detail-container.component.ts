@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ROUTES } from 'src/app/app.constants';
 import { DetailContainerFacade } from './detail-container.facade';
 import { DetailContainerFacadeProvider } from './detail-container.provider';
-import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-history-detail-container',
@@ -12,14 +11,15 @@ import { ROUTES } from 'src/app/app.constants';
     providers: [DetailContainerFacadeProvider],
 })
 export class DetailContainerComponent {
-    public readonly supplyPoint$ = this.detailContainerFacade.historySupplyPointData$;
+    public readonly supplyPoint$ =
+        this.detailContainerFacade.historySupplyPointData$;
     public readonly isLoading$ = this.detailContainerFacade.isLoading$;
     public readonly fieldError$ = this.detailContainerFacade.fieldError$;
     public readonly globalError$ = this.detailContainerFacade.globalError$;
 
     constructor(
         private detailContainerFacade: DetailContainerFacade,
-        private router: Router,
+        private router: Router
     ) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }

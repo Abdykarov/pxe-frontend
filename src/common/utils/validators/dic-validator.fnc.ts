@@ -22,4 +22,3 @@ export const verifyDIC = (dic: string): DICError => {
 
     return DICError.NONE;
 };
-

@@ -1,12 +1,16 @@
 <div class="row">
     <div class="col-12">
-        <p class="perex mb-4"
-           [class.text-center]="supplyPointsImport$ | async">
+        <p class="perex mb-4" [class.text-center]="supplyPointsImport$ | async">
             Zadejte údaje k odběrnému místu
         </p>
     </div>
-    <ng-container *ngIf="(queryParams$ | async).askForOfferId as activeAskForOfferId">
-        <div class="col-12" *ngIf="(activeSupplyPoint$ | async) as activeSupplyPoint">
+    <ng-container
+        *ngIf="(queryParams$ | async).askForOfferId as activeAskForOfferId"
+    >
+        <div
+            class="col-12"
+            *ngIf="activeSupplyPoint$ | async as activeSupplyPoint"
+        >
             <pxe-supply-point-form
                 [editMode]="editMode"
                 [withoutValidator]="true"
@@ -17,7 +21,9 @@
                 [globalError]="globalError"
                 [fieldError]="fieldError"
                 submitLabel="Další"
-                (submitAction)="save($event, activeAskForOfferId, activeSupplyPoint)"
+                (submitAction)="
+                    save($event, activeAskForOfferId, activeSupplyPoint)
+                "
             ></pxe-supply-point-form>
         </div>
         <div class="col-12" *ngIf="!(queryParams$ | async)?.supplyPointId">

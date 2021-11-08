@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import {
-    tableCols,
-    tableRows,
-} from './config';
+import { tableCols, tableRows } from './config';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class AdvancedTablesPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public tableCols;

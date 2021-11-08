@@ -3,7 +3,7 @@
  */
 
 // Set text size to 12px, (1rem = 16px)
-@use "sass:math";
+@use 'sass:math';
 
 .font-size-12 {
 	font-size: .75rem;
@@ -94,7 +94,7 @@
 	}
 
 	&__text {
-		margin-left: ( $spacer * 0.5 );
+		margin-left: ( $spacer * .5  );
 	}
 
 	&--link {
@@ -118,7 +118,7 @@
 	&--icon-right {
 		.text-with-icon__text {
 			margin-left: 0;
-			margin-right: ( $spacer * 0.5 );
+			margin-right: ( $spacer * .5  );
 		}
 	}
 }
@@ -129,7 +129,7 @@
 	align-items: center;
 
 	& &__icon {
-		margin-right: ( $spacer * 0.5 );
+		margin-right: ( $spacer * .5  );
 		color: $icons-green;
 		font-size: 1rem;
 		font-weight: 700;
@@ -146,7 +146,7 @@
 .loader__wrapper-text {
 	position: relative;
 	display: inline-block;
-	padding-right: ( $loader-size + $spacer );
+	padding-right: ( $loader-size + $spacer  );
 
 	.loader {
 		position: absolute;
@@ -266,15 +266,15 @@ $colors: (
 );
 
 @each $name, $value in $colors {
-	.bg--#{$name} {
+	.bg--#{"" + $name} {
 		background-color: $value;
 	}
 
-	.text-color--#{$name} {
+	.text-color--#{"" + $name} {
 		color: $value;
 	}
 
-	.fill--#{$name} {
+	.fill--#{"" + $name} {
 		fill: $value;
 	}
 }
@@ -284,7 +284,7 @@ $colors: (
  */
 
 @mixin generate-gradient($name-color, $start-color, $end-color) {
-	.bg--gradient-#{$name-color} {
+	.bg--gradient-#{"" + $name-color} {
 		background: linear-gradient(143deg, $start-color 0%, $end-color 100%);
 	}
 }
@@ -397,14 +397,14 @@ $colors: (
 .info-flag {
 	position: relative;
 	display: inline-block;
-	padding: $spacer ( $spacer * 1.25 );
+	padding: $spacer ( $spacer * 1.25  );
 	background-color: $secondary;
 	border-radius: $border-radius;
 	border-bottom-left-radius: 0;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		margin-top: ( $spacer * 2 );
+		margin-top: ( $spacer * 2  );
 	}
 
 	&__beak {

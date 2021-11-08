@@ -1,5 +1,4 @@
-import {gql} from 'apollo-angular';
-
+import { gql } from 'apollo-angular';
 
 export const clientSchema = gql`
     extend type Query {

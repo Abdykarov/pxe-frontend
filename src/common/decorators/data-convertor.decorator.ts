@@ -1,11 +1,10 @@
-
 export function DataConvertor(convertor: (value: any) => any) {
     return (target: object, key: string) => {
         const definition = Object.getOwnPropertyDescriptor(target, key);
         if (definition) {
             Object.defineProperty(target, key, {
                 get: definition.get,
-                set: newValue => {
+                set: (newValue) => {
                     definition.set(convertor(newValue));
                 },
                 enumerable: true,

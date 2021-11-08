@@ -1,18 +1,11 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-} from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
     CommodityType,
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { getConfigStepper } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-request-card',
@@ -20,7 +13,6 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
     styleUrls: ['./request-card.component.scss'],
 })
 export class RequestCardComponent implements OnInit {
-
     @Input()
     public supplyPoint: ISupplyPoint;
 
@@ -37,6 +29,9 @@ export class RequestCardComponent implements OnInit {
     public allowPersonalDataStep = ProgressStatus.PERSONAL_DATA;
 
     ngOnInit(): void {
-        this.stepperProgressConfig = getConfigStepper(this.supplyPoint.progressStatus, false);
+        this.stepperProgressConfig = getConfigStepper(
+            this.supplyPoint.progressStatus,
+            false
+        );
     }
 }

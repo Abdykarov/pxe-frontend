@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import {
-    Routes,
-    RouterModule,
-} from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { ImportComponent } from 'src/app/pages/suppliers/import/import.component';
 
@@ -19,7 +15,10 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.UPLOAD,
-                loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule),
+                loadChildren: () =>
+                    import('./upload/upload.module').then(
+                        (m) => m.UploadModule
+                    ),
             },
             {
                 path: CONSTS.PATHS.APPROVAL,
@@ -27,19 +26,17 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.APPROVAL + '/:commodityType',
-                loadChildren: () => import('./approval/approval.module').then(m => m.ApprovalModule),
+                loadChildren: () =>
+                    import('./approval/approval.module').then(
+                        (m) => m.ApprovalModule
+                    ),
             },
-
         ],
     },
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-    ],
-    exports: [
-        RouterModule,
-    ],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class ImportRoutingModule { }
+export class ImportRoutingModule {}

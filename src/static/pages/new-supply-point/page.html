@@ -1,19 +1,13 @@
 <ng-template #bannerButtonsTemplate>
-    <lnd-button
-        customClass="mb-2 mb-md-0"
-        label="Ano"
-        type="white">
+    <lnd-button customClass="mb-2 mb-md-0" label="Ano" type="white">
     </lnd-button>
-    <lnd-button
-        class="ml-3"
-        label="Ne"
-        type="white">
-    </lnd-button>
+    <lnd-button class="ml-3" label="Ne" type="white"> </lnd-button>
 </ng-template>
 
 <ng-template #phraseHelpTemplate>
     <p class="small mt-0 mb-1">
-        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu.
+        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší
+        hodnotu.
     </p>
 </ng-template>
 
@@ -26,9 +20,11 @@
         [actionTemplate]="tooltipBottom"
         direction="bottom"
         customClass="ml-2"
-        customContentClass="tooltip__content--fixed-width">
+        customContentClass="tooltip__content--fixed-width"
+    >
         <p class="mb-2">
-            Vyberte tuto možnost pokud nemáte smlouvu se současným dodavatelem, například z důvodu bankrotu, nezasmluvnění atd.
+            Vyberte tuto možnost pokud nemáte smlouvu se současným dodavatelem,
+            například z důvodu bankrotu, nezasmluvnění atd.
         </p>
     </lnd-tooltip>
 </ng-template>
@@ -50,9 +46,7 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Nové odběrné místo
-            </h1>
+            <h1>Nové odběrné místo</h1>
         </div>
     </div>
     <div class="row mb-6">
@@ -60,14 +54,14 @@
             <h2>Odběrné místo: U budky</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="config.stepperProgressConfig"></pxe-progress-bar>
+            <pxe-progress-bar
+                [config]="config.stepperProgressConfig"
+            ></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <p class="perex mb-4">
-                Zadejte údaje k odběrnému místu
-            </p>
+            <p class="perex mb-4">Zadejte údaje k odběrnému místu</p>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <!-- <lnd-banner-ui
@@ -75,13 +69,17 @@
                 [data]="bannerObj"
             >
             </lnd-banner-ui> -->
-            <form
-                [formGroup]="form">
+            <form [formGroup]="form">
                 <div class="page-box mb-3">
                     <div class="form-container">
                         <div class="row no-gutters mb-2">
                             <div class="col-12">
-                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/light.svg" title="">
+                                <img
+                                    alt="Současná smlouva"
+                                    class="w-25 mb-3"
+                                    src="/assets/images/illustrations/light.svg"
+                                    title=""
+                                />
                                 <h2 class="page-box__title">
                                     Komodita <br />a současný dodavatel
                                 </h2>
@@ -113,7 +111,8 @@
                             subtext="Začněte psát a my vám poradíme."
                             [disabledField]="true"
                             [hiddenOnDisable]="false"
-                            searchable="true">
+                            searchable="true"
+                        >
                         </lnd-select>
                     </div>
                 </div>
@@ -121,7 +120,12 @@
                     <div class="form-container">
                         <div class="row no-gutters mb-2">
                             <div class="col-12">
-                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-point.svg" title="">
+                                <img
+                                    alt="Současná smlouva"
+                                    class="w-25 mb-3"
+                                    src="/assets/images/illustrations/house-point.svg"
+                                    title=""
+                                />
                                 <h2 class="page-box__title">
                                     Identifikace a adresa odběrného místa
                                 </h2>
@@ -144,7 +148,8 @@
                         <pxe-address-whisperer
                             [label]="'Adresa'"
                             [parentForm]="form"
-                            [whispererName]="'address'">
+                            [whispererName]="'address'"
+                        >
                         </pxe-address-whisperer>
                     </div>
                 </div>
@@ -152,7 +157,12 @@
                     <div class="form-container">
                         <div class="row no-gutters mb-2">
                             <div class="col-12">
-                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
+                                <img
+                                    alt="Současná smlouva"
+                                    class="w-25 mb-3"
+                                    src="/assets/images/illustrations/house-info.svg"
+                                    title=""
+                                />
                                 <h2 class="page-box__title">
                                     Parametry odběru elekřiny
                                 </h2>
@@ -164,11 +174,13 @@
                             label="Distribuční sazba"
                             [options]="config.distributionRateOptions"
                             [parentForm]="form"
-                            [selectName]="'distributionRateId'">
+                            [selectName]="'distributionRateId'"
+                        >
                         </lnd-select>
                         <pxe-field-wrapper
                             labelFor="phasesId"
-                            [subtextTemplate]="phraseHelpTemplate">
+                            [subtextTemplate]="phraseHelpTemplate"
+                        >
                             <div class="row no-gutters">
                                 <div class="col-12 mb-2">
                                     <small>Jistič</small>
@@ -178,7 +190,8 @@
                                         label="fáze"
                                         [options]="config.circuitBreakerPhaseOptions"
                                         [parentForm]="form"
-                                        [selectName]="'phasesId'">
+                                        [selectName]="'phasesId'"
+                                    >
                                     </lnd-select>
                                 </div>
                                 <div class="col-12 col-md-6 pl-md-1">
@@ -188,7 +201,8 @@
                                         label="velikost"
                                         [options]="config.circuitBreakerSizeOptions"
                                         [parentForm]="form"
-                                        [selectName]="'circuitBreakerId'">
+                                        [selectName]="'circuitBreakerId'"
+                                    >
                                     </lnd-select>
                                 </div>
                             </div>
@@ -213,7 +227,12 @@
                     <div class="form-container">
                         <div class="row no-gutters mb-2">
                             <div class="col-12">
-                                <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
+                                <img
+                                    alt="Současná smlouva"
+                                    class="w-25 mb-3"
+                                    src="/assets/images/illustrations/document-cancel.svg"
+                                    title=""
+                                />
                                 <h2 class="page-box__title">
                                     Výpověď současné smlouvy
                                 </h2>
@@ -244,7 +263,8 @@
                             <lnd-button
                                 type="primary"
                                 (action)="submitAction()"
-                                label="Uložit a zobrazit nabídky">
+                                label="Uložit a zobrazit nabídky"
+                            >
                             </lnd-button>
                         </div>
                     </div>

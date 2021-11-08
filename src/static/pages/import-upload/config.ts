@@ -1,6 +1,5 @@
-
-import { FileUploader } from 'src/third-sides/file-upload';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { FileUploader } from 'src/third-sides/file-upload';
 
 export const stepperProgressConfig: IStepperProgressItem[] = [
     {

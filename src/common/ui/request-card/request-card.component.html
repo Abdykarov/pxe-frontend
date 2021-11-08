@@ -1,24 +1,48 @@
-<div *ngIf="supplyPoint"
-     class="request-card">
+<div *ngIf="supplyPoint" class="request-card">
     <div class="request-card__inner">
         <div class="row no-gutters">
             <div class="col-3 col-md-2 col-xl-1 text-center">
-                <span class="icon request-card__icon"
-                        [class.icon--flame]="supplyPoint.commodityType === commodityType.GAS"
-                        [class.icon--flash]="supplyPoint.commodityType === commodityType.POWER"
+                <span
+                    class="icon request-card__icon"
+                    [class.icon--flame]="
+                        supplyPoint.commodityType === commodityType.GAS
+                    "
+                    [class.icon--flash]="
+                        supplyPoint.commodityType === commodityType.POWER
+                    "
                 ></span>
             </div>
             <div class="col-9 col-md-10 col-xl-7 mb-4">
-                <span class="request-card__title text-break">{{supplyPoint.name}}</span>
+                <span class="request-card__title text-break"
+                    >{{ supplyPoint.name }}</span
+                >
                 <span class="request-card__title-subtext">
-                    Dodávka {{supplyPoint.commodityType === commodityType.GAS? 'plynu' : 'elektřiny'}}
+                    Dodávka {{ supplyPoint.commodityType === commodityType.GAS ?
+                    "plynu" : "elektřiny" }}
                 </span>
             </div>
-            <div class="col-12 mb-4 col-md-10 offset-md-2 col-xl-11 offset-xl-1 mb-xl-0 order-xl-3">
+            <div
+                class="
+                    col-12
+                    mb-4
+                    col-md-10
+                    offset-md-2
+                    col-xl-11
+                    offset-xl-1
+                    mb-xl-0
+                    order-xl-3
+                "
+            >
                 <div class="row">
-                    <div *ngIf="(supplyPoint.progressStatus | progressStatus: supplyPoint.subject) as stateDescription"
-                            class="col-12 mb-2 col-md-7 pr-md-3 mb-md-0 col-xl-5">
-                        Stav – {{stateDescription}}
+                    <div
+                        *ngIf="
+                            supplyPoint.progressStatus
+                                | progressStatus
+                                    : supplyPoint.subject as stateDescription
+                        "
+                        class="col-12 mb-2 col-md-7 pr-md-3 mb-md-0 col-xl-5"
+                    >
+                        Stav – {{ stateDescription }}
                     </div>
                     <div class="col-12 col-md-5 col-xl-4">
                         <pxe-progress-bar
@@ -28,30 +52,47 @@
                         ></pxe-progress-bar>
                     </div>
                 </div>
-                <ng-container *ngIf="(supplyPoint | pathValue: ['contract']) && (supplyPoint | allowProgressStep: allowPersonalDataStep)">
-                    <div class="row mt-3"
-                            [class.d-none]="supplyPoint.contract.offerValidity">
+                <ng-container
+                    *ngIf="
+                        (supplyPoint | pathValue: ['contract']) &&
+                        (supplyPoint | allowProgressStep: allowPersonalDataStep)
+                    "
+                >
+                    <div
+                        class="row mt-3"
+                        [class.d-none]="supplyPoint.contract.offerValidity"
+                    >
                         <div class="col-12 col-md-10">
                             <pxe-badge type="light">
-                                Platnost dříve vybrané nabídky bohužel již vypršela.
+                                Platnost dříve vybrané nabídky bohužel již
+                                vypršela.
                             </pxe-badge>
                         </div>
                     </div>
                 </ng-container>
             </div>
-            <div class="col-12 col-md-auto offset-md-2 offset-xl-0 order-xl-2 ml-xl-auto">
+            <div
+                class="
+                    col-12 col-md-auto
+                    offset-md-2 offset-xl-0
+                    order-xl-2
+                    ml-xl-auto
+                "
+            >
                 <div class="request-card__addon">
                     <lnd-button
                         label="Pokračovat"
                         type="primary"
                         customClass="mb-2"
-                        (click)="continueAction.emit(supplyPoint)">
+                        (click)="continueAction.emit(supplyPoint)"
+                    >
                     </lnd-button>
                     <lnd-button
                         *ngIf="!supplyPoint.contract?.previousContractId"
                         label="Smazat"
                         type="link-danger"
-                        (click)="removeAction.emit(supplyPoint)">
+                        (click)="removeAction.emit(supplyPoint)"
+                    >
                     </lnd-button>
                 </div>
             </div>

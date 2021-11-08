@@ -7,7 +7,7 @@
 .login-page {
 	.section-picture-text {
 		position: relative;
-		padding-bottom: ( $spacer * 13 );
+		padding-bottom: ( $spacer * 13  );
 		// z-index: $zindex-lp-picture-bg-overlap;
 
 		// Media queries
@@ -15,7 +15,7 @@
 			padding-top: $spacer;
 		}
 		@include media-breakpoint-up(xl) {
-			padding: ( $spacer * 3 ) 0 ( $spacer * 5 );
+			padding: ( $spacer * 3 ) 0 ( $spacer * 5  );
 		}
 
 		&::after {
@@ -23,7 +23,7 @@
 			position: absolute;
 			top: 20%;
 			right: -30px;
-			width: calc( 100% + #{$spacer});
+			width: calc( 100% + #{$spacer} );
 			height: $landing-page-picture-bg-height-mobile;
 			background-image: url(/assets/images/landing-page/lp-picture-socket.png);
 			background-repeat: no-repeat;

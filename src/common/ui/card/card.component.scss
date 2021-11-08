@@ -36,11 +36,11 @@
 	}
 
 	.card-tile__item {
-		margin-bottom: ($spacer * 2);
+		margin-bottom: ( $spacer * 2 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: 0 ($card-tile-item-spacer * 0.2);
+			padding: 0 ($card-tile-item-spacer * .2);
 		}
 		@include media-breakpoint-up(xl) {
 			padding: $card-tile-item-spacer;
@@ -64,7 +64,7 @@
 		}
 
 		&--last-item {
-			padding-bottom: ($spacer * 0.5);
+			padding-bottom: ( $spacer * .5 );
 			border-bottom: none;
 		}
 

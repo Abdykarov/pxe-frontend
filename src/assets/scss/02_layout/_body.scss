@@ -5,19 +5,19 @@
  */
 
 
-@use "sass:math";
+@use 'sass:math';
 
 .container-fluid {
 	&--max-width {
-		padding-left: ( $spacer * 2 );
-		padding-right: ( $spacer * 2 );
+		padding-left: ( $spacer * 2  );
+		padding-right: ( $spacer * 2  );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
 			padding-left: $spacer;
 			padding-right: $spacer;
 		}
-		@media (min-width: ( $body-max-width + $spacer ) ) {
+		@media (min-width: ( $body-max-width + $spacer )  ) {
 			max-width: $body-max-width;
 			padding-left: 0;
 			padding-right: 0;
@@ -78,8 +78,8 @@
 	justify-content: center;
 	align-items: flex-end;
 	height: calc(100% - 30px);
-	margin: 0 ( -$spacer * 0.5 );
-	padding: 0 ( $spacer * 0.5 );
+	margin: 0 ( -$spacer * .5  );
+	padding: 0 ( $spacer * .5  );
 	background-color: $white;
 
 	// Media queries
@@ -101,7 +101,7 @@
 		// Media queries
 		@include media-breakpoint-up(md) {
 			position: absolute;
-			top: -( math.div($spacer, 3) );
+			top: -( math.div( $spacer, 3)  );
 		}
 	}
 }

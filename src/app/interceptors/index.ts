@@ -1,5 +1,4 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { ApiInterceptor } from './api.interceptor';
 import { TransferHttpResponseInterceptor } from './transfer-http-response.interceptor';
 

@@ -30,7 +30,7 @@
 	.pagination-next,
 	.pagination-last {
 		.page-link {
-			height: (($spacer * 0.5) + $icon-size-small-px);
+			height: (( $spacer * .5) + $icon-size-small-px );
 			color: $font-text;
 			font-size: $icon-size-small-px;
 
@@ -93,7 +93,7 @@
 
 	.disabled {
 		.page-link {
-			opacity: 0.3;
+			opacity: .3;
 		}
 	}
 }

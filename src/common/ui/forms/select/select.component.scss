@@ -12,10 +12,10 @@
 .ng-select-custom {
 	max-width: $input-width;
 	padding-bottom: 0;
-	margin-bottom: ($spacer * 2);
+	margin-bottom: ( $spacer * 2 );
 
 	.ng-select-label {
-		margin-bottom: ($spacer * 0.25);
+		margin-bottom: ( $spacer * .25 );
 		font-size: $input-font-size;
 		cursor: pointer;
 	}
@@ -112,7 +112,7 @@
 					top: 5px;
 					left: 0;
 					padding: 0 $spacer;
-					color: rgba($input-color, 0.5);
+					color: rgba($input-color, .5);
 					transform: none;
 					transition: none;
 				}
@@ -198,11 +198,11 @@
 		}
 
 		.ng-dropdown-panel-items {
-			padding: math.div($spacer, 2.5) 0;
+			padding: math.div( $spacer, 2.5 ) 0;
 			max-height: $select-dropdown-panel-height;
 			background-color: $input-bg;
 			border-radius: $input-border-radius;
-			box-shadow: 0 0 10px 0 rgba($black, 0.09);
+			box-shadow: 0 0 10px 0 rgba($black, .09);
 
 			.ng-option {
 				.highlighted {
@@ -224,7 +224,7 @@
 		}
 
 		.ng-option {
-			padding: ($spacer * 0.5) $input-padding-x;
+			padding: ( $spacer * .5 ) $input-padding-x;
 			line-height: $line-height-sm;
 
 			&.ng-option-selected {

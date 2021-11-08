@@ -28,7 +28,7 @@
 			.supply-point__inner--price {
 				// Media queries
 				@include media-breakpoint-up(xl) {
-					background-color: rgba($white, 0.5);
+					background-color: rgba($white, .5);
 				}
 			}
 		}
@@ -38,14 +38,14 @@
 			align-items: center;
 			justify-content: center;
 			min-height: 255px;
-			height: calc(100% - #{$spacer});
-			padding: ($spacer * 1.5);
+			height: calc(100% - #{$spacer} );
+			padding: ( $spacer * 1.5 );
 			border-radius: $border-radius;
 			box-shadow: $box-shadow;
 
 			// Media queries
 			@include media-breakpoint-up(lg) {
-				padding: ($spacer * 2);
+				padding: ( $spacer * 2 );
 			}
 
 			> :nth-child(n) {
@@ -63,7 +63,7 @@
 	@include link-without-href-self {
 		pointer-events: auto;
 		display: block;
-		height: calc(100% - #{$spacer});
+		height: calc(100% - #{$spacer} );
 		margin-bottom: $spacer;
 		background-color: $white;
 		color: inherit;
@@ -85,34 +85,34 @@
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			box-shadow: 0 10px 20px rgba($box-shadow-color, 0.2);
+			box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
 		}
 
 		.supply-point__inner--price {
-			background-color: rgba($body-bg, 0.5);
+			background-color: rgba($body-bg, .5);
 		}
 	}
 
 	&__inner {
 		height: 100%;
-		padding: ($spacer * 1.5) $spacer ($spacer * 0.5);
+		padding: ( $spacer * 1.5) $spacer ( $spacer * .5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ($spacer * 2.5) ($spacer * 3) ($spacer * 1.5)
-				($spacer * 1.5);
+			padding: ( $spacer * 2.5) ( $spacer * 3) ( $spacer * 1.5 )
+				( $spacer * 1.5 );
 		}
 
 		&--price {
-			padding-bottom: ($spacer * 1.5);
-			background-color: rgba($body-bg, 0.5);
+			padding-bottom: ( $spacer * 1.5 );
+			background-color: rgba($body-bg, .5);
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding-bottom: ($spacer * 2.5);
+				padding-bottom: ( $spacer * 2.5 );
 			}
 			@include media-breakpoint-up(xl) {
-				padding-left: ($spacer * 3);
+				padding-left: ( $spacer * 3 );
 			}
 		}
 	}
@@ -127,7 +127,7 @@
 		display: block;
 		padding-top: (
 			($supply-point-title-line-height-px - $supply-point-icon-font-size) *
-				0.5
+				.5
 		);
 		color: $icons-primary;
 		font-size: $supply-point-icon-font-size;
@@ -141,7 +141,7 @@
 		@include media-breakpoint-up(md) {
 			display: inline-block;
 			max-width: 100%;
-			margin-right: ($spacer * 1.25);
+			margin-right: ( $spacer * 1.25 );
 			font-size: $supply-point-title-font-size;
 			line-height: $supply-point-title-line-height;
 		}
@@ -181,9 +181,9 @@
 		display: flex;
 		padding-bottom: (
 			($supply-point-title-line-height-px - $supply-point-title-font-size) *
-				0.5
+				.5
 		);
-		margin-bottom: ($spacer * 0.25);
+		margin-bottom: ( $spacer * .25 );
 		line-height: math.div(18, 14);
 
 		// Media queries
@@ -207,7 +207,7 @@
 		// Media queries
 		@include media-breakpoint-up(md) {
 			padding-top: (
-				($supply-point-title-line-height-px - $btn-height) * 0.5
+				($supply-point-title-line-height-px - $btn-height) * .5
 			);
 			text-align: right;
 		}

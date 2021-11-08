@@ -1,13 +1,8 @@
-import { AbstractComponent } from './abstract.component';
 import { Directive } from '@angular/core';
-
-import {
-    debounceTime,
-    takeUntil,
-} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
+import { AbstractComponent } from './abstract.component';
 import { TypeOfResolution } from './models/type-of-resolution';
 
 @Directive()
@@ -16,11 +11,10 @@ export abstract class AbstractResizeComponent extends AbstractComponent {
 
     public showCarousel = true;
 
-    public resizeEvent$ = fromEvent(window, 'resize')
-        .pipe(
-            takeUntil(this.destroy$),
-            debounceTime(200),
-        );
+    public resizeEvent$ = fromEvent(window, 'resize').pipe(
+        takeUntil(this.destroy$),
+        debounceTime(200)
+    );
 
     public getTypeOfDevice = (): TypeOfResolution => {
         const viewPortWidth = window.innerWidth;
@@ -28,10 +22,12 @@ export abstract class AbstractResizeComponent extends AbstractComponent {
             return TypeOfResolution.DESKTOP;
         }
 
-        if (viewPortWidth <= CONSTS.XL_RESOLUTION &&  viewPortWidth > CONSTS.SM_RESOLUTION ) {
+        if (
+            viewPortWidth <= CONSTS.XL_RESOLUTION &&
+            viewPortWidth > CONSTS.SM_RESOLUTION
+        ) {
             return TypeOfResolution.TABLET;
         }
-        return  TypeOfResolution.MOBILE;
-    }
-
+        return TypeOfResolution.MOBILE;
+    };
 }

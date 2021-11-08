@@ -2,7 +2,7 @@
 @use 'sass:math';
 
 $input-height:                       50px;
-$input-padding-y:                    ( $spacer * .25 );
+$input-padding-y:                    ( $spacer * .25  );
 $input-padding-x:                    $spacer;
 $input-font-size:                    12px;
 $input-line-height:                  1;
@@ -23,20 +23,19 @@ $input-disabled-color:               rgba($input-color, .2);
 $input-disabled-border-color:        rgba($input-border-color, .4);
 $input-group-addon-bg:               transparent;
 $input-group-addon-color:            $gray-400;
-$form-group-padding-top:             ( $spacer * 1.25 );
-$form-group-margin-bottom:           ( $spacer * 2 );
+$form-group-padding-top:             ( $spacer * 1.25  );
+$form-group-margin-bottom:           ( $spacer * 2  );
 $input-label-active-font-size:       .75rem;
 $input-textarea-min-height:          175px;
 $input-textarea-line-height:         24px;
 
 $input-height-public:                60px;
 $input-padding-y-public:             $spacer;
-$input-padding-x-public:             ( $spacer * 1.5 );
+$input-padding-x-public:             ( $spacer * 1.5  );
 
 $custom-control-gutter:                                  0;
 $custom-control-indicator-top:                           2px;
 $custom-control-indicator-size:                          1rem;
-$custom-control-indicator-size-px:                       16px;
 $custom-control-indicator-bg:                            $white;
 $custom-control-indicator-box-shadow:                    none;
 $custom-control-indicator-bg-interactive-warning:        rgba($warning-lighten, .3);
@@ -61,7 +60,7 @@ $custom-control-indicator-checked-bg:                    $custom-control-indicat
 $custom-control-indicator-checked-disabled-bg:           transparent;
 $custom-control-label-disabled-color:                    rgba($input-color, .4);
 
-$custom-control-spacer-x:                     ( $spacer * 2 );
+$custom-control-spacer-x:                     ( $spacer * 2  );
 
 $custom-radio-filling-size:                   8px;
 $custom-radio-indicator-border-radius:        50%;

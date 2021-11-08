@@ -33,7 +33,7 @@
 		&::before {
 			content: '';
 			position: absolute;
-			top: ($progress-bar-bullet-size - $progress-bar-line-height) * 0.5;
+			top: ($progress-bar-bullet-size - $progress-bar-line-height) * .5;
 			left: 0;
 			width: 100%;
 			height: $progress-bar-line-height;
@@ -77,16 +77,14 @@
 				}
 			}
 
-			&
-				+ .progress-bar__item:not(:last-child):not(.progress-bar__item--shadow-step) {
+			& + .progress-bar__item:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
 					left: 0;
 					width: 120%;
 				}
 			}
 
-			&
-				+ .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
+			& + .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
 					background: linear-gradient(
 						90deg,
@@ -124,11 +122,11 @@
 			position: absolute;
 			top: (
 				($progress-bar-bullet-size - $progress-bar-bullet-size-inner) *
-					0.5
+					.5
 			);
 			left: (
 				($progress-bar-bullet-size - $progress-bar-bullet-size-inner) *
-					0.5
+					.5
 			);
 			width: $progress-bar-bullet-size-inner;
 			height: $progress-bar-bullet-size-inner;
@@ -164,7 +162,7 @@
 
 	&__label {
 		display: block;
-		padding: ($spacer * 0.5) ($spacer * 0.5) 0;
+		padding: ( $spacer * .5) ( $spacer * .5 ) 0;
 		line-height: math.div(19, 14);
 	}
 
@@ -212,10 +210,6 @@
 
 			.progress-bar__label {
 				display: none;
-			}
-
-			&--shadow-step {
-				flex-grow: 2;
 			}
 		}
 	}

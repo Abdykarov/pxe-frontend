@@ -1,22 +1,19 @@
-import {gql} from 'apollo-angular';
-
+import { gql } from 'apollo-angular';
 
 export const listAskForOfferQuery = gql`
-    query listAskForOffer($filter: AskForOfferFilter!){
-        listAskForOffer(filter: $filter){
+    query listAskForOffer($filter: AskForOfferFilter!) {
+        listAskForOffer(filter: $filter) {
             page {
-                id,
-                createdAt,
-                status,
-                email,
+                id
+                createdAt
+                status
+                email
                 files {
-                    id,
-                    fileName,
-                },
+                    id
+                    fileName
+                }
             }
-            totalRecords,
-
+            totalRecords
         }
     }
 `;
-

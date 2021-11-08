@@ -12,16 +12,16 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		min-height: calc(100vh - #{$footer-height-tablet});
-		padding-top: ( ( $header-height - $logo-height-tablet ) * 0.5 );
+		padding-top: ( ( $header-height - $logo-height-tablet ) * .5 );
 	}
 
 	&--public {
-		padding: ( $header-height + ( $spacer * 1.5 ) ) ( $spacer * 1.5 ) 0;
+		padding: ( $header-height + ( $spacer * 1.5 ) ) ( $spacer * 1.5  ) 0;
 		font-size: $large-font-size;
 
 		// Media queries
 		@include media-breakpoint-up(lg) {
-			padding-top: ( $header-height + $spacer );
+			padding-top: ( $header-height + $spacer  );
 		}
 	}
 }

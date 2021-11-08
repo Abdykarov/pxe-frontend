@@ -1,6 +1,8 @@
 <div class="row static-pages-holder">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 
@@ -17,7 +19,8 @@
                     [gasPlacesCount]="supplyPointStatistic.gasCount"
                     [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
                     [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
-                    [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems">
+                    [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems"
+                >
                 </pxe-supply-points-summary>
             </div>
             <h3>více smluv k prodloužení</h3>
@@ -30,7 +33,8 @@
                     [gasPlacesCount]="supplyPointStatisticMore.gasCount"
                     [gasPlacesConsumptionSum]="supplyPointStatisticMore.gasAnnualConsumptionSum"
                     [supplyPointsEndingCount]="supplyPointStatisticMore.showDeliveryCount"
-                    [supplyPointsEndingData]="supplyPointStatisticMore.showDeliveryItems">
+                    [supplyPointsEndingData]="supplyPointStatisticMore.showDeliveryItems"
+                >
                 </pxe-supply-points-summary>
             </div>
             <h3>žádná smlouva k prodloužení</h3>
@@ -43,7 +47,8 @@
                     [gasPlacesCount]="supplyPointStatisticNone.gasCount"
                     [gasPlacesConsumptionSum]="supplyPointStatisticNone.gasAnnualConsumptionSum"
                     [supplyPointsEndingCount]="supplyPointStatisticNone.showDeliveryCount"
-                    [supplyPointsEndingData]="supplyPointStatisticNone.showDeliveryItems">
+                    [supplyPointsEndingData]="supplyPointStatisticNone.showDeliveryItems"
+                >
                 </pxe-supply-points-summary>
             </div>
         </div>

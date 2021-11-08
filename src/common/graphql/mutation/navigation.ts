@@ -1,5 +1,4 @@
-import {gql} from 'apollo-angular';
-
+import { gql } from 'apollo-angular';
 
 export const loadConfigMutation = gql`
     mutation loadConfig($config: NavigationConfigInput) {

@@ -1,36 +1,29 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-
-import { compareDates } from 'src/common/utils';
 import { CONSTS } from 'src/app/app.constants';
+import { compareDates } from 'src/common/utils';
 
 export const normalizeNews = R.pipe(
     R.head,
     R.prop('news'),
-    R.sort((first, second) => compareDates(first.date, second.date, false)),
+    R.sort((first, second) => compareDates(first.date, second.date, false))
 );
 
 const processHeadOperationOnReference = R.mapObjIndexed(
-    R.cond(
+    R.cond([
         [
-            [
-                (value, key) => (
-                    R.pipe(
-                        R_.isArray,
-                        R.and(key !== 'carouselReferences'),
-                    )(value)
-                ),
-                R.head,
-            ],
-            [R.T, data => data],
+            (value, key) =>
+                R.pipe(R_.isArray, R.and(key !== 'carouselReferences'))(value),
+            R.head,
         ],
-    ),
+        [R.T, (data) => data],
+    ])
 );
 
 const normalizeLogos = (data) => {
     return R.pipe(
         R.path(['aboutUs', 'logos']),
-        R.map(({alt, logo, title, width, faq}) => {
+        R.map(({ alt, logo, title, width, faq }) => {
             const faqItem = R.head(faq);
             const { url: logoUrl } = R.head(logo);
 
@@ -38,15 +31,18 @@ const normalizeLogos = (data) => {
                 alt,
                 logoUrl,
                 title,
-                faqUrl: `/${CONSTS.PATHS.FAQ}/${R.head(faqItem.tag).url}/${faqItem.url}`,
+                faqUrl: `/${CONSTS.PATHS.FAQ}/${R.head(faqItem.tag).url}/${
+                    faqItem.url
+                }`,
                 width,
             };
         }),
-        (normalizedData) => R.assocPath(['aboutUs', 'logos'], normalizedData, data),
+        (normalizedData) =>
+            R.assocPath(['aboutUs', 'logos'], normalizedData, data)
     )(data);
 };
 
 export const normalizeLandingPage = R.pipe(
     processHeadOperationOnReference,
-    normalizeLogos,
+    normalizeLogos
 );

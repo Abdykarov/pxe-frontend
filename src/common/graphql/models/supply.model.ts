@@ -1,5 +1,5 @@
-import { IContract } from './contract';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { IContract } from './contract';
 
 export enum CommodityType {
     POWER = 'POWER',

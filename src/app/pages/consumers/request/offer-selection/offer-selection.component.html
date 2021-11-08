@@ -3,62 +3,90 @@
         bannerTitle="Litujeme, ale pro zadané odběrné místo nemáme nyní vhodnou nabídku."
         bannerDescription="Zadali jste správně informace ohledně vašeho odběrného místa?"
         buttonLabel="Zkontrolovat zadané informace"
-        (buttonAction)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS)"
+        (buttonAction)="
+            navigateRequestService.backStepAction(
+                supplyPoint,
+                PREVIOUS_PROGRESS_STATUS
+            )
+        "
     >
     </lnd-info-banner>
 </ng-template>
-<ng-template #noOfferTextTemplate>
-    Neexistuje vhodná nabídka
-</ng-template>
+<ng-template #noOfferTextTemplate> Neexistuje vhodná nabídka </ng-template>
 
 <pxe-layout-container pageTitle="Výběr nabídky">
     <div class="row mb-6">
         <div *ngIf="supplyPoint && supplyPoint.name" class="col-12 text-center">
-            <h2>Odběrné místo: {{supplyPoint.name}}</h2>
+            <h2>Odběrné místo: {{ supplyPoint.name }}</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+            <pxe-progress-bar
+                [config]="stepperProgressConfig"
+            ></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-banner-ui
-                *ngIf="onlyOffersFromActualSupplier && supplyPointOffers.length && bannerObj && bannerObj.text"
+                *ngIf="
+                    onlyOffersFromActualSupplier &&
+                    supplyPointOffers.length &&
+                    bannerObj &&
+                    bannerObj.text
+                "
                 [data]="bannerObj"
-                [showButtonLabel]="false">
+                [showButtonLabel]="false"
+            >
             </lnd-banner-ui>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
     </div>
-    <lnd-placeloader [loading]="loadingSupplyPointOffers && !globalError.length"></lnd-placeloader>
-    <div class="row"
-        *ngIf="supplyPointOffers && questions">
+    <lnd-placeloader
+        [loading]="loadingSupplyPointOffers && !globalError.length"
+    ></lnd-placeloader>
+    <div class="row" *ngIf="supplyPointOffers && questions">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="row justify-content-md-between mb-md-3 text-center text-md-left">
-                <div *ngIf="supplyPointOffers && supplyPointOffers.length"
-                     class="col-12 mb-5 col-md-auto mb-md-0">
+            <div
+                class="
+                    row
+                    justify-content-md-between
+                    mb-md-3
+                    text-center text-md-left
+                "
+            >
+                <div
+                    *ngIf="supplyPointOffers && supplyPointOffers.length"
+                    class="col-12 mb-5 col-md-auto mb-md-0"
+                >
                     <lnd-button
                         label="Krok zpět"
                         type="secondary"
-                        (action)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS)">
+                        (action)="
+                            navigateRequestService.backStepAction(
+                                supplyPoint,
+                                PREVIOUS_PROGRESS_STATUS
+                            )
+                        "
+                    >
                     </lnd-button>
                 </div>
-                <div *ngIf="existsCurrentOffer"
-                     class="col-12 mb-5 col-md-auto mb-md-0">
+                <div
+                    *ngIf="existsCurrentOffer"
+                    class="col-12 mb-5 col-md-auto mb-md-0"
+                >
                     <lnd-button
                         label="Zobrazit současnou smlouvu"
                         type="dark"
-                        (action)="scrollToCurrentOffer()">
+                        (action)="scrollToCurrentOffer()"
+                    >
                     </lnd-button>
                 </div>
             </div>
@@ -75,9 +103,17 @@
                         [isOwner]="!supplyPointOffer.id"
                         [offerSelected]="offerSelected"
                         [supplyPointOffer]="supplyPointOffer"
-                        (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
+                        (mouseenter)="
+                            sAnalyticsService.sFormFocus($event);
+                            sAnalyticsService.sFormChange(supplyPointOffer)
+                        "
                         (mouseleave)="sAnalyticsService.sFormBlur($event)"
-                        (togglePriceDecompositionAction)="togglePriceDecompositionAction($event, supplyPointOffer)"
+                        (togglePriceDecompositionAction)="
+                            togglePriceDecompositionAction(
+                                $event,
+                                supplyPointOffer
+                            )
+                        "
                     >
                     </pxe-supply-point-offer>
                 </div>

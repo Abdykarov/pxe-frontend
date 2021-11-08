@@ -38,7 +38,7 @@
 			margin-left: $spacer;
 		}
 		@include media-breakpoint-up(xl) {
-			margin-left: ($spacer * 2);
+			margin-left: ( $spacer * 2 );
 		}
 	}
 
@@ -79,9 +79,9 @@
 				justify-content: center;
 				width: auto;
 				height: auto;
-				padding: ($spacer * 0.5);
+				padding: ( $spacer * .5 );
 				border: none;
-				opacity: 0.2;
+				opacity: .2;
 
 				&::before {
 					display: none;
@@ -89,7 +89,7 @@
 
 				&:focus,
 				&:hover {
-					opacity: 0.5;
+					opacity: .5;
 				}
 
 				&--active {

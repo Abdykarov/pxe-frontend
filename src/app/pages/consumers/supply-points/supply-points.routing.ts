@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import {
-    Routes,
-    RouterModule,
-} from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { SupplyPointsComponent } from './supply-points.component';
 
@@ -14,16 +10,15 @@ const routes: Routes = [
     },
     {
         path: ':supplyPointId/:contractId',
-        loadChildren: () => import('./detail/supply-point-detail.module').then(m => m.SupplyPointDetailModule),
+        loadChildren: () =>
+            import('./detail/supply-point-detail.module').then(
+                (m) => m.SupplyPointDetailModule
+            ),
     },
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-    ],
-    exports: [
-        RouterModule,
-    ],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 export class SupplyPointsRoutingModule {}

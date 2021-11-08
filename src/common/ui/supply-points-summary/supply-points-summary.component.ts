@@ -1,10 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
     CommodityType,
     ISupplyPointStatisticView,
@@ -16,7 +10,6 @@ import {
     styleUrls: ['./supply-points-summary.component.scss'],
 })
 export class SupplyPointsSummaryComponent {
-
     @Input()
     public concludedPlacesCount = 0;
 

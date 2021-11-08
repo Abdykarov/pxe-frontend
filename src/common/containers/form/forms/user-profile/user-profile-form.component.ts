@@ -6,11 +6,9 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-
 import { takeUntil } from 'rxjs/operators';
-
-import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
 
@@ -19,8 +17,10 @@ import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.
     templateUrl: './user-profile-form.component.html',
     styleUrls: ['./user-profile-form.component.scss'],
 })
-export class UserProfileFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
-
+export class UserProfileFormComponent
+    extends AbstractFormComponent
+    implements OnInit, OnChanges
+{
     @Input()
     public formValues = null;
 
@@ -33,20 +33,21 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
 
     public showForm = false;
 
-    constructor(
-        protected fb: FormBuilder,
-    ) {
+    constructor(protected fb: FormBuilder) {
         super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
 
-        this.form.get('phone')
-            .valueChanges
-            .pipe(takeUntil(this.destroy$))
+        this.form
+            .get('phone')
+            .valueChanges.pipe(takeUntil(this.destroy$))
             .subscribe(() => {
-                this.phoneNumber = this.getFieldValue('phonePrefix') + '' + this.getFieldValue('phone');
+                this.phoneNumber =
+                    this.getFieldValue('phonePrefix') +
+                    '' +
+                    this.getFieldValue('phone');
                 this.smsSent = false;
                 this.showForm = false;
             });
@@ -66,22 +67,32 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.form.get('firstName').setValue(this.formValues.firstName);
         this.form.get('lastName').setValue(this.formValues.lastName);
 
-        const phone = this.formValues.phoneNumber && this.formValues.phoneNumber.indexOf(CONSTS.TELEPHONE_PREFIX_CZ) >= 0 ?
-            this.formValues.phoneNumber.substr(4, 10) : this.formValues.phoneNumber;
+        const phone =
+            this.formValues.phoneNumber &&
+            this.formValues.phoneNumber.indexOf(CONSTS.TELEPHONE_PREFIX_CZ) >= 0
+                ? this.formValues.phoneNumber.substr(4, 10)
+                : this.formValues.phoneNumber;
         this.form.get('phone').setValue(phone);
-    }
+    };
 
-    public processSaveButton = (value: IUserProfileModelForm, submitValidFormAction = true) => {
+    public processSaveButton = (
+        value: IUserProfileModelForm,
+        submitValidFormAction = true
+    ) => {
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            if (this.phoneChanged() && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
+            if (
+                this.phoneChanged() &&
+                (!submitValidFormAction || !this.smsSent) &&
+                this.phoneNumber
+            ) {
                 this.customAction.emit(this.form.value.phone);
             } else {
                 this.submitValidForm(value);
             }
         }
-    }
+    };
 
     public submitValidForm = (smsCode) => {
         const form: IPersonalDataInputForm = {
@@ -90,7 +101,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
             phoneNumber: this.phoneNumber,
         };
         this.submitAction.emit(form);
-    }
+    };
 
     public phoneChanged = (): boolean => this.oldPhone !== this.phoneNumber;
 
@@ -104,5 +115,5 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
                 this.submitValidForm(value);
             }
         }
-    }
+    };
 }

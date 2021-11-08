@@ -2,13 +2,15 @@
     <div class="news__inner">
         <div class="row">
             <div class="col-12">
-                <div class="row mb-4" *ngFor="let oneNew of news; let i = index">
+                <div
+                    class="row mb-4"
+                    *ngFor="let oneNew of news; let i = index"
+                >
                     <div class="col-xl-auto text-xl-right">
-                        {{oneNew.date | date:'d.&nbsp;M.&nbsp;y'}}
+                        {{ oneNew.date | date: "d.&nbsp;M.&nbsp;y" }}
                     </div>
-                    <div class="col"
-                         [class.perex]="i === 0">
-                        {{oneNew.new}}
+                    <div class="col" [class.perex]="i === 0">
+                        {{ oneNew.new }}
                     </div>
                 </div>
             </div>

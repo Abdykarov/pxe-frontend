@@ -3,24 +3,23 @@
     [class.modal--open]="!!isModalOpen"
     [class.modal-confirm]="isConfirm"
     tabindex="-1"
-    role="dialog">
+    role="dialog"
+>
     <div
         class="modal-dialog modal-dialog-centered"
         [ngClass]="size ? 'modal-' + size : ''"
         [class.modal-video]="isVideo"
-        role="document">
+        role="document"
+    >
         <div class="modal-content">
             <div class="modal-header">
-                <h3
-                    *ngIf="!!title"
-                    class="modal-title">
-                    {{ title }}
-                </h3>
+                <h3 *ngIf="!!title" class="modal-title">{{ title }}</h3>
                 <button
                     *ngIf="showClose"
                     type="button"
                     class="close modal__close"
-                    (click)="close.emit($event)">
+                    (click)="close.emit($event)"
+                >
                     &times;
                 </button>
             </div>

@@ -1,7 +1,7 @@
 <pxe-layout-container pageTitle="Podepsání smlouvy">
     <div class="row mb-6">
         <div *ngIf="supplyPoint && supplyPoint.name" class="col-12 text-center">
-            <h2>Odběrné místo: {{supplyPoint.name}}</h2>
+            <h2>Odběrné místo: {{ supplyPoint.name }}</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
@@ -9,11 +9,9 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
@@ -29,42 +27,73 @@
     <lnd-placeloader
         *ngIf="loadingSupplyPoint && !globalError.length"
         [loading]="true"
-        label="Právě připravujeme vaše smlouvy">
+        label="Právě připravujeme vaše smlouvy"
+    >
     </lnd-placeloader>
-    <div *ngIf="supplyPoint && !loadingSupplyPoint && !globalError.length"
-         class="row">
+    <div
+        *ngIf="supplyPoint && !loadingSupplyPoint && !globalError.length"
+        class="row"
+    >
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="row align-items-center mb-3">
-                <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                <div
+                    class="
+                        col-12
+                        mb-5
+                        col-md-3
+                        mb-md-0
+                        text-center text-md-left
+                    "
+                >
                     <lnd-button
                         label="Krok zpět"
                         type="secondary"
-                        (action)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS )">
+                        (action)="
+                            navigateRequestService.backStepAction(
+                                supplyPoint,
+                                PREVIOUS_PROGRESS_STATUS
+                            )
+                        "
+                    >
                     </lnd-button>
                 </div>
                 <div class="col-12 col-md-6 text-center">
-                    <h2 class="mb-0">
-                        Podepište smlouvu
-                    </h2>
+                    <h2 class="mb-0">Podepište smlouvu</h2>
                 </div>
             </div>
         </div>
-        <div *ngIf="!supplyPoint.contract.offerValidity"
-             class="col-12 col-xl-10 offset-xl-1">
+        <div
+            *ngIf="!supplyPoint.contract.offerValidity"
+            class="col-12 col-xl-10 offset-xl-1"
+        >
             <lnd-banner-ui
                 [data]="{
                     text: 'Platnost nabídky vypršela.'
                 }"
                 buttonLabel="Vybrat novou nabídku"
-                (customBannerAction)="chooseNewOfferAction($event)">
+                (customBannerAction)="chooseNewOfferAction($event)"
+            >
             </lnd-banner-ui>
             <p class="mt-5">
                 Tato nabídka již není aktivní. Dokumenty k uzavření dodávky
-                <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> dále nejsou k dispozici.
-                Pokud máte pořád zájem o dodávku
-                <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> pro vaše odběrné místo, vyberte prosím novou nabídku.
+                <ng-container
+                    *ngIf="supplyPoint.commodityType === commodityType.POWER"
+                    >elektřiny</ng-container
+                >
+                <ng-container
+                    *ngIf="supplyPoint.commodityType === commodityType.GAS"
+                    >plynu</ng-container
+                >
+                dále nejsou k dispozici. Pokud máte pořád zájem o dodávku
+                <ng-container
+                    *ngIf="supplyPoint.commodityType === commodityType.POWER"
+                    >elektřiny</ng-container
+                >
+                <ng-container
+                    *ngIf="supplyPoint.commodityType === commodityType.GAS"
+                    >plynu</ng-container
+                >
+                pro vaše odběrné místo, vyberte prosím novou nabídku.
             </p>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
@@ -72,15 +101,19 @@
                 <div class="row">
                     <div class="col-12 text-center d-xl-none">
                         <lnd-button
-                            [label]="showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'"
+                            [label]="
+                                showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'
+                            "
                             type="link"
-                            (click)="toggleOffer()">
+                            (click)="toggleOffer()"
+                        >
                         </lnd-button>
                     </div>
                     <div
-                        class="col-12  d-xl-block"
+                        class="col-12 d-xl-block"
                         [class.d-block]="showOffer"
-                        [class.d-none]="!showOffer">
+                        [class.d-none]="!showOffer"
+                    >
                         <pxe-supply-point-offer
                             *ngIf="questions"
                             customClass="mb-0"
@@ -88,7 +121,8 @@
                             [isFromContract]="true"
                             [personalInfo]="supplyPoint.contract.personalData"
                             [supplyPointOffer]="supplyPoint.contract.offer"
-                            [interactive]="false">
+                            [interactive]="false"
+                        >
                         </pxe-supply-point-offer>
                     </div>
                 </div>
@@ -96,27 +130,91 @@
                     <div class="page-box__inner page-box__inner--light">
                         <h3 class="mb-2">Podepište smlouvu pomocí SMS</h3>
                         <p>
-                            Níže naleznete dokumenty, které jsou potřebné k uzavření dodávky
-                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> pro budoucí období.
-                            Návrh <strong>smlouvy o sdružených službách dodávky <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container></strong> obsahuje také <strong>obchodní
-                            podmínky</strong> dodávky a <strong>plnou moc</strong> pro dodavatele.
+                            Níže naleznete dokumenty, které jsou potřebné k
+                            uzavření dodávky
+                            <ng-container
+                                *ngIf="
+                                    supplyPoint.commodityType ===
+                                    commodityType.POWER
+                                "
+                                >elektřiny</ng-container
+                            >
+                            <ng-container
+                                *ngIf="
+                                    supplyPoint.commodityType ===
+                                    commodityType.GAS
+                                "
+                                >plynu</ng-container
+                            >
+                            pro budoucí období. Návrh
+                            <strong
+                                >smlouvy o sdružených službách dodávky
+                                <ng-container
+                                    *ngIf="
+                                        supplyPoint.commodityType ===
+                                        commodityType.POWER
+                                    "
+                                    >elektřiny</ng-container
+                                >
+                                <ng-container
+                                    *ngIf="
+                                        supplyPoint.commodityType ===
+                                        commodityType.GAS
+                                    "
+                                    >plynu</ng-container
+                                ></strong
+                            >
+                            obsahuje také
+                            <strong>obchodní podmínky</strong> dodávky a
+                            <strong>plnou moc</strong> pro dodavatele.
                         </p>
-                        <div *ngIf="supplyPoint.subject.code === subjectType.SUBJECT_TYPE_INDIVIDUAL">
+                        <div
+                            *ngIf="
+                                supplyPoint.subject.code ===
+                                subjectType.SUBJECT_TYPE_INDIVIDUAL
+                            "
+                        >
                             <div class="row mb-2">
                                 <div class="col mb-1">
-                                    <span class="small">Informace před uzavřením smlouvy o sdružených službách dodávky
-                                        <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                                        <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
+                                    <span class="small"
+                                        >Informace před uzavřením smlouvy o
+                                        sdružených službách dodávky
+                                        <ng-container
+                                            *ngIf="
+                                                supplyPoint.commodityType ===
+                                                commodityType.POWER
+                                            "
+                                            >elektřiny</ng-container
+                                        >
+                                        <ng-container
+                                            *ngIf="
+                                                supplyPoint.commodityType ===
+                                                commodityType.GAS
+                                            "
+                                            >plynu</ng-container
+                                        >
                                     </span>
                                 </div>
                                 <div>
                                     <span class="col-auto mb-1">
-                                        <lnd-loader class="mr-2" *ngIf="documentLoading"></lnd-loader>
-                                        <a class="small"
-                                            [class.link--disabled]="documentLoading"
-                                            (click)="saveDocument(supplyPoint.contract.contractId, documentType.INFORMATION)">Stáhnout</a>
+                                        <lnd-loader
+                                            class="mr-2"
+                                            *ngIf="documentLoading"
+                                        ></lnd-loader>
+                                        <a
+                                            class="small"
+                                            [class.link--disabled]="
+                                                documentLoading
+                                            "
+                                            (click)="
+                                                saveDocument(
+                                                    supplyPoint.contract
+                                                        .contractId,
+                                                    documentType.INFORMATION
+                                                )
+                                            "
+                                            >Stáhnout</a
+                                        >
                                     </span>
                                 </div>
                                 <div class="col-12 pdf-holder">
@@ -124,52 +222,106 @@
                                         #pdfInformation
                                         [openFile]="false"
                                         [viewBookmark]="false"
-                                        zoom="page-width">
+                                        zoom="page-width"
+                                    >
                                     </pxe-pdf-viewer>
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <span class="small">Smlouva o sdružených službách dodávky
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
+                                <span class="small"
+                                    >Smlouva o sdružených službách dodávky
+                                    <ng-container
+                                        *ngIf="
+                                            supplyPoint.commodityType ===
+                                            commodityType.POWER
+                                        "
+                                        >elektřiny</ng-container
+                                    >
+                                    <ng-container
+                                        *ngIf="
+                                            supplyPoint.commodityType ===
+                                            commodityType.GAS
+                                        "
+                                        >plynu</ng-container
+                                    >
                                 </span>
                             </div>
                             <div class="col-auto mb-1">
-                                <lnd-loader class="mr-2" *ngIf="documentLoading"></lnd-loader>
-                                <a class="small"
-                                   [class.link--disabled]="documentLoading"
-                                   (click)="saveDocument(supplyPoint.contract.contractId, documentType.CONTRACT)">Stáhnout</a>
+                                <lnd-loader
+                                    class="mr-2"
+                                    *ngIf="documentLoading"
+                                ></lnd-loader>
+                                <a
+                                    class="small"
+                                    [class.link--disabled]="documentLoading"
+                                    (click)="
+                                        saveDocument(
+                                            supplyPoint.contract.contractId,
+                                            documentType.CONTRACT
+                                        )
+                                    "
+                                    >Stáhnout</a
+                                >
                             </div>
                             <div class="col-12 pdf-holder">
                                 <pxe-pdf-viewer
                                     #pdfContract
                                     [openFile]="false"
                                     [viewBookmark]="false"
-                                    zoom="page-width">
+                                    zoom="page-width"
+                                >
                                 </pxe-pdf-viewer>
                             </div>
                         </div>
-                        <div *ngIf="documentTypeUnsetProlongation" class="row mb-2">
+                        <div
+                            *ngIf="documentTypeUnsetProlongation"
+                            class="row mb-2"
+                        >
                             <div class="col">
-                                <span class="small">Smlouva o zrušení automatické prolongace
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
+                                <span class="small"
+                                    >Smlouva o zrušení automatické prolongace
+                                    <ng-container
+                                        *ngIf="
+                                            supplyPoint.commodityType ===
+                                            commodityType.POWER
+                                        "
+                                        >elektřiny</ng-container
+                                    >
+                                    <ng-container
+                                        *ngIf="
+                                            supplyPoint.commodityType ===
+                                            commodityType.GAS
+                                        "
+                                        >plynu</ng-container
+                                    >
                                 </span>
                             </div>
                             <div class="col-auto mb-1">
-                                <lnd-loader class="mr-2" *ngIf="documentLoading"></lnd-loader>
-                                <a class="small"
-                                   [class.link--disabled]="documentLoading"
-                                   (click)="saveDocument(supplyPoint.contract.contractId, documentType.CONTRACT_NOT_EXTENDED)">Stáhnout</a>
+                                <lnd-loader
+                                    class="mr-2"
+                                    *ngIf="documentLoading"
+                                ></lnd-loader>
+                                <a
+                                    class="small"
+                                    [class.link--disabled]="documentLoading"
+                                    (click)="
+                                        saveDocument(
+                                            supplyPoint.contract.contractId,
+                                            documentType.CONTRACT_NOT_EXTENDED
+                                        )
+                                    "
+                                    >Stáhnout</a
+                                >
                             </div>
                             <div class="col-12 pdf-holder">
                                 <pxe-pdf-viewer
                                     #pdfStopProlongation
                                     [openFile]="false"
                                     [viewBookmark]="false"
-                                    zoom="page-width">
+                                    zoom="page-width"
+                                >
                                 </pxe-pdf-viewer>
                             </div>
                         </div>
@@ -178,29 +330,80 @@
                         <div class="row justify-content-end">
                             <div class="col-12">
                                 <p class="mt-5">
-                                    Kliknutím na tlačítko „Podepsat smlouvu“ souhlasím s výše uvedeným návrhem smlouvy o sdružených službách dodávky
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>, včetně přiložených
-                                    obchodních podmínek dodávky a uděluji dodavateli plnou moc, která je přílohou návrhu smlouvy.
-                                    Potvrzuji, že jsem se s obsahem těchto dokumentů seznámil/a<ng-container *ngIf="supplyPoint.subject.code === subjectType.SUBJECT_TYPE_INDIVIDUAL">
-                                    a že jsem obdržel/a dokument "Informace před uzavřením smlouvy o sdružených službách dodávky
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
-                                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>"</ng-container>.
+                                    Kliknutím na tlačítko „Podepsat smlouvu“
+                                    souhlasím s výše uvedeným návrhem smlouvy o
+                                    sdružených službách dodávky
+                                    <ng-container
+                                        *ngIf="
+                                            supplyPoint.commodityType ===
+                                            commodityType.POWER
+                                        "
+                                        >elektřiny</ng-container
+                                    >
+                                    <ng-container
+                                        *ngIf="
+                                            supplyPoint.commodityType ===
+                                            commodityType.GAS
+                                        "
+                                        >plynu</ng-container
+                                    >, včetně přiložených obchodních podmínek
+                                    dodávky a uděluji dodavateli plnou moc,
+                                    která je přílohou návrhu smlouvy. Potvrzuji,
+                                    že jsem se s obsahem těchto dokumentů
+                                    seznámil/a<ng-container
+                                        *ngIf="
+                                            supplyPoint.subject.code ===
+                                            subjectType.SUBJECT_TYPE_INDIVIDUAL
+                                        "
+                                    >
+                                        a že jsem obdržel/a dokument "Informace
+                                        před uzavřením smlouvy o sdružených
+                                        službách dodávky
+                                        <ng-container
+                                            *ngIf="
+                                                supplyPoint.commodityType ===
+                                                commodityType.POWER
+                                            "
+                                            >elektřiny</ng-container
+                                        >
+                                        <ng-container
+                                            *ngIf="
+                                                supplyPoint.commodityType ===
+                                                commodityType.GAS
+                                            "
+                                            >plynu</ng-container
+                                        >"</ng-container
+                                    >.
                                 </p>
                                 <div class="row">
                                     <div class="col-12 text-center">
                                         <pxe-verification-form
-                                            *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
+                                            *ngIf="
+                                                supplyPoint
+                                                    | pathValue
+                                                        : [
+                                                              'contract',
+                                                              'personalData',
+                                                              'phone'
+                                                          ]
+                                            "
                                             [toggleEnabledBySelf]="false"
                                             [fieldError]="fieldError"
                                             [formLoading]="formLoading"
                                             [contract]="supplyPoint.contract"
                                             textInfoAboutVerificationPassword="Podepsání smlouvy je nutné potvrdit ověřovacím SMS kódem"
                                             [globalError]="globalError"
-                                            [phone]="supplyPoint.contract.personalData.phone"
+                                            [phone]="
+                                                supplyPoint.contract
+                                                    .personalData.phone
+                                            "
                                             [smsSent]="smsSent"
-                                            (submitAction)="signContract($event)"
-                                            (customAction)="sendContractConfirmationSms()"
+                                            (submitAction)="
+                                                signContract($event)
+                                            "
+                                            (customAction)="
+                                                sendContractConfirmationSms()
+                                            "
                                         ></pxe-verification-form>
                                     </div>
                                 </div>

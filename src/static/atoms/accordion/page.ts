@@ -3,9 +3,8 @@ import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.mo
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class AccordionPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 

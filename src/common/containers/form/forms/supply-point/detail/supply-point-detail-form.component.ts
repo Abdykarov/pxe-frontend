@@ -11,22 +11,10 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {
-    filter,
-    takeUntil,
-} from 'rxjs/operators';
-
-import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
-import {
-    AllowedOperations,
-    CommodityType,
-    ICodelistOptions,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import { filter, takeUntil } from 'rxjs/operators';
 import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
@@ -39,6 +27,13 @@ import {
     SUBJECT_TYPE_OPTIONS,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
+import { DocumentService } from 'src/app/services/document.service';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
     confirmConfirmSaveSupplyPointConfig,
     confirmFindNewSupplyPoint,
@@ -46,27 +41,27 @@ import {
     confirmSaveSupplyPoint,
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { DocumentService } from 'src/app/services/document.service';
-import { ContractService } from 'src/common/graphql/services/contract.service';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
-    IDocumentType,
-    IResponseDataDocument,
-} from 'src/app/services/model/document.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import {
-    parseRestAPIErrors,
-    transformCodeList,
-} from 'src/common/utils';
+    AllowedOperations,
+    CommodityType,
+    ICodelistOptions,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { parseRestAPIErrors, transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
     templateUrl: './supply-point-detail-form.component.html',
     styleUrls: ['./supply-point-detail-form.component.scss'],
 })
-export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+export class SupplyPointDetailFormComponent
+    extends AbstractSupplyPointFormComponent
+    implements OnInit, OnChanges
+{
     public fileLoading = false;
 
     @Input()
@@ -103,7 +98,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         private modalsService: ModalService,
         private navigateRequestService: NavigateRequestService,
         private router: Router,
-        private supplyService: SupplyService,
+        private supplyService: SupplyService
     ) {
         super(fb);
     }
@@ -111,57 +106,59 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     ngOnInit() {
         if (this.isForm) {
             super.ngOnInit();
-            this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
-            this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;
+            this.setFormByCommodity(
+                this.commodityType[this.supplyPoint.commodityType]
+            );
+            this.subjectName = R.find(
+                R.propEq('value', this.supplyPoint.subject.code)
+            )(SUBJECT_TYPE_OPTIONS).label;
 
-            this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+            this.supplyService
+                .findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(({data}) => {
-                    this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                .subscribe(({ data }) => {
+                    this.codeLists = transformCodeList(
+                        data.findCodelistsByTypes
+                    );
                     this.setAnnualConsumptionNTState(
-                        this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code,
-                        this.codeLists,
+                        this.supplyPoint.distributionRate &&
+                            this.supplyPoint.distributionRate.code,
+                        this.codeLists
                     );
                     this.prefillFormData();
                     this.cd.markForCheck();
                 });
 
-            this.form.get('annualConsumptionNTUnit')
-                .valueChanges
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
+            this.form
+                .get('annualConsumptionNTUnit')
+                .valueChanges.pipe(takeUntil(this.destroy$))
                 .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
                     this.detectChangesForAnnualConsumption(
                         ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                         ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
-                        annualConsumptionNTUnit,
+                        annualConsumptionNTUnit
                     );
                 });
 
-            this.form.get('annualConsumptionUnit')
-                .valueChanges
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
+            this.form
+                .get('annualConsumptionUnit')
+                .valueChanges.pipe(takeUntil(this.destroy$))
                 .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
                     this.detectChangesForAnnualConsumption(
                         ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
                         ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
-                        annualConsumptionUnit,
+                        annualConsumptionUnit
                     );
                 });
 
-            this.form.get('annualConsumptionVTUnit')
-                .valueChanges
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
+            this.form
+                .get('annualConsumptionVTUnit')
+                .valueChanges.pipe(takeUntil(this.destroy$))
                 .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
                     this.detectChangesForAnnualConsumption(
                         ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
                         ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
-                        annualConsumptionVTUnit,
+                        annualConsumptionVTUnit
                     );
                 });
 
@@ -169,9 +166,9 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 .pipe(
                     takeUntil(this.destroy$),
                     filter(R_.isNotNil),
-                    filter((modal: ICloseModalData) => modal.confirmed),
+                    filter((modal: ICloseModalData) => modal.confirmed)
                 )
-                .subscribe(modal => {
+                .subscribe((modal) => {
                     if (modal.modalType === confirmFindNewSupplyPoint) {
                         this.navigateToSupplyPoint(modal.data);
                     }
@@ -200,12 +197,13 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public findNewSupplier = () => {
         const isDifferentForm = this.isDifferentForm();
         if (isDifferentForm) {
-            this.modalsService
-                .showModal$.next(confirmFindNewSupplyPointConfig(this.supplyPoint));
+            this.modalsService.showModal$.next(
+                confirmFindNewSupplyPointConfig(this.supplyPoint)
+            );
         } else {
             this.navigateToSupplyPoint(this.supplyPoint);
         }
-    }
+    };
 
     public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) => {
         const state = {
@@ -213,13 +211,15 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 ...supplyPoint,
             },
         };
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
-    }
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], { state });
+    };
 
     public fixAnnualConsumptionByUnit = () => {
         const annualConsumptionUnit = this.supplyPoint.annualConsumptionUnit;
-        const annualConsumptionNTUnit = this.supplyPoint.annualConsumptionNTUnit;
-        const annualConsumptionVTUnit = this.supplyPoint.annualConsumptionVTUnit;
+        const annualConsumptionNTUnit =
+            this.supplyPoint.annualConsumptionNTUnit;
+        const annualConsumptionVTUnit =
+            this.supplyPoint.annualConsumptionVTUnit;
         if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
             this.supplyPoint.annualConsumption *= 1000;
         }
@@ -231,7 +231,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
             this.supplyPoint.annualConsumptionNT *= 1000;
         }
-    }
+    };
 
     public prefillFormData = () => {
         let id = null;
@@ -267,13 +267,22 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 annualConsumptionNT *= 1000;
             }
 
-            annualConsumptionNT = this.normalizationAnnualConsumption(annualConsumptionNT);
-            annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
-            annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
+            annualConsumptionNT =
+                this.normalizationAnnualConsumption(annualConsumptionNT);
+            annualConsumptionVT =
+                this.normalizationAnnualConsumption(annualConsumptionVT);
+            annualConsumption =
+                this.normalizationAnnualConsumption(annualConsumption);
 
-            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
-            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
-            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+            this.form.controls['annualConsumptionNTUnit'].setValue(
+                annualConsumptionNTUnit
+            );
+            this.form.controls['annualConsumptionVTUnit'].setValue(
+                annualConsumptionVTUnit
+            );
+            this.form.controls['annualConsumptionUnit'].setValue(
+                annualConsumptionUnit
+            );
         }
 
         this.form.controls['id'].setValue(id);
@@ -285,10 +294,12 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
         this.setOriginalFormValues(this.form.value);
         this.resetFormError(false);
-    }
+    };
 
-    public submitValidForm = () => this.modalsService
-        .showModal$.next(confirmConfirmSaveSupplyPointConfig())
+    public submitValidForm = () =>
+        this.modalsService.showModal$.next(
+            confirmConfirmSaveSupplyPointConfig()
+        );
 
     private saveSubmittedData = () => {
         const form: any = {
@@ -296,13 +307,19 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         };
 
         if (!R.isNil(form.annualConsumptionNT)) {
-            form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
+            form.annualConsumptionNT = parseFloat(
+                form.annualConsumptionNT.toString().replace(',', '.')
+            );
         }
         if (!R.isNil(form.annualConsumptionVT)) {
-            form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
+            form.annualConsumptionVT = parseFloat(
+                form.annualConsumptionVT.toString().replace(',', '.')
+            );
         }
         if (!R.isNil(form.annualConsumption)) {
-            form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
+            form.annualConsumption = parseFloat(
+                form.annualConsumption.toString().replace(',', '.')
+            );
         }
         if (form.annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
             form.annualConsumptionVT = form.annualConsumptionVT / 1000;
@@ -315,14 +332,16 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         }
 
         this.submitAction.emit(form);
-    }
+    };
 
     public downloadPdf = () => {
         this.formLoading = true;
-        this.documentService.getDocument(this.supplyPoint.contract.contractId, IDocumentType.CONTRACT)
-            .pipe(
-                takeUntil(this.destroy$),
+        this.documentService
+            .getDocument(
+                this.supplyPoint.contract.contractId,
+                IDocumentType.CONTRACT
             )
+            .pipe(takeUntil(this.destroy$))
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentService.documentSave(responseDataDocument);
@@ -334,7 +353,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                     this.globalError = [message];
                     this.formLoading = false;
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
+    };
 }

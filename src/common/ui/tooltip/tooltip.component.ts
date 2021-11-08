@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -9,15 +10,9 @@ import {
     TemplateRef,
     ViewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
 import * as R from 'ramda';
-import {
-    debounceTime,
-    takeUntil,
-} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ITooltipDirection } from './models/direction.model';
 
@@ -50,25 +45,25 @@ export class TooltipComponent extends AbstractComponent {
     public isOpen: boolean;
 
     private allowClick = true;
-    private resizeEvent$ = fromEvent(window, 'resize')
-        .pipe(
-            debounceTime(200),
-        );
+    private resizeEvent$ = fromEvent(window, 'resize').pipe(debounceTime(200));
 
     constructor(
         private cd: ChangeDetectorRef,
         private hostElement: ElementRef,
         private renderer: Renderer2,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
-        this.direction = R.contains(this.direction, Object.values(ITooltipDirection)) ? this.direction : ITooltipDirection.LEFT;
-        this.resizeEvent$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.isOpen = false;
-                this.cd.markForCheck();
-            });
+        this.direction = R.contains(
+            this.direction,
+            Object.values(ITooltipDirection)
+        )
+            ? this.direction
+            : ITooltipDirection.LEFT;
+        this.resizeEvent$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+            this.isOpen = false;
+            this.cd.markForCheck();
+        });
     }
 
     public toggle = () => {
@@ -80,10 +75,14 @@ export class TooltipComponent extends AbstractComponent {
                 });
             }
         }
-    }
+    };
 
     public manageTooltipPosition() {
-        if (this.wrapperElement && isPlatformBrowser(this.platformId) && this.isOpen) {
+        if (
+            this.wrapperElement &&
+            isPlatformBrowser(this.platformId) &&
+            this.isOpen
+        ) {
             if (this.direction !== ITooltipDirection.BOTTOM) {
                 this.direction = ITooltipDirection.BOTTOM;
                 this.cd.markForCheck();
@@ -98,12 +97,20 @@ export class TooltipComponent extends AbstractComponent {
                 const wrapperRect = this.wrapperElement.getBoundingClientRect();
                 let tooltipContentRect = tooltipContent.getBoundingClientRect();
 
-                const differenceTooltipAndWrapperLeft = tooltipContentRect.left - wrapperRect.left;
-                const needLeftShift = differenceTooltipAndWrapperLeft <= this.INNER_PADDING_FOR_COUNT;
-                const differenceTooltipAndWrapperRight = tooltipContentRect.right - wrapperRect.right;
-                const needRightShift = differenceTooltipAndWrapperRight >= this.INNER_PADDING_FOR_COUNT;
+                const differenceTooltipAndWrapperLeft =
+                    tooltipContentRect.left - wrapperRect.left;
+                const needLeftShift =
+                    differenceTooltipAndWrapperLeft <=
+                    this.INNER_PADDING_FOR_COUNT;
+                const differenceTooltipAndWrapperRight =
+                    tooltipContentRect.right - wrapperRect.right;
+                const needRightShift =
+                    differenceTooltipAndWrapperRight >=
+                    this.INNER_PADDING_FOR_COUNT;
 
-                const isDownAvailable = tooltipContentRect.bottom + this.INNER_PADDING_FOR_COUNT < document.documentElement.clientHeight;
+                const isDownAvailable =
+                    tooltipContentRect.bottom + this.INNER_PADDING_FOR_COUNT <
+                    document.documentElement.clientHeight;
 
                 if (isDownAvailable) {
                     this.direction = ITooltipDirection.BOTTOM;
@@ -114,26 +121,34 @@ export class TooltipComponent extends AbstractComponent {
                 this.cd.markForCheck();
 
                 if (needLeftShift) {
-                    this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
+                    this.renderer.setStyle(
+                        tooltipContent,
+                        'transform',
+                        'translateX(0%)'
+                    );
                     this.renderer.setStyle(tooltipContent, 'left', '0px');
                     tooltipContentRect = tooltipContent.getBoundingClientRect();
                     const diff = tooltipContentRect.left - wrapperRect.left;
                     this.renderer.setStyle(
                         tooltipContent,
                         'left',
-                        -(diff - this.INNER_PADDING_FOR_COUNT) + 'px',
+                        -(diff - this.INNER_PADDING_FOR_COUNT) + 'px'
                     );
                 }
 
                 if (needRightShift) {
-                    this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
+                    this.renderer.setStyle(
+                        tooltipContent,
+                        'transform',
+                        'translateX(0%)'
+                    );
                     this.renderer.setStyle(tooltipContent, 'left', '0px');
                     tooltipContentRect = tooltipContent.getBoundingClientRect();
                     const diff = tooltipContentRect.right - wrapperRect.right;
                     this.renderer.setStyle(
                         tooltipContent,
                         'left',
-                        -(diff + this.INNER_PADDING_FOR_COUNT) + 'px',
+                        -(diff + this.INNER_PADDING_FOR_COUNT) + 'px'
                     );
                 }
             });

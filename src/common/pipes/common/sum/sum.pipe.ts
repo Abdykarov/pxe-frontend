@@ -1,13 +1,9 @@
-import {
-    Pipe,
-    PipeTransform,
-} from '@angular/core';
-
+import { Pipe, PipeTransform } from '@angular/core';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
 @Pipe({
-  name: 'sum',
+    name: 'sum',
 })
 export class SumPipe implements PipeTransform {
     transform(values: number[]): number {
@@ -17,5 +13,3 @@ export class SumPipe implements PipeTransform {
         return R.sum(values);
     }
 }
-
-

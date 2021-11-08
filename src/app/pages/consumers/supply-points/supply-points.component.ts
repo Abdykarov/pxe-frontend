@@ -1,39 +1,22 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
-
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as R from 'ramda';
-import {
-    filter,
-    map,
-    switchMap,
-    takeUntil,
-} from 'rxjs/operators';
 import { of } from 'rxjs';
-
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { ROUTES } from 'src/app/app.constants';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
     AllowedOperations,
     ISupplyPoint,
     ISupplyPointStatistic,
     ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
-import { ContractStatus } from 'src/common/graphql/models/contract';
-import {
-    isDataAvailable,
-    parseGraphQLErrors,
-} from 'src/common/utils';
-import { IsDatePast } from 'src/common/pipes/secured/is-date-past/is-date-past.pipe';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { IsDatePast } from 'src/common/pipes/secured/is-date-past/is-date-past.pipe';
+import { isDataAvailable, parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     selector: 'lnd-supply-points',
@@ -41,7 +24,6 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-points.component.scss'],
 })
 export class SupplyPointsComponent extends AbstractComponent implements OnInit {
-
     public allowedOperations = AllowedOperations;
     public dataLoading = true;
     public error = false;
@@ -58,47 +40,44 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         private navigateRequestService: NavigateRequestService,
         private supplyService: SupplyService,
         private route: ActivatedRoute,
-        private router: Router,
+        private router: Router
     ) {
         super();
     }
 
-    ngOnInit () {
+    ngOnInit() {
         super.ngOnInit();
 
-        this.supplyService.findSupplyPointsByContractStatus([
-                    ContractStatus.CONCLUDED,
-                ],
+        this.supplyService
+            .findSupplyPointsByContractStatus(
+                [ContractStatus.CONCLUDED],
                 null,
-                true,
+                true
             )
             .pipe(
                 filter(isDataAvailable),
-                map( ({data}) => data.findSupplyPointsByContractStatus),
+                map(({ data }) => data.findSupplyPointsByContractStatus),
                 switchMap((supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
 
-                    this.supplyPointsActual =
-                        R.pipe(
-                            R.filter(
-                                (supplyPoint: ISupplyPoint) =>
-                                    moment()
-                                        .isBetween(
-                                            moment(supplyPoint.contract.deliveryFrom),
-                                            moment(supplyPoint.contract.deliveryTo),
-                                        ),
-                            ),
-                            R.sort(R.ascend(R.path(['contract', 'deliveryFrom']))),
-                        )(supplyPoints);
+                    this.supplyPointsActual = R.pipe(
+                        R.filter((supplyPoint: ISupplyPoint) =>
+                            moment().isBetween(
+                                moment(supplyPoint.contract.deliveryFrom),
+                                moment(supplyPoint.contract.deliveryTo)
+                            )
+                        ),
+                        R.sort(R.ascend(R.path(['contract', 'deliveryFrom'])))
+                    )(supplyPoints);
 
-                    this.supplyPointsFuture =
-                        R.pipe(
-                            R.filter(
-                                (supplyPoint: ISupplyPoint) =>
-                                    this.isDatePast.transform(supplyPoint.contract.deliveryFrom),
-                            ),
-                            R.sort(R.ascend(R.path(['contract', 'deliveryFrom']))),
-                        )(supplyPoints);
+                    this.supplyPointsFuture = R.pipe(
+                        R.filter((supplyPoint: ISupplyPoint) =>
+                            this.isDatePast.transform(
+                                supplyPoint.contract.deliveryFrom
+                            )
+                        ),
+                        R.sort(R.ascend(R.path(['contract', 'deliveryFrom'])))
+                    )(supplyPoints);
 
                     if (this.supplyPoints.length) {
                         return of({
@@ -109,10 +88,11 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                     }
                     return this.supplyService.computeAndGetSupplyPointStatistics();
                 }),
-                map(({data}) =>  data.computeAndGetSupplyPointStatistics),
-                takeUntil(this.destroy$),
-            ).subscribe(
-            (supplyPointStatistic: ISupplyPointStatistic) => {
+                map(({ data }) => data.computeAndGetSupplyPointStatistics),
+                takeUntil(this.destroy$)
+            )
+            .subscribe(
+                (supplyPointStatistic: ISupplyPointStatistic) => {
                     this.dataLoading = false;
                     this.supplyPointStatistic = supplyPointStatistic;
                     this.cd.markForCheck();
@@ -123,23 +103,23 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                     const { globalError } = parseGraphQLErrors(error);
                     this.errorMessages = globalError;
                     this.cd.markForCheck();
-                });
+                }
+            );
     }
-
 
     public createSupplyPoint = (event) => {
         event.stopPropagation();
         this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
-    }
+    };
 
-    public navigateToSupplyPointDetail = ({contract: {contractId}, id}: ISupplyPoint) => {
-        this.router.navigate(
-            [id, contractId],
-            {
-                relativeTo: this.route,
-            },
-        );
-    }
+    public navigateToSupplyPointDetail = ({
+        contract: { contractId },
+        id,
+    }: ISupplyPoint) => {
+        this.router.navigate([id, contractId], {
+            relativeTo: this.route,
+        });
+    };
 
     public restoreContractAction = (evt, supplyPoint: ISupplyPoint) => {
         evt.preventDefault();
@@ -151,26 +131,27 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
             },
         };
 
-        this.router.navigate(
-            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
-            {state});
-    }
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], { state });
+    };
 
-    public completeRequestAction = (notConcludedItems: ISupplyPointStatisticView[]) => {
+    public completeRequestAction = (
+        notConcludedItems: ISupplyPointStatisticView[]
+    ) => {
         R.cond([
             [
-                (items: ISupplyPointStatisticView[]) => R.equals(1, items.length),
+                (items: ISupplyPointStatisticView[]) =>
+                    R.equals(1, items.length),
                 (items: ISupplyPointStatisticView[]) => {
                     const notConcludedItem = items[0];
-                    this.navigateRequestService.routerToRequestStep(notConcludedItem);
+                    this.navigateRequestService.routerToRequestStep(
+                        notConcludedItem
+                    );
                 },
             ],
-            [
-                R.T,
-                () => this.navigateToRequests(),
-            ],
+            [R.T, () => this.navigateToRequests()],
         ])(notConcludedItems);
-    }
+    };
 
-    public navigateToRequests = () => this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+    public navigateToRequests = () =>
+        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
 }

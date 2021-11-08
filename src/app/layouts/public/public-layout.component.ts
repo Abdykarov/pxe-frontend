@@ -1,8 +1,4 @@
-import {Apollo} from 'apollo-angular';
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -12,32 +8,30 @@ import {
     PLATFORM_ID,
     Renderer2,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
-
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
-
-import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
-import { AuthService } from 'src/app/services/auth.service';
+import { map, takeUntil } from 'rxjs/operators';
 import {
     CommodityTypesCsLowerCase,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
+import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { CookiesService } from 'src/app/services/cookies.service';
-import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     templateUrl: './public-layout.component.html',
     styleUrls: ['./public-layout.component.scss'],
 })
-export class PublicLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
+export class PublicLayoutComponent
+    extends AbstractLayoutComponent
+    implements OnInit, OnDestroy
+{
     public commodityTypePower = CommodityTypesCsLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
@@ -55,7 +49,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent implements On
         protected sAnalyticsService: SAnalyticsService,
         public scrollToService: ScrollToService,
         @Inject(DOCUMENT) private document: any,
-        @Inject(PLATFORM_ID) public platformId: string,
+        @Inject(PLATFORM_ID) public platformId: string
     ) {
         super(
             apollo,
@@ -66,13 +60,14 @@ export class PublicLayoutComponent extends AbstractLayoutComponent implements On
             route,
             router,
             sAnalyticsService,
-            scrollToService,
+            scrollToService
         );
 
-        this.overlayService.getOverlay()
+        this.overlayService
+            .getOverlay()
             .pipe(
                 takeUntil(this.destroy$),
-                map(R.path(['data', 'ui', 'showOverlay'])),
+                map(R.path(['data', 'ui', 'showOverlay']))
             )
             .subscribe((current: boolean) => {
                 this.showOverlay = current;

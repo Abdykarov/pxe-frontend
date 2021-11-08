@@ -1,32 +1,33 @@
-import { ActivatedRoute } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
     EventEmitter,
     Inject,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     OnInit,
     Output,
     PLATFORM_ID,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
-
+import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-
-import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
-import { Environment } from 'src/app/models/environment/environment.model';
+import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 import { EnvironmentService } from 'src/app/services/environment.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
-import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
     selector: 'pxe-login-form',
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent extends AbstractFormComponent implements OnInit, OnDestroy {
+export class LoginFormComponent
+    extends AbstractFormComponent
+    implements OnInit, OnDestroy
+{
     public readonly LOGIN_FORM_NAME = CONSTS.LOGIN_FORM_NAME;
     public readonly oAuthType = OAuthType;
 
@@ -51,7 +52,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
         public oauthService: OAuthService,
         public sAnalyticsService: SAnalyticsService,
         private route: ActivatedRoute,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super(fb);
     }
@@ -60,17 +61,15 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
         this.form.controls['password'].setValue('');
         this.resetFormError(false);
         return this.reSentAction.emit(this.login);
-    }
+    };
 
     ngOnInit() {
         super.ngOnInit();
         this.sAnalyticsService.sFormStart();
         this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => {
-                if (this.login  === '') {
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((params) => {
+                if (this.login === '') {
                     this.login = params['email'];
                 }
                 if (this.login) {

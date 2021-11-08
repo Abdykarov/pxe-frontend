@@ -8,21 +8,13 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
+import { NgSelectComponent, NgSelectConfig } from '@ng-select/ng-select';
 import * as R from 'ramda';
-import {
-    NgSelectComponent,
-    NgSelectConfig,
-} from '@ng-select/ng-select';
-
-import { defaultSelectConfig } from './select.config';
 import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
-import {
-    getErrorMessage,
-    normalizeString,
-} from 'src/common/utils';
+import { getErrorMessage, normalizeString } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
+import { defaultSelectConfig } from './select.config';
 
 @Component({
     selector: 'lnd-select',
@@ -31,7 +23,6 @@ import { IValidationMessages } from '../models/validation-messages.model';
     encapsulation: ViewEncapsulation.None,
 })
 export class SelectComponent {
-
     @ViewChild('select', { static: true })
     private select: NgSelectComponent;
 
@@ -142,18 +133,18 @@ export class SelectComponent {
 
     constructor(
         private config: NgSelectConfig,
-        private dynamicPipe: DynamicPipe,
+        private dynamicPipe: DynamicPipe
     ) {
         R.pipe(
             R.keys,
-            R.map(key => {
+            R.map((key) => {
                 this.config[key] = defaultSelectConfig[key];
-            }),
+            })
         )(defaultSelectConfig);
     }
 
     public customSearchFn = (term: string, item: any) => {
-        if (this.withoutConditionalAtLength || !!term && term.length > 2) {
+        if (this.withoutConditionalAtLength || (!!term && term.length > 2)) {
             const label = R.path(['label'], item);
             if (label) {
                 const normalizationTerm = normalizeString(term);
@@ -163,9 +154,10 @@ export class SelectComponent {
                 return false;
             }
         }
-    }
+    };
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
+    public getErrorMessage = () =>
+        getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 
     public hideDialog = () => {
         this.select.close();
@@ -173,5 +165,5 @@ export class SelectComponent {
             window.scrollTo(window.scrollX, window.scrollY - 1);
             window.scrollTo(window.scrollX, window.scrollY + 1);
         });
-    }
+    };
 }

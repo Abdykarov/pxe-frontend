@@ -1,27 +1,25 @@
-import { EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Directive } from '@angular/core';
 import {
-    FormArray,
-    FormBuilder,
-    FormGroup,
-    Validators,
-} from '@angular/forms';
-
+    Directive,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as R from 'ramda';
 import { BehaviorSubject } from 'rxjs';
-
-import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
-import {
-    isUserName,
-    scrollToWithOffset,
-} from 'src/common/utils';
-import {
-    IFieldError,
-    IForm,
-} from './models/form-definition.model';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { isUserName, scrollToWithOffset } from 'src/common/utils';
+import { IFieldError, IForm } from './models/form-definition.model';
 
 @Directive()
-export class AbstractFormComponent extends AbstractComponent implements OnInit, OnChanges {
+export class AbstractFormComponent
+    extends AbstractComponent
+    implements OnInit, OnChanges
+{
     @Input()
     public formFields: IForm;
 
@@ -43,14 +41,14 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     @Output()
     public submitAction: EventEmitter<any> = new EventEmitter<any>();
 
-    public fieldWrapperFocused$: BehaviorSubject<any> = new BehaviorSubject(null);
+    public fieldWrapperFocused$: BehaviorSubject<any> = new BehaviorSubject(
+        null
+    );
     public form: FormGroup;
     public formError: any = {};
     public originalFormValues: any = {};
 
-    constructor(
-        protected fb: FormBuilder,
-    ) {
+    constructor(protected fb: FormBuilder) {
         super();
     }
 
@@ -66,27 +64,27 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     }
 
     public prefillFormWithSameKeys = (data: object) => {
-        Object.keys(this.form.controls).forEach(key => {
+        Object.keys(this.form.controls).forEach((key) => {
             const prefillingValueForKey = data[key];
             if (!!prefillingValueForKey) {
                 this.form.controls[key].setValue(prefillingValueForKey);
             }
         });
-    }
+    };
 
     public handleCustomAction = ($event) => this.customAction.emit($event);
 
     public setLoginValidator = (formName, $event) => {
-        this.form.controls[formName]
-            .setValidators(
-                [
-                    Validators.required,
-                    Validators.maxLength(isUserName($event.target.value) ?
-                        CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN : CONSTS.VALIDATORS.MAX_LENGTH.USER_NAME_LOGIN),
-                ]);
-        this.form.controls[formName]
-            .updateValueAndValidity();
-    }
+        this.form.controls[formName].setValidators([
+            Validators.required,
+            Validators.maxLength(
+                isUserName($event.target.value)
+                    ? CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN
+                    : CONSTS.VALIDATORS.MAX_LENGTH.USER_NAME_LOGIN
+            ),
+        ]);
+        this.form.controls[formName].updateValueAndValidity();
+    };
 
     public submitForm = (event = null) => {
         if (event) {
@@ -98,14 +96,17 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             this.submitValidForm();
         } else {
             setTimeout(() => {
-                scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+                scrollToWithOffset(
+                    '.invalid-input',
+                    CONSTS.OFFSET_ERRORS.INVALID_INPUT
+                );
             });
         }
-    }
+    };
 
     public submitValidForm = (customParam = null) => {
         this.submitAction.emit(this.form.value);
-    }
+    };
 
     public resetFormError = (clearError = true) => {
         this.resetCustomFieldError();
@@ -113,9 +114,9 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             R.keys,
             R.map((field) => {
                 this.resetFieldError(field, clearError);
-            }),
+            })
         )(this.form.controls);
-    }
+    };
 
     public resetFieldError = (field, clearError) => {
         const fieldControl = this.form.get(field);
@@ -125,11 +126,11 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         if (clearError) {
             fieldControl.setErrors(null);
         }
-    }
+    };
 
     public triggerValidation = () => {
         this.triggerValidationOnForm(this.form);
-    }
+    };
 
     public triggerValidationOnForm = (form) => {
         R.pipe(
@@ -142,31 +143,30 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
                         this.triggerValidationOnForm(formGroup);
                     }, this.form.get(field)['controls']);
                 } else {
-                    form.get(field)
-                        .markAsTouched({
-                            onlySelf: true,
-                        });
+                    form.get(field).markAsTouched({
+                        onlySelf: true,
+                    });
                 }
-            }),
+            })
         )(form.controls);
-    }
+    };
 
     public getFieldValue = (fieldName: string) => {
         return this.form.get(fieldName).value;
-    }
+    };
 
     public setEnableField = (fieldName: string, opts = {}): void => {
         this.form.get(fieldName).enable(opts);
-    }
+    };
 
     public setDisableField = (fieldName: string, opts = {}): void => {
         this.form.get(fieldName).disable(opts);
-    }
+    };
 
     public resetFieldValue = (field, clearError = true) => {
         this.form.get(field).patchValue(null);
         this.resetFieldError(field, clearError);
-    }
+    };
 
     public resetCustomFieldError = () => {
         R.mapObjIndexed((_, field) => {
@@ -174,19 +174,20 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
                 delete this.formError[field];
             }
         })(this.formFields.controls);
-    }
+    };
 
     public clearFormArray = (formArray: FormArray) => {
         while (formArray.length !== 0) {
             formArray.removeAt(0);
         }
-    }
+    };
 
     public setOriginalFormValues = (obj: any) => {
         this.originalFormValues = Object.assign({}, obj);
-    }
+    };
 
-    public isDifferentField = (prop: string): boolean => this.originalFormValues[prop] !== this.form.value[prop];
+    public isDifferentField = (prop: string): boolean =>
+        this.originalFormValues[prop] !== this.form.value[prop];
 
     public isDifferentForm = (): boolean => {
         let hasChanges = false;
@@ -196,15 +197,15 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             }
         }
         return hasChanges;
-    }
+    };
 
     public fieldWrapperFocus = (name: string) => {
         this.fieldWrapperFocused$.next(name);
-    }
+    };
 
     public fieldWrapperBlur = () => {
         this.fieldWrapperFocused$.next(null);
-    }
+    };
 
     public submitCustomActionValidFormForm = (data = null) => {
         this.resetCustomFieldError();
@@ -216,8 +217,11 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             });
         } else {
             setTimeout(() => {
-                scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+                scrollToWithOffset(
+                    '.invalid-input',
+                    CONSTS.OFFSET_ERRORS.INVALID_INPUT
+                );
             });
         }
-    }
+    };
 }

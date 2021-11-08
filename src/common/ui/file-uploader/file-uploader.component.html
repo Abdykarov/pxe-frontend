@@ -12,28 +12,29 @@
         src="/assets/images/illustrations/upload.svg"
         alt="upload ikona"
         title="upload ikona"
-    >
+    />
     <ng-container *ngIf="!contentTemplate">
-        <p
-            [ngClass]="mainTextCustomClass"
-            class="mb-1">
-            {{mainText}}
+        <p [ngClass]="mainTextCustomClass" class="mb-1">
+            {{ mainText }}
             <ng-container *ngIf="labelFromMainText">
-                <label [for]="id" class="drop-zone__control link"
-                       [ngClass]="labelCustomClass">
-                    nahrajte
-                </label>.
+                <label
+                    [for]="id"
+                    class="drop-zone__control link"
+                    [ngClass]="labelCustomClass"
+                >
+                    nahrajte </label
+                >.
             </ng-container>
         </p>
-        <p class="mb-0"
-        [ngClass]="secondaryTextCustomClass">
-            {{secondaryText}}
+        <p class="mb-0" [ngClass]="secondaryTextCustomClass">
+            {{ secondaryText }}
         </p>
     </ng-container>
     <ng-container *ngIf="contentTemplate">
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-container>
-    <input [id]=id
+    <input
+        [id]="id"
         ng2FileSelect
         type="file"
         [ngClass]="inputCustomClass"
@@ -42,9 +43,12 @@
         (fileSelected)="fileSelectAction.emit(uploader)"
         hidden
     />
-    <label [for]="id" class="btn btn-primary drop-zone__control"
+    <label
+        [for]="id"
+        class="btn btn-primary drop-zone__control"
         [ngClass]="labelCustomClass"
-        *ngIf="!labelFromMainText">
+        *ngIf="!labelFromMainText"
+    >
         nahrát ze zařízení
     </label>
 </div>

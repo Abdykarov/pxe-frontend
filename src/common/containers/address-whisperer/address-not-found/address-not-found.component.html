@@ -5,7 +5,10 @@
         [formControl]="parentForm.controls[whispererName].controls.city"
         [id]="'city'"
         label="Město / Obec"
-        [success]="parentForm.controls[whispererName].controls.city.valid && parentForm.controls[whispererName].controls.city.touched"
+        [success]="
+            parentForm.controls[whispererName].controls.city.valid &&
+            parentForm.controls[whispererName].controls.city.touched
+        "
         [touched]="parentForm.controls[whispererName].controls.city.touched"
         [validationMessages]="formFields.validationMessages.city"
     ></lnd-form-field>
@@ -14,47 +17,120 @@
         [formControl]="parentForm.controls[whispererName].controls.street"
         [id]="'street'"
         label="Ulice"
-        [success]="parentForm.controls[whispererName].controls.street.valid && parentForm.controls[whispererName].controls.street.touched"
+        [success]="
+            parentForm.controls[whispererName].controls.street.valid &&
+            parentForm.controls[whispererName].controls.street.touched
+        "
         [touched]="parentForm.controls[whispererName].controls.street.touched"
         [validationMessages]="formFields.validationMessages.street"
     ></lnd-form-field>
     <pxe-field-wrapper
         label=""
         labelFor="descriptiveNumber"
-        [wrapperFocused]="(fieldWrapperFocused$ | async) === whispererName + 'descriptiveNumber' || (fieldWrapperFocused$ | async) === whispererName + 'orientationNumber'"
-        [error]="(parentForm.controls[whispererName].controls.descriptiveNumber.touched && parentForm.controls[whispererName].controls.descriptiveNumber.errors) ||
-                 (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors)"
-        [validationMessages]="(parentForm.controls[whispererName].controls.descriptiveNumber.touched && parentForm.controls[whispererName].controls.descriptiveNumber.errors && formFields.validationMessages.descriptiveNumber) ||
-                              (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors && formFields.validationMessages.orientationNumber)">
+        [wrapperFocused]="
+            (fieldWrapperFocused$ | async) ===
+                whispererName + 'descriptiveNumber' ||
+            (fieldWrapperFocused$ | async) ===
+                whispererName + 'orientationNumber'
+        "
+        [error]="
+            (parentForm.controls[whispererName].controls.descriptiveNumber
+                .touched &&
+                parentForm.controls[whispererName].controls.descriptiveNumber
+                    .errors) ||
+            (parentForm.controls[whispererName].controls.orientationNumber
+                .touched &&
+                parentForm.controls[whispererName].controls.orientationNumber
+                    .errors)
+        "
+        [validationMessages]="
+            (parentForm.controls[whispererName].controls.descriptiveNumber
+                .touched &&
+                parentForm.controls[whispererName].controls.descriptiveNumber
+                    .errors &&
+                formFields.validationMessages.descriptiveNumber) ||
+            (parentForm.controls[whispererName].controls.orientationNumber
+                .touched &&
+                parentForm.controls[whispererName].controls.orientationNumber
+                    .errors &&
+                formFields.validationMessages.orientationNumber)
+        "
+    >
         <div class="row align-items-end no-gutters">
             <div class="col-6 pr-1">
                 <lnd-form-field
-                    [error]="parentForm.controls[whispererName].controls.descriptiveNumber.errors"
-                    [formControl]="parentForm.controls[whispererName].controls.descriptiveNumber"
+                    [error]="
+                        parentForm.controls[whispererName].controls
+                            .descriptiveNumber.errors
+                    "
+                    [formControl]="
+                        parentForm.controls[whispererName].controls
+                            .descriptiveNumber
+                    "
                     [id]="whispererName + 'descriptiveNumber'"
-                    (focus)="fieldWrapperFocus(whispererName + 'descriptiveNumber')"
+                    (focus)="
+                        fieldWrapperFocus(whispererName + 'descriptiveNumber')
+                    "
                     (blur)="fieldWrapperBlur()"
-                    [inputFocused]="(fieldWrapperFocused$ | async) === whispererName + 'descriptiveNumber' || (fieldWrapperFocused$ | async) === whispererName + 'orientationNumber'"
+                    [inputFocused]="
+                        (fieldWrapperFocused$ | async) ===
+                            whispererName + 'descriptiveNumber' ||
+                        (fieldWrapperFocused$ | async) ===
+                            whispererName + 'orientationNumber'
+                    "
                     label="Číslo popisné"
                     [showErrorMessage]="false"
-                    [success]="parentForm.controls[whispererName].controls.descriptiveNumber.valid && parentForm.controls[whispererName].controls.descriptiveNumber.touched"
-                    [touched]="parentForm.controls[whispererName].controls.descriptiveNumber.touched"
-                    [validationMessages]="formFields.validationMessages.descriptiveNumber"
+                    [success]="
+                        parentForm.controls[whispererName].controls
+                            .descriptiveNumber.valid &&
+                        parentForm.controls[whispererName].controls
+                            .descriptiveNumber.touched
+                    "
+                    [touched]="
+                        parentForm.controls[whispererName].controls
+                            .descriptiveNumber.touched
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.descriptiveNumber
+                    "
                 ></lnd-form-field>
             </div>
             <div class="col-6 pl-1">
                 <lnd-form-field
-                    [error]="parentForm.controls[whispererName].controls.orientationNumber.errors"
-                    [formControl]="parentForm.controls[whispererName].controls.orientationNumber"
+                    [error]="
+                        parentForm.controls[whispererName].controls
+                            .orientationNumber.errors
+                    "
+                    [formControl]="
+                        parentForm.controls[whispererName].controls
+                            .orientationNumber
+                    "
                     [id]="whispererName + 'orientationNumber'"
-                    (focus)="fieldWrapperFocus(whispererName + 'orientationNumber')"
+                    (focus)="
+                        fieldWrapperFocus(whispererName + 'orientationNumber')
+                    "
                     (blur)="fieldWrapperBlur()"
-                    [inputFocused]="(fieldWrapperFocused$ | async) === whispererName + 'descriptiveNumber' || (fieldWrapperFocused$ | async) === whispererName + 'orientationNumber'"
+                    [inputFocused]="
+                        (fieldWrapperFocused$ | async) ===
+                            whispererName + 'descriptiveNumber' ||
+                        (fieldWrapperFocused$ | async) ===
+                            whispererName + 'orientationNumber'
+                    "
                     label="Číslo orientační"
                     [showErrorMessage]="false"
-                    [success]="parentForm.controls[whispererName].controls.orientationNumber.valid && parentForm.controls[whispererName].controls.orientationNumber.touched"
-                    [touched]="parentForm.controls[whispererName].controls.orientationNumber.touched"
-                    [validationMessages]="formFields.validationMessages.orientationNumber"
+                    [success]="
+                        parentForm.controls[whispererName].controls
+                            .orientationNumber.valid &&
+                        parentForm.controls[whispererName].controls
+                            .orientationNumber.touched
+                    "
+                    [touched]="
+                        parentForm.controls[whispererName].controls
+                            .orientationNumber.touched
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.orientationNumber
+                    "
                 ></lnd-form-field>
             </div>
         </div>
@@ -64,7 +140,10 @@
         [formControl]="parentForm.controls[whispererName].controls.postCode"
         [id]="'postCode'"
         label="PSČ"
-        [success]="parentForm.controls[whispererName].controls.postCode.valid && parentForm.controls[whispererName].controls.postCode.touched"
+        [success]="
+            parentForm.controls[whispererName].controls.postCode.valid &&
+            parentForm.controls[whispererName].controls.postCode.touched
+        "
         [touched]="parentForm.controls[whispererName].controls.postCode.touched"
         [validationMessages]="formFields.validationMessages.postCode"
     ></lnd-form-field>
@@ -74,8 +153,12 @@
         [options]="regionOptions"
         [parentForm]="parentForm.controls[whispererName]"
         [selectName]="'region'"
-        [success]="parentForm.controls[whispererName].controls.region.valid && parentForm.controls[whispererName].controls.region.touched"
+        [success]="
+            parentForm.controls[whispererName].controls.region.valid &&
+            parentForm.controls[whispererName].controls.region.touched
+        "
         [touched]="parentForm.controls[whispererName].controls.region.touched"
-        [validationMessages]="formFields.validationMessages.region">
+        [validationMessages]="formFields.validationMessages.region"
+    >
     </lnd-select>
 </div>

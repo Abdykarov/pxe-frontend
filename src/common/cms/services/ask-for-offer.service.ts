@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import { getAskForOfferQuery } from '../queries/ask-for-offer';
 
@@ -7,13 +6,10 @@ import { getAskForOfferQuery } from '../queries/ask-for-offer';
     providedIn: 'root',
 })
 export class AskForOfferCmsService {
+    constructor(private apolloCmsService: ApolloCmsService) {}
 
-    constructor(
-        private apolloCmsService: ApolloCmsService,
-    ) {}
-
-    public getAskForOffer = () => this.apolloCmsService
-        .fetchQuery({
+    public getAskForOffer = () =>
+        this.apolloCmsService.fetchQuery({
             query: getAskForOfferQuery,
-        })
+        });
 }

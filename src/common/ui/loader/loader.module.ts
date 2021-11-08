@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
-
 // own components
 import { LoaderComponent } from './loader.component';
 
 @NgModule({
-    declarations: [
-        LoaderComponent,
-    ],
+    declarations: [LoaderComponent],
     imports: [],
-    exports: [
-        LoaderComponent,
-    ],
+    exports: [LoaderComponent],
 })
 export class LoaderModule {}

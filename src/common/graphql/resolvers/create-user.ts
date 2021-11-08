@@ -1,4 +1,4 @@
-import { getCreateUserQuery} from '../queries/supply-point-import';
+import { getCreateUserQuery } from '../queries/supply-point-import';
 
 export const defaults = {
     createUser: {
@@ -9,8 +9,10 @@ export const defaults = {
 
 export const resolvers = {
     Mutation: {
-        setActiveSupplyPoint: (_, {supplyPoint}, {cache}) => {
-            const { createUser } = cache.readQuery({query: getCreateUserQuery});
+        setActiveSupplyPoint: (_, { supplyPoint }, { cache }) => {
+            const { createUser } = cache.readQuery({
+                query: getCreateUserQuery,
+            });
             const data = {
                 createUser: {
                     ...createUser,
@@ -19,12 +21,10 @@ export const resolvers = {
                 },
             };
 
-            cache.writeQuery(
-                {
-                     query: getCreateUserQuery,
-                     data,
-                },
-            );
+            cache.writeQuery({
+                query: getCreateUserQuery,
+                data,
+            });
             return data;
         },
     },

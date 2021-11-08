@@ -1,21 +1,22 @@
 <!-- Example link in subtext -->
 <ng-template #linkInSubtext>
-    <a (click)="clickAction()">
-        Link
-    </a>
+    <a (click)="clickAction()"> Link </a>
 </ng-template>
 <!-- Example checkbox in subtext -->
 <ng-template #checkboxInSubtext>
     <lnd-form-field
         [id]="'checkbox-in-subtext'"
         label="Checkbox"
-        [type]="'CHECKBOX'">
+        [type]="'CHECKBOX'"
+    >
     </lnd-form-field>
 </ng-template>
 
 <div class="row static-pages-holder">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <h3>Inputs with help icon</h3>
@@ -26,7 +27,8 @@
                 id="normal-input"
                 label="Normal"
                 [appendButtonIcon]="true ? 'icon--info' : null"
-                (appendButtonAction)="trigger()">
+                (appendButtonAction)="trigger()"
+            >
             </lnd-form-field>
         </div>
         <div class="col-12">
@@ -35,7 +37,8 @@
                 label="With appendtext"
                 appendText="CZK"
                 [appendButtonIcon]="true ? 'icon--info' : null"
-                (appendButtonAction)="trigger()">
+                (appendButtonAction)="trigger()"
+            >
             </lnd-form-field>
         </div>
         <div class="col-12">
@@ -47,7 +50,8 @@
                 [selectName]="'searchableSelect'"
                 placeholder="placeholder"
                 [appendButtonIcon]="true ? 'icon--info' : null"
-                (appendButtonAction)="trigger()">
+                (appendButtonAction)="trigger()"
+            >
             </lnd-select>
         </div>
         <div class="col-12">
@@ -58,7 +62,8 @@
                 label="Datepicker"
                 id="datepicker-1"
                 [appendButtonIcon]="true ? 'icon--info' : null"
-                (appendButtonAction)="trigger()">
+                (appendButtonAction)="trigger()"
+            >
             </lnd-datepicker>
         </div>
     </div>
@@ -68,17 +73,15 @@
     <h4>Normal</h4>
     <div class="row">
         <div class="col-md-4">
-            <lnd-form-field
-                id="normal-input1"
-                label="Label">
-            </lnd-form-field>
+            <lnd-form-field id="normal-input1" label="Label"> </lnd-form-field>
         </div>
         <div class="col-md-4">
             <lnd-form-field
                 id="error-input1"
                 label="Label error"
                 error="This field is required"
-                [touched]="true">
+                [touched]="true"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -90,7 +93,8 @@
                 label="Normal input"
                 placeholder="Placeholder text"
                 [touched]="true"
-                value="Filled input">
+                value="Filled input"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -99,7 +103,8 @@
                 label="Normal error"
                 value="Filled input"
                 error="This field is required field is required field is required field."
-                [touched]="true">
+                [touched]="true"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -110,7 +115,8 @@
                 id="appendtext-input4"
                 label="Input s appendtext"
                 placeholder="Placeholder text"
-                appendText="CZK">
+                appendText="CZK"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -119,7 +125,8 @@
                 id="appendtext-input81"
                 label="Input s appendtext"
                 placeholder="Placeholder text"
-                appendText="CZK">
+                appendText="CZK"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -129,7 +136,8 @@
             <lnd-form-field
                 id="light-input"
                 label="Normal input"
-                [lightField]="true">
+                [lightField]="true"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -138,7 +146,8 @@
                 label="Normal error"
                 error="This field is required"
                 [touched]="true"
-                [lightField]="true">
+                [lightField]="true"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -149,7 +158,8 @@
                 id="appendtext-input7"
                 label="Input s appendtext"
                 placeholder="Placeholder text"
-                appendText="CZK">
+                appendText="CZK"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -158,7 +168,8 @@
                 id="appendtext-input8"
                 label="Input s appendtext"
                 placeholder="Placeholder text"
-                appendText="CZK">
+                appendText="CZK"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -168,7 +179,8 @@
             <lnd-form-field
                 [disabledField]="true"
                 id="disabled-input"
-                label="Disabled input">
+                label="Disabled input"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -176,7 +188,8 @@
                 [disabledField]="true"
                 id="disabled-input-filled"
                 label="Disabled input"
-                value="Disabled">
+                value="Disabled"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -186,21 +199,24 @@
             <lnd-form-field
                 id="input-normal-subtext"
                 label="Normal subtext"
-                subtext="Subtext">
+                subtext="Subtext"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
             <lnd-form-field
                 id="input-link-in-subtext"
                 label="Link in subtext"
-                [subtextTemplate]="linkInSubtext">
+                [subtextTemplate]="linkInSubtext"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
             <lnd-form-field
                 id="input-checkbox-in-subtext"
                 label="Checkbox in subtext"
-                [subtextTemplate]="checkboxInSubtext">
+                [subtextTemplate]="checkboxInSubtext"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -217,7 +233,8 @@
                     [options]="config.selectOptions"
                     [parentForm]="selectBoxes"
                     [selectName]="'simpleSelect'"
-                    placeholder="placeholder">
+                    placeholder="placeholder"
+                >
                 </lnd-select>
             </div>
             <div class="col-md-4">
@@ -228,7 +245,8 @@
                     [parentForm]="selectBoxes"
                     searchable="true"
                     [selectName]="'searchableSelect'"
-                    placeholder="placeholder">
+                    placeholder="placeholder"
+                >
                 </lnd-select>
             </div>
             <div class="col-md-4">
@@ -240,7 +258,8 @@
                     [error]="'Error message'"
                     [selectName]="'errorSelect'"
                     placeholder="Error"
-                    touched="true">
+                    touched="true"
+                >
                 </lnd-select>
             </div>
         </div>
@@ -254,7 +273,8 @@
                 [label]="'Adresa'"
                 [placeholder]="'Address whisperer placeholder'"
                 [parentForm]="addressWhisperer"
-                [whispererName]="'address'">
+                [whispererName]="'address'"
+            >
             </pxe-address-whisperer>
         </div>
     </form>
@@ -269,7 +289,7 @@
                 [placeholder]="'Datepicker'"
                 label="Datepicker"
                 id="datepicker-20"
-                >
+            >
             </lnd-datepicker>
         </div>
         <div class="col-4">
@@ -280,7 +300,8 @@
                 label="Datepicker range"
                 id="datepicker-1-range"
                 [appendButtonIcon]="true ? 'icon--info' : null"
-                (appendButtonAction)="trigger()">
+                (appendButtonAction)="trigger()"
+            >
             </lnd-datepicker-range>
         </div>
         <div class="col-md-4">
@@ -292,7 +313,7 @@
                 id="datepicker-2"
                 error="This field is required"
                 [touched]="true"
-                >
+            >
             </lnd-datepicker>
         </div>
         <div class="col-md-4">
@@ -303,7 +324,7 @@
                 label="Disabled datepicker"
                 id="disabledDatepicker"
                 [disabledField]="true"
-                >
+            >
             </lnd-datepicker>
         </div>
     </form>
@@ -318,7 +339,8 @@
                 label="Radio label"
                 [type]="'RADIOGROUP'"
                 [options]="config.options"
-                [defaultRadioGroupValue]="config.options[1].key">
+                [defaultRadioGroupValue]="config.options[1].key"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -331,7 +353,8 @@
             <lnd-form-field
                 [id]="'normal-checkbox'"
                 label="Checkbox label"
-                [type]="'CHECKBOX'">
+                [type]="'CHECKBOX'"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -340,7 +363,8 @@
                 label="Checked checkbox"
                 [type]="'CHECKBOX'"
                 value="1"
-                [checked]="true">
+                [checked]="true"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -349,7 +373,8 @@
                 label="Error checkbox"
                 error="This field is required"
                 [touched]="true"
-                [type]="'CHECKBOX'">
+                [type]="'CHECKBOX'"
+            >
             </lnd-form-field>
         </div>
     </div>
@@ -360,7 +385,8 @@
                 [disabledField]="true"
                 id="disabled-checkbox"
                 label="Disabled checkbox"
-                [type]="'CHECKBOX'">
+                [type]="'CHECKBOX'"
+            >
             </lnd-form-field>
         </div>
         <div class="col-md-4">
@@ -370,7 +396,8 @@
                 label="Disabled checkbox checked"
                 value="1"
                 [checked]="true"
-                [type]="'CHECKBOX'">
+                [type]="'CHECKBOX'"
+            >
             </lnd-form-field>
         </div>
     </div>

@@ -1,8 +1,5 @@
-import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
-
-
-
+import { Apollo } from 'apollo-angular';
 import {
     makeRegistrationMutation,
     makeUnregistrationMutation,
@@ -13,30 +10,27 @@ import {
     providedIn: 'root',
 })
 export class RegistrationService {
+    constructor(private apollo: Apollo) {}
 
-    constructor(
-        private apollo: Apollo,
-    ) {}
-
-    public makeRegistration = (values: any)  => this.apollo
-        .mutate<any>({
+    public makeRegistration = (values: any) =>
+        this.apollo.mutate<any>({
             mutation: makeRegistrationMutation,
             variables: {
                 ...values,
             },
-        })
+        });
 
-    public makeUnregistration = (smsCode: string) => this.apollo
-        .mutate<any>({
+    public makeUnregistration = (smsCode: string) =>
+        this.apollo.mutate<any>({
             mutation: makeUnregistrationMutation,
             variables: {
                 smsCode,
                 withSmsCode: !!smsCode,
             },
-        })
+        });
 
-    public sendUnregisterSms = () => this.apollo
-        .mutate<any>({
+    public sendUnregisterSms = () =>
+        this.apollo.mutate<any>({
             mutation: sendUnregisterSmsMutation,
-        })
+        });
 }

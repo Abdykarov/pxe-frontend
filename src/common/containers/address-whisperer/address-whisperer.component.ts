@@ -10,29 +10,22 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import {
-    FormBuilder,
-    FormGroup,
-} from '@angular/forms';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as R from 'ramda';
 import {
     debounceTime,
     distinctUntilChanged,
     filter,
     switchMap,
-    tap,
     takeUntil,
+    tap,
 } from 'rxjs/operators';
-
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    addressNotFoundFields,
-} from 'src/common/containers/address-whisperer/address-not-found/address-not-found.config';
-import { AddressWhispererService } from './services/address-whisperer.service';
+import { addressNotFoundFields } from 'src/common/containers/address-whisperer/address-not-found/address-not-found.config';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 import { SelectComponent } from 'src/common/ui/forms/select/select.component';
+import { AddressWhispererService } from './services/address-whisperer.service';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -40,13 +33,15 @@ import { SelectComponent } from 'src/common/ui/forms/select/select.component';
     styleUrls: ['./address-whisperer.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class AddressWhispererComponent extends AbstractComponent implements OnInit {
-
+export class AddressWhispererComponent
+    extends AbstractComponent
+    implements OnInit
+{
     set showForm(showForm: boolean) {
         if (showForm) {
             this.parentForm.addControl(
                 this.nameOfTemporaryWhispererFormGroup,
-                this.fb.group(this.formFields.controls, this.formFields.options),
+                this.fb.group(this.formFields.controls, this.formFields.options)
             );
         }
 
@@ -149,7 +144,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     constructor(
         private cd: ChangeDetectorRef,
         private addressWhispererService: AddressWhispererService,
-        private fb: FormBuilder,
+        private fb: FormBuilder
     ) {
         super();
         this.typeahead = new EventEmitter();
@@ -165,42 +160,70 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 filter(this.hasTermGoodLength),
                 distinctUntilChanged(),
-                switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
-                takeUntil(this.destroy$),
+                switchMap((term: string) =>
+                    this.addressWhispererService.getPlaces(
+                        AddressWhispererComponent.ROWS_RESPONSE,
+                        term
+                    )
+                ),
+                takeUntil(this.destroy$)
             )
-            .subscribe((addresses: Array<IAddress>)  => {
-                this.setAddresses(addresses);
-            }, (err) => {
-                this.setAddresses();
-            });
+            .subscribe(
+                (addresses: Array<IAddress>) => {
+                    this.setAddresses(addresses);
+                },
+                (err) => {
+                    this.setAddresses();
+                }
+            );
     }
 
-    public static getAddressNotFoundUniqueValue = (object: object) => R.pipe(
-        R.keys,
-        R.filter(R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)),
-        (key) => R.prop(key)(object),
-    )(object)
+    public static getAddressNotFoundUniqueValue = (object: object) =>
+        R.pipe(
+            R.keys,
+            R.filter(
+                R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)
+            ),
+            (key) => R.prop(key)(object)
+        )(object);
 
-    public static removeAddressNotFoundUnique = (object: object) => R.pipe(
-        R.keys,
-        R.map((key: string) => {
-            if (R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)(key)) {
-                object[key.split(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)[0]] = object[key];
-            }
-            return key;
-        }),
-        R.reject(R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)),
-        R.reduce((acc, key) => ({
-            [key]: object[key],
-            ...acc,
-        }), {}),
-    )(object)
+    public static removeAddressNotFoundUnique = (object: object) =>
+        R.pipe(
+            R.keys,
+            R.map((key: string) => {
+                if (
+                    R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)(
+                        key
+                    )
+                ) {
+                    object[
+                        key.split(
+                            AddressWhispererComponent.UNIQUE_FIELD_NAME_END
+                        )[0]
+                    ] = object[key];
+                }
+                return key;
+            }),
+            R.reject(
+                R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)
+            ),
+            R.reduce(
+                (acc, key) => ({
+                    [key]: object[key],
+                    ...acc,
+                }),
+                {}
+            )
+        )(object);
 
-    public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
+    public hasTermGoodLength = (term) =>
+        term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
 
     ngOnInit() {
         super.ngOnInit();
-        this.nameOfTemporaryWhispererFormGroup = this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
+        this.nameOfTemporaryWhispererFormGroup =
+            this.whispererName +
+            AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
         const addressData = this.parentForm.get(this.whispererName).value;
         if (addressData && addressData.city && !this.isAllFilled(addressData)) {
             this.changeSelectedValue(addressData);
@@ -210,27 +233,30 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public setAddresses = (addresses = []) => {
         this.addresses = addresses;
         this.cd.markForCheck();
-    }
+    };
 
     public setAddressValidator = (required: boolean) => {
         if (this.formFieldsParentForm) {
-            let updatedValidators =  this.formFieldsParentForm.controls[this.whispererName][1];
+            let updatedValidators =
+                this.formFieldsParentForm.controls[this.whispererName][1];
             if (!required) {
                 updatedValidators = R.omit(['required'], updatedValidators);
             }
-            this.parentForm.controls[this.whispererName].setValidators(updatedValidators);
+            this.parentForm.controls[this.whispererName].setValidators(
+                updatedValidators
+            );
             this.parentForm.get(this.whispererName).markAsUntouched({
                 onlySelf: true,
             });
         }
-    }
+    };
 
     public fillAddressBySelf = (evt) => {
         this.setAddressValidator(false);
         this.lndSelect.hideDialog();
         this.showForm = true;
         this.cd.markForCheck();
-    }
+    };
 
     public sendValidAddress = (value) => {
         this.parentForm.get(this.whispererName).setValue(value);
@@ -238,22 +264,31 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.change.emit(value);
         this.blur.emit();
         this.cd.markForCheck();
-    }
+    };
 
     private isAllFilled = (addressData: IAddress): boolean =>
-        !!(addressData && addressData.street && addressData.descriptiveNumber &&
-            addressData.city && addressData.postCode && addressData.region)
+        !!(
+            addressData &&
+            addressData.street &&
+            addressData.descriptiveNumber &&
+            addressData.city &&
+            addressData.postCode &&
+            addressData.region
+        );
 
     public changeSelectedValue = (userData: IAddress) => {
         this.change.emit(userData);
         if (userData && !this.isAllFilled(userData)) {
             this.showForm = true;
-            this.parentForm.controls[this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END].setValue(userData);
+            this.parentForm.controls[
+                this.whispererName +
+                    AddressWhispererComponent.UNIQUE_FIELD_NAME_END
+            ].setValue(userData);
             this.cd.markForCheck();
         }
 
         if (R.isNil(userData)) {
             this.showForm = false;
         }
-   }
+    };
 }

@@ -1,5 +1,5 @@
 export enum Environment {
     PREVIEW = 'preview',
-    TEST =  'test',
+    TEST = 'test',
     PROD = 'prod',
 }

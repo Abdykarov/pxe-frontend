@@ -4,8 +4,8 @@
  -
  */
 
-@use "sass:math";
+@use 'sass:math';
 
-$clickable-size:                            math.div($spacer, 2.25) ;
+$clickable-size:                            math.div( $spacer, 2.25 ) ;
 $indicator-size:                           6px;
 $image-size:                               80px;

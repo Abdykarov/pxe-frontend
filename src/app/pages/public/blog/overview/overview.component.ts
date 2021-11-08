@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { Router} from '@angular/router';
-
+import { Router } from '@angular/router';
 import * as R from 'ramda';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { map } from 'rxjs/operators';
 import { BlogFacade } from 'src/app/pages/public/blog/blog.facade';
 import { BlogService } from 'src/app/pages/public/blog/blog.service';
-import { ICardData } from 'src/common/ui/card/models/data.model';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { IType } from 'src/common/cms/models/blog';
+import { ICardData } from 'src/common/ui/card/models/data.model';
 
 @Component({
     selector: 'pxe-overview',
@@ -17,20 +15,22 @@ import { IType } from 'src/common/cms/models/blog';
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent extends AbstractComponent {
-    public readonly blogTypes$: Observable<IType[]> = this.blogFacade.blogTypes$;
-    public readonly activeTag$: Observable<IType>  = this.blogFacade.activeType$;
+    public readonly blogTypes$: Observable<IType[]> =
+        this.blogFacade.blogTypes$;
+    public readonly activeTag$: Observable<IType> = this.blogFacade.activeType$;
     public readonly activeArticles$: Observable<ICardData[]>;
-    public readonly totalItems$: Observable<number> = this.blogFacade.totalItems$;
+    public readonly totalItems$: Observable<number> =
+        this.blogFacade.totalItems$;
 
     constructor(
         public blogFacade: BlogFacade,
         public blogService: BlogService,
-        private router: Router,
+        private router: Router
     ) {
         super();
         this.activeArticles$ = this.blogFacade.activeArticles$.pipe(
             map(R.map(this.blogService.articleToCardData)),
-            map(R.map(this.blogService.toShortContent)),
+            map(R.map(this.blogService.toShortContent))
         );
     }
 

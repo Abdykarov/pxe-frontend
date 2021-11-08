@@ -6,14 +6,18 @@
         customClass ? customClass : ''
     ]"
     (lndOffClick)="isOpen = false"
-    [offClickEnabled]="isOpen">
+    [offClickEnabled]="isOpen"
+>
     <div class="tooltip__toggle">
-        <ng-container *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle } "></ng-container>
+        <ng-container
+            *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle }"
+        ></ng-container>
     </div>
-    <div 
-        #contentWrapperDiv 
+    <div
+        #contentWrapperDiv
         class="tooltip__content"
-        [ngClass]="[customContentClass ? customContentClass : '']">
+        [ngClass]="[customContentClass ? customContentClass : '']"
+    >
         <ng-content></ng-content>
     </div>
 </div>

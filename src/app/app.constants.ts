@@ -1,12 +1,11 @@
 import * as CryptoJS from 'crypto-js';
-
+import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 import {
     CommodityType,
     SubjectType,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ALL_BLOG: 'vse',
@@ -88,7 +87,8 @@ export const CONSTS = {
     MODAL_TYPE: {
         CONFIRM_INFO_DELETE_ASK_FOR_OFFER: 'confirmAskForOfferOffer',
         CONFIRM_INFO_OFFER: 'confirmInfoOffer',
-        CONFIRM_INFO_SUPPLY_POINT_IMPORT_ADDED: 'confirmInfoSupplyPointImportAdded',
+        CONFIRM_INFO_SUPPLY_POINT_IMPORT_ADDED:
+            'confirmInfoSupplyPointImportAdded',
         CONFIRM_DELETE_ASK_FOR_OFFER: 'confirmDeleteAskForOffer',
         CONFIRM_DELETE_SUPPLY_POINT_IMPORT: 'confirmSupplyPointImport',
         CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
@@ -106,52 +106,52 @@ export const CONSTS = {
     BOHEMIA_ENERGY_VAT_NUMBER: '27386732',
     PATHS: {
         APPROVAL: 'schvaleni',
-        ASK_FOR_OFFER : 'nahrane-faktury',
+        ASK_FOR_OFFER: 'nahrane-faktury',
         ASK_FOR_OFFER_NEW: 'prijate',
         ASK_FOR_OFFER_IN_PROGRESS: 'rozpracovane',
         ASK_FOR_OFFER_PROCESSED: 'uzavrene',
         BLOG: 'blog',
         CREATE_USER: 'vytvoreni-odberatele',
-        CONTRACT : 'smlouva',
-        COOKIES_POLICY : 'zasady-pouzivani-cookies',
+        CONTRACT: 'smlouva',
+        COOKIES_POLICY: 'zasady-pouzivani-cookies',
         CHANGE_PASSWORD: 'zmena-hesla',
-        DASHBOARD : 'nastenka',
+        DASHBOARD: 'nastenka',
         DELETE_ACCOUNT: 'smazani-uctu',
         DELETED_ACCOUNT: 'ucet-smazan',
         EMPTY: '',
         IMPORT: 'import',
         GAS: 'plyn',
         FAQ: 'casto-kladene-otazky',
-        FORGOTTEN_PASSWORD : 'zapomenute-heslo',
+        FORGOTTEN_PASSWORD: 'zapomenute-heslo',
         HISTORY: 'historie',
-        LOGIN : 'prihlaseni',
-        LOGOUT : 'odhlaseni',
+        LOGIN: 'prihlaseni',
+        LOGOUT: 'odhlaseni',
         NOT_FOUND: 'stranka-nenalezena',
         O_AUTH: 'o-auth',
-        OFFER_SELECTION : 'vyber-nabidky',
+        OFFER_SELECTION: 'vyber-nabidky',
         PATTERNS_OF_CONTRACTS: 'vzory-smluv',
-        PAYMENT : 'platba',
+        PAYMENT: 'platba',
         PRICES: 'ceny',
         POWER: 'elektrina',
-        RECAPITULATION : 'rekapitulace',
-        REQUEST : 'rozpracovana-smlouva',
-        REQUESTS : 'rozpracovane-smlouvy',
-        RESULT : 'vysledek',
-        SECURED : 'aplikace',
-        SECURING_YOUR_DATA : 'ochrana-osobnich-udaju',
+        RECAPITULATION: 'rekapitulace',
+        REQUEST: 'rozpracovana-smlouva',
+        REQUESTS: 'rozpracovane-smlouvy',
+        RESULT: 'vysledek',
+        SECURED: 'aplikace',
+        SECURING_YOUR_DATA: 'ochrana-osobnich-udaju',
         SIGNBOARD: 'informace',
-        SIGN_UP : 'registrace',
-        SUPPLY_POINT : 'odberne-misto',
-        SUPPLY_POINT_SELECTION : 'vyber-odberneho-mista',
-        SUPPLY_POINTS : 'uzavrene-smlouvy',
+        SIGN_UP: 'registrace',
+        SUPPLY_POINT: 'odberne-misto',
+        SUPPLY_POINT_SELECTION: 'vyber-odberneho-mista',
+        SUPPLY_POINTS: 'uzavrene-smlouvy',
         SUPPLY_OFFER: 'sprava-nabidek',
         SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
-        TERMS_OF_USE : 'podminky-uzivani',
-        UNSUBSCRIBE_NEWS : 'odhlaseni-z-odberu',
+        TERMS_OF_USE: 'podminky-uzivani',
+        UNSUBSCRIBE_NEWS: 'odhlaseni-z-odberu',
         UPLOAD: 'nahrani',
         USER_PROFILE: 'uzivatelsky-profil',
         SUPPLIER_PROFILE: 'dodavatelsky-profil',
-        WILD_CART  : '**',
+        WILD_CART: '**',
     },
     REFRESH_TOKEN: {
         INTERVAL: 300000,
@@ -248,10 +248,8 @@ export const ROUTES = {
     ROUTER_SECURING_YOUR_DATA: `/${CONSTS.PATHS.SECURING_YOUR_DATA}`,
     ROUTER_SUPPLIER_CONCLUDED_CONTRACTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}`,
     ROUTER_SIGN_UP: `/${CONSTS.PATHS.SIGN_UP}`,
-    ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER:
-        `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}/${CONSTS.PATHS.POWER}`,
-    ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS:
-        `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}/${CONSTS.PATHS.GAS}`,
+    ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}/${CONSTS.PATHS.POWER}`,
+    ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}/${CONSTS.PATHS.GAS}`,
     ROUTER_SUPPLY_POINTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINTS}`,
     ROUTER_HISTORY: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.HISTORY}`,
     ROUTER_SUPPLY_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}`,
@@ -264,7 +262,6 @@ export const ROUTES = {
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
     ROUTER_SUPPLIER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_PROFILE}`,
-
 };
 
 export enum INavigationItemType {
@@ -326,10 +323,12 @@ export const CONTRACT_END_TYPE_ORDER = [
     CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD,
 ];
 
-export const CONTRACT_END_TYPE_TRANSLATE_MAP  = {
+export const CONTRACT_END_TYPE_TRANSLATE_MAP = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: 'Smlouva na dobu určitou',
-    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: 'Smlouva na dobu určitou s automatickou prolongací',
-    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: 'Smlouva na dobu neurčitou',
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]:
+        'Smlouva na dobu určitou s automatickou prolongací',
+    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]:
+        'Smlouva na dobu neurčitou',
     [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: 'Vlastní výpověď',
 };
 
@@ -421,7 +420,7 @@ export const DELIVERY_LENGTH_OPTIONS: Array<IOption> = [
     },
 ];
 
-export const  ANNUAL_CONSUMPTION_OPTIONS = [
+export const ANNUAL_CONSUMPTION_OPTIONS = [
     {
         key: 1,
         value: '1',
@@ -481,74 +480,74 @@ export enum UNIT_OF_PRICES {
 
 export const REGIONS: Array<IOption> = [
     {
-        'label': 'Hlavní město Praha',
-        'value': 'Hlavní město Praha',
-        'key': 'Hlavní město Praha',
+        label: 'Hlavní město Praha',
+        value: 'Hlavní město Praha',
+        key: 'Hlavní město Praha',
     },
     {
-        'label': 'Jihočeský kraj',
-        'value': 'Jihočeský kraj',
-        'key': 'Jihočeský kraj',
+        label: 'Jihočeský kraj',
+        value: 'Jihočeský kraj',
+        key: 'Jihočeský kraj',
     },
     {
-        'label': 'Jihomoravský kraj',
-        'value': 'Jihomoravský kraj',
-        'key': 'Jihomoravský kraj',
+        label: 'Jihomoravský kraj',
+        value: 'Jihomoravský kraj',
+        key: 'Jihomoravský kraj',
     },
     {
-        'label': 'Karlovarský kraj',
-        'value': 'Karlovarský kraj',
-        'key': 'Karlovarský kraj',
+        label: 'Karlovarský kraj',
+        value: 'Karlovarský kraj',
+        key: 'Karlovarský kraj',
     },
     {
-        'label': 'Královéhradecký kraj',
-        'value': 'Královéhradecký kraj',
-        'key': 'Královéhradecký kraj',
+        label: 'Královéhradecký kraj',
+        value: 'Královéhradecký kraj',
+        key: 'Královéhradecký kraj',
     },
     {
-        'label': 'Liberecký kraj',
-        'value': 'Liberecký kraj',
-        'key': 'Liberecký kraj',
+        label: 'Liberecký kraj',
+        value: 'Liberecký kraj',
+        key: 'Liberecký kraj',
     },
     {
-        'label': 'Moravskoslezský kraj',
-        'value': 'Moravskoslezský kraj',
-        'key': 'Moravskoslezský kraj',
+        label: 'Moravskoslezský kraj',
+        value: 'Moravskoslezský kraj',
+        key: 'Moravskoslezský kraj',
     },
     {
-        'label': 'Olomoucký kraj',
-        'value': 'Olomoucký kraj',
-        'key': 'Olomoucký kraj',
+        label: 'Olomoucký kraj',
+        value: 'Olomoucký kraj',
+        key: 'Olomoucký kraj',
     },
     {
-        'label': 'Pardubický kraj',
-        'value': 'Pardubický kraj',
-        'key': 'Pardubický kraj',
+        label: 'Pardubický kraj',
+        value: 'Pardubický kraj',
+        key: 'Pardubický kraj',
     },
     {
-        'label': 'Plzeňský kraj',
-        'value': 'Plzeňský kraj',
-        'key': 'Plzeňský kraj',
+        label: 'Plzeňský kraj',
+        value: 'Plzeňský kraj',
+        key: 'Plzeňský kraj',
     },
     {
-        'label': 'Středočeský kraj',
-        'value': 'Středočeský kraj',
-        'key': 'Středočeský kraj',
+        label: 'Středočeský kraj',
+        value: 'Středočeský kraj',
+        key: 'Středočeský kraj',
     },
     {
-        'label': 'Ústecký kraj',
-        'value': 'Ústecký kraj',
-        'key': 'Ústecký kraj',
+        label: 'Ústecký kraj',
+        value: 'Ústecký kraj',
+        key: 'Ústecký kraj',
     },
     {
-        'label': 'Kraj Vysočina',
-        'value': 'Kraj Vysočina',
-        'key': 'Kraj Vysočina',
+        label: 'Kraj Vysočina',
+        value: 'Kraj Vysočina',
+        key: 'Kraj Vysočina',
     },
     {
-        'label': 'Zlínský kraj',
-        'value': 'Zlínský kraj',
-        'key': 'Zlínský kraj',
+        label: 'Zlínský kraj',
+        value: 'Zlínský kraj',
+        key: 'Zlínský kraj',
     },
 ];
 

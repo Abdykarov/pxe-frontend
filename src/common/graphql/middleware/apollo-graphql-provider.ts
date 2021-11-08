@@ -1,43 +1,43 @@
-import {APOLLO_OPTIONS} from 'apollo-angular';
-import {ApolloLink, from, NextLink, Observable, Operation, InMemoryCache} from '@apollo/client/core';
-import {BatchHttpLink} from '@apollo/client/link/batch-http';
-import {onError} from '@apollo/client/link/error';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import {
+    ApolloLink,
+    from,
+    InMemoryCache,
+    NextLink,
+    Observable,
+    Operation,
+} from '@apollo/client/core';
+import { BatchHttpLink } from '@apollo/client/link/batch-http';
+import { onError } from '@apollo/client/link/error';
+import { APOLLO_OPTIONS } from 'apollo-angular';
 import * as R from 'ramda';
-
-
-
-import fetch from 'unfetch';
-
-
-
-import { AuthService } from 'src/app/services/auth.service';
-import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
     CONSTS,
     OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION,
     OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
     OPERATIONS_WITHOUT_TOKEN,
 } from 'src/app/app.constants';
-import {
-    defaults,
-    resolvers,
-} from '../resolvers/';
-import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
+import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import { processErrorScrolls } from 'src/common/utils';
+import { environment } from 'src/environments/environment';
+import fetch from 'unfetch';
+import { resolvers } from '../resolvers/';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
-    const setTokenHeader = (operation: Operation, withoutToken = false): void => {
+    const setTokenHeader = (
+        operation: Operation,
+        withoutToken = false
+    ): void => {
         const headers: HttpHeaders = authService.getAuthorizationHeaders(null);
         const xAPIKey = headers.get('X-API-Key');
         const Authorization = headers.get('Authorization');
         operation.setContext({
             headers: {
-                ...(!!Authorization && !withoutToken) && {Authorization},
+                ...(!!Authorization && !withoutToken && { Authorization }),
                 'X-API-Key': xAPIKey,
             },
         });
@@ -50,20 +50,30 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
-        const withoutToken = R.includes(operation.operationName, OPERATIONS_WITHOUT_TOKEN);
+        const withoutToken = R.includes(
+            operation.operationName,
+            OPERATIONS_WITHOUT_TOKEN
+        );
         setTokenHeader(operation, withoutToken);
 
-        return new Observable(observer => {
+        return new Observable((observer) => {
             let subscription, innerSubscription;
             try {
                 subscription = forward(operation).subscribe({
                     next: (result: any) => {
                         if (result.errors) {
                             const isAccessDeniedException = R.pipe(
-                                R.filter((err) => err && err.type === 'AccessDeniedException'),
-                                R.head,
+                                R.filter(
+                                    (err) =>
+                                        err &&
+                                        err.type === 'AccessDeniedException'
+                                ),
+                                R.head
                             )(result.errors);
-                            const ignoreException = !R.includes(operation.operationName, OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION);
+                            const ignoreException = !R.includes(
+                                operation.operationName,
+                                OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION
+                            );
                             if (isAccessDeniedException && ignoreException) {
                                 authService.logoutForced();
                             }
@@ -71,18 +81,22 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                         observer.next(result);
                     },
                     complete: observer.complete.bind(observer),
-                    error: networkError => {
-                        if (networkError.status === 401 || networkError.statusCode === 401) {
-                            authService.refreshToken()
-                                .subscribe(
-                                    () => {
-                                        setTokenHeader(operation);
-                                        innerSubscription = forward(operation).subscribe(observer);
-                                    },
-                                    () => {
-                                        // observer.error(new Error('jwt refresh failed'));
-                                        authService.logoutForced();
-                                    });
+                    error: (networkError) => {
+                        if (
+                            networkError.status === 401 ||
+                            networkError.statusCode === 401
+                        ) {
+                            authService.refreshToken().subscribe(
+                                () => {
+                                    setTokenHeader(operation);
+                                    innerSubscription =
+                                        forward(operation).subscribe(observer);
+                                },
+                                () => {
+                                    // observer.error(new Error('jwt refresh failed'));
+                                    authService.logoutForced();
+                                }
+                            );
                         } else {
                             observer.error(networkError);
                         }
@@ -114,9 +128,11 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             // console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
         }
 
-
         if (graphQLErrors || networkError) {
-            const isOperationWithoutScrollOnError = !R.includes(operation.operationName, OPERATIONS_WITHOUT_SCROLL_ON_ERRORS);
+            const isOperationWithoutScrollOnError = !R.includes(
+                operation.operationName,
+                OPERATIONS_WITHOUT_SCROLL_ON_ERRORS
+            );
             if (isOperationWithoutScrollOnError) {
                 processErrorScrolls();
             }
@@ -141,8 +157,5 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 export const ApolloGraphQLProvider = {
     provide: APOLLO_OPTIONS,
     useFactory: apolloGraphQLFactory,
-    deps: [
-        AuthService,
-        Router,
-    ],
+    deps: [AuthService, Router],
 };

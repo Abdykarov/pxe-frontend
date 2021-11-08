@@ -1,11 +1,5 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import * as R from 'ramda';
-
 import { IAlertIcon } from './models/icon.model';
 import { IAlertType } from './models/type.model';
 
@@ -14,7 +8,6 @@ import { IAlertType } from './models/type.model';
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
 })
-
 export class AlertComponent {
     @Input()
     public type: IAlertType;
@@ -36,6 +29,8 @@ export class AlertComponent {
     }
 
     constructor() {
-        this.type = R.contains(this.type, Object.values(IAlertType)) ? this.type : IAlertType.INFO;
+        this.type = R.contains(this.type, Object.values(IAlertType))
+            ? this.type
+            : IAlertType.INFO;
     }
 }

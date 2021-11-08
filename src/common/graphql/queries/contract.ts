@@ -1,9 +1,8 @@
-import {gql} from 'apollo-angular';
-
+import { gql } from 'apollo-angular';
 
 export const getPaymentInfoQuery = gql`
-    query getPaymentInfo($contractId: ID!, $setting: QRCodeSetting!){
-        getPaymentInfo(contractId: $contractId, setting: $setting){
+    query getPaymentInfo($contractId: ID!, $setting: QRCodeSetting!) {
+        getPaymentInfo(contractId: $contractId, setting: $setting) {
             accountNumber {
                 accountNumber
                 accountPrefix

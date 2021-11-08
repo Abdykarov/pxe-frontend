@@ -5,7 +5,6 @@ import {
     Output,
     TemplateRef,
 } from '@angular/core';
-
 import {
     AllowedOperations,
     CommodityType,
@@ -38,4 +37,3 @@ export class SupplyPointComponent {
 
     constructor() {}
 }
-

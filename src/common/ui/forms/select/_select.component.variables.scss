@@ -7,6 +7,6 @@
 $select-input-padding-bottom:     ( $input-padding-y + $input-border-width );
 $select-arrow-size:               $icon-size-small-px;
 $select-clear-size:               15px;
-$select-clear-right:              ( ( $spacer * 1.5 ) + $select-arrow-size );
+$select-clear-right:              ( ( $spacer * 1.5 ) + $select-arrow-size  );
 $select-value-padding-right:      ( ( $input-padding-x * .75 ) + $select-clear-right + $select-clear-size );
 $select-dropdown-panel-height:    196px; // 5x ng-option height + ng-dropdown-panel-items padding top and bottom

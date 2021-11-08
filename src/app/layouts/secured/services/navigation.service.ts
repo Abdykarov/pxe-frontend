@@ -1,41 +1,29 @@
-import {Apollo} from 'apollo-angular';
 import { Injectable } from '@angular/core';
-
+import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
-
+import { Observable, of, Subscriber, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {
-    Observable,
-    of,
-    Subscriber,
-    throwError,
-} from 'rxjs';
-
 import { AuthService } from 'src/app/services/auth.service';
+import { ILoginProvider, IUserTypes } from 'src/app/services/model/auth.model';
+import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 import {
     IMenuByUserTypeMapping,
     INavigationConfig,
     INavigationItem,
 } from 'src/common/ui/navigation/models/navigation.model';
 import {
-    ILoginProvider,
-    IUserTypes,
-} from 'src/app/services/model/auth.model';
-import {
-    navigationMenuUsers,
-    navigationMenuUserActions,
-    navigationMenuSuppliers,
-    navigationMenuSuppliersActions,
     navigationMenuAdmins,
     navigationMenuAdminsActions,
+    navigationMenuSuppliers,
+    navigationMenuSuppliersActions,
+    navigationMenuUserActions,
+    navigationMenuUsers,
 } from './navigation.config';
-import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NavigationService {
-
     public readonly MENU_BY_USER_TYPE_MAPPING: IMenuByUserTypeMapping = {
         [IUserTypes.CONSUMER]: {
             navigationMenu: navigationMenuUsers,
@@ -53,46 +41,46 @@ export class NavigationService {
 
     get = (): Observable<INavigationConfig> => {
         const currentUserType = this.authService.currentUserValue?.type;
-        const { navigationMenu, navigationMenuActions} = this.MENU_BY_USER_TYPE_MAPPING[currentUserType];
+        const { navigationMenu, navigationMenuActions } =
+            this.MENU_BY_USER_TYPE_MAPPING[currentUserType];
 
-        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
-            R.concat(navigationMenu, navigationMenuActions),
-        ]));
-    }
+        return new Observable<INavigationConfig>(
+            (subscriber: Subscriber<INavigationConfig>) =>
+                subscriber.next([
+                    R.concat(navigationMenu, navigationMenuActions),
+                ])
+        );
+    };
 
     constructor(
         private apollo: Apollo,
         private authService: AuthService,
-        private navigationApolloService: NavigationApolloService,
+        private navigationApolloService: NavigationApolloService
     ) {}
 
-    public getNavigationConfig = () => this.get()
-        .pipe(
-            catchError(error => throwError(error)),
-        )
-        .subscribe((config: INavigationConfig) => {
-            this.saveConfigToStore(config);
-            return of(config);
-        })
+    public getNavigationConfig = () =>
+        this.get()
+            .pipe(catchError((error) => throwError(error)))
+            .subscribe((config: INavigationConfig) => {
+                this.saveConfigToStore(config);
+                return of(config);
+            });
 
     public saveConfigToStore = (config: INavigationConfig) => {
         this.navigationApolloService.saveConfig(config).subscribe();
-    }
+    };
 
     public filterNavigationByProvider = (
         navigationItems: INavigationItem[],
-        userLoginProvider: ILoginProvider,
-    ) => (
-        R.reject(
-            (navigationItem: INavigationItem) => {
-                if (!navigationItem.allowedLoginProviders) {
-                    return false;
-                }
+        userLoginProvider: ILoginProvider
+    ) =>
+        R.reject((navigationItem: INavigationItem) => {
+            if (!navigationItem.allowedLoginProviders) {
+                return false;
+            }
 
-                return !R.find(
-                    R.equals(userLoginProvider),
-                )(navigationItem.allowedLoginProviders);
-            },
-        )(navigationItems)
-    )
+            return !R.find(R.equals(userLoginProvider))(
+                navigationItem.allowedLoginProviders
+            );
+        })(navigationItems);
 }

@@ -1,19 +1,14 @@
 import { Component } from '@angular/core';
-import {
-    FormControl,
-    FormGroup,
-} from '@angular/forms';
-
+import { FormControl, FormGroup } from '@angular/forms';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 import { SupplyOfferOrganismConfig } from 'src/static/organisms/supply-offer/config';
+import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 
 @Component({
     templateUrl: './page.html',
     styleUrls: ['../../../assets/scss/05_pages/supply-offer.scss'],
 })
-
 export class SupplyOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public commodityType = CommodityType.POWER;
@@ -35,7 +30,7 @@ export class SupplyOfferComponent {
 
     constructor(
         public newSupplyPointPageConfig: NewSupplyPointPageConfig,
-        public supplyOfferConfig: SupplyOfferOrganismConfig,
+        public supplyOfferConfig: SupplyOfferOrganismConfig
     ) {
         this.breadcrumbItemsSimple = [
             {
@@ -48,12 +43,12 @@ export class SupplyOfferComponent {
     public click = (evt) => {
         evt.preventDefault();
         console.log('click');
-    }
+    };
 
     public action = (table, row) => {
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
         }
-    }
+    };
 }

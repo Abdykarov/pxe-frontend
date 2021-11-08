@@ -3,25 +3,38 @@
         customClass="mb-2 mb-md-0"
         label="Ano"
         (action)="continueInPreviousFormBannerAction()"
-        type="white">
+        type="white"
+    >
     </lnd-button>
     <lnd-button
         class="ml-3"
         label="Ne"
         (action)="removePreviousFormBannerAction()"
-        type="white">
+        type="white"
+    >
     </lnd-button>
 </ng-template>
 
 <pxe-layout-container pageTitle="Nové odběrné místo">
     <div class="row mb-6">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+            <pxe-progress-bar
+                [config]="stepperProgressConfig"
+            ></pxe-progress-bar>
         </div>
     </div>
-    <div *ngIf="supplyPointData && pxeSupplyPointForm &&
-                (pxeSupplyPointForm.codeLists && pxeSupplyPointForm.suppliers && pxeSupplyPointForm.suppliers[pxeSupplyPointForm.form.controls.commodityType.value])"
-         class="row">
+    <div
+        *ngIf="
+            supplyPointData &&
+            pxeSupplyPointForm &&
+            pxeSupplyPointForm.codeLists &&
+            pxeSupplyPointForm.suppliers &&
+            pxeSupplyPointForm.suppliers[
+                pxeSupplyPointForm.form.controls.commodityType.value
+            ]
+        "
+        class="row"
+    >
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-banner-ui
                 *ngIf="showBannerOfContinueInPreviousForm"
@@ -33,9 +46,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <p class="perex mb-4">
-                Zadejte údaje k odběrnému místu
-            </p>
+            <p class="perex mb-4">Zadejte údaje k odběrnému místu</p>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-placeloader [loading]="!supplyPointData"></lnd-placeloader>

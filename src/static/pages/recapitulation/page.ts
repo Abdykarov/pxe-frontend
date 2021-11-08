@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import {
-    FormControl,
-    FormGroup,
-} from '@angular/forms';
-
-import { depositPaymentType } from 'src/static/pages/recapitulation/config';
-import { getConfigStepper } from 'src/common/utils';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { getConfigStepper } from 'src/common/utils';
+import { depositPaymentType } from 'src/static/pages/recapitulation/config';
 
 @Component({
     templateUrl: './page.html',
@@ -35,6 +31,5 @@ export class RecapitulationPageComponent {
     submitForm = (evt) => {
         evt.preventDefault();
         console.log('clicked');
-    }
-
+    };
 }

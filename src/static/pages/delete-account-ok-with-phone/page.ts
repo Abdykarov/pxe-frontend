@@ -9,9 +9,9 @@ export class DeleteAccountOkWithPhoneComponent {
     redirectToUserProfile = (evt) => {
         evt.preventDefault();
         console.log('CLICKED');
-    }
+    };
 
     sendConfirmationSms = () => {
         console.log('CLICKED');
-    }
+    };
 }

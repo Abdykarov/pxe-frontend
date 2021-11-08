@@ -1,7 +1,4 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -10,19 +7,25 @@ import {
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as R from 'ramda';
-import {
-    concatMap,
-    map,
-    takeUntil,
-} from 'rxjs/operators';
 import { of } from 'rxjs';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { concatMap, map, takeUntil } from 'rxjs/operators';
+import {
+    GTM_CONSTS,
+    ROUTES,
+    SUPPLY_POINT_EDIT_TYPE,
+    S_ANALYTICS,
+} from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { GTMService } from 'src/app/services/gtm.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     CommodityType,
     ISupplyPoint,
@@ -33,30 +36,16 @@ import {
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { getConfigStepper } from 'src/common/utils';
-import { GTMService } from 'src/app/services/gtm.service';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { parseGraphQLErrors } from 'src/common/utils';
-import {
-    GTM_CONSTS,
-    ROUTES,
-    S_ANALYTICS,
-    SUPPLY_POINT_EDIT_TYPE,
-} from 'src/app/app.constants';
-import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
-import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { getConfigStepper, parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
-
     @ViewChild('pxeSupplyPointForm')
     public pxeSupplyPointForm: SupplyPointFormComponent;
 
@@ -65,11 +54,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     private deteledContractId = null;
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
-    public formFields = formFields(this.authService.currentUserValue.testingAccount);
+    public formFields = formFields(
+        this.authService.currentUserValue.testingAccount
+    );
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(
+        this.ACTUAL_PROGRESS_STATUS
+    );
     public showBannerOfContinueInPreviousForm = false;
     public supplyPointData = null;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
@@ -88,28 +81,34 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         private supplyPointLocalStorageService: SupplyPointLocalStorageService,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
+        this.gtmService.loadFormEvent(
+            GTM_CONSTS.LABELS.STEP_TWO,
+            this.authService.hashedUserId
+        );
     }
 
     ngOnInit() {
-        let supplyPointCopy,
-            supplyPointIdCopy;
+        let supplyPointCopy, supplyPointIdCopy;
 
         if (isPlatformBrowser(this.platformId)) {
             supplyPointCopy = window.history.state.supplyPointCopy;
             supplyPointIdCopy = window.history.state.supplyPointId;
         }
 
-        this.editMode = supplyPointCopy || supplyPointIdCopy ? SUPPLY_POINT_EDIT_TYPE.PROLONG : SUPPLY_POINT_EDIT_TYPE.NORMAL;
+        this.editMode =
+            supplyPointCopy || supplyPointIdCopy
+                ? SUPPLY_POINT_EDIT_TYPE.PROLONG
+                : SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
         if (this.supplyPointId || supplyPointIdCopy) {
             let supplyPointFound: ISupplyPoint = null;
-            this.supplyService.getSupplyPoint(this.supplyPointId || supplyPointIdCopy)
+            this.supplyService
+                .getSupplyPoint(this.supplyPointId || supplyPointIdCopy)
                 .pipe(
-                    map(({data}) => data.getSupplyPoint),
+                    map(({ data }) => data.getSupplyPoint),
                     concatMap((supplyPoint: ISupplyPoint) => {
                         if (supplyPoint.imported) {
                             return of(supplyPoint);
@@ -119,10 +118,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         if (this.deteledContractId) {
                             return of({});
                         } else {
-                            this.deteledContractId = R.path(['contract', 'contractId'])(supplyPoint) && R.isNil(supplyPointIdCopy);
-                            return this.deteledContractId ?
-                                this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
-                                of({});
+                            this.deteledContractId =
+                                R.path(['contract', 'contractId'])(
+                                    supplyPoint
+                                ) && R.isNil(supplyPointIdCopy);
+                            return this.deteledContractId
+                                ? this.contractService.deleteSelectedOfferFromContract(
+                                      supplyPoint.contract.contractId
+                                  )
+                                : of({});
                         }
                     }),
                     concatMap((supplyPoint: ISupplyPoint) => {
@@ -130,12 +134,13 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             return of(supplyPoint);
                         }
 
-                        return this.deteledContractId ?
-                        this.supplyService.getSupplyPoint(this.supplyPointId)
-                            .pipe(map(({data}) => data.getSupplyPoint)) :
-                        of({});
+                        return this.deteledContractId
+                            ? this.supplyService
+                                  .getSupplyPoint(this.supplyPointId)
+                                  .pipe(map(({ data }) => data.getSupplyPoint))
+                            : of({});
                     }),
-                    takeUntil(this.destroy$),
+                    takeUntil(this.destroy$)
                 )
                 .subscribe(
                     (supplyPoint: ISupplyPoint) => {
@@ -149,14 +154,16 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         const { globalError } = parseGraphQLErrors(error);
                         this.globalError = globalError;
                         this.cd.markForCheck();
-                    },
+                    }
                 );
         } else if (supplyPointCopy) {
             this.supplyPointLocalStorageService.isEdit = true;
             this.supplyPointData = supplyPointCopy;
         } else {
             this.supplyPointLocalStorageService.isEdit = false;
-            this.showBannerOfContinueInPreviousForm = !R.isEmpty(this.supplyPointLocalStorageService.getSupplyPoint());
+            this.showBannerOfContinueInPreviousForm = !R.isEmpty(
+                this.supplyPointLocalStorageService.getSupplyPoint()
+            );
             this.supplyPointData = {};
         }
     }
@@ -164,12 +171,12 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public continueInPreviousFormBannerAction = () => {
         this.supplyPointLocalStorageService.loadSupplyPointAction();
         this.showBannerOfContinueInPreviousForm = false;
-    }
+    };
 
     public removePreviousFormBannerAction = () => {
         this.supplyPointLocalStorageService.removeSupplyPoint();
         this.showBannerOfContinueInPreviousForm = false;
-    }
+    };
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading = true;
@@ -178,25 +185,28 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         let supplyPointAction;
         const id = supplyPointFormData.id;
 
-        const supplyPoint: ISupplyPoint = R.pick([
-            'supplierId',
-            'name',
-            'address',
-            'expirationDate',
-            'subjectTypeId',
-            'contractEndTypeId',
-            'timeToContractEnd',
-            'timeToContractEndPeriodId',
-            'withoutSupplier',
-        ], supplyPointFormData);
+        const supplyPoint: ISupplyPoint = R.pick(
+            [
+                'supplierId',
+                'name',
+                'address',
+                'expirationDate',
+                'subjectTypeId',
+                'contractEndTypeId',
+                'timeToContractEnd',
+                'timeToContractEndPeriodId',
+                'withoutSupplier',
+            ],
+            supplyPointFormData
+        );
 
         if (supplyPoint.withoutSupplier) {
             supplyPoint.expirationDate = moment().format('YYYY-MM-DD');
         }
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
-            const powerAttributes: ISupplyPointPowerAttributes =
-                R.pick([
+            const powerAttributes: ISupplyPointPowerAttributes = R.pick(
+                [
                     'ean',
                     'circuitBreakerId',
                     'phasesId',
@@ -205,31 +215,48 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNTUnit',
                     'annualConsumptionVT',
                     'annualConsumptionVTUnit',
-                ], supplyPointFormData);
-            supplyPointAction = id && !this.supplyPointData?.imported ?
-                this.supplyService.updatePowerSupplyPoint(id, supplyPoint, powerAttributes) :
-                this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
+                ],
+                supplyPointFormData
+            );
+            supplyPointAction =
+                id && !this.supplyPointData?.imported
+                    ? this.supplyService.updatePowerSupplyPoint(
+                          id,
+                          supplyPoint,
+                          powerAttributes
+                      )
+                    : this.supplyService.createPowerSupplyPoint(
+                          supplyPoint,
+                          powerAttributes
+                      );
         } else {
-            const gasAttributes: ISupplyPointGasAttributes =
-                R.pick([
-                    'eic',
-                    'annualConsumption',
-                    'annualConsumptionUnit',
-                ], supplyPointFormData);
-            supplyPointAction = id && !this.supplyPointData?.imported ?
-                this.supplyService.updateGasSupplyPoint(id, supplyPoint, gasAttributes) :
-                this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
+            const gasAttributes: ISupplyPointGasAttributes = R.pick(
+                ['eic', 'annualConsumption', 'annualConsumptionUnit'],
+                supplyPointFormData
+            );
+            supplyPointAction =
+                id && !this.supplyPointData?.imported
+                    ? this.supplyService.updateGasSupplyPoint(
+                          id,
+                          supplyPoint,
+                          gasAttributes
+                      )
+                    : this.supplyService.createGasSupplyPoint(
+                          supplyPoint,
+                          gasAttributes
+                      );
         }
 
         supplyPointAction
             .pipe(
                 takeUntil(this.destroy$),
                 map(
-                    ({data}) => data.createPowerSupplyPoint ||
+                    ({ data }) =>
+                        data.createPowerSupplyPoint ||
                         data.updatePowerSupplyPoint ||
                         data.createGasSupplyPoint ||
-                        data.updateGasSupplyPoint,
-                ),
+                        data.updateGasSupplyPoint
+                )
             )
             .subscribe(
                 (supplyPointId) => {
@@ -245,16 +272,21 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         {
                             ACTION: S_ANALYTICS.ACTIONS.CREATE_SUPPLY_POINT,
                             supplyPointFormData,
-                        },
+                        }
                     );
                     this.gtmService.pushEvent({
-                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
-                        'category': GTM_CONSTS.CATEGORIES.FORM,
-                        'action': GTM_CONSTS.ACTIONS.SAVE,
-                        'label': GTM_CONSTS.LABELS.STEP_TWO,
-                        'odberatel': (<any>supplyPoint)?.subjectTypeId === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'domacnost' : 'firma',
-                        'energie': supplyPointFormData?.commodityType?.toLowerCase(),
-                        'userID': this.authService?.hashedUserId,
+                        event: GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        category: GTM_CONSTS.CATEGORIES.FORM,
+                        action: GTM_CONSTS.ACTIONS.SAVE,
+                        label: GTM_CONSTS.LABELS.STEP_TWO,
+                        odberatel:
+                            (<any>supplyPoint)?.subjectTypeId ===
+                            SubjectType.SUBJECT_TYPE_INDIVIDUAL
+                                ? 'domacnost'
+                                : 'firma',
+                        energie:
+                            supplyPointFormData?.commodityType?.toLowerCase(),
+                        userID: this.authService?.hashedUserId,
                     });
                     this.cd.markForCheck();
                     this.router.navigate(
@@ -263,15 +295,18 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             queryParams: {
                                 supplyPointId,
                             },
-                        });
+                        }
+                    );
                 },
                 (error) => {
                     this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    const { fieldError, globalError } =
+                        parseGraphQLErrors(error);
                     this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                });
-    }
+                }
+            );
+    };
 }
