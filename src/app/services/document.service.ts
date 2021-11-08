@@ -17,6 +17,7 @@ import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -65,9 +66,17 @@ export class DocumentService {
         }
     }
 
-    public documentSave = (data: IResponseDataDocument) => {
+    public processContractFilename = (data: IResponseDataDocument, supplyPoint?: ISupplyPoint) => {
+        if (data.filename === 'Smlouva.pdf' && supplyPoint !== null) {
+            return `Smlouva-${supplyPoint.identificationNumber}.pdf`;
+        } else {
+            return data.filename;
+        }
+    }
+
+    public documentSave = (data: IResponseDataDocument, supplyPoint: ISupplyPoint = null) => {
         if (isPlatformBrowser(this.platformId)) {
-            saveAs(data.file, data.filename);
+            saveAs(data.file, this.processContractFilename(data, supplyPoint));
         }
     }
 }
