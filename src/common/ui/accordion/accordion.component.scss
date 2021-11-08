@@ -8,7 +8,7 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .accordion {
-	margin-bottom: ( $spacer * 0.5 );
+	margin-bottom: ($spacer * 0.5);
 
 	&__item {
 		margin-bottom: $spacer;
@@ -41,17 +41,19 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			padding: ( $spacer * 1.5 ) $accordion-padding-right-xs ( $spacer * 1.5 ) $spacer;
+			padding: ($spacer * 1.5) $accordion-padding-right-xs ($spacer * 1.5)
+				$spacer;
 			background-color: $white;
 			color: $font-text;
-			letter-spacing: -.6px;
+			letter-spacing: -0.6px;
 			line-height: $line-height-sm;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding: $accordion-padding $accordion-padding-right $accordion-padding $accordion-padding;
+				padding: $accordion-padding $accordion-padding-right
+					$accordion-padding $accordion-padding;
 				font-size: 1.125rem;
-				letter-spacing: -.75px;
+				letter-spacing: -0.75px;
 			}
 		}
 
@@ -70,13 +72,12 @@
 		right: $spacer;
 		width: $accordion-toggle-icon-size;
 		height: $accordion-toggle-icon-size;
-		padding-top: ( $spacer * 0.1 );
+		padding-top: ($spacer * 0.1);
 		background-color: $primary;
 		color: $white;
 		font-size: $icon-size-small;
 		letter-spacing: normal;
 		border-radius: $accordion-toggle-icon-size;
-
 
 		// Media queries
 		@include media-breakpoint-up(md) {

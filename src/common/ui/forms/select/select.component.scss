@@ -1,5 +1,5 @@
 // Core component import
-@use "sass:math";
+@use 'sass:math';
 
 @import 'src/assets/scss/01_base/base.scss';
 
@@ -9,14 +9,13 @@
 // Component variables
 @import 'select.component.variables.scss';
 
-
 .ng-select-custom {
 	max-width: $input-width;
 	padding-bottom: 0;
-	margin-bottom: ( $spacer * 2 );
+	margin-bottom: ($spacer * 2);
 
 	.ng-select-label {
-		margin-bottom: ( $spacer * 0.25 );
+		margin-bottom: ($spacer * 0.25);
 		font-size: $input-font-size;
 		cursor: pointer;
 	}
@@ -80,14 +79,17 @@
 			.ng-placeholder,
 			.ng-value,
 			.ng-input > input {
-				line-height: ( $input-height - ( $input-padding-y * 2 ) - $input-border-width );
+				line-height: (
+					$input-height - ($input-padding-y * 2) - $input-border-width
+				);
 			}
 
 			.ng-value-container {
 				.ng-input {
 					top: 0;
 					height: $input-height;
-					padding: $input-padding-y $input-padding-x $select-input-padding-bottom;
+					padding: $input-padding-y $input-padding-x
+						$select-input-padding-bottom;
 				}
 
 				.ng-input > input {
@@ -101,7 +103,8 @@
 				.ng-value-container {
 					align-items: center;
 					height: $input-height;
-					padding: $input-padding-y $select-value-padding-right $select-input-padding-bottom $input-padding-x;
+					padding: $input-padding-y $select-value-padding-right
+						$select-input-padding-bottom $input-padding-x;
 					border: none;
 				}
 
@@ -109,7 +112,7 @@
 					top: 5px;
 					left: 0;
 					padding: 0 $spacer;
-					color: rgba($input-color, .5);
+					color: rgba($input-color, 0.5);
 					transform: none;
 					transition: none;
 				}
@@ -195,11 +198,11 @@
 		}
 
 		.ng-dropdown-panel-items {
-			padding:  math.div($spacer, 2.5)  0;
+			padding: math.div($spacer, 2.5) 0;
 			max-height: $select-dropdown-panel-height;
 			background-color: $input-bg;
 			border-radius: $input-border-radius;
-			box-shadow: 0 0 10px 0 rgba($black, .09);
+			box-shadow: 0 0 10px 0 rgba($black, 0.09);
 
 			.ng-option {
 				.highlighted {
@@ -221,7 +224,7 @@
 		}
 
 		.ng-option {
-			padding: ( $spacer * 0.5 ) $input-padding-x;
+			padding: ($spacer * 0.5) $input-padding-x;
 			line-height: $line-height-sm;
 
 			&.ng-option-selected {
@@ -293,17 +296,21 @@
 
 				.ng-value-container {
 					position: relative;
-					padding-right: ( $input-padding-x + $select-clear-size );
+					padding-right: ($input-padding-x + $select-clear-size);
 				}
 
 				.ng-value-container::after {
 					content: '';
 					position: absolute;
 					top: 0;
-					right: ( $input-padding-x + $select-clear-size );
+					right: ($input-padding-x + $select-clear-size);
 					width: 50px;
 					height: 100%;
-					background: linear-gradient(90deg,rgba($input-bg, 0) 0,$input-bg 100%);
+					background: linear-gradient(
+						90deg,
+						rgba($input-bg, 0) 0,
+						$input-bg 100%
+					);
 				}
 			}
 

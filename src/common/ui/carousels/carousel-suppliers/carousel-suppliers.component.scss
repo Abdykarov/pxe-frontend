@@ -34,7 +34,7 @@
 	}
 
 	.carousel {
-		margin: 0 ( -$spacer * 1.5 );
+		margin: 0 (-$spacer * 1.5);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -42,7 +42,7 @@
 		}
 
 		.carousel-inner {
-			padding: 0 ( $spacer * 2 );
+			padding: 0 ($spacer * 2);
 
 			// Media queries
 			@include media-breakpoint-up(md) {

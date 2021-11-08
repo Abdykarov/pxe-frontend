@@ -7,10 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .footer {
 	position: relative;
-	padding: ( $spacer * 5 ) 0 $spacer;
+	padding: ($spacer * 5) 0 $spacer;
 	font-size: $small-font-size;
 	text-align: center;
 	z-index: $zindex-footer;
@@ -18,10 +17,10 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		height: $footer-height-tablet;
-		padding: ( $spacer * 3.5 ) 0 ( $spacer * 1.5 );
+		padding: ($spacer * 3.5) 0 ($spacer * 1.5);
 	}
 	@include media-breakpoint-up(xl) {
-		padding-top: ( $spacer * 5 );
+		padding-top: ($spacer * 5);
 	}
 
 	&--public {
@@ -30,7 +29,7 @@
 
 	.copy-holder,
 	.logo-holder {
-		margin-bottom: ( $spacer * 0.5 );
+		margin-bottom: ($spacer * 0.5);
 	}
 
 	.logo {
@@ -55,13 +54,13 @@
 
 	&__item {
 		&:nth-child(n + 2) {
-			margin-top: ( $spacer * 0.5 );
+			margin-top: ($spacer * 0.5);
 
 			// Media queries
 			@include media-breakpoint-up(md) {
 				position: relative;
 				margin-top: 0;
-				margin-left: ( $spacer * 2 );
+				margin-left: ($spacer * 2);
 			}
 		}
 	}

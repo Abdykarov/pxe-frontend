@@ -7,10 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .banner {
 	position: relative;
-	padding: $spacer ( $spacer * 1.5 );
+	padding: $spacer ($spacer * 1.5);
 	margin-bottom: $spacer;
 	background-color: $secondary;
 	color: $white;
@@ -18,23 +17,23 @@
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		padding: ( $spacer * 2 ) ( $spacer * 3 );
+		padding: ($spacer * 2) ($spacer * 3);
 	}
 
 	&__content {
 		display: flex;
 		align-items: center;
-		margin-bottom: ( $spacer * .75 );
+		margin-bottom: ($spacer * 0.75);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
 			margin-bottom: 0;
-			margin-right: ( $spacer * 2.5 );
+			margin-right: ($spacer * 2.5);
 		}
 	}
 
 	&__text {
-		margin-left: ( $spacer * .75 );
+		margin-left: ($spacer * 0.75);
 	}
 
 	&__controls {
@@ -46,4 +45,3 @@
 		}
 	}
 }
-

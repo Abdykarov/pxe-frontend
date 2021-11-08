@@ -16,29 +16,135 @@
 .drop-zone {
 	position: relative;
 	width: 100%;
-	padding: ( $spacer * 2.5 ) $spacer;
+	padding: ($spacer * 2.5) $spacer;
 
 	&::after {
-		content:'';
+		content: '';
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background:
-			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) top left no-repeat,
-			linear-gradient(90deg, transparent ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width)) top center repeat-x,
-			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) top right no-repeat,
-			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) top left no-repeat,
-			linear-gradient(0deg, transparent ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width)) center left repeat-y,
-			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) bottom left no-repeat,
-			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) bottom left no-repeat,
-			linear-gradient(90deg, transparent ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width)) bottom center repeat-x,
-			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) bottom right no-repeat,
-			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) top right no-repeat,
-			linear-gradient(0deg, transparent ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5), $drop-zone-border-color ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width * 0.5 + $drop-zone-border-dash-width)) center right repeat-y,
-			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) bottom right no-repeat;
-		background-size: $drop-zone-border-dash-width $drop-zone-border-size, ($drop-zone-border-dash-width + $drop-zone-border-gap-width) $drop-zone-border-size, $drop-zone-border-dash-width $drop-zone-border-size, $drop-zone-border-size $drop-zone-border-dash-width, $drop-zone-border-size ($drop-zone-border-dash-width + $drop-zone-border-gap-width), $drop-zone-border-size $drop-zone-border-dash-width;
+		background: linear-gradient(
+					90deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				top left no-repeat,
+			linear-gradient(
+					90deg,
+					transparent ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						),
+					transparent
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						)
+				)
+				top center repeat-x,
+			linear-gradient(
+					90deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				top right no-repeat,
+			linear-gradient(
+					0deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				top left no-repeat,
+			linear-gradient(
+					0deg,
+					transparent ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						),
+					transparent
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						)
+				)
+				center left repeat-y,
+			linear-gradient(
+					0deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				bottom left no-repeat,
+			linear-gradient(
+					90deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				bottom left no-repeat,
+			linear-gradient(
+					90deg,
+					transparent ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						),
+					transparent
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						)
+				)
+				bottom center repeat-x,
+			linear-gradient(
+					90deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				bottom right no-repeat,
+			linear-gradient(
+					0deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				top right no-repeat,
+			linear-gradient(
+					0deg,
+					transparent ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color ($drop-zone-border-gap-width * 0.5),
+					$drop-zone-border-color
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						),
+					transparent
+						(
+							$drop-zone-border-gap-width * 0.5 +
+								$drop-zone-border-dash-width
+						)
+				)
+				center right repeat-y,
+			linear-gradient(
+					0deg,
+					$drop-zone-border-color 100%,
+					transparent 100%
+				)
+				bottom right no-repeat;
+		background-size: $drop-zone-border-dash-width $drop-zone-border-size,
+			($drop-zone-border-dash-width + $drop-zone-border-gap-width)
+				$drop-zone-border-size,
+			$drop-zone-border-dash-width $drop-zone-border-size,
+			$drop-zone-border-size $drop-zone-border-dash-width,
+			$drop-zone-border-size
+				($drop-zone-border-dash-width + $drop-zone-border-gap-width),
+			$drop-zone-border-size $drop-zone-border-dash-width;
 		z-index: $zindex-drop-zone-bg-image;
 	}
 
@@ -53,7 +159,7 @@
 	}
 
 	&--interactive {
-		background-color: rgba($light-dark, .3);
+		background-color: rgba($light-dark, 0.3);
 	}
 
 	&--zindex {

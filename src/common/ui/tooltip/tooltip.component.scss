@@ -23,7 +23,7 @@
 	&__content {
 		position: absolute;
 		display: none;
-		padding: ( $spacer * 0.25 ) ( $spacer * .75 );
+		padding: ($spacer * 0.25) ($spacer * 0.75);
 		background-color: $font-text;
 		color: $white;
 		font-size: $font-size-base;
@@ -47,7 +47,7 @@
 		}
 
 		.tooltip__content {
-			top: calc(100% + #{$spacer * .75});
+			top: calc(100% + #{$spacer * 0.75});
 			left: 50%;
 			transform: translateX(-50%);
 		}

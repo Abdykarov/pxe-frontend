@@ -13,7 +13,6 @@
 // Bootstrap alert and close import
 @import '~bootstrap/scss/badge';
 
-
 .badge {
 	@include link-without-href {
 		display: inline-flex;
@@ -60,7 +59,7 @@
 			height: 24px;
 			min-height: auto;
 			margin-bottom: 0;
-			margin-left: ( $spacer * .75 );
+			margin-left: ($spacer * 0.75);
 			vertical-align: middle;
 			text-transform: none;
 		}
@@ -78,4 +77,3 @@
 		}
 	}
 }
-

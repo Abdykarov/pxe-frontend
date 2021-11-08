@@ -5,7 +5,7 @@
  */
 
 // Core component import
-@use "sass:math";
+@use 'sass:math';
 
 @import 'src/assets/scss/01_base/base.scss';
 
@@ -33,7 +33,7 @@
 		&::before {
 			content: '';
 			position: absolute;
-			top: ( $progress-bar-bullet-size - $progress-bar-line-height ) * 0.5;
+			top: ($progress-bar-bullet-size - $progress-bar-line-height) * 0.5;
 			left: 0;
 			width: 100%;
 			height: $progress-bar-line-height;
@@ -77,16 +77,24 @@
 				}
 			}
 
-			& + .progress-bar__item:not(:last-child):not(.progress-bar__item--shadow-step) {
+			&
+				+ .progress-bar__item:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
 					left: 0;
 					width: 120%;
 				}
 			}
 
-			& + .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
+			&
+				+ .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
-					background: linear-gradient(90deg, $progress-bar-line-bg-active 0%, $progress-bar-line-bg-active 40%, $progress-bar-line-bg 40%, $progress-bar-line-bg 100%);
+					background: linear-gradient(
+						90deg,
+						$progress-bar-line-bg-active 0%,
+						$progress-bar-line-bg-active 40%,
+						$progress-bar-line-bg 40%,
+						$progress-bar-line-bg 100%
+					);
 				}
 			}
 		}
@@ -114,8 +122,14 @@
 		&::before {
 			content: '';
 			position: absolute;
-			top: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner ) * 0.5 );
-			left: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner ) * 0.5 );
+			top: (
+				($progress-bar-bullet-size - $progress-bar-bullet-size-inner) *
+					0.5
+			);
+			left: (
+				($progress-bar-bullet-size - $progress-bar-bullet-size-inner) *
+					0.5
+			);
 			width: $progress-bar-bullet-size-inner;
 			height: $progress-bar-bullet-size-inner;
 			line-height: $progress-bar-bullet-size-inner;
@@ -150,8 +164,8 @@
 
 	&__label {
 		display: block;
-		padding: ( $spacer * 0.5 ) ( $spacer * 0.5 ) 0;
-		line-height:  math.div(19, 14) ;
+		padding: ($spacer * 0.5) ($spacer * 0.5) 0;
+		line-height: math.div(19, 14);
 	}
 
 	&.progress-bar--minor {

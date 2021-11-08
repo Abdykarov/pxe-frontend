@@ -7,7 +7,6 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .address-whisperer {
 	.select-wrapper {
 		.is-started-searching {
@@ -18,6 +17,6 @@
 	}
 
 	.check-other-correspondence-address {
-		margin-top: -( $spacer * 1.5 );
+		margin-top: -($spacer * 1.5);
 	}
 }

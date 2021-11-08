@@ -4,11 +4,11 @@
  -
  */
 
-$alert-padding-y:                   ( $spacer * .75 );
-$alert-padding-x:                   $spacer;
-$alert-margin-bottom:               ( $spacer * 2 );
-$alert-border-radius:               4px;
-$alert-border-width:                0;
-$alert-bg-level:                    0;
-$alert-border-level:                0;
-$alert-color-level:                 0;
+$alert-padding-y: ($spacer * 0.75);
+$alert-padding-x: $spacer;
+$alert-margin-bottom: ($spacer * 2);
+$alert-border-radius: 4px;
+$alert-border-width: 0;
+$alert-bg-level: 0;
+$alert-border-level: 0;
+$alert-color-level: 0;

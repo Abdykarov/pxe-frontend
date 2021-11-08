@@ -12,11 +12,11 @@
 		display: inline-flex;
 		align-items: flex-end;
 		@include reset-list;
-		margin: 0 $spacer ( $spacer * 2 );
+		margin: 0 $spacer ($spacer * 2);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			margin: 0 ( $spacer * 1.25 ) ( $spacer * 2 );
+			margin: 0 ($spacer * 1.25) ($spacer * 2);
 		}
 
 		&::before {

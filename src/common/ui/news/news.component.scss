@@ -13,11 +13,11 @@
 	box-shadow: $box-shadow;
 
 	&__inner {
-		padding: ( $spacer * 1.5 ) $spacer ( $spacer * 0.5 );
+		padding: ($spacer * 1.5) $spacer ($spacer * 0.5);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 2.5 ) ( $spacer * 3 ) ( $spacer * 1.5 ) ( $spacer * 3 );
+			padding: ($spacer * 2.5) ($spacer * 3) ($spacer * 1.5) ($spacer * 3);
 		}
 	}
 }

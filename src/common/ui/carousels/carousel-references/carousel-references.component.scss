@@ -12,7 +12,6 @@
 // Component variables
 @import 'carousel-references.variables.scss';
 
-
 .carousel-references {
 	display: flex;
 	flex-direction: column;
@@ -39,7 +38,7 @@
 			margin-left: $spacer;
 		}
 		@include media-breakpoint-up(xl) {
-			margin-left: ( $spacer * 2 );
+			margin-left: ($spacer * 2);
 		}
 	}
 
@@ -80,9 +79,9 @@
 				justify-content: center;
 				width: auto;
 				height: auto;
-				padding: ( $spacer * 0.5 );
+				padding: ($spacer * 0.5);
 				border: none;
-				opacity: .2;
+				opacity: 0.2;
 
 				&::before {
 					display: none;
@@ -90,7 +89,7 @@
 
 				&:focus,
 				&:hover {
-					opacity: .5;
+					opacity: 0.5;
 				}
 
 				&--active {

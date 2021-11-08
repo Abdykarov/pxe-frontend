@@ -36,13 +36,13 @@
 .nav-tabs {
 	display: flex;
 	justify-content: center;
-	margin-bottom: ( $spacer * 1.25 );
+	margin-bottom: ($spacer * 1.25);
 	list-style: none;
 	border: none;
 
 	// Media queries
 	@include media-breakpoint-up(lg) {
-		margin-bottom: ( $spacer * 1.75 );
+		margin-bottom: ($spacer * 1.75);
 	}
 
 	.nav-item {
@@ -53,7 +53,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			margin-right: ( $spacer * 2.5 );
+			margin-right: ($spacer * 2.5);
 		}
 
 		&:last-child {
@@ -77,11 +77,11 @@
 			text-align: center;
 			text-transform: uppercase;
 			text-decoration: none;
-			padding: ( $spacer * 0.25 ) 0;
+			padding: ($spacer * 0.25) 0;
 
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				padding: ( $spacer * 0.5 ) 0;
+				padding: ($spacer * 0.5) 0;
 			}
 			// display: inline-block;
 			// width: 100%;

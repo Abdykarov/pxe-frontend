@@ -32,14 +32,14 @@
 	}
 
 	.carousel-inner {
-		padding: 0 ( $carousel-control-size + ( $spacer * 0.5 ) );
+		padding: 0 ($carousel-control-size + ($spacer * 0.5));
 
 		// Media queries
 		@include media-breakpoint-up(md) {
 			padding: 0;
 		}
 		@include media-breakpoint-up(xl) {
-			padding: 0 ( $carousel-control-size + $spacer );
+			padding: 0 ($carousel-control-size + $spacer);
 		}
 	}
 
@@ -53,7 +53,7 @@
 		margin-right: 0;
 
 		.item {
-			margin: 0 ( -$spacer );
+			margin: 0 (-$spacer);
 
 			// Media queries
 			@include media-breakpoint-down(xs) {
@@ -68,11 +68,11 @@
 
 		&__inner {
 			display: inline-block;
-			padding: 0 ( $spacer * 1 );
+			padding: 0 ($spacer * 1);
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding: ( $spacer * 1.5 ) $spacer $spacer;
+				padding: ($spacer * 1.5) $spacer $spacer;
 			}
 			@include media-breakpoint-up(xl) {
 				display: flex;
@@ -81,8 +81,8 @@
 				border-left: $carousel-compare-border-left;
 			}
 			@include media-breakpoint-up(lg) {
-				padding-left: ( $spacer * 2 );
-				padding-right: ( $spacer * 2 );
+				padding-left: ($spacer * 2);
+				padding-right: ($spacer * 2);
 			}
 
 			&--none {
@@ -92,7 +92,7 @@
 	}
 
 	.carousel {
-		margin: 0 ( -$spacer * 1.25 );
+		margin: 0 (-$spacer * 1.25);
 
 		// Media queries
 		@include media-breakpoint-up(md) {

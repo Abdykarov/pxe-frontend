@@ -5,7 +5,7 @@
  */
 
 // Core component import
-@use "sass:math";
+@use 'sass:math';
 
 @import 'src/assets/scss/01_base/base.scss';
 
@@ -16,16 +16,16 @@
 .supply-point-offer {
 	@include link-without-href-self {
 		display: block;
-		padding: ( $spacer * 1.5 );
+		padding: ($spacer * 1.5);
 		margin-bottom: $spacer;
 		background-color: $white;
 		color: inherit;
 		border-radius: $border-radius;
-		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
+		box-shadow: 0 2px 5px rgba($box-shadow-color, 0.16);
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			padding: ( $spacer * 2.5 );
+			padding: ($spacer * 2.5);
 		}
 	}
 
@@ -36,14 +36,14 @@
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			&:not(.supply-point-offer--not-interactive):not(.supply-point-offer--owner) {
-				box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+				box-shadow: 0 10px 20px rgba($box-shadow-color, 0.2);
 			}
 		}
 	}
 
 	&.supply-point-offer--owner {
 		@include link-without-href-self {
-			background-color: rgba($body-bg, .5);
+			background-color: rgba($body-bg, 0.5);
 		}
 
 		.supply-point-offer__title {
@@ -71,19 +71,21 @@
 	&__inner {
 		position: relative;
 		height: 100%;
-		padding: $supply-point-offer-inner-padding-mobil $supply-point-offer-inner-padding-horizontal-mobil;
+		padding: $supply-point-offer-inner-padding-mobil
+			$supply-point-offer-inner-padding-horizontal-mobil;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding;
+			padding: $supply-point-offer-inner-padding
+				$supply-point-offer-inner-padding;
 		}
 
 		&--second {
-			background-color: rgba($body-bg, .5);
+			background-color: rgba($body-bg, 0.5);
 		}
 
 		&--price {
-			padding-bottom: ( $spacer * 1.5 );
+			padding-bottom: ($spacer * 1.5);
 
 			.supply-point-offer__title {
 				margin-bottom: 0;
@@ -97,21 +99,21 @@
 	}
 
 	&__block {
-		padding-bottom: ( $spacer * 2 );
+		padding-bottom: ($spacer * 2);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
 			height: 100%;
-			padding: ( $spacer * 1.5 );
+			padding: ($spacer * 1.5);
 		}
 
 		&--second {
-			background-color: rgba($body-bg, .5);
+			background-color: rgba($body-bg, 0.5);
 
 			// Media queries
 			@include media-breakpoint-down(xs) {
-				padding: $spacer ( $spacer * 1.5 );
-				margin-bottom: ( $spacer * 1.5 );
+				padding: $spacer ($spacer * 1.5);
+				margin-bottom: ($spacer * 1.5);
 			}
 		}
 
@@ -142,19 +144,19 @@
 	&__value-name {
 		display: flex;
 		align-items: center;
-		line-height:  math.div(18, 14) ;
+		line-height: math.div(18, 14);
 		text-transform: uppercase;
 		width: 100%;
 	}
 
 	&__title-label {
-		margin-bottom: ( $spacer * 0.25 );
+		margin-bottom: ($spacer * 0.25);
 	}
 
 	&__title {
 		display: block;
 		width: 100%;
-		margin-bottom: ( $spacer * 0.25 );
+		margin-bottom: ($spacer * 0.25);
 	}
 
 	&__info-icon {
@@ -184,8 +186,8 @@
 	}
 
 	&__value-name {
-		margin-bottom: ( $spacer * 0.25 );
-		color: rgba($font-text, .5);
+		margin-bottom: ($spacer * 0.25);
+		color: rgba($font-text, 0.5);
 	}
 
 	&__value {
@@ -207,7 +209,7 @@
 	}
 
 	&__addon {
-		margin-top: ( $spacer * 0.5 );
+		margin-top: ($spacer * 0.5);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -239,13 +241,13 @@
 		&-item {
 			display: inline-block;
 			width: 100%;
-			padding: $spacer ( $spacer * 1.5 );
+			padding: $spacer ($spacer * 1.5);
 			margin-bottom: $spacer;
-			background-color: rgba($body-bg, .5);
+			background-color: rgba($body-bg, 0.5);
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				width: calc(50% - #{ $spacer * 0.5 } );
+				width: calc(50% - #{$spacer * 0.5});
 			}
 
 			&::before {

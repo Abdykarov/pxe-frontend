@@ -18,11 +18,12 @@
 
 	&__inner {
 		height: 100%;
-		padding: ( $spacer * 1.5 ) $spacer;
+		padding: ($spacer * 1.5) $spacer;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 2.5 ) ( $spacer * 3 ) ( $spacer * 2.5 ) ( $spacer * 1.5 );
+			padding: ($spacer * 2.5) ($spacer * 3) ($spacer * 2.5)
+				($spacer * 1.5);
 		}
 	}
 
@@ -34,7 +35,10 @@
 
 	&__icon {
 		display: block;
-		padding-top: ( ( $supply-point-title-line-height-px - $supply-point-icon-font-size ) * 0.5 );
+		padding-top: (
+			($supply-point-title-line-height-px - $supply-point-icon-font-size) *
+				0.5
+		);
 		color: $icons-primary;
 		font-size: $supply-point-icon-font-size;
 	}
@@ -47,7 +51,7 @@
 		@include media-breakpoint-up(md) {
 			display: inline-block;
 			max-width: 100%;
-			margin-right: ( $spacer * 1.25 );
+			margin-right: ($spacer * 1.25);
 			font-size: $supply-point-title-font-size;
 			line-height: $supply-point-title-line-height;
 		}
@@ -64,7 +68,9 @@
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			padding-top: ( ( $supply-point-title-line-height-px - $btn-height ) * 0.5 );
+			padding-top: (
+				($supply-point-title-line-height-px - $btn-height) * 0.5
+			);
 		}
 	}
 }

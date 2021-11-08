@@ -339,7 +339,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                             .pipe(takeUntil(this.destroy$))
                             .subscribe(formValues => {
                                 try {
-                                    // tslint:disable-next-line
+                                    // eslint-disable-next-line
                                     let { email, supplyPointForm } = formValues;
                                     this.resetFormError(false);
                                     if (email === this.authService.currentUserValue.email) {

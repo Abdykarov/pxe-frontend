@@ -7,7 +7,6 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .list-of-notifications {
 	&__list {
 		list-style: none;
@@ -16,17 +15,17 @@
 
 	&__item {
 		counter-increment: items;
-		padding-left: ( $spacer * 1.5 );
-		padding-bottom: ( $spacer * 0.2 );
+		padding-left: ($spacer * 1.5);
+		padding-bottom: ($spacer * 0.2);
 		font-size: $small-font-size;
 
 		&::before {
-			content: '0' counter(items)'.';
+			content: '0' counter(items) '.';
 			font-weight: 400;
 		}
 
-		&:nth-child(n+10):before {
-			content: counter(items)'.';
+		&:nth-child(n + 10):before {
+			content: counter(items) '.';
 		}
 	}
 }

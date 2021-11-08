@@ -5,7 +5,6 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .loader {
 	position: relative;
 	display: inline-block;
@@ -51,7 +50,7 @@
 			transform: rotate(90deg);
 
 			&::before {
-				animation-delay: -.9s;
+				animation-delay: -0.9s;
 			}
 		}
 
@@ -59,7 +58,7 @@
 			transform: rotate(120deg);
 
 			&::before {
-				animation-delay: -.8s;
+				animation-delay: -0.8s;
 			}
 		}
 
@@ -67,7 +66,7 @@
 			transform: rotate(150deg);
 
 			&::before {
-				animation-delay: -.7s;
+				animation-delay: -0.7s;
 			}
 		}
 
@@ -75,7 +74,7 @@
 			transform: rotate(180deg);
 
 			&::before {
-				animation-delay: -.6s;
+				animation-delay: -0.6s;
 			}
 		}
 
@@ -83,7 +82,7 @@
 			transform: rotate(210deg);
 
 			&::before {
-				animation-delay: -.5s;
+				animation-delay: -0.5s;
 			}
 		}
 
@@ -91,7 +90,7 @@
 			transform: rotate(240deg);
 
 			&::before {
-				animation-delay: -.4s;
+				animation-delay: -0.4s;
 			}
 		}
 
@@ -99,7 +98,7 @@
 			transform: rotate(270deg);
 
 			&::before {
-				animation-delay: -.3s;
+				animation-delay: -0.3s;
 			}
 		}
 
@@ -107,7 +106,7 @@
 			transform: rotate(300deg);
 
 			&::before {
-				animation-delay: -.2s;
+				animation-delay: -0.2s;
 			}
 		}
 
@@ -115,7 +114,7 @@
 			transform: rotate(330deg);
 
 			&::before {
-				animation-delay: -.1s;
+				animation-delay: -0.1s;
 			}
 		}
 	}

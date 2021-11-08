@@ -7,7 +7,6 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .header {
 	position: absolute;
 	top: 0;
@@ -32,8 +31,8 @@
 		.header-inner {
 			// Media queries
 			@include media-breakpoint-down(xl) {
-				width: calc( 100% + #{$spacer} );
-				margin-left: -( $spacer * 0.5 );
+				width: calc(100% + #{$spacer});
+				margin-left: -($spacer * 0.5);
 				background-color: $body-bg-lp;
 			}
 		}
