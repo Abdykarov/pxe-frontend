@@ -2,7 +2,7 @@
     <li *ngFor="let item of data"
         [class.list-of-supply-points__item--active]="item.active"
         class="list-of-supply-points__item">
-        <div style='display: flex;flex-direction: column'>
+        <div class="d-flex flex-column">
             <span class="list-of-supply-points__item-title">{{item.label}}</span>
             <span *ngIf='item.description' class="list-of-supply-points__item-description">{{item.description}}</span>
         </div>
