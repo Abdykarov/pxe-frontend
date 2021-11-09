@@ -13,16 +13,18 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { saveAs } from 'file-saver';
 
+import { environment } from 'src/environments/environment';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
-import { environment } from 'src/environments/environment';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DocumentService {
+    public readonly contractNameTag = (identificationNumber) => `Smlouva-${identificationNumber}.pdf`;
 
     constructor(
         private http: HttpClient,
@@ -65,9 +67,17 @@ export class DocumentService {
         }
     }
 
-    public documentSave = (data: IResponseDataDocument) => {
+    public processContractFilename = (data: IResponseDataDocument, supplyPoint?: ISupplyPoint) => {
+        if (data.filename === 'Smlouva.pdf' && supplyPoint !== null) {
+            return this.contractNameTag(supplyPoint.identificationNumber);
+        } else {
+            return data.filename;
+        }
+    }
+
+    public documentSave = (data: IResponseDataDocument, supplyPoint: ISupplyPoint = null) => {
         if (isPlatformBrowser(this.platformId)) {
-            saveAs(data.file, data.filename);
+            saveAs(data.file, this.processContractFilename(data, supplyPoint));
         }
     }
 }
