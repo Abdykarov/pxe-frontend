@@ -20,7 +20,7 @@ const mapValidationFieldArrayToValidationObj = (array) => {
 };
 
 export const mapGlobalGraphQLErrorMessages = (messages: string[], message: string = null): string[] => {
-    if (graphQLMessagesDynamic[messages[0]]) {
+    if (messages && graphQLMessagesDynamic[messages[0]]) {
         return graphQLMessagesDynamic[messages[0]](message);
     }
 

@@ -182,8 +182,8 @@ export class CreateUserFacade {
     public processEanFieldErrorToGlobal = (fieldError: IFieldError): string[] => {
         const eanFieldError = fieldError['ean'];
         if (eanFieldError) {
-        const key = Object.keys(fieldError['ean'])[0];
-        return  mapGlobalGraphQLErrorMessages([key]);
+            const key = Object.keys(fieldError['ean'])[0];
+            return  mapGlobalGraphQLErrorMessages([key]);
         } else {
             return null;
         }

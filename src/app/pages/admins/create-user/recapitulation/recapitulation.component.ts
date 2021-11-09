@@ -149,7 +149,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 (error) => {
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
-                    this.globalError = this.createUserFacade.processEanFieldErrorToGlobal(fieldError) || globalError ;
+                    this.globalError = this.createUserFacade.processEanFieldErrorToGlobal(fieldError) || globalError;
                     this.cd.markForCheck();
                 },
             );
