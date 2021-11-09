@@ -43,6 +43,12 @@
 		text-overflow: ellipsis;
 	}
 
+	&__item-description {
+		font-size: 0.75rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
 	&__item-controls {
 		display: flex;
 		margin-left: ( $spacer * 1.5 );

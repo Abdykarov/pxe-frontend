@@ -102,7 +102,7 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
-                    this.globalError = globalError;
+                    this.globalError = this.createUserFacade.processEanFieldErrorToGlobal(fieldError) || globalError ;
                     this.cd.markForCheck();
                 });
     }
@@ -127,9 +127,10 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
-                    this.globalError = globalError;
+                    this.globalError = this.createUserFacade.processEanFieldErrorToGlobal(fieldError) || globalError ;
                     this.cd.markForCheck();
-                });
+                },
+            );
     }
 
     public backStep = () => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {

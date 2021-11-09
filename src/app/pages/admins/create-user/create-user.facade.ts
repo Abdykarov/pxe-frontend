@@ -23,6 +23,8 @@ import {
     CommodityType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { mapGlobalGraphQLErrorMessages } from 'src/common/utils';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 
@@ -113,8 +115,9 @@ export class CreateUserFacade {
                         (
                             {
                                 data: supplyPoint,
-                                label: supplyPoint.name || supplyPoint.identificationNumber,
+                                label: supplyPoint.name || '',
                                 active: supplyPoint.id === this.getSupplyPointId(),
+                                description: supplyPoint.identificationNumber,
                             }
                         ),
                 ),
@@ -175,6 +178,16 @@ export class CreateUserFacade {
 
     public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) =>
         this.supplyPointImportService.setActiveSupplyPoint(supplyPoint).subscribe()
+
+    public processEanFieldErrorToGlobal = (fieldError: IFieldError): string[] => {
+        const eanFieldError = fieldError['ean'];
+        if (eanFieldError) {
+        const key = Object.keys(fieldError['ean'])[0];
+        return  mapGlobalGraphQLErrorMessages([key]);
+        } else {
+            return null;
+        }
+    }
 
     public getEmail = (): string => this.queryParamsSubject$.getValue().email;
     public getAskForOfferId = (): string => this.queryParamsSubject$.getValue().askForOfferId;
