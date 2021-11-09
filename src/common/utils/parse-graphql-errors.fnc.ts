@@ -6,6 +6,7 @@ import { ErrorResponse } from 'apollo-link-error';
 import {
     defaultErrorMessage,
     graphQLMessages,
+    graphQLMessagesDynamic,
 } from 'src/common/constants/errors.constant';
 import { environment } from 'src/environments/environment';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -18,8 +19,13 @@ const mapValidationFieldArrayToValidationObj = (array) => {
     return R.map(prepareKeys)(array);
 };
 
-const mapGlobalGraphQLErrorMessages = (messages: string[]): string[] =>
-    R.map((key: string) => graphQLMessages[key] || defaultErrorMessage, messages);
+export const mapGlobalGraphQLErrorMessages = (messages: string[], message: string = null): string[] => {
+    if (messages && graphQLMessagesDynamic[messages[0]]) {
+        return graphQLMessagesDynamic[messages[0]](message);
+    }
+
+    return R.map((key: string) => graphQLMessages[key] || defaultErrorMessage, messages);
+};
 
 export const parseGraphQLErrors = (error: ErrorResponse):
     {
@@ -36,7 +42,7 @@ export const parseGraphQLErrors = (error: ErrorResponse):
                     fieldError = mapValidationFieldArrayToValidationObj(errors.validationError.field);
                 }
                 if (errors.validationError.global) {
-                    globalError = mapGlobalGraphQLErrorMessages(errors.validationError.global);
+                    globalError = mapGlobalGraphQLErrorMessages(errors.validationError.global, errors.message);
                 }
             } else {
                 globalError.push(environment.production ? defaultErrorMessage : errors.message);
