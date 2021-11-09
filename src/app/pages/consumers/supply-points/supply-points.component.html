@@ -5,7 +5,7 @@
              class="col-12">
             <pxe-badge type="info"
                        [isLink]="true"
-                       (action)="restoreContractAction($event, data)">
+                       (action)="restoreContractAction($event, data, router)">
                 Platnost končí za {{contractEndInDays}} {{contractEndInDays | plural: 'day'}} - Obnovit smlouvu
             </pxe-badge>
         </div>

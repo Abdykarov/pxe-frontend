@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
+import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DetailContainerComponent } from './detail-container.component';
 import { FormModule } from 'src/common/ui/forms/form.module';
@@ -22,6 +23,7 @@ import { SupplyPointDetailFormModule } from 'src/common/containers/form/forms/su
         FormModule,
         PlaceloaderModule,
         SupplyPointDetailFormModule,
+        BannerUIModule,
     ],
 })
 export class DetailContainerModule {}
