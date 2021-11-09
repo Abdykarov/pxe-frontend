@@ -5,16 +5,14 @@ import { ROUTES } from 'src/app/app.constants';
 
 export const restoreContractAction = (
     evt,
-    supplyPoint: ISupplyPoint,
+    supplyPointCopy: ISupplyPoint,
     router: Router,
 ) => {
     evt.preventDefault();
     evt.cancelBubble = true;
 
     const state = {
-        supplyPointCopy: {
-            ...supplyPoint,
-        },
+        supplyPointCopy,
     };
 
     router.navigate(
