@@ -34,7 +34,7 @@ $input-padding-y-public:             $spacer;
 $input-padding-x-public:             ( $spacer * 1.5  );
 
 $custom-control-gutter:                                  0;
-$custom-control-indicator-top:                           2px;
+$custom-control-indicator-top:                           .125;
 $custom-control-indicator-size:                          1rem;
 $custom-control-indicator-bg:                            $white;
 $custom-control-indicator-box-shadow:                    none;
@@ -62,17 +62,17 @@ $custom-control-label-disabled-color:                    rgba($input-color, .4);
 
 $custom-control-spacer-x:                     ( $spacer * 2  );
 
-$custom-radio-filling-size:                   8px;
+$custom-radio-filling-size:                   .5rem;
 $custom-radio-indicator-border-radius:        50%;
 $custom-radio-indicator-icon-checked:         none;
 $custom-radio-control-indicator-checked-bg:   $font-text;
 
-$custom-checkbox-icon-size:                   10px;
+$custom-checkbox-icon-size:                   .625rem;
 $custom-checkbox-indicator-border-radius:     3px;
 $custom-checkbox-indicator-icon-checked:      none;
 
 $custom-switch-height:                30px;
-$custom-switch-width:                 56px;
+$custom-switch-width:			   	  3.5rem;
 $custom-switch-bg:                    $primary;
 $custom-switch-shadow:                0 2px 4px 0 rgba($black, .25);
 $custom-switch-bg-interactive:        $primary-dark;

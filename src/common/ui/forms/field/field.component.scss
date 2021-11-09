@@ -593,7 +593,7 @@ textarea.form-control--not-empty {
 }
 
 .custom-control-label {
-	padding-left: ($custom-control-indicator-size + ( $spacer * .5) );
+	//padding-left: ($custom-control-indicator-size + ( $spacer * .5) ); --- // todo
 	color: $input-color;
 	font-size: $input-font-size;
 	cursor: pointer;
@@ -897,7 +897,7 @@ th {
 		&:nth-of-type(1) {
 			.custom-control-input {
 				& + .custom-control-label {
-					padding-right: ( $spacer * 6) + ($custom-switch-width * .5 );
+					padding-right: ( 1.25rem * 6) + ($custom-switch-width * .5 ); //todo
 				}
 			}
 		}
@@ -907,7 +907,7 @@ th {
 			margin-left: -$spacer * 7;
 
 			.custom-control-input + .custom-control-label {
-				padding-left: ( $spacer * 6) + ($custom-switch-width * .5 );
+				padding-left: ( 1.25rem * 6) + ($custom-switch-width * .5 ); //todo
 
 				&::before {
 					display: block;
