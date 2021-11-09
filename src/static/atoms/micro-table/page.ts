@@ -15,6 +15,7 @@ export class MicroTablePageComponent {
         },
         {
             data: '2',
+            description: '859182465878565209',
             label: '987328424',
         },
         {
