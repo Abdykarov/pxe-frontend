@@ -224,7 +224,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentLoading = false;
-                    this.documentService.documentSave(responseDataDocument);
+                    this.documentService.documentSave(responseDataDocument, this.supplyPoint);
                     this.cd.markForCheck();
                 },
                 (error) => {
