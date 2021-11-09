@@ -5,7 +5,8 @@ import { ErrorResponse } from 'apollo-link-error';
 
 import {
     defaultErrorMessage,
-    graphQLMessages, graphQLMessagesDynamic,
+    graphQLMessages,
+    graphQLMessagesDynamic,
 } from 'src/common/constants/errors.constant';
 import { environment } from 'src/environments/environment';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
