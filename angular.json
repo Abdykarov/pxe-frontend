@@ -13,6 +13,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "sourceMap": true,
                         "aot": true,
                         "outputPath": "dist/app",
                         "index": "src/index.html",
@@ -43,7 +44,9 @@
                                 "bundleName": "pdf-viewer"
                             }
                         ],
-                        "scripts": []
+                        "allowedCommonJsDependencies": [
+                            "crypto-js", "html-entities"
+                        ]
                     },
                     "configurations": {
                         "production": {

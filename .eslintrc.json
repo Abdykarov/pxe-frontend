@@ -52,17 +52,6 @@
                     }
                 ],
                 "brace-style": "off",
-                //"brace-style":["error", "1tbs"],
-                //                "comma-dangle": [
-                //                    "error",
-                //                    {
-                //                        "arrays": "always-multiline",
-                //                        "exports": "always-multiline",
-                //                        "functions": "always-multiline",
-                //                        "imports": "always-multiline",
-                //                        "objects": "always-multiline"
-                //                    }
-                //                ],
                 "id-blacklist": "off",
                 "id-match": "off",
                 "no-underscore-dangle": "off"
@@ -75,7 +64,8 @@
                 "plugin:prettier/recommended"
             ],
             "rules": {
-                "@angular-eslint/template/no-negated-async": "off"
+                "@angular-eslint/template/no-negated-async": "off",
+                "@angular-eslint/template/banana-in-box": "off"
             }
         }
     ]
