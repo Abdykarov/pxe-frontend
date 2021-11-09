@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2">
+                    <div class="col-md-10 offset-md-2">
                         <div class="row justify-content-between">
                             <div *ngIf="data.commodityType === commodityType.POWER"
                                  class="col-6 col-md-auto">
@@ -43,7 +43,7 @@
                                     <lnd-indicator [value]="data | consumptionIndicator: UNIT_INDICATOR"></lnd-indicator>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-auto order-md-1">
+                            <div class="col-md-auto order-md-1">
                                 <div class="supply-point__value-box">
                                     <span *ngIf="data.commodityType === commodityType.POWER"
                                           class="supply-point__value-name">
@@ -56,7 +56,7 @@
                                     <span class="supply-point__value">{{data.identificationNumber}}</span>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-auto order-md-2"
+                            <div class="col-md-auto order-md-2"
                                  *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Dodávkové období</span>
@@ -74,22 +74,22 @@
             </div>
         </div>
         <div *ngIf="!isListItem"
-             class="col-12 col-xl-5">
+             class="col-xl-5">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">
+                    <div class="col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
                             <ng-container *ngIf="(data | pathValue:['contract', 'personalData', 'deposit']) as deposit">
                                 <div class="col-12">
                                     <span class="supply-point__price-label">Sjednaná záloha&nbsp;<small>(včetně&nbsp;DPH)</small></span>
                                 </div>
                                 <div *ngIf="(data | pathValue:['contract', 'offer', 'supplier','name'])"
-                                     class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
+                                     class="col-md-8 col-xl-12 mb-4 mb-md-0">
                                     <span class="supply-point__price">{{deposit | number: '1.0-2'}} Kč</span>
                                     / měsíc ({{data.contract.offer.supplier.name}})
                                 </div>
                             </ng-container>
-                            <div class="col-12 col-md-4 supply-point__addon">
+                            <div class="col-md-4 supply-point__addon">
                                 <lnd-button
                                     label="Vybrat"
                                     type="primary"
