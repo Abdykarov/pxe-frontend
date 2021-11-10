@@ -12,9 +12,11 @@ export const initGlobalVariables = () => {
     win['angularDevstack']['config'] = global['config'];
 
     // create global variables
+    // @ts-ignore
     global['window'] = win;
     global['document'] = win.document;
     global['navigator'] = win.navigator;
+    // @ts-ignore
     global['HTMLAnchorElement'] = () => null;
 
     global['window'].HTMLElement.prototype.getBoundingClientRect = () => null;

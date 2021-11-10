@@ -2,10 +2,12 @@ import {
     HttpHandler,
     HttpInterceptor,
     HttpRequest,
+    HttpResponse,
 } from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
-import { Request } from 'express';
+import { Inject, Injectable } from '@angular/core';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { mkdir, writeFile } from 'fs';
+import { tap } from 'rxjs/operators';
 
 const startsWithAny =
     (arr: string[] = []) =>
@@ -17,23 +19,32 @@ const startsWithAny =
 
 const isAbsoluteURL = startsWithAny(['http', '//']);
 
-@Injectable({
-    providedIn: 'root',
-})
-export class UniversalInterceptor implements HttpInterceptor {
-    constructor(@Optional() @Inject(REQUEST) protected request: Request) {}
+@Injectable()
+export class ServerStateInterceptor implements HttpInterceptor {
+    constructor(
+        private transferState: TransferState,
+        @Inject('PAGE_URL') public pageUrl: string
+    ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        if (this.request && !isAbsoluteURL(req.url)) {
-            const protocolHost = `${this.request.protocol}://${this.request.get(
-                'host'
-            )}`;
-            const pathSeparator = !req.url.startsWith('/') ? '/' : '';
-            const url = protocolHost + pathSeparator + req.url;
-            const serverRequest = req.clone({ url });
-            return next.handle(serverRequest);
-        } else {
-            return next.handle(req);
-        }
+        return next.handle(req).pipe(
+            tap((event: any) => {
+                if (event instanceof HttpResponse) {
+                    mkdir('./dist/fe/browser' + this.pageUrl, () => ({}));
+                    writeFile(
+                        './dist/fe/browser' + this.pageUrl + '/data.json',
+                        JSON.stringify(event.body),
+                        { flag: 'w' },
+                        function (err) {
+                            if (err) return console.error(err);
+                        }
+                    );
+                    this.transferState.set(
+                        makeStateKey(req.url),
+                        <any>JSON.stringify(event.body)
+                    );
+                }
+            })
+        );
     }
 }

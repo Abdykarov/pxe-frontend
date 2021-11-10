@@ -45,7 +45,7 @@
                             }
                         ],
                         "allowedCommonJsDependencies": [
-                            "crypto-js", "html-entities"
+                            "crypto-js", "html-entities", "url"
                         ]
                     },
                     "configurations": {
@@ -112,14 +112,13 @@
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
                         "outputPath": "dist/server",
-                        "main": "ssr/app.ts",
+                        "main": "ssr/prerender.ts",
                         "tsConfig": "src/tsconfig.server.json",
                         "optimization": false
                     },
                     "configurations": {
                         "production": {
-                            "outputHashing": "media",
-                            "optimization": true
+                            "outputHashing": "media"
                         }
                     },
                     "defaultConfiguration": ""
@@ -171,7 +170,8 @@
                     "options": {
                         "browserTarget": "app:build:production",
                         "serverTarget": "app:server:production",
-                        "routes": ["/"]
+                        "guessRoutes": false,
+                        "routes": ["/", "/prihlaseni"]
                     },
                     "configurations": {
                         "production": {}
