@@ -16,10 +16,10 @@ window.angularDevstack = {
             "badge": "none"
         },
         "cms": {
-            "client_id": 'pxe-parc4u:default',
-            "client_secret": 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
-            "grand_type": 'client_credentials',
-            "scope": 'squidex-api',
+            "client_id": "pxe-parc4u:default",
+            "client_secret": "oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx",
+            "grand_type": "client_credentials",
+            "scope": "squidex-api"
         },
         "sAnalyticsTId": "",
         "url": "http://localhost:4200",
