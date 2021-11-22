@@ -19,7 +19,7 @@ export class DetailContainerComponent {
     public readonly globalError$ = this.detailContainerFacade.globalError$;
 
     constructor(
-        public detailContainerFacade: DetailContainerFacade,
+        private detailContainerFacade: DetailContainerFacade,
         public router: Router,
     ) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
