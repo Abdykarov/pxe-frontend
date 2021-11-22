@@ -11,9 +11,12 @@ export const restoreContractAction = (
     evt.preventDefault();
     evt.cancelBubble = true;
 
+    delete supplyPointCopy['id'];
+
     const state = {
         supplyPointCopy,
     };
+
 
     router.navigate(
         [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
