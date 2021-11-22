@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
     OnInit,
     ViewChild,
 } from '@angular/core';
@@ -224,7 +223,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentLoading = false;
-                    this.documentService.documentSave(responseDataDocument, this.supplyPoint);
+                    this.documentService.documentSave(responseDataDocument);
                     this.cd.markForCheck();
                 },
                 (error) => {

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { DetailContainerFacade } from './detail-container.facade';
 import { DetailContainerFacadeProvider } from './detail-container.provider';
-import { restoreContractAction } from 'src/common/utils/standalone/remove-contract-action.fnc';
 import { ROUTES } from 'src/app/app.constants';
 
 @Component({
@@ -13,7 +12,7 @@ import { ROUTES } from 'src/app/app.constants';
     providers: [DetailContainerFacadeProvider],
 })
 export class DetailContainerComponent {
-    public readonly restoreContractAction = restoreContractAction;
+    public readonly restoreContractAction = this.detailContainerFacade.restoreContractAction;
     public readonly supplyPoint$ = this.detailContainerFacade.historySupplyPointData$;
     public readonly isLoading$ = this.detailContainerFacade.isLoading$;
     public readonly fieldError$ = this.detailContainerFacade.fieldError$;

@@ -18,8 +18,8 @@ import { ROUTES } from 'src/app/app.constants';
 })
 export class OverviewContainerComponent {
     public readonly orderKeyValueByKeyDest = orderKeyValueByKeyDest;
-    public readonly restoreContractAction = restoreContractAction;
 
+    public readonly restoreContractAction = this.overviewContainerFacade.restoreContractAction;
     public readonly history$ = this.overviewContainerFacade.historySupplyPointsData$;
     public readonly isLoading$ = this.overviewContainerFacade.isLoading$;
     public readonly fieldError$ = this.overviewContainerFacade.fieldError$;
