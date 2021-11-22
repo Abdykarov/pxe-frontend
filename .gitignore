@@ -4,11 +4,13 @@
 /dist*
 /tmp
 /out-tsc
+/prerender/dist
 
 # dependencies
 /node_modules
 /mock/node_modules
 /mock/package-lock.json
+/prerender/node_modules
 
 ### Vim ###
 # swap

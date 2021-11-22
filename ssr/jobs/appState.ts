@@ -18,23 +18,19 @@ const initState = () => {
     let faqTypeSource = null;
 
     const setQuestions = () => request(queryRequest(bodyQuestionsQuery, Authorization), (_, __, body) => {
-        console.log("4")
         questionsSource = JSON.parse(body);
     });
 
     const setBlog = () => request(queryRequest(bodyBlogQuery, Authorization), (_, __, body) => {
-        console.log("3")
         blogSource = JSON.parse(body);
     });
 
     const setFaq = () => request(queryRequest(bodyFaqType, Authorization), (_, __, body) => {
-        console.log("3")
         faqTypeSource = JSON.parse(body);
     });
 
     const resetAppState = () => {
         request(newTokenRequest, (_, __, body) => {
-            console.log("2")
             const payload = JSON.parse(body);
             Authorization = getAuthorizationFromPayload(payload);
             setQuestions();
@@ -43,16 +39,6 @@ const initState = () => {
         });
         mCache.clear();
     };
-
-    const job = new cron.CronJob(
-        '0 22 * * *',
-        resetAppState,
-        null,
-        true,
-        'Europe/Prague',
-    );
-    job.start();
-    resetAppState();
 
     const getState = () => ({
         Authorization,

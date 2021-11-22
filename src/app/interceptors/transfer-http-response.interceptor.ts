@@ -36,6 +36,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             !this.isCmsRequest(req) ||
             (this.isRefreshToken(req) && environment.useDirectlyCMS)
         ) {
+            console.log('1');
             return next.handle(req);
         } else {
             const plainKey = req.body && req.body.operationName;
@@ -49,9 +50,10 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
 
             if (isPlatformBrowser(this.platformId)) {
                 // Try reusing transferred response from server
+                console.log(key);
                 const cachedResponse = this.transferState.get(key, null);
                 if (cachedResponse) {
-                    this.transferState.remove(key); // cached response should be used for the very first time
+                    // this.transferState.remove(key); // cached response should be used for the very first time
                     return of(
                         new HttpResponse({
                             body: cachedResponse.body,
@@ -61,7 +63,19 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                         })
                     );
                 }
-                return next.handle(req);
+
+                const secureReq = req.clone({
+                    url: window.location.href + 'data.json',
+                    method: 'GET',
+                    headers: req.headers.set('Accept', 'application/json'),
+                });
+                // send the cloned, "secure" request to the next handler.
+                return next.handle(secureReq);
+                //   return this.httpClient.get(window.location.pathname + '/data.json').pipe((data) =>
+                //     of(new HttpResponse({ body: data, status: 200 }))
+                //   );
+
+                // return next.handle(req);
             }
 
             if (isPlatformServer(this.platformId)) {
@@ -84,6 +98,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                 );
             }
         }
+        console.log('DEFAULT');
         return next.handle(req);
     }
 }

@@ -9,18 +9,8 @@ import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { mkdir, writeFile } from 'fs';
 import { tap } from 'rxjs/operators';
 
-const startsWithAny =
-    (arr: string[] = []) =>
-    (value = '') => {
-        return arr.some((test) =>
-            value.toLowerCase().startsWith(test.toLowerCase())
-        );
-    };
-
-const isAbsoluteURL = startsWithAny(['http', '//']);
-
 @Injectable()
-export class ServerStateInterceptor implements HttpInterceptor {
+export class SquidexInterceptor implements HttpInterceptor {
     constructor(
         private transferState: TransferState,
         @Inject('PAGE_URL') public pageUrl: string
@@ -29,10 +19,14 @@ export class ServerStateInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         return next.handle(req).pipe(
             tap((event: any) => {
-                if (event instanceof HttpResponse) {
-                    mkdir('./dist/fe/browser' + this.pageUrl, () => ({}));
+                if (
+                    event instanceof HttpResponse &&
+                    req.url ===
+                        'https://squidex.lnd.bz/api/content/pxe-parc4u/graphql'
+                ) {
+                    mkdir('./dist/app' + this.pageUrl, () => ({}));
                     writeFile(
-                        './dist/fe/browser' + this.pageUrl + '/data.json',
+                        './dist/app' + this.pageUrl + '/data.json',
                         JSON.stringify(event.body),
                         { flag: 'w' },
                         function (err) {

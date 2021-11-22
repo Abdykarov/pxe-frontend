@@ -171,7 +171,7 @@
                         "browserTarget": "app:build:production",
                         "serverTarget": "app:server:production",
                         "guessRoutes": false,
-                        "routes": ["/", "/prihlaseni"]
+                        "routesFile": "routes.txt"
                     },
                     "configurations": {
                         "production": {}

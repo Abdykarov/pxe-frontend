@@ -1,3 +1,5 @@
+import { appState } from './jobs/appState';
+
 /***************************************************************************************************
  * Initialize the server environment - for example, adding DOM built-in types to the global scope.
  *
@@ -5,17 +7,16 @@
  * This import must come before any imports (direct or transitive) that rely on DOM built-ins being
  * available, such as `@angular/elements`.
  */
-console.log("....PRERENDER....2")
 import './init';
-
+console.log("___");
+console.log(appState);
 import '@angular/platform-server/init';
 
 import { enableProdMode, StaticProvider, Type } from '@angular/core';
 
 enableProdMode();
-console.log("....PRERENDER....")
 
-export { AppServerModule } from 'src/app/app.server.module';
+export { AppServerModule } from 'src/app/server/app.server.module';
 import { renderModule as dd, renderModuleFactory } from '@angular/platform-server';
 
 const sdsd = (module: Type<any>, options: {
@@ -34,5 +35,3 @@ const sdsd = (module: Type<any>, options: {
 }
 
 export { sdsd as renderModule }
-// todo dynamic route
-//https://www.aldoperak.cz/api/content/ald-oplease/titles

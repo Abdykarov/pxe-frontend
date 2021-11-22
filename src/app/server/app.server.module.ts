@@ -1,16 +1,15 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Inject, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
     ServerModule,
     ServerTransferStateModule,
 } from '@angular/platform-server';
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 import { CookieBackendService, CookieService } from 'ngx-cookie';
-import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
-import { UniversalInterceptor } from './interceptors/universal.interceptor';
-
-// import { UniversalInterceptor } from './interceptors/universal.interceptor';
+import { AppComponent } from '../app.component';
+import { AppModule } from '../app.module';
+import { SquidexInterceptor } from './squidex.interceptor';
+import { UniversalInterceptor } from './universal.interceptor';
 
 @NgModule({
     imports: [AppModule, ServerModule, ServerTransferStateModule],
@@ -33,12 +32,16 @@ import { UniversalInterceptor } from './interceptors/universal.interceptor';
             useClass: UniversalInterceptor,
             multi: true,
         },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: SquidexInterceptor,
+            multi: true,
+        },
     ],
     bootstrap: [AppComponent],
 })
 export class AppServerModule {
-    constructor(@Inject('PAGE_URL') public pageUrl: string) {
-        console.log('PAGE_URL');
-        console.log(this.pageUrl);
+    constructor() {
+        console.log('__TEST__');
     }
 }
