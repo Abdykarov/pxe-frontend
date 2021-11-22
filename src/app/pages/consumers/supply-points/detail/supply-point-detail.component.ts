@@ -358,7 +358,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentLoading = false;
-                    this.documentService.documentSave(responseDataDocument, this.supplyPoint);
+                    this.documentService.documentSave(responseDataDocument);
                     this.cd.markForCheck();
                 },
                 (error) => {

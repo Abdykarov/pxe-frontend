@@ -325,7 +325,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             )
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
-                    this.documentService.documentSave(responseDataDocument, this.supplyPoint);
+                    this.documentService.documentSave(responseDataDocument);
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },

@@ -123,7 +123,7 @@ export const supplyPointImportPricesToOffer = (
             marked: false,
             marketOrganizerRegulatedPrice: 0,
             monthlyConsumptionFee: supplyPointImportPrices?.importPermanentMonthlyPay,
-            name: supplyPoint?.contract?.offer?.name,
+            name: null,
             permanentPaymentPrice: 0,
             priceGas: 0,
             priceGasWithVAT: supplyPointImportPrices?.importPricePerKwGas,

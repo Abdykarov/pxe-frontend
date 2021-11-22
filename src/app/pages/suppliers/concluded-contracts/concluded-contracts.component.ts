@@ -159,7 +159,7 @@ export class ConcludedContractsComponent extends AbstractComponent implements On
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.downloadingContractIds = R.without(contractId, this.downloadingContractIds);
-                    this.documentService.documentSave(responseDataDocument, null);
+                    this.documentService.documentSave(responseDataDocument);
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },

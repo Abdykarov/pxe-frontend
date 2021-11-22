@@ -18,14 +18,11 @@ import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DocumentService {
-    public readonly contractNameTag = (identificationNumber) => `Smlouva-${identificationNumber}.pdf`;
-
     constructor(
         private http: HttpClient,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -67,17 +64,9 @@ export class DocumentService {
         }
     }
 
-    public processContractFilename = (data: IResponseDataDocument, supplyPoint?: ISupplyPoint) => {
-        if (data.filename === 'Smlouva.pdf' && supplyPoint !== null) {
-            return this.contractNameTag(supplyPoint.identificationNumber);
-        } else {
-            return data.filename;
-        }
-    }
-
-    public documentSave = (data: IResponseDataDocument, supplyPoint: ISupplyPoint = null) => {
+    public documentSave = (data: IResponseDataDocument) => {
         if (isPlatformBrowser(this.platformId)) {
-            saveAs(data.file, this.processContractFilename(data, supplyPoint));
+            saveAs(data.file, data.filename);
         }
     }
 }
