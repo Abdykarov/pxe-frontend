@@ -40,8 +40,4 @@ import { UniversalInterceptor } from './universal.interceptor';
     ],
     bootstrap: [AppComponent],
 })
-export class AppServerModule {
-    constructor() {
-        console.log('__TEST__');
-    }
-}
+export class AppServerModule {}

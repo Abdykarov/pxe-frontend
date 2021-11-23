@@ -1,4 +1,4 @@
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
     HttpEvent,
     HttpHandler,
@@ -8,8 +8,8 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { NavigationStart, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 
@@ -17,10 +17,20 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root',
 })
 export class TransferHttpResponseInterceptor implements HttpInterceptor {
+    private nextRouteUrl: string;
+
     constructor(
         private transferState: TransferState,
+        private router: Router,
         @Inject(PLATFORM_ID) private platformId: string
-    ) {}
+    ) {
+        router.events.subscribe((event) => {
+            if (event instanceof NavigationStart) {
+                this.nextRouteUrl = event.url;
+                console.log(this.nextRouteUrl);
+            }
+        });
+    }
 
     private isRefreshToken = (req) =>
         req.url.indexOf(CONSTS.CMS.REFRESH_TOKEN_URL) >= -1;
@@ -36,24 +46,26 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             !this.isCmsRequest(req) ||
             (this.isRefreshToken(req) && environment.useDirectlyCMS)
         ) {
-            console.log('1');
             return next.handle(req);
         } else {
-            const plainKey = req.body && req.body.operationName;
+            console.log('___ROUTER___');
+            console.log(this.router);
+            console.log(this.router.routerState.snapshot.url);
 
-            if (!plainKey) {
-                return next.handle(req);
-            }
+            const plainKey = req.body && req.body.operationName;
             const key = makeStateKey<HttpResponse<object>>(
                 CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + plainKey
             );
 
+            if (!plainKey) {
+                return next.handle(req);
+            }
+
             if (isPlatformBrowser(this.platformId)) {
                 // Try reusing transferred response from server
-                console.log(key);
                 const cachedResponse = this.transferState.get(key, null);
                 if (cachedResponse) {
-                    // this.transferState.remove(key); // cached response should be used for the very first time
+                    this.transferState.remove(key); // cached response should be used for the very first time
                     return of(
                         new HttpResponse({
                             body: cachedResponse.body,
@@ -64,8 +76,16 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     );
                 }
 
+                const urlData = (this.nextRouteUrl + '/data.json').replace(
+                    '//',
+                    '/'
+                );
+
+                console.log('urlData');
+                console.log(urlData);
+
                 const secureReq = req.clone({
-                    url: window.location.href + 'data.json',
+                    url: urlData,
                     method: 'GET',
                     headers: req.headers.set('Accept', 'application/json'),
                 });
@@ -77,28 +97,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
 
                 // return next.handle(req);
             }
-
-            if (isPlatformServer(this.platformId)) {
-                // Try saving response to be transferred to browser
-                return next.handle(req).pipe(
-                    tap((event) => {
-                        if (
-                            event instanceof HttpResponse &&
-                            event.status === 200
-                        ) {
-                            // Only body is preserved as it is and it seems sufficient for now.
-                            // It would be nice to transfer whole response, but http response is not
-                            // a POJO and it needs custom serialization/deserialization.
-                            const response = {
-                                body: event.body,
-                            };
-                            this.transferState.set(key, response);
-                        }
-                    })
-                );
-            }
         }
-        console.log('DEFAULT');
         return next.handle(req);
     }
 }

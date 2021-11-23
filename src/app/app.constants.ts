@@ -9,7 +9,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const CONSTS = {
     ALL_BLOG: 'vse',
-    ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_requests:',
+    ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_request:',
     APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
@@ -36,7 +36,7 @@ export const CONSTS = {
     },
     CMS: {
         REFRESH_TOKEN_URL: 'identity-server/connect/token',
-        REGEX_CONTAIN_CMS: 'cms-api',
+        REGEX_CONTAIN_CMS: 'pxe-parc4u/graphql',
         REGEX_CONTAIN_CMS_DIRECT: 'content/pxe-parc4u/graphql',
     },
     CONTRACT_SIGN_NUMBER_OF_RETRY: 3,

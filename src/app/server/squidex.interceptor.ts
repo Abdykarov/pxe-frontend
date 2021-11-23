@@ -6,8 +6,10 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { mkdir, writeFile } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
+import { CONSTS } from '../app.constants';
 
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
@@ -24,19 +26,47 @@ export class SquidexInterceptor implements HttpInterceptor {
                     req.url ===
                         'https://squidex.lnd.bz/api/content/pxe-parc4u/graphql'
                 ) {
-                    mkdir('./dist/app' + this.pageUrl, () => ({}));
-                    writeFile(
-                        './dist/app' + this.pageUrl + '/data.json',
-                        JSON.stringify(event.body),
-                        { flag: 'w' },
-                        function (err) {
-                            if (err) return console.error(err);
+                    const plainKey = req.body && req.body.operationName;
+                    const key = makeStateKey<HttpResponse<object>>(
+                        CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + plainKey
+                    );
+                    const response = {
+                        body: event.body,
+                    };
+
+                    const dirPath = './dist/app' + this.pageUrl;
+                    const dataPath = dirPath + '/data.json';
+                    if (existsSync(dataPath)) {
+                        const data = readFileSync(dataPath, 'utf8');
+                        const content = JSON.parse(data);
+                        const finalData = R.mergeDeepLeft(
+                            response.body,
+                            content
+                        );
+                        writeFileSync(
+                            dataPath,
+                            JSON.stringify(finalData), //pak finalData
+                            { flag: 'w' }
+                        );
+                        this.transferState.set(key, response);
+                    } else {
+                        try {
+                            try {
+                                mkdirSync(dirPath);
+                            } catch (e) {}
+                            writeFileSync(
+                                dataPath,
+                                JSON.stringify(event.body),
+                                {
+                                    flag: 'w',
+                                }
+                            );
+                            this.transferState.set(key, response);
+                        } catch (e) {
+                            console.log('__ee__');
+                            console.log(e);
                         }
-                    );
-                    this.transferState.set(
-                        makeStateKey(req.url),
-                        <any>JSON.stringify(event.body)
-                    );
+                    }
                 }
             })
         );
