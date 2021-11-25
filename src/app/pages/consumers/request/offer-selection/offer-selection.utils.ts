@@ -123,7 +123,7 @@ export const supplyPointImportPricesToOffer = (
             marked: false,
             marketOrganizerRegulatedPrice: 0,
             monthlyConsumptionFee: supplyPointImportPrices?.importPermanentMonthlyPay,
-            name: supplyPoint?.contract?.offer?.name,
+            name: null,
             permanentPaymentPrice: 0,
             priceGas: 0,
             priceGasWithVAT: supplyPointImportPrices?.importPricePerKwGas,
@@ -176,17 +176,8 @@ export const addPastOfferToFindSupplyPointOffers =
             );
     }
 
-    if (supplyPoint?.contract?.offer) {
-        supplyPoint.contract.offer.totalPriceIncludeAnnualConsumption =
-            countTotalPriceIncludeAnnualConsumption(
-                supplyPoint,
-                emptySupplyPointImportPrices,
-                supplyPoint.contract.offer,
-            );
-    }
 
-    const pastOffer: IOffer = supplyPoint?.contract?.offer ||
-    supplyPointOffers.pastOffer ||
+    const pastOffer: IOffer = supplyPointOffers.pastOffer ||
     supplyPointImportPricesToOffer(supplyPoint, supplyPointOffers.supplyPointImportPrices);
 
     return R.pipe(

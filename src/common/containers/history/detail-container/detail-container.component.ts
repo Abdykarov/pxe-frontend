@@ -12,6 +12,7 @@ import { ROUTES } from 'src/app/app.constants';
     providers: [DetailContainerFacadeProvider],
 })
 export class DetailContainerComponent {
+    public readonly restoreContractAction = this.detailContainerFacade.restoreContractAction;
     public readonly supplyPoint$ = this.detailContainerFacade.historySupplyPointData$;
     public readonly isLoading$ = this.detailContainerFacade.isLoading$;
     public readonly fieldError$ = this.detailContainerFacade.fieldError$;
@@ -19,7 +20,7 @@ export class DetailContainerComponent {
 
     constructor(
         private detailContainerFacade: DetailContainerFacade,
-        private router: Router,
+        public router: Router,
     ) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }

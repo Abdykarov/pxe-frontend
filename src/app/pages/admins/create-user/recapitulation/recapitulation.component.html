@@ -10,6 +10,17 @@
                 </lnd-button>
             </div>
         </div>
+        <div class='row'>
+            <div class="col-12">
+                <lnd-alert
+                    *ngIf="globalError.length"
+                    type="danger">
+                    <ng-container *ngFor="let error of globalError">
+                        {{ error }}<br>
+                    </ng-container>
+                </lnd-alert>
+            </div>
+        </div>
         <div class="page-box">
             <pxe-personal-info-form
                 *ngIf="codeLists"

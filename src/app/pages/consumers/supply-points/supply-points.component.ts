@@ -32,6 +32,7 @@ import {
 } from 'src/common/utils';
 import { IsDatePast } from 'src/common/pipes/secured/is-date-past/is-date-past.pipe';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { restoreContractAction } from 'src/common/utils/standalone/remove-contract-action.fnc';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -50,7 +51,8 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     public supplyPointsFuture: ISupplyPoint[];
     public supplyPointsActual: ISupplyPoint[];
     public supplyPointStatistic: ISupplyPointStatistic;
-    public today = new Date().toISOString();
+    public today = moment().startOf('days');
+    public readonly restoreContractAction = restoreContractAction;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -58,7 +60,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         private navigateRequestService: NavigateRequestService,
         private supplyService: SupplyService,
         private route: ActivatedRoute,
-        private router: Router,
+        public router: Router,
     ) {
         super();
     }
@@ -139,21 +141,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 relativeTo: this.route,
             },
         );
-    }
-
-    public restoreContractAction = (evt, supplyPoint: ISupplyPoint) => {
-        evt.preventDefault();
-        evt.cancelBubble = true;
-
-        const state = {
-            supplyPointCopy: {
-                ...supplyPoint,
-            },
-        };
-
-        this.router.navigate(
-            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
-            {state});
     }
 
     public completeRequestAction = (notConcludedItems: ISupplyPointStatisticView[]) => {

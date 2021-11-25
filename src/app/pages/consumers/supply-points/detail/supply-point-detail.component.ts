@@ -284,10 +284,15 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                         this.supplyPoint.allowedOperations = this.supplyPoint.allowedOperations.filter(
                             (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
                         );
-
                         this.supplyPoint.contractEndType = R.find(
                             R.propEq('code', CONTRACT_END_TYPE.CONTRACT_END_TERM),
                         )(this.supplyPointDetailForm.codeLists[CODE_LIST.CONTRACT_END_TYPE]);
+
+                        setTimeout(_ => {
+                            this.formSent = false;
+                            this.cd.markForCheck();
+                        }, 5000);
+
 
                         this.globalError = [];
                         this.formSent = true;

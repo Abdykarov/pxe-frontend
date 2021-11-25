@@ -13,17 +13,16 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { saveAs } from 'file-saver';
 
+import { environment } from 'src/environments/environment';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DocumentService {
-
     constructor(
         private http: HttpClient,
         @Inject(PLATFORM_ID) private platformId: string,

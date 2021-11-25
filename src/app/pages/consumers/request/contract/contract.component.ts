@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
     OnInit,
     ViewChild,
 } from '@angular/core';

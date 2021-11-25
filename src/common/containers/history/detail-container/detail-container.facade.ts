@@ -6,13 +6,13 @@ import {
     map,
 } from 'rxjs/operators';
 
-import { AbstractFacade } from 'src/common/abstract.facade';
+import { HistoryFacade } from 'src/common/containers/history/history.facade';
 import { isDataAvailable } from 'src/common/utils';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Injectable()
-export class DetailContainerFacade extends AbstractFacade {
+export class DetailContainerFacade extends HistoryFacade {
     public readonly historySupplyPoint$ = this.supplyPointService.getSupplyPoint(
         this.supplyPointId,
         this.contractId,
