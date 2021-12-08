@@ -22,7 +22,7 @@ import {
     map,
     startWith,
     switchMap,
-    takeUntil,
+    takeUntil, tap,
 } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
