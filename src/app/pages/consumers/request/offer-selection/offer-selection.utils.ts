@@ -148,16 +148,34 @@ export const supplyPointImportPricesToOffer = (
     return null;
 };
 
+const plusVat  = (value) => {
+    if (value) {
+        return value *= 1.21;
+    }
+
+    return null;
+};
+
 export const setTotalPriceWithAnnualConsumption =
     (supplyPoint: ISupplyPoint, supplyPointOffers: ISupplyPointOffers): ISupplyPointOffers => {
 
-    R.forEach((offer: IOffer) =>
-        offer.totalPriceIncludeAnnualConsumption = countTotalPriceIncludeAnnualConsumption(
-            supplyPoint,
-            emptySupplyPointImportPrices,
-            offer,
-        ),
-    )(supplyPointOffers.offers);
+        if (supplyPointOffers.supplyPointImportPrices) {
+            const supplyPointImportPrices = supplyPointOffers.supplyPointImportPrices;
+            supplyPointImportPrices.importPermanentMonthlyPay = plusVat(supplyPointImportPrices.importPermanentMonthlyPay);
+            supplyPointImportPrices.importPricePerKwGas = plusVat(supplyPointImportPrices.importPricePerKwGas);
+            supplyPointImportPrices.importPricePerKwPowerNT = plusVat(supplyPointImportPrices.importPricePerKwPowerNT);
+            supplyPointImportPrices.importPricePerKwPowerVT = plusVat(supplyPointImportPrices.importPricePerKwPowerVT);
+            supplyPointImportPrices.importPriceTotalPerYear = plusVat(supplyPointImportPrices.importPriceTotalPerYear);
+            supplyPointOffers.supplyPointImportPrices = supplyPointImportPrices;
+        }
+
+        R.forEach((offer: IOffer) =>
+            offer.totalPriceIncludeAnnualConsumption = countTotalPriceIncludeAnnualConsumption(
+                supplyPoint,
+                emptySupplyPointImportPrices,
+                offer,
+            ),
+        )(supplyPointOffers.offers);
 
     return supplyPointOffers;
 };
@@ -175,7 +193,6 @@ export const addPastOfferToFindSupplyPointOffers =
                 supplyPointOffers.pastOffer,
             );
     }
-
 
     const pastOffer: IOffer = supplyPointOffers.pastOffer ||
     supplyPointImportPricesToOffer(supplyPoint, supplyPointOffers.supplyPointImportPrices);
