@@ -59,7 +59,7 @@ export class OfferService {
 
     public findSupplyPointOffers = (identificationNumber: string) => this.apollo
         .watchQuery<any>({
-            fetchPolicy: 'network-only',
+            fetchPolicy: 'no-cache',
             query: findSupplyPointOffersQuery,
             variables: {
                 identificationNumber,
