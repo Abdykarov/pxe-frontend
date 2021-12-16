@@ -22,29 +22,30 @@ export class GTMService {
 
     public init = () => {
         (<any>window).dataLayer = (<any>window).dataLayer || [];
-        // (<any>window).dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        (<any>window).dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+
+        const script = this.document.createElement('script');
+        script.async = true;
+        // GTM
+        script.src = 'https://www.googletagmanager.com/gtm.js?id=' + environment.gtmId;
+        // GA
+        // script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gaId;
+        this.document.head.append(script);
 
         // gtag('consent', 'default', {
         //     ad_storage: 'denied',
         //     analytics_storage: 'denied',
         //     wait_for_update: 2000,
         // });
-        gtag('js', new Date());
-        // (<any>window).dataLayer.push({
-        //     'gtm.start': new Date().getTime(),
-        //     event: 'gtm.js',
-        // });
-        // gtag('config', environment.gtmId);
+        // gtag('js', new Date());
+        (<any>window).dataLayer.push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js',
+        });
+        gtag('config', environment.gtmId);
 
-        // setTimeout(() => {
-            const script = this.document.createElement('script');
-            script.async = true;
-            // GTM
-            script.src = 'https://www.googletagmanager.com/gtm.js?id=' + environment.gtmId;
-            // GA
-            // script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gaId;
-            this.document.body.append(script);
-        // }, 2000);
+
+
 
         (<any>(
             window
@@ -62,7 +63,6 @@ export class GTMService {
         this.scriptService.loadStatic(
             ExternalResourceType.scripts,
             'ccbundle',
-            'body',
         );
     }
 

@@ -56,9 +56,9 @@ export class ScriptService {
         }
     }
 
-    public loadStatic(type = ExternalResourceType.scripts, name: string, whereToInsert = 'head'): void {
+    public loadStatic(type = ExternalResourceType.scripts, name: string): void {
         const resource = this.createResource(type, name);
-        this.document.getElementsByTagName(whereToInsert)[0].appendChild(resource);
+        this.document.getElementsByTagName('head')[0].appendChild(resource);
     }
 
     private createResource(
