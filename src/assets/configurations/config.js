@@ -6,7 +6,7 @@
 window.angularDevstack = {
     "config": {
         "gaId": "",
-        "gtmId": "",
+        "gtmId": "GTM-58VS48R",
         "environment": "preview",
         "production": false,
         "re_captcha": {
