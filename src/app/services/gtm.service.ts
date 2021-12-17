@@ -32,20 +32,11 @@ export class GTMService {
         // script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gaId;
         this.document.head.append(script);
 
-        // gtag('consent', 'default', {
-        //     ad_storage: 'denied',
-        //     analytics_storage: 'denied',
-        //     wait_for_update: 2000,
-        // });
-        // gtag('js', new Date());
         (<any>window).dataLayer.push({
             'gtm.start': new Date().getTime(),
             event: 'gtm.js',
         });
         gtag('config', environment.gtmId);
-
-
-
 
         (<any>(
             window
