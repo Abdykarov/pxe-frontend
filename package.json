@@ -3,6 +3,9 @@
   "version": "7.0.0",
   "description": "Lundegaard Angular Devstack",
   "license": "MIT",
+  "engines": {
+    "node": "^10"
+  },
   "scripts": {
     "build": "ng build",
     "build:app": "yarn build --prod --output-hashing none",

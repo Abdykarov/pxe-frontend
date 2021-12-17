@@ -7,6 +7,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
+import { IExternalResource } from 'src/app/services/model/widget.model';
 
 export const CONSTS = {
     ALL_BLOG: 'vse',
@@ -612,3 +613,17 @@ export const GTM_CONSTS = {
         STEP_SIX: 'step 6',
     },
 };
+
+export const externalScripts: IExternalResource[] = [
+    {
+        name: 'ccbundle',
+        src: `ccbundle.min.js`,
+    },
+];
+
+export const externalStyles: IExternalResource[] = [
+    {
+        name: 'ccstyles',
+        src: `ccstyles.min.css`,
+    },
+];
