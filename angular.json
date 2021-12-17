@@ -42,9 +42,20 @@
                                 "input": "src/assets/pdfjs/web/viewer.scss",
                                 "inject": false,
                                 "bundleName": "assets/pdfjs/web/viewer"
+                            },
+                            {
+                                "input": "src/assets/cookie-bar/ccstyles.min.css",
+                                "bundleName": "ccstyles.min",
+                                "inject": false
                             }
                         ],
-                        "scripts": [],
+                        "scripts": [
+                            {
+                                "input": "src/assets/cookie-bar/ccbundle.min.js",
+                                "inject": false,
+                                "bundleName": "ccbundle.min"
+                            }
+                        ],
                         "customWebpackConfig": {
                             "path": "./custom-webpack.config.js"
                         }

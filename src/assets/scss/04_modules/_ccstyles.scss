@@ -1,0 +1,18 @@
+@import 'src/assets/scss/01_base/base.scss';
+
+/* stylelint-disable declaration-no-important */
+:root {
+	--cc-btn-primary-bg: #0097ff !important;
+	--cc-btn-primary-hover-bg: #0088e5 !important;
+}
+/* stylelint-enable declaration-no-important */
+
+.c--anim {
+	.ccnst {
+		font-family: $font-family-sans-serif;
+		.c-bn {
+			font-weight: 400;
+			font-size: .875rem;
+		}
+	}
+}
