@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ILandingPage } from 'src/common/cms/models/landing-page';
+import { ILandingPageContent } from 'src/common/cms/models/landing-page';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
@@ -7,7 +7,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 })
 export class BestPricesInTheWorldPipe implements PipeTransform {
     transform(
-        landingPage: ILandingPage,
+        landingPage: ILandingPageContent,
         commodityType: CommodityType,
         property: string
     ): any {

@@ -1,5 +1,6 @@
 import { gql } from 'apollo-angular';
 import { seoFragment } from './seo';
+import { signUpFragment, signUpSection } from './sign-up';
 
 export const getLandingPageQuery = gql`
     query queryLandingPageContents {
@@ -99,6 +100,35 @@ export const getLandingPageQuery = gql`
                 }
             }
         }
+        queryAskForOfferContents {
+            flatData {
+                firstStep
+                secondStep
+                title
+            }
+        }
+        queryArticleContents(
+            filter: "data/oneOfMostVisited/iv eq true"
+            top: 3
+            orderby: "data/date/iv desc"
+        ) {
+            flatData {
+                content
+                header
+                img {
+                    url
+                }
+                type {
+                    flatData {
+                        url
+                    }
+                }
+                oneOfMostVisited
+                url
+                date
+            }
+        }
+        ${signUpSection}
     }
-    ${seoFragment}
+    ${seoFragment}${signUpFragment}
 `;

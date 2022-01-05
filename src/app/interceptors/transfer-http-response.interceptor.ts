@@ -27,7 +27,6 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
                 this.nextRouteUrl = event.url;
-                console.log(this.nextRouteUrl);
             }
         });
     }
@@ -48,10 +47,6 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         ) {
             return next.handle(req);
         } else {
-            console.log('___ROUTER___');
-            console.log(this.router);
-            console.log(this.router.routerState.snapshot.url);
-
             const plainKey = req.body && req.body.operationName;
             const key = makeStateKey<HttpResponse<object>>(
                 CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + plainKey
@@ -81,21 +76,13 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     '/'
                 );
 
-                console.log('urlData');
-                console.log(urlData);
-
                 const secureReq = req.clone({
                     url: urlData,
                     method: 'GET',
                     headers: req.headers.set('Accept', 'application/json'),
                 });
-                // send the cloned, "secure" request to the next handler.
-                return next.handle(secureReq);
-                //   return this.httpClient.get(window.location.pathname + '/data.json').pipe((data) =>
-                //     of(new HttpResponse({ body: data, status: 200 }))
-                //   );
 
-                // return next.handle(req);
+                return next.handle(secureReq);
             }
         }
         return next.handle(req);

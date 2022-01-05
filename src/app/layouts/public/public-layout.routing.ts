@@ -3,9 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
 import { ArticlesResolver } from 'src/app/resolvers/articles.resolver';
-import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
-import { LandingPageArticlesResolver } from 'src/app/resolvers/landing-page-articles.resolver';
 import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
 import { LoginResolver } from 'src/app/resolvers/login.resolver';
 import { PatternsOfContractsResolver } from 'src/app/resolvers/patterns-of-contracts.resolver';
@@ -27,10 +25,7 @@ const routes = [
                         (m) => m.LandingModule
                     ),
                 resolve: {
-                    askForOffer: AskForOfferResolver,
                     landingPage: LandingPageResolver,
-                    signUp: SignUpResolver,
-                    articles: LandingPageArticlesResolver,
                 },
                 data: {
                     isPublic: true,

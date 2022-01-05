@@ -4,8 +4,10 @@
 /ochrana-osobnich-udaju
 /prihlaseni
 /registrace
-/vzory-smluv/domacnost
-/vzory-smluv/firma
+/vzory-smluv/domacnost#plyn
+/vzory-smluv/domacnost#elektrina
+/vzory-smluv/firma#plyn
+/vzory-smluv/firma#elektrina
 /casto-kladene-otazky/obecne/pxe-ctvrty-dodavatel
 /casto-kladene-otazky/dodavatele/yello-energy
 /casto-kladene-otazky/dodavatele/prazska-plynarenska

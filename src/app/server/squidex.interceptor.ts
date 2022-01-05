@@ -50,22 +50,11 @@ export class SquidexInterceptor implements HttpInterceptor {
                         );
                         this.transferState.set(key, response);
                     } else {
-                        try {
-                            try {
-                                mkdirSync(dirPath);
-                            } catch (e) {}
-                            writeFileSync(
-                                dataPath,
-                                JSON.stringify(event.body),
-                                {
-                                    flag: 'w',
-                                }
-                            );
-                            this.transferState.set(key, response);
-                        } catch (e) {
-                            console.log('__ee__');
-                            console.log(e);
-                        }
+                        mkdirSync(dirPath, { recursive: true });
+                        writeFileSync(dataPath, JSON.stringify(event.body), {
+                            flag: 'w',
+                        });
+                        this.transferState.set(key, response);
                     }
                 }
             })

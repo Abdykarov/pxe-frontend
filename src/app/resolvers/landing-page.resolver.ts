@@ -5,7 +5,7 @@ import {
     RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ILandingPage } from 'src/common/cms/models/landing-page';
+import { ILandingPageContent } from 'src/common/cms/models/landing-page';
 import { LandingPageService } from 'src/common/cms/services/landing-page.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class LandingPageResolver implements Resolve<any> {
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
-    ): Observable<ILandingPage> {
+    ): Observable<ILandingPageContent> {
         return this.landingPageService.getLandingPage();
     }
 }

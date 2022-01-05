@@ -8,8 +8,6 @@ import { appState } from './jobs/appState';
  * available, such as `@angular/elements`.
  */
 import './init';
-console.log("___");
-console.log(appState);
 import '@angular/platform-server/init';
 
 import { enableProdMode, StaticProvider, Type } from '@angular/core';

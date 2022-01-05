@@ -5,6 +5,7 @@ import { MaskDateDirective } from './datepicker/datepicker.directive';
 import { DisplayNoneOnFirefoxDirective } from './display-none-on-firefox/display-none-on-firefox.directive';
 import { FirstTimeInViewDirective } from './first-time-in-view/first-time-in-view.directive';
 import { OffClickDirective } from './off-click/off-click.directive';
+import { OnlySsrDirective } from './only-ssr/only-ssr.directive';
 import { OptionHighlightDirective } from './option-highlight/option-highlight.directive';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { OptionHighlightDirective } from './option-highlight/option-highlight.di
         SFormDirective,
         FirstTimeInViewDirective,
         DisplayNoneOnFirefoxDirective,
+        OnlySsrDirective,
     ],
     exports: [
         MaskDateDirective,
@@ -25,6 +27,7 @@ import { OptionHighlightDirective } from './option-highlight/option-highlight.di
         SFormDirective,
         FirstTimeInViewDirective,
         DisplayNoneOnFirefoxDirective,
+        OnlySsrDirective,
     ],
 })
 export class DirectivesModule {}

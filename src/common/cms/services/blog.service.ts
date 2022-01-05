@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import {
-    getArticles,
-    getLpArticles,
-    getTypes,
-} from 'src/common/cms/queries/blog';
+import { getArticles, getTypes } from 'src/common/cms/queries/blog';
 
 @Injectable({
     providedIn: 'root',
@@ -28,14 +24,6 @@ export class BlogService {
                     skip,
                     ...(!!type && { filter: `data/typePlain/iv eq '${type}'` }),
                 },
-            },
-            false
-        );
-
-    public getLpArticles = () =>
-        this.apolloCmsService.fetchQuery(
-            {
-                query: getLpArticles,
             },
             false
         );

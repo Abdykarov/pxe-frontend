@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
+    ViewChild,
+} from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { saveAs } from 'file-saver';
@@ -60,7 +68,8 @@ export class PatternsOfContractsComponent
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
-        private titleService: Title
+        private titleService: Title,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
         const seo = R.head(this.patternsOfContracts.seo);
@@ -98,15 +107,20 @@ export class PatternsOfContractsComponent
                 return;
             }
 
-            const pdfCurrentSetting =
-                this.pdfActiveContracts[this.subjectType][this.commodityType];
-            this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
-            this.pxePdfViewer.downloadFileName = pdfCurrentSetting.downloadName;
+            if (isPlatformBrowser(this.platformId)) {
+                const pdfCurrentSetting =
+                    this.pdfActiveContracts[this.subjectType][
+                        this.commodityType
+                    ];
+                this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
+                this.pxePdfViewer.downloadFileName =
+                    pdfCurrentSetting.downloadName;
 
-            setTimeout((_) => {
-                this.pxePdfViewer.refresh();
-                this.cd.markForCheck();
-            });
+                setTimeout((_) => {
+                    this.pxePdfViewer.refresh();
+                    this.cd.markForCheck();
+                });
+            }
         });
     }
 

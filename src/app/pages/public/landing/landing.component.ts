@@ -25,9 +25,7 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { IAskForOffer } from 'src/common/cms/models/ask-for-offer';
-import { ILandingPage } from 'src/common/cms/models/landing-page';
-import { ISignUp } from 'src/common/cms/models/sign-up';
+import { ILandingPageQuery } from 'src/common/cms/models/landing-page';
 import { NewsService } from 'src/common/cms/services/news.service';
 import { AskForOfferContainerComponent } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
@@ -42,7 +40,6 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
-import { ICardData } from 'src/common/ui/card/models/data.model';
 import { scrollToElementFnc } from 'src/common/utils';
 import { scrollSettings } from './landing.config';
 
@@ -89,12 +86,15 @@ export class LandingComponent
     public routes = ROUTES;
     public scrollSettings = scrollSettings;
 
-    public readonly askForOffer: IAskForOffer =
-        this.route.snapshot.data.askForOffer;
-    public readonly landingPage: ILandingPage =
+    public readonly landingPageQuery: ILandingPageQuery =
         this.route.snapshot.data.landingPage;
-    public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
-    public readonly articles: ICardData[] = this.route.snapshot.data.articles;
+
+    public readonly askForOffer =
+        this.landingPageQuery.queryAskForOfferContents;
+    public readonly landingPage =
+        this.landingPageQuery.queryLandingPageContents;
+    public readonly signUp = this.landingPageQuery.querySignUpContents;
+    public readonly articles = this.landingPageQuery.queryArticleContents;
 
     public isMoreThanMdResolution = false;
 
@@ -141,14 +141,16 @@ export class LandingComponent
             this.cd.markForCheck();
         });
 
-        this.titleService.setTitle(this.landingPage.seo.title);
+        const { title, description, keywords } = this.landingPage.seo;
+
+        this.titleService.setTitle(title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.landingPage.seo.description,
+            content: description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.landingPage.seo.keywords,
+            content: keywords,
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

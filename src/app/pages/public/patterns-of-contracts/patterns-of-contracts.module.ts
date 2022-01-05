@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PatternsOfContractsRoutingModule } from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts-routing.module';
 import { PatternsOfContractsComponent } from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts.component';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { DirectivesModule } from 'src/common/directives/directives.module';
 import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
@@ -20,6 +21,7 @@ import { TableModule } from 'src/common/ui/table/table.module';
         BannerUIModule,
         ButtonModule,
         CommonModule,
+        DirectivesModule,
         InfoBannerModule,
         LayoutContainerModule,
         PdfViewerModule,
