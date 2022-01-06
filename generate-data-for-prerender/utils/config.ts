@@ -4,7 +4,7 @@ export const DIST_FOLDER = join(process.cwd(), 'dist');
 export const loadConfig = () => {
     // create configuration
     const configJs = readFileSync(
-        join(DIST_FOLDER, 'assets', 'configurations', 'config.js')
+        join(DIST_FOLDER, 'data', 'config.js')
     ).toString();
     const configString = configJs.substring(
         configJs.indexOf('= ') + 1,

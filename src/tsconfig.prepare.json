@@ -4,6 +4,6 @@
         "outDir": "../out-tsc/app",
         "target": "es2016"
     },
-    "files": ["../ssr/prepare.ts"],
+    "files": ["../prerender/index.ts"],
     "include": ["src/**/*.d.ts", "src/**/*.ts"]
 }

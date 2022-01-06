@@ -22,7 +22,8 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
     constructor(
         private transferState: TransferState,
         private router: Router,
-        @Inject(PLATFORM_ID) private platformId: string
+        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject('UUID_APP') public uuid: string
     ) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
@@ -71,10 +72,11 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     );
                 }
 
-                const urlData = (this.nextRouteUrl + '/data.json').replace(
-                    '//',
-                    '/'
-                );
+                const urlData = (
+                    this.nextRouteUrl +
+                    '/data.json?' +
+                    this.uuid
+                ).replace('//', '/');
 
                 const secureReq = req.clone({
                     url: urlData,

@@ -34,7 +34,10 @@
         "ng-high-memory": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng",
         "dev:ssr": "yarn ng-high-memory run app:serve-ssr",
         "build:ssr": "yarn build:client-and-server-bundles",
-        "prerender": "ng run app:prerender"
+        "prerender": "ng run app:prerender",
+        "copy:configs-for-genate-data": "copyfiles -f src/assets/configurations/config.js dist/data && copyfiles -f src/sitemap.xml dist/data",
+        "build:generate-data": "ng run app:generate-data-for-prerender",
+        "start:generate-data": "yarn build:generate-data && yarn copy:configs-for-genate-data && node dist/data/main.js"
     },
     "private": true,
     "dependencies": {
@@ -131,7 +134,9 @@
         "ts-loader": "^5.3.3",
         "ts-node": "^8.0.3",
         "typescript": "4.3.5",
-        "webpack-cli": "^4.7.2"
+        "webpack-cli": "^4.7.2",
+        "copyfiles": "^2.4.1",
+        "xml2js": "^0.4.23"
     },
     "browser": {
         "crypto": false

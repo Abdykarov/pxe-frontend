@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { Inject, NgModule } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import {
     ServerModule,
     ServerTransferStateModule,
@@ -40,4 +41,15 @@ import { UniversalInterceptor } from './universal.interceptor';
     ],
     bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule {
+    constructor(
+        private metaService: Meta,
+        @Inject('UUID') public UUID: string
+    ) {
+        this.metaService.addTag({
+            name: 'UUID-test',
+            id: 'UUID-test',
+            content: this.UUID,
+        });
+    }
+}

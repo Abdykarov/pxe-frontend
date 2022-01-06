@@ -8,11 +8,6 @@ import {
 } from '../requests/squidex';
 import { getAuthorizationFromPayload } from '../utils/squidex';
 
-let Authorization: String = null;
-let questionsSource = null;
-let blogSource = null;
-let faqTypeSource = null;
-
 const requestToPromise = (
     requestBody,
     mapping = (data) => data

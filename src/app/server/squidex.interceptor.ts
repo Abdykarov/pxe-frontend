@@ -15,7 +15,8 @@ import { CONSTS } from '../app.constants';
 export class SquidexInterceptor implements HttpInterceptor {
     constructor(
         private transferState: TransferState,
-        @Inject('PAGE_URL') public pageUrl: string
+        @Inject('PAGE_URL') public pageUrl: string,
+        @Inject('UUID') public uuid: string
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {

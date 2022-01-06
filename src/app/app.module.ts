@@ -1,10 +1,10 @@
-import { registerLocaleData } from '@angular/common';
+import { isPlatformBrowser, registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeCs from '@angular/common/locales/cs';
 import localeCsExtra from '@angular/common/locales/extra/cs';
-import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule, PLATFORM_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Meta } from '@angular/platform-browser';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { RECAPTCHA_LANGUAGE, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -20,6 +20,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { GlobalErrorHandler } from './errors/global.error.handler';
 import { InterceptorProviders } from './interceptors';
+
+const uuidBuild = (meta: Meta, platformId: string) => {
+    if (isPlatformBrowser(platformId)) {
+        console.log(meta.getTag('UUID'));
+        return meta.getTag('UUID');
+    }
+};
 
 @NgModule({
     declarations: [AppComponent],
@@ -41,6 +48,11 @@ import { InterceptorProviders } from './interceptors';
         ApolloGraphQLProvider,
         ApolloCMSGraphQLProvider,
         InterceptorProviders,
+        {
+            provide: 'UUID_APP',
+            useFactory: uuidBuild,
+            deps: [Meta, PLATFORM_ID],
+        },
         {
             provide: ErrorHandler,
             useClass: GlobalErrorHandler,
