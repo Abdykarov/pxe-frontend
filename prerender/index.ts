@@ -9,14 +9,20 @@ import { enableProdMode, StaticProvider, Type } from '@angular/core';
 import { renderModule as renderModuleOld } from '@angular/platform-server';
 import '@angular/platform-server/init';
 import { readFileSync } from 'fs';
+import { join } from 'path';
+import { BUILD_ID_PROVIDER, PAGE_URL_PROVIDER } from '../src/app/app.constants';
 import '../ssr/init';
+import { DIST_FOLDER } from '../ssr/utils/config';
 
 enableProdMode();
 
 export { AppServerModule } from 'src/app/server/app.server.module';
 export { renderModule };
 
-const buildUUID = readFileSync('uuid.text', 'utf-8').replace('\n', '');
+const buildId = readFileSync(
+    join(DIST_FOLDER, 'data', 'build-id.text'),
+    'utf-8'
+);
 
 const renderModule = (
     module: Type<any>,
@@ -30,8 +36,8 @@ const renderModule = (
         document: options.document,
         url: options.url,
         extraProviders: [
-            { provide: 'PAGE_URL', useValue: options.url },
-            { provide: 'UUID', useValue: buildUUID },
+            { provide: PAGE_URL_PROVIDER, useValue: options.url },
+            { provide: BUILD_ID_PROVIDER, useValue: buildId },
         ],
     });
 };

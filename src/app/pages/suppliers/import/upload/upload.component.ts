@@ -12,7 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
-import { CONSTS, FILE_UPLOAD_CONFIG, ROUTES } from 'src/app/app.constants';
+import {
+    CONSTS,
+    FILE_UPLOAD_CONFIG_PROVIDER,
+    ROUTES,
+} from 'src/app/app.constants';
 import { ApprovalConfig } from 'src/app/pages/suppliers/import/approval/approval.config';
 import {
     ImportProgressStep,
@@ -46,7 +50,7 @@ import { FileItem, FileUploader } from 'src/third-sides/file-upload';
     styleUrls: ['./upload.component.scss'],
     providers: [
         {
-            provide: FILE_UPLOAD_CONFIG,
+            provide: FILE_UPLOAD_CONFIG_PROVIDER,
             useFactory: fileUploaderFactory(
                 'offer/batch-validate',
                 'offers',
@@ -83,7 +87,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         private modalsService: ModalService,
         private route: ActivatedRoute,
         private router: Router,
-        @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploader,
+        @Inject(FILE_UPLOAD_CONFIG_PROVIDER) public fileUploader: FileUploader,
         @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();

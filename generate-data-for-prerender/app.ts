@@ -68,7 +68,6 @@ result.then((state: any) => {
         fs.writeFile('./src/sitemap.xml', xml, { flag: 'w' }, (err) => {
             if (err) console.error(err);
         });
-        console.log(xml);
         generateRoutesFromSiteMap(xml);
         generateBuildId();
     });

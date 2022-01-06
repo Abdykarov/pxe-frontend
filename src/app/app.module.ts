@@ -1,4 +1,4 @@
-import { isPlatformBrowser, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeCs from '@angular/common/locales/cs';
 import localeCsExtra from '@angular/common/locales/extra/cs';
@@ -17,16 +17,11 @@ import { environment } from 'src/environments/environment';
 import { FileUploadModule } from 'src/third-sides/file-upload';
 import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
 import { AppComponent } from './app.component';
+import { buildIdFactory } from './app.config';
+import { BUILD_ID_PROVIDER } from './app.constants';
 import { AppRoutingModule } from './app.routing';
 import { GlobalErrorHandler } from './errors/global.error.handler';
 import { InterceptorProviders } from './interceptors';
-
-const uuidBuild = (meta: Meta, platformId: string) => {
-    if (isPlatformBrowser(platformId)) {
-        console.log(meta.getTag('UUID'));
-        return meta.getTag('UUID');
-    }
-};
 
 @NgModule({
     declarations: [AppComponent],
@@ -49,8 +44,8 @@ const uuidBuild = (meta: Meta, platformId: string) => {
         ApolloCMSGraphQLProvider,
         InterceptorProviders,
         {
-            provide: 'UUID_APP',
-            useFactory: uuidBuild,
+            provide: BUILD_ID_PROVIDER,
+            useFactory: buildIdFactory,
             deps: [Meta, PLATFORM_ID],
         },
         {

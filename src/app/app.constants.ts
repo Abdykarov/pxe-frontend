@@ -564,7 +564,11 @@ export enum RequestsOverviewBannerShow {
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
 }
-export const FILE_UPLOAD_CONFIG = 'file_upload_config';
+export const FILE_UPLOAD_CONFIG_PROVIDER = 'file_upload_config';
+
+export const BUILD_ID_PROVIDER = 'buildID';
+
+export const PAGE_URL_PROVIDER = 'PAGE_URL';
 
 export enum ANNUAL_CONSUMPTION_TYPES {
     ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',

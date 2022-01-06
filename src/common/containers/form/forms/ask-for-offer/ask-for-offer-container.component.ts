@@ -7,7 +7,7 @@ import {
     TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FILE_UPLOAD_CONFIG } from 'src/app/app.constants';
+import { FILE_UPLOAD_CONFIG_PROVIDER } from 'src/app/app.constants';
 import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
 import { AuthService } from 'src/app/services/auth.service';
 import {
@@ -26,7 +26,7 @@ import { formFields } from './ask-for-offer-container.config';
     styleUrls: ['./ask-for-offer-container.component.scss'],
     providers: [
         {
-            provide: FILE_UPLOAD_CONFIG,
+            provide: FILE_UPLOAD_CONFIG_PROVIDER,
             useFactory: fileUploaderFactory(
                 'ask-for-offer/send',
                 'files',
@@ -68,7 +68,8 @@ export class AskForOfferContainerComponent
 
     constructor(
         private cd: ChangeDetectorRef,
-        @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,
+        @Inject(FILE_UPLOAD_CONFIG_PROVIDER)
+        public fileUploader: FileUploaderCustom,
         protected fb: FormBuilder
     ) {
         super(fb);

@@ -9,14 +9,14 @@ import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
-import { CONSTS } from '../app.constants';
+import { BUILD_ID_PROVIDER, CONSTS, PAGE_URL_PROVIDER } from '../app.constants';
 
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
     constructor(
         private transferState: TransferState,
-        @Inject('PAGE_URL') public pageUrl: string,
-        @Inject('UUID') public uuid: string
+        @Inject(PAGE_URL_PROVIDER) public pageUrl: string,
+        @Inject(BUILD_ID_PROVIDER) public uuid: string
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {

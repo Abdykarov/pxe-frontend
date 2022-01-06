@@ -10,7 +10,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { NavigationStart, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { CONSTS } from 'src/app/app.constants';
+import { BUILD_ID_PROVIDER, CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         private transferState: TransferState,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
-        @Inject('UUID_APP') public uuid: string
+        @Inject(BUILD_ID_PROVIDER) public uuid: string
     ) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
