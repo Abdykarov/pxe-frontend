@@ -8,7 +8,7 @@ import {
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 import { CookieBackendService, CookieService } from 'ngx-cookie';
 import { AppComponent } from '../app.component';
-import { BUILD_ID_PROVIDER } from '../app.constants';
+import { BUILD_ID_PROVIDER_SERVER } from '../app.constants';
 import { AppModule } from '../app.module';
 import { SquidexInterceptor } from './squidex.interceptor';
 import { UniversalInterceptor } from './universal.interceptor';
@@ -45,11 +45,11 @@ import { UniversalInterceptor } from './universal.interceptor';
 export class AppServerModule {
     constructor(
         private metaService: Meta,
-        @Inject(BUILD_ID_PROVIDER) public UUID: string
+        @Inject(BUILD_ID_PROVIDER_SERVER) public buildId: string
     ) {
         this.metaService.updateTag({
             name: 'build-id',
-            content: this.UUID,
+            content: this.buildId,
         });
     }
 }
