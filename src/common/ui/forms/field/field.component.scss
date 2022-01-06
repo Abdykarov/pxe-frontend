@@ -121,13 +121,13 @@
 		}
 
 		.custom-control-label {
-			padding-right: ($icon-size-px + ( $spacer * .5) );
+			padding-right: ( $icon-size-px + ( $spacer * .5 ) );
 			z-index: $zindex-custom-control;
 		}
 	}
 
 	.is-disabled {
-		opacity: .3;
+		opacity: $opacity-disabled;
 	}
 }
 
@@ -199,7 +199,7 @@
 
 textarea.form-control {
 	min-height: $input-textarea-min-height;
-	padding: (( $spacer * 2) + $input-border-width );
+	padding: ( $input-border-width + ( $spacer * 2 ) );
 	line-height: $input-textarea-line-height;
 	border-color: $input-border-color;
 	border-width: $input-border-width;
@@ -212,10 +212,8 @@ textarea.form-control {
 	}
 
 	& + .control-label {
-		top: (
-			$form-group-padding-top + $spacer + ($input-border-width * 2 )
-		); // 26px
-		left: (( $spacer * 2) + ($input-border-width * 2) );
+		top: ( $form-group-padding-top + $spacer + ( $input-border-width * 2 ) ); // 26px
+		left: ( ( $spacer * 2) + ($input-border-width * 2) );
 	}
 
 	&[disabled] {
@@ -403,8 +401,8 @@ textarea.form-control--not-empty {
 	position: absolute;
 	top: 0;
 	padding: 0 ( $spacer * .75 );
-	height: ($input-height - $input-border-width);
-	line-height: ($input-height - $input-border-width + 1);
+	height: ( $input-height - $input-border-width );
+	line-height: ( $input-height - $input-border-width + 1 );
 	color: $gray-100;
 	font-size: $input-font-size;
 	pointer-events: none;
@@ -423,7 +421,7 @@ textarea.form-control--not-empty {
 .input-group-append-help {
 	position: absolute;
 	top: $form-group-padding-top;
-	right: -($input-height);
+	right: -$input-height;
 	width: $input-height;
 	height: $input-height;
 	line-height: $input-height;
@@ -593,7 +591,7 @@ textarea.form-control--not-empty {
 }
 
 .custom-control-label {
-	//padding-left: ($custom-control-indicator-size + ( $spacer * .5) ); --- // todo
+	padding-left: calc( #{$custom-control-indicator-size} + ( #{$spacer} * .5) );
 	color: $input-color;
 	font-size: $input-font-size;
 	cursor: pointer;
@@ -641,15 +639,8 @@ th {
 		}
 
 		&::after {
-			top: (
-				$custom-control-indicator-size / 2 -
-					$custom-radio-filling-size / 2 +
-					$custom-control-indicator-top
-			);
-			left: (
-				$custom-control-indicator-size / 2 -
-					$custom-radio-filling-size / 2
-			);
+			top: ( $custom-radio-filling-center + $custom-control-indicator-top );
+			left: $custom-radio-filling-center;
 			width: $custom-radio-filling-size;
 			height: $custom-radio-filling-size;
 			background-color: $custom-radio-control-indicator-checked-bg;
@@ -967,7 +958,7 @@ th {
 
 	.select-icon {
 		position: absolute;
-		top: ($input-height * .5);
+		top: ( $input-height * .5 );
 		right: 0;
 		padding-right: ( $spacer * .5 );
 		font-weight: $font-weight-bold;

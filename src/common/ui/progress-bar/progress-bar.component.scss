@@ -86,13 +86,7 @@
 
 			& + .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
-					background: linear-gradient(
-						90deg,
-						$progress-bar-line-bg-active 0%,
-						$progress-bar-line-bg-active 40%,
-						$progress-bar-line-bg 40%,
-						$progress-bar-line-bg 100%
-					);
+					background: linear-gradient(90deg, $progress-bar-line-bg-active 0%, $progress-bar-line-bg-active 40%, $progress-bar-line-bg 40%, $progress-bar-line-bg 100%);
 				}
 			}
 		}
@@ -120,14 +114,8 @@
 		&::before {
 			content: '';
 			position: absolute;
-			top: (
-				($progress-bar-bullet-size - $progress-bar-bullet-size-inner) *
-					.5
-			);
-			left: (
-				($progress-bar-bullet-size - $progress-bar-bullet-size-inner) *
-					.5
-			);
+			top: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner) * .5 );
+			left: ( ($progress-bar-bullet-size - $progress-bar-bullet-size-inner) * .5 );
 			width: $progress-bar-bullet-size-inner;
 			height: $progress-bar-bullet-size-inner;
 			line-height: $progress-bar-bullet-size-inner;

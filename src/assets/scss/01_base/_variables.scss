@@ -138,16 +138,16 @@ $body-max-width:                   1366px;
 // Typography
 $font-family-sans-serif:           'roboto', arial;
 $font-size-base-public:            1rem;
-$line-height-base-public:           math.div(28, 16) ;
+$line-height-base-public:          math.div(28, 16);
 
 $font-family-sans-serif-secured:   'roboto_mono', arial;
 $font-size-base:                   .875rem;
-$line-height-base:                  math.div(24, 14) ;
+$line-height-base:                 math.div(24, 14);
 
 $small-font-size:                  .75rem;
-$line-height-sm:                    math.div(16, 12) ;
+$line-height-sm:                   math.div(16, 12);
 $large-font-size:                  1rem;
-$line-height-lg:                    math.div(16, 16) ;
+$line-height-lg:                   math.div(16, 16);
 $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;
@@ -169,7 +169,7 @@ $h5-font-size:                     .8125rem;
 $h6-font-size:                     .8125rem;
 $h4-font-size-public:              1rem;
 $headings-color:                   $font-header;
-$headings-line-height:              math.div(40, 30) ;
+$headings-line-height:             math.div(40, 30);
 $headings-font-weight:             400;
 $headings-margin-bottom:           ( $spacer * 1.5  );
 
@@ -191,6 +191,8 @@ $border-radius:                    5px;
 $box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
 $box-shadow-interactive:           0 10px 30px 0 rgba($body-color, .2);
 $box-shadow-circle:                -10px 20px 56px 0 rgba($box-shadow-color, .15);
+
+$opacity-disabled:                 .3px;
 
 $box-shadow-carousel:              -15px 20px 30px 0 rgba(0, 9, 16, .1);
 
@@ -243,7 +245,7 @@ $footer-height-tablet:             220px;
 // Badges
 $badge-font-size:                  .75rem;
 $badge-font-weight:                400;
-$badge-padding-y:                   math.div( $spacer, 7.5 ) ;
+$badge-padding-y:                  math.div( $spacer, 7.5 );
 $badge-padding-x:                  ( $spacer * .25  );
 
 

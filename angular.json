@@ -228,7 +228,7 @@
                             "src/assets/scss/front.scss",
                             {
                                 "input": "src/assets/pdfjs/web/viewer.scss",
-                                "inject": true,
+                                "inject": false,
                                 "bundleName": "pdf-viewer"
                             }
                         ],
