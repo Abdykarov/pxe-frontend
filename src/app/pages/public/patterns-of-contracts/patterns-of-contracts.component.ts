@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { saveAs } from 'file-saver';
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 import {
@@ -17,15 +16,12 @@ import {
     CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
-import { IPdfSetting } from 'src/app/pages/public/patterns-of-contracts/models/patterns-of-contracts.model';
-import {
-    historyColConfig,
-    pdfSetting,
-} from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts.config';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
+import { IPdfSetting } from './models/patterns-of-contracts.model';
+import { historyColConfig, pdfSetting } from './patterns-of-contracts.config';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -72,6 +68,7 @@ export class PatternsOfContractsComponent
         @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
+        console.log('CONSTUKTOR');
         const seo = R.head(this.patternsOfContracts.seo);
 
         this.titleService.setTitle(seo.title);
@@ -86,10 +83,16 @@ export class PatternsOfContractsComponent
     }
 
     ngOnInit(): void {
+        console.log('ON INIT');
         this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-            this.subjectType = params.subjectType;
+            console.log('ON INIT -- 2');
+            console.log(params);
+            this.subjectType =
+                params.subjectType || this.SUBJECT_TYPE.INDIVIDUAL;
             const tree = this.router.parseUrl(this.router.url);
-            this.commodityType = <CommodityTypesCsLowerCase>tree.fragment;
+            this.commodityType =
+                <CommodityTypesCsLowerCase>tree.fragment ||
+                CommodityTypesCsLowerCase.POWER;
 
             this.prepareActiveContract();
             this.prepareFutureContracts();

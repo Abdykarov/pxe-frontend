@@ -1,6 +1,9 @@
 import fs from 'fs';
 import { join } from 'path';
+import { CONSTS } from '../../src/app/app.constants';
 import { DIST_FOLDER, getConfig } from './config';
+
+export const routersToAdd = [CONSTS.PATHS.FAQ];
 
 export const generateRoutesFromSiteMap = (sitemap: string) => {
     const regex = new RegExp(`<loc>${getConfig()['url']}/(.*?)</loc>`, 'g');
@@ -15,6 +18,9 @@ export const generateRoutesFromSiteMap = (sitemap: string) => {
     var file = fs.createWriteStream(join(DIST_FOLDER, 'data', 'routes.txt'));
     file.write('/' + '\n');
     fileContent.forEach(function (v) {
+        file.write('/' + v + '\n');
+    });
+    routersToAdd.forEach(function (v) {
         file.write('/' + v + '\n');
     });
     file.end();

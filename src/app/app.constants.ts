@@ -568,6 +568,8 @@ export const FILE_UPLOAD_CONFIG_PROVIDER = 'file_upload_config';
 
 export const BUILD_ID_PROVIDER = 'buildID';
 
+export const BUILD_ID_PROVIDER_SERVER = 'buildIDServer';
+
 export const PAGE_URL_PROVIDER = 'PAGE_URL';
 
 export enum ANNUAL_CONSUMPTION_TYPES {

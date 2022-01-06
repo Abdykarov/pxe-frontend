@@ -10,7 +10,10 @@ import { renderModule as renderModuleOld } from '@angular/platform-server';
 import '@angular/platform-server/init';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { BUILD_ID_PROVIDER, PAGE_URL_PROVIDER } from '../src/app/app.constants';
+import {
+    BUILD_ID_PROVIDER_SERVER,
+    PAGE_URL_PROVIDER,
+} from '../src/app/app.constants';
 import '../ssr/init';
 import { DIST_FOLDER } from '../ssr/utils/config';
 
@@ -37,7 +40,7 @@ const renderModule = (
         url: options.url,
         extraProviders: [
             { provide: PAGE_URL_PROVIDER, useValue: options.url },
-            { provide: BUILD_ID_PROVIDER, useValue: buildId },
+            { provide: BUILD_ID_PROVIDER_SERVER, useValue: buildId },
         ],
     });
 };
