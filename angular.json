@@ -41,7 +41,7 @@
                             {
                                 "input": "src/assets/pdfjs/web/viewer.scss",
                                 "inject": false,
-                                "bundleName": "pdf-viewer"
+                                "bundleName": "viewer"
                             }
                         ],
                         "allowedCommonJsDependencies": [
@@ -229,7 +229,7 @@
                             {
                                 "input": "src/assets/pdfjs/web/viewer.scss",
                                 "inject": true,
-                                "bundleName": "pdf-viewer"
+                                "bundleName": "viewer"
                             }
                         ],
                         "scripts": [],

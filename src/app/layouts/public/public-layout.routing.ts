@@ -153,10 +153,6 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS,
-                redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
-            },
-            {
                 path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType',
                 loadChildren: () =>
                     import(
@@ -171,6 +167,10 @@ const routes = [
                     loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
                 },
+            },
+            {
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS,
+                redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
             },
             {
                 path: CONSTS.PATHS.SIGN_UP,
