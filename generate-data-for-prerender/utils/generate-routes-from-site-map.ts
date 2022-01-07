@@ -1,9 +1,9 @@
 import fs from 'fs';
 import { join } from 'path';
-import { CONSTS } from '../../src/app/app.constants';
+import { CONSTS, ROUTES } from '../../src/app/app.constants';
 import { DIST_FOLDER, getConfig } from './config';
 
-export const routersToAdd = [CONSTS.PATHS.FAQ];
+export const routersToAdd = [CONSTS.PATHS.FAQ, ROUTES.ROUTER_DASHBOARD];
 
 export const generateRoutesFromSiteMap = (sitemap: string) => {
     const regex = new RegExp(`<loc>${getConfig()['url']}/(.*?)</loc>`, 'g');
@@ -21,7 +21,13 @@ export const generateRoutesFromSiteMap = (sitemap: string) => {
         file.write('/' + v + '\n');
     });
     routersToAdd.forEach(function (v) {
-        file.write('/' + v + '\n');
+        file.write(
+            '/' +
+                CONSTS.PATHS.GENERATE_DATA +
+                '?page=' +
+                encodeURIComponent(v) +
+                '\n'
+        );
     });
     file.end();
 };

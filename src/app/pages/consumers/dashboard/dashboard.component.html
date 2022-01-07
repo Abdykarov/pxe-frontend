@@ -49,8 +49,8 @@
             completeRequestAction(supplyPointStatistic.notConcludedItems)
         "
     ></lnd-banner-ui>
-    <div *ngIf="supplyPointStatistic && !loadingData" class="row mt-4">
-        <div class="col-md-6">
+    <div class="row mt-4">
+        <div *ngIf="supplyPointStatistic && !loadingData" class="col-md-6">
             <h2>Odběrná místa</h2>
             <pxe-supply-points-summary
                 [concludedPlacesCount]="supplyPointStatistic.concludedCount"

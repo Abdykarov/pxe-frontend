@@ -33,7 +33,7 @@ const apolloCmsGraphQLFactory = (
     httpLink: HttpLink,
     isPrerender?: string
 ) => {
-    const useDirectlyCMS = isPrerender;
+    const useDirectlyCMS = isPrerender || environment.useDirectlyCMS;
     const uriDomain = useDirectlyCMS
         ? environment.url_cms_local
         : environment.url_cms;

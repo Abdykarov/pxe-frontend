@@ -11,6 +11,15 @@ import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
 import { BUILD_ID_PROVIDER, CONSTS, PAGE_URL_PROVIDER } from '../app.constants';
 
+const getParameterByName = (name, url = window.location.href) => {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+};
+
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
     constructor(
@@ -34,6 +43,10 @@ export class SquidexInterceptor implements HttpInterceptor {
                     const response = {
                         body: event.body,
                     };
+
+                    if (this.pageUrl.includes(CONSTS.PATHS.GENERATE_DATA)) {
+                        this.pageUrl = getParameterByName('page', this.pageUrl);
+                    }
 
                     const dirPath = './dist/app' + this.pageUrl;
                     const dataPath = dirPath + '/data.json';

@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { CmsService } from 'src/app/services/cms.service';
+import { environment } from '../../environments/environment';
 import { IS_PRERENDER_PROVIDER } from '../app.constants';
 
 @Injectable({
@@ -21,6 +22,8 @@ export class CmsResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any> | any {
-        return this.isPrerender ? this.cmsService.getNewToken() : of({});
+        return this.isPrerender || environment.useDirectlyCMS
+            ? this.cmsService.getNewToken()
+            : of({});
     }
 }

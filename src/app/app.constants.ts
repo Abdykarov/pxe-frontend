@@ -123,6 +123,7 @@ export const CONSTS = {
         GAS: 'plyn',
         FAQ: 'casto-kladene-otazky',
         FORGOTTEN_PASSWORD: 'zapomenute-heslo',
+        GENERATE_DATA: 'generate-data',
         HISTORY: 'historie',
         LOGIN: 'prihlaseni',
         LOGOUT: 'odhlaseni',

@@ -8,6 +8,16 @@ import { CmsResolver } from './resolvers/cms.resolver';
 
 const routes: Routes = [
     {
+        path: CONSTS.PATHS.GENERATE_DATA,
+        loadChildren: () =>
+            import('./layouts/generate-data/generate-data-layout.module').then(
+                (m) => m.GenerateDataLayoutModule
+            ),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
+    },
+    {
         path: CONSTS.PATHS.O_AUTH,
         loadChildren: () =>
             import('./layouts/o-auth/o-auth-layout.module').then(

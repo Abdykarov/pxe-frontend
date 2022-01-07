@@ -15,6 +15,7 @@ import {
     CONSTS,
     IS_PRERENDER_PROVIDER,
 } from 'src/app/app.constants';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -51,7 +52,8 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         if (
             !this.isCmsRequest(req) ||
-            (this.isRefreshToken(req) && this.isPrerender)
+            (this.isRefreshToken(req) &&
+                (this.isPrerender || environment.useDirectlyCMS))
         ) {
             return next.handle(req);
         } else {
