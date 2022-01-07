@@ -570,6 +570,8 @@ export const BUILD_ID_PROVIDER = 'buildID';
 
 export const BUILD_ID_PROVIDER_SERVER = 'buildIDServer';
 
+export const IS_PRERENDER_PROVIDER = 'isPrerender';
+
 export const PAGE_URL_PROVIDER = 'PAGE_URL';
 
 export enum ANNUAL_CONSUMPTION_TYPES {

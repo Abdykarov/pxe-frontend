@@ -27,7 +27,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
     ) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
-                this.nextRouteUrl = event.url;
+                this.nextRouteUrl = event.url.substr(0, event.url.indexOf('#'));
             }
         });
     }
@@ -74,7 +74,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
 
                 const urlData = (
                     this.nextRouteUrl +
-                    '/data.json?' +
+                    '/data.json?v=' +
                     this.uuid
                 ).replace('//', '/');
 

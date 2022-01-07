@@ -4,6 +4,7 @@ import {
     Component,
     Inject,
     OnInit,
+    Optional,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 import {
     CommodityTypesCsLowerCase,
     CONSTS,
+    IS_PRERENDER_PROVIDER,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -53,6 +55,8 @@ export class PatternsOfContractsComponent
     public commodityType = this.COMMODITY_TYPE.POWER;
     public subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
 
+    public readonly isClientRendering = isPlatformBrowser(this.platformId);
+
     public historyTableCols = historyColConfig;
     public pdfSettings = pdfSetting;
     public pdfActiveContracts = null;
@@ -65,10 +69,10 @@ export class PatternsOfContractsComponent
         private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
-        @Inject(PLATFORM_ID) private platformId: string
+        @Inject(PLATFORM_ID) private platformId: string,
+        @Optional() @Inject(IS_PRERENDER_PROVIDER) private isPrerender: boolean
     ) {
         super();
-        console.log('CONSTUKTOR');
         const seo = R.head(this.patternsOfContracts.seo);
 
         this.titleService.setTitle(seo.title);
@@ -82,17 +86,24 @@ export class PatternsOfContractsComponent
         });
     }
 
+    public defaultValueInPrerender(value: string, defaultValue: string): any {
+        if (!value && this.isPrerender) {
+            return defaultValue;
+        }
+        return value;
+    }
+
     ngOnInit(): void {
-        console.log('ON INIT');
         this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-            console.log('ON INIT -- 2');
-            console.log(params);
-            this.subjectType =
-                params.subjectType || this.SUBJECT_TYPE.INDIVIDUAL;
+            this.subjectType = this.defaultValueInPrerender(
+                params.subjectType,
+                this.SUBJECT_TYPE.INDIVIDUAL
+            );
             const tree = this.router.parseUrl(this.router.url);
-            this.commodityType =
-                <CommodityTypesCsLowerCase>tree.fragment ||
-                CommodityTypesCsLowerCase.POWER;
+            this.commodityType = this.defaultValueInPrerender(
+                tree.fragment,
+                CommodityTypesCsLowerCase.POWER
+            );
 
             this.prepareActiveContract();
             this.prepareFutureContracts();
@@ -102,7 +113,8 @@ export class PatternsOfContractsComponent
                 !R.path(
                     [this.subjectType, this.commodityType],
                     this.pdfActiveContracts
-                )
+                ) &&
+                !this.isPrerender
             ) {
                 this.commodityType = this.COMMODITY_TYPE.POWER;
                 this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
@@ -110,7 +122,7 @@ export class PatternsOfContractsComponent
                 return;
             }
 
-            if (isPlatformBrowser(this.platformId)) {
+            if (this.isClientRendering) {
                 const pdfCurrentSetting =
                     this.pdfActiveContracts[this.subjectType][
                         this.commodityType

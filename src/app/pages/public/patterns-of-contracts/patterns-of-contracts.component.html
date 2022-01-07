@@ -151,7 +151,7 @@
                                 </div>
                                 <ng-container
                                     *ngIf="
-                                        pdfActiveContracts[this.subjectType][
+                                        pdfActiveContracts && pdfActiveContracts[this.subjectType][
                                             this.commodityType
                                         ] as pdfSetting
                                     "

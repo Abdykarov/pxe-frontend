@@ -12,6 +12,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import {
     BUILD_ID_PROVIDER_SERVER,
+    IS_PRERENDER_PROVIDER,
     PAGE_URL_PROVIDER,
 } from '../src/app/app.constants';
 import '../ssr/init';
@@ -40,6 +41,7 @@ const renderModule = (
         url: options.url,
         extraProviders: [
             { provide: PAGE_URL_PROVIDER, useValue: options.url },
+            { provide: IS_PRERENDER_PROVIDER, useValue: true },
             { provide: BUILD_ID_PROVIDER_SERVER, useValue: buildId },
         ],
     });
