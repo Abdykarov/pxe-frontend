@@ -93,7 +93,7 @@
 
 	.disabled {
 		.page-link {
-			opacity: .3;
+			opacity: $opacity-disabled;
 		}
 	}
 }
