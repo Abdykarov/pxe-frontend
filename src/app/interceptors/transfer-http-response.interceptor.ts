@@ -6,12 +6,15 @@ import {
     HttpRequest,
     HttpResponse,
 } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { NavigationStart, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { BUILD_ID_PROVIDER, CONSTS } from 'src/app/app.constants';
-import { environment } from 'src/environments/environment';
+import {
+    BUILD_ID_PROVIDER,
+    CONSTS,
+    IS_PRERENDER_PROVIDER,
+} from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -23,11 +26,15 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         private transferState: TransferState,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
-        @Inject(BUILD_ID_PROVIDER) public uuid: string
+        @Inject(BUILD_ID_PROVIDER) public uuid: string,
+        @Optional() @Inject(IS_PRERENDER_PROVIDER) private isPrerender: boolean
     ) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
-                this.nextRouteUrl = event.url.substr(0, event.url.indexOf('#'));
+                this.nextRouteUrl =
+                    event.url.substr(0, event.url.indexOf('#')) ||
+                    event.url ||
+                    '';
             }
         });
     }
@@ -44,7 +51,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
     ): Observable<HttpEvent<any>> {
         if (
             !this.isCmsRequest(req) ||
-            (this.isRefreshToken(req) && environment.useDirectlyCMS)
+            (this.isRefreshToken(req) && this.isPrerender)
         ) {
             return next.handle(req);
         } else {

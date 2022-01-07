@@ -24,7 +24,6 @@ window.angularDevstack = {
         "web_api_key": "preview-api-key",
         "x_api_key": "6DBE159EAAB67C2AFD31DED689608711",
         "includeTestData": true,
-        "useDirectlyCMS": false,
         "cacheSSR": false
     }
 };

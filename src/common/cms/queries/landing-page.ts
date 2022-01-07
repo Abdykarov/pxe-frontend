@@ -1,4 +1,10 @@
 import { gql } from 'apollo-angular';
+import {
+    faqFragment,
+    faqSection,
+    questionsFragment,
+    questionsSection,
+} from './faq';
 import { seoFragment } from './seo';
 import { signUpFragment, signUpSection } from './sign-up';
 
@@ -129,6 +135,8 @@ export const getLandingPageQuery = gql`
             }
         }
         ${signUpSection}
+        ${questionsSection}
+        ${faqSection}
     }
-    ${seoFragment}${signUpFragment}
+    ${seoFragment}${questionsFragment}${signUpFragment}${faqFragment}
 `;

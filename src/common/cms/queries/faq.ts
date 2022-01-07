@@ -1,44 +1,62 @@
 import { gql } from 'apollo-angular';
 import { seoFragment } from './seo';
 
-export const questionsQuery = gql`
-    query queryQuestionContents {
-        queryQuestionContents(orderby: "data/header/iv", top: 100) {
-            flatData {
-                id
-                fullContent
-                shortContent
-                isTestData
-                oneOfMostVisited
-                seoKeywords
-                tag {
-                    flatData {
-                        label
-                        type
-                        url
-                        title
-                    }
+export const questionsFragment = gql`
+    fragment questionsFragment on Question {
+        flatData {
+            id
+            fullContent
+            shortContent
+            isTestData
+            oneOfMostVisited
+            seoKeywords
+            tag {
+                flatData {
+                    label
+                    type
+                    url
+                    title
                 }
-                header
-                url
-                vatNumber
             }
+            header
+            url
+            vatNumber
         }
     }
 `;
 
-export const faqConfigQuery = gql`
-    query queryTagContents {
-        queryTagContents(orderby: "data/order/iv asc") {
-            flatData {
-                type
-                url
-                label
-                title
-                order
-            }
+export const questionsSection = `queryQuestionContents(orderby: "data/header/iv", top: 100) {
+    ...questionsFragment
+}`;
+
+export const questionsQuery = gql`
+    query queryQuestionContents {
+        ${questionsSection}
+    }
+    ${questionsFragment}
+`;
+
+export const faqFragment = gql`
+    fragment faqFragment on Tag {
+        flatData {
+            type
+            url
+            label
+            title
+            order
         }
     }
+`;
+
+export const faqSection = `queryTagContents(orderby: "data/order/iv asc") {
+    ...faqFragment
+}`;
+
+export const faqConfigQuery = gql`
+    query queryTagContents {
+        ${faqSection}
+    }
+    ${faqFragment}
 `;
 
 export const faqQuery = gql`

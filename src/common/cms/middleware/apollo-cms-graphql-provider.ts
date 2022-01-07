@@ -1,3 +1,4 @@
+import { Optional } from '@angular/core';
 import {
     ApolloLink,
     from,
@@ -8,7 +9,7 @@ import {
 } from '@apollo/client/core';
 import { APOLLO_NAMED_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { CONSTS } from 'src/app/app.constants';
+import { CONSTS, IS_PRERENDER_PROVIDER } from 'src/app/app.constants';
 import { CmsService } from 'src/app/services/cms.service';
 import { environment } from 'src/environments/environment';
 
@@ -29,9 +30,10 @@ const defaultOptions = {
 
 const apolloCmsGraphQLFactory = (
     cmsService: CmsService,
-    httpLink: HttpLink
+    httpLink: HttpLink,
+    isPrerender?: string
 ) => {
-    const useDirectlyCMS = environment.useDirectlyCMS;
+    const useDirectlyCMS = isPrerender;
     const uriDomain = useDirectlyCMS
         ? environment.url_cms_local
         : environment.url_cms;
@@ -96,5 +98,5 @@ const apolloCmsGraphQLFactory = (
 export const ApolloCMSGraphQLProvider = {
     provide: APOLLO_NAMED_OPTIONS,
     useFactory: apolloCmsGraphQLFactory,
-    deps: [CmsService, HttpLink],
+    deps: [CmsService, HttpLink, [new Optional(), IS_PRERENDER_PROVIDER]],
 };
