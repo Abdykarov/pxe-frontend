@@ -24,7 +24,7 @@ export const generateRoutesFromSiteMap = (sitemap: string) => {
         file.write(
             '/' +
                 CONSTS.PATHS.GENERATE_DATA +
-                '?page=' +
+                '/' +
                 encodeURIComponent(v) +
                 '\n'
         );

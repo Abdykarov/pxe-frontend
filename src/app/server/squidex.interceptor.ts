@@ -6,24 +6,17 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { PRIMARY_OUTLET, Router } from '@angular/router';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
 import { BUILD_ID_PROVIDER, CONSTS, PAGE_URL_PROVIDER } from '../app.constants';
 
-const getParameterByName = (name, url = window.location.href) => {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-};
-
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
     constructor(
         private transferState: TransferState,
+        private router: Router,
         @Inject(PAGE_URL_PROVIDER) public pageUrl: string,
         @Inject(BUILD_ID_PROVIDER) public uuid: string
     ) {}
@@ -45,7 +38,9 @@ export class SquidexInterceptor implements HttpInterceptor {
                     };
 
                     if (this.pageUrl.includes(CONSTS.PATHS.GENERATE_DATA)) {
-                        this.pageUrl = getParameterByName('page', this.pageUrl);
+                        const tree = this.router.parseUrl(this.pageUrl);
+                        const primary = tree.root.children[PRIMARY_OUTLET];
+                        this.pageUrl = R.last(primary.segments).path;
                     }
 
                     const dirPath = './dist/app' + this.pageUrl;
