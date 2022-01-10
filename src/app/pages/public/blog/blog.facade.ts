@@ -193,11 +193,18 @@ export class BlogFacade {
     private isAllTypes = (): boolean =>
         this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 
-    public fetchMoreArticles(): void {
+    public fetchMoreArticles(page: number): void {
         const currentCountArticle =
             this.activeArticlesSubject$.getValue().length;
+
         this.blogService
-            .getArticles(currentCountArticle)
+            .getArticles(
+                currentCountArticle,
+                this.isAllTypes()
+                    ? null
+                    : this.activeTypeSubject$.getValue().url,
+                page.toString()
+            )
             .subscribe(({ items }) => {
                 const currentArticles = this.activeArticlesSubject$.getValue();
                 const nextArticleState = [...currentArticles, ...items];

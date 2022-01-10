@@ -14,6 +14,7 @@ import {
     BUILD_ID_PROVIDER,
     CONSTS,
     IS_PRERENDER_PROVIDER,
+    PAGE_PRERENDER,
 } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 
@@ -36,6 +37,11 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     event.url.substr(0, event.url.indexOf('#')) ||
                     event.url ||
                     '';
+                return;
+            }
+
+            if (event['url']) {
+                this.nextRouteUrl = event['url'];
             }
         });
     }
@@ -81,11 +87,32 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     );
                 }
 
-                const urlData = (
+                console.log('this.nextRouteUrl', this.nextRouteUrl);
+
+                let urlData = (
                     this.nextRouteUrl +
                     '/data.json?v=' +
                     this.uuid
                 ).replace('//', '/');
+
+                if (req.headers.has(PAGE_PRERENDER)) {
+                    const page = req.headers.get(PAGE_PRERENDER);
+
+                    console.log('PAGE', page);
+                    console.log(
+                        this.nextRouteUrl,
+                        this.nextRouteUrl + '/data-'
+                    );
+
+                    urlData = (
+                        this.nextRouteUrl +
+                        '/data-' +
+                        page +
+                        '.json?v=' +
+                        this.uuid
+                    ).replace('//', '/');
+                    console.log(urlData);
+                }
 
                 const secureReq = req.clone({
                     url: urlData,

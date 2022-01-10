@@ -10,7 +10,12 @@ import { PRIMARY_OUTLET, Router } from '@angular/router';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
-import { BUILD_ID_PROVIDER, CONSTS, PAGE_URL_PROVIDER } from '../app.constants';
+import {
+    BUILD_ID_PROVIDER,
+    CONSTS,
+    PAGE_PRERENDER,
+    PAGE_URL_PROVIDER,
+} from '../app.constants';
 
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
@@ -44,7 +49,24 @@ export class SquidexInterceptor implements HttpInterceptor {
                     }
 
                     const dirPath = './dist/app' + this.pageUrl;
+                    if (req.headers.has(PAGE_PRERENDER)) {
+                        const page = req.headers.get(PAGE_PRERENDER);
+
+                        if (parseInt(page) > 1) {
+                            mkdirSync(dirPath, { recursive: true });
+                            writeFileSync(
+                                `${dirPath}/data-${page}.json`,
+                                JSON.stringify(event.body),
+                                {
+                                    flag: 'w',
+                                }
+                            );
+                        }
+                        return;
+                    }
+
                     const dataPath = dirPath + '/data.json';
+
                     if (existsSync(dataPath)) {
                         const data = readFileSync(dataPath, 'utf8');
                         const content = JSON.parse(data);

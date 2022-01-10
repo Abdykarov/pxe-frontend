@@ -18,6 +18,7 @@ const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
     operation.setContext({
         headers: {
             ...(!!Authorization && { Authorization }),
+            ...operation.getContext()['headers'],
         },
     });
 };

@@ -15,8 +15,6 @@ export class GenerateDataLayoutComponent extends AbstractComponent {
         super();
         const dataPage = decodeURIComponent(this.route.snapshot.params['page']);
 
-        console.log(dataPage);
-
         switch (dataPage) {
             case this.ROUTES.ROUTER_DASHBOARD:
                 newsService.getNews().subscribe();

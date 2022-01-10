@@ -40,7 +40,7 @@
         <div *ngIf="(totalItems$ | async) > articles.length" class="row">
             <div class="col-12 text-center">
                 <lnd-button
-                    (action)="blogFacade.fetchMoreArticles()"
+                    (action)="blogFacade.fetchMoreArticles(Math.floor(articles.length / CONSTS.ARTICLE_PAGE_SIZE) + 1)"
                     type="gradient-primary"
                     customClass="btn-public btn--icon-right"
                     icon="icon--arrow-down"

@@ -34,6 +34,7 @@ export const CONSTS = {
         MAX_FILE_SIZE: 10485760,
         MANUALLY_ADD_EMAIL: 'user@email.com',
     },
+    ARTICLE_PAGE_SIZE: 9,
     CMS: {
         REFRESH_TOKEN_URL: 'identity-server/connect/token',
         REGEX_CONTAIN_CMS: 'pxe-parc4u/graphql',
@@ -269,6 +270,8 @@ export enum INavigationItemType {
     NORMAL,
     ONLY_LABEL,
 }
+
+export const PAGE_PRERENDER = 'page';
 
 export const CODE_LIST = {
     ANNUAL_CONSUMPTION_UNITS: 'UNITS',
