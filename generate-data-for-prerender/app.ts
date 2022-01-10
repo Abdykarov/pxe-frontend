@@ -9,7 +9,7 @@ import './init';
 import { result } from './state/appState';
 import { getConfig } from './utils/config';
 import { generateBuildId } from './utils/generate-build-id';
-import { generateRoutesFromSiteMap } from './utils/generate-routes-from-site-map';
+import { generateRoutes } from './utils/generate-routes';
 import { getQuestions, getTypeOfArticle, getTypes } from './utils/sitemap';
 
 result.then((state: any) => {
@@ -68,7 +68,7 @@ result.then((state: any) => {
         fs.writeFile('./src/sitemap.xml', xml, { flag: 'w' }, (err) => {
             if (err) console.error(err);
         });
-        generateRoutesFromSiteMap(xml);
+        generateRoutes(xml);
         generateBuildId();
     });
 });
