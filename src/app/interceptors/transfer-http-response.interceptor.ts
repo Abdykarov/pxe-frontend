@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {
     BUILD_ID_PROVIDER,
