@@ -4,7 +4,6 @@ import { CONSTS, ROUTES } from '../../src/app/app.constants';
 import { DIST_FOLDER, getConfig } from './config';
 
 const generateDataToAdd = [
-    CONSTS.PATHS.FAQ,
     ROUTES.ROUTER_DASHBOARD,
     ROUTES.ROUTER_REQUEST_CONTRACT,
     ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
@@ -40,11 +39,7 @@ const generateDataRoutes = (file: WriteStream) => {
 };
 
 const generateAdditionalRoutes = (file: WriteStream) => {
-    routersToAdd.forEach((helpRoute) =>
-        file.write(
-            `/${CONSTS.PATHS.GENERATE_DATA}/${encodeURIComponent(helpRoute)}\n`
-        )
-    );
+    routersToAdd.forEach((helpRoute) => file.write(`/${helpRoute}\n`));
 };
 
 export const generateRoutes = (sitemap: string) => {

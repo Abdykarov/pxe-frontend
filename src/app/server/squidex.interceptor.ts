@@ -65,7 +65,7 @@ export class SquidexInterceptor implements HttpInterceptor {
                         return;
                     }
 
-                    const dataPath = dirPath + '/data.json';
+                    const dataPath = `${dirPath}/data.json`;
 
                     if (existsSync(dataPath)) {
                         const data = readFileSync(dataPath, 'utf8');

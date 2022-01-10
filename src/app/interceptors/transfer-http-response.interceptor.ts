@@ -32,19 +32,16 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         @Optional() @Inject(IS_PRERENDER_PROVIDER) private isPrerender: boolean
     ) {
         router.events.subscribe((event) => {
-            if (event instanceof NavigationStart) {
-                this.nextRouteUrl =
-                    event.url.substr(0, event.url.indexOf('#')) ||
-                    event.url ||
-                    '';
+            const eventUrl = event['url'];
+            if (eventUrl) {
+                this.nextRouteUrl = this.processUrlFromFragment(eventUrl);
                 return;
-            }
-
-            if (event['url']) {
-                this.nextRouteUrl = event['url'];
             }
         });
     }
+
+    private processUrlFromFragment = (url: string) =>
+        url.substr(0, url.indexOf('#')) || url || '';
 
     private isRefreshToken = (req) =>
         req.url.indexOf(CONSTS.CMS.REFRESH_TOKEN_URL) >= -1;
@@ -73,6 +70,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             }
 
             if (isPlatformBrowser(this.platformId)) {
+                // Process script tag in html
                 // Try reusing transferred response from server
                 const cachedResponse = this.transferState.get(key, null);
                 if (cachedResponse) {
@@ -87,35 +85,14 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     );
                 }
 
-                console.log('this.nextRouteUrl', this.nextRouteUrl);
+                const isPageFilterData = req.headers.has(PAGE_PRERENDER);
 
-                let urlData = (
-                    this.nextRouteUrl +
-                    '/data.json?v=' +
-                    this.uuid
-                ).replace('//', '/');
-
-                if (req.headers.has(PAGE_PRERENDER)) {
-                    const page = req.headers.get(PAGE_PRERENDER);
-
-                    console.log('PAGE', page);
-                    console.log(
-                        this.nextRouteUrl,
-                        this.nextRouteUrl + '/data-'
-                    );
-
-                    urlData = (
-                        this.nextRouteUrl +
-                        '/data-' +
-                        page +
-                        '.json?v=' +
-                        this.uuid
-                    ).replace('//', '/');
-                    console.log(urlData);
-                }
+                let url = `${this.nextRouteUrl}/data${
+                    isPageFilterData ? req.headers.get(PAGE_PRERENDER) : ''
+                }.json?v=${this.uuid}`.replace('//', '/');
 
                 const secureReq = req.clone({
-                    url: urlData,
+                    url,
                     method: 'GET',
                     headers: req.headers.set('Accept', 'application/json'),
                 });
