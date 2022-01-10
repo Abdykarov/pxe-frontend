@@ -15,7 +15,7 @@ import {
     CONSTS,
     PAGE_PRERENDER,
     PAGE_URL_PROVIDER,
-} from '../app.constants';
+} from 'src/app/app.constants';
 
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {

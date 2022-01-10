@@ -12,7 +12,7 @@ import { FieldWrapperModule } from 'src/common/ui/forms/field-wrapper/field-wrap
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
-import { TooltipModule } from '../../../../ui/tooltip/tooltip.module';
+import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
 import { SupplyPointFormComponent } from './supply-point-form.component';
 
 @NgModule({

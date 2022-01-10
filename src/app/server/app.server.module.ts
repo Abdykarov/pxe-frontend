@@ -7,9 +7,9 @@ import {
 } from '@angular/platform-server';
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 import { CookieBackendService, CookieService } from 'ngx-cookie';
-import { AppComponent } from '../app.component';
-import { BUILD_ID_PROVIDER_SERVER } from '../app.constants';
-import { AppModule } from '../app.module';
+import { AppComponent } from 'src/app/app.component';
+import { BUILD_ID_PROVIDER_SERVER } from 'src/app/app.constants';
+import { AppModule } from 'src/app/app.module';
 import { SquidexInterceptor } from './squidex.interceptor';
 import { UniversalInterceptor } from './universal.interceptor';
 

@@ -1,6 +1,6 @@
 import fs, { WriteStream } from 'fs';
 import { join } from 'path';
-import { CONSTS, ROUTES } from '../../src/app/app.constants';
+import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { DIST_FOLDER, getConfig } from './config';
 
 const generateDataToAdd = [

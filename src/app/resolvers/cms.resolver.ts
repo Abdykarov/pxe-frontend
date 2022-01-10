@@ -5,9 +5,9 @@ import {
     RouterStateSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { IS_PRERENDER_PROVIDER } from 'src/app/app.constants';
 import { CmsService } from 'src/app/services/cms.service';
-import { environment } from '../../environments/environment';
-import { IS_PRERENDER_PROVIDER } from '../app.constants';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',

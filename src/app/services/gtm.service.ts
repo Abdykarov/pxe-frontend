@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GTM_CONSTS } from '../app.constants';
+import { GTM_CONSTS } from 'src/app/app.constants';
 
 declare const gtag;
 

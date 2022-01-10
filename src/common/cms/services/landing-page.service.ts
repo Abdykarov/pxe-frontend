@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { BlogService } from 'src/app/pages/public/blog/blog.service';
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import { getLandingPageQuery } from 'src/common/cms/queries/landing-page';
-import { normalizeLandingPageQuery } from '../utils/normalisation';
+import { normalizeLandingPageQuery } from 'src/common/cms/utils/normalisation';
 
 @Injectable({
     providedIn: 'root',
