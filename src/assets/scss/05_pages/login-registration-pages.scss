@@ -7,12 +7,13 @@
 .login-page {
 	.section-picture-text {
 		position: relative;
-		padding-bottom: ( $spacer * 13  );
-		// z-index: $zindex-lp-picture-bg-overlap;
+		padding-bottom: ( $spacer * 10 );
+		overflow: hidden;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
 			padding-top: $spacer;
+			padding-bottom: ( $spacer * 5 );
 		}
 		@include media-breakpoint-up(xl) {
 			padding: ( $spacer * 3 ) 0 ( $spacer * 5  );
@@ -21,33 +22,31 @@
 		&::after {
 			content: '';
 			position: absolute;
-			top: 20%;
-			right: -30px;
-			width: calc( 100% + #{$spacer} );
-			height: $landing-page-picture-bg-height-mobile;
+			top: 2%;
+			right: 0;
+			width: 100%;
+			height: 100%;
 			background-image: url(/assets/images/landing-page/lp-picture-socket.png);
 			background-repeat: no-repeat;
-			background-position: right center;
-			background-size: $landing-page-picture-bg-height-mobile auto;
+			background-position: right bottom;
+			background-size: 100% auto;
 			z-index: $zindex-lp-picture-bg;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				top: 32%;
-				height: $landing-page-picture-bg-height-tablet;
-				background-position-y: top;
+				right: -12%;
+				background-position-y: center;
 				background-size: 90%;
 			}
 			@include media-breakpoint-up(xl) {
-				top: 10%;
-				height: $landing-page-picture-bg-height-laptop;
+				right: 0;
+				height: 720px;
 				background-size: 70%;
 			}
 			@include media-breakpoint-up(lg) {
-				top: 0;
 				width: 100%;
 				height: 850px;
-				background-size: $landing-page-picture-bg-height-desktop;
+				background-size: 1000px;
 			}
 		}
 	}

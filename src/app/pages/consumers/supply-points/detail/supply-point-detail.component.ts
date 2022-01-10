@@ -299,7 +299,6 @@ export class SupplyPointDetailComponent
                                         allowedOperation !==
                                         AllowedOperations.UNSET_AUTOMATIC_PROLONGATION
                                 );
-
                             this.supplyPoint.contractEndType = R.find(
                                 R.propEq(
                                     'code',
@@ -310,6 +309,11 @@ export class SupplyPointDetailComponent
                                     CODE_LIST.CONTRACT_END_TYPE
                                 ]
                             );
+
+                            setTimeout((_) => {
+                                this.formSent = false;
+                                this.cd.markForCheck();
+                            }, 5000);
 
                             this.globalError = [];
                             this.formSent = true;

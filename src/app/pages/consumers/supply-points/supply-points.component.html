@@ -1,26 +1,19 @@
 <ng-template #additionalInfoTemplate let-data="data">
     <div
-        *ngIf="
-            data?.allowedOperations
-                | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO
-        "
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)"
         class="row"
     >
         <div
-            *ngIf="
-                (data | pathValue: ['contract', 'deliveryTo']) &&
-                (today
-                    | dateDiff: data.contract.deliveryTo) as contractEndInDays
-            "
+            *ngIf="(data | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: data.contract.deliveryTo) as contractEndInDays"
             class="col-12"
         >
             <pxe-badge
                 type="info"
                 [isLink]="true"
-                (action)="restoreContractAction($event, data)"
+                (action)="restoreContractAction($event, data, router)"
             >
-                Platnost končí za {{ contractEndInDays }} {{ contractEndInDays |
-                plural: "day" }} - Obnovit smlouvu
+                Platnost končí za {{contractEndInDays}} {{contractEndInDays |
+                plural: 'day'}} - Obnovit smlouvu
             </pxe-badge>
         </div>
     </div>
@@ -36,12 +29,7 @@
         [loading]="dataLoading && !errorMessages.length"
     ></lnd-placeloader>
     <ng-container
-        *ngIf="
-            !dataLoading &&
-            supplyPoints &&
-            !supplyPoints.length &&
-            supplyPointStatistic
-        "
+        *ngIf="!dataLoading && supplyPoints && !supplyPoints.length && supplyPointStatistic"
     >
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu'"
@@ -70,25 +58,15 @@
                     class="col-md-4 offset-md-2"
                 >
                     <lnd-button
-                        (action)="
-                            completeRequestAction(
-                                supplyPointStatistic.notConcludedItems
-                            )
-                        "
-                        [label]="
-                            supplyPointStatistic.notConcludedCount > 1
-                                ? 'Zobrazit rozpracované smlouvy'
-                                : 'Dokončit rozpracovanou smlouvu'
-                        "
+                        (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"
+                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"
                         type="link"
                     >
                     </lnd-button>
                 </div>
                 <div
                     class="col-md-4"
-                    [class.offset-md-4]="
-                        !supplyPointStatistic.notConcludedCount
-                    "
+                    [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"
                 >
                     <lnd-button
                         (action)="createSupplyPoint($event)"

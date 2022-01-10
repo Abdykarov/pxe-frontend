@@ -170,6 +170,14 @@ export const restAPIErrorCodes = {
     accessDenied: 'K tomuto dokumentu nemáte oprávnění.',
 };
 
+export const graphQLMessagesDynamic = {
+    duplicateSupplyPoints: (ids: string) => [
+        `V aplikaci již evidujeme importované odběrné místa: ${JSON.parse(
+            ids
+        )}.`,
+    ],
+};
+
 export const graphQLMessages = {
     activeContractPresent: 'Účet nelze smazat, protože jsou aktivní smlouvy.',
     applicationError: 'Došlo k chybě. Zkuste to později.',
@@ -190,6 +198,7 @@ export const graphQLMessages = {
         'Nabídka nebyla založena, protože totožná nabídka již existuje.',
     mustBeValidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
     notValidOffer: 'Platnost nabídka vypršela.',
+    duplicateSupplyPoint: 'Odběrné místo již bylo vytvořeno.',
 };
 
 export const cantDeleteAllMarkedOffers =

@@ -1,4 +1,5 @@
 import * as CryptoJS from 'crypto-js';
+import { IExternalResource } from 'src/app/services/model/widget.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 import {
     CommodityType,
@@ -624,3 +625,17 @@ export const GTM_CONSTS = {
         STEP_SIX: 'step 6',
     },
 };
+
+export const externalScripts: IExternalResource[] = [
+    {
+        name: 'ccbundle',
+        src: `ccbundle.min.js`,
+    },
+];
+
+export const externalStyles: IExternalResource[] = [
+    {
+        name: 'ccstyles',
+        src: `ccstyles.min.css`,
+    },
+];

@@ -1,3 +1,17 @@
+<ng-template #additionalInfoTemplate let-data="data">
+    <div class="row">
+        <div class="col-12">
+            <pxe-badge
+                (action)="restoreContractAction($event, data, router)"
+                type="info"
+                [isLink]="true"
+            >
+                Obnovit smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+</ng-template>
+
 <div *ngIf="globalError$ | async as globalError" class="row">
     <div *ngIf="globalError?.length !== 0" class="col-12">
         <lnd-alert type="danger">
@@ -62,8 +76,8 @@
             <div *ngFor="let historyOfSupplyPoints of history" class="row">
                 <div class="col-12 col-xl-10 offset-xl-1 mb-5">
                     <h2 class="text-center">
-                        Odběrná místa s ukončenou dodávkou energií za rok {{
-                        historyOfSupplyPoints.key }}
+                        Odběrná místa s ukončenou dodávkou energií za rok
+                        {{historyOfSupplyPoints.key}}
                     </h2>
                     <div
                         *ngFor="let supplyPoint of historyOfSupplyPoints.value"
@@ -71,6 +85,7 @@
                     >
                         <pxe-supply-point
                             [data]="supplyPoint"
+                            [additionalInfoTemplate]="additionalInfoTemplate"
                             (action)="navigateToHistoryDetail($event)"
                         >
                         </pxe-supply-point>

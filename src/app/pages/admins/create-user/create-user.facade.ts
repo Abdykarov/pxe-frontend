@@ -5,6 +5,7 @@ import * as R_ from 'ramda-extension';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CONSTS, ROUTES } from 'src/app/app.constants';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     CommodityType,
@@ -12,6 +13,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 import { IMicroTableData } from 'src/common/ui/micro-table/micro-table/item.model';
+import { mapGlobalGraphQLErrorMessages } from 'src/common/utils';
 import { IQueryParams } from './models/create-user.model';
 
 @Injectable({
@@ -112,10 +114,9 @@ export class CreateUserFacade {
                 R.map(
                     (supplyPoint: ISupplyPoint): IMicroTableData => ({
                         data: supplyPoint,
-                        label:
-                            supplyPoint.name ||
-                            supplyPoint.identificationNumber,
+                        label: supplyPoint.name || '',
                         active: supplyPoint.id === this.getSupplyPointId(),
+                        description: supplyPoint.identificationNumber,
                     })
                 )
             )
@@ -198,6 +199,18 @@ export class CreateUserFacade {
         this.supplyPointImportService
             .setActiveSupplyPoint(supplyPoint)
             .subscribe();
+
+    public processEanFieldErrorToGlobal = (
+        fieldError: IFieldError
+    ): string[] => {
+        const eanFieldError = fieldError['ean'];
+        if (eanFieldError) {
+            const key = Object.keys(fieldError['ean'])[0];
+            return mapGlobalGraphQLErrorMessages([key]);
+        } else {
+            return null;
+        }
+    };
 
     public getEmail = (): string => this.queryParamsSubject$.getValue().email;
     public getAskForOfferId = (): string =>

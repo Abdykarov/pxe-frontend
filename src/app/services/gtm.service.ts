@@ -1,5 +1,10 @@
-import { Injectable } from '@angular/core';
-import { GTM_CONSTS } from 'src/app/app.constants';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import * as R from 'ramda';
+import { ScriptService } from 'src/app/services/external-resources.service';
+import { ExternalResourceType } from 'src/app/services/model/widget.model';
+import { environment } from 'src/environments/environment';
+import { CONSTS, GTM_CONSTS } from '../app.constants';
 
 declare const gtag;
 
@@ -7,12 +12,40 @@ declare const gtag;
     providedIn: 'root',
 })
 export class GTMService {
+    constructor(
+        @Inject(DOCUMENT) private document: Document,
+        @Inject(LOCALE_ID) private locale: string,
+        private scriptService: ScriptService
+    ) {}
+
     public init = () => {
         (<any>window).dataLayer = (<any>window).dataLayer || [];
         (<any>window).dataLayer.push({
             'gtm.start': new Date().getTime(),
             event: 'gtm.js',
         });
+
+        const script = this.document.createElement('script');
+        script.async = true;
+        // GTM
+        script.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + environment.gtmId;
+        // GA
+        // script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gaId;
+        this.document.head.append(script);
+
+        (<any>window).dataLayer.push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js',
+        });
+        gtag('config', environment.gtmId);
+
+        (<any>window).ccnstL = `/${CONSTS.PATHS.COOKIES_POLICY}`;
+        (<any>window).ccnstS = '/ccstyles.min.css';
+        (<any>window).ccnstLang = R.pipe(R.split('-'), R.head)(this.locale);
+
+        this.scriptService.loadStatic(ExternalResourceType.styles, 'ccstyles');
+        this.scriptService.loadStatic(ExternalResourceType.scripts, 'ccbundle');
     };
 
     public gtm = (event): void => {

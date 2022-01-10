@@ -140,13 +140,28 @@ export class RecapitulationComponent
                 takeUntil(this.destroy$),
                 map(({ data }) => data.createSupplyPointImport)
             )
-            .subscribe((newSupplyPoint) => {
-                this.createUserFacade.setActiveSupplyPoint(newSupplyPoint);
-                this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_PRICES], {
-                    queryParams:
-                        this.createUserFacade.queryParamsSubject$.getValue(),
-                });
-            });
+            .subscribe(
+                (newSupplyPoint) => {
+                    this.createUserFacade.setActiveSupplyPoint(newSupplyPoint);
+                    this.router.navigate(
+                        [this.ROUTES.ROUTER_CREATE_USER_PRICES],
+                        {
+                            queryParams:
+                                this.createUserFacade.queryParamsSubject$.getValue(),
+                        }
+                    );
+                },
+                (error) => {
+                    const { fieldError, globalError } =
+                        parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError =
+                        this.createUserFacade.processEanFieldErrorToGlobal(
+                            fieldError
+                        ) || globalError;
+                    this.cd.markForCheck();
+                }
+            );
     };
 
     public backStep = () =>

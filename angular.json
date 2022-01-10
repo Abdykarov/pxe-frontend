@@ -42,6 +42,18 @@
                                 "input": "src/assets/pdfjs/web/viewer.scss",
                                 "inject": false,
                                 "bundleName": "viewer"
+                            },
+                            {
+                                "input": "src/assets/cookie-bar/ccstyles.min.css",
+                                "bundleName": "ccstyles.min",
+                                "inject": false
+                            }
+                        ],
+                        "scripts": [
+                            {
+                                "input": "src/assets/cookie-bar/ccbundle.min.js",
+                                "inject": false,
+                                "bundleName": "ccbundle.min"
                             }
                         ],
                         "allowedCommonJsDependencies": [
@@ -205,6 +217,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "aot": true,
                         "outputPath": "dist/static",
                         "index": "src/index.html",
                         "main": "src/static.ts",
@@ -252,6 +265,7 @@
                             "outputHashing": "all",
                             "sourceMap": false,
                             "namedChunks": false,
+                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true
@@ -294,6 +308,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "aot": true,
                         "outputPath": "dist/500",
                         "index": "src/500/index.html",
                         "main": "",

@@ -14,6 +14,8 @@ import { OverviewContainerFacade } from './overview-container.facade';
 export class OverviewContainerComponent {
     public readonly orderKeyValueByKeyDest = orderKeyValueByKeyDest;
 
+    public readonly restoreContractAction =
+        this.overviewContainerFacade.restoreContractAction;
     public readonly history$ =
         this.overviewContainerFacade.historySupplyPointsData$;
     public readonly isLoading$ = this.overviewContainerFacade.isLoading$;
@@ -23,7 +25,7 @@ export class OverviewContainerComponent {
     constructor(
         public overviewContainerFacade: OverviewContainerFacade,
         private route: ActivatedRoute,
-        private router: Router
+        public router: Router
     ) {}
 
     public navigateToHistoryDetail({

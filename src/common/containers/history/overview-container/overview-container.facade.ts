@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { AbstractFacade } from 'src/common/abstract.facade';
+import { HistoryFacade } from 'src/common/containers/history/history.facade';
 import { IHistory } from 'src/common/containers/history/models/history';
 import { concludedSupplyPointsToHistory } from 'src/common/containers/history/overview-container/overview-container.utils';
 import { ContractStatus } from 'src/common/graphql/models/contract';
@@ -9,7 +9,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { isDataAvailable } from 'src/common/utils';
 
 @Injectable()
-export class OverviewContainerFacade extends AbstractFacade {
+export class OverviewContainerFacade extends HistoryFacade {
     public readonly historySupplyPoints$ = this.supplyService
         .findSupplyPointsByContractStatus(
             [ContractStatus.CONCLUDED],

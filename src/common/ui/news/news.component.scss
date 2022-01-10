@@ -20,4 +20,23 @@
 			padding: ( $spacer * 2.5) ( $spacer * 3) ( $spacer * 1.5) ( $spacer * 3 );
 		}
 	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			flex-direction: row;
+		}
+	}
+
+	&__item-date {
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			min-width: 110px;
+			margin-right: $spacer;
+			text-align: right;
+		}
+	}
 }

@@ -4,9 +4,10 @@ import * as R_ from 'ramda-extension';
 import {
     defaultErrorMessage,
     graphQLMessages,
+    graphQLMessagesDynamic,
 } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 const mapValidationFieldArrayToValidationObj = (array) => {
     const prepareKeys = (val) =>
@@ -17,11 +18,19 @@ const mapValidationFieldArrayToValidationObj = (array) => {
     return R.map(prepareKeys)(array);
 };
 
-const mapGlobalGraphQLErrorMessages = (messages: string[]): string[] =>
-    R.map(
+export const mapGlobalGraphQLErrorMessages = (
+    messages: string[],
+    message: string = null
+): string[] => {
+    if (messages && graphQLMessagesDynamic[messages[0]]) {
+        return graphQLMessagesDynamic[messages[0]](message);
+    }
+
+    return R.map(
         (key: string) => graphQLMessages[key] || defaultErrorMessage,
         messages
     );
+};
 
 export const parseGraphQLErrors = (
     error: ErrorResponse
@@ -42,7 +51,8 @@ export const parseGraphQLErrors = (
             }
             if (errors.validationError.global) {
                 globalError = mapGlobalGraphQLErrorMessages(
-                    errors.validationError.global
+                    errors.validationError.global,
+                    errors.message
                 );
             }
         } else {

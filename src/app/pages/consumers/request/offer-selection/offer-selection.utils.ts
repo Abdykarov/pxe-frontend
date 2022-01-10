@@ -127,7 +127,7 @@ export const supplyPointImportPricesToOffer = (
             marketOrganizerRegulatedPrice: 0,
             monthlyConsumptionFee:
                 supplyPointImportPrices?.importPermanentMonthlyPay,
-            name: supplyPoint?.contract?.offer?.name,
+            name: null,
             permanentPaymentPrice: 0,
             priceGas: 0,
             priceGasWithVAT: supplyPointImportPrices?.importPricePerKwGas,
@@ -156,10 +156,39 @@ export const supplyPointImportPricesToOffer = (
     return null;
 };
 
+const plusVat = (value) => {
+    if (value) {
+        return (value *= 1.21);
+    }
+
+    return null;
+};
+
 export const setTotalPriceWithAnnualConsumption = (
     supplyPoint: ISupplyPoint,
     supplyPointOffers: ISupplyPointOffers
 ): ISupplyPointOffers => {
+    if (supplyPointOffers.supplyPointImportPrices) {
+        const supplyPointImportPrices =
+            supplyPointOffers.supplyPointImportPrices;
+        supplyPointImportPrices.importPermanentMonthlyPay = plusVat(
+            supplyPointImportPrices.importPermanentMonthlyPay
+        );
+        supplyPointImportPrices.importPricePerKwGas = plusVat(
+            supplyPointImportPrices.importPricePerKwGas
+        );
+        supplyPointImportPrices.importPricePerKwPowerNT = plusVat(
+            supplyPointImportPrices.importPricePerKwPowerNT
+        );
+        supplyPointImportPrices.importPricePerKwPowerVT = plusVat(
+            supplyPointImportPrices.importPricePerKwPowerVT
+        );
+        supplyPointImportPrices.importPriceTotalPerYear = plusVat(
+            supplyPointImportPrices.importPriceTotalPerYear
+        );
+        supplyPointOffers.supplyPointImportPrices = supplyPointImportPrices;
+    }
+
     R.forEach(
         (offer: IOffer) =>
             (offer.totalPriceIncludeAnnualConsumption =

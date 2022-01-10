@@ -11,6 +11,8 @@ import { DetailContainerFacadeProvider } from './detail-container.provider';
     providers: [DetailContainerFacadeProvider],
 })
 export class DetailContainerComponent {
+    public readonly restoreContractAction =
+        this.detailContainerFacade.restoreContractAction;
     public readonly supplyPoint$ =
         this.detailContainerFacade.historySupplyPointData$;
     public readonly isLoading$ = this.detailContainerFacade.isLoading$;
@@ -19,7 +21,7 @@ export class DetailContainerComponent {
 
     constructor(
         private detailContainerFacade: DetailContainerFacade,
-        private router: Router
+        public router: Router
     ) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }

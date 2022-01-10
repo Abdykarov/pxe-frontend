@@ -105,7 +105,10 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                         const { fieldError, globalError } =
                             parseGraphQLErrors(error);
                         this.fieldError = fieldError;
-                        this.globalError = globalError;
+                        this.globalError =
+                            this.createUserFacade.processEanFieldErrorToGlobal(
+                                fieldError
+                            ) || globalError;
                         this.cd.markForCheck();
                     }
                 );
@@ -145,7 +148,10 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                     const { fieldError, globalError } =
                         parseGraphQLErrors(error);
                     this.fieldError = fieldError;
-                    this.globalError = globalError;
+                    this.globalError =
+                        this.createUserFacade.processEanFieldErrorToGlobal(
+                            fieldError
+                        ) || globalError;
                     this.cd.markForCheck();
                 }
             );

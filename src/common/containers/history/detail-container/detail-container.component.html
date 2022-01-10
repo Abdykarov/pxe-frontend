@@ -17,6 +17,15 @@
 </ng-container>
 <ng-template #dataTemplate>
     <div *ngIf="supplyPoint$ | async as supplyPoint" class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                buttonLabel="Najít dodavatele"
+                [data]="{
+                            text: 'Obnovit smlouvu'
+                        }"
+                (customBannerAction)="restoreContractAction($event,supplyPoint, router)"
+            ></lnd-banner-ui>
+        </div>
         <div
             class="
                 col-12

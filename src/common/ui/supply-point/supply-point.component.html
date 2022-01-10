@@ -9,25 +9,21 @@
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
                         <span
-                            [class.icon--flame]="
-                                data.commodityType === commodityType.GAS
-                            "
-                            [class.icon--flash]="
-                                data.commodityType === commodityType.POWER
-                            "
+                            [class.icon--flame]="data.commodityType === commodityType.GAS"
+                            [class.icon--flash]="data.commodityType === commodityType.POWER"
                             class="icon supply-point__icon"
                         ></span>
                     </div>
                     <div class="col-9 col-md-10">
                         <span class="supply-point__title text-break"
-                            >{{ data.name }}</span
+                            >{{data.name}}</span
                         >
                         <span
                             *ngIf="data.commodityType === commodityType.POWER"
                             class="supply-point__title-subtext"
                         >
-                            {{ data.distributionRate.description }} ({{
-                            data.distributionRate.code }})
+                            {{data.distributionRate.description}}
+                            ({{data.distributionRate.code}})
                         </span>
                     </div>
                     <div class="col-9 col-md-10 offset-3 offset-md-2 mt-2">
@@ -45,12 +41,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2">
+                    <div class="col-md-10 offset-md-2">
                         <div class="row justify-content-between">
                             <div
-                                *ngIf="
-                                    data.commodityType === commodityType.POWER
-                                "
+                                *ngIf="data.commodityType === commodityType.POWER"
                                 class="col-6 col-md-auto"
                             >
                                 <div class="supply-point__value-box">
@@ -58,8 +52,7 @@
                                         >Jistič</span
                                     >
                                     <span class="supply-point__value"
-                                        >{{ data.circuitBreaker.description
-                                        }}</span
+                                        >{{data.circuitBreaker.description}}</span
                                     >
                                 </div>
                             </div>
@@ -69,95 +62,62 @@
                                         >Spotřeba</span
                                     >
                                     <lnd-indicator
-                                        [value]="
-                                            data
-                                                | consumptionIndicator
-                                                    : UNIT_INDICATOR
-                                        "
+                                        [value]="data | consumptionIndicator: UNIT_INDICATOR"
                                     ></lnd-indicator>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-auto order-md-1">
+                            <div class="col-md-auto order-md-1">
                                 <div class="supply-point__value-box">
                                     <span
-                                        *ngIf="
-                                            data.commodityType ===
-                                            commodityType.POWER
-                                        "
+                                        *ngIf="data.commodityType === commodityType.POWER"
                                         class="supply-point__value-name"
                                     >
                                         EAN
                                     </span>
                                     <span
-                                        *ngIf="
-                                            data.commodityType ===
-                                            commodityType.GAS
-                                        "
+                                        *ngIf="data.commodityType === commodityType.GAS"
                                         class="supply-point__value-name"
                                     >
                                         EIC
                                     </span>
                                     <span class="supply-point__value"
-                                        >{{ data.identificationNumber }}</span
+                                        >{{data.identificationNumber}}</span
                                     >
                                 </div>
                             </div>
                             <div
-                                class="col-6 col-md-auto order-md-2"
-                                *ngIf="
-                                    (data
-                                        | pathValue
-                                            : ['contract', 'deliveryTo']) &&
-                                    !isListItem
-                                "
+                                class="col-md-auto order-md-2"
+                                *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem"
                             >
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name"
                                         >Dodávkové období</span
                                     >
                                     <span class="supply-point__value">
-                                        {{ data.contract.deliveryFrom | date:
-                                        "d.&nbsp;M.&nbsp;y" }} - {{
-                                        data.contract.deliveryTo | date:
-                                        "d.&nbsp;M.&nbsp;y" }}
+                                        {{data.contract.deliveryFrom |
+                                        date:'d.&nbsp;M.&nbsp;y'}} -
+                                        {{data.contract.deliveryTo |
+                                        date:'d.&nbsp;M.&nbsp;y'}}
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <ng-container *ngIf="additionalInfoTemplate">
                             <ng-container
-                                *ngTemplateOutlet="
-                                    additionalInfoTemplate;
-                                    context: { data: this.data }
-                                "
+                                *ngTemplateOutlet="additionalInfoTemplate; context: { data: this.data } "
                             ></ng-container>
                         </ng-container>
                     </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="!isListItem" class="col-12 col-xl-5">
+        <div *ngIf="!isListItem" class="col-xl-5">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
-                    <div
-                        class="
-                            col-12 col-md-10
-                            offset-md-2
-                            col-xl-12
-                            offset-xl-0
-                        "
-                    >
+                    <div class="col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
                             <ng-container
-                                *ngIf="
-                                    data
-                                        | pathValue
-                                            : [
-                                                  'contract',
-                                                  'personalData',
-                                                  'deposit'
-                                              ] as deposit
-                                "
+                                *ngIf="(data | pathValue:['contract', 'personalData', 'deposit']) as deposit"
                             >
                                 <div class="col-12">
                                     <span class="supply-point__price-label"
@@ -167,37 +127,21 @@
                                     >
                                 </div>
                                 <div
-                                    *ngIf="
-                                        data
-                                            | pathValue
-                                                : [
-                                                      'contract',
-                                                      'offer',
-                                                      'supplier',
-                                                      'name'
-                                                  ]
-                                    "
-                                    class="
-                                        col-12 col-md-8 col-xl-12
-                                        mb-4 mb-md-0
-                                    "
+                                    *ngIf="(data | pathValue:['contract', 'offer', 'supplier','name'])"
+                                    class="col-md-8 col-xl-12 mb-4 mb-md-0"
                                 >
                                     <span class="supply-point__price"
-                                        >{{ deposit | number: "1.0-2" }}
-                                        Kč</span
+                                        >{{deposit | number: '1.0-2'}} Kč</span
                                     >
-                                    / měsíc ({{
-                                    data.contract.offer.supplier.name }})
+                                    / měsíc
+                                    ({{data.contract.offer.supplier.name}})
                                 </div>
                             </ng-container>
-                            <div class="col-12 col-md-4 supply-point__addon">
+                            <div class="col-md-4 supply-point__addon">
                                 <lnd-button
                                     label="Vybrat"
                                     type="primary"
-                                    (action)="
-                                        $event.stopPropagation();
-                                        action.emit(data)
-                                    "
+                                    (action)="$event.stopPropagation();action.emit(data)"
                                 >
                                 </lnd-button>
                             </div>

@@ -16,7 +16,7 @@
 	}
 
 	&--public {
-		padding: ( $header-height + ( $spacer * 1.5 ) ) ( $spacer * 1.5  ) 0;
+		padding-top: ( $header-height + ( $spacer * 1.5 ) );
 		font-size: $large-font-size;
 
 		// Media queries

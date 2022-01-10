@@ -58,16 +58,6 @@ export class AppComponent extends AbstractComponent implements OnInit {
                 return;
             }
 
-            const script = this.document.createElement('script');
-            script.async = true;
-            // GTM
-            script.src =
-                'https://www.googletagmanager.com/gtm.js?id=' +
-                environment.gtmId;
-            // GA
-            // script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gaId;
-            this.document.head.prepend(script);
-
             this.gtmService.init();
 
             this.router.events
