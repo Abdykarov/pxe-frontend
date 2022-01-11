@@ -11,9 +11,9 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
 import {
+    ARTICLES_PAGE,
     BUILD_ID_PROVIDER,
     CONSTS,
-    PAGE_PRERENDER,
     PAGE_URL_PROVIDER,
 } from 'src/app/app.constants';
 
@@ -49,8 +49,8 @@ export class SquidexInterceptor implements HttpInterceptor {
                     }
 
                     const dirPath = './dist/app' + this.pageUrl;
-                    if (req.headers.has(PAGE_PRERENDER)) {
-                        const page = req.headers.get(PAGE_PRERENDER);
+                    if (req.headers.has(ARTICLES_PAGE)) {
+                        const page = req.headers.get(ARTICLES_PAGE);
 
                         if (parseInt(page) > 1) {
                             mkdirSync(dirPath, { recursive: true });

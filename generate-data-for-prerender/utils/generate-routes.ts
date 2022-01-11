@@ -3,7 +3,7 @@ import { join } from 'path';
 import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { DIST_FOLDER, getConfig } from './config';
 
-const generateDataToAdd = [
+const dateForSecuredPages = [
     ROUTES.ROUTER_DASHBOARD,
     ROUTES.ROUTER_REQUEST_CONTRACT,
     ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
@@ -30,8 +30,8 @@ const fromSitemap = (sitemap: string, fs: WriteStream) => {
     });
 };
 
-const generateDataRoutes = (file: WriteStream) => {
-    generateDataToAdd.forEach((forPage) =>
+const securedPagesRoutes = (file: WriteStream) => {
+    dateForSecuredPages.forEach((forPage) =>
         file.write(
             `/${CONSTS.PATHS.GENERATE_DATA}/${encodeURIComponent(forPage)}\n`
         )
@@ -48,7 +48,7 @@ export const generateRoutes = (sitemap: string) => {
     file.write('/' + '\n');
 
     fromSitemap(sitemap, file);
-    generateDataRoutes(file);
+    securedPagesRoutes(file);
     generateAdditionalRoutes(file);
 
     file.end();

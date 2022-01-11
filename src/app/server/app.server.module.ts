@@ -51,5 +51,13 @@ export class AppServerModule {
             name: 'build-id',
             content: this.buildId,
         });
+
+        this.metaService.updateTag(
+            {
+                type: 'text/javascript',
+                src: `assets/configurations/config.jsv=${this.buildId}`,
+            },
+            "name='script-id'"
+        );
     }
 }

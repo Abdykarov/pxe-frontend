@@ -1,4 +1,3 @@
-// TODO update static
 import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 import {

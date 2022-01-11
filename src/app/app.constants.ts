@@ -273,7 +273,7 @@ export enum INavigationItemType {
     ONLY_LABEL,
 }
 
-export const PAGE_PRERENDER = 'page';
+export const ARTICLES_PAGE = 'page';
 
 export const CODE_LIST = {
     ANNUAL_CONSUMPTION_UNITS: 'UNITS',

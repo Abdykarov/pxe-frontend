@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { ScriptService } from 'src/app/services/external-resources.service';
 import { ExternalResourceType } from 'src/app/services/model/widget.model';
 import { environment } from 'src/environments/environment';
-import { CONSTS, GTM_CONSTS } from '../app.constants';
+import { BUILD_ID_PROVIDER, CONSTS, GTM_CONSTS } from '../app.constants';
 
 declare const gtag;
 
@@ -15,6 +15,7 @@ export class GTMService {
     constructor(
         @Inject(DOCUMENT) private document: Document,
         @Inject(LOCALE_ID) private locale: string,
+        @Inject(BUILD_ID_PROVIDER) public buildId: string,
         private scriptService: ScriptService
     ) {}
 
@@ -41,7 +42,7 @@ export class GTMService {
         gtag('config', environment.gtmId);
 
         (<any>window).ccnstL = `/${CONSTS.PATHS.COOKIES_POLICY}`;
-        (<any>window).ccnstS = '/ccstyles.min.css';
+        (<any>window).ccnstS = `/ccstyles.min.css?v=${this.buildId}`;
         (<any>window).ccnstLang = R.pipe(R.split('-'), R.head)(this.locale);
 
         this.scriptService.loadStatic(ExternalResourceType.styles, 'ccstyles');

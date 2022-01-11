@@ -51,27 +51,32 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 () => {
                     this.authService.isLastRefreshToken = false;
-                    this.apolloService.resetStore().then(() => {
-                        const reasonForLogoutUserValue = this.state
-                            .isFromUnauthorized
-                            ? CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED
-                            : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF;
-                        const reasonForLogoutUserTime =
-                            new Date().getTime() +
-                            CONSTS.COOKIE_TEMPORARY_EXPIRATION;
+                    this.apolloService.resetStore().then(
+                        () => {
+                            const reasonForLogoutUserValue = this.state
+                                .isFromUnauthorized
+                                ? CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED
+                                : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF;
+                            const reasonForLogoutUserTime =
+                                new Date().getTime() +
+                                CONSTS.COOKIE_TEMPORARY_EXPIRATION;
 
-                        this.cookieService.set(
-                            CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER,
-                            reasonForLogoutUserValue,
-                            reasonForLogoutUserTime
-                        );
+                            this.cookieService.set(
+                                CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER,
+                                reasonForLogoutUserValue,
+                                reasonForLogoutUserTime
+                            );
 
-                        this.router.navigate([CONSTS.PATHS.LOGIN]).then(() => {
-                            if (this.state.refresh) {
-                                window.location.reload();
-                            }
-                        });
-                    });
+                            this.router
+                                .navigate([CONSTS.PATHS.LOGIN])
+                                .then(() => {
+                                    if (this.state.refresh) {
+                                        window.location.reload();
+                                    }
+                                });
+                        },
+                        (err) => console.log(err)
+                    );
                 },
                 () => {
                     this.error = true;
