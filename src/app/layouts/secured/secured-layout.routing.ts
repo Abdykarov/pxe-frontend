@@ -61,20 +61,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                loadChildren: () =>
-                    import(
-                        '../../pages/consumers/supply-point-selection/supply-point-selection.module'
-                    ).then((m) => m.SupplyPointSelectionModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-                data: {
-                    isSimpleFooter: false,
-                    isPublic: false,
-                    userType: IUserTypes.CONSUMER,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
+                redirectTo: CONSTS.PATHS.SIGNBOARD,
             },
             {
                 path: CONSTS.PATHS.CREATE_USER,

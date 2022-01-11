@@ -22,15 +22,11 @@ import { NavigateRequestService } from 'src/app/services/navigate-request.servic
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import {
-    AllowedOperations,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
-    inArray,
     isDataAvailable,
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -56,7 +52,6 @@ export class RequestsOverviewComponent
     public RequestsOverviewBannersShow = RequestsOverviewBannerShow;
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
-    public sourceSupplyPoints: ISupplyPoint[] = null;
     public deletedRequest: ISupplyPoint = null;
 
     @ViewChild('deletedRequestInfo')
@@ -84,10 +79,7 @@ export class RequestsOverviewComponent
         }
 
         this.supplyService
-            .findSupplyPointsByContractStatus([
-                ContractStatus.NOT_CONCLUDED,
-                ContractStatus.CONCLUDED,
-            ])
+            .findSupplyPointsByContractStatus([ContractStatus.NOT_CONCLUDED])
             .pipe(
                 takeUntil(this.destroy$),
                 filter(isDataAvailable),
@@ -95,11 +87,10 @@ export class RequestsOverviewComponent
             )
             .subscribe(
                 (supplyPointsSource: ISupplyPoint[]) => {
-                    this.sourceSupplyPoints = supplyPointsSource;
                     this.loadingRequests = false;
                     const { overviewState, supplyPoints } =
                         getOverviewState(supplyPointsSource);
-                    this.supplyPoints = supplyPoints;
+                    this.supplyPoints = supplyPointsSource;
                     this.state = overviewState;
                     this.cd.markForCheck();
                 },
@@ -131,16 +122,15 @@ export class RequestsOverviewComponent
                         .pipe(takeUntil(this.destroy$))
                         .subscribe(
                             (_) => {
-                                this.sourceSupplyPoints = R.filter(
+                                this.supplyPoints = R.filter(
                                     (supplyPoint: ISupplyPoint) =>
                                         R.path(
                                             ['identificationNumber'],
                                             supplyPoint
                                         ) !== modal.data.identificationNumber
-                                )(this.sourceSupplyPoints);
+                                )(this.supplyPoints);
                                 const { overviewState, supplyPoints } =
-                                    getOverviewState(this.sourceSupplyPoints);
-                                this.supplyPoints = supplyPoints;
+                                    getOverviewState(this.supplyPoints);
                                 this.state = overviewState;
                                 this.deletedRequest = modal.data;
                                 setTimeout(() =>
@@ -170,21 +160,6 @@ export class RequestsOverviewComponent
 
     public newRequestAction = (evt): void => {
         evt.preventDefault();
-        const lastSupplyPointsWithConcludedContract = R.find(
-            (supplyPoint: ISupplyPoint) =>
-                supplyPoint.allowedOperations &&
-                inArray(
-                    AllowedOperations.SHOW_DELIVERY_TO,
-                    supplyPoint.allowedOperations
-                )
-        )(this.sourceSupplyPoints);
-
-        if (lastSupplyPointsWithConcludedContract) {
-            this.router.navigate([
-                ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION,
-            ]);
-            return;
-        }
         this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
     };
 
