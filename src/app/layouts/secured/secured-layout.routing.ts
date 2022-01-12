@@ -98,40 +98,6 @@ const routes = [
                 },
             },
             {
-                path: `${CONSTS.PATHS.HISTORY}/:supplyPointId/:contractId`,
-                loadChildren: () =>
-                    import(
-                        '../../pages/consumers/history/detail/history-detail.module'
-                    ).then((m) => m.HistoryDetailModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-                data: {
-                    isSimpleFooter: false,
-                    isPublic: false,
-                    userType: IUserTypes.CONSUMER,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
-            },
-            {
-                path: CONSTS.PATHS.HISTORY,
-                loadChildren: () =>
-                    import(
-                        '../../pages/consumers/history/overview/history-overview.module'
-                    ).then((m) => m.HistoryOverviewModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-                data: {
-                    isSimpleFooter: false,
-                    isPublic: false,
-                    userType: IUserTypes.CONSUMER,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
-            },
-            {
                 path: CONSTS.PATHS.USER_PROFILE,
                 loadChildren: () =>
                     import('../../pages/consumers/profile/profile.module').then(

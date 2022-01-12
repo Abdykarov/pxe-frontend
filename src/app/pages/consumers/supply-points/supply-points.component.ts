@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import * as R from 'ramda';
 import { of } from 'rxjs';
 import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
@@ -30,8 +29,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     public error = false;
     public errorMessages = [];
     public supplyPoints: ISupplyPoint[];
-    public supplyPointsFuture: ISupplyPoint[];
-    public supplyPointsActual: ISupplyPoint[];
     public supplyPointStatistic: ISupplyPointStatistic;
     public today = moment().startOf('days');
     public readonly restoreContractAction = restoreContractAction;
@@ -61,25 +58,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 map(({ data }) => data.findSupplyPointsByContractStatus),
                 switchMap((supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
-
-                    this.supplyPointsActual = R.pipe(
-                        R.filter((supplyPoint: ISupplyPoint) =>
-                            moment().isBetween(
-                                moment(supplyPoint.contract.deliveryFrom),
-                                moment(supplyPoint.contract.deliveryTo)
-                            )
-                        ),
-                        R.sort(R.ascend(R.path(['contract', 'deliveryFrom'])))
-                    )(supplyPoints);
-
-                    this.supplyPointsFuture = R.pipe(
-                        R.filter((supplyPoint: ISupplyPoint) =>
-                            this.isDatePast.transform(
-                                supplyPoint.contract.deliveryFrom
-                            )
-                        ),
-                        R.sort(R.ascend(R.path(['contract', 'deliveryFrom'])))
-                    )(supplyPoints);
 
                     if (this.supplyPoints.length) {
                         return of({

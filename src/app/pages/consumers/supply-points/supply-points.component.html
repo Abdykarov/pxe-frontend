@@ -94,30 +94,28 @@
                 ></lnd-button>
             </div>
         </div>
-        <ng-container
-            *ngIf="supplyPointsActual && supplyPointsActual.length !== 0"
-        >
-            <p class="perex text-center mb-3">
-                Odběrná místa s aktivní dodávkou energií
-            </p>
+        <ng-container *ngIf="supplyPoints && supplyPoints.length !== 0">
+            <p class="perex text-center mb-3">Odběrná místa</p>
+            <ul class="text-center link-list mb-4">
+                <li class="link-list__item">
+                    <a class="link-list__link"> Historická </a>
+                </li>
+                <li class="link-list__item">
+                    <a
+                        class="link-list__link"
+                        [class.link-list__link--active]="true"
+                    >
+                        Aktivní
+                    </a>
+                </li>
+                <li class="link-list__item">
+                    <a class="link-list__link"> Budoucí </a>
+                </li>
+            </ul>
+
             <div class="supply-points">
                 <pxe-supply-point
-                    *ngFor="let supplyPoint of supplyPointsActual"
-                    [additionalInfoTemplate]="additionalInfoTemplate"
-                    [data]="supplyPoint"
-                    (action)="navigateToSupplyPointDetail($event)"
-                ></pxe-supply-point>
-            </div>
-        </ng-container>
-        <ng-container
-            *ngIf="supplyPointsFuture && supplyPointsFuture.length !== 0"
-        >
-            <p class="perex text-center mb-3 mt-5">
-                Odběrná místa s budoucí dodávkou energií
-            </p>
-            <div class="supply-points">
-                <pxe-supply-point
-                    *ngFor="let supplyPoint of supplyPointsFuture"
+                    *ngFor="let supplyPoint of supplyPoints"
                     [additionalInfoTemplate]="additionalInfoTemplate"
                     [data]="supplyPoint"
                     (action)="navigateToSupplyPointDetail($event)"
