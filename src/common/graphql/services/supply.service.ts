@@ -22,6 +22,7 @@ import {
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
     findSupplyPointsByContractStatusQuery,
+    findSupplyPointsConcludedByContractTypeQuery,
     getCodelistByTypeQuery,
     getSupplyPointGlobalStatisticsQuery,
     getSupplyPointQuery,
@@ -181,6 +182,16 @@ export class SupplyService {
                 skipOfferValidity,
             },
             useInitialLoading,
+        }).valueChanges;
+
+    public findSupplyPointsConcludedByContractType = (contractType: string) =>
+        this.apollo.watchQuery<any>({
+            fetchPolicy: 'no-cache',
+            query: findSupplyPointsConcludedByContractTypeQuery,
+            variables: {
+                contractType,
+            },
+            useInitialLoading: true,
         }).valueChanges;
 
     public computeAndGetSupplyPointStatistics = () =>

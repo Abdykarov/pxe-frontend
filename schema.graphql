@@ -491,6 +491,12 @@ input Pagination {
     offset: Int!
 }
 
+enum ContractType {
+    ACTIVE,
+    FUTURE,
+    HISTORY
+}
+
 enum ContractStatus {
     CANCELED
     NOT_CONCLUDED
@@ -603,6 +609,9 @@ type Query {
     findSupplyPointsByContractStatus(
         contractStatus: [ContractStatus]!
         identificationNumber: String
+    ): [SupplyPoint]
+    findSupplyPointsConcludedByContractType(
+        contractType: ContractType
     ): [SupplyPoint]
     getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     computeAndGetSupplyPointStatistics: SupplyPointStatistic

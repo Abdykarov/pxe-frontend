@@ -1,11 +1,18 @@
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/app.constants';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import {
+    AllowedOperations,
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 
 export const restoreContractAction = (
     evt,
     supplyPointCopy: ISupplyPoint,
-    router: Router
+    router: Router,
+    allowedOperation: AllowedOperations,
+    navigateRequestService: NavigateRequestService = null
 ) => {
     evt.preventDefault();
     evt.cancelBubble = true;
@@ -14,5 +21,16 @@ export const restoreContractAction = (
         supplyPointCopy,
     };
 
-    router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], { state });
+    if (allowedOperation === AllowedOperations.SHOW_DELIVERY_TO) {
+        router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], { state });
+    } else if (allowedOperation === AllowedOperations.FINALIZE_NEXT_CONTRACT) {
+        navigateRequestService.checkCorrectStep(
+            supplyPointCopy,
+            ProgressStatus.COMPLETED
+        );
+    } else {
+        router.navigate([
+            `${ROUTES.ROUTER_SUPPLY_POINTS}/${supplyPointCopy.id}/${supplyPointCopy.contract.nextContractId}`,
+        ]);
+    }
 };

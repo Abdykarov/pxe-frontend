@@ -270,6 +270,19 @@ export const findSupplyPointsByContractStatusQuery = gql`
     ${supplyPointFragment}
 `;
 
+export const findSupplyPointsConcludedByContractTypeQuery = gql`
+    query findSupplyPointsConcludedByContractType(
+        $contractType: ContractType
+        $skipInfoAboutRelationContracts: Boolean = false
+        $skipOfferValidity: Boolean = true
+    ) {
+        findSupplyPointsConcludedByContractType(contractType: $contractType) {
+            ...SupplyPointFragment
+        }
+    }
+    ${supplyPointFragment}
+`;
+
 export const computeAndGetSupplyPointStatisticsQuery = gql`
     query computeAndGetSupplyPointStatistics {
         computeAndGetSupplyPointStatistics {

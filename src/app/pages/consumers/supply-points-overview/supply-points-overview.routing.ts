@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
-import { SupplyPointsComponent } from './supply-points.component';
+import { ContractTypes } from 'src/common/containers/supply-points-overview/supply-points-overview-container.model';
+import { SupplyPointsOverviewComponent } from './supply-points-overview.component';
 
 const routes: Routes = [
     {
-        path: CONSTS.PATHS.EMPTY,
-        component: SupplyPointsComponent,
+        path: ':type',
+        component: SupplyPointsOverviewComponent,
     },
     {
         path: ':supplyPointId/:contractId',
@@ -15,10 +16,14 @@ const routes: Routes = [
                 (m) => m.SupplyPointDetailModule
             ),
     },
+    {
+        path: CONSTS.PATHS.EMPTY,
+        redirectTo: ContractTypes.ACTIVE,
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class SupplyPointsRoutingModule {}
+export class SupplyPointsOverviewRoutingModule {}

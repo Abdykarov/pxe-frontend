@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/app.constants';
+import { ContractTypes } from '../../supply-points-overview/supply-points-overview-container.model';
 import { DetailContainerFacade } from './detail-container.facade';
 import { DetailContainerFacadeProvider } from './detail-container.provider';
 
@@ -27,6 +28,8 @@ export class DetailContainerComponent {
     }
 
     public backStep(): void {
-        this.router.navigate([ROUTES.ROUTER_HISTORY]);
+        this.router.navigate([
+            `${ROUTES.ROUTER_SUPPLY_POINTS}/${ContractTypes.HISTORY}`,
+        ]);
     }
 }

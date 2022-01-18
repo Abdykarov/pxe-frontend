@@ -84,8 +84,8 @@ const routes = [
                 path: CONSTS.PATHS.SUPPLY_POINTS,
                 loadChildren: () =>
                     import(
-                        '../../pages/consumers/supply-points/supply-points.module'
-                    ).then((m) => m.SupplyPointsModule),
+                        '../../pages/consumers/supply-points-overview/supply-points-overview.module'
+                    ).then((m) => m.SupplyPointsOverviewModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

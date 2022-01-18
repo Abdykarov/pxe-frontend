@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     EventEmitter,
     Input,
@@ -15,6 +16,7 @@ import {
     selector: 'pxe-supply-point',
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SupplyPointComponent {
     public allowedOperations = AllowedOperations;
