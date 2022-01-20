@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { GTM_CONSTS, ROUTES } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
@@ -43,6 +44,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private oAuthService: OAuthService,
@@ -92,7 +94,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                                 ],
                             },
                         },
-                        userID: this.authService?.hashedUserId,
+                        userID: this.cryptoService?.hashedUserId,
                     });
 
                     this.navigateRequestService.checkCorrectStep(
@@ -190,7 +192,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                         ).toLowerCase(),
                         action: GTM_CONSTS.ACTIONS.SIGNED,
                         label: GTM_CONSTS.LABELS.STEP_SIX,
-                        userID: this.authService.hashedUserId,
+                        userID: this.cryptoService.hashedUserId,
                     });
                     this.supplyPointNewVersion = supplyPointNewVersion;
                     this.loading = false;

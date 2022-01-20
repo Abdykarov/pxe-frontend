@@ -124,7 +124,7 @@
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
                         "outputPath": "dist/server",
-                        "main": "prerender/index.ts",
+                        "main": "src/server/prerender/index.ts",
                         "tsConfig": "src/tsconfig.server.json",
                         "optimization": false
                     },
@@ -194,7 +194,7 @@
                     "options": {
                         "sourceMap": false,
                         "outputPath": "dist/data",
-                        "main": "generate-data-for-prerender/app.ts",
+                        "main": "src/server/generate-data-for-prerender/app.ts",
                         "tsConfig": "src/tsconfig.generate-data-for-prerender.json"
                     },
                     "configurations": {

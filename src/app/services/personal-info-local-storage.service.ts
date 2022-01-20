@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 import { CONSTS } from 'src/app/app.constants';
+import { CRYPTO } from 'src/app/constants/crypto.constants';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
@@ -21,8 +22,8 @@ export class PersonalInfoLocalStorageService {
                 CryptoJS.AES.encrypt(
                     JSON.stringify(personalInfoForm),
                     this.authService.currentUserValue.email,
-                    CONSTS.CRYPTO.SALT.toString(),
-                    CONSTS.CRYPTO.IV.toString()
+                    CRYPTO.SALT.toString(),
+                    CRYPTO.IV.toString()
                 )
             );
         }
@@ -38,8 +39,8 @@ export class PersonalInfoLocalStorageService {
                     CryptoJS.AES.decrypt(
                         item,
                         this.authService.currentUserValue.email,
-                        CONSTS.CRYPTO.SALT.toString(),
-                        CONSTS.CRYPTO.IV.toString()
+                        CRYPTO.SALT.toString(),
+                        CRYPTO.IV.toString()
                     ).toString(CryptoJS.enc.Utf8)
                 ) || {}
             );

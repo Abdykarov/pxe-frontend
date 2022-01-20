@@ -11,6 +11,7 @@ import { fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
@@ -42,7 +43,8 @@ export class SignboardComponent extends AbstractComponent {
         public authService: AuthService,
         public cd: ChangeDetectorRef,
         private gtmService: GTMService,
-        private router: Router
+        private router: Router,
+        private cryptoService: CryptoService
     ) {
         super();
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
@@ -60,7 +62,7 @@ export class SignboardComponent extends AbstractComponent {
 
         this.gtmService.loadFormEvent(
             GTM_CONSTS.LABELS.STEP_ONE,
-            this.authService.hashedUserId
+            this.cryptoService.hashedUserId
         );
     }
 
@@ -71,7 +73,7 @@ export class SignboardComponent extends AbstractComponent {
             category: GTM_CONSTS.CATEGORIES.FORM,
             action: GTM_CONSTS.ACTIONS.START,
             label: GTM_CONSTS.LABELS.STEP_ONE,
-            userID: this.authService.hashedUserId,
+            userID: this.cryptoService.hashedUserId,
         });
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     };

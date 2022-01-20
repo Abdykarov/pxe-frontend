@@ -1,4 +1,3 @@
-import * as CryptoJS from 'crypto-js';
 import { IExternalResource } from 'src/app/services/model/widget.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 import {
@@ -42,14 +41,6 @@ export const CONSTS = {
         REGEX_CONTAIN_CMS_DIRECT: 'content/pxe-parc4u/graphql',
     },
     CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
-    CRYPTO: {
-        get SALT() {
-            return CryptoJS.lib.WordArray.random(128 / 8);
-        },
-        get IV() {
-            return CryptoJS.lib.WordArray.random(128 / 8);
-        },
-    },
     CURRENCY: {
         DEFAULT: 'CZK',
     },

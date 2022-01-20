@@ -19,6 +19,7 @@ import {
     S_ANALYTICS,
 } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
@@ -75,6 +76,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
         private route: ActivatedRoute,
         private router: Router,
@@ -86,7 +88,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         super();
         this.gtmService.loadFormEvent(
             GTM_CONSTS.LABELS.STEP_TWO,
-            this.authService.hashedUserId
+            this.cryptoService.hashedUserId
         );
     }
 
@@ -286,7 +288,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                                 : 'firma',
                         energie:
                             supplyPointFormData?.commodityType?.toLowerCase(),
-                        userID: this.authService?.hashedUserId,
+                        userID: this.cryptoService?.hashedUserId,
                     });
                     this.cd.markForCheck();
                     this.router.navigate(

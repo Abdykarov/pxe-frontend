@@ -5,6 +5,7 @@ import { map, retry, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -80,6 +81,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private cryptoService: CryptoService,
         private documentService: DocumentService,
         public faqService: FaqService,
         private gtmService: GTMService,
@@ -91,7 +93,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         super(faqService, route);
         this.gtmService.loadFormEvent(
             GTM_CONSTS.LABELS.STEP_FIVE,
-            this.authService.hashedUserId
+            this.cryptoService.hashedUserId
         );
     }
 
@@ -119,7 +121,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                                     },
                                 },
                             },
-                            userID: this.authService?.hashedUserId,
+                            userID: this.cryptoService?.hashedUserId,
                         });
                         this.checkoutSent = true;
                     }
@@ -309,7 +311,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             ).toLowerCase(),
                             action: GTM_CONSTS.ACTIONS.SIGN,
                             label: GTM_CONSTS.LABELS.STEP_FIVE,
-                            userID: this.authService.hashedUserId,
+                            userID: this.cryptoService.hashedUserId,
                         });
                         this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], {
                             queryParams: {

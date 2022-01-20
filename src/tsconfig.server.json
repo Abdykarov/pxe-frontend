@@ -7,6 +7,8 @@
     "angularCompilerOptions": {
         "entryModule": "src/app/server/app.server.module#AppServerModule"
     },
-    "files": ["../prerender/index.ts"],
+    "files": [
+        "./server/prerender/index.ts"
+    ],
     "include": ["src/**/*.d.ts", "src/**/*.ts"]
 }

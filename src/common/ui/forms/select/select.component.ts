@@ -11,8 +11,9 @@ import { FormGroup } from '@angular/forms';
 import { NgSelectComponent, NgSelectConfig } from '@ng-select/ng-select';
 import * as R from 'ramda';
 import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
-import { getErrorMessage, normalizeString } from 'src/common/utils';
-import { IOption } from '../models/option.model';
+import { IOption } from 'src/common/ui/forms/models/option.model';
+import { getErrorMessage } from 'src/common/utils';
+import { normalizeString } from 'src/common/utils/standalone/normalize-string.fnc';
 import { IValidationMessages } from '../models/validation-messages.model';
 import { defaultSelectConfig } from './select.config';
 
