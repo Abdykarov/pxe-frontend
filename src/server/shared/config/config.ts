@@ -1,11 +1,22 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
-import { DIST_FOLDER } from 'src/server/shared/consts';
+import { APP_FOLDER, DIST_FOLDER } from 'src/server/shared/consts';
 
-export const loadConfig = () => {
+export const loadConfig = (): void => {
     // create configuration
+
+    const preRenderPathConfig = join(DIST_FOLDER, 'data', 'config.js');
+    const ssrPathConfig = join(
+        APP_FOLDER,
+        'assets',
+        'configurations',
+        'config.js'
+    );
+
+    const isPrerender = existsSync(preRenderPathConfig);
+
     const configJs = readFileSync(
-        join(DIST_FOLDER, 'data', 'config.js')
+        isPrerender ? preRenderPathConfig : ssrPathConfig
     ).toString();
     const configString = configJs.substring(
         configJs.indexOf('= ') + 1,

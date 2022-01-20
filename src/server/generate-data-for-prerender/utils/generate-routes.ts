@@ -12,7 +12,7 @@ const dateForSecuredPages = [
 
 const routersToAdd = [CONSTS.PATHS.FAQ, CONSTS.PATHS.PATTERNS_OF_CONTRACTS];
 
-const fromSitemap = (sitemap: string, fs: WriteStream) => {
+const fromSitemap = (sitemap: string, fs: WriteStream): void => {
     const regexForRoutesInSitemap = new RegExp(
         `<loc>${getConfig()['url']}/(.*?)</loc>`,
         'g'
@@ -31,7 +31,7 @@ const fromSitemap = (sitemap: string, fs: WriteStream) => {
     });
 };
 
-const securedPagesRoutes = (file: WriteStream) => {
+const securedPagesRoutes = (file: WriteStream): void => {
     dateForSecuredPages.forEach((forPage) =>
         file.write(
             `/${CONSTS.PATHS.GENERATE_DATA}/${encodeURIComponent(forPage)}\n`
@@ -39,11 +39,11 @@ const securedPagesRoutes = (file: WriteStream) => {
     );
 };
 
-const generateAdditionalRoutes = (file: WriteStream) => {
+const generateAdditionalRoutes = (file: WriteStream): void => {
     routersToAdd.forEach((helpRoute) => file.write(`/${helpRoute}\n`));
 };
 
-export const generateRoutes = (sitemap: string) => {
+export const generateRoutes = (sitemap: string): void => {
     const file = fs.createWriteStream(join(DIST_FOLDER, 'data', 'routes.txt'));
     //lp
     file.write('/' + '\n');

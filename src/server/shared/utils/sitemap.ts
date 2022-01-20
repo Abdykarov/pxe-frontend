@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import { IType } from 'src/common/cms/models/blog';
 import { getConfig } from 'src/server/shared/config/config';
 
 export const getQuestions = (questions) => {
@@ -17,7 +18,7 @@ export const getTypeOfArticle = R.pipe(
     R.prop('url')
 );
 
-export const getTypes = (types, allType) =>
+export const getTypes = (types: IType, allType: IType) =>
     R.pipe(
         R.map(R.prop('type')),
         R.flatten,

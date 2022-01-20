@@ -16,7 +16,7 @@ import {
 } from 'src/server/shared/utils/sitemap';
 import * as xml2js from 'xml2js';
 
-result.then((state: any) => {
+result.then((state: object) => {
     const config = getConfig();
     const siteMapOriginal = readFileSync(
         join(DIST_FOLDER, 'data', 'sitemap.xml'),

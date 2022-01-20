@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { DIST_FOLDER } from 'src/server/shared/consts';
 
-export const initGlobalVariables = () => {
+export const initGlobalVariables = (): void => {
     const template = readFileSync(
         join(DIST_FOLDER, 'app', 'index.html')
     ).toString();
