@@ -21,6 +21,7 @@ import {
     findAllSuppliersQuery,
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
+    findSupplyPointByContractIdQuery,
     findSupplyPointsByContractStatusQuery,
     findSupplyPointsConcludedByContractTypeQuery,
     getCodelistByTypeQuery,
@@ -39,6 +40,14 @@ export class SupplyService {
             query: findAllSuppliersQuery,
             variables: {
                 commodityType,
+            },
+        }).valueChanges;
+
+    public getByContractId = (contractId: string) =>
+        this.apollo.watchQuery<any>({
+            query: findSupplyPointByContractIdQuery,
+            variables: {
+                contractId,
             },
         }).valueChanges;
 

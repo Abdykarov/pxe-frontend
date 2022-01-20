@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/app.constants';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { SupplyPointsOverviewContainerFacade } from 'src/common/containers/supply-points-overview/supply-points-overview-container.facade';
 import {
     AllowedOperations,
     ISupplyPoint,
@@ -12,7 +13,8 @@ export const restoreContractAction = (
     supplyPointCopy: ISupplyPoint,
     router: Router,
     allowedOperation: AllowedOperations,
-    navigateRequestService: NavigateRequestService = null
+    navigateRequestService: NavigateRequestService = null,
+    supplyPointsOverviewContainerFacade: SupplyPointsOverviewContainerFacade = null
 ) => {
     evt.preventDefault();
     evt.cancelBubble = true;
@@ -27,6 +29,17 @@ export const restoreContractAction = (
         navigateRequestService.checkCorrectStep(
             supplyPointCopy,
             ProgressStatus.COMPLETED
+        );
+    } else if (
+        allowedOperation === AllowedOperations.CREATE_FROM_HISTORY_CONTRACT
+    ) {
+        delete state.supplyPointCopy['id'];
+        router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], { state });
+    } else if (
+        allowedOperation === AllowedOperations.FINALIZE_FROM_HISTORY_CONTRACT
+    ) {
+        supplyPointsOverviewContainerFacade.redirectToNewVersionOfSupplyPoint(
+            supplyPointCopy.closedByContractEntityId
         );
     } else {
         router.navigate([

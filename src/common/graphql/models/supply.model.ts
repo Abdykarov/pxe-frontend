@@ -25,6 +25,8 @@ export enum AllowedOperations {
     UNSET_AUTOMATIC_PROLONGATION = 'UNSET_AUTOMATIC_PROLONGATION',
     FINALIZE_NEXT_CONTRACT = 'FINALIZE_NEXT_CONTRACT',
     OPEN_NEXT_CONTRACT = 'OPEN_NEXT_CONTRACT',
+    CREATE_FROM_HISTORY_CONTRACT = 'CREATE_FROM_HISTORY_CONTRACT',
+    FINALIZE_FROM_HISTORY_CONTRACT = 'FINALIZE_FROM_HISTORY_CONTRACT',
 }
 
 export interface IAddress {
@@ -150,6 +152,8 @@ export interface ISupplyPoint {
     importPermanentMonthlyPay?: number;
     imported?: boolean;
     withoutSupplier?: boolean;
+    closedByContractEntityId: string;
+    closedByContractIsConcluded: boolean;
 }
 
 export enum ProgressStatus {

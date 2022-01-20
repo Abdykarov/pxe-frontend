@@ -1,15 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { ISupplyPoint } from '../../graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from '../../graphql/models/supply.model';
 import { ContractTypes } from './supply-points-overview-container.model';
 
 @Injectable()
 export class SupplyPointsOverviewContainerFacade extends AbstractFacade {
     public activeContractTypes = null;
+
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        protected supplyPointService: SupplyService,
+        private navigateRequestService: NavigateRequestService
+    ) {
+        super();
+    }
 
     public getSupplyPoints = (contractType: ContractTypes) =>
         this.supplyPointService
@@ -37,10 +50,18 @@ export class SupplyPointsOverviewContainerFacade extends AbstractFacade {
         this.supplyPointsSource$
     );
 
-    constructor(
-        private route: ActivatedRoute,
-        protected supplyPointService: SupplyService
-    ) {
-        super();
-    }
+    public readonly redirectToNewVersionOfSupplyPoint = (contractId) => {
+        this.supplyPointService
+            .getByContractId(contractId)
+            .pipe(
+                take(1),
+                map(({ data }) => data.findSupplyPointByContractId)
+            )
+            .subscribe((suppyPoint: ISupplyPoint) =>
+                this.navigateRequestService.checkCorrectStep(
+                    suppyPoint,
+                    ProgressStatus.COMPLETED
+                )
+            );
+    };
 }

@@ -42,11 +42,30 @@
                         navigateRequestService
                    )"
                 >
-                    Platnost končí za {{contractEndInDays}}
-                    {{contractEndInDays}} - Dokončit rozpracovanou smlouvu
+                    Dokončit navazující rozpracovanou smlouvu
                 </pxe-badge>
             </ng-container>
         </div>
+    </div>
+
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT)"
+        class="row"
+    >
+        <pxe-badge
+            type="info"
+            [isLink]="true"
+            (action)="restoreContractAction(
+                            $event,
+                            data,
+                            router,
+                            allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT,
+                            navigateRequestService,
+                            supplyPointsOverviewContainerFacade
+                       )"
+        >
+            Dokončit obnovovací smlouvu
+        </pxe-badge>
     </div>
     <div
         *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.OPEN_NEXT_CONTRACT)"
@@ -59,6 +78,20 @@
                 (action)="restoreContractAction($event, data, router, allowedOperations.OPEN_NEXT_CONTRACT, navigateRequestService)"
             >
                 Otevřít navazující smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.CREATE_FROM_HISTORY_CONTRACT)"
+        class="row"
+    >
+        <div class="col-12">
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="restoreContractAction($event, data, router, allowedOperations.CREATE_FROM_HISTORY_CONTRACT)"
+            >
+                Obnovit smlouvu
             </pxe-badge>
         </div>
     </div>
