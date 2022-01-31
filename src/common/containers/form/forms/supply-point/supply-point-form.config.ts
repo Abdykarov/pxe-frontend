@@ -188,6 +188,7 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             invalidEan: errorFieldMessages.ean.ean,
             pattern: errorFieldMessages.ean.ean,
             invalidEanOnTenthPosition: errorFieldMessages.ean.ean,
+            canBeProlongInFuture: errorFieldMessages.ean.canBeProlongInFuture,
             duplicateSupplyPoint: errorFieldMessages.ean.nonUniqueEan,
         },
         eic: {
@@ -196,6 +197,7 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             invalidEic: errorFieldMessages.eic.eic,
             pattern: errorFieldMessages.eic.eic,
             duplicateSupplyPoint: errorFieldMessages.eic.nonUniqueEic,
+            canBeProlongInFuture: errorFieldMessages.eic.canBeProlongInFuture,
             invalidEicOnFifthToSeventhPosition: errorFieldMessages.eic.eic,
         },
         address: {

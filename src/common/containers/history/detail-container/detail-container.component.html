@@ -12,6 +12,7 @@
         </div>
     </div>
 </ng-container>
+
 <ng-container *ngIf="isLoading$ | async; else dataTemplate">
     <lnd-placeloader [loading]="true"></lnd-placeloader>
 </ng-container>
