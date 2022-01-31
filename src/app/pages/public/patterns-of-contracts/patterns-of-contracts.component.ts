@@ -1,14 +1,20 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     ChangeDetectorRef,
     Component,
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
-import { saveAs } from 'file-saver';
 import * as R from 'ramda';
+import { saveAs } from 'file-saver';
 import { combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
