@@ -41,6 +41,13 @@ export const restoreContractAction = (
         supplyPointsOverviewContainerFacade.redirectToNewVersionOfSupplyPoint(
             supplyPointCopy.closedByContractEntityId
         );
+    } else if (
+        allowedOperation ===
+        AllowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY
+    ) {
+        supplyPointsOverviewContainerFacade.redirectDetailFromHistory(
+            supplyPointCopy.closedByContractEntityId
+        );
     } else {
         router.navigate([
             `${ROUTES.ROUTER_SUPPLY_POINTS}/${supplyPointCopy.id}/${supplyPointCopy.contract.nextContractId}`,

@@ -95,6 +95,20 @@
             </pxe-badge>
         </div>
     </div>
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY)"
+        class="row"
+    >
+        <div class="col-12">
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="restoreContractAction($event, data, router, allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY, navigateRequestService, supplyPointsOverviewContainerFacade)"
+            >
+                Otevřít novou verzy OM
+            </pxe-badge>
+        </div>
+    </div>
 </ng-template>
 
 <!--<lnd-alert [type]="'danger'" [isDismissible]="false" *ngIf="error">-->
