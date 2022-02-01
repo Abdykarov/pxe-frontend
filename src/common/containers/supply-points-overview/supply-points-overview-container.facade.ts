@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as R from 'ramda';
 import { Observable } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, share, switchMap, take } from 'rxjs/operators';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -14,6 +15,7 @@ import { ContractTypes } from './supply-points-overview-container.model';
 @Injectable()
 export class SupplyPointsOverviewContainerFacade extends AbstractFacade {
     public activeContractTypes = null;
+    public date = new Date();
 
     constructor(
         private route: ActivatedRoute,
@@ -24,6 +26,14 @@ export class SupplyPointsOverviewContainerFacade extends AbstractFacade {
         super();
     }
 
+    private readonly supplyPointsSource$ = this.route.params.pipe(
+        switchMap(({ type }) => {
+            this.activeContractTypes = type;
+            return this.getSupplyPoints(type);
+        }),
+        share()
+    );
+
     public getSupplyPoints = (contractType: ContractTypes) =>
         this.supplyPointService
             .findSupplyPointsConcludedByContractType(
@@ -31,23 +41,15 @@ export class SupplyPointsOverviewContainerFacade extends AbstractFacade {
             )
             .pipe(this.catchError);
 
-    private readonly supplyPointsSource$ = this.route.params.pipe(
-        switchMap(({ type }) => {
-            this.activeContractTypes = type;
-            return this.getSupplyPoints(type);
-        })
-    );
-
     public readonly supplyPoints$: Observable<ISupplyPoint[]> =
         this.supplyPointsSource$.pipe(
-            map(
-                ({ data = null }) =>
-                    data?.findSupplyPointsConcludedByContractType
-            )
+            map(({ data = null }) => {
+                return data?.findSupplyPointsConcludedByContractType;
+            })
         );
 
-    public readonly isLoading$: Observable<boolean> = this.createIsLoading(
-        this.supplyPointsSource$
+    public readonly isLoading$: Observable<any> = this.supplyPointsSource$.pipe(
+        map(R.prop('loading'))
     );
 
     public readonly redirectToNewVersionOfSupplyPoint = (contractId) => {

@@ -196,72 +196,68 @@
     </div>
 </div>
 
-<ng-container
-    *ngIf="supplyPointsOverviewContainerFacade.isLoading$ | async; else dataTemplate"
->
+<ng-container *ngIf="supplyPointsOverviewContainerFacade.isLoading$ | async">
     <lnd-placeloader [loading]="true"></lnd-placeloader>
 </ng-container>
 
-<ng-template #dataTemplate>
-    <div
-        *ngIf="supplyPointsOverviewContainerFacade.supplyPoints$ | async as supplyPoints"
-        class="supply-points"
-    >
-        <ng-container *ngIf="supplyPoints.length !== 0">
-            <pxe-supply-point
-                *ngFor="let supplyPoint of supplyPoints; trackBy: trackSupplyPoint"
-                [additionalInfoTemplate]="additionalInfoTemplate"
-                [data]="supplyPoint"
-                (action)="navigateToSupplyPointDetail($event)"
-            ></pxe-supply-point>
-        </ng-container>
+<div
+    *ngIf="supplyPointsOverviewContainerFacade.supplyPoints$ | async as supplyPoints"
+    class="supply-points"
+>
+    <ng-container *ngIf="supplyPoints.length !== 0">
+        <pxe-supply-point
+            *ngFor="let supplyPoint of supplyPoints; trackBy: trackSupplyPoint"
+            [additionalInfoTemplate]="additionalInfoTemplate"
+            [data]="supplyPoint"
+            (action)="navigateToSupplyPointDetail($event)"
+        ></pxe-supply-point>
+    </ng-container>
 
-        <lnd-info-banner
-            *ngIf="supplyPoints.length === 0"
-            bannerTitle="Zatím nemáte žádnou {{pluralContractType[supplyPointsOverviewContainerFacade.activeContractTypes]}} smlouvu"
-            [showButton]="false"
-        >
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <p>
-                        V případě zájmu o dodávku energií pro nové odběrné
-                        místo, pokračujte prosím zadáním odběrného místa
-                        <!--                        <ng-container-->
-                        <!--                            *ngIf="supplyPointStatistic.notConcludedCount"-->
-                        <!--                        ></ng-container>-->
-                        <!--                        <ng-container-->
-                        <!--                            *ngIf="supplyPointStatistic.notConcludedCount"-->
-                        <!--                        >-->
-                        <!--                            Pokud už máte vytvořené odběrné místo, můžete se-->
-                        <!--                            vrátit k vaší rozpracované smlouvě a dokončit proces-->
-                        <!--                        </ng-container>-->
-                    </p>
-                </div>
+    <lnd-info-banner
+        *ngIf="supplyPoints.length === 0"
+        bannerTitle="Zatím nemáte žádnou {{pluralContractType[supplyPointsOverviewContainerFacade.activeContractTypes]}} smlouvu"
+        [showButton]="false"
+    >
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <p>
+                    V případě zájmu o dodávku energií pro nové odběrné místo,
+                    pokračujte prosím zadáním odběrného místa
+                    <!--                        <ng-container-->
+                    <!--                            *ngIf="supplyPointStatistic.notConcludedCount"-->
+                    <!--                        ></ng-container>-->
+                    <!--                        <ng-container-->
+                    <!--                            *ngIf="supplyPointStatistic.notConcludedCount"-->
+                    <!--                        >-->
+                    <!--                            Pokud už máte vytvořené odběrné místo, můžete se-->
+                    <!--                            vrátit k vaší rozpracované smlouvě a dokončit proces-->
+                    <!--                        </ng-container>-->
+                </p>
             </div>
-            <!--            <div class="row">-->
-            <!--                <div-->
-            <!--                    *ngIf="supplyPointStatistic.notConcludedCount"-->
-            <!--                    class="col-md-4 offset-md-2"-->
-            <!--                >-->
-            <!--                    <lnd-button-->
-            <!--                        (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"-->
-            <!--                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"-->
-            <!--                        type="link"-->
-            <!--                    >-->
-            <!--                    </lnd-button>-->
-            <!--                </div>-->
-            <!--                <div-->
-            <!--                    class="col-md-4"-->
-            <!--                    [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"-->
-            <!--                >-->
-            <!--                    <lnd-button-->
-            <!--                        (action)="createSupplyPoint($event)"-->
-            <!--                        label="Nové odběrné místo"-->
-            <!--                        type="primary"-->
-            <!--                    >-->
-            <!--                    </lnd-button>-->
-            <!--                </div>-->
-            <!--            </div>-->
-        </lnd-info-banner>
-    </div>
-</ng-template>
+        </div>
+        <!--            <div class="row">-->
+        <!--                <div-->
+        <!--                    *ngIf="supplyPointStatistic.notConcludedCount"-->
+        <!--                    class="col-md-4 offset-md-2"-->
+        <!--                >-->
+        <!--                    <lnd-button-->
+        <!--                        (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"-->
+        <!--                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"-->
+        <!--                        type="link"-->
+        <!--                    >-->
+        <!--                    </lnd-button>-->
+        <!--                </div>-->
+        <!--                <div-->
+        <!--                    class="col-md-4"-->
+        <!--                    [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"-->
+        <!--                >-->
+        <!--                    <lnd-button-->
+        <!--                        (action)="createSupplyPoint($event)"-->
+        <!--                        label="Nové odběrné místo"-->
+        <!--                        type="primary"-->
+        <!--                    >-->
+        <!--                    </lnd-button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+    </lnd-info-banner>
+</div>
