@@ -75,8 +75,8 @@ export const offerFragment = gql`
 `;
 
 export const findSupplierOffersQuery = gql`
-    query findSupplierOffers {
-        findSupplierOffers {
+    query findSupplierOffers($commodityType: CommodityType!) {
+        findSupplierOffers(commodityType: $commodityType) {
             ...offerFragment
             marked @client
             isLastUpdated @client

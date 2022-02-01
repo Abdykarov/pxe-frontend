@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+    AllowedOperations,
     CommodityType,
     ISupplyPoint,
     ProgressStatus,
@@ -13,6 +14,8 @@ import { getConfigStepper } from 'src/common/utils';
     styleUrls: ['./request-card.component.scss'],
 })
 export class RequestCardComponent implements OnInit {
+    public readonly allowedOperations = AllowedOperations;
+
     @Input()
     public supplyPoint: ISupplyPoint;
 

@@ -88,7 +88,7 @@
                     >
                     </lnd-button>
                     <lnd-button
-                        *ngIf="!supplyPoint.contract?.previousContractId"
+                        *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.DELETE_CONTRACT"
                         label="Smazat"
                         type="link-danger"
                         (click)="removeAction.emit(supplyPoint)"

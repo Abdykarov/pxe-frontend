@@ -17,7 +17,7 @@ export enum TimeToContractEndPeriod {
 }
 
 export enum AllowedOperations {
-    DELETE = 'DELETE',
+    DELETE_CONTRACT = 'DELETE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
     PARTIAL_EDIT = 'PARTIAL_EDIT',
     SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
