@@ -13,6 +13,7 @@ import { filter, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, ROUTES, S_ANALYTICS } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
@@ -58,6 +59,7 @@ export class OfferSelectionComponent
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cryptoService: CryptoService,
         private contractService: ContractService,
         public faqService: FaqService,
         private gtmService: GTMService,
@@ -72,7 +74,7 @@ export class OfferSelectionComponent
         super(faqService, route);
         this.gtmService.loadFormEvent(
             GTM_CONSTS.LABELS.STEP_THREE,
-            this.authService.hashedUserId
+            this.cryptoService.hashedUserId
         );
     }
 
@@ -236,7 +238,7 @@ export class OfferSelectionComponent
                         ).toLowerCase(),
                         action: GTM_CONSTS.ACTIONS.SELECT_OFFER,
                         label: GTM_CONSTS.LABELS.STEP_THREE,
-                        userID: this.authService.hashedUserId,
+                        userID: this.cryptoService.hashedUserId,
                     });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
@@ -283,7 +285,7 @@ export class OfferSelectionComponent
                 ).toLowerCase(),
                 action: GTM_CONSTS.ACTIONS.SHOW_DETAIL,
                 label: GTM_CONSTS.LABELS.STEP_THREE,
-                userID: this.authService.hashedUserId,
+                userID: this.cryptoService.hashedUserId,
             });
         }
     };

@@ -11,6 +11,7 @@ import {
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as R from 'ramda';
+import { combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {
     CommodityTypesCsLowerCase,
@@ -18,12 +19,15 @@ import {
     IS_PRERENDER_PROVIDER,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
+import { IPdfSetting } from 'src/app/pages/public/patterns-of-contracts/models/patterns-of-contracts.model';
+import {
+    historyColConfig,
+    pdfSetting,
+} from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts.config';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
-import { IPdfSetting } from './models/patterns-of-contracts.model';
-import { historyColConfig, pdfSetting } from './patterns-of-contracts.config';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -94,82 +98,82 @@ export class PatternsOfContractsComponent
     }
 
     ngOnInit(): void {
-        this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-            this.subjectType = this.defaultValueInPrerender(
-                params.subjectType,
-                this.SUBJECT_TYPE.INDIVIDUAL
-            );
-            const tree = this.router.parseUrl(this.router.url);
-            this.commodityType = this.defaultValueInPrerender(
-                tree.fragment,
-                CommodityTypesCsLowerCase.POWER
-            );
+        combineLatest([this.route.params, this.route.fragment])
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(([params, fragment]) => {
+                this.subjectType = this.defaultValueInPrerender(
+                    params.subjectType,
+                    this.SUBJECT_TYPE.INDIVIDUAL
+                );
+                const tree = this.router.parseUrl(this.router.url);
+                this.commodityType = this.defaultValueInPrerender(
+                    tree.fragment,
+                    CommodityTypesCsLowerCase.POWER
+                );
 
-            this.prepareActiveContract();
-            this.prepareFutureContracts();
-            this.prepareOldContracts();
+                this.prepareActiveContract();
+                this.prepareFutureContracts();
+                this.prepareOldContracts();
 
-            if (
-                !R.path(
-                    [this.subjectType, this.commodityType],
-                    this.pdfActiveContracts
-                ) &&
-                !this.isPrerender
-            ) {
-                this.commodityType = this.COMMODITY_TYPE.POWER;
-                this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
-                this.navigateToCorrectUrl();
-                return;
-            }
+                if (
+                    !R.path(
+                        [this.subjectType, this.commodityType],
+                        this.pdfActiveContracts
+                    ) &&
+                    !this.isPrerender
+                ) {
+                    this.commodityType = this.COMMODITY_TYPE.POWER;
+                    this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
+                    this.navigateToCorrectUrl();
+                    return;
+                }
 
-            if (this.isClientRendering) {
-                const pdfCurrentSetting =
-                    this.pdfActiveContracts[this.subjectType][
-                        this.commodityType
-                    ];
-                this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
-                this.pxePdfViewer.downloadFileName =
-                    pdfCurrentSetting.downloadName;
+                if (this.isClientRendering) {
+                    const pdfCurrentSetting =
+                        this.pdfActiveContracts[this.subjectType][
+                            this.commodityType
+                        ];
+                    this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
+                    this.pxePdfViewer.downloadFileName =
+                        pdfCurrentSetting.downloadName;
 
-                setTimeout((_) => {
-                    this.pxePdfViewer.refresh();
-                    this.cd.markForCheck();
-                });
-            }
-        });
+                    setTimeout((_) => {
+                        this.pxePdfViewer.refresh();
+                        this.cd.markForCheck();
+                    });
+                }
+            });
     }
 
-    public routeToSubjectType = (evt, subjectType: SubjectTypeLowerCase) => {
+    public routeToSubjectType(evt, subjectType: SubjectTypeLowerCase): void {
         evt.preventDefault();
         this.subjectType = subjectType;
         this.navigateToCorrectUrl();
-    };
+    }
 
-    public routeToCommodityType = (
+    public routeToCommodityType(
         evt,
         commodityType: CommodityTypesCsLowerCase
-    ) => {
+    ): void {
         evt.preventDefault();
         this.commodityType = commodityType;
         this.navigateToCorrectUrl();
-    };
+    }
 
-    public navigateToCorrectUrl = () => {
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-            this.router.navigate(
-                [`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}`],
-                {
-                    fragment: this.commodityType,
-                }
-            )
+    public navigateToCorrectUrl(): void {
+        this.router.navigate(
+            [`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}`],
+            {
+                fragment: this.commodityType,
+            }
         );
-    };
+    }
 
-    public downloadPdf = (sourceUrl: string, name: string) => {
+    public downloadPdf(sourceUrl: string, name: string): void {
         saveAs(sourceUrl, name);
-    };
+    }
 
-    public prepareOldContracts = () => {
+    public prepareOldContracts(): void {
         this.pdfOldContracts = R.pipe(
             R.filter((setting: IPdfSetting) => {
                 const { dateTo, dateFrom } =
@@ -187,9 +191,9 @@ export class PatternsOfContractsComponent
                     setting[this.subjectType][this.commodityType]
             )
         )(this.pdfSettings);
-    };
+    }
 
-    public prepareActiveContract = () => {
+    public prepareActiveContract(): void {
         this.pdfActiveContracts = R.pipe(
             R.filter((setting: IPdfSetting) => {
                 const { dateFrom, dateTo } =
@@ -205,9 +209,9 @@ export class PatternsOfContractsComponent
             }),
             R.head
         )(this.pdfSettings);
-    };
+    }
 
-    public prepareFutureContracts = () => {
+    public prepareFutureContracts(): void {
         this.pdfFutureContracts = R.filter((setting: IPdfSetting) => {
             const { dateTo, dateFrom } =
                 setting[this.SUBJECT_TYPE.INDIVIDUAL][
@@ -216,5 +220,5 @@ export class PatternsOfContractsComponent
             const now = new Date().getTime();
             return dateTo.getTime() > now && dateFrom.getTime() > now;
         })(this.pdfSettings);
-    };
+    }
 }

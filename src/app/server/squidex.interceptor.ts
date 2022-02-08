@@ -8,14 +8,17 @@ import { Inject, Injectable } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { PRIMARY_OUTLET, Router } from '@angular/router';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import * as R from 'ramda';
 import { tap } from 'rxjs/operators';
 import {
+    ARTICLES_PAGE,
     BUILD_ID_PROVIDER,
     CONSTS,
-    PAGE_PRERENDER,
     PAGE_URL_PROVIDER,
 } from 'src/app/app.constants';
+import { environment } from 'src/environments/environment';
+import { APP_FOLDER } from 'src/server/shared/consts';
 
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
@@ -32,7 +35,7 @@ export class SquidexInterceptor implements HttpInterceptor {
                 if (
                     event instanceof HttpResponse &&
                     req.url ===
-                        'https://squidex.lnd.bz/api/content/pxe-parc4u/graphql'
+                        `${environment.url_cms}/api/content/pxe-parc4u/graphql`
                 ) {
                     const plainKey = req.body && req.body.operationName;
                     const key = makeStateKey<HttpResponse<object>>(
@@ -48,9 +51,9 @@ export class SquidexInterceptor implements HttpInterceptor {
                         this.pageUrl = R.last(primary.segments).path;
                     }
 
-                    const dirPath = './dist/app' + this.pageUrl;
-                    if (req.headers.has(PAGE_PRERENDER)) {
-                        const page = req.headers.get(PAGE_PRERENDER);
+                    const dirPath = join(APP_FOLDER, this.pageUrl);
+                    if (req.headers.has(ARTICLES_PAGE)) {
+                        const page = req.headers.get(ARTICLES_PAGE);
 
                         if (parseInt(page) > 1) {
                             mkdirSync(dirPath, { recursive: true });

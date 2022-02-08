@@ -11,10 +11,10 @@ import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {
+    ARTICLES_PAGE,
     BUILD_ID_PROVIDER,
     CONSTS,
     IS_PRERENDER_PROVIDER,
-    PAGE_PRERENDER,
 } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 
@@ -85,10 +85,10 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     );
                 }
 
-                const isPageFilterData = req.headers.has(PAGE_PRERENDER);
+                const isPageFilterData = req.headers.has(ARTICLES_PAGE);
 
                 let url = `${this.nextRouteUrl}/data${
-                    isPageFilterData ? req.headers.get(PAGE_PRERENDER) : ''
+                    isPageFilterData ? `-${req.headers.get(ARTICLES_PAGE)}` : ''
                 }.json?v=${this.uuid}`.replace('//', '/');
 
                 const secureReq = req.clone({

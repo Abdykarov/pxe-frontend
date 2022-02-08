@@ -15,4 +15,8 @@
 			font-size: .875rem;
 		}
 	}
+
+	#c-a-txt::after {
+		content: '.';
+	}
 }

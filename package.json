@@ -4,7 +4,7 @@
     "description": "Lundegaard Angular Devstack",
     "license": "MIT",
     "engines": {
-        "node": "^14"
+        "node": "^14.15"
     },
     "scripts": {
         "build": "ng build",

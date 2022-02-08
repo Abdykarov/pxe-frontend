@@ -7,6 +7,7 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -45,6 +46,7 @@ export class SignUpComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private cookieService: CookieService,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
@@ -90,7 +92,7 @@ export class SignUpComponent extends AbstractComponent {
                             category: GTM_CONSTS.CATEGORIES.REGISTRATION,
                             action: GTM_CONSTS.ACTIONS.SENT,
                             label: GTM_CONSTS.LABELS.REGISTRATION,
-                            email: this.authService.hashUserId(values.email),
+                            email: this.cryptoService.hashUserId(values.email),
                         });
                         this.formLoading = false;
                         this.formSent = true;

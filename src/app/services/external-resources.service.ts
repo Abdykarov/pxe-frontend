@@ -1,7 +1,11 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import * as R from 'ramda';
-import { externalScripts, externalStyles } from 'src/app/app.constants';
+import {
+    BUILD_ID_PROVIDER,
+    externalScripts,
+    externalStyles,
+} from 'src/app/app.constants';
 import {
     ExternalResourceType,
     IExternalPromise,
@@ -22,7 +26,8 @@ export class ScriptService {
 
     constructor(
         @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: string
+        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(BUILD_ID_PROVIDER) public buildId: string
     ) {
         R.forEach((script: IExternalResource) => {
             this.resources[ExternalResourceType.scripts][script.name] = {
@@ -69,14 +74,14 @@ export class ScriptService {
         if (type === 'scripts') {
             resource = this.document.createElement('script');
             resource.type = 'text/javascript';
-            resource.src = this.resources[type][name].src;
+            resource.src = `${this.resources[type][name].src}?v=${this.buildId}`;
             resource.defer = true;
             resource.async = false;
         } else {
             resource = this.document.createElement('link');
             resource.type = 'text/css';
             resource.rel = 'stylesheet';
-            resource.href = this.resources[type][name].src;
+            resource.src = `${this.resources[type][name].src}?v=${this.buildId}`;
         }
         return resource;
     }

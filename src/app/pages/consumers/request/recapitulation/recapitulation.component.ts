@@ -10,6 +10,7 @@ import {
     S_ANALYTICS,
 } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
@@ -76,6 +77,7 @@ export class RecapitulationComponent
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
@@ -87,7 +89,7 @@ export class RecapitulationComponent
         super();
         this.gtmService.loadFormEvent(
             GTM_CONSTS.LABELS.STEP_FOUR,
-            this.authService.hashedUserId
+            this.cryptoService.hashedUserId
         );
     }
 
@@ -127,7 +129,7 @@ export class RecapitulationComponent
                                         ],
                                     },
                                 },
-                                userID: this.authService?.hashedUserId,
+                                userID: this.cryptoService?.hashedUserId,
                             });
                             this.checkoutSent = true;
                         }
@@ -188,7 +190,7 @@ export class RecapitulationComponent
                         ).toLowerCase(),
                         action: GTM_CONSTS.ACTIONS.CONTINUE,
                         label: GTM_CONSTS.LABELS.STEP_FOUR,
-                        userID: this.authService.hashedUserId,
+                        userID: this.cryptoService.hashedUserId,
                     });
                     this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT], {
                         queryParams: {
