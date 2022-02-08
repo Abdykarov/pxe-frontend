@@ -12,9 +12,7 @@ const routes: Routes = [
     {
         path: ':supplyPointId/:contractId',
         loadChildren: () =>
-            import('./detail/supply-point-detail.module').then(
-                (m) => m.SupplyPointDetailModule
-            ),
+            import('./detail/detail.module').then((m) => m.DetailModule),
     },
     {
         path: CONSTS.PATHS.EMPTY,

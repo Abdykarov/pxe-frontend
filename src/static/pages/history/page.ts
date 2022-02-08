@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IHistory } from 'src/common/containers/history/models/history';
+import { IHistory } from 'src/common/containers/supply-point-detail/models/history';
 import { supplyPointConfigPower } from 'src/static/organisms/supply-point/config';
 
 @Component({

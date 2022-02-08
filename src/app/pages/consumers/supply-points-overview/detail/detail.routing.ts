@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
-import { SupplyPointDetailComponent } from './supply-point-detail.component';
+import { DetailComponent } from 'src/app/pages/consumers/supply-points-overview/detail/detail.component';
 
 const routes: Routes = [
     {
         path: CONSTS.PATHS.EMPTY,
-        component: SupplyPointDetailComponent,
+        component: DetailComponent,
     },
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class NewSupplyPointRoutingModule {}
+export class DetailRouting {}

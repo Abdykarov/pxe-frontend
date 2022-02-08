@@ -164,10 +164,11 @@ export class SupplyService {
     public getSupplyPoint = (
         supplyPointId: string,
         contractId: string = null,
-        useInitialLoading = false
+        useInitialLoading = false,
+        noCache = true
     ) =>
         this.apollo.watchQuery<any>({
-            fetchPolicy: contractId ? 'no-cache' : 'network-only',
+            fetchPolicy: !noCache || !contractId ? 'network-only' : 'no-cache',
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,

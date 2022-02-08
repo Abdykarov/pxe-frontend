@@ -9,7 +9,7 @@ import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import {
-    IDocumentType,
+    DocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
@@ -61,7 +61,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
-    public documentType = IDocumentType;
+    public documentType = DocumentType;
     public documentTypeContract: IResponseDataDocument = null;
     public documentTypeInformation: IResponseDataDocument = null;
     public documentTypeUnsetProlongation: IResponseDataDocument = null;
@@ -223,7 +223,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         }
     };
 
-    public saveDocument = (contractId: string, documentType: IDocumentType) => {
+    public saveDocument = (contractId: string, documentType: DocumentType) => {
         this.documentLoading = true;
         this.globalError = [];
         this.documentService
@@ -245,7 +245,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     };
 
     // v pripade budouci zmeny
-    public openDocument = (contractId: string, documentType: IDocumentType) => {
+    public openDocument = (contractId: string, documentType: DocumentType) => {
         const windowReference = window && window.open();
         this.documentLoading = true;
         this.globalError = [];

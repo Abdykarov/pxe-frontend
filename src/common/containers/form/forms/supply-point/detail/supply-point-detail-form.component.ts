@@ -29,7 +29,7 @@ import {
 } from 'src/app/app.constants';
 import { DocumentService } from 'src/app/services/document.service';
 import {
-    IDocumentType,
+    DocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
@@ -339,7 +339,7 @@ export class SupplyPointDetailFormComponent
         this.documentService
             .getDocument(
                 this.supplyPoint.contract.contractId,
-                IDocumentType.CONTRACT
+                DocumentType.CONTRACT
             )
             .pipe(takeUntil(this.destroy$))
             .subscribe(

@@ -172,6 +172,7 @@ export const CONSTS = {
         BY_SELF: 'Byl jste úspěšně odhlášen.',
         UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity.',
     },
+    TIME_TO_SHOW_FLASH_MESSAGES: 3000,
     TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,

@@ -452,7 +452,9 @@
                     </div>
                     <ng-container *ngIf="contractActionsTemplate">
                         <ng-container
-                            *ngTemplateOutlet="contractActionsTemplate"
+                            *ngTemplateOutlet="contractActionsTemplate;
+                                               context: { supplyPoint: supplyPoint }
+                                              "
                         ></ng-container>
                     </ng-container>
                 </div>

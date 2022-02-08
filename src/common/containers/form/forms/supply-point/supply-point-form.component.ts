@@ -13,7 +13,14 @@ import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { filter, map, pairwise, startWith, takeUntil } from 'rxjs/operators';
+import {
+    distinctUntilChanged,
+    filter,
+    map,
+    pairwise,
+    startWith,
+    takeUntil,
+} from 'rxjs/operators';
 import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
@@ -145,32 +152,37 @@ export class SupplyPointFormComponent
             .valueChanges.pipe(takeUntil(this.destroy$))
             .subscribe((withoutSupplier: boolean) => {
                 if (withoutSupplier) {
+                    this.form.controls['supplierId'].setValue(null);
                     this.form.controls['supplierId'].setValidators([]);
                     this.form.controls['supplierId'].disable();
                     this.form.controls['ownTerminate'].setValue(true);
                     this.form.controls['expirationDate'].setValue(
                         convertDateToSendFormatFnc(new Date())
                     );
-                    const sampleDocuments = R.pipe(
-                        R.prop(this.commodityType),
-                        R.filter(
-                            R.propEq(
-                                'vatNumber',
-                                this.CONSTS.BOHEMIA_ENERGY_VAT_NUMBER
-                            )
-                        ),
-                        R.head,
-                        R.prop('sampleDocuments')
-                    )(this.suppliers);
-                    this.helpDocuments = sampleDocuments
-                        ? convertArrayToObject(
-                              sampleDocuments,
-                              'type',
-                              (sampleDocument: ISupplierSampleDocument) =>
-                                  sampleDocument.commodityType ===
-                                  this.commodityType
-                          )
-                        : {};
+                    // after change commodity is supplier empty and supplier for commodity could not be loaded
+                    if (this.suppliers[this.commodityType]) {
+                        const sampleDocuments = R.pipe(
+                            R.prop(this.commodityType),
+                            R.filter(
+                                R.propEq(
+                                    'vatNumber',
+                                    this.CONSTS.BOHEMIA_ENERGY_VAT_NUMBER
+                                )
+                            ),
+                            R.head,
+                            R.prop('sampleDocuments')
+                        )(this.suppliers);
+
+                        this.helpDocuments = sampleDocuments
+                            ? convertArrayToObject(
+                                  sampleDocuments,
+                                  'type',
+                                  (sampleDocument: ISupplierSampleDocument) =>
+                                      sampleDocument.commodityType ===
+                                      this.commodityType
+                              )
+                            : {};
+                    }
                 } else {
                     this.form.controls['ownTerminate'].setValue(false);
                     this.form.controls['supplierId'].enable();
@@ -259,6 +271,10 @@ export class SupplyPointFormComponent
                     this.codeLists
                 );
                 this.setOwnTerminate(this.form.get('ownTerminate').value);
+                this.setFieldValue(
+                    'withoutSupplier',
+                    this.getFieldValue('withoutSupplier')
+                );
             });
 
         this.form
@@ -355,7 +371,10 @@ export class SupplyPointFormComponent
 
                         this.supplyPointLocalStorageService
                             .getSupplyPointStream()
-                            .pipe(takeUntil(this.destroy$))
+                            .pipe(
+                                takeUntil(this.destroy$),
+                                distinctUntilChanged()
+                            )
                             .subscribe((formValues) => {
                                 try {
                                     // eslint-disable-next-line
@@ -380,6 +399,18 @@ export class SupplyPointFormComponent
                                                 supplyPointForm
                                             );
                                         this.form.setValue(supplyPointForm);
+                                        this.form.controls[
+                                            'supplierId'
+                                        ].setValue(
+                                            formValues.supplyPointForm
+                                                .supplierId
+                                        );
+                                        this.form.controls[
+                                            'distributionRateId'
+                                        ].setValue(
+                                            formValues.supplyPointForm
+                                                .distributionRateId
+                                        );
                                         if (setPartialFormForAddress) {
                                             this.pxeAddressWhisperer.changeSelectedValue(
                                                 setPartialFormForAddress
@@ -602,8 +633,8 @@ export class SupplyPointFormComponent
     public setFormByCommodity = (
         commodityType: CommodityType = CommodityType.POWER
     ) => {
-        this.setFormFields(commodityType);
         this.loadSuppliers(commodityType);
+        this.setFormFields(commodityType);
     };
 
     public submitValidForm = () => {

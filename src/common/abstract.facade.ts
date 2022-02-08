@@ -2,8 +2,9 @@ import { ErrorResponse } from '@apollo/client/link/error';
 import * as R from 'ramda';
 import { BehaviorSubject, combineLatest, Observable, Observer, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { IRestAPIError } from 'src/common/containers/form/models/rest-api-error.model';
 import { IFieldError } from './containers/form/models/form-definition.model';
-import { parseGraphQLErrors } from './utils';
+import { parseGraphQLErrors, parseRestAPIErrors } from './utils';
 
 export abstract class AbstractFacade {
     public successResultSubject$: BehaviorSubject<boolean> =
@@ -16,7 +17,7 @@ export abstract class AbstractFacade {
     public globalError$ = this.globalErrorSubject$.asObservable();
 
     public fieldErrorSubject$: BehaviorSubject<IFieldError> =
-        new BehaviorSubject(null);
+        new BehaviorSubject({});
     public fieldError$ = this.fieldErrorSubject$.asObservable();
 
     public isUploadingSubject$: BehaviorSubject<boolean> = new BehaviorSubject(
@@ -39,11 +40,16 @@ export abstract class AbstractFacade {
         complete: () => this.isUploadingSubject$.next(false),
     };
 
-    private processError = (error: ErrorResponse): void => {
+    protected processError(error: ErrorResponse): void {
         const { globalError, fieldError } = parseGraphQLErrors(error);
         this.globalErrorSubject$.next(globalError);
         this.fieldErrorSubject$.next(fieldError);
         this.isUploadingSubject$.next(false);
+    }
+
+    protected processRestError = (errorObj: IRestAPIError): void => {
+        const message = parseRestAPIErrors(errorObj);
+        this.globalErrorSubject$.next([message]);
     };
 
     public createIsLoading = (
