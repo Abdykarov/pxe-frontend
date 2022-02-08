@@ -1,23 +1,22 @@
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractFacade } from 'src/common/abstract.facade';
 import {
     AllowedOperations,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { restoreContractAction } from 'src/common/utils/standalone/remove-contract-action.fnc';
 
-export abstract class HistoryFacade extends AbstractFacade {
-    public restoreContractAction(
-        evt,
-        supplyPointCopy: ISupplyPoint,
-        router: Router
-    ) {
+@Injectable()
+export class UtilsService {
+    public restoreContractAction(evt, supplyPointCopy: ISupplyPoint) {
         delete supplyPointCopy['id'];
         restoreContractAction(
             evt,
             supplyPointCopy,
-            router,
+            this.router,
             AllowedOperations.SHOW_DELIVERY_TO
         );
     }
+
+    constructor(private readonly router: Router) {}
 }
