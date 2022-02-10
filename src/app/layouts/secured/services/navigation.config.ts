@@ -1,5 +1,5 @@
 import { CONSTS, INavigationItemType, ROUTES } from 'src/app/app.constants';
-import { ILoginProvider } from 'src/app/services/model/auth.model';
+import { ILoginProvider } from 'src/common/services/model/auth.model';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 
 export const navigationMenuUsers: INavigationMenu = [
@@ -66,7 +66,7 @@ export const navigationMenuUsers: INavigationMenu = [
     },
     {
         class: '',
-        url: ROUTES.ROUTER_SUPPLY_POINTS,
+        url: `${ROUTES.ROUTER_SUPPLY_POINTS}`,
         label: 'Uzavřené',
         allowedLoginProviders: null,
         type: INavigationItemType.NORMAL,

@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { CookiesService } from 'src/app/services/cookies.service';
-import { IUserRoles } from 'src/app/services/model/auth.model';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { AuthService } from 'src/common/services/auth.service';
+import { CookiesService } from 'src/common/services/cookies.service';
+import { IUserRoles } from 'src/common/services/model/auth.model';
 
 @Component({
     selector: 'pxe-login-supply-auth-form',

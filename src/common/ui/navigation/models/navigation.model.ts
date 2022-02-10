@@ -1,5 +1,8 @@
 import { INavigationItemType } from 'src/app/app.constants';
-import { ILoginProvider, IUserTypes } from 'src/app/services/model/auth.model';
+import {
+    ILoginProvider,
+    IUserTypes,
+} from 'src/common/services/model/auth.model';
 
 export interface INavigationConfig extends Array<INavigationMenu> {}
 

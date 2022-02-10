@@ -4,8 +4,8 @@ import * as R from 'ramda';
 import { combineLatest } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
-import { FaqService } from 'src/app/services/faq.service';
 import { IFaq } from 'src/common/cms/models/faq';
+import { FaqService } from 'src/common/services/faq.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { AbstractFaqComponent } from './abstract-faq.component';
 

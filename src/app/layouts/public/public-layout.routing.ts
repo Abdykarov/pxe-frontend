@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
-import { ArticlesResolver } from 'src/app/resolvers/articles.resolver';
-import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
-import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
-import { LoginResolver } from 'src/app/resolvers/login.resolver';
-import { PatternsOfContractsResolver } from 'src/app/resolvers/patterns-of-contracts.resolver';
-import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
-import { SignUpResolver } from 'src/app/resolvers/sign-up.resolver';
-import { TermsOfUseResolver } from 'src/app/resolvers/terms-of-use.resolver';
-import { TypesResolver } from 'src/app/resolvers/types.resolver';
+import { ArticlesResolver } from 'src/common/resolvers/articles.resolver';
+import { CookiePolicyResolver } from 'src/common/resolvers/cookie-policy.resolver';
+import { LandingPageResolver } from 'src/common/resolvers/landing-page.resolver';
+import { LoginResolver } from 'src/common/resolvers/login.resolver';
+import { PatternsOfContractsResolver } from 'src/common/resolvers/patterns-of-contracts.resolver';
+import { SecuringYourDataResolver } from 'src/common/resolvers/securing-your-data.resolver';
+import { SignUpResolver } from 'src/common/resolvers/sign-up.resolver';
+import { TermsOfUseResolver } from 'src/common/resolvers/terms-of-use.resolver';
+import { TypesResolver } from 'src/common/resolvers/types.resolver';
 import { PublicLayoutComponent } from './public-layout.component';
 
 const routes = [

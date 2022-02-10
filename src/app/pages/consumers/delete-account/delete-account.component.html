@@ -12,7 +12,7 @@
                 label="Zůstat v parc4u"
                 type="link"
                 [customClass]="currentUser.phoneNumber ? 'mt-md-4' : ''"
-                (click)="redirectToUserProfile()"
+                (click)="navigateConsumerService.navigateToUserProfile()"
             >
             </lnd-button>
         </div>
@@ -80,7 +80,7 @@
             <lnd-button
                 label="Zůstat v parc4u"
                 type="link"
-                (click)="redirectToUserProfile()"
+                (click)="navigateConsumerService.navigateToUserProfile()"
             >
             </lnd-button>
         </div>
@@ -88,7 +88,7 @@
             <lnd-button
                 label="Přejít na smlouvy"
                 type="primary"
-                (click)="redirectToConcludedContract()"
+                (click)="navigateConsumerService.navigateToSupplyPoints()"
             >
             </lnd-button>
         </div>

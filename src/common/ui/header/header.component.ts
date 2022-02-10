@@ -9,8 +9,8 @@ import {
 import { fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { ISettings } from 'src/app/layouts/models/router-data.model';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { IJwtPayload } from 'src/common/services/model/auth.model';
 import { DropdownComponent } from 'src/common/ui/dropdown/dropdown.component';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 

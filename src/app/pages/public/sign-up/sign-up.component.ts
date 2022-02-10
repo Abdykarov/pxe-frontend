@@ -6,10 +6,6 @@ import { CookieService } from 'ngx-cookie';
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { CryptoService } from 'src/app/services/crypto.service';
-import { GTMService } from 'src/app/services/gtm.service';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ISeo } from 'src/common/cms/models/seo';
 import { ISignUp } from 'src/common/cms/models/sign-up';
@@ -22,6 +18,10 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
+import { AuthService } from 'src/common/services/auth.service';
+import { CryptoService } from 'src/common/services/crypto.service';
+import { GTMService } from 'src/common/services/gtm.service';
+import { ILogoutRequired } from 'src/common/services/model/logout-required.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({

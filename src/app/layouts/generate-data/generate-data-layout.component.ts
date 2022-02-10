@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FaqService } from 'src/app/services/faq.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { NewsService } from 'src/common/cms/services/news.service';
+import { FaqService } from 'src/common/services/faq.service';
 
 @Component({
     templateUrl: './generate-data-layout.component.html',

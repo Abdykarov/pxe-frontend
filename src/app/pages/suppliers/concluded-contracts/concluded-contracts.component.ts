@@ -10,16 +10,16 @@ import {
     urlCommodityToCommodityType,
 } from 'src/app/app.constants';
 import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
-import { DocumentService } from 'src/app/services/document.service';
-import {
-    DocumentType,
-    IResponseDataDocument,
-} from 'src/app/services/model/document.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IPaginatedContractsWithNameAndSupplyPoint } from 'src/common/graphql/models/suppplier.model';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
+import { DocumentService } from 'src/common/services/document.service';
+import {
+    DocumentType,
+    IResponseDataDocument,
+} from 'src/common/services/model/document.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     parseGraphQLErrors,

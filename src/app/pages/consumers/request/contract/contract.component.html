@@ -21,7 +21,7 @@
         [bannerType]="BannerTypeImages.NONE"
         bannerTitle="Nebojte, vše jsme pro vás uložili do rozpracovaných smluv."
         buttonLabel="Rozpracované smlouvy"
-        (buttonAction)="redirectToRequest()"
+        (buttonAction)="navigateConsumerService.navigateToRequests()"
     >
     </lnd-info-banner>
     <lnd-placeloader
@@ -49,7 +49,7 @@
                         label="Krok zpět"
                         type="secondary"
                         (action)="
-                            navigateRequestService.backStepAction(
+                            navigateConsumerService.backStepAction(
                                 supplyPoint,
                                 PREVIOUS_PROGRESS_STATUS
                             )

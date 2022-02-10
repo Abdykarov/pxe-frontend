@@ -8,9 +8,7 @@ import {
 import { Router } from '@angular/router';
 import * as R from 'ramda';
 import { map, takeUntil } from 'rxjs/operators';
-import { CONSTS, ROUTES } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
+import { CONSTS } from 'src/app/app.constants';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -18,6 +16,9 @@ import { ContractStatus } from 'src/common/graphql/models/contract';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { AuthService } from 'src/common/services/auth.service';
+import { IJwtPayload } from 'src/common/services/model/auth.model';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { parseGraphQLErrors, scrollToElementFnc } from 'src/common/utils';
 
 @Component({
@@ -50,6 +51,7 @@ export class DeleteAccountComponent
     }
 
     constructor(
+        public navigateConsumerService: NavigateConsumerService,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private registrationService: RegistrationService,
@@ -145,13 +147,5 @@ export class DeleteAccountComponent
                     this.cd.markForCheck();
                 }
             );
-    };
-
-    public redirectToUserProfile = () => {
-        this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
-    };
-
-    public redirectToConcludedContract = () => {
-        this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
     };
 }

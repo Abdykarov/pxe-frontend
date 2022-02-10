@@ -2,15 +2,16 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as R from 'ramda';
 import { map, takeUntil } from 'rxjs/operators';
-import { ROUTES } from 'src/app/app.constants';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { NewsService } from 'src/common/cms/services/news.service';
 import {
     ISupplyPointStatistic,
     ISupplyPointStatisticView,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
+import { SupplyPointUtilsService } from 'src/common/services/supply-point-utils.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
@@ -22,15 +23,17 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loadingData = true;
     public supplyPointStatistic: ISupplyPointStatistic;
+    public ProgressStatus = ProgressStatus;
 
     public news$ = this.newsService.getNews();
 
     constructor(
         private cd: ChangeDetectorRef,
-        private navigateRequestService: NavigateRequestService,
+        public navigateConsumerService: NavigateConsumerService,
         private newsService: NewsService,
         private router: Router,
-        private supplyService: SupplyService
+        private supplyService: SupplyService,
+        public supplyPointUtilsService: SupplyPointUtilsService
     ) {
         super();
     }
@@ -56,41 +59,6 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    public navigateToSupplyPoints = () => {
-        this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
-    };
-
-    public navigateToRequests = () => {
-        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
-    };
-
-    public navigateToNewSupplyPoint = (
-        supplyPointId: string | number = null
-    ) => {
-        const state = {
-            supplyPointId,
-        };
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD], { state });
-    };
-
-    public completeRequestAction = (
-        notConcludedItems: ISupplyPointStatisticView[]
-    ) => {
-        R.cond([
-            [
-                (items: ISupplyPointStatisticView[]) =>
-                    R.equals(1, items.length),
-                (items: ISupplyPointStatisticView[]) => {
-                    const notConcludedItem = items[0];
-                    this.navigateRequestService.routerToRequestStep(
-                        notConcludedItem
-                    );
-                },
-            ],
-            [R.T, () => this.navigateToRequests()],
-        ])(notConcludedItems);
-    };
-
     public supplierAction = (
         showDeliveryItems: ISupplyPointStatisticView[]
     ) => {
@@ -100,10 +68,16 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
                     R.equals(1, items.length),
                 (items: ISupplyPointStatisticView[]) => {
                     const supplyPointId = items[0].id;
-                    this.navigateToNewSupplyPoint(supplyPointId);
+                    this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                        ProgressStatus.SUPPLY_POINT,
+                        null,
+                        {
+                            supplyPointId,
+                        }
+                    );
                 },
             ],
-            [R.T, () => this.navigateToSupplyPoints()],
+            [R.T, () => this.navigateConsumerService.navigateToSupplyPoints()],
         ])(showDeliveryItems);
     };
 }

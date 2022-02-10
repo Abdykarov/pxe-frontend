@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IQuestion, Tag } from 'src/app/services/model/faq.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { IQuestion, Tag } from 'src/common/services/model/faq.model';
 import { getConfigStepper } from 'src/common/utils';
 import { offerConfig1, offerConfig2, offerConfig3 } from './config';
 

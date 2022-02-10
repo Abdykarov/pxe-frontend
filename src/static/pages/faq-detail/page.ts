@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IQuestion, Tag } from 'src/app/services/model/faq.model';
+import { IQuestion, Tag } from 'src/common/services/model/faq.model';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 

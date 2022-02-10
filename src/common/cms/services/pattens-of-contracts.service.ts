@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SubjectTypeLowerCase } from 'src/app/app.constants';
-import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import { patternsOfContractsQuery } from 'src/common/cms/queries/pattens-of-contracts';
+import { ApolloCmsService } from 'src/common/services/apollo-cms.service';
 
 @Injectable({
     providedIn: 'root',

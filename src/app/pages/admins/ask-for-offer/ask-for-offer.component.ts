@@ -7,7 +7,6 @@ import * as R_ from 'ramda-extension';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
-import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { ModalService } from 'src/common/containers/modal/modal.service';
@@ -17,6 +16,7 @@ import {
     IPaginatedAskForOffer,
 } from 'src/common/graphql/models/ask-for-offer';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
+import { IResponseDataDocument } from 'src/common/services/model/document.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     downloadFile,

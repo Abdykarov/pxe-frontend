@@ -15,12 +15,10 @@
                 <pxe-badge
                     type="info"
                     [isLink]="true"
-                    (action)="restoreContractAction(
+                    (action)="utilsService.restoreContractAction(
                         $event,
                         data,
-                        router,
-                        allowedOperations.SHOW_DELIVERY_TO,
-                        navigateRequestService
+                        allowedOperations.SHOW_DELIVERY_TO
                    )"
                 >
                     Platnost končí za {{contractEndInDays}} {{contractEndInDays
@@ -34,12 +32,10 @@
                 <pxe-badge
                     type="info"
                     [isLink]="true"
-                    (action)="restoreContractAction(
+                    (action)="utilsService.restoreContractAction(
                         $event,
                         data,
-                        router,
-                        allowedOperations.FINALIZE_NEXT_CONTRACT,
-                        navigateRequestService
+                        allowedOperations.FINALIZE_NEXT_CONTRACT
                    )"
                 >
                     Dokončit navazující rozpracovanou smlouvu
@@ -55,13 +51,10 @@
         <pxe-badge
             type="info"
             [isLink]="true"
-            (action)="restoreContractAction(
+            (action)="utilsService.restoreContractAction(
                             $event,
                             data,
-                            router,
-                            allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT,
-                            navigateRequestService,
-                            supplyPointsOverviewContainerFacade
+                            allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT
                        )"
         >
             Dokončit obnovovací smlouvu
@@ -75,7 +68,7 @@
             <pxe-badge
                 type="info"
                 [isLink]="true"
-                (action)="restoreContractAction($event, data, router, allowedOperations.OPEN_NEXT_CONTRACT, navigateRequestService)"
+                (action)="utilsService.restoreContractAction($event, data, allowedOperations.OPEN_NEXT_CONTRACT)"
             >
                 Otevřít navazující smlouvu
             </pxe-badge>
@@ -89,7 +82,7 @@
             <pxe-badge
                 type="info"
                 [isLink]="true"
-                (action)="restoreContractAction($event, data, router, allowedOperations.CREATE_FROM_HISTORY_CONTRACT)"
+                (action)="utilsService.restoreContractAction($event, data, allowedOperations.CREATE_FROM_HISTORY_CONTRACT)"
             >
                 Obnovit smlouvu
             </pxe-badge>
@@ -103,7 +96,7 @@
             <pxe-badge
                 type="info"
                 [isLink]="true"
-                (action)="restoreContractAction($event, data, router, allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY, navigateRequestService, supplyPointsOverviewContainerFacade)"
+                (action)="utilsService.restoreContractAction($event, data, allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY)"
             >
                 Otevřít novou verzy OM
             </pxe-badge>
@@ -232,46 +225,50 @@
         bannerTitle="Zatím nemáte žádnou {{pluralContractType[supplyPointsOverviewContainerFacade.activeContractTypes]}} smlouvu"
         [showButton]="false"
     >
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <p>
-                    V případě zájmu o dodávku energií pro nové odběrné místo,
-                    pokračujte prosím zadáním odběrného místa
-                    <!--                        <ng-container-->
-                    <!--                            *ngIf="supplyPointStatistic.notConcludedCount"-->
-                    <!--                        ></ng-container>-->
-                    <!--                        <ng-container-->
-                    <!--                            *ngIf="supplyPointStatistic.notConcludedCount"-->
-                    <!--                        >-->
-                    <!--                            Pokud už máte vytvořené odběrné místo, můžete se-->
-                    <!--                            vrátit k vaší rozpracované smlouvě a dokončit proces-->
-                    <!--                        </ng-container>-->
-                </p>
+        <ng-container
+            *ngIf="supplyPointsOverviewContainerFacade.supplyPointStatistic$ | async as supplyPointStatistic"
+        >
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <p>
+                        V případě zájmu o dodávku energií pro nové odběrné
+                        místo, pokračujte prosím zadáním odběrného místa
+                        <ng-container
+                            *ngIf="supplyPointStatistic.notConcludedCount"
+                        ></ng-container>
+                        <ng-container
+                            *ngIf="supplyPointStatistic.notConcludedCount"
+                        >
+                            Pokud už máte vytvořené odběrné místo, můžete se
+                            vrátit k vaší rozpracované smlouvě a dokončit proces
+                        </ng-container>
+                    </p>
+                </div>
             </div>
-        </div>
-        <!--            <div class="row">-->
-        <!--                <div-->
-        <!--                    *ngIf="supplyPointStatistic.notConcludedCount"-->
-        <!--                    class="col-md-4 offset-md-2"-->
-        <!--                >-->
-        <!--                    <lnd-button-->
-        <!--                        (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"-->
-        <!--                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"-->
-        <!--                        type="link"-->
-        <!--                    >-->
-        <!--                    </lnd-button>-->
-        <!--                </div>-->
-        <!--                <div-->
-        <!--                    class="col-md-4"-->
-        <!--                    [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"-->
-        <!--                >-->
-        <!--                    <lnd-button-->
-        <!--                        (action)="createSupplyPoint($event)"-->
-        <!--                        label="Nové odběrné místo"-->
-        <!--                        type="primary"-->
-        <!--                    >-->
-        <!--                    </lnd-button>-->
-        <!--                </div>-->
-        <!--            </div>-->
+            <div class="row">
+                <div
+                    *ngIf="supplyPointStatistic.notConcludedCount"
+                    class="col-md-4 offset-md-2"
+                >
+                    <lnd-button
+                        (action)="completeRequestAction.completeRequestAction(supplyPointStatistic.notConcludedItems)"
+                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"
+                        type="link"
+                    >
+                    </lnd-button>
+                </div>
+                <div
+                    class="col-md-4"
+                    [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"
+                >
+                    <lnd-button
+                        (action)="createSupplyPoint($event)"
+                        label="Nové odběrné místo"
+                        type="primary"
+                    >
+                    </lnd-button>
+                </div>
+            </div>
+        </ng-container>
     </lnd-info-banner>
 </div>

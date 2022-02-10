@@ -23,8 +23,6 @@ import {
     IOfferImportInput,
 } from 'src/app/pages/suppliers/import/import.model';
 import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
-import { AuthService } from 'src/app/services/auth.service';
-import { DocumentService } from 'src/app/services/document.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     defaultErrorMessage,
@@ -32,6 +30,8 @@ import {
 } from 'src/common/constants/errors.constant';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { AuthService } from 'src/common/services/auth.service';
+import { DocumentService } from 'src/common/services/document.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     getConfigStepper,

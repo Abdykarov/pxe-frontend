@@ -6,9 +6,9 @@ import { takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { FaqComponent } from 'src/app/pages/public/faq/faq.component';
-import { FaqService } from 'src/app/services/faq.service';
-import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISeo } from 'src/common/cms/models/seo';
+import { FaqService } from 'src/common/services/faq.service';
+import { IQuestion } from 'src/common/services/model/faq.model';
 
 @Component({
     selector: 'lnd-faq-overview',

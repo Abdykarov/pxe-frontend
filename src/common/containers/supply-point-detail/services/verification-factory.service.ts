@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-    CONSTS,
-    RequestsOverviewBannerShow,
-    ROUTES,
-} from 'src/app/app.constants';
+import { CONSTS, RequestsOverviewBannerShow } from 'src/app/app.constants';
 import { ContractActions } from 'src/app/pages/consumers/supply-points-overview/models/supply-point-detail.model';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
@@ -14,6 +10,7 @@ import { ContractActionsService } from 'src/common/containers/supply-point-detai
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { scrollToElementFnc } from 'src/common/utils';
 
 @Injectable()
@@ -21,6 +18,7 @@ export class VerificationFactoryService {
     constructor(
         private contractActionsService: ContractActionsService,
         private contractService: ContractService,
+        private navigateConsumerService: NavigateConsumerService,
         private router: Router
     ) {}
 
@@ -104,7 +102,7 @@ export class VerificationFactoryService {
         globalErrorSubject$: BehaviorSubject<string[]>
     ): void {
         if (deleteSignedContract) {
-            this.router.navigate([ROUTES.ROUTER_REQUESTS], {
+            this.navigateConsumerService.navigateToRequests({
                 state: {
                     requestsOverviewBannerShow:
                         this.contractActionsService.getValue() ===

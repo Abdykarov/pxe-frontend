@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { UtilsService } from 'src/common/containers/supply-point-detail/services/utils.service';
 import {
     AllowedOperations,
     ISupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { restoreContractAction } from 'src/common/utils/standalone/remove-contract-action.fnc';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
+import { SupplyPointUtilsService } from 'src/common/services/supply-point-utils.service';
 import {
     configLinksToContractTypes,
     pluralContractType,
@@ -25,28 +27,29 @@ export class SupplyPointsOverviewContainerComponent extends AbstractComponent {
     public readonly ContractTypes = ContractTypes;
     public readonly configLinksToContractTypes = configLinksToContractTypes;
     public readonly pluralContractType = pluralContractType;
-    public readonly restoreContractAction = restoreContractAction;
     public readonly today = moment().startOf('days');
     public readonly allowedOperations = AllowedOperations;
 
     constructor(
+        public completeRequestAction: SupplyPointUtilsService,
+        public navigateConsumerService: NavigateConsumerService,
         private route: ActivatedRoute,
         public router: Router,
         public supplyPointsOverviewContainerFacade: SupplyPointsOverviewContainerFacade,
-        public navigateRequestService: NavigateRequestService
+        public utilsService: UtilsService
     ) {
         super();
     }
 
-    public changeActiveContractType(ContractTypes: ContractTypes) {
-        this.router.navigate([
-            `${this.ROUTES.ROUTER_SUPPLY_POINTS}/${ContractTypes}`,
-        ]);
+    public changeActiveContractType(contractTypes: ContractTypes) {
+        this.navigateConsumerService.navigateToSupplyPoints(contractTypes);
     }
 
     public createSupplyPoint = (event) => {
         event.stopPropagation();
-        this.router.navigate([this.ROUTES.ROUTER_REQUEST_SIGNBOARD]);
+        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+            ProgressStatus.SIGNBOARD
+        );
     };
 
     public trackSupplyPoint(index, { id }) {
@@ -57,10 +60,9 @@ export class SupplyPointsOverviewContainerComponent extends AbstractComponent {
         contract: { contractId },
         id,
     }: ISupplyPoint) {
-        this.router.navigate([
-            this.ROUTES.ROUTER_SUPPLY_POINTS,
+        this.navigateConsumerService.navigateToSupplyPointDetail(
             id,
-            contractId,
-        ]);
+            contractId
+        );
     }
 }

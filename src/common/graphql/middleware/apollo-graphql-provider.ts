@@ -18,8 +18,8 @@ import {
     OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
     OPERATIONS_WITHOUT_TOKEN,
 } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
+import { AuthService } from 'src/common/services/auth.service';
 import { processErrorScrolls } from 'src/common/utils';
 import { environment } from 'src/environments/environment';
 import fetch from 'unfetch';

@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { CONSTS } from 'src/app/app.constants';
-import { ApolloService } from 'src/app/services/apollo.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { ApolloService } from 'src/common/services/apollo.service';
+import { AuthService } from 'src/common/services/auth.service';
 
 @Component({
     templateUrl: './deleted-account.component.html',

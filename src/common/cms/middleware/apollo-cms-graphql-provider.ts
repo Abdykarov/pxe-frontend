@@ -10,7 +10,7 @@ import {
 import { APOLLO_NAMED_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { CONSTS, IS_PRERENDER_PROVIDER } from 'src/app/app.constants';
-import { CmsService } from 'src/app/services/cms.service';
+import { CmsService } from 'src/common/services/cms.service';
 import { environment } from 'src/environments/environment';
 
 const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {

@@ -36,9 +36,6 @@ import {
     SUPPLY_POINT_EDIT_TYPE,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import { ModalService } from 'src/common/containers/modal/modal.service';
@@ -52,6 +49,9 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { AuthService } from 'src/common/services/auth.service';
+import { SAnalyticsService } from 'src/common/services/s-analytics.service';
+import { SupplyPointLocalStorageService } from 'src/common/services/supply-point-local-storage.service';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import {
     convertArrayToObject,

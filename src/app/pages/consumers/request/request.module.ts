@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
+import { RefreshTokenResolver } from 'src/common/resolvers/refresh-token.resolver';
 import { RequestComponent } from './request.component';
 import { RequestRoutingModule } from './request.routing';
 

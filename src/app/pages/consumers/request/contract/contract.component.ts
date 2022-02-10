@@ -2,18 +2,8 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, of } from 'rxjs';
 import { map, retry, switchMap, takeUntil } from 'rxjs/operators';
-import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
+import { CONSTS, GTM_CONSTS } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
-import { AuthService } from 'src/app/services/auth.service';
-import { CryptoService } from 'src/app/services/crypto.service';
-import { DocumentService } from 'src/app/services/document.service';
-import { FaqService } from 'src/app/services/faq.service';
-import { GTMService } from 'src/app/services/gtm.service';
-import {
-    DocumentType,
-    IResponseDataDocument,
-} from 'src/app/services/model/document.model';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
@@ -24,6 +14,16 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { AuthService } from 'src/common/services/auth.service';
+import { CryptoService } from 'src/common/services/crypto.service';
+import { DocumentService } from 'src/common/services/document.service';
+import { FaqService } from 'src/common/services/faq.service';
+import { GTMService } from 'src/common/services/gtm.service';
+import {
+    DocumentType,
+    IResponseDataDocument,
+} from 'src/common/services/model/document.model';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 import {
@@ -85,7 +85,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private documentService: DocumentService,
         public faqService: FaqService,
         private gtmService: GTMService,
-        public navigateRequestService: NavigateRequestService,
+        public navigateConsumerService: NavigateConsumerService,
         public route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService
@@ -162,7 +162,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                               .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY))
                         : of(null);
 
-                    this.navigateRequestService.checkCorrectStep(
+                    this.navigateConsumerService.checkCorrectStep(
                         this.supplyPoint,
                         ProgressStatus.READY_FOR_SIGN
                     );
@@ -284,7 +284,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
 
     public chooseNewOfferAction = (evt) => {
         evt.preventDefault();
-        this.navigateRequestService.routerToRequestStep(
+        this.navigateConsumerService.routerToRequestStep(
             this.supplyPoint,
             ProgressStatus.OFFER_STEP
         );
@@ -313,11 +313,12 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             label: GTM_CONSTS.LABELS.STEP_FIVE,
                             userID: this.cryptoService.hashedUserId,
                         });
-                        this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], {
-                            queryParams: {
+                        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                            ProgressStatus.WAITING_FOR_PAYMENT,
+                            {
                                 supplyPointId: this.supplyPointId,
-                            },
-                        });
+                            }
+                        );
                     } else {
                         this.globalError = [defaultErrorMessage];
                         this.formLoading = false;
@@ -353,9 +354,5 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                     this.cd.markForCheck();
                 }
             );
-    };
-
-    public redirectToRequest = () => {
-        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
     };
 }

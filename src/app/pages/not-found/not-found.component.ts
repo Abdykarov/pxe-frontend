@@ -8,8 +8,8 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/common/services/auth.service';
 
 @Component({
     templateUrl: './not-found.component.html',

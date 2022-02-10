@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/guards/auth.guard';
-import { PaymentGuard } from 'src/app/guards/payment.guard';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { PaymentGuard } from 'src/common/guards/payment.guard';
+import { AuthService } from 'src/common/services/auth.service';
+import { CmsResolver } from '../common/resolvers/cms.resolver';
 import { CONSTS } from './app.constants';
-import { CmsResolver } from './resolvers/cms.resolver';
 
 const routes: Routes = [
     {

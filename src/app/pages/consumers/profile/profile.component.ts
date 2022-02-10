@@ -2,9 +2,6 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as R from 'ramda';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { ROUTES } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { userNotificationFormFields } from 'src/common/containers/form/forms/user-notification/user-notification-form.config';
@@ -13,6 +10,9 @@ import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-pro
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { UserService } from 'src/common/graphql/services/user.service';
+import { AuthService } from 'src/common/services/auth.service';
+import { IJwtPayload } from 'src/common/services/model/auth.model';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
@@ -37,6 +37,7 @@ export class ProfileComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        public navigateConsumerService: NavigateConsumerService,
         private router: Router,
         private userService: UserService
     ) {
@@ -140,9 +141,5 @@ export class ProfileComponent extends AbstractComponent {
                     this.cd.markForCheck();
                 }
             );
-    };
-
-    public redirectToDeleteProfile = () => {
-        this.router.navigate([ROUTES.ROUTER_DELETE_ACCOUNT]);
     };
 }

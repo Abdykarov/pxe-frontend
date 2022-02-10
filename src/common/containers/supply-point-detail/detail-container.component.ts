@@ -1,14 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import {
-    CONSTS,
-    ROUTES,
-    TIME_TO_CONTRACT_END_PERIOD_MAP,
-} from 'src/app/app.constants';
+import { CONSTS, TIME_TO_CONTRACT_END_PERIOD_MAP } from 'src/app/app.constants';
 import { ContractActions } from 'src/app/pages/consumers/supply-points-overview/models/supply-point-detail.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { DocumentType } from 'src/app/services/model/document.model';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { DetailContainerFacade } from 'src/common/containers/supply-point-detail/detail-container.facade';
@@ -18,13 +12,16 @@ import { ContractActionsService } from 'src/common/containers/supply-point-detai
 import { SupplyPointFactoryService } from 'src/common/containers/supply-point-detail/services/supply-point-factory.service';
 import { UtilsService } from 'src/common/containers/supply-point-detail/services/utils.service';
 import { VerificationFactoryService } from 'src/common/containers/supply-point-detail/services/verification-factory.service';
-import { ContractTypes } from 'src/common/containers/supply-points-overview/supply-points-overview-container.model';
 import {
     AllowedOperations,
     CommodityType,
     ISupplyPoint,
+    ProgressStatus,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
+import { AuthService } from 'src/common/services/auth.service';
+import { DocumentType } from 'src/common/services/model/document.model';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Component({
     selector: 'pxe-detail-container',
@@ -100,37 +97,27 @@ export class DetailContainerComponent {
     constructor(
         private detailContainerFacade: DetailContainerFacade,
         public router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private navigateConsumerService: NavigateConsumerService
     ) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
-    public backStep(): void {
-        this.router.navigate([
-            `${ROUTES.ROUTER_SUPPLY_POINTS}/${ContractTypes.HISTORY}`,
-        ]);
-    }
-
-    public cancelUpdate = () => {
-        this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
-    };
-
-    public findNewSupplier(): void {
-        console.log('AhOJ');
-    }
+    public cancelUpdate = () =>
+        this.navigateConsumerService.navigateToSupplyPoints();
 
     public routerToNextContract = (isNextContractConcluded: boolean) => {
-        // if (isNextContractConcluded) {
-        //     this.router.navigate([
-        //         ROUTES.ROUTER_SUPPLY_POINTS,
-        //         this.nextSupplyPoint.id,
-        //         this.nextSupplyPoint.contract.contractId,
-        //     ]);
-        // } else {
-        //     this.navigateRequestService.checkCorrectStep(
-        //         this.nextSupplyPoint,
-        //         ProgressStatus.COMPLETED
-        //     );
-        // }
+        const nextSupplyPoint = this.nextSupplyPoint$.getValue();
+        if (isNextContractConcluded) {
+            this.navigateConsumerService.navigateToSupplyPointDetail(
+                nextSupplyPoint.id,
+                nextSupplyPoint.contract.contractId
+            );
+        } else {
+            this.navigateConsumerService.checkCorrectStep(
+                nextSupplyPoint,
+                ProgressStatus.COMPLETED
+            );
+        }
     };
 }

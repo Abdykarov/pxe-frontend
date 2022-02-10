@@ -2,9 +2,9 @@ import { Directive } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
-import { FaqService } from 'src/app/services/faq.service';
-import { IQuestion, ITagConfigItem } from 'src/app/services/model/faq.model';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { FaqService } from 'src/common/services/faq.service';
+import { IQuestion, ITagConfigItem } from 'src/common/services/model/faq.model';
 
 @Directive()
 export class AbstractFaqComponent extends AbstractComponent {

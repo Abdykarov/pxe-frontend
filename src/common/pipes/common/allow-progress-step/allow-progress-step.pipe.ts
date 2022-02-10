@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Pipe({
     name: 'allowProgressStep',
 })
 export class AllowProgressStepPipe implements PipeTransform {
-    constructor(private navigateRequestService: NavigateRequestService) {}
+    constructor(private navigateConsumerService: NavigateConsumerService) {}
 
     transform(
         supplyPoint: ISupplyPoint,
@@ -18,7 +18,7 @@ export class AllowProgressStepPipe implements PipeTransform {
         if (!supplyPoint || !progressStatus) {
             return false;
         }
-        return this.navigateRequestService.canGoToStep(
+        return this.navigateConsumerService.canGoToStep(
             supplyPoint,
             progressStatus
         );

@@ -10,12 +10,12 @@ import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
-import { CookiesService } from 'src/app/services/cookies.service';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { AuthService } from 'src/common/services/auth.service';
+import { CookiesService } from 'src/common/services/cookies.service';
+import { SAnalyticsService } from 'src/common/services/s-analytics.service';
+import { ScrollToService } from 'src/common/services/scroll-to.service';
 import { inArray } from 'src/common/utils';
 import { ISettings, LoginType, SignType } from './models/router-data.model';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import { getArticles, getTypes } from 'src/common/cms/queries/blog';
+import { ApolloCmsService } from 'src/common/services/apollo-cms.service';
 
 @Injectable({
     providedIn: 'root',

@@ -182,42 +182,11 @@
 </ng-container>
 <ng-template #dataTemplate>
     <div *ngIf="supplyPoint$ | async as supplyPoint" class="row">
-        <div
-            *ngIf="
-                supplyPoint?.allowedOperations
-                    | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO
-            "
-            class="col-12 col-xl-10 offset-xl-1"
-        >
-            <lnd-banner-ui
-                buttonLabel="Najít dodavatele"
-                [data]="{
-                            text: 'Obnovit smlouvu'
-                        }"
-                (customBannerAction)="restoreContractAction($event,supplyPoint)"
-            ></lnd-banner-ui>
-        </div>
-        <div
-            class="
-                col-12
-                mb-5
-                text-center text-md-left
-                mb-md-3
-                col-xl-10
-                offset-xl-1
-            "
-        >
-            <lnd-button
-                label="Krok zpět"
-                type="secondary"
-                (action)="backStep()"
-            >
-            </lnd-button>
-        </div>
         <div class="col-12">
             <pxe-supply-point-detail-form
                 #supplyPointDetailForm
                 [supplyPoint]="supplyPoint"
+                [restoreContractAction]="restoreContractAction"
                 [isForm]="supplyPoint?.allowedOperations
                     | isAllowedOperation
                         : allowedOperations.PARTIAL_EDIT"
@@ -237,19 +206,15 @@
             <div class="col-12 col-lg-10 offset-lg-1">
                 <h2
                     *ngIf="
-                            supplyPoint.contract.isNextContractConcluded &&
-                            supplyPoint.contract?.nextContractId !==
-                                supplyPoint.contract.contractId
-                        "
+                        supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.OPEN_NEXT_CONTRACT
+                    "
                 >
                     Tato smlouva bude nahrazena budoucí smlouvou.
                 </h2>
                 <h2
                     *ngIf="
-                            !supplyPoint.contract.isNextContractConcluded &&
-                            supplyPoint.contract.nextContractId &&
-                            supplyPoint.contract?.nextContractId !== supplyPoint.id
-                        "
+                        supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_NEXT_CONTRACT
+                    "
                 >
                     Máte jednu rozpracovanou navazující smlouvu, nechcete ji
                     dokončit?
@@ -269,16 +234,16 @@
                     </p>
                     <lnd-button
                         [label]="
-                                            supplyPoint.contract.isNextContractConcluded
-                                                ? 'Uzavřená navazujcí smlouva'
-                                                : 'Dokončit žádost'
-                                        "
+                                        supplyPoint.contract.isNextContractConcluded
+                                            ? 'Uzavřená navazujcí smlouva'
+                                            : 'Dokončit žádost'
+                                    "
                         type="primary"
                         (click)="
-                                            routerToNextContract(
-                                                !!supplyPoint.contract.isNextContractConcluded
-                                            )
-                                        "
+                                        routerToNextContract(
+                                            !!supplyPoint.contract.isNextContractConcluded
+                                        )
+                                    "
                     >
                     </lnd-button>
                 </div>
