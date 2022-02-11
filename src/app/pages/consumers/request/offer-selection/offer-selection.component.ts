@@ -11,7 +11,6 @@ import * as R from 'ramda';
 import { interval, Observable, of } from 'rxjs';
 import { filter, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, S_ANALYTICS } from 'src/app/app.constants';
-import { offerValidityMessages } from 'src/app/constants/errors.constant';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
@@ -20,6 +19,7 @@ import { GTMService } from 'src/app/services/gtm.service';
 import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ValidityService } from 'src/app/services/validity.service';
+import { offerValidityMessages } from 'src/common/constants/errors.constant';
 import {
     IOffer,
     ISupplyPointOffers,

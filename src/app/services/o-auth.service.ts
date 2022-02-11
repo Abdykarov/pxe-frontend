@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CONSTS } from 'src/app/app.constants';
-import { oAuthApiError } from 'src/app/constants/errors.constant';
 import { AuthService } from 'src/app/services/auth.service';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { OAuthType } from 'src/app/services/model/o-auth.model';
+import { oAuthApiError } from 'src/common/constants/errors.constant';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

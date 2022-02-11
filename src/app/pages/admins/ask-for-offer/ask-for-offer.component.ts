@@ -7,9 +7,9 @@ import * as R_ from 'ramda-extension';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
-import { defaultErrorMessage } from 'src/app/constants/errors.constant';
 import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     ContractUploadStatus,

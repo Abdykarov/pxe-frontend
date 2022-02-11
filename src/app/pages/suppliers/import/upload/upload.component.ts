@@ -17,10 +17,6 @@ import {
     FILE_UPLOAD_CONFIG_PROVIDER,
     ROUTES,
 } from 'src/app/app.constants';
-import {
-    defaultErrorMessage,
-    importErrorCodes,
-} from 'src/app/constants/errors.constant';
 import { ApprovalConfig } from 'src/app/pages/suppliers/import/approval/approval.config';
 import {
     ImportProgressStep,
@@ -30,6 +26,10 @@ import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/uploa
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    defaultErrorMessage,
+    importErrorCodes,
+} from 'src/common/constants/errors.constant';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';

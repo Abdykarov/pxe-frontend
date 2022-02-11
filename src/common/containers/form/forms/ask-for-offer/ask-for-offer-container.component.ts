@@ -8,12 +8,12 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FILE_UPLOAD_CONFIG_PROVIDER } from 'src/app/app.constants';
+import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     askForOfferCodes,
     defaultErrorMessage,
-} from 'src/app/constants/errors.constant';
-import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
-import { AuthService } from 'src/app/services/auth.service';
+} from 'src/common/constants/errors.constant';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { inArray } from 'src/common/utils';
 import { FileItem } from 'src/third-sides/file-upload';

@@ -19,11 +19,11 @@ import {
     ROUTES,
     urlCommodityToCommodityType,
 } from 'src/app/app.constants';
-import { cantDeleteAllMarkedOffers } from 'src/app/constants/errors.constant';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocumentService } from 'src/app/services/document.service';
 import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';

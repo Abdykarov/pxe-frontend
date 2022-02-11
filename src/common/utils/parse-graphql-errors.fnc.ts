@@ -5,7 +5,7 @@ import {
     defaultErrorMessage,
     graphQLMessages,
     graphQLMessagesDynamic,
-} from 'src/app/constants/errors.constant';
+} from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { environment } from '../../environments/environment';
 

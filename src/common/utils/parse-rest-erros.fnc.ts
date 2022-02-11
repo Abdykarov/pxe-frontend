@@ -1,7 +1,7 @@
 import {
     defaultErrorMessage,
     restAPIErrorCodes,
-} from 'src/app/constants/errors.constant';
+} from 'src/common/constants/errors.constant';
 import { IRestAPIError } from 'src/common/containers/form/models/rest-api-error.model';
 import { environment } from 'src/environments/environment';
 

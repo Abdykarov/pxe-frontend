@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, of } from 'rxjs';
 import { map, retry, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS } from 'src/app/app.constants';
-import { defaultErrorMessage } from 'src/app/constants/errors.constant';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
@@ -15,6 +14,7 @@ import {
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     CommodityType,

@@ -1,7 +1,7 @@
 import { Validators } from '@angular/forms';
 import * as R from 'ramda';
 import { CONSTS } from 'src/app/app.constants';
-import { errorFieldMessages } from 'src/app/constants/errors.constant';
+import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { CustomValidators } from 'src/common/utils';
 
 export const formFields = {
