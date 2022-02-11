@@ -14,6 +14,7 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { AuthService } from 'src/common/services/auth.service';
 import { CryptoService } from 'src/common/services/crypto.service';
 import { GTMService } from 'src/common/services/gtm.service';
+import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { getConfigStepper, playVideo } from 'src/common/utils';
 
@@ -42,7 +43,8 @@ export class SignboardComponent extends AbstractComponent {
         public authService: AuthService,
         public cd: ChangeDetectorRef,
         private cryptoService: CryptoService,
-        private gtmService: GTMService
+        private gtmService: GTMService,
+        public navigateConsumerService: NavigateConsumerService
     ) {
         super();
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
@@ -73,6 +75,9 @@ export class SignboardComponent extends AbstractComponent {
             label: GTM_CONSTS.LABELS.STEP_ONE,
             userID: this.cryptoService.hashedUserId,
         });
+        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+            ProgressStatus.SUPPLY_POINT
+        );
     };
 
     public videoEnded = (event) => {

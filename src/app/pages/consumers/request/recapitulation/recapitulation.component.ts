@@ -28,6 +28,7 @@ import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import {
     getConfigStepper,
+    omitTypeName,
     parseGraphQLErrors,
     transformCodeList,
 } from 'src/common/utils';
@@ -147,6 +148,8 @@ export class RecapitulationComponent
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
+
+        personalInfoInput = omitTypeName(personalInfoInput);
 
         const personalDataAction = this.navigateConsumerService.isPreviousStep(
             this.supplyPoint,

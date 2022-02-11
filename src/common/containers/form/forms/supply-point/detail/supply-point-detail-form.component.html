@@ -458,7 +458,7 @@
                         </h2>
                         <a
                             [class.link--disabled]="formLoading"
-                            (click)="downloadPdf()"
+                            (click)="downloadPfdAction.emit(supplyPoint.contract?.contractId)"
                         >
                             Stáhnout</a
                         >

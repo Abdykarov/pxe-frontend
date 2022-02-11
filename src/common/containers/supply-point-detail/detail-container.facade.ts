@@ -86,9 +86,11 @@ export class DetailContainerFacade extends AbstractFacade {
                             contractActionsWrapper.nativeElement
                         );
                     }
-                },
-                () => this.formLoading$.next(false)
-            );
+                }
+            )
+            .add(() => {
+                this.formLoading$.next(false);
+            });
     };
 
     public restoreContractAction = (evt, supplyPointCopy: ISupplyPoint) =>
@@ -100,37 +102,43 @@ export class DetailContainerFacade extends AbstractFacade {
 
     public saveDocument = (contractId: string, documentType: DocumentType) => {
         this.documentLoadingSubject$.next(true);
-        this.apiService.saveDocument(contractId, documentType).subscribe(
-            (responseDataDocument: IResponseDataDocument) => {
+        this.apiService
+            .saveDocument(contractId, documentType)
+            .subscribe((responseDataDocument: IResponseDataDocument) => {
                 this.documentService.documentSave(responseDataDocument);
-            },
-            this.processRestError,
-            () => this.documentLoadingSubject$.next(false)
-        );
+            }, this.processRestError)
+            .add(() => {
+                this.documentLoadingSubject$.next(false);
+            });
     };
 
     public sendContractConfirmationSms = (contractId: string) => {
         this.formLoading$.next(true);
-        this.apiService.sendContractConfirmationSms(contractId).subscribe(
-            () => this.smsSentSubject$.next(new Date().getTime()),
-            this.processError,
-            () => this.formLoading$.next(false)
-        );
+        this.apiService
+            .sendContractConfirmationSms(contractId)
+            .subscribe(
+                () => this.smsSentSubject$.next(new Date().getTime()),
+                this.processError
+            )
+            .add(() => {
+                this.formLoading$.next(false);
+            });
     };
 
     public updateSupplyPoint = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading$.next(true);
-        this.apiService.updateSupplyForm(supplyPointFormData).subscribe(
-            () => {
+        this.apiService
+            .updateSupplyForm(supplyPointFormData)
+            .subscribe(() => {
                 scrollToElementFnc('top');
                 this.formSent$.next(true);
                 setTimeout(() => {
                     this.formSent$.next(false);
                 }, CONSTS.TIME_TO_SHOW_FLASH_MESSAGES);
-            },
-            this.processError,
-            () => this.formLoading$.next(false)
-        );
+            }, this.processError)
+            .add(() => {
+                this.formLoading$.next(false);
+            });
     };
 
     protected override processError(error: ErrorResponse): void {
@@ -139,6 +147,16 @@ export class DetailContainerFacade extends AbstractFacade {
         this.documentLoadingSubject$.next(false);
         this.formSent$.next(false);
     }
+
+    public downloadPdf = (contractId: string) => {
+        this.formLoading$.next(true);
+        this.documentService
+            .getDocument(contractId, DocumentType.CONTRACT)
+            .subscribe(this.documentService.documentSave, this.processRestError)
+            .add(() => {
+                this.formLoading$.next(false);
+            });
+    };
 
     constructor(
         protected supplyPointId: string,

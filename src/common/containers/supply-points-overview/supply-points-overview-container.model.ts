@@ -1,4 +1,4 @@
-export enum ContractTypes {
+export const enum ContractTypes {
     ACTIVE = 'active',
     HISTORY = 'history',
     FUTURE = 'future',

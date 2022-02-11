@@ -24,7 +24,6 @@ import { ContractTypes } from './supply-points-overview-container.model';
     providers: [SupplyPointsOverviewContainerFacade],
 })
 export class SupplyPointsOverviewContainerComponent extends AbstractComponent {
-    public readonly ContractTypes = ContractTypes;
     public readonly configLinksToContractTypes = configLinksToContractTypes;
     public readonly pluralContractType = pluralContractType;
     public readonly today = moment().startOf('days');

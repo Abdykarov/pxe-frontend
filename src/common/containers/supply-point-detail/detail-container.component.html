@@ -196,6 +196,7 @@
                 [contractActionsTemplate]="contractActionsTemplate"
                 (submitAction)="updateSupplyPoint($event)"
                 (customAction)="cancelUpdate()"
+                (downloadPfdAction)="downloadPdf($event)"
                 (finallyNextContractAction)="routerToNextContract(false)"
             ></pxe-supply-point-detail-form>
         </div>

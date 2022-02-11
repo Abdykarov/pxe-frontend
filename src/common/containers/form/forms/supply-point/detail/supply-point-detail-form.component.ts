@@ -47,12 +47,8 @@ import {
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { DocumentService } from 'src/common/services/document.service';
-import {
-    DocumentType,
-    IResponseDataDocument,
-} from 'src/common/services/model/document.model';
 import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { parseRestAPIErrors, transformCodeList } from 'src/common/utils';
+import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -79,6 +75,9 @@ export class SupplyPointDetailFormComponent
 
     @Output()
     public finallyNextContractAction?: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public downloadPfdAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
@@ -339,28 +338,5 @@ export class SupplyPointDetailFormComponent
         }
 
         this.submitAction.emit(form);
-    };
-
-    public downloadPdf = () => {
-        this.formLoading = true;
-        this.documentService
-            .getDocument(
-                this.supplyPoint.contract.contractId,
-                DocumentType.CONTRACT
-            )
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                (responseDataDocument: IResponseDataDocument) => {
-                    this.documentService.documentSave(responseDataDocument);
-                    this.formLoading = false;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    const message = parseRestAPIErrors(error);
-                    this.globalError = [message];
-                    this.formLoading = false;
-                    this.cd.markForCheck();
-                }
-            );
     };
 }

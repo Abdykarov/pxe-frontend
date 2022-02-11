@@ -71,6 +71,7 @@ export class DetailContainerComponent {
     public readonly formFields = formFields(
         this.authService.currentUserValue.testingAccount
     );
+    public readonly downloadPdf = this.detailContainerFacade.downloadPdf;
     public readonly formLoading$ = this.detailContainerFacade.formLoading$;
     public readonly nextSupplyPoint$ =
         this.detailContainerFacade.nextSupplyPoint$;
