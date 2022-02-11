@@ -12,10 +12,10 @@ import { first } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
 import { defaultState } from 'src/app/pages/public/logout/logout-page.config';
 import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
+import { ApolloService } from 'src/app/services/apollo.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ApolloService } from 'src/common/services/apollo.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CookiesService } from 'src/common/services/cookies.service';
 
 @Component({
     templateUrl: './logout-page.component.html',

@@ -17,6 +17,12 @@ import {
     SUPPLY_POINT_EDIT_TYPE,
     S_ANALYTICS,
 } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
+import { GTMService } from 'src/app/services/gtm.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
@@ -32,12 +38,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CryptoService } from 'src/common/services/crypto.service';
-import { GTMService } from 'src/common/services/gtm.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
-import { SupplyPointLocalStorageService } from 'src/common/services/supply-point-local-storage.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { getConfigStepper, parseGraphQLErrors } from 'src/common/utils';

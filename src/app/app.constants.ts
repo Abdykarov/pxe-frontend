@@ -1,10 +1,10 @@
+import { IExternalResource } from 'src/app/services/model/widget.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 import {
     CommodityType,
     SubjectType,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
-import { IExternalResource } from 'src/common/services/model/widget.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const CONSTS = {

@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import * as R from 'ramda';
+import { viewBreakpoints } from 'src/app/constants/breakpoints.constant';
 import { AbstractComponent } from 'src/common/abstract.component';
-import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 import { isRouterLink } from 'src/common/utils';
 import { ITableColumnConfig } from './models/table.model';
 

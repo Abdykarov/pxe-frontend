@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { saveAs } from 'file-saver';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { IAskForOfferFilter } from 'src/common/graphql/models/ask-for-offer';
 import {
     createAskForOffer,
@@ -8,7 +9,6 @@ import {
     finalizeAskForOfferMutation,
 } from 'src/common/graphql/mutation/ask-for-offer';
 import { listAskForOfferQuery } from 'src/common/graphql/queries/ask-for-offer';
-import { IResponseDataDocument } from 'src/common/services/model/document.model';
 
 @Injectable({
     providedIn: 'root',

@@ -9,7 +9,7 @@ import {
 import * as R from 'ramda';
 import { Observable } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
-import { AuthService } from 'src/common/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
     providedIn: 'root',

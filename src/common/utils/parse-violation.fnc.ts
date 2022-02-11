@@ -1,7 +1,7 @@
 import {
     defaultErrorMessageViolation,
     importErrorViolations,
-} from 'src/common/constants/errors.constant';
+} from 'src/app/constants/errors.constant';
 import { environment } from 'src/environments/environment';
 
 export const parseViolation = (violation: string): string => {

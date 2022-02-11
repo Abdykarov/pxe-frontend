@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { ApprovalComponent } from 'src/app/pages/suppliers/import/approval/approval.component';
-import { RefreshTokenResolver } from 'src/common/resolvers/refresh-token.resolver';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes: Routes = [
     {

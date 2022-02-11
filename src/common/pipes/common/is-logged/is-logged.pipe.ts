@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as R_ from 'ramda-extension';
-import { IJwtPayload, IUserRoles } from 'src/common/services/model/auth.model';
+import { IJwtPayload, IUserRoles } from 'src/app/services/model/auth.model';
 
 @Pipe({
     name: 'isLogged',

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
-import { SupplyPointDetailGuard } from 'src/common/guards/supply-point-detail.guard';
-import { RefreshTokenResolver } from 'src/common/resolvers/refresh-token.resolver';
+import { SupplyPointDetailGuard } from 'src/app/guards/supply-point-detail.guard';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 import { RequestComponent } from './request.component';
 
 const routes: Routes = [

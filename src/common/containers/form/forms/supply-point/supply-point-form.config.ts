@@ -4,7 +4,7 @@ import {
     CONTRACT_END_TYPE,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
-import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { errorFieldMessages } from 'src/app/constants/errors.constant';
 import {
     ICommodityTypeFields,
     IExpirationConfig,

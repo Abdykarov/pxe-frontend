@@ -9,10 +9,10 @@ import {
 import * as R from 'ramda';
 import { Observable } from 'rxjs';
 import { ROUTES } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserStatus } from 'src/app/services/model/auth.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
-import { AuthService } from 'src/common/services/auth.service';
-import { UserStatus } from 'src/common/services/model/auth.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Injectable({
     providedIn: 'root',

@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 // own classes
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AuthService } from 'src/common/services/auth.service';
-import { OnlyOneTabActiveService } from 'src/common/services/only-one-tab-active.service';
 
 @Component({
     selector: 'pxe-logout-information',

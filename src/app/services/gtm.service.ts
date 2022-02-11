@@ -2,8 +2,8 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import * as R from 'ramda';
 import { BUILD_ID_PROVIDER, CONSTS, GTM_CONSTS } from 'src/app/app.constants';
-import { ScriptService } from 'src/common/services/external-resources.service';
-import { ExternalResourceType } from 'src/common/services/model/widget.model';
+import { ScriptService } from 'src/app/services/external-resources.service';
+import { ExternalResourceType } from 'src/app/services/model/widget.model';
 import { environment } from 'src/environments/environment';
 
 declare const gtag;

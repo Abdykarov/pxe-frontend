@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as R from 'ramda';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import {
     ISupplyPointStatisticView,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Injectable({
     providedIn: 'root',

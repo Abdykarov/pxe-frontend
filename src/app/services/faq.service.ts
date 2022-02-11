@@ -3,8 +3,8 @@ import * as R from 'ramda';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
+import { IQuestion, ITagConfigItem } from 'src/app/services/model/faq.model';
 import { FaqService as FaqServiceCms } from 'src/common/cms/services/faq.service';
-import { IQuestion, ITagConfigItem } from 'src/common/services/model/faq.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

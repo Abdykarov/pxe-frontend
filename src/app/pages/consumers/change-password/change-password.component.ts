@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { map, takeUntil } from 'rxjs/operators';
 import { IChangePassword } from 'src/app/pages/public/login/login.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { UserService } from 'src/common/graphql/services/user.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { ILoginResponse } from 'src/common/services/model/auth.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({

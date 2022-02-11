@@ -20,16 +20,16 @@ import {
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CookiesService } from 'src/common/services/cookies.service';
-import { OnlyOneTabActiveState } from 'src/common/services/model/only-one-tab-active.model';
-import { OnlyOneTabActiveService } from 'src/common/services/only-one-tab-active.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
-import { ScrollToService } from 'src/common/services/scroll-to.service';
 import {
     INavigationConfig,
     INavigationMenu,

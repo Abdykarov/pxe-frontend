@@ -1,9 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { CONSTS } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
-import { CookiesService } from 'src/common/services/cookies.service';
-import { OnlyOneTabActiveState } from 'src/common/services/model/only-one-tab-active.model';
 import { v4 as generateUuid } from 'uuid';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { CONSTS } from 'src/app/app.constants';
-import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { errorFieldMessages } from 'src/app/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { CustomValidators } from 'src/common/utils';
 

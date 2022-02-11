@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 import { Subject } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
-import { CRYPTO } from 'src/common/constants/crypto.constants';
-import { AuthService } from 'src/common/services/auth.service';
+import { CRYPTO } from 'src/app/constants/crypto.constants';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
     providedIn: 'root',

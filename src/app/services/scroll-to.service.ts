@@ -5,7 +5,7 @@ import { scrollSettings } from 'src/app/pages/public/landing/landing.config';
 import {
     IScrollSetting,
     SCROLL_TO,
-} from 'src/common/services/model/scroll-to.model';
+} from 'src/app/services/model/scroll-to.model';
 
 @Injectable({
     providedIn: 'root',

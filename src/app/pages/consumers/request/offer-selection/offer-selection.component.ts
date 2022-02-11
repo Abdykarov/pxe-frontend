@@ -11,8 +11,15 @@ import * as R from 'ramda';
 import { interval, Observable, of } from 'rxjs';
 import { filter, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS, S_ANALYTICS } from 'src/app/app.constants';
+import { offerValidityMessages } from 'src/app/constants/errors.constant';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
-import { offerValidityMessages } from 'src/common/constants/errors.constant';
+import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
+import { FaqService } from 'src/app/services/faq.service';
+import { GTMService } from 'src/app/services/gtm.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { ValidityService } from 'src/app/services/validity.service';
 import {
     IOffer,
     ISupplyPointOffers,
@@ -24,13 +31,6 @@ import {
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CryptoService } from 'src/common/services/crypto.service';
-import { FaqService } from 'src/common/services/faq.service';
-import { GTMService } from 'src/common/services/gtm.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
-import { ValidityService } from 'src/common/services/validity.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { SupplyPointOfferComponent } from 'src/common/ui/supply-point-offer/supply-point-offer.component';

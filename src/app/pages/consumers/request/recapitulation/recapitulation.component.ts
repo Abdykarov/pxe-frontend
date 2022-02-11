@@ -8,6 +8,11 @@ import {
     GTM_CONSTS,
     S_ANALYTICS,
 } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
+import { GTMService } from 'src/app/services/gtm.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -20,11 +25,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CryptoService } from 'src/common/services/crypto.service';
-import { GTMService } from 'src/common/services/gtm.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import {
     getConfigStepper,

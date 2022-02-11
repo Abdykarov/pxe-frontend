@@ -10,6 +10,10 @@ import * as moment from 'moment';
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 import { CODE_LIST, CONSTS } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserStatus } from 'src/app/services/model/auth.model';
+import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
@@ -21,10 +25,6 @@ import {
     ICodelistOptions,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
-import { AuthService } from 'src/common/services/auth.service';
-import { UserStatus } from 'src/common/services/model/auth.model';
-import { PersonalInfoLocalStorageService } from 'src/common/services/personal-info-local-storage.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 import { CustomValidators } from 'src/common/utils';
 import { convertDateToSendFormatFnc } from 'src/common/utils/standalone/convert-date-to-send-format.fnc';
 

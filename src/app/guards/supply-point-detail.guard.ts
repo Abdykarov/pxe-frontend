@@ -8,7 +8,7 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { Observable } from 'rxjs';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 
 @Injectable({
     providedIn: 'root',

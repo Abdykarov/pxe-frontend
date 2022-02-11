@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IResponseDataDocument } from 'src/common/services/model/document.model';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { environment } from 'src/environments/environment';
 
 export const downloadFile = (

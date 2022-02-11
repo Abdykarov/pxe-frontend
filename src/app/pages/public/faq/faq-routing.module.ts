@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { FaqComponent } from 'src/app/pages/public/faq/faq.component';
-import { FaqResolver } from 'src/common/resolvers/faq.resolver';
+import { FaqResolver } from 'src/app/resolvers/faq.resolver';
 
 const routes: Routes = [
     {

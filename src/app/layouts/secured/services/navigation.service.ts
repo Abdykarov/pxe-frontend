@@ -3,12 +3,9 @@ import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
 import { Observable, of, Subscriber, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { ILoginProvider, IUserTypes } from 'src/app/services/model/auth.model';
 import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
-import { AuthService } from 'src/common/services/auth.service';
-import {
-    ILoginProvider,
-    IUserTypes,
-} from 'src/common/services/model/auth.model';
 import {
     IMenuByUserTypeMapping,
     INavigationConfig,

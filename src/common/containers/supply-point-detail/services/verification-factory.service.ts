@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONSTS, RequestsOverviewBannerShow } from 'src/app/app.constants';
+import { defaultErrorMessage } from 'src/app/constants/errors.constant';
 import { ContractActions } from 'src/app/pages/consumers/supply-points-overview/models/supply-point-detail.model';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { ContractActionsService } from 'src/common/containers/supply-point-detail/services/contract-actions.service';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { scrollToElementFnc } from 'src/common/utils';
 
 @Injectable()

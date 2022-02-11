@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as R from 'ramda';
 import { map, takeUntil } from 'rxjs/operators';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { SupplyPointUtilsService } from 'src/app/services/supply-point-utils.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { NewsService } from 'src/common/cms/services/news.service';
 import {
@@ -10,8 +12,6 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { SupplyPointUtilsService } from 'src/common/services/supply-point-utils.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({

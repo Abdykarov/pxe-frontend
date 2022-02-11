@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
 import { Observable, Observable as ObservableRxjs, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import {
     IOffer,
     IOfferInput,
@@ -23,7 +24,6 @@ import {
     findSupplierOffersQuery,
     findSupplyPointOffersQuery,
 } from 'src/common/graphql/queries/offer';
-import { IResponseDataDocument } from 'src/common/services/model/document.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -283,15 +283,6 @@ export class OfferService {
                 commodityType,
             },
         });
-
-        console.log(
-            client.readQuery({
-                query: findSupplierOffersQuery,
-                variables: {
-                    commodityType,
-                },
-            })
-        );
 
         return mark ? numberOfMarked : 0;
     };

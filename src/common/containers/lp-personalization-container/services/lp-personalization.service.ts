@@ -1,7 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import * as R from 'ramda';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { personalizationOptions } from 'src/common/containers/lp-personalization-container/lp-personalization-container.config';
-import { CookiesService } from 'src/common/services/cookies.service';
 
 @Injectable({
     providedIn: 'root',

@@ -13,11 +13,11 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
+import { EnvironmentService } from 'src/app/services/environment.service';
+import { OAuthType } from 'src/app/services/model/o-auth.model';
+import { OAuthService } from 'src/app/services/o-auth.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { EnvironmentService } from 'src/common/services/environment.service';
-import { OAuthType } from 'src/common/services/model/o-auth.model';
-import { OAuthService } from 'src/common/services/o-auth.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-login-form',

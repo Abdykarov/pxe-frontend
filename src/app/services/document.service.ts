@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import {
     DocumentType,
     IResponseDataDocument,
-} from 'src/common/services/model/document.model';
+} from 'src/app/services/model/document.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

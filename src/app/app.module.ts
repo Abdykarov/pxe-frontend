@@ -16,12 +16,12 @@ import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { environment } from 'src/environments/environment';
 import { FileUploadModule } from 'src/third-sides/file-upload';
 import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
-import { GlobalErrorHandler } from '../common/errors/global.error.handler';
-import { InterceptorProviders } from '../common/interceptors';
 import { AppComponent } from './app.component';
 import { buildIdFactory } from './app.config';
 import { BUILD_ID_PROVIDER } from './app.constants';
 import { AppRoutingModule } from './app.routing';
+import { GlobalErrorHandler } from './errors/global.error.handler';
+import { InterceptorProviders } from './interceptors';
 
 @NgModule({
     declarations: [AppComponent],

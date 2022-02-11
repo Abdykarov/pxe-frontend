@@ -19,19 +19,19 @@ import {
 } from 'rxjs/operators';
 import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
-import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
-import { CookiesService } from 'src/common/services/cookies.service';
-import { GTMService } from 'src/common/services/gtm.service';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { GTMService } from 'src/app/services/gtm.service';
 import {
     IJwtPayload,
     ILoginRequest,
     ILoginResponse,
     IUserRoles,
     IUserTypes,
-} from 'src/common/services/model/auth.model';
-import { ILogoutRequired } from 'src/common/services/model/logout-required.model';
-import { OnlyOneTabActiveState } from 'src/common/services/model/only-one-tab-active.model';
-import { OnlyOneTabActiveService } from 'src/common/services/only-one-tab-active.service';
+} from 'src/app/services/model/auth.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

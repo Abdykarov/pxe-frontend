@@ -3,8 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, of } from 'rxjs';
 import { map, retry, switchMap, takeUntil } from 'rxjs/operators';
 import { CONSTS, GTM_CONSTS } from 'src/app/app.constants';
+import { defaultErrorMessage } from 'src/app/constants/errors.constant';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
+import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
+import { DocumentService } from 'src/app/services/document.service';
+import { FaqService } from 'src/app/services/faq.service';
+import { GTMService } from 'src/app/services/gtm.service';
+import {
+    DocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     CommodityType,
@@ -14,16 +24,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CryptoService } from 'src/common/services/crypto.service';
-import { DocumentService } from 'src/common/services/document.service';
-import { FaqService } from 'src/common/services/faq.service';
-import { GTMService } from 'src/common/services/gtm.service';
-import {
-    DocumentType,
-    IResponseDataDocument,
-} from 'src/common/services/model/document.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 import {

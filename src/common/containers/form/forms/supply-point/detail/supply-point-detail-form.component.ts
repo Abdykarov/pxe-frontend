@@ -26,6 +26,8 @@ import {
     SUBJECT_TYPE_OPTIONS,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
+import { DocumentService } from 'src/app/services/document.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
     confirmConfirmSaveSupplyPointConfig,
@@ -46,8 +48,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { DocumentService } from 'src/common/services/document.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { transformCodeList } from 'src/common/utils';
 
 @Component({

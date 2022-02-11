@@ -10,7 +10,7 @@ import {
     ExternalResourceType,
     IExternalPromise,
     IExternalResource,
-} from 'src/common/services/model/widget.model';
+} from 'src/app/services/model/widget.model';
 import { v4 as generateUuid } from 'uuid';
 
 @Injectable({

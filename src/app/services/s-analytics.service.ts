@@ -1,7 +1,7 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import * as R from 'ramda';
-import { SAnalyticsPlugins } from 'src/common/services/model/s-analytics.model';
+import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 import { environment } from 'src/environments/environment';
 
 declare const sa;

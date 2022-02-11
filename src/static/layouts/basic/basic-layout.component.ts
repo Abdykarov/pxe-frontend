@@ -14,8 +14,8 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { AbstractComponent } from 'src/common/abstract.component';
-import { IJwtPayload } from 'src/common/services/model/auth.model';
 import { staticNavigationConfig } from 'src/static/config/navigation.config';
 
 @Component({

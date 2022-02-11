@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
-import { AuthService } from 'src/common/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { dateDiff } from 'src/common/utils/supply-point-date-calculate.fnc';
 
 @Injectable()

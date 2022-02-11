@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CONSTS, TIME_TO_CONTRACT_END_PERIOD_MAP } from 'src/app/app.constants';
 import { ContractActions } from 'src/app/pages/consumers/supply-points-overview/models/supply-point-detail.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { DocumentType } from 'src/app/services/model/document.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { DetailContainerFacade } from 'src/common/containers/supply-point-detail/detail-container.facade';
@@ -19,9 +22,6 @@ import {
     ProgressStatus,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
-import { AuthService } from 'src/common/services/auth.service';
-import { DocumentType } from 'src/common/services/model/document.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Component({
     selector: 'pxe-detail-container',

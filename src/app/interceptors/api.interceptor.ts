@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
 // own classes
-import { AuthService } from 'src/common/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { processErrorScrolls } from 'src/common/utils';
 import { environment } from 'src/environments/environment';
 

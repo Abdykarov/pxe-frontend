@@ -5,8 +5,8 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
-import { FaqService } from 'src/common/services/faq.service';
-import { IQuestion } from 'src/common/services/model/faq.model';
+import { FaqService } from 'src/app/services/faq.service';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import { removeHtmlFromText, truncateText } from 'src/common/utils';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
-import { AuthService } from 'src/common/services/auth.service';
-import { IJwtPayload } from 'src/common/services/model/auth.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 
 @Injectable({
     providedIn: 'root',

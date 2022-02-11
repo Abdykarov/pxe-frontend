@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { CONSTS } from 'src/app/app.constants';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-reset-password-form',

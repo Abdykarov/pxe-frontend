@@ -13,11 +13,11 @@ import * as R from 'ramda';
 import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { IUserRoles } from 'src/app/services/model/auth.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { AuthService } from 'src/common/services/auth.service';
-import { CookiesService } from 'src/common/services/cookies.service';
-import { IUserRoles } from 'src/common/services/model/auth.model';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-change-password-form',

@@ -9,9 +9,9 @@ import {
     TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { IContract } from 'src/common/graphql/models/contract';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
 import { formFields } from './verification-form.config';
 
 @Component({

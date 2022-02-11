@@ -1,4 +1,4 @@
-import { IUserTypes } from 'src/common/services/model/auth.model';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 
 export interface ISettings {
     isPublic: boolean;

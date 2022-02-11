@@ -14,6 +14,7 @@ import * as R_ from 'ramda-extension';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { CONSTS, RequestsOverviewBannerShow } from 'src/app/app.constants';
 import { confirmDeleteRequest } from 'src/app/pages/consumers/requests-overview/requests-overview.config';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ContractStatus } from 'src/common/graphql/models/contract';
@@ -23,7 +24,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     isDataAvailable,

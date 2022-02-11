@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ROUTES } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { OAuthService } from 'src/app/services/o-auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
-import { AuthService } from 'src/common/services/auth.service';
-import { ILoginResponse } from 'src/common/services/model/auth.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { OAuthService } from 'src/common/services/o-auth.service';
 
 @Component({
     templateUrl: './o-auth-layout.component.html',

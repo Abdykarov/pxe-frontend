@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as R from 'ramda';
 import { CONSTS } from 'src/app/app.constants';
-import { IQuestion, ITagConfigItem } from 'src/common/services/model/faq.model';
+import { IQuestion, ITagConfigItem } from 'src/app/services/model/faq.model';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 
 @Pipe({

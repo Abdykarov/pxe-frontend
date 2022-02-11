@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Directive({
     selector: '[lndSBiometricsDirective]',

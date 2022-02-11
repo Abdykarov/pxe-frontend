@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, take } from 'rxjs/operators';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import {
     AllowedOperations,
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Injectable({
     providedIn: 'root',

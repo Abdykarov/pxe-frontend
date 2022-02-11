@@ -1,5 +1,5 @@
+import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISupplier } from 'src/common/graphql/models/supply.model';
-import { IQuestion } from 'src/common/services/model/faq.model';
 import { ICodelistItem } from './supply.model';
 
 export interface ISupplyPointImportPrices {

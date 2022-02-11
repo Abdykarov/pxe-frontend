@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { SupplyPointUtilsService } from 'src/app/services/supply-point-utils.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { UtilsService } from 'src/common/containers/supply-point-detail/services/utils.service';
 import {
@@ -8,8 +10,6 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { SupplyPointUtilsService } from 'src/common/services/supply-point-utils.service';
 import {
     configLinksToContractTypes,
     pluralContractType,

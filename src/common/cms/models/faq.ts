@@ -1,4 +1,4 @@
-import { ITagConfigItem } from 'src/common/services/model/faq.model';
+import { ITagConfigItem } from 'src/app/services/model/faq.model';
 import { ISeo } from './seo';
 
 export interface IFaq {

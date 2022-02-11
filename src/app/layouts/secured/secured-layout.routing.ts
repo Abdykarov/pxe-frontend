@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
 import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
-import { RefreshTokenResolver } from 'src/common/resolvers/refresh-token.resolver';
-import { IUserTypes } from 'src/common/services/model/auth.model';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 import { SecuredLayoutComponent } from './secured-layout.component';
 
 const routes = [

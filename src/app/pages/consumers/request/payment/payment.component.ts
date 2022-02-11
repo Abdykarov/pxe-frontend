@@ -4,6 +4,11 @@ import * as R from 'ramda';
 import { of } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { GTM_CONSTS } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { CryptoService } from 'src/app/services/crypto.service';
+import { GTMService } from 'src/app/services/gtm.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { OAuthService } from 'src/app/services/o-auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus, IPayment } from 'src/common/graphql/models/contract';
 import {
@@ -12,11 +17,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CryptoService } from 'src/common/services/crypto.service';
-import { GTMService } from 'src/common/services/gtm.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
-import { OAuthService } from 'src/common/services/o-auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { getConfigStepper, parseGraphQLErrors } from 'src/common/utils';
 import { removeAccent } from 'src/common/utils/standalone/remove-accent.fnc';

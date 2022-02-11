@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as R from 'ramda';
 import { Observable } from 'rxjs';
 import { map, share, switchMap } from 'rxjs/operators';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 import { ContractTypes } from './supply-points-overview-container.model';
 
 @Injectable()

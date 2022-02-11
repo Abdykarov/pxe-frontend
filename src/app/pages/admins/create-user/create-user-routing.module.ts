@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
-import { RefreshTokenResolver } from 'src/common/resolvers/refresh-token.resolver';
 import { CreateUserComponent } from './create-user.component';
 import { PricesComponent } from './prices/prices.component';
 import { RecapitulationComponent } from './recapitulation/recapitulation.component';

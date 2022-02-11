@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
-import { IRefreshTokenJwtResponse } from 'src/common/services/model/cms.model';
+import { IRefreshTokenJwtResponse } from 'src/app/services/model/cms.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

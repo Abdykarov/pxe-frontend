@@ -5,6 +5,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
 import { ContractActions } from 'src/app/pages/consumers/supply-points-overview/models/supply-point-detail.model';
+import { DocumentService } from 'src/app/services/document.service';
+import {
+    DocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { ApiService } from 'src/common/containers/supply-point-detail/services/api.service';
@@ -15,11 +20,6 @@ import {
     ISupplyPointFormData,
 } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { DocumentService } from 'src/common/services/document.service';
-import {
-    DocumentType,
-    IResponseDataDocument,
-} from 'src/common/services/model/document.model';
 import { isDataAvailable, scrollToElementFnc } from 'src/common/utils';
 
 @Injectable()

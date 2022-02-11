@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateConsumerService } from 'src/common/services/navigate-consumer.service';
 
 @Pipe({
     name: 'allowProgressStep',

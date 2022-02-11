@@ -17,12 +17,12 @@ import {
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { AuthService } from 'src/common/services/auth.service';
-import { CookiesService } from 'src/common/services/cookies.service';
-import { SAnalyticsService } from 'src/common/services/s-analytics.service';
-import { ScrollToService } from 'src/common/services/scroll-to.service';
 
 @Component({
     templateUrl: './public-layout.component.html',
