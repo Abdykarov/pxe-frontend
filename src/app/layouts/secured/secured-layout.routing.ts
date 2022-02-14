@@ -60,10 +60,6 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                redirectTo: CONSTS.PATHS.SIGNBOARD,
-            },
-            {
                 path: CONSTS.PATHS.CREATE_USER,
                 loadChildren: () =>
                     import(

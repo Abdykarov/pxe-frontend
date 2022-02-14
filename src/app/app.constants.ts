@@ -136,7 +136,6 @@ export const CONSTS = {
         SIGNBOARD: 'informace',
         SIGN_UP: 'registrace',
         SUPPLY_POINT: 'odberne-misto',
-        SUPPLY_POINT_SELECTION: 'vyber-odberneho-mista',
         SUPPLY_POINTS: 'uzavrene-smlouvy',
         SUPPLY_OFFER: 'sprava-nabidek',
         SUPPLIER_CONCLUDED_CONTRACTS: 'uzavrene-smlouvy-dodavatel',
