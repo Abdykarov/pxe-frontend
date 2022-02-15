@@ -186,9 +186,6 @@ export const errorFieldMessages =  {
     benefitName: {
         required: 'Vyplňte benefit.',
     },
-    benefitUrl: {
-        url: 'Vyplňte validní URL adresu.',
-    },
     birthDate: {
         required: 'Vyplňte datum narození.',
         bsDateMaxDate: 'Nesmíte být mladší 18 let.',
@@ -380,6 +377,9 @@ export const errorFieldMessages =  {
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',
+    },
+    url: {
+        url: 'Vyplňte validní URL adresu.',
     },
     contractEndTypeId: {
         required: 'Zvolte typ ukončení platnosti aktuální smlouvy.',
