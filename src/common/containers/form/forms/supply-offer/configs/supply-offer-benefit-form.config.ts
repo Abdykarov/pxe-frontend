@@ -30,9 +30,8 @@ export const formFieldsBenefit: IForm = {
                 errorFieldMessages.string.maxlength,
         },
         url: {
-            requireIfFieldHaveValueSecondControl:
-                errorFieldMessages.benefitUrl.url,
-            url: errorFieldMessages.benefitUrl.url,
+            requireIfFieldHaveValueSecondControl: errorFieldMessages.url.url,
+            url: errorFieldMessages.url.url,
             maxlengthRequiredLengthActualLength:
                 errorFieldMessages.string.maxlength,
         },
