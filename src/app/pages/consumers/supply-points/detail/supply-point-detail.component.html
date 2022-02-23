@@ -1,0 +1,286 @@
+<ng-template #leaveContactInfoTemplate let-contract="contract">
+    <div class="col-12 mb-4 small">
+        Kliknutím na tlačítko „Odstoupit“ odstoupíte od smlouvy o sdružených
+        službách dodávky pro výše uvedené odběrné místo podle §11a odst. 2 zák.
+        č. 458/2000 Sb. Text odstoupení naleznete
+        <a
+            [class.link--disabled]="documentLoading"
+            (click)="saveDocument(contract.contractId, documentType.WITHDRAWAL)"
+            >zde</a
+        >.
+    </div>
+</ng-template>
+<ng-template #terminateContactInfoTemplate let-contract="contract">
+    <div class="col-12 mb-4 small">
+        Kliknutím na tlačítko „Vypovědět“ vypovíte smlouvu o sdružených službách
+        dodávky pro výše uvedené odběrné místo podle §11b odst. 1 zák. č.
+        458/2000 Sb. Text výpovědi naleznete
+        <a
+            [class.link--disabled]="documentLoading"
+            (click)="
+                saveDocument(contract.contractId, documentType.DENUNCIATION)
+            "
+            >zde</a
+        >.
+    </div>
+</ng-template>
+<ng-template #interruptAutomaticProlongationTemplate let-contract="contract">
+    <div class="col-12 mb-4 small">
+        Kliknutím na tlačítko „Zrušit“ přerušíte automatickou prolongaci. Text
+        přerušení automaticke prolongace naleznete
+        <a
+            [class.link--disabled]="documentLoading"
+            (click)="
+                saveDocument(
+                    contract.contractId,
+                    documentType.UNSET_PROLONGATION
+                )
+            "
+            >zde</a
+        >.
+    </div>
+</ng-template>
+<!--budu odkomentovano v tasku pro prevod OM na jiny ucet-->
+<!--<ng-template #transferSupplyPointTemplate let-contract="contract">-->
+<!--<div class="col-12 mb-4 small">-->
+<!--Kliknutím na tlačítko „Převést“ převedete....-->
+<!--</div>-->
+<!--</ng-template>-->
+<ng-template #contractActionsTemplate>
+    <div #contractActionsWrapper>
+        <div
+            *ngIf="
+                supplyPoint?.allowedOperations
+                    | isAllowedOperation
+                        : allowedOperations.UNSET_AUTOMATIC_PROLONGATION
+            "
+            class="row no-gutters mb-3"
+        >
+            <div class="col-12">
+                <pxe-verification-form
+                    customSubmitButtonClass="mb-5 w-100"
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [phone]="supplyPoint.contract.personalData.phone"
+                    [globalError]="globalError"
+                    [infoTemplate]="interruptAutomaticProlongationTemplate"
+                    [smsSent]="smsSent"
+                    [showForm]="
+                        contractAction === contractActions.UNSET_PROLONGATION
+                    "
+                    (enableVerificationAction)="
+                        interruptAutomaticProlongation()
+                    "
+                    [toggleEnabledBySelf]="true"
+                    textInfoAboutVerificationPassword="Zrušení automatické prolongace je nutné potvrdit ověřovacím SMS kódem"
+                    enableVerificationLabel="Zrušit automatickou prolongaci"
+                    enableButtonType="secondary"
+                    submitLabelText="Zrušit"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()"
+                >
+                </pxe-verification-form>
+            </div>
+            <div
+                [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
+                class="col-12"
+            >
+                <div class="mb-1">Výpovědní lhůta</div>
+                <span class="perex"
+                    >{{ timeToContractEnd }} {{ timeToContractEnd | plural :
+                    timeToContractEndPeriodMap[ timeToContractEndPeriod ]
+                    }}</span
+                >
+            </div>
+        </div>
+        <div
+            *ngIf="
+                supplyPoint?.allowedOperations
+                    | isAllowedOperation: allowedOperations.LEAVE_CONTRACT
+            "
+            class="row no-gutters mb-3"
+        >
+            <div class="col-12">
+                <pxe-verification-form
+                    customSubmitButtonClass="mb-5 w-100"
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [globalError]="globalError"
+                    [infoTemplate]="leaveContactInfoTemplate"
+                    [phone]="supplyPoint.contract.personalData.phone"
+                    [smsSent]="smsSent"
+                    textInfoAboutVerificationPassword="Odstoupení od smlouvy je nutné potvrdit ověřovacím SMS kódem"
+                    enableVerificationSubText="Podle občanského zákoníku (§ 1829) můžete odstoupit od smlouvy do 14 dní od data
+                        podpisu smlouvy. Účinky nastávají okamžikem, kdy je toto právní jednání doručeno dodavateli.
+                        Smlouva se zruší od počátku a vy nemusíte udávat žádný důvod odstoupení."
+                    enableVerificationLabel="Odstoupit od smlouvy"
+                    enableButtonType="secondary"
+                    submitLabelText="Odstoupit"
+                    [showForm]="
+                        contractAction === contractActions.LEAVE_CONTRACT
+                    "
+                    [toggleEnabledBySelf]="true"
+                    (enableVerificationAction)="leaveContract()"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()"
+                >
+                </pxe-verification-form>
+            </div>
+        </div>
+        <div
+            *ngIf="
+                supplyPoint?.allowedOperations
+                    | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT
+            "
+            class="row no-gutters mb-3"
+        >
+            <div class="col-12">
+                <pxe-verification-form
+                    customSubmitButtonClass="mb-5 w-100"
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [phone]="supplyPoint.contract.personalData.phone"
+                    [globalError]="globalError"
+                    [infoTemplate]="terminateContactInfoTemplate"
+                    [smsSent]="smsSent"
+                    textInfoAboutVerificationPassword="Výpověď smlouvy je nutné potvrdit ověřovacím SMS kódem"
+                    enableVerificationSubText="Energetický zákon (§ 11b odst. 1) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
+                        do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
+                        následujícího. Jediná částka, kterou zaplatíte, je za energii, kterou jste už stihli odebrat."
+                    enableVerificationLabel="Vypovědět smlouvu"
+                    [showForm]="
+                        contractAction === contractActions.TERMINATE_CONTRACT
+                    "
+                    [toggleEnabledBySelf]="true"
+                    enableButtonType="secondary"
+                    submitLabelText="Vypovědět"
+                    (enableVerificationAction)="terminateContract()"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()"
+                >
+                </pxe-verification-form>
+            </div>
+        </div>
+        <!--<div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"-->
+        <!--class="row no-gutters align-items-end mb-5">-->
+        <!--<div class="col-12 col-md-6">-->
+        <!--<small>Převést odběrné místo na jiného odběratele</small>-->
+        <!--</div>-->
+        <!--<div class="col-12 col-md-6 pl-3 text-right">-->
+        <!--<lnd-button-->
+        <!--(click)="transferSupplyPoint()"-->
+        <!--[isDisabled]="formLoading"-->
+        <!--label="Převést"-->
+        <!--type="link-danger"-->
+        <!--size="sm">-->
+        <!--</lnd-button>-->
+        <!--</div>-->
+        <!--<div *ngIf="contractAction === contractActions.TRANSFER_SUPPLY_POINT"-->
+        <!--class="col-12 mt-4">-->
+        <!--<pxe-verification-form-->
+        <!--[fieldError]="fieldError"-->
+        <!--[formLoading]="formLoading"-->
+        <!--[contract]="supplyPoint.contract"-->
+        <!--[phone]="supplyPoint.contract.personalData.phone"-->
+        <!--[globalError]="globalError"-->
+        <!--[infoTemplate]="terminateContactInfoTemplate"-->
+        <!--[smsSent]="smsSent"-->
+        <!--[showSentSmsLabelUnderFirstField]="false"-->
+        <!--classFirstField="col-12"-->
+        <!--classSecondField="col-12 text-center"-->
+        <!--submitLabelText="Převést odběrné místo na jiného odběratele"-->
+        <!--(submitAction)="submitVerification($event)"-->
+        <!--(customAction)="sendContractConfirmationSms()">-->
+        <!--</pxe-verification-form>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</ng-template>
+<pxe-layout-container pageTitle="Odběrné místo">
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-alert
+                [type]="'danger'"
+                [isDismissible]="false"
+                *ngIf="globalError.length"
+            >
+                <ng-container *ngFor="let message of globalError">
+                    {{ message }}<br />
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <lnd-placeloader
+        [loading]="dataLoading && !globalError.length"
+    ></lnd-placeloader>
+    <ng-container *ngIf="supplyPoint && !dataLoading">
+        <pxe-supply-point-detail-form
+            #supplyPointDetailForm
+            [formFields]="formFields"
+            [formLoading]="formLoading"
+            [formSent]="formSent"
+            [globalError]="globalError"
+            [fieldError]="fieldError"
+            [supplyPoint]="supplyPoint"
+            [contractActionsTemplate]="contractActionsTemplate"
+            (submitAction)="updateSupplyForm($event)"
+            (customAction)="cancelUpdate()"
+            (finallyNextContractAction)="routerToNextContract(false)"
+        ></pxe-supply-point-detail-form>
+    </ng-container>
+
+    <div *ngIf="supplyPoint?.contract?.nextContractId" class="row text-center">
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <h2
+                *ngIf="
+                    supplyPoint.contract.isNextContractConcluded &&
+                    supplyPoint.contract?.nextContractId !==
+                        supplyPoint.contract.contractId
+                "
+            >
+                Tato smlouva bude nahrazena budoucí smlouvou.
+            </h2>
+            <h2
+                *ngIf="
+                    !supplyPoint.contract.isNextContractConcluded &&
+                    supplyPoint.contract.nextContractId &&
+                    supplyPoint.contract?.nextContractId !== supplyPoint.id
+                "
+            >
+                Máte jednu rozpracovanou navazující smlouvu, nechcete ji
+                dokončit?
+            </h2>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <div class="page-box">
+                <h1 class="mb-1">{{ nextSupplyPoint.name }}</h1>
+                <p class="mb-3">
+                    Navazující smlouva pro dodávku {{
+                    nextSupplyPoint.commodityType === CommodityType.GAS ?
+                    "plynu" : "elektřiny" }} v období {{
+                    nextSupplyPoint.contract.deliveryFrom | date:
+                    "d.&nbsp;M.&nbsp;y" }} - {{
+                    nextSupplyPoint.contract.deliveryTo | date:
+                    "d.&nbsp;M.&nbsp;y" }}
+                </p>
+                <lnd-button
+                    [label]="
+                        supplyPoint.contract.isNextContractConcluded
+                            ? 'Uzavřená navazujcí smlouva'
+                            : 'Dokončit žádost'
+                    "
+                    type="primary"
+                    (click)="
+                        routerToNextContract(
+                            !!supplyPoint.contract.isNextContractConcluded
+                        )
+                    "
+                >
+                </lnd-button>
+            </div>
+        </div>
+    </div>
+</pxe-layout-container>
