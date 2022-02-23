@@ -184,9 +184,10 @@
                                     class="col-12"
                                 >
                                     <h5>
-                                        Archiv smluv o dodávce elektřiny
-                                        společnosti Power Central Europe, a.s.
-                                        pro domácnosti
+                                        Archiv smluv o dodávce {{ commodityType
+                                        === COMMODITY_TYPE.POWER ? "elektřiny" :
+                                        "plynu" }} společnosti Power Central
+                                        Europe, a.s. pro domácnosti
                                     </h5>
                                     <lnd-table
                                         [withoutBorder]="true"
