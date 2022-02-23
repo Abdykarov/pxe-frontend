@@ -15,6 +15,7 @@ import {
 
 import * as R from 'ramda';
 import { saveAs } from 'file-saver';
+import { combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -26,10 +27,10 @@ import {
 import {
     historyColConfig,
     pdfSetting,
-} from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts.config';
+} from './patterns-of-contracts.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
-import { IPdfSetting } from 'src/app/pages/public/patterns-of-contracts/models/patterns-of-contracts.model';
+import { IPdfSetting } from './models/patterns-of-contracts.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 
 @Component({
@@ -37,8 +38,11 @@ import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.componen
     templateUrl: './patterns-of-contracts.component.html',
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
-export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
-    public readonly patternsOfContracts: IPatternsOfContracts = this.route.snapshot.data.patternsOfContracts;
+export class PatternsOfContractsComponent
+    extends AbstractComponent
+    implements OnInit {
+    public readonly patternsOfContracts: IPatternsOfContracts =
+        this.route.snapshot.data.patternsOfContracts;
     public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
         {
             label: 'Domů',
@@ -86,11 +90,9 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     ngOnInit(): void {
-        this.route.params
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => {
+        combineLatest([this.route.params, this.route.fragment])
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(([params, fragment]) => {
                 this.subjectType = params.subjectType;
                 const tree = this.router.parseUrl(this.router.url);
                 this.commodityType = <CommodityTypesCsLowerCase>tree.fragment;
@@ -117,78 +119,80 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             });
     }
 
-    public routeToSubjectType = (evt, subjectType: SubjectTypeLowerCase) => {
+    public routeToSubjectType (evt, subjectType: SubjectTypeLowerCase): void {
         evt.preventDefault();
         this.subjectType = subjectType;
         this.navigateToCorrectUrl();
     }
 
-    public routeToCommodityType = (evt, commodityType: CommodityTypesCsLowerCase) => {
+    public routeToCommodityType (
+        evt,
+        commodityType: CommodityTypesCsLowerCase,
+    ): void {
         evt.preventDefault();
         this.commodityType = commodityType;
         this.navigateToCorrectUrl();
     }
 
-    public navigateToCorrectUrl = () => {
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-            this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}`],
-                {
-                    fragment: this.commodityType,
-                }),
+    public navigateToCorrectUrl(): void {
+        this.router.navigate(
+            [`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}`],
+            {
+                fragment: this.commodityType,
+            },
         );
     }
 
-    public downloadPdf = (sourceUrl: string, name: string) => {
+    public downloadPdf(sourceUrl: string, name: string): void {
         saveAs(sourceUrl, name);
     }
 
-    public prepareOldContracts = () => {
+    public prepareOldContracts(): void {
         this.pdfOldContracts = R.pipe(
-            R.filter(
-                (setting: IPdfSetting) => {
-                    const {
-                        dateTo,
-                        dateFrom,
-                    } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
-                    const now = new Date().getTime();
-                    const tomorrowFromDateTo = new Date(dateTo.getTime() + (24 * 60 * 60 * 1000)).getTime();
-                    return dateFrom.getTime() < now && tomorrowFromDateTo < now;
-                },
-            ),
-            R.map(
-                (setting: IPdfSetting) => setting[this.subjectType][this.commodityType],
-            ),
-        )(this.pdfSettings);
-    }
-
-    public prepareActiveContract = () => {
-        this.pdfActiveContracts = R.pipe(
-            R.filter(
-                (setting: IPdfSetting) => {
-                    const {
-                        dateFrom,
-                        dateTo,
-                    } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
-
-                    const now = new Date().getTime();
-                    const tomorrowFromDateTo = new Date(dateTo.getTime() + (24 * 60 * 60 * 1000)).getTime();
-                    return dateFrom.getTime() <= now && now < tomorrowFromDateTo;
-                },
-            ),
-            R.head,
-        ) (this.pdfSettings);
-    }
-
-    public prepareFutureContracts = () => {
-        this.pdfFutureContracts = R.filter(
-            (setting: IPdfSetting) => {
-                const {
-                    dateTo,
-                    dateFrom,
-                } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+            R.filter((setting: IPdfSetting) => {
+                const { dateTo, dateFrom } =
+                    setting[this.SUBJECT_TYPE.INDIVIDUAL][
+                        this.COMMODITY_TYPE.POWER
+                        ];
                 const now = new Date().getTime();
-                return dateTo.getTime() > now && dateFrom.getTime() > now;
-            },
+                const tomorrowFromDateTo = new Date(
+                    dateTo.getTime() + 24 * 60 * 60 * 1000,
+                ).getTime();
+                return dateFrom.getTime() < now && tomorrowFromDateTo < now;
+            }),
+            R.map(
+                (setting: IPdfSetting) =>
+                    setting[this.subjectType][this.commodityType],
+            ),
         )(this.pdfSettings);
+    }
+
+    public prepareActiveContract(): void {
+        this.pdfActiveContracts = R.pipe(
+            R.filter((setting: IPdfSetting) => {
+                const { dateFrom, dateTo } =
+                    setting[this.SUBJECT_TYPE.INDIVIDUAL][
+                        this.COMMODITY_TYPE.POWER
+                    ];
+
+                const now = new Date().getTime();
+                const tomorrowFromDateTo = new Date(
+                    dateTo.getTime() + 24 * 60 * 60 * 1000,
+                ).getTime();
+                return dateFrom.getTime() <= now && now < tomorrowFromDateTo;
+            }),
+            R.head,
+        )(this.pdfSettings);
+    }
+
+    public prepareFutureContracts(): void {
+        this.pdfFutureContracts = R.filter((setting: IPdfSetting) => {
+            const { dateTo, dateFrom } =
+                setting[this.SUBJECT_TYPE.INDIVIDUAL][
+                    this.COMMODITY_TYPE.POWER
+                    ];
+            const now = new Date().getTime();
+            return dateTo.getTime() > now && dateFrom.getTime() > now;
+        })(this.pdfSettings);
     }
 }
