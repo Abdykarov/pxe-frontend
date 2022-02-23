@@ -26,6 +26,7 @@ export const findSupplierProfileQuery = gql`
             numberSeriesPrefix
             numberSeriesVariable
             numberSeriesSuffix
+            pricesUrl
         }
     }
 `;
