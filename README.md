@@ -1,45 +1,103 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# parc4u
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+Aplikace slouží pro p
 
-_We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket._
+## Základní odkazy
+Wiki - https://wiki.lnd.bz/display/PXEPARC/PARC4Retail
 
----
+Přístupy - https://wiki.lnd.bz/display/DLVR/PXE+P4R , https://wiki.lnd.bz/pages/viewpage.action?pageId=87753370
 
-## Edit a file
+Bussiness logika - https://wiki.lnd.bz/pages/viewpage.action?pageId=181964207
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+Zastaralá dokumentace - https://wiki.lnd.bz/display/PXEPARC/Dokumentace -
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: _Delete this line to make a change to the README from Bitbucket._
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+Doporučená sekce: https://wiki.lnd.bz/pages/viewpage.action?pageId=98765235
 
----
+Výpočet cen pro parametry: https://wiki.lnd.bz/pages/viewpage.action?pageId=181968101
 
-## Create a file
+Mapování cen do FE: https://wiki.lnd.bz/pages/viewpage.action?pageId=71241134
 
-Next, you’ll add a new file to this repository.
+## Struktura projektu
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+- <b>pdf-export</b> Složka pro, kde se obsahují vzorové smlouvy. Po každé změně ve smlouvách na BE je nutné tyto HTML aktualizovat a vygenerované .PDF přidat do vzorových smluv a staré do archivu.
+- <b>src</b> Zdrojové soubory
+    - <b>500</b> - Aplikace, v případě nedostuptnosti hlavní aplikace
+    - <b>app</b> - Hlavní aplikace
+      - <b>layout</b> - Laouty dle typu a účelu stránek
+        - <b>generate-data</b> Slouží pro prerender, když jsou pro stránku potřeba dogenerovat náký data.
+        - <b>o-auth</b> Slouží pro BE, když se uživatel přihláší přes google, tak BE redirectne v poslendím kroku na tenhle endpoint a nasimuluje přihlášení a redirect na sekci pro odběratele.
+        - <b>public</b> Layout pro nepřihlášené uživatele.
+        - <b>secured</b> Layout pro přihlášené uživatele.
+      - <b>resolver</b> Jelikož je aplikace napojena na Squidex, tak pro fetchnutí dat se použvají resolvery
+      - <b>services</b>
+        - <b>apollo-cms.service.ts</b> Wrapper nad klasickým apollem, rozšířen o normalizaci dat z CMS. 
+        - <b>crypto.service.ts</b> Některá citlivá data se ukládají do localstorege, tato služba je umožnuje zahashovat.
+        - <b>s-analytics.service.ts</b> Implementuje zoe.io.
+        - <b>ga|gtm.service.ts</b> V systému je nasazen GA přes GTM, přes tento nástroj je dále nasazen Hotjar.
+        - <b>...</b>
+      - <b>pages</b> Aplikace má 4ři rozhraní
+        - <b>admins</b> - Pro adminy. Správa faktur a uživatelů, kteří chtějí vyplnit jejich údaje a samotným se nechce.  
+        - <b>consumers</b> - Po importu nebo registraci se stávají uživatele odběratelem, v těchto stránkách si vybírají pro svoje OM nabídku od dodavatele. 
+        - <b>not-found</b> 
+        - <b>public</b> - Public page (LP, přihlášení... )
+        - <b>suppliers</b> - Správa nabídek, import, stažení uzavřených smluv - pro dodavatele
+    - <b>assets</b> - Public složka (csska, configurace, fonty, obrázky), o správné kopírování configurací dle prostředí se stará Jenkins
+    - <b>common</b> - Znovupoužitelné pipy, služby atd
+        - <b>cms</b> - Napojení na CMS
+        - <b>constants</b> - Konastanty převážně errors
+        - <b>containers</b> - Smart componenty obsahující logiku
+        - <b>decorators</b> - Dekorátory
+        - <b>directives</b> -  Direktivy
+        - <b>graphql</b> - Systém konsumuje API přes Graphql, CMS a Graphql mají vlastní pojmenování Apollo clienta, kdy API client je defaultní
+        - <b>pipes</b> - Zde je složka common a secured. Implementace je takováhle, jinak webpack zařadí všecky moduly do main.js a nefunguej condesplitting.
+        - <b>ui</b> - Dump UI komponnty
+        - <b>utils</b> 
+        - <b>abstract.component.ts</b> - Převážně unsubcribe pro obserables
+        - <b>abstract.facade.ts </b> - Znovupoužitelná CRUD logika pro facady
+    - <b>server</b> - Prerender a SSR
+    - <b>static</b> - Statická aplikace podpora atomického designu
+    - <b>third-sides</b> - Knihovny třetích stran, které byly potřeba lehce "ohnout"
+- <b>.eslintrc.json</b> - nastavení eslintu + prettier
+- <b>.huskyrc</b> - husky pouští yarn lint
+- <b>.prettierignore</b>
+- <b>Dockerfile.deploy.app</b>
+- <b>.huskyrc</b>
+- <b>run-test.sh</b>
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+## Stack
+- <b>FE</b> - Angular
+- <b>BE</b> - Kotlin, Spring, Hibernate a postgresql
+- <b>API</b> - Graphql, Rest (Převážně soubory)
 
----
+### Hlavní knihovny
+- <b>@angular</b>
+- <b>@apollo/client & apollo-angular</b> - Fetchování dat, state managment
+- <b>moment</b> - Nepoužívat v public layoutu, jinak se zvedne budle size
+- <b>ng-recaptcha</b> - Formuláře v public sekci jsou chráněny přes recaptcha v2 invisible  
+- <b>ramda</b> - Funkcionální programování
+- <b>rxjs</b> - Reaktivní programování
+- <b>UI komponenty</b> - Vlastní z Lundegaard Angular devstacku
 
-## Clone a repository
+## Package.json - Scripty
+### Puštění aplikace
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+    "start:app": "yarn start --proxy-config proxy-dev.conf.json", // Puštění aplikace oproti lokálnímu BE
+    "start:preview": "yarn start --proxy-config proxy-prev.conf.json", // Puštění aplikace oproti preview
+    "start:test": "yarn start --proxy-config proxy-test.conf.json", // Puštění aplikace oproti testu
+    "start:static": "yarn start static", // Puštění aplikace statiku
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+### Produkční build - SSR
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+    "build:ssr": "yarn build:client-and-server-bundles", 
+    "start:ssr": "node dist/server/main.js",
+
+### Produkční build - Prender
+
+    "build:generate-data": "ng run app:generate-data-for-prerender",
+    "prerender": "ng run app:prerender",
+
+### Anylýza budle size
+
+    "bundle-report-create": "yarn build:app --stats-json",
+    "bundle-report": "webpack-bundle-analyzer dist/app/stats.json",
+
