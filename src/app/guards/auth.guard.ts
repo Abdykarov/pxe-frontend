@@ -36,6 +36,13 @@ export class AuthGuard implements CanActivateChild {
             return false;
         }
 
+        /**
+         * In parc4u there are 3 types of secured views.
+         * 1. Consumer
+         * 2. Supplier
+         * 3. Admin
+         * This block check if user is allowed to access to section.
+         */
         if (!R.isNil(childRoute.data.userType)) {
             const routerUserType = childRoute.data.userType;
             const currentUserType = this.authService.currentUserValue.type;

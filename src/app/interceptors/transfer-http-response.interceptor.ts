@@ -18,6 +18,9 @@ import {
 } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 
+/**
+ * Interceptor for work with squidex.
+ */
 @Injectable({
     providedIn: 'root',
 })

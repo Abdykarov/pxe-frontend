@@ -9,6 +9,10 @@ import { IS_PRERENDER_PROVIDER } from 'src/app/app.constants';
 import { CmsService } from 'src/app/services/cms.service';
 import { environment } from 'src/environments/environment';
 
+/**
+ * Usefull for local dev and prerender.
+ * If is need connect to CMS directly.
+ */
 @Injectable({
     providedIn: 'root',
 })

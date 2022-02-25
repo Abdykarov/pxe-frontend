@@ -1,6 +1,6 @@
 # parc4u
 
-Aplikace slouží pro p
+Aplikace slouží pro výběr nového dodavatele energií. "srovnávač"
 
 ## Základní odkazy
 Wiki - https://wiki.lnd.bz/display/PXEPARC/PARC4Retail
@@ -75,7 +75,7 @@ Mapování cen do FE: https://wiki.lnd.bz/pages/viewpage.action?pageId=71241134
 - <b>moment</b> - Nepoužívat v public layoutu, jinak se zvedne budle size
 - <b>ng-recaptcha</b> - Formuláře v public sekci jsou chráněny přes recaptcha v2 invisible  
 - <b>ramda</b> - Funkcionální programování
-- <b>rxjs</b> - Reaktivní programování
+- <b>RxJS</b> - Reaktivní programování
 - <b>UI komponenty</b> - Vlastní z Lundegaard Angular devstacku
 
 ## Package.json - Scripty
@@ -101,3 +101,8 @@ Mapování cen do FE: https://wiki.lnd.bz/pages/viewpage.action?pageId=71241134
     "bundle-report-create": "yarn build:app --stats-json",
     "bundle-report": "webpack-bundle-analyzer dist/app/stats.json",
 
+
+## Jenkins build
+Popsáno zde
+
+https://jira.lnd.bz/browse/ICTOHELP-2299

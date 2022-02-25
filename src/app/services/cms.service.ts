@@ -43,7 +43,7 @@ export class CmsService {
         }
     };
 
-    public getAuthorizationHeaders = () => {
+    public getAuthorizationHeaders = (): string => {
         return `${this.tokenJwtResponse.token_type} ${this.tokenJwtResponse.access_token}`;
     };
 }

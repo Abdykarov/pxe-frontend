@@ -20,6 +20,9 @@ import {
 import { environment } from 'src/environments/environment';
 import { APP_FOLDER } from 'src/server/shared/consts';
 
+/**
+ * Prerender server interceptor which generate static json data for application.
+ */
 @Injectable()
 export class SquidexInterceptor implements HttpInterceptor {
     constructor(

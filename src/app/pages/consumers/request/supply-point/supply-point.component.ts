@@ -106,6 +106,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 ? SUPPLY_POINT_EDIT_TYPE.PROLONG
                 : SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
+        // There are 3 types of situation
+        // 1. New supply point =>  this.supplyPointId && supplyPointIdCopy == false
+        // 2. NON_CONCLUDED supply point. (from backStep) => this.supplyPointId
+        // 3. Prolongation from overview or detail supply point. In this situation form is prefill with previous values. supplyPointIdCopy
         if (this.supplyPointId || supplyPointIdCopy) {
             let supplyPointFound: ISupplyPoint = null;
             this.supplyService

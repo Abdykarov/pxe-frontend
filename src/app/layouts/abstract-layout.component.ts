@@ -65,14 +65,14 @@ export abstract class AbstractLayoutComponent
                         `/${this.CONSTS.PATHS.LOGOUT}`
                     ) !== -1;
 
-                if (
+                const isNotAuthUrl =
                     event &&
                     event.urlAfterRedirects &&
                     !inArray(event.urlAfterRedirects, [
                         `/${this.CONSTS.PATHS.LOGIN}`,
                         `/${this.CONSTS.PATHS.LOGOUT}`,
-                    ])
-                ) {
+                    ]);
+                if (isNotAuthUrl) {
                     this.cookieService.remove(
                         this.CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER
                     );
@@ -84,22 +84,22 @@ export abstract class AbstractLayoutComponent
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
-                if (
+
+                const isSecuredUrl =
                     event.urlAfterRedirects.indexOf(
                         `/${this.CONSTS.PATHS.SECURED}`
-                    ) !== -1 &&
-                    isPlatformBrowser(this.platformId)
-                ) {
+                    ) !== -1 && isPlatformBrowser(this.platformId);
+                if (isSecuredUrl) {
                     localStorage.setItem(
                         this.CONSTS.STORAGE_HELPERS.LAST_URL,
                         event.urlAfterRedirects
                     );
                 }
 
-                if (
+                const isNotSecuredUrl =
                     event &&
-                    event.url.indexOf(`/${this.CONSTS.PATHS.SECURED}`) === -1
-                ) {
+                    event.url.indexOf(`/${this.CONSTS.PATHS.SECURED}`) === -1;
+                if (isNotSecuredUrl) {
                     this.authService.setActualStateFromOtherTab();
                 }
 

@@ -14,6 +14,9 @@ import { UserStatus } from 'src/app/services/model/auth.model';
 import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
+/**
+ * If any acount waits for payment its block on payment view.
+ */
 @Injectable({
     providedIn: 'root',
 })
@@ -38,9 +41,11 @@ export class PaymentGuard implements CanActivateChild {
         const actualSupplyPointId =
             state.root.queryParams?.supplyPointId?.toString();
 
-        if (
+        const isInPaymentState =
             this.authService.currentUserValue?.userStatus ===
-                UserStatus.AWAITING_VERIFICATION &&
+            UserStatus.AWAITING_VERIFICATION;
+        if (
+            isInPaymentState &&
             (R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0 ||
                 actualSupplyPointId !== storedSupplyPointId)
         ) {
