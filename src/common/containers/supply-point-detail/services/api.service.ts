@@ -56,11 +56,13 @@ export class ApiService {
         };
     }
 
-    public sendContractConfirmationSms(contractId: string) {
+    public sendContractConfirmationSms(contractId: string): Observable<any> {
         return this.contractService.sendContractConfirmationSms(contractId);
     }
 
-    public updateSupplyForm(supplyPointFormData: ISupplyPointFormData) {
+    public updateSupplyForm(
+        supplyPointFormData: ISupplyPointFormData
+    ): Observable<any> {
         return this.supplyPointFactoryService.updateSupplyPointDetail(
             supplyPointFormData
         );

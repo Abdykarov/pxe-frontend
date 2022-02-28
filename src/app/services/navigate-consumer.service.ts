@@ -24,7 +24,6 @@ export class NavigateConsumerService {
         this.isPreviousStep(supplyPoint, allowedProgressStatus) ||
         this.isProgressStatusStep(supplyPoint, allowedProgressStatus);
 
-    // dont want to destroy something
     public routerToRequestStep = (
         supplyPoint: ISupplyPoint | ISupplyPointStatisticView,
         progressStatus: ProgressStatus = null
@@ -140,11 +139,10 @@ export class NavigateConsumerService {
         this.routerToRequestStep(supplyPoint);
     };
 
-    public navigateToRequests = (state = null) => {
+    public navigateToRequests = (state = null) =>
         this.router.navigate([ROUTES.ROUTER_REQUESTS], {
             state,
         });
-    };
 
     public navigateToSupplyPoints = (
         contractTypes: ContractTypes = ContractTypes.ACTIVE

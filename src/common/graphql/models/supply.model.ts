@@ -161,7 +161,7 @@ export interface ISupplyPoint {
 export enum ProgressStatus {
     COMPLETED = 'COMPLETED',
     NONE = 'NONE',
-    SIGNBOARD = 'SIGNBOARD', // Doesnot exist in BE, only for router. Theoretical it can be replace by NONE.
+    SIGNBOARD = 'SIGNBOARD', // Doesnot exist in BE, only for router. Theoretically it can be replaced by NONE.
     OFFER_STEP = 'OFFER_STEP',
     PERSONAL_DATA = 'PERSONAL_DATA',
     READY_FOR_SIGN = 'READY_FOR_SIGN',

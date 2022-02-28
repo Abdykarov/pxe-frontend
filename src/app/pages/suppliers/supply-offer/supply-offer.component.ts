@@ -91,11 +91,9 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         .pipe(
             filter(R.complement(R.equals)(null)),
             switchMap((commodityType: CommodityType) =>
-                this.offerService.findSupplierOffers(this.commodityType).pipe(
-                    map(({ data }) => {
-                        return data.findSupplierOffers;
-                    })
-                )
+                this.offerService
+                    .findSupplierOffers(this.commodityType)
+                    .pipe(map(({ data }) => data.findSupplierOffers))
             )
         );
 

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { map, take } from 'rxjs/operators';
 import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import {
@@ -15,12 +14,11 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class UtilsService {
     constructor(
         private readonly navigateConsumerService: NavigateConsumerService,
-        private readonly router: Router,
         protected supplyPointService: SupplyService
     ) {}
 
     public restoreContractAction(
-        evt,
+        evt: MouseEvent,
         supplyPointCopy: ISupplyPoint,
         allowedOperation: AllowedOperations = AllowedOperations.SHOW_DELIVERY_TO
     ) {
