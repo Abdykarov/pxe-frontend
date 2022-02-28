@@ -51,7 +51,9 @@ export class PricesComponent extends AbstractComponent implements OnInit {
             map(({ data }) => transformCodeList(data.findCodelistsByTypes))
         );
 
-    // Care for testing admin fill without tax and consumer see it with tax
+    // Care for testing
+    // Admin fill prices without tax
+    // Consumer see it with tax
     public save = (formData, activeSupplyPoint: ISupplyPoint) => {
         const data = formData.value;
         const isOnlySave = formData.data;

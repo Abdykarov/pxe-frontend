@@ -9,7 +9,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 /**
- * Process login by oauth
+ * Oauth login process
  * GOOGLE send token to BE -> redirect here
  */
 @Component({

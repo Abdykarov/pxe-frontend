@@ -15,7 +15,7 @@ import { NavigateConsumerService } from 'src/app/services/navigate-consumer.serv
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 /**
- * If any acount waits for payment its block on payment view.
+ * If any account is waiting for payment it is blocked on payment view.
  */
 @Injectable({
     providedIn: 'root',
