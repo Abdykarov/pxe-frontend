@@ -189,9 +189,8 @@
                     "options": {
                         "browserTarget": "app:build:production",
                         "serverTarget": "app:server:production",
-                        "routes": [
-                            "/"
-                        ]
+                        "guessRoutes": false,
+                        "routesFile": "dist/data/routes.txt"
                     },
                     "configurations": {
                         "production": {}
