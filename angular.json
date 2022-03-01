@@ -68,7 +68,14 @@
                                     "maximumWarning": "100kb"
                                 }
                             ],
-                            "optimization": true,
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": false
+                                },
+                                "fonts": true
+                            },
                             "outputHashing": "all",
                             "sourceMap": false,
                             "namedChunks": false,
@@ -182,8 +189,9 @@
                     "options": {
                         "browserTarget": "app:build:production",
                         "serverTarget": "app:server:production",
-                        "guessRoutes": false,
-                        "routesFile": "dist/data/routes.txt"
+                        "routes": [
+                            "/"
+                        ]
                     },
                     "configurations": {
                         "production": {}
