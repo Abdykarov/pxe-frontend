@@ -20,10 +20,12 @@ import {
 } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
+import { getConfigQuery } from 'src/common/graphql/queries/navigation';
+import { getCreateUserQuery } from 'src/common/graphql/queries/supply-point-import';
 import { processErrorScrolls } from 'src/common/utils';
 import { environment } from 'src/environments/environment';
 import fetch from 'unfetch';
-import { resolvers } from '../resolvers/';
+import { defaults, resolvers } from '../resolvers/';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -140,9 +142,19 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         // response.errors = null;
     });
 
-    // cache.write({
-    //     data: defaults,
-    // });
+    cache.writeQuery({
+        query: getConfigQuery,
+        data: {
+            ui: defaults.ui,
+        },
+    });
+
+    cache.writeQuery({
+        query: getCreateUserQuery,
+        data: {
+            createUser: defaults.createUser,
+        },
+    });
 
     const link = from([error, auth, http]);
     return {
