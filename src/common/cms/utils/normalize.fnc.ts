@@ -11,7 +11,7 @@ export const normalize = R.cond([
         (data) =>
             normalize({
                 ...data,
-                img: data.img[0].url,
+                img: data.img[0]?.url,
             }),
     ],
     [
