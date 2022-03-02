@@ -86,6 +86,11 @@ Mapování cen do FE: https://wiki.lnd.bz/pages/viewpage.action?pageId=71241134
     "start:test": "yarn start --proxy-config proxy-test.conf.json", // Puštění aplikace oproti testu
     "start:static": "yarn start static", // Puštění aplikace statiku
 
+### Puštění lokálního BE
+
+https://bitbucket.org/lundegaard/pxe-parc4retail-backend/src/develop/README.md
+
+
 ### Produkční build - SSR
 
     "build:ssr": "yarn build:client-and-server-bundles", 
