@@ -17,6 +17,8 @@ Výpočet cen pro parametry: https://wiki.lnd.bz/pages/viewpage.action?pageId=18
 
 Mapování cen do FE: https://wiki.lnd.bz/pages/viewpage.action?pageId=71241134
 
+Ostatní věci ohledně devstacku popsáno: https://wiki.lnd.bz/display/DS/Angular+DevStack
+
 ## Struktura projektu
 
 - <b>pdf-export</b> Složka pro, kde se obsahují vzorové smlouvy. Po každé změně ve smlouvách na BE je nutné tyto HTML aktualizovat a vygenerované .PDF přidat do vzorových smluv a staré do archivu.
@@ -111,3 +113,29 @@ https://bitbucket.org/lundegaard/pxe-parc4retail-backend/src/develop/README.md
 Popsáno zde
 
 https://jira.lnd.bz/browse/ICTOHELP-2299
+
+## Squidex
+
+### Prostředí
+Preview - https://squidex.lnd.bz
+
+Test - https://squidex-preview.lnd.bz
+
+Prod - https://squidex-prod.lnd.bz
+
+### Job
+
+#### Preview
+Job na pusteni squidexu na preview nedělá nic.
+
+#### Test 
+Při puštění jobu se se Squidexem nic neděje.
+
+<i><u><b> Test squidex musí být vždy 1:1 s produkcí !!! </b></i></u>
+
+#### Production
+Při puštění jobnu na produkci se kopíruje test squidex na prod squidex.
+
+Zde bylo třeba pokaždý změnit rules a upravit url adresu z test.parc4u.cz na parc4u.cz.
+
+Jelikož je nově implementován prerender a web je statický, tak toto není třeba dělat.
