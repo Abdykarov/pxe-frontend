@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, of } from 'rxjs';
 import { map, retry, switchMap, takeUntil } from 'rxjs/operators';
-import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
+import { CONSTS, GTM_CONSTS } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
@@ -10,10 +10,10 @@ import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import {
-    IDocumentType,
+    DocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
@@ -62,7 +62,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
-    public documentType = IDocumentType;
+    public documentType = DocumentType;
     public documentTypeContract: IResponseDataDocument = null;
     public documentTypeInformation: IResponseDataDocument = null;
     public documentTypeUnsetProlongation: IResponseDataDocument = null;
@@ -85,7 +85,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private documentService: DocumentService,
         public faqService: FaqService,
         private gtmService: GTMService,
-        public navigateRequestService: NavigateRequestService,
+        public navigateConsumerService: NavigateConsumerService,
         public route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService
@@ -162,7 +162,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                               .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY))
                         : of(null);
 
-                    this.navigateRequestService.checkCorrectStep(
+                    this.navigateConsumerService.checkCorrectStep(
                         this.supplyPoint,
                         ProgressStatus.READY_FOR_SIGN
                     );
@@ -225,7 +225,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         }
     };
 
-    public saveDocument = (contractId: string, documentType: IDocumentType) => {
+    public saveDocument = (contractId: string, documentType: DocumentType) => {
         this.documentLoading = true;
         this.globalError = [];
         this.documentService
@@ -247,7 +247,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     };
 
     // v pripade budouci zmeny
-    public openDocument = (contractId: string, documentType: IDocumentType) => {
+    public openDocument = (contractId: string, documentType: DocumentType) => {
         const windowReference = window && window.open();
         this.documentLoading = true;
         this.globalError = [];
@@ -284,7 +284,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
 
     public chooseNewOfferAction = (evt) => {
         evt.preventDefault();
-        this.navigateRequestService.routerToRequestStep(
+        this.navigateConsumerService.routerToRequestStep(
             this.supplyPoint,
             ProgressStatus.OFFER_STEP
         );
@@ -313,11 +313,12 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             label: GTM_CONSTS.LABELS.STEP_FIVE,
                             userID: this.cryptoService.hashedUserId,
                         });
-                        this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], {
-                            queryParams: {
+                        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                            ProgressStatus.WAITING_FOR_PAYMENT,
+                            {
                                 supplyPointId: this.supplyPointId,
-                            },
-                        });
+                            }
+                        );
                     } else {
                         this.globalError = [defaultErrorMessage];
                         this.formLoading = false;
@@ -353,9 +354,5 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                     this.cd.markForCheck();
                 }
             );
-    };
-
-    public redirectToRequest = () => {
-        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
     };
 }

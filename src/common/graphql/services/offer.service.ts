@@ -35,10 +35,14 @@ export class OfferService {
     private setIsLastUpdatedToFalse = (offers: IOffer[]): IOffer[] =>
         R.map(R.assoc('isLastUpdated', false))(offers);
 
-    public findSupplierOffers = () =>
+    public findSupplierOffers = (commodityType: CommodityType) =>
         this.apollo.watchQuery<any>({
             query: findSupplierOffersQuery,
             fetchPolicy: 'network-only',
+            nextFetchPolicy: 'cache-first',
+            variables: {
+                commodityType,
+            },
         }).valueChanges;
 
     public findSupplyPointOffers = (identificationNumber: string) =>
@@ -254,53 +258,62 @@ export class OfferService {
     };
 
     public markAll = (mark: boolean, commodityType: CommodityType): number => {
-        const client = this.apollo.getClient();
+        const client = this.apollo.client;
         const { findSupplierOffers: offers } = client.readQuery({
             query: findSupplierOffersQuery,
+            variables: {
+                commodityType,
+            },
         });
         let numberOfMarked = 0;
         const markedOffers = R.map((offer: IOffer) => {
-            if (
-                offer.commodityType === commodityType &&
-                offer.status === IOfferStatus.ACTIVE
-            ) {
+            if (offer.status === IOfferStatus.ACTIVE) {
                 numberOfMarked++;
                 offer.marked = mark;
             }
             return offer;
         }, offers);
+
         client.writeQuery({
             query: findSupplierOffersQuery,
             data: {
-                findSupplierOffers: markedOffers,
+                findSupplierOffers: R.clone(markedOffers),
+            },
+            variables: {
+                commodityType,
             },
         });
+
         return mark ? numberOfMarked : 0;
     };
 
     public markOne = (id: string, commodityType: CommodityType): number => {
         let numberOfMarked = 0;
-        const client = this.apollo.getClient();
+        const client = this.apollo.client;
         const { findSupplierOffers: offers } = client.readQuery({
             query: findSupplierOffersQuery,
+            variables: {
+                commodityType,
+            },
         });
+
         const updatedOffers = R.map((offer: IOffer) => {
             if (offer.id === id) {
                 offer.marked = !offer.marked;
             }
-            if (
-                offer.marked &&
-                offer.commodityType === commodityType &&
-                offer.status === IOfferStatus.ACTIVE
-            ) {
+            if (offer.marked && offer.status === IOfferStatus.ACTIVE) {
                 numberOfMarked++;
             }
             return offer;
         }, offers);
+
         client.writeQuery({
             query: findSupplierOffersQuery,
             data: {
-                findSupplierOffers: updatedOffers,
+                findSupplierOffers: R.clone(updatedOffers),
+            },
+            variables: {
+                commodityType,
             },
         });
         return numberOfMarked;

@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import * as R from 'ramda';
+import {
+    CODE_LIST,
+    CONTRACT_END_TYPE,
+    DEFAULT_QR_CODE_SETTING,
+} from 'src/app/app.constants';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import {
     ContractDeleteReason,
     IQRCodeSetting,
@@ -129,7 +135,8 @@ export class ContractService {
     public unsetContractProlongation = (
         supplyPointId: string,
         contractId: string,
-        smsCode: string
+        smsCode: string,
+        supplyPointDetailForm: SupplyPointFormComponent
     ) =>
         this.apollo.mutate<any>({
             mutation: unsetContractProlongationMutation,
@@ -138,27 +145,31 @@ export class ContractService {
                 smsCode,
             },
             update: (cache, { data }) => {
-                const { getSupplyPoint } = cache.readQuery({
+                const result = cache.readQuery({
                     query: getSupplyPointQuery,
                     variables: {
                         supplyPointId,
+                        contractId,
                     },
                 });
-
-                getSupplyPoint.contract.prolong = false;
-
-                getSupplyPoint.allowedOperations =
-                    getSupplyPoint.allowedOperations.filter(
+                const { getSupplyPoint: supplyPoint } = <any>result;
+                supplyPoint.contract.prolong = false;
+                supplyPoint.allowedOperations =
+                    supplyPoint.allowedOperations.filter(
                         (allowedOperation: AllowedOperations) =>
                             allowedOperation !==
                             AllowedOperations.UNSET_AUTOMATIC_PROLONGATION
                     );
+                supplyPoint.contractEndType = R.find(
+                    R.propEq('code', CONTRACT_END_TYPE.CONTRACT_END_TERM)
+                )(supplyPointDetailForm.codeLists[CODE_LIST.CONTRACT_END_TYPE]);
 
                 cache.writeQuery({
                     query: getSupplyPointQuery,
-                    data: { getSupplyPoint },
+                    data: { getSupplyPoint: { ...supplyPoint } },
                     variables: {
                         supplyPointId,
+                        contractId,
                     },
                 });
             },

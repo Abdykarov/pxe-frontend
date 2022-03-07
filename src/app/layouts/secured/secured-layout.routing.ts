@@ -60,23 +60,6 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                loadChildren: () =>
-                    import(
-                        '../../pages/consumers/supply-point-selection/supply-point-selection.module'
-                    ).then((m) => m.SupplyPointSelectionModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-                data: {
-                    isSimpleFooter: false,
-                    isPublic: false,
-                    userType: IUserTypes.CONSUMER,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
-            },
-            {
                 path: CONSTS.PATHS.CREATE_USER,
                 loadChildren: () =>
                     import(
@@ -97,42 +80,8 @@ const routes = [
                 path: CONSTS.PATHS.SUPPLY_POINTS,
                 loadChildren: () =>
                     import(
-                        '../../pages/consumers/supply-points/supply-points.module'
-                    ).then((m) => m.SupplyPointsModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-                data: {
-                    isSimpleFooter: false,
-                    isPublic: false,
-                    userType: IUserTypes.CONSUMER,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
-            },
-            {
-                path: `${CONSTS.PATHS.HISTORY}/:supplyPointId/:contractId`,
-                loadChildren: () =>
-                    import(
-                        '../../pages/consumers/history/detail/history-detail.module'
-                    ).then((m) => m.HistoryDetailModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-                data: {
-                    isSimpleFooter: false,
-                    isPublic: false,
-                    userType: IUserTypes.CONSUMER,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
-            },
-            {
-                path: CONSTS.PATHS.HISTORY,
-                loadChildren: () =>
-                    import(
-                        '../../pages/consumers/history/overview/history-overview.module'
-                    ).then((m) => m.HistoryOverviewModule),
+                        '../../pages/consumers/supply-points-overview/supply-points-overview.module'
+                    ).then((m) => m.SupplyPointsOverviewModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

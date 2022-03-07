@@ -14,13 +14,13 @@ import { of } from 'rxjs';
 import { concatMap, map, takeUntil } from 'rxjs/operators';
 import {
     GTM_CONSTS,
-    ROUTES,
     SUPPLY_POINT_EDIT_TYPE,
     S_ANALYTICS,
 } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -78,6 +78,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private contractService: ContractService,
         private cryptoService: CryptoService,
         private gtmService: GTMService,
+        private navigateConsumerService: NavigateConsumerService,
         private route: ActivatedRoute,
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
@@ -291,12 +292,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         userID: this.cryptoService?.hashedUserId,
                     });
                     this.cd.markForCheck();
-                    this.router.navigate(
-                        [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
+                    this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                        ProgressStatus.OFFER_STEP,
                         {
-                            queryParams: {
-                                supplyPointId,
-                            },
+                            supplyPointId,
                         }
                     );
                 },

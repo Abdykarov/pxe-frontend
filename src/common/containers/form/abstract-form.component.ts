@@ -151,6 +151,9 @@ export class AbstractFormComponent
         )(form.controls);
     };
 
+    public setFieldValue = (fieldName: string, value: any) =>
+        this.form.controls[fieldName].setValue(value);
+
     public getFieldValue = (fieldName: string) => {
         return this.form.get(fieldName).value;
     };

@@ -4,7 +4,7 @@
         bannerDescription="Zadali jste správně informace ohledně vašeho odběrného místa?"
         buttonLabel="Zkontrolovat zadané informace"
         (buttonAction)="
-            navigateRequestService.backStepAction(
+            navigateConsumerService.backStepAction(
                 supplyPoint,
                 PREVIOUS_PROGRESS_STATUS
             )
@@ -70,7 +70,7 @@
                         label="Krok zpět"
                         type="secondary"
                         (action)="
-                            navigateRequestService.backStepAction(
+                            navigateConsumerService.backStepAction(
                                 supplyPoint,
                                 PREVIOUS_PROGRESS_STATUS
                             )

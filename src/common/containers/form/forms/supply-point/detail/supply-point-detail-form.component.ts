@@ -23,16 +23,11 @@ import {
     CONSTS,
     CONTRACT_END_TYPE,
     CONTRACT_END_TYPE_TRANSLATE_MAP,
-    ROUTES,
     SUBJECT_TYPE_OPTIONS,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import { DocumentService } from 'src/app/services/document.service';
-import {
-    IDocumentType,
-    IResponseDataDocument,
-} from 'src/app/services/model/document.model';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
     confirmConfirmSaveSupplyPointConfig,
@@ -43,15 +38,17 @@ import {
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { UtilsService } from 'src/common/containers/supply-point-detail/services/utils.service';
 import {
     AllowedOperations,
     CommodityType,
     ICodelistOptions,
     ISupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { parseRestAPIErrors, transformCodeList } from 'src/common/utils';
+import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -73,8 +70,14 @@ export class SupplyPointDetailFormComponent
     @Input()
     public isForm = true;
 
+    @Input()
+    public restoreContractAction: Function = null;
+
     @Output()
     public finallyNextContractAction?: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public downloadPfdAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
@@ -96,9 +99,10 @@ export class SupplyPointDetailFormComponent
         private documentService: DocumentService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
-        private navigateRequestService: NavigateRequestService,
+        private navigateConsumerService: NavigateConsumerService,
         private router: Router,
-        private supplyService: SupplyService
+        private supplyService: SupplyService,
+        public utilsService: UtilsService
     ) {
         super(fb);
     }
@@ -205,14 +209,16 @@ export class SupplyPointDetailFormComponent
         }
     };
 
-    public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) => {
-        const state = {
-            supplyPointCopy: {
-                ...supplyPoint,
-            },
-        };
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], { state });
-    };
+    public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) =>
+        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+            ProgressStatus.SUPPLY_POINT,
+            null,
+            {
+                supplyPointCopy: {
+                    ...supplyPoint,
+                },
+            }
+        );
 
     public fixAnnualConsumptionByUnit = () => {
         const annualConsumptionUnit = this.supplyPoint.annualConsumptionUnit;
@@ -332,28 +338,5 @@ export class SupplyPointDetailFormComponent
         }
 
         this.submitAction.emit(form);
-    };
-
-    public downloadPdf = () => {
-        this.formLoading = true;
-        this.documentService
-            .getDocument(
-                this.supplyPoint.contract.contractId,
-                IDocumentType.CONTRACT
-            )
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                (responseDataDocument: IResponseDataDocument) => {
-                    this.documentService.documentSave(responseDataDocument);
-                    this.formLoading = false;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    const message = parseRestAPIErrors(error);
-                    this.globalError = [message];
-                    this.formLoading = false;
-                    this.cd.markForCheck();
-                }
-            );
     };
 }

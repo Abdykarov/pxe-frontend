@@ -8,7 +8,6 @@ import { IJwtPayload } from 'src/app/services/model/auth.model';
 })
 export class CryptoService {
     constructor(private authService: AuthService) {
-        // todo unsubcribe
         authService.currentUserSubject$.subscribe(
             (jwtPayloadSubjectSubject: IJwtPayload) => {
                 authService.gtmService.setUserId(

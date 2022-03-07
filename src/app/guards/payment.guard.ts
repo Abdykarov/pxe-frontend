@@ -11,12 +11,18 @@ import { Observable } from 'rxjs';
 import { ROUTES } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserStatus } from 'src/app/services/model/auth.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PaymentGuard implements CanActivateChild {
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private navigateConsumerService: NavigateConsumerService
+    ) {}
 
     canActivateChild(
         childRoute: ActivatedRouteSnapshot,
@@ -39,12 +45,13 @@ export class PaymentGuard implements CanActivateChild {
                 actualSupplyPointId !== storedSupplyPointId)
         ) {
             if (storedSupplyPointId) {
-                const extras = {
-                    queryParams: {
-                        supplyPointId: storedSupplyPointId,
-                    },
+                const queryParams = {
+                    supplyPointId: storedSupplyPointId,
                 };
-                this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
+                this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                    ProgressStatus.WAITING_FOR_PAYMENT,
+                    queryParams
+                );
             } else {
                 this.authService.logoutForced();
             }

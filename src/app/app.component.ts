@@ -10,13 +10,13 @@ import {
 import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { GTMService } from 'src/app/services/gtm.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './services/auth.service';
-import { GTMService } from './services/gtm.service';
 
 @Component({
     selector: 'lnd-root',

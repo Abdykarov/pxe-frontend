@@ -1,10 +1,10 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID, PLATFORM_ID } from '@angular/core';
 import * as R from 'ramda';
+import { BUILD_ID_PROVIDER, CONSTS, GTM_CONSTS } from 'src/app/app.constants';
 import { ScriptService } from 'src/app/services/external-resources.service';
 import { ExternalResourceType } from 'src/app/services/model/widget.model';
 import { environment } from 'src/environments/environment';
-import { BUILD_ID_PROVIDER, CONSTS, GTM_CONSTS } from '../app.constants';
 
 declare const gtag;
 

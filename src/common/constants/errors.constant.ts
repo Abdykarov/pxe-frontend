@@ -265,9 +265,6 @@ export const errorFieldMessages = {
     benefitName: {
         required: 'Vyplňte benefit.',
     },
-    benefitUrl: {
-        url: 'Vyplňte validní URL adresu.',
-    },
     birthDate: {
         required: 'Vyplňte datum narození.',
         bsDateMaxDate: 'Nesmíte být mladší 18 let.',
@@ -320,6 +317,8 @@ export const errorFieldMessages = {
         required: 'Vyberte ze seznamu, jakou máte distribuční sazbu.',
     },
     ean: {
+        canBeProlongInFuture:
+            'Toto odběrné místo je již existuje a bude prolongováno.',
         required:
             'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
         ean:
@@ -329,6 +328,8 @@ export const errorFieldMessages = {
             'Vyplněné identifikační číslo odběrného místa již registrujeme.',
     },
     eic: {
+        canBeProlongInFuture:
+            'Toto odběrné místo je již existuje a bude prolongováno.',
         required:
             'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
         eic:
@@ -486,6 +487,9 @@ export const errorFieldMessages = {
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',
+    },
+    url: {
+        url: 'Vyplňte validní URL adresu.',
     },
     contractEndTypeId: {
         required: 'Zvolte typ ukončení platnosti aktuální smlouvy.',

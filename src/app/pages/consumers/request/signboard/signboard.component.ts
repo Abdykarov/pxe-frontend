@@ -5,14 +5,14 @@ import {
     ElementRef,
     ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import * as R from 'ramda';
 import { fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
+import { CONSTS, GTM_CONSTS } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
@@ -42,9 +42,9 @@ export class SignboardComponent extends AbstractComponent {
     constructor(
         public authService: AuthService,
         public cd: ChangeDetectorRef,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
-        private router: Router,
-        private cryptoService: CryptoService
+        public navigateConsumerService: NavigateConsumerService
     ) {
         super();
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
@@ -75,7 +75,9 @@ export class SignboardComponent extends AbstractComponent {
             label: GTM_CONSTS.LABELS.STEP_ONE,
             userID: this.cryptoService.hashedUserId,
         });
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+            ProgressStatus.SUPPLY_POINT
+        );
     };
 
     public videoEnded = (event) => {

@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 import { EnvironmentService } from 'src/app/services/environment.service';
-import { OAuthService } from 'src/app/services/OAuth.service';
+import { OAuthType } from 'src/app/services/model/o-auth.model';
+import { OAuthService } from 'src/app/services/o-auth.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 

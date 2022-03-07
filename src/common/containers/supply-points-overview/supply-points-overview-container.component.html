@@ -1,0 +1,274 @@
+<ng-template #additionalInfoTemplate let-data="data">
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO) ||
+         (data?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_NEXT_CONTRACT)"
+        class="row"
+    >
+        <div
+            *ngIf="(data | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: data.contract.deliveryTo) as contractEndInDays"
+            class="col-12"
+        >
+            <ng-container
+                *ngIf="data?.allowedOperations |
+                    isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO"
+            >
+                <pxe-badge
+                    type="info"
+                    [isLink]="true"
+                    (action)="utilsService.restoreContractAction(
+                        $event,
+                        data,
+                        allowedOperations.SHOW_DELIVERY_TO
+                   )"
+                >
+                    Platnost končí za {{contractEndInDays}} {{contractEndInDays
+                    | plural: 'day'}} - Obnovit smlouvu
+                </pxe-badge>
+            </ng-container>
+            <ng-container
+                *ngIf="data?.allowedOperations |
+                    isAllowedOperation: allowedOperations.FINALIZE_NEXT_CONTRACT"
+            >
+                <pxe-badge
+                    type="info"
+                    [isLink]="true"
+                    (action)="utilsService.restoreContractAction(
+                        $event,
+                        data,
+                        allowedOperations.FINALIZE_NEXT_CONTRACT
+                   )"
+                >
+                    Dokončit navazující rozpracovanou smlouvu
+                </pxe-badge>
+            </ng-container>
+        </div>
+    </div>
+
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT)"
+        class="row"
+    >
+        <pxe-badge
+            type="info"
+            [isLink]="true"
+            (action)="utilsService.restoreContractAction(
+                            $event,
+                            data,
+                            allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT
+                       )"
+        >
+            Dokončit obnovovací smlouvu
+        </pxe-badge>
+    </div>
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.OPEN_NEXT_CONTRACT)"
+        class="row"
+    >
+        <div class="col-12">
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="utilsService.restoreContractAction($event, data, allowedOperations.OPEN_NEXT_CONTRACT)"
+            >
+                Otevřít navazující smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.CREATE_FROM_HISTORY_CONTRACT)"
+        class="row"
+    >
+        <div class="col-12">
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="utilsService.restoreContractAction($event, data, allowedOperations.CREATE_FROM_HISTORY_CONTRACT)"
+            >
+                Obnovit smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+    <div
+        *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY)"
+        class="row"
+    >
+        <div class="col-12">
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="utilsService.restoreContractAction($event, data, allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY)"
+            >
+                Otevřít novou verzy OM
+            </pxe-badge>
+        </div>
+    </div>
+</ng-template>
+
+<!--<lnd-alert [type]="'danger'" [isDismissible]="false" *ngIf="error">-->
+<!--    <ng-container *ngFor="let message of errorMessages">-->
+<!--        {{ message }}<br />-->
+<!--    </ng-container>-->
+<!--</lnd-alert>-->
+<!--<lnd-placeloader-->
+<!--    [loading]="dataLoading && !errorMessages.length"-->
+<!--&gt;</lnd-placeloader>-->
+<!--<ng-container-->
+<!--    *ngIf="!dataLoading && supplyPoints && !supplyPoints.length && supplyPointStatistic"-->
+<!--&gt;-->
+<!--    <lnd-info-banner-->
+<!--        [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu'"-->
+<!--        [showButton]="false"-->
+<!--    >-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-8 offset-md-2">-->
+<!--                <p>-->
+<!--                    V případě zájmu o dodávku energií pro nové odběrné místo,-->
+<!--                    pokračujte prosím zadáním odběrného místa<ng-container-->
+<!--                        *ngIf="supplyPointStatistic.notConcludedCount"-->
+<!--                    ></ng-container>-->
+<!--                    <ng-container-->
+<!--                        *ngIf="supplyPointStatistic.notConcludedCount"-->
+<!--                    >-->
+<!--                        Pokud už máte vytvořené odběrné místo, můžete se vrátit-->
+<!--                        k vaší rozpracované smlouvě a dokončit proces-->
+<!--                    </ng-container>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div-->
+<!--                *ngIf="supplyPointStatistic.notConcludedCount"-->
+<!--                class="col-md-4 offset-md-2"-->
+<!--            >-->
+<!--                <lnd-button-->
+<!--                    (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"-->
+<!--                    [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"-->
+<!--                    type="link"-->
+<!--                >-->
+<!--                </lnd-button>-->
+<!--            </div>-->
+<!--            <div-->
+<!--                class="col-md-4"-->
+<!--                [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"-->
+<!--            >-->
+<!--                <lnd-button-->
+<!--                    (action)="createSupplyPoint($event)"-->
+<!--                    label="Nové odběrné místo"-->
+<!--                    type="primary"-->
+<!--                >-->
+<!--                </lnd-button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </lnd-info-banner>-->
+<!--</ng-container>-->
+<div class="row mb-5">
+    <div class="col text-center">
+        <p class="mb-2">
+            Pokud máte zájem o dodávku energií pro další odběrné místo,
+            doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou smlouvu.
+        </p>
+        <p>Pokud ne, pokračujte založením nového odběrného místa.</p>
+        <lnd-button
+            label="ZALOŽIT NOVÉ ODBĚRNÉ MÍSTO"
+            type="secondary"
+            (action)="createSupplyPoint($event)"
+        ></lnd-button>
+    </div>
+</div>
+<ul class="text-center link-list mb-4">
+    <li
+        *ngFor="let configLinksToContractType of configLinksToContractTypes"
+        class="link-list__item"
+    >
+        <a
+            class="link-list__link"
+            [class.link-list__link--active]="supplyPointsOverviewContainerFacade.activeContractTypes === configLinksToContractType.contractType"
+            (click)="changeActiveContractType(configLinksToContractType.contractType)"
+        >
+            {{configLinksToContractType.text}}
+        </a>
+    </li>
+</ul>
+
+<div
+    *ngIf="supplyPointsOverviewContainerFacade.globalError$ | async as globalError"
+    class="row"
+>
+    <div *ngIf="globalError?.length !== 0" class="col-12">
+        <lnd-alert type="danger">
+            <ng-container *ngFor="let error of globalError">
+                {{ error }}<br />
+            </ng-container>
+        </lnd-alert>
+    </div>
+</div>
+
+<ng-container *ngIf="supplyPointsOverviewContainerFacade.isLoading$ | async">
+    <lnd-placeloader [loading]="true"></lnd-placeloader>
+</ng-container>
+
+<div
+    *ngIf="supplyPointsOverviewContainerFacade.supplyPoints$ | async as supplyPoints"
+    class="supply-points"
+>
+    <ng-container *ngIf="supplyPoints.length !== 0">
+        <pxe-supply-point
+            *ngFor="let supplyPoint of supplyPoints; trackBy: trackSupplyPoint"
+            [additionalInfoTemplate]="additionalInfoTemplate"
+            [data]="supplyPoint"
+            (action)="navigateToSupplyPointDetail($event)"
+        ></pxe-supply-point>
+    </ng-container>
+
+    <lnd-info-banner
+        *ngIf="supplyPoints.length === 0"
+        bannerTitle="Zatím nemáte žádnou {{pluralContractType[supplyPointsOverviewContainerFacade.activeContractTypes]}} smlouvu"
+        [showButton]="false"
+    >
+        <ng-container
+            *ngIf="supplyPointsOverviewContainerFacade.supplyPointStatistic$ | async as supplyPointStatistic"
+        >
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <p>
+                        V případě zájmu o dodávku energií pro nové odběrné
+                        místo, pokračujte prosím zadáním odběrného místa
+                        <ng-container
+                            *ngIf="supplyPointStatistic.notConcludedCount"
+                        ></ng-container>
+                        <ng-container
+                            *ngIf="supplyPointStatistic.notConcludedCount"
+                        >
+                            Pokud už máte vytvořené odběrné místo, můžete se
+                            vrátit k vaší rozpracované smlouvě a dokončit proces
+                        </ng-container>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div
+                    *ngIf="supplyPointStatistic.notConcludedCount"
+                    class="col-md-4 offset-md-2"
+                >
+                    <lnd-button
+                        (action)="completeRequestAction.completeRequestAction(supplyPointStatistic.notConcludedItems)"
+                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Zobrazit rozpracované smlouvy' : 'Dokončit rozpracovanou smlouvu'"
+                        type="link"
+                    >
+                    </lnd-button>
+                </div>
+                <div
+                    class="col-md-4"
+                    [class.offset-md-4]="!supplyPointStatistic.notConcludedCount"
+                >
+                    <lnd-button
+                        (action)="createSupplyPoint($event)"
+                        label="Nové odběrné místo"
+                        type="primary"
+                    >
+                    </lnd-button>
+                </div>
+            </div>
+        </ng-container>
+    </lnd-info-banner>
+</div>

@@ -1,3 +1,33 @@
+<div
+    *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT"
+    class="row"
+>
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <lnd-banner-ui
+            buttonLabel="Doknčit rozpacovanou smlouvu (novou)"
+            [data]="{
+                    text: 'Some texts'
+                }"
+            (customBannerAction)="utilsService.restoreContractAction($event, supplyPoint, allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT)"
+        ></lnd-banner-ui>
+    </div>
+</div>
+
+<div
+    *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY"
+    class="row"
+>
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <lnd-banner-ui
+            buttonLabel="Otevrit uzavrenou smlouvu (novou)"
+            [data]="{
+                    text: 'Some texts'
+                }"
+            (customBannerAction)="utilsService.restoreContractAction($event, supplyPoint, allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY)"
+        ></lnd-banner-ui>
+    </div>
+</div>
+
 <ng-container
     *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO"
 >
@@ -34,10 +64,12 @@
 </div>
 
 <ng-container
-    *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo']) && supplyPoint.contract.nextContractId &&
-                     !supplyPoint.contract.isNextContractConcluded && (today | dateDiff: supplyPoint.contract.deliveryTo) as contractEndInDays"
+    *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_NEXT_CONTRACT"
 >
-    <div *ngIf="contractEndInDays >= 0" class="row">
+    <div
+        *ngIf="(today | dateDiff: supplyPoint.contract.deliveryTo) as contractEndInDays"
+        class="row"
+    >
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-banner-ui
                 buttonLabel="Dokončit"
@@ -59,6 +91,24 @@
         </div>
     </div>
 </ng-container>
+
+<div
+    class="row"
+    *ngIf="
+                supplyPoint?.allowedOperations
+                    | isAllowedOperation: allowedOperations.CREATE_FROM_HISTORY_CONTRACT
+            "
+>
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <lnd-banner-ui
+            buttonLabel="Najít dodavatele"
+            [data]="{
+                            text: 'Obnovit smlouvu'
+                        }"
+            (customBannerAction)="restoreContractAction($event,supplyPoint)"
+        ></lnd-banner-ui>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
@@ -432,7 +482,7 @@
                         </h2>
                         <a
                             [class.link--disabled]="formLoading"
-                            (click)="downloadPdf()"
+                            (click)="downloadPfdAction.emit(supplyPoint.contract?.contractId)"
                         >
                             Stáhnout</a
                         >
@@ -481,7 +531,9 @@
                     </div>
                     <ng-container *ngIf="contractActionsTemplate">
                         <ng-container
-                            *ngTemplateOutlet="contractActionsTemplate"
+                            *ngTemplateOutlet="contractActionsTemplate;
+                                               context: { supplyPoint: supplyPoint }
+                                              "
                         ></ng-container>
                     </ng-container>
                 </div>

@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
-import { OAuthService } from 'src/app/services/OAuth.service';
+import { OAuthService } from 'src/app/services/o-auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ILogin } from 'src/common/cms/models/login';
 import { ISeo } from 'src/common/cms/models/seo';

@@ -26,7 +26,7 @@
                     'Zadejte odběrné místo a my vám hned dáme nabídky'
                 "
                 [buttonLabel]="'Nové odběrné místo'"
-                (buttonAction)="navigateToNewSupplyPoint()"
+                (buttonAction)="navigateConsumerService.navigateToRequestStepByProgressStatus(ProgressStatus.SUPPLY_POINT)"
             ></lnd-info-banner>
         </div>
     </div>
@@ -46,7 +46,7 @@
                     : 'Máte rozpracováno více smluv.'
         }"
         (customBannerAction)="
-            completeRequestAction(supplyPointStatistic.notConcludedItems)
+            supplyPointUtilsService.completeRequestAction(supplyPointStatistic.notConcludedItems)
         "
     ></lnd-banner-ui>
     <div class="row mt-4">
@@ -71,11 +71,11 @@
                 [supplyPointsEndingData]="
                     supplyPointStatistic.showDeliveryItems
                 "
-                (requestListAction)="navigateToRequests()"
+                (requestListAction)="navigateConsumerService.navigateToRequests()"
                 (newSupplierAction)="
                     supplierAction(supplyPointStatistic.showDeliveryItems)
                 "
-                (supplyPointsListAction)="navigateToSupplyPoints()"
+                (supplyPointsListAction)="navigateConsumerService.navigateToSupplyPoints()"
             >
             </pxe-supply-points-summary>
         </div>

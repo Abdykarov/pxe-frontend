@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { BehaviorSubject, combineLatest, forkJoin, Observable } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import {
     CODE_LIST_TYPES,
     commodityTypes,
@@ -33,7 +33,6 @@ import {
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
-    IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
@@ -87,31 +86,14 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     private codeLists$: Observable<any> = this.supplyService
         .findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
         .pipe(map(({ data }) => transformCodeList(data.findCodelistsByTypes)));
-    private offers$: Observable<IOffer[]> = this.offerService
-        .findSupplierOffers()
+    private offers$: Observable<IOffer[]> = this.commodityType$
+        .asObservable()
         .pipe(
-            map(({ data }) =>
-                R.filter(
-                    R.whereEq({
-                        commodityType: this.commodityType,
-                        status: IOfferStatus.ACTIVE,
-                    })
-                )(data.findSupplierOffers)
-            ),
-            map((offers) =>
-                offers.sort(function (first, second) {
-                    if (
-                        first?.name?.toLowerCase() < second?.name?.toLowerCase()
-                    ) {
-                        return -1;
-                    }
-                    if (
-                        first?.name?.toLowerCase() > second?.name?.toLowerCase()
-                    ) {
-                        return 1;
-                    }
-                    return 0;
-                })
+            filter(R.complement(R.equals)(null)),
+            switchMap((commodityType: CommodityType) =>
+                this.offerService
+                    .findSupplierOffers(this.commodityType)
+                    .pipe(map(({ data }) => data.findSupplierOffers))
             )
         );
 

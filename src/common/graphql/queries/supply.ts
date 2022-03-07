@@ -177,6 +177,8 @@ export const supplyPointFragment = gql`
             }
             prolong
         }
+        closedByContractEntityId
+        closedByContractIsConcluded
         imported
         progressStatus
         allowedOperations
@@ -253,6 +255,19 @@ export const getSupplyPointQuery = gql`
     ${supplyPointFragment}
 `;
 
+export const findSupplyPointByContractIdQuery = gql`
+    query findSupplyPointByContractId(
+        $contractId: ID
+        $skipInfoAboutRelationContracts: Boolean = true
+        $skipOfferValidity: Boolean = true
+    ) {
+        findSupplyPointByContractId(contractId: $contractId) {
+            ...SupplyPointFragment
+        }
+    }
+    ${supplyPointFragment}
+`;
+
 export const findSupplyPointsByContractStatusQuery = gql`
     query findSupplyPointsByContractStatus(
         $identificationNumber: String
@@ -264,6 +279,19 @@ export const findSupplyPointsByContractStatusQuery = gql`
             identificationNumber: $identificationNumber
             contractStatus: $contractStatus
         ) {
+            ...SupplyPointFragment
+        }
+    }
+    ${supplyPointFragment}
+`;
+
+export const findSupplyPointsConcludedByContractTypeQuery = gql`
+    query findSupplyPointsConcludedByContractType(
+        $contractType: ContractType
+        $skipInfoAboutRelationContracts: Boolean = false
+        $skipOfferValidity: Boolean = true
+    ) {
+        findSupplyPointsConcludedByContractType(contractType: $contractType) {
             ...SupplyPointFragment
         }
     }

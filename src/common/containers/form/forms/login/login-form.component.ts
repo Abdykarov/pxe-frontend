@@ -13,9 +13,9 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { CONSTS } from 'src/app/app.constants';
-import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 import { EnvironmentService } from 'src/app/services/environment.service';
-import { OAuthService } from 'src/app/services/OAuth.service';
+import { OAuthType } from 'src/app/services/model/o-auth.model';
+import { OAuthService } from 'src/app/services/o-auth.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 

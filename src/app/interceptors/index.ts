@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ApiInterceptor } from './api.interceptor';
-import { TransferHttpResponseInterceptor } from './transfer-http-response.interceptor';
+import { ApiInterceptor } from 'src/app/interceptors/api.interceptor';
+import { TransferHttpResponseInterceptor } from 'src/app/interceptors/transfer-http-response.interceptor';
 
 export const InterceptorProviders = [
     {

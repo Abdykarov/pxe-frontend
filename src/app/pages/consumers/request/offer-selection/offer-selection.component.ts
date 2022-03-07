@@ -10,13 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as R from 'ramda';
 import { interval, Observable, of } from 'rxjs';
 import { filter, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { CONSTS, GTM_CONSTS, ROUTES, S_ANALYTICS } from 'src/app/app.constants';
+import { CONSTS, GTM_CONSTS, S_ANALYTICS } from 'src/app/app.constants';
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ValidityService } from 'src/app/services/validity.service';
 import { offerValidityMessages } from 'src/common/constants/errors.constant';
@@ -63,7 +63,7 @@ export class OfferSelectionComponent
         private contractService: ContractService,
         public faqService: FaqService,
         private gtmService: GTMService,
-        public navigateRequestService: NavigateRequestService,
+        public navigateConsumerService: NavigateConsumerService,
         private offerService: OfferService,
         public route: ActivatedRoute,
         private router: Router,
@@ -182,7 +182,7 @@ export class OfferSelectionComponent
     private setCurrentStateAndFindSupplyPointOffers = (
         supplyPoint: ISupplyPoint
     ): Observable<any> => {
-        this.navigateRequestService.checkCorrectStep(
+        this.navigateConsumerService.checkCorrectStep(
             supplyPoint,
             ProgressStatus.OFFER_STEP
         );
@@ -196,7 +196,7 @@ export class OfferSelectionComponent
         this.offerSelected = true;
         const supplyPointId = this.supplyPoint.id;
 
-        const contractAction = this.navigateRequestService.isPreviousStep(
+        const contractAction = this.navigateConsumerService.isPreviousStep(
             this.supplyPoint,
             this.ACTUAL_PROGRESS_STATUS
         )
@@ -240,12 +240,10 @@ export class OfferSelectionComponent
                         label: GTM_CONSTS.LABELS.STEP_THREE,
                         userID: this.cryptoService.hashedUserId,
                     });
-                    this.router.navigate(
-                        [ROUTES.ROUTER_REQUEST_RECAPITULATION],
+                    this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                        ProgressStatus.PERSONAL_DATA,
                         {
-                            queryParams: {
-                                supplyPointId,
-                            },
+                            supplyPointId,
                         }
                     );
                 },

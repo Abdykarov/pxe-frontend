@@ -6,13 +6,12 @@ import { map, takeUntil } from 'rxjs/operators';
 import {
     CODE_LIST_TYPES,
     GTM_CONSTS,
-    ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
@@ -29,6 +28,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import {
     getConfigStepper,
+    omitTypeName,
     parseGraphQLErrors,
     transformCodeList,
 } from 'src/common/utils';
@@ -79,7 +79,7 @@ export class RecapitulationComponent
         private cd: ChangeDetectorRef,
         private cryptoService: CryptoService,
         private gtmService: GTMService,
-        public navigateRequestService: NavigateRequestService,
+        public navigateConsumerService: NavigateConsumerService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
@@ -99,7 +99,7 @@ export class RecapitulationComponent
             .subscribe(
                 ([codeLists, supplyPoint]) => {
                     if (!R.isNil(codeLists) && !R.isNil(supplyPoint)) {
-                        this.navigateRequestService.checkCorrectStep(
+                        this.navigateConsumerService.checkCorrectStep(
                             supplyPoint,
                             ProgressStatus.PERSONAL_DATA
                         );
@@ -149,7 +149,9 @@ export class RecapitulationComponent
         this.globalError = [];
         this.fieldError = {};
 
-        const personalDataAction = this.navigateRequestService.isPreviousStep(
+        personalInfoInput = omitTypeName(personalInfoInput);
+
+        const personalDataAction = this.navigateConsumerService.isPreviousStep(
             this.supplyPoint,
             this.ACTUAL_PROGRESS_STATUS
         )
@@ -192,11 +194,12 @@ export class RecapitulationComponent
                         label: GTM_CONSTS.LABELS.STEP_FOUR,
                         userID: this.cryptoService.hashedUserId,
                     });
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT], {
-                        queryParams: {
+                    this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                        ProgressStatus.READY_FOR_SIGN,
+                        {
                             supplyPointId: this.supplyPointId,
-                        },
-                    });
+                        }
+                    );
                 },
                 (error) => {
                     this.formLoading = false;
@@ -211,7 +214,7 @@ export class RecapitulationComponent
 
     public chooseNewOfferAction = (evt) => {
         evt.preventDefault();
-        this.navigateRequestService.routerToRequestStep(
+        this.navigateConsumerService.routerToRequestStep(
             this.supplyPoint,
             ProgressStatus.OFFER_STEP
         );

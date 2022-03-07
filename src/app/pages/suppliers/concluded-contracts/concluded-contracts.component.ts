@@ -12,7 +12,7 @@ import {
 import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 import { DocumentService } from 'src/app/services/document.service';
 import {
-    IDocumentType,
+    DocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -161,7 +161,7 @@ export class ConcludedContractsComponent
         );
         this.globalError = [];
         this.documentService
-            .getDocument(contractId, IDocumentType.CONTRACT)
+            .getDocument(contractId, DocumentType.CONTRACT)
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
@@ -186,7 +186,7 @@ export class ConcludedContractsComponent
     };
 
     // do budoucna
-    // public openDocument(contractId: string, documentType: IDocumentType) {
+    // public openDocument(contractId: string, documentType: DocumentType) {
     //     const windowReference = window && window.open();
     //     this.formLoading = true;
     //     this.globalError = [];

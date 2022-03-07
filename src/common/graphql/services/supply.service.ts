@@ -21,7 +21,9 @@ import {
     findAllSuppliersQuery,
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
+    findSupplyPointByContractIdQuery,
     findSupplyPointsByContractStatusQuery,
+    findSupplyPointsConcludedByContractTypeQuery,
     getCodelistByTypeQuery,
     getSupplyPointGlobalStatisticsQuery,
     getSupplyPointQuery,
@@ -38,6 +40,14 @@ export class SupplyService {
             query: findAllSuppliersQuery,
             variables: {
                 commodityType,
+            },
+        }).valueChanges;
+
+    public getByContractId = (contractId: string) =>
+        this.apollo.watchQuery<any>({
+            query: findSupplyPointByContractIdQuery,
+            variables: {
+                contractId,
             },
         }).valueChanges;
 
@@ -154,10 +164,11 @@ export class SupplyService {
     public getSupplyPoint = (
         supplyPointId: string,
         contractId: string = null,
-        useInitialLoading = false
+        useInitialLoading = false,
+        noCache = true
     ) =>
         this.apollo.watchQuery<any>({
-            fetchPolicy: contractId ? 'no-cache' : 'network-only',
+            fetchPolicy: !noCache || !contractId ? 'network-only' : 'no-cache',
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,
@@ -181,6 +192,16 @@ export class SupplyService {
                 skipOfferValidity,
             },
             useInitialLoading,
+        }).valueChanges;
+
+    public findSupplyPointsConcludedByContractType = (contractType: string) =>
+        this.apollo.watchQuery<any>({
+            fetchPolicy: 'no-cache',
+            query: findSupplyPointsConcludedByContractTypeQuery,
+            variables: {
+                contractType,
+            },
+            useInitialLoading: true,
         }).valueChanges;
 
     public computeAndGetSupplyPointStatistics = () =>

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 import { Subject } from 'rxjs';
 import { scrollSettings } from 'src/app/pages/public/landing/landing.config';
-import { IScrollSetting, SCROLL_TO } from './model/scroll-to.model';
+import {
+    IScrollSetting,
+    SCROLL_TO,
+} from 'src/app/services/model/scroll-to.model';
 
 @Injectable({
     providedIn: 'root',

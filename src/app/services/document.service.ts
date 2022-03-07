@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-    IDocumentType,
+    DocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { environment } from 'src/environments/environment';
@@ -21,7 +21,7 @@ export class DocumentService {
 
     public getDocument = (
         contractId: string,
-        documentType: IDocumentType
+        documentType: DocumentType
     ): Observable<IResponseDataDocument> => {
         return this.http
             .get(
