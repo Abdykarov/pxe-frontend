@@ -439,7 +439,7 @@ $colors: (
 	max-width: $input-width;
 	margin: 0 auto;
 
-	&--large {
+	&.form-container--large {
 		&,
 		.form-control-case {
 			max-width: $input-width-large;
