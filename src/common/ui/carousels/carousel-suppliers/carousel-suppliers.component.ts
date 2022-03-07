@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
     Inject,
@@ -5,14 +6,11 @@ import {
     PLATFORM_ID,
     ViewEncapsulation,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
 import { takeUntil } from 'rxjs/operators';
-
 import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
+import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 import { ISupplierLogo } from 'src/common/ui/carousels/models/models';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
-import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 
 @Component({
     selector: 'pxe-carousel-suppliers',
@@ -29,27 +27,27 @@ export class CarouselSuppliersComponent extends AbstractResizeComponent {
     public supplierLogos: ISupplierLogo[];
 
     public deviceCouldBeChanged = (typeOfResolution: TypeOfResolution) =>
-        this.numberOfSlides = mapTypeOfDeviceToNumberOfSlides[typeOfResolution]
+        (this.numberOfSlides =
+            mapTypeOfDeviceToNumberOfSlides[typeOfResolution]);
 
-    constructor(
-        @Inject(PLATFORM_ID) private platformId: string,
-    ) {
+    constructor(@Inject(PLATFORM_ID) private platformId: string) {
         super();
 
         if (isPlatformBrowser(this.platformId)) {
-
             this.deviceCouldBeChanged(this.getTypeOfDevice());
 
-            this.resizeEvent$
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(() => {
-                    this.showCarousel = false;
-                    this.numberOfSlides = this.deviceCouldBeChanged(this.getTypeOfDevice());
-                    setTimeout(_ => this.showCarousel = true);
-                });
+            this.resizeEvent$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+                this.showCarousel = false;
+                this.numberOfSlides = this.deviceCouldBeChanged(
+                    this.getTypeOfDevice()
+                );
+                setTimeout((_) => (this.showCarousel = true));
+            });
         } else {
             this.showCarousel = true;
-            this.numberOfSlides = this.deviceCouldBeChanged(TypeOfResolution.DESKTOP);
+            this.numberOfSlides = this.deviceCouldBeChanged(
+                TypeOfResolution.DESKTOP
+            );
         }
     }
 }

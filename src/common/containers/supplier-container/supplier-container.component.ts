@@ -1,12 +1,6 @@
-import {
-    Component,
-    Input,
-} from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 import { config } from './supplier-container.config';
-import {
-    ISupplierLogo,
-} from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     selector: 'pxe-supplier-container',

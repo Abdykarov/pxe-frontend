@@ -1,6 +1,6 @@
 <ng-template #sendSmsAgainTemplate>
     <a [class.link--disabled]="!smsSent" (click)="submitSms()">Poslat znovu</a>
-    na číslo {{phone | phone}}
+    na číslo {{ phone | phone }}
 </ng-template>
 
 <ng-template #confirmLabelTemplate>
@@ -8,39 +8,40 @@
 </ng-template>
 
 <div class="row no-gutters form-container text-left">
-    <div
-        *ngIf="!showForm"
-        class="col-12 mb-5">
+    <div *ngIf="!showForm" class="col-12 mb-5">
         <lnd-button
             class="w-100 mb-1"
             customClass="p-2 w-100"
             [label]="enableVerificationLabel"
-            (click)="(toggleEnabledBySelf ? enableVerificationAction.emit() : enableVerification())"
-            [type]="enableButtonType">
+            (click)="
+                toggleEnabledBySelf
+                    ? enableVerificationAction.emit()
+                    : enableVerification()
+            "
+            [type]="enableButtonType"
+        >
         </lnd-button>
         <p class="input-subtext mt-1" *ngIf="enableVerificationSubText">
-            {{enableVerificationSubText}}
+            {{ enableVerificationSubText }}
         </p>
     </div>
 
     <ng-container *ngIf="showForm">
-        <div *ngIf="!smsSent"
-             class="col-12">
-            <p *ngIf="textInfoAboutVerificationPassword"
-               class="small mb-2">
-                {{textInfoAboutVerificationPassword}}
+        <div *ngIf="!smsSent" class="col-12">
+            <p *ngIf="textInfoAboutVerificationPassword" class="small mb-2">
+                {{ textInfoAboutVerificationPassword }}
             </p>
             <lnd-button
                 class="w-100 mb-1"
                 customClass="p-2 w-100"
-                (action)="submitSms();sAnalyticsService.sFormClick($event)"
+                (action)="submitSms(); sAnalyticsService.sFormClick($event)"
                 [isDisabled]="formLoading || smsSent"
                 [label]="sendSmsLabel"
-                type="primary">
+                type="primary"
+            >
             </lnd-button>
-            <p class="small"
-               [class.is-disabled]="smsSent">
-                Ověřovací SMS kód odešleme na číslo {{phone | phone}}
+            <p class="small" [class.is-disabled]="smsSent">
+                Ověřovací SMS kód odešleme na číslo {{ phone | phone }}
             </p>
         </div>
         <div class="col-12">
@@ -48,8 +49,9 @@
                 [formGroup]="form"
                 autocomplete="off"
                 (keydown)="resetCustomFieldError()"
-                (keydown.enter)="submitForm($event);false"
-                (change)="resetCustomFieldError()">
+                (keydown.enter)="submitForm($event); (false)"
+                (change)="resetCustomFieldError()"
+            >
                 <lnd-form-field
                     lndSFormDirective
                     lndSBiometricsDirective
@@ -61,21 +63,35 @@
                     [id]="'smsCode'"
                     [labelTemplate]="confirmLabelTemplate"
                     [subtextTemplate]="sendSmsAgainTemplate"
-                    [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
-                    [touched]="form.controls.smsCode.touched || formError.smsCode"
+                    [success]="
+                        form.controls.smsCode.valid &&
+                        (form.controls.smsCode.touched || formError.smsCode)
+                    "
+                    [touched]="
+                        form.controls.smsCode.touched || formError.smsCode
+                    "
                     [triggerFocus]="smsSent"
-                    [validationMessages]="formFields.validationMessages.smsCode">
+                    [validationMessages]="formFields.validationMessages.smsCode"
+                >
                 </lnd-form-field>
                 <ng-container *ngIf="infoTemplate && smsSent">
-                    <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
+                    <ng-container
+                        *ngTemplateOutlet="
+                            infoTemplate;
+                            context: { contract: this.contract }
+                        "
+                    ></ng-container>
                 </ng-container>
                 <lnd-button
                     [class]="customSubmitButtonClass"
                     customClass="p-2 w-100"
-                    (action)="submitForm();sAnalyticsService.sFormClick($event)"
+                    (action)="
+                        submitForm(); sAnalyticsService.sFormClick($event)
+                    "
                     [isDisabled]="formLoading || !smsSent"
                     [label]="submitLabelText"
-                    type="primary">
+                    type="primary"
+                >
                 </lnd-button>
             </form>
         </div>

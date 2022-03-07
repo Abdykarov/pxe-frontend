@@ -1,15 +1,13 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Dashboard
-            </h1>
+            <h1>Dashboard</h1>
         </div>
     </div>
     <lnd-banner-ui
-            *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
-            [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat' : 'Rozpracované smlouvy'"
-            [data]="{
+        *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
+        [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat' : 'Rozpracované smlouvy'"
+        [data]="{
             text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte jednu rozpracovanou smlouvu.' : 'Máte rozpracováno více smluv.'
         }"
     ></lnd-banner-ui>
@@ -24,7 +22,8 @@
                 [gasPlacesCount]="supplyPointStatistic.gasCount"
                 [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
                 [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
-                [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems">
+                [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems"
+            >
             </pxe-supply-points-summary>
         </div>
         <div class="col-md-6 mt-md-0 mt-4">

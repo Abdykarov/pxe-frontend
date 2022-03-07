@@ -1,7 +1,11 @@
-export const getHeightOfDisplayNoneElement = (el: HTMLDivElement, countSizeFor: HTMLDivElement = null, withLog = false): number =>  {
-    const el_style      = window.getComputedStyle(el),
-        el_display    = el_style.display,
-        el_position   = el_style.position,
+export const getHeightOfDisplayNoneElement = (
+    el: HTMLDivElement,
+    countSizeFor: HTMLDivElement = null,
+    withLog = false
+): number => {
+    const el_style = window.getComputedStyle(el),
+        el_display = el_style.display,
+        el_position = el_style.position,
         el_visibility = el_style.visibility,
         el_max_height = el_style.maxHeight.replace('px', '').replace('%', '');
 
@@ -24,13 +28,11 @@ export const getHeightOfDisplayNoneElement = (el: HTMLDivElement, countSizeFor: 
 
     wanted_height = countSizeFor?.offsetHeight || el.offsetHeight;
 
-
     if (!withLog) {
         // reverting to the original values
-        el.style.display    = isDisplayInline ? el_display : '';
-        el.style.position   = isPositionInline ? el_position : '';
+        el.style.display = isDisplayInline ? el_display : '';
+        el.style.position = isPositionInline ? el_position : '';
         el.style.visibility = isVisibilityInline ? el_visibility : '';
-
     } else {
         el.style.visibility = null;
     }

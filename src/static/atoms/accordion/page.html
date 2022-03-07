@@ -1,26 +1,24 @@
 <div class="row">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 
-<h2>
-    Accordion - default accordion
-</h2>
+<h2>Accordion - default accordion</h2>
 
 <lnd-accordion
     title="Accordion - default accordion item template, all items visible"
     [accordionItems]="accordionItems1"
-    >
+>
 </lnd-accordion>
 
-<h2>
-    Accordion - can open more accordion item with template
-</h2>
+<h2>Accordion - can open more accordion item with template</h2>
 
 <ng-template #accordionContentTemplate let-data>
-    <strong>User info</strong><br>
-    First name: {{ data.firstname }}<br>
+    <strong>User info</strong><br />
+    First name: {{ data.firstname }}<br />
     Last name: {{ data.lastname }}
 </ng-template>
 

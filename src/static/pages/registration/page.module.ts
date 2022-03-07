@@ -1,28 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-    RouterModule,
-    Routes,
-} from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
+import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
 // own classes
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FileUploaderModule } from 'src/common/ui/file-uploader/file-uploader.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import {
-    LoginType,
-    SignType,
-} from 'src/app/layouts/models/router-data.model';
-import { RegistrationPageComponent } from './page';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
+import { RegistrationPageComponent } from './page';
 
 @NgModule({
-    declarations: [
-        RegistrationPageComponent,
-    ],
-    exports: [
-        RegistrationPageComponent,
-    ],
+    declarations: [RegistrationPageComponent],
+    exports: [RegistrationPageComponent],
     imports: [
         ButtonModule,
         CommonModule,

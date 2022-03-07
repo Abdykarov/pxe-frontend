@@ -5,8 +5,9 @@
  */
 
 // Core component import
-@import 'src/assets/scss/01_base/base.scss';
+@use 'sass:math';
 
+@import 'src/assets/scss/01_base/base.scss';
 
 .placeloader {
 	text-align: center;
@@ -25,10 +26,15 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: $spacer ( $spacer / 2 );
+		padding: $spacer ( $spacer * .5 );
 		z-index: $zindex-placeloader-holder;
 		background-color: $white;
-		background: linear-gradient(90deg, rgba($white, 0) 0%, rgba($white, 1) 50%, rgba($white, 0) 100%);
+		background: linear-gradient(
+			90deg,
+			rgba($white, 0) 0%,
+			rgba($white, 1) 50%,
+			rgba($white, 0) 100%
+		);
 	}
 
 	&__symbol,
@@ -39,7 +45,7 @@
 
 	&__symbol {
 		position: relative;
-		width: ( 3 * $placeloader-circle-size ) + ( ( $spacer / 3 ) * 2 );
+		width: (3 * $placeloader-circle-size) + (math.div( $spacer, 3) * 2 );
 		height: $placeloader-circle-size;
 	}
 
@@ -60,19 +66,20 @@
 		}
 
 		&:nth-child(2) {
-			left: $placeloader-circle-size + ( $spacer / 3 );
+			left: $placeloader-circle-size + math.div( $spacer, 3 );
 			animation-delay: .3s;
 		}
 
 		&:nth-child(3) {
-			left: $placeloader-circle-size + ( $spacer / 3 ) + $placeloader-circle-size + ( $spacer / 3 );
+			left: $placeloader-circle-size + math.div( $spacer, 3 ) +
+				$placeloader-circle-size + math.div( $spacer, 3 );
 			animation-delay: .6s;
 		}
 	}
 
 	&__text {
 		max-width: 90%;
-		padding: ( $spacer / 3 ) ( $spacer / 2 );
+		padding: math.div( $spacer, 3) ( $spacer * .5 );
 	}
 }
 

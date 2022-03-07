@@ -1,13 +1,6 @@
 import { DecimalPipe } from '@angular/common';
-import {
-    Injector,
-    Pipe,
-    PipeTransform,
-    Type,
-} from '@angular/core';
-
+import { Injector, Pipe, PipeTransform, Type } from '@angular/core';
 import * as R from 'ramda';
-
 import { CeilPipe } from 'src/common/pipes/common/ceil-number/simple-number.pipe';
 import { IsLastUpdatedOfferPipe } from 'src/common/pipes/common/is-last-updated-offer/is-last-updated-offer.pipe';
 
@@ -15,16 +8,13 @@ import { IsLastUpdatedOfferPipe } from 'src/common/pipes/common/is-last-updated-
     name: 'dynamic',
 })
 export class DynamicPipe implements PipeTransform {
-
     private pipesMapping = {
-        'number': DecimalPipe,
-        'ceil': CeilPipe,
-        'isLastUpdatedOffer': IsLastUpdatedOfferPipe,
+        number: DecimalPipe,
+        ceil: CeilPipe,
+        isLastUpdatedOffer: IsLastUpdatedOfferPipe,
     };
 
-    public constructor(
-        private injector: Injector,
-    ) {}
+    public constructor(private injector: Injector) {}
 
     transform(value: any, pipeWithArgs: string): any {
         if (R.isNil(pipeWithArgs)) {

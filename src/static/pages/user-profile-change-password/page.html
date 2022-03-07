@@ -10,11 +10,11 @@
                 <form
                     [formGroup]="form"
                     autocomplete="off"
-                    class="form-container">
+                    class="form-container"
+                >
                     <div class="row">
                         <div class="col">
-                            <lnd-alert type="info"
-                                       hasIcon="true">
+                            <lnd-alert type="info" hasIcon="true">
                                 Změny byly úspěšně uloženy
                             </lnd-alert>
                         </div>
@@ -41,7 +41,8 @@
                         <lnd-button
                             type="primary"
                             (action)="submitForm($event)"
-                            label="Změnit heslo">
+                            label="Změnit heslo"
+                        >
                         </lnd-button>
                     </div>
                 </form>

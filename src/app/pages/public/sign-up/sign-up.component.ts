@@ -1,43 +1,28 @@
-import {
-    Component,
-    ChangeDetectorRef,
-    ViewChild,
-} from '@angular/core';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-
-import * as R from 'ramda';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
-import { AskForOfferContainerComponent } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
+import { CONSTS, GTM_CONSTS, ROUTES } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    GTM_CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
-import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { ISeo } from 'src/common/cms/models/seo';
+import { ISignUp } from 'src/common/cms/models/sign-up';
+import { AskForOfferContainerComponent } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
+import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
     IFieldError,
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
-import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
-import { ISeo } from 'src/common/cms/models/seo';
-import { ISignUp } from 'src/common/cms/models/sign-up';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
+import { IsLoggedPipe } from 'src/common/pipes/common/is-logged/is-logged.pipe';
+import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     templateUrl: './sign-up.component.html',
@@ -61,13 +46,14 @@ export class SignUpComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private cookieService: CookieService,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private registrationService: RegistrationService,
         private route: ActivatedRoute,
         private router: Router,
-        private titleService: Title,
+        private titleService: Title
     ) {
         super();
         const seo: ISeo = R.head(this.signUp.seo);
@@ -90,47 +76,50 @@ export class SignUpComponent extends AbstractComponent {
         this.globalError = [];
         this.fieldError = {};
         this.authService.setActualStateFromOtherTab();
-        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        const isLogged = this.isLoggedPipe.transform(
+            this.authService.currentUserValue
+        );
         if (isLogged) {
             this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
         } else {
-            this.registrationService.makeRegistration(values)
+            this.registrationService
+                .makeRegistration(values)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
                         this.gtmService.pushEvent({
-                            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
-                            'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
-                            'action': GTM_CONSTS.ACTIONS.SENT,
-                            'label': GTM_CONSTS.LABELS.REGISTRATION,
-                            'email': this.authService.hashUserId(values.email),
+                            event: GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                            category: GTM_CONSTS.CATEGORIES.REGISTRATION,
+                            action: GTM_CONSTS.ACTIONS.SENT,
+                            label: GTM_CONSTS.LABELS.REGISTRATION,
+                            email: this.cryptoService.hashUserId(values.email),
                         });
                         this.formLoading = false;
                         this.formSent = true;
                         this.cd.markForCheck();
-                        this.router.navigate([CONSTS.PATHS.LOGIN],
-                            {
-                                queryParams: {
-                                    email: values.email,
-                                },
-                                state: {
-                                    passwordWasSent: true,
-                                },
+                        this.router.navigate([CONSTS.PATHS.LOGIN], {
+                            queryParams: {
+                                email: values.email,
                             },
-                        );
+                            state: {
+                                passwordWasSent: true,
+                            },
+                        });
                     },
                     (error) => {
                         this.formLoading = false;
-                        const { fieldError, globalError } = parseGraphQLErrors(error);
+                        const { fieldError, globalError } =
+                            parseGraphQLErrors(error);
                         this.fieldError = fieldError;
                         this.globalError = globalError;
                         this.cd.markForCheck();
-                    });
+                    }
+                );
         }
-    }
+    };
 
     public routerToLogin = (event) => {
         event.preventDefault();
         this.router.navigate([ROUTES.ROUTER_LOGIN]);
-    }
+    };
 }

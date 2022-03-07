@@ -1,22 +1,14 @@
 <ng-template #templateIcons let-row="row">
-    <lnd-button
-        type="icon"
-        icon="icon--delete"
-        variant="icon"
-    >
-    </lnd-button>
-    <lnd-button
-        customClass="ml-2"
-        type="icon"
-        icon="icon--edit"
-        variant="icon"
-    >
+    <lnd-button type="icon" icon="icon--delete" variant="icon"> </lnd-button>
+    <lnd-button customClass="ml-2" type="icon" icon="icon--edit" variant="icon">
     </lnd-button>
 </ng-template>
 
 <div class="row">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <div class="row">

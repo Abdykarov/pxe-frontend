@@ -1,11 +1,9 @@
 <pxe-layout-container pageTitle="Nastavení uživatelského účtu">
     <div class="row">
         <div class="col-12">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
@@ -23,16 +21,15 @@
                     [globalError]="globalError"
                     [fieldError]="fieldError"
                     (submitAction)="submitForm($event)"
-                    (customAction)="sendChangePhoneNumberSmsMutation($event)">
+                    (customAction)="sendChangePhoneNumberSmsMutation($event)"
+                >
                 </pxe-user-form>
             </div>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-12 col-xl-6 offset-xl-3 text-center">
-            <h1>
-                Nastavení notifikací
-            </h1>
+            <h1>Nastavení notifikací</h1>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -46,7 +43,8 @@
                     [formValues]="formValues"
                     [globalError]="globalError"
                     [fieldError]="fieldError"
-                    (submitAction)="toggleWatchDog($event)">
+                    (submitAction)="toggleWatchDog($event)"
+                >
                 </pxe-user-notification-form>
             </div>
         </div>
@@ -61,15 +59,17 @@
             <div class="page-box">
                 <div class="row">
                     <div class="col-12 text-center mb-4">
-                        Chci zrušit svůj uživatelský účet a přestat využívat aplikaci parc4u.
+                        Chci zrušit svůj uživatelský účet a přestat využívat
+                        aplikaci parc4u.
                     </div>
                 </div>
                 <div class="col-12 text-center">
                     <lnd-button
                         type="primary"
-                        (action)="redirectToDeleteProfile()"
+                        (action)="navigateConsumerService.navigateToDeleteProfile()"
                         [isDisabled]="formLoading"
-                        label="Zrušit účet">
+                        label="Zrušit účet"
+                    >
                     </lnd-button>
                 </div>
             </div>

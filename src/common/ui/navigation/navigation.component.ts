@@ -1,15 +1,6 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
-
-import {
-    INavigationConfig,
-    INavigationItem,
-} from './models/navigation.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { INavigationItemType } from 'src/app/app.constants';
+import { INavigationConfig, INavigationItem } from './models/navigation.model';
 
 @Component({
     selector: 'lnd-navigation',
@@ -34,7 +25,9 @@ export class NavigationComponent {
     @Output()
     public openItem: EventEmitter<INavigationItem> = new EventEmitter<INavigationItem>();
 
-    public callOpenItem (itemClicked) {
-        this.openItem.emit(itemClicked === this.itemOpened ? null : itemClicked);
+    public callOpenItem(itemClicked) {
+        this.openItem.emit(
+            itemClicked === this.itemOpened ? null : itemClicked
+        );
     }
 }

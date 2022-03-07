@@ -3,7 +3,8 @@ export const defaultTileCard = {
     imgAlt: 'Card image',
     imgTitle: 'Card title',
     title: 'Tile card',
-    content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    content:
+        'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 };
 
 export const defaultBlogCard = {
@@ -12,5 +13,6 @@ export const defaultBlogCard = {
     imgTitle: 'Card title',
     textPrefix: '15. 2. 2021',
     title: 'Blog card',
-    content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    content:
+        'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 };

@@ -1,7 +1,8 @@
 <footer
     class="footer"
     [class.footer--public]="isSimpleFooter"
-    [class.footer--secured]="!isSimpleFooter">
+    [class.footer--secured]="!isSimpleFooter"
+>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 footer-container">
@@ -11,10 +12,12 @@
                             src="/assets/images/layout/logo-pxe.svg"
                             class="logo"
                             title="PXE"
-                            alt="logo PXE">
+                            alt="logo PXE"
+                        />
                     </div>
                     <p class="copy mb-0">
-                        &copy;&nbsp;POWER EXCHANGE CENTRAL EUROPE, a.s. {{year}}
+                        &copy;&nbsp;POWER EXCHANGE CENTRAL EUROPE, a.s. {{ year
+                        }}
                     </p>
                 </div>
             </div>

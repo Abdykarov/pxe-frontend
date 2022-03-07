@@ -1,9 +1,7 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Import nabídek
-            </h1>
+            <h1>Import nabídek</h1>
         </div>
     </div>
     <div class="row mb-6">
@@ -17,7 +15,8 @@
             <lnd-button
                 label="Stáhnout vzorový soubor"
                 type="secondary"
-                (action)="downloadExampleFile($event)">>
+                (action)="downloadExampleFile($event)"
+                >>
             </lnd-button>
         </div>
     </div>
@@ -25,24 +24,23 @@
         <div class="col-xl-8 offset-xl-2 text-center">
             <pxe-file-uploader
                 [uploader]="uploader"
-                (fileSelectAction)="uploadFile($event)">
+                (fileSelectAction)="uploadFile($event)"
+            >
             </pxe-file-uploader>
         </div>
     </div>
-    <div #listOfNotificationsRow
-        class="row mb-2">
+    <div #listOfNotificationsRow class="row mb-2">
         <div class="col-xl-8 offset-xl-2">
             <pxe-list-of-notifications
                 [headerText]="'Seznam chyb'"
-                [notifications]="['item 1','item 2']">
+                [notifications]="['item 1','item 2']"
+            >
             </pxe-list-of-notifications>
         </div>
     </div>
     <div class="row">
         <div class="col-xl-8 offset-xl-2 text-center">
-            <a (click)="backAction($event)">
-                Zpět
-            </a>
+            <a (click)="backAction($event)"> Zpět </a>
         </div>
     </div>
 </div>

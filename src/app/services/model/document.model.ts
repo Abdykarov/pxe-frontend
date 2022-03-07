@@ -3,7 +3,7 @@ export interface IResponseDataDocument {
     filename: string;
 }
 
-export enum IDocumentType {
+export enum DocumentType {
     INFORMATION = 'INFORMATION',
     CONTRACT_NOT_EXTENDED = 'CONTRACT_NOT_EXTENDED',
     UNSET_PROLONGATION = 'UNSET_PROLONGATION',

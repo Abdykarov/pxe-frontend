@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Environment } from 'src/app/services/model/environment.model';
 import { environment } from 'src/environments/environment';
-import { Environment } from 'src/app/models/environment/environment.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class EnvironmentService {
-    public is = (isEnvironment: Environment) => environment.environment === isEnvironment;
+    public is = (isEnvironment: Environment) =>
+        environment.environment === isEnvironment;
 }

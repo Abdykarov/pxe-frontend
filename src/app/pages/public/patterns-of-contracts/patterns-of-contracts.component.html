@@ -3,26 +3,48 @@
 </ng-template>
 
 <ng-template #columnTemplateDownloadText let-row="row">
-    Platná v období: {{row.dateFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.dateTo | date:'d.&nbsp;M.&nbsp;y'}}
+    Platná v období: {{ row.dateFrom | date: "d.&nbsp;M.&nbsp;y" }} - {{
+    row.dateTo | date: "d.&nbsp;M.&nbsp;y" }}
 </ng-template>
 
 <div class="container-fluid container-fluid--max-width">
     <div class="container-content container-content--public">
-        <pxe-layout-container [pageTitle]="patternsOfContracts.title" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
+        <pxe-layout-container
+            [pageTitle]="patternsOfContracts.title"
+            [breadcrumbItemsSimple]="breadcrumbItemsSimple"
+        >
             <div class="row">
                 <div class="col-12">
                     <ul class="text-center link-list mb-4">
                         <li class="link-list__item">
-                            <a class="link-list__link"
-                                [class.link-list__link--active]="subjectType == SUBJECT_TYPE.INDIVIDUAL"
-                                (click)="routeToSubjectType($event, SUBJECT_TYPE.INDIVIDUAL)">
+                            <a
+                                class="link-list__link"
+                                [class.link-list__link--active]="
+                                    subjectType === SUBJECT_TYPE.INDIVIDUAL
+                                "
+                                (click)="
+                                    routeToSubjectType(
+                                        $event,
+                                        SUBJECT_TYPE.INDIVIDUAL
+                                    )
+                                "
+                            >
                                 Domácnost
                             </a>
                         </li>
                         <li class="link-list__item">
-                            <a class="link-list__link"
-                                [class.link-list__link--active]="subjectType == SUBJECT_TYPE.BUSINESSMAN"
-                                (click)="routeToSubjectType($event, SUBJECT_TYPE.BUSINESSMAN)">
+                            <a
+                                class="link-list__link"
+                                [class.link-list__link--active]="
+                                    subjectType === SUBJECT_TYPE.BUSINESSMAN
+                                "
+                                (click)="
+                                    routeToSubjectType(
+                                        $event,
+                                        SUBJECT_TYPE.BUSINESSMAN
+                                    )
+                                "
+                            >
                                 Firma
                             </a>
                         </li>
@@ -33,10 +55,24 @@
                         *ngFor="let setting of pdfFutureContracts"
                         icon="icon--info"
                         [data]="{
-                            text: (setting[subjectType][commodityType].dateFrom | date: 'd.&nbsp;M.&nbsp;y') +  ' začíná platnost nové smlouvy o sdružených službách dodávky ' +
-                                (commodityType === COMMODITY_TYPE.POWER ? 'elektřiny' : 'plynu') + ' pro ' + (subjectType === SUBJECT_TYPE.INDIVIDUAL ? 'domácnost' : 'firmu')
+                            text:
+                                (setting[subjectType][commodityType].dateFrom
+                                    | date: 'd.&nbsp;M.&nbsp;y') +
+                                ' začíná platnost nové smlouvy o sdružených službách dodávky ' +
+                                (commodityType === COMMODITY_TYPE.POWER
+                                    ? 'elektřiny'
+                                    : 'plynu') +
+                                ' pro ' +
+                                (subjectType === SUBJECT_TYPE.INDIVIDUAL
+                                    ? 'domácnost'
+                                    : 'firmu')
                         }"
-                        (customBannerAction)="downloadPdf(setting[subjectType][commodityType].sourceUrl, setting[subjectType][commodityType].downloadName)"
+                        (customBannerAction)="
+                            downloadPdf(
+                                setting[subjectType][commodityType].sourceUrl,
+                                setting[subjectType][commodityType].downloadName
+                            )
+                        "
                         buttonLabel="Stáhnout"
                     ></lnd-banner-ui>
                 </div>
@@ -48,27 +84,54 @@
                         <div class="page-box__inner">
                             <ul class="link-list link-list--small mb-3">
                                 <li class="link-list__item">
-                                    <a class="link-list__link"
-                                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.POWER"
-                                       (click)="routeToCommodityType($event, COMMODITY_TYPE.POWER)">
+                                    <a
+                                        class="link-list__link"
+                                        [class.link-list__link--active]="
+                                            commodityType ===
+                                            COMMODITY_TYPE.POWER
+                                        "
+                                        (click)="
+                                            routeToCommodityType(
+                                                $event,
+                                                COMMODITY_TYPE.POWER
+                                            )
+                                        "
+                                    >
                                         Elektřina
                                     </a>
                                 </li>
                                 <li class="link-list__item">
-                                    <a class="link-list__link"
-                                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
-                                       (click)="routeToCommodityType($event, COMMODITY_TYPE.GAS)">
+                                    <a
+                                        class="link-list__link"
+                                        [class.link-list__link--active]="
+                                            commodityType === COMMODITY_TYPE.GAS
+                                        "
+                                        (click)="
+                                            routeToCommodityType(
+                                                $event,
+                                                COMMODITY_TYPE.GAS
+                                            )
+                                        "
+                                    >
                                         Plyn
                                     </a>
                                 </li>
                             </ul>
-                            <h3 class="h2 mb-2">Aktuální smlouva o dodávce
-                                {{commodityType === COMMODITY_TYPE.POWER ? 'elektřiny' : 'plynu'}} pro {{subjectType === SUBJECT_TYPE.INDIVIDUAL ? 'domácnost' : 'firmu'}}
+                            <h3 class="h2 mb-2">
+                                Aktuální smlouva o dodávce {{ commodityType ===
+                                COMMODITY_TYPE.POWER ? "elektřiny" : "plynu" }}
+                                pro {{ subjectType === SUBJECT_TYPE.INDIVIDUAL ?
+                                "domácnost" : "firmu" }}
                             </h3>
                             <p class="mb-0">
-                                Níže naleznete dokumenty potřebné k uzavření dodávky {{commodityType === COMMODITY_TYPE.POWER ? 'energií' : 'plynu'}} pro budoucí období.
-                                Návrh smlouvy o sdružených službách dodávky {{commodityType === COMMODITY_TYPE.POWER ? 'energií' : 'plynu'}}, obsahuje také všeobecné
-                                podmínky dodávky a plnou moc pro dodavatele.
+                                Níže naleznete dokumenty potřebné k uzavření
+                                dodávky {{ commodityType ===
+                                COMMODITY_TYPE.POWER ? "energií" : "plynu" }}
+                                pro budoucí období. Návrh smlouvy o sdružených
+                                službách dodávky {{ commodityType ===
+                                COMMODITY_TYPE.POWER ? "energií" : "plynu" }},
+                                obsahuje také všeobecné podmínky dodávky a plnou
+                                moc pro dodavatele.
                             </p>
                         </div>
                         <div class="page-box__inner page-box__inner--light">
@@ -77,37 +140,75 @@
                                     <div class="pdf-holder pdf-holder--large">
                                         <pxe-pdf-viewer
                                             #pxePdfViewer
+                                            *lndOnlySsr
                                             [openFile]="false"
                                             [viewBookmark]="false"
-                                            zoom="page-width">
-                                        ></pxe-pdf-viewer>
+                                            zoom="page-width"
+                                        >
+                                            ></pxe-pdf-viewer
+                                        >
                                     </div>
                                 </div>
-                                <ng-container *ngIf="pdfActiveContracts[this.subjectType][this.commodityType] as pdfSetting">
-                                    <div class="col-12 text-right"
-                                         [class.mb-5]="pdfOldContracts && pdfOldContracts.length">
+                                <ng-container
+                                    *ngIf="
+                                        pdfActiveContracts && pdfActiveContracts[this.subjectType][
+                                            this.commodityType
+                                        ] as pdfSetting
+                                    "
+                                >
+                                    <div
+                                        class="col-12 text-right"
+                                        [class.mb-5]="
+                                            pdfOldContracts &&
+                                            pdfOldContracts.length
+                                        "
+                                    >
                                         <lnd-button
                                             label="Stáhnout"
                                             type="primary"
-                                            (action)="downloadPdf(pdfSetting.sourceUrl, pdfSetting.downloadName)">
+                                            (action)="
+                                                downloadPdf(
+                                                    pdfSetting.sourceUrl,
+                                                    pdfSetting.downloadName
+                                                )
+                                            "
+                                        >
                                         </lnd-button>
                                     </div>
                                 </ng-container>
                                 <div
-                                    *ngIf="pdfOldContracts && pdfOldContracts.length"
-                                    class="col-12">
-                                    <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
+                                    *ngIf="
+                                        pdfOldContracts &&
+                                        pdfOldContracts.length
+                                    "
+                                    class="col-12"
+                                >
+                                    <h5>
+                                        Archiv smluv o dodávce {{ commodityType
+                                        === COMMODITY_TYPE.POWER ? "elektřiny" :
+                                        "plynu" }} společnosti Power Central
+                                        Europe, a.s. pro domácnosti
+                                    </h5>
                                     <lnd-table
                                         [withoutBorder]="true"
                                         [cols]="historyTableCols"
                                         [rows]="pdfOldContracts"
-                                        [tableWrapperClass]="['table-wrapper--advanced pb-4']"
-                                        [tableClass]="['table--advanced', 'mb-0']"
+                                        [tableWrapperClass]="[
+                                            'table-wrapper--advanced pb-4'
+                                        ]"
+                                        [tableClass]="[
+                                            'table--advanced',
+                                            'mb-0'
+                                        ]"
                                         [columnTemplates]="{
-                                            columnTemplateDownload: columnTemplateDownload,
-                                            columnTemplateDownloadText: columnTemplateDownloadText
-                                        }">
-                                    ></lnd-table>
+                                            columnTemplateDownload:
+                                                columnTemplateDownload,
+                                            columnTemplateDownloadText:
+                                                columnTemplateDownloadText
+                                        }"
+                                    >
+                                        ></lnd-table
+                                    >
                                 </div>
                             </div>
                         </div>

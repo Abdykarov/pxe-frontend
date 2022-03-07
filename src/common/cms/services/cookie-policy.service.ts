@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import { cookiePolicyQuery } from 'src/common/cms/queries/cookie-policy';
 
@@ -7,14 +6,10 @@ import { cookiePolicyQuery } from 'src/common/cms/queries/cookie-policy';
     providedIn: 'root',
 })
 export class CookiePolicyService {
+    constructor(private apolloCmsService: ApolloCmsService) {}
 
-    constructor(
-        private apolloCmsService: ApolloCmsService,
-    ) {}
-
-    public getCookiePolicy = () => this.apolloCmsService
-        .fetchQuery({
+    public getCookiePolicy = () =>
+        this.apolloCmsService.fetchQuery({
             query: cookiePolicyQuery,
-        })
-
+        });
 }

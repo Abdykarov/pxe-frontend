@@ -1,0 +1,11 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../out-tsc/app",
+        "target": "es2016"
+    },
+    "files": [
+        "./server/generate-data-for-prerender/app.ts"
+    ],
+    "include": ["src/**/*.d.ts", "src/**/*.ts"]
+}

@@ -1,5 +1,5 @@
-import { IContract } from './contract';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { IContract } from './contract';
 
 export enum CommodityType {
     POWER = 'POWER',
@@ -17,12 +17,18 @@ export enum TimeToContractEndPeriod {
 }
 
 export enum AllowedOperations {
-    DELETE = 'DELETE',
+    DELETE_CONTRACT = 'DELETE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
     PARTIAL_EDIT = 'PARTIAL_EDIT',
     SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     UNSET_AUTOMATIC_PROLONGATION = 'UNSET_AUTOMATIC_PROLONGATION',
+    SHOW_DELIVERY_TO_INFINITE_PERIOD = 'SHOW_DELIVERY_TO_INFINITE_PERIOD',
+    FINALIZE_NEXT_CONTRACT = 'FINALIZE_NEXT_CONTRACT',
+    OPEN_NEXT_CONTRACT = 'OPEN_NEXT_CONTRACT',
+    CREATE_FROM_HISTORY_CONTRACT = 'CREATE_FROM_HISTORY_CONTRACT',
+    FINALIZE_FROM_HISTORY_CONTRACT = 'FINALIZE_FROM_HISTORY_CONTRACT',
+    SHOW_CREATED_CONTRACT_FROM_HISTORY = 'SHOW_CREATED_CONTRACT_FROM_HISTORY',
 }
 
 export interface IAddress {
@@ -148,11 +154,14 @@ export interface ISupplyPoint {
     importPermanentMonthlyPay?: number;
     imported?: boolean;
     withoutSupplier?: boolean;
+    closedByContractEntityId: string;
+    closedByContractIsConcluded: boolean;
 }
 
 export enum ProgressStatus {
     COMPLETED = 'COMPLETED',
     NONE = 'NONE',
+    SIGNBOARD = 'SIGNBOARD', // Doesnot exist in BE, only for router. Theoretically it can be replaced by NONE.
     OFFER_STEP = 'OFFER_STEP',
     PERSONAL_DATA = 'PERSONAL_DATA',
     READY_FOR_SIGN = 'READY_FOR_SIGN',

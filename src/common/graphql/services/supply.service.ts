@@ -1,175 +1,189 @@
 import { Injectable } from '@angular/core';
-
 import { Apollo } from 'apollo-angular';
-
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
     CommodityType,
     ISupplyPoint,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
-import { ContractStatus } from 'src/common/graphql/models/contract';
+import {
+    createGasSupplyPointMutation,
+    createPowerSupplyPointMutation,
+    deleteUnfinishedSupplyPointMutation,
+    updateGasSupplyPointMutation,
+    updateGasSupplyPointWithContractMutation,
+    updatePowerSupplyPointMutation,
+    updatePowerSupplyPointWithContractMutation,
+} from 'src/common/graphql/mutation/supply';
 import {
     computeAndGetSupplyPointStatisticsQuery,
     findAllSuppliersQuery,
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
+    findSupplyPointByContractIdQuery,
     findSupplyPointsByContractStatusQuery,
+    findSupplyPointsConcludedByContractTypeQuery,
     getCodelistByTypeQuery,
     getSupplyPointGlobalStatisticsQuery,
     getSupplyPointQuery,
 } from 'src/common/graphql/queries/supply';
-import {
-    createGasSupplyPointMutation,
-    updateGasSupplyPointMutation,
-    updateGasSupplyPointWithContractMutation,
-    createPowerSupplyPointMutation,
-    updatePowerSupplyPointMutation,
-    updatePowerSupplyPointWithContractMutation,
-    deleteUnfinishedSupplyPointMutation,
-} from 'src/common/graphql/mutation/supply';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SupplyService {
+    constructor(private apollo: Apollo) {}
 
-    constructor(
-        private apollo: Apollo,
-    ) {}
-
-    public getSuppliers = (commodityType: CommodityType) => this.apollo
-        .watchQuery<any>({
+    public getSuppliers = (commodityType: CommodityType) =>
+        this.apollo.watchQuery<any>({
             query: findAllSuppliersQuery,
             variables: {
                 commodityType,
             },
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public getCodelistByType = (type: string, locale: string) => this.apollo
-        .watchQuery<any>({
+    public getByContractId = (contractId: string) =>
+        this.apollo.watchQuery<any>({
+            query: findSupplyPointByContractIdQuery,
+            variables: {
+                contractId,
+            },
+        }).valueChanges;
+
+    public getCodelistByType = (type: string, locale: string) =>
+        this.apollo.watchQuery<any>({
             query: getCodelistByTypeQuery,
             variables: {
                 type,
                 locale,
             },
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public findCodelistsByTypes = (types: string[], locale: string) => this.apollo
-        .watchQuery<any>({
+    public findCodelistsByTypes = (types: string[], locale: string) =>
+        this.apollo.watchQuery<any>({
             query: findCodelistsByTypesQuery,
             variables: {
                 types,
                 locale,
             },
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public findSupplierDocumentsByComodity = (supplierId: number, commodityType: CommodityType) => this.apollo
-        .watchQuery<any>({
+    public findSupplierDocumentsByComodity = (
+        supplierId: number,
+        commodityType: CommodityType
+    ) =>
+        this.apollo.watchQuery<any>({
             query: findSupplierDocumentsByComodityQuery,
             variables: {
                 supplierId,
                 commodityType,
             },
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public createPowerSupplyPoint = (supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) => this.apollo
-        .mutate<any>({
+    public createPowerSupplyPoint = (
+        supplyPoint: ISupplyPoint,
+        powerAttributes: ISupplyPointPowerAttributes
+    ) =>
+        this.apollo.mutate<any>({
             mutation: createPowerSupplyPointMutation,
             variables: {
                 supplyPoint,
                 powerAttributes,
             },
-        })
+        });
 
-    public createGasSupplyPoint = (supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) => this.apollo
-        .mutate<any>({
+    public createGasSupplyPoint = (
+        supplyPoint: ISupplyPoint,
+        gasAttributes: ISupplyPointGasAttributes
+    ) =>
+        this.apollo.mutate<any>({
             mutation: createGasSupplyPointMutation,
             variables: {
                 supplyPoint,
                 gasAttributes,
             },
-        })
+        });
 
     public updatePowerSupplyPoint = (
         supplyPointId: number,
         supplyPoint: ISupplyPoint,
-        powerAttributes: ISupplyPointPowerAttributes,
-    ) => this.apollo
-        .mutate<any>({
+        powerAttributes: ISupplyPointPowerAttributes
+    ) =>
+        this.apollo.mutate<any>({
             mutation: updatePowerSupplyPointMutation,
             variables: {
                 supplyPointId,
                 supplyPoint,
                 powerAttributes,
             },
-        })
+        });
 
     public updateGasSupplyPoint = (
         supplyPointId: number,
         supplyPoint: ISupplyPoint,
-        gasAttributes: ISupplyPointGasAttributes,
-    ) => this.apollo
-        .mutate<any>({
+        gasAttributes: ISupplyPointGasAttributes
+    ) =>
+        this.apollo.mutate<any>({
             mutation: updateGasSupplyPointMutation,
             variables: {
                 supplyPointId,
                 supplyPoint,
                 gasAttributes,
             },
-        })
+        });
 
     public updatePowerSupplyPointWithContract = (
         supplyPointId: number,
         supplyPointUpdate: ISupplyPoint,
-        attributes: ISupplyPointPowerAttributes,
-    ) => this.apollo
-        .mutate<any>({
+        attributes: ISupplyPointPowerAttributes
+    ) =>
+        this.apollo.mutate<any>({
             mutation: updatePowerSupplyPointWithContractMutation,
             variables: {
                 supplyPointId,
                 supplyPointUpdate,
                 attributes,
             },
-        })
+        });
 
     public updateGasSupplyPointWithContract = (
         supplyPointId: number,
         supplyPointUpdate: ISupplyPoint,
-        attributes: ISupplyPointGasAttributes,
-    ) => this.apollo
-        .mutate<any>({
+        attributes: ISupplyPointGasAttributes
+    ) =>
+        this.apollo.mutate<any>({
             mutation: updateGasSupplyPointWithContractMutation,
             variables: {
                 supplyPointId,
                 supplyPointUpdate,
                 attributes,
             },
-        })
+        });
 
-    public getSupplyPoint = (supplyPointId: string, contractId: string = null, useInitialLoading = false) => this.apollo
-        .watchQuery<any>({
-            fetchPolicy: contractId ? 'no-cache' : 'network-only',
+    public getSupplyPoint = (
+        supplyPointId: string,
+        contractId: string = null,
+        useInitialLoading = false,
+        noCache = true
+    ) =>
+        this.apollo.watchQuery<any>({
+            fetchPolicy: !noCache || !contractId ? 'network-only' : 'no-cache',
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,
-                ...(!!contractId) && {contractId},
+                ...(!!contractId && { contractId }),
             },
             useInitialLoading,
-        })
-        .valueChanges
+        }).valueChanges;
 
     public findSupplyPointsByContractStatus = (
         contractStatus: ContractStatus[],
         identificationNumber: string = null,
         skipOfferValidity = false,
-        useInitialLoading = false,
-    ) => this.apollo
-        .watchQuery<any>({
+        useInitialLoading = false
+    ) =>
+        this.apollo.watchQuery<any>({
             fetchPolicy: 'no-cache',
             query: findSupplyPointsByContractStatusQuery,
             variables: {
@@ -178,31 +192,40 @@ export class SupplyService {
                 skipOfferValidity,
             },
             useInitialLoading,
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public computeAndGetSupplyPointStatistics = () => this.apollo
-        .watchQuery<any>({
+    public findSupplyPointsConcludedByContractType = (contractType: string) =>
+        this.apollo.watchQuery<any>({
+            fetchPolicy: 'no-cache',
+            query: findSupplyPointsConcludedByContractTypeQuery,
+            variables: {
+                contractType,
+            },
+            useInitialLoading: true,
+        }).valueChanges;
+
+    public computeAndGetSupplyPointStatistics = () =>
+        this.apollo.watchQuery<any>({
             fetchPolicy: 'network-only',
             query: computeAndGetSupplyPointStatisticsQuery,
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public getSupplyPointGlobalStatistics = (includeHistoryData: boolean = false) => this.apollo
-        .watchQuery<any>({
+    public getSupplyPointGlobalStatistics = (
+        includeHistoryData: boolean = false
+    ) =>
+        this.apollo.watchQuery<any>({
             fetchPolicy: 'network-only',
             query: getSupplyPointGlobalStatisticsQuery,
             variables: {
                 includeHistoryData,
             },
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public deleteUnfinishedSupplyPoint = (supplyPointId: string) => this.apollo
-        .mutate<any>({
+    public deleteUnfinishedSupplyPoint = (supplyPointId: string) =>
+        this.apollo.mutate<any>({
             mutation: deleteUnfinishedSupplyPointMutation,
             variables: {
                 supplyPointId,
             },
-        })
+        });
 }

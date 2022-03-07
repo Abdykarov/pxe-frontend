@@ -1,6 +1,7 @@
 <ng-template #confirmCodeInfoTemplate>
     <div class="small mb-3">
-        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací SMS kód.
+        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací SMS
+        kód.
     </div>
 </ng-template>
 
@@ -9,12 +10,11 @@
     (keydown)="resetCustomFieldError()"
     (change)="resetCustomFieldError()"
     autocomplete="off"
-    class="form-container">
-    <div *ngIf="formSent"
-         class="row">
+    class="form-container"
+>
+    <div *ngIf="formSent" class="row">
         <div class="col">
-            <lnd-alert type="info"
-                       hasIcon="true">
+            <lnd-alert type="info" hasIcon="true">
                 Změny byly úspěšně uloženy
             </lnd-alert>
         </div>
@@ -22,38 +22,76 @@
     <pxe-field-wrapper
         label="Jméno a příjmení"
         labelFor="firstName"
-        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'firstName' || (fieldWrapperFocused$ | async) === 'lastName'"
-        [error]="((form.controls.firstName.touched || formError.firstName) && (formError.firstName || form.controls.firstName.errors)) ||
-                 ((form.controls.lastName.touched || formError.lastName) && (formError.lastName || form.controls.lastName.errors))"
-        [validationMessages]="((form.controls.firstName.touched || formError.firstName) && (formError.firstName || form.controls.firstName.errors) && formFields.validationMessages.firstName) ||
-                              ((form.controls.lastName.touched || formError.lastName) && (formError.lastName || form.controls.lastName.errors) && formFields.validationMessages.lastName)">
+        [wrapperFocused]="
+            (fieldWrapperFocused$ | async) === 'firstName' ||
+            (fieldWrapperFocused$ | async) === 'lastName'
+        "
+        [error]="
+            ((form.controls.firstName.touched || formError.firstName) &&
+                (formError.firstName || form.controls.firstName.errors)) ||
+            ((form.controls.lastName.touched || formError.lastName) &&
+                (formError.lastName || form.controls.lastName.errors))
+        "
+        [validationMessages]="
+            ((form.controls.firstName.touched || formError.firstName) &&
+                (formError.firstName || form.controls.firstName.errors) &&
+                formFields.validationMessages.firstName) ||
+            ((form.controls.lastName.touched || formError.lastName) &&
+                (formError.lastName || form.controls.lastName.errors) &&
+                formFields.validationMessages.lastName)
+        "
+    >
         <div class="row no-gutters">
             <div class="col-6 pr-1">
                 <lnd-form-field
-                    [error]="formError.firstName || form.controls.firstName.errors"
+                    [error]="
+                        formError.firstName || form.controls.firstName.errors
+                    "
                     [formControl]="form.controls.firstName"
                     (focus)="fieldWrapperFocus('firstName')"
                     (blur)="fieldWrapperBlur()"
-                    [inputFocused]="(fieldWrapperFocused$ | async) === 'firstName' || (fieldWrapperFocused$ | async) === 'lastName'"
+                    [inputFocused]="
+                        (fieldWrapperFocused$ | async) === 'firstName' ||
+                        (fieldWrapperFocused$ | async) === 'lastName'
+                    "
                     [id]="'firstName'"
                     [label]="'Jméno'"
-                    [success]="form.controls.firstName.valid && (form.controls.firstName.touched || formError.firstName)"
-                    [touched]="form.controls.firstName.touched || formError.firstName"
-                    [validationMessages]="formFields.validationMessages.firstName"
+                    [success]="
+                        form.controls.firstName.valid &&
+                        (form.controls.firstName.touched || formError.firstName)
+                    "
+                    [touched]="
+                        form.controls.firstName.touched || formError.firstName
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.firstName
+                    "
                 ></lnd-form-field>
             </div>
             <div class="col-6 pl-1">
                 <lnd-form-field
-                    [error]="formError.lastName || form.controls.lastName.errors"
+                    [error]="
+                        formError.lastName || form.controls.lastName.errors
+                    "
                     [formControl]="form.controls.lastName"
                     (focus)="fieldWrapperFocus('lastName')"
                     (blur)="fieldWrapperBlur()"
-                    [inputFocused]="(fieldWrapperFocused$ | async) === 'firstName' || (fieldWrapperFocused$ | async) === 'lastName'"
+                    [inputFocused]="
+                        (fieldWrapperFocused$ | async) === 'firstName' ||
+                        (fieldWrapperFocused$ | async) === 'lastName'
+                    "
                     [id]="'name'"
                     [label]="'Příjmení'"
-                    [success]="form.controls.lastName.valid && (form.controls.lastName.touched || formError.lastName)"
-                    [touched]="form.controls.lastName.touched || formError.lastName"
-                    [validationMessages]="formFields.validationMessages.lastName"
+                    [success]="
+                        form.controls.lastName.valid &&
+                        (form.controls.lastName.touched || formError.lastName)
+                    "
+                    [touched]="
+                        form.controls.lastName.touched || formError.lastName
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.lastName
+                    "
                 ></lnd-form-field>
             </div>
         </div>
@@ -64,32 +102,64 @@
         [disabledField]="true"
         [id]="'email'"
         label="E-mail"
-        [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+        [success]="
+            form.controls.email.valid &&
+            (form.controls.email.touched || formError.email)
+        "
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
     ></lnd-form-field>
     <pxe-field-wrapper
         label="Telefonní číslo"
         labelFor="phone"
-        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
-        [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
-                 ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
-        [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
-                              ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
+        [wrapperFocused]="
+            (fieldWrapperFocused$ | async) === 'phonePrefix' ||
+            (fieldWrapperFocused$ | async) === 'phone'
+        "
+        [error]="
+            ((form.controls.phonePrefix.touched || formError.phonePrefix) &&
+                (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
+            ((form.controls.phone.touched || formError.phone) &&
+                (formError.phone || form.controls.phone.errors))
+        "
+        [validationMessages]="
+            ((form.controls.phonePrefix.touched || formError.phonePrefix) &&
+                (formError.phonePrefix || form.controls.phonePrefix.errors) &&
+                formFields.validationMessages.phonePrefix) ||
+            ((form.controls.phone.touched || formError.phone) &&
+                (formError.phone || form.controls.phone.errors) &&
+                formFields.validationMessages.phone)
+        "
+    >
         <div class="row no-gutters">
             <div class="col-4 pr-1">
                 <lnd-form-field
                     [disabledField]="true"
-                    [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
+                    [error]="
+                        formError.phonePrefix ||
+                        form.controls.phonePrefix.errors
+                    "
                     [formControl]="form.controls.phonePrefix"
                     (focus)="fieldWrapperFocus('phonePrefix')"
                     (blur)="fieldWrapperBlur()"
-                    [inputFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
+                    [inputFocused]="
+                        (fieldWrapperFocused$ | async) === 'phonePrefix' ||
+                        (fieldWrapperFocused$ | async) === 'phone'
+                    "
                     [id]="'phonePrefix'"
                     label="Telefonní číslo"
-                    [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
-                    [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
-                    [validationMessages]="formFields.validationMessages.phonePrefix"
+                    [success]="
+                        form.controls.phonePrefix.valid &&
+                        (form.controls.phonePrefix.touched ||
+                            formError.phonePrefix)
+                    "
+                    [touched]="
+                        form.controls.phonePrefix.touched ||
+                        formError.phonePrefix
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.phonePrefix
+                    "
                 ></lnd-form-field>
             </div>
             <div class="col-8 pl-1">
@@ -98,10 +168,16 @@
                     [formControl]="form.controls.phone"
                     (focus)="fieldWrapperFocus('phone')"
                     (blur)="fieldWrapperBlur()"
-                    [inputFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
+                    [inputFocused]="
+                        (fieldWrapperFocused$ | async) === 'phonePrefix' ||
+                        (fieldWrapperFocused$ | async) === 'phone'
+                    "
                     [id]="'phone'"
                     label=""
-                    [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
+                    [success]="
+                        form.controls.phone.valid &&
+                        (form.controls.phone.touched || formError.phone)
+                    "
                     [touched]="form.controls.phone.touched || formError.phone"
                     [validationMessages]="formFields.validationMessages.phone"
                 ></lnd-form-field>
@@ -112,7 +188,9 @@
     <div class="text-center">
         <pxe-verification-form
             enableVerificationLabel="Uložit"
-            [phone]="form.controls.phonePrefix.value + '' + form.controls.phone.value"
+            [phone]="
+                form.controls.phonePrefix.value + '' + form.controls.phone.value
+            "
             [fieldError]="fieldError"
             [formLoading]="formLoading"
             [globalError]="globalError"
@@ -125,6 +203,7 @@
             (customAction)="processSaveButton($event, false)"
             (enableVerificationAction)="enableVerification($event)"
         >
-        ></pxe-verification-form>
+            ></pxe-verification-form
+        >
     </div>
 </form>

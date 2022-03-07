@@ -1,24 +1,19 @@
 import { Validators } from '@angular/forms';
-
 import { CONSTS } from 'src/app/app.constants';
-import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
+import { CustomValidators } from 'src/common/utils';
 
 export const userProfileFormFields: IForm = {
     controls: {
-        email: [
-            null,
-            [
-                Validators.required,
-                CustomValidators.email,
-            ],
-        ],
+        email: [null, [Validators.required, CustomValidators.email]],
         firstName: [
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME),
+                Validators.maxLength(
+                    CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME
+                ),
                 CustomValidators.username,
             ],
         ],
@@ -26,23 +21,19 @@ export const userProfileFormFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME),
+                Validators.maxLength(
+                    CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME
+                ),
                 CustomValidators.username,
             ],
         ],
         phone: [
             null,
-            [
-                Validators.required,
-                CustomValidators.mobilePhoneNumber,
-            ],
+            [Validators.required, CustomValidators.mobilePhoneNumber],
         ],
         phonePrefix: [
             CONSTS.TELEPHONE_PREFIX_CZ,
-            [
-                Validators.required,
-                CustomValidators.phoneNumberPrefix,
-            ],
+            [Validators.required, CustomValidators.phoneNumberPrefix],
         ],
     },
     validationMessages: {
@@ -53,12 +44,14 @@ export const userProfileFormFields: IForm = {
         },
         firstName: {
             required: errorFieldMessages.fullName.requiredPersonFirstName,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
             username: errorFieldMessages.fullName.patternFirstName,
         },
         lastName: {
             required: errorFieldMessages.fullName.requiredPersonLastName,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
             username: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
@@ -67,7 +60,8 @@ export const userProfileFormFields: IForm = {
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,
-            phoneNumberPrefix: errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
+            phoneNumberPrefix:
+                errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
         },
     },
 };

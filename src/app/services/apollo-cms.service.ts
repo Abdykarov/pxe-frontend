@@ -1,49 +1,47 @@
 import { Injectable } from '@angular/core';
-
-import * as R from 'ramda';
+import { QueryOptions } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
-import { QueryOptions } from 'apollo-client';
-import { WatchQueryOptions } from 'apollo-angular/types';
-
-import { apolloGetOperationName } from 'src/common/utils';
 import { CONSTS } from 'src/app/app.constants';
-import {
-    flatData,
-    normalize,
-} from 'src/common/cms/utils';
+import { normalize, removeFlatData } from 'src/common/cms/utils';
+import { apolloGetOperationName } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApolloCmsService {
+    constructor(private apollo: Apollo) {}
 
-    constructor(
-        private apollo: Apollo,
-    ) {}
-
-    public watchQuery = (options: WatchQueryOptions<any>): any =>
-        this.apollo.use(CONSTS.APOLLO_CMS_KEY)
+    public watchQuery = (options: any): any =>
+        this.apollo
+            .use(CONSTS.APOLLO_CMS_KEY)
             .watchQuery(options)
-            .valueChanges
-            .pipe(
-                map(({data}) =>  data[apolloGetOperationName(options)]),
-                map(normalize),
-            )
+            .valueChanges.pipe(
+                map(({ data }) => data[apolloGetOperationName(options)]),
+                map(normalize)
+            );
 
-    public fetchQuery = (options: QueryOptions<any>, withFlatData = true): any =>
-        this.apollo.use(CONSTS.APOLLO_CMS_KEY)
+    public fetchQuery = (
+        options: QueryOptions<any>,
+        withFlatData = true,
+        isMultipleOperations = false
+    ): any => {
+        return this.apollo
+            .use(CONSTS.APOLLO_CMS_KEY)
             .query(options)
             .pipe(
-                map(({data}) =>  data[apolloGetOperationName(options)]),
-                map((operation) => {
+                map(({ data }) => {
+                    if (!isMultipleOperations) {
+                        const operation = data[apolloGetOperationName(options)];
+                        if (withFlatData) {
+                            return removeFlatData(operation);
+                        }
 
-                    if (withFlatData) {
-                        return R.pipe(R.head, flatData)(operation);
+                        return operation;
                     }
-
-                    return operation;
+                    return data;
                 }),
-                map(normalize),
-            )
+                map(normalize)
+            );
+    };
 }

@@ -1,54 +1,73 @@
 <ng-template #systemLabelTemplate>
     <p class="mb-2">
-        <b>Notifikace ke stávajícím smlouvám </b><br>
+        <b>Notifikace ke stávajícím smlouvám </b><br />
         (např. upozornění o vypršení smlouvy)
     </p>
 </ng-template>
 
 <ng-template #watchDogLabelTemplate>
     <p class="mb-2">
-        <b>Notifikace k novým smlouvám</b><br>
+        <b>Notifikace k novým smlouvám</b><br />
         (např. upozornění o rozpracování odběrného místa)
     </p>
 </ng-template>
-
 
 <form
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
     (change)="resetCustomFieldError()"
     autocomplete="off"
-    class="form-container">
-    <div *ngIf="formSent"
-         class="row">
+    class="form-container"
+>
+    <div *ngIf="formSent" class="row">
         <div class="col">
-            <lnd-alert type="info"
-                       hasIcon="true">
-                Notifikace byly úspěšně {{(isNotificationsAllowed ? 'zapnuty' : 'vypnuty')}}.
+            <lnd-alert type="info" hasIcon="true">
+                Notifikace byly úspěšně {{ isNotificationsAllowed ? "zapnuty" :
+                "vypnuty" }}.
             </lnd-alert>
         </div>
     </div>
     <lnd-form-field
-        [error]="formError.systemNotification || form.controls.systemNotification.errors"
+        [error]="
+            formError.systemNotification ||
+            form.controls.systemNotification.errors
+        "
         [formControl]="form.controls.systemNotification"
         [disabledField]="true"
         customFormGroupClass="mb-0"
         [id]="'systemNotification'"
         [labelTemplate]="systemLabelTemplate"
         [type]="'CHECKBOX'"
-        [success]="form.controls.systemNotification.valid && (form.controls.systemNotification.touched || formError.systemNotification)"
-        [touched]="form.controls.systemNotification.touched || formError.systemNotification"
+        [success]="
+            form.controls.systemNotification.valid &&
+            (form.controls.systemNotification.touched ||
+                formError.systemNotification)
+        "
+        [touched]="
+            form.controls.systemNotification.touched ||
+            formError.systemNotification
+        "
         [validationMessages]="formFields.validationMessages.systemNotification"
     ></lnd-form-field>
     <lnd-form-field
-        [error]="formError.notificatiosAllowed || form.controls.notificatiosAllowed.errors"
+        [error]="
+            formError.notificatiosAllowed ||
+            form.controls.notificatiosAllowed.errors
+        "
         customFormGroupClass="mb-0"
         [formControl]="form.controls.notificatiosAllowed"
         [type]="'CHECKBOX'"
         [id]="'notificatiosAllowed'"
         [labelTemplate]="watchDogLabelTemplate"
-        [success]="form.controls.notificatiosAllowed.valid && (form.controls.notificatiosAllowed.touched || formError.notificatiosAllowed)"
-        [touched]="form.controls.notificatiosAllowed.touched || formError.notificatiosAllowed"
+        [success]="
+            form.controls.notificatiosAllowed.valid &&
+            (form.controls.notificatiosAllowed.touched ||
+                formError.notificatiosAllowed)
+        "
+        [touched]="
+            form.controls.notificatiosAllowed.touched ||
+            formError.notificatiosAllowed
+        "
         [validationMessages]="formFields.validationMessages.notificatiosAllowed"
     ></lnd-form-field>
     <div class="row">
@@ -57,7 +76,8 @@
                 type="primary"
                 [isDisabled]="formLoading"
                 label="Uložit"
-            (action)="submitForm($event)">
+                (action)="submitForm($event)"
+            >
             </lnd-button>
         </div>
     </div>

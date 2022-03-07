@@ -1,15 +1,9 @@
 import { Validators } from '@angular/forms';
-
-import {
-    CommodityType,
-    SubjectType,
-} from 'src/common/graphql/models/supply.model';
 import {
     CONSTS,
     CONTRACT_END_TYPE,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
-import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
     ICommodityTypeFields,
@@ -17,65 +11,51 @@ import {
     IForm,
 } from 'src/common/containers/form/models/form-definition.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import {
+    CommodityType,
+    SubjectType,
+} from 'src/common/graphql/models/supply.model';
+import { CustomValidators } from 'src/common/utils';
 import { timeToContractEndProlonged } from 'src/common/utils/validators/time-to-contract-end-prolonged.fnc';
 
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
-        'expirationDate': true,
-        'timeToContractEnd': false,
-        'timeToContractEndPeriodId': false,
+        expirationDate: true,
+        timeToContractEnd: false,
+        timeToContractEndPeriodId: false,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: {
-        'expirationDate': true,
-        'timeToContractEnd': true,
-        'timeToContractEndPeriodId': true,
+        expirationDate: true,
+        timeToContractEnd: true,
+        timeToContractEndPeriodId: true,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
-        'expirationDate': false,
-        'timeToContractEnd': true,
-        'timeToContractEndPeriodId': true,
+        expirationDate: false,
+        timeToContractEnd: true,
+        timeToContractEndPeriodId: true,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: {
-        'expirationDate': true,
-        'timeToContractEnd': false,
-        'timeToContractEndPeriodId': false,
+        expirationDate: true,
+        timeToContractEnd: false,
+        timeToContractEndPeriodId: false,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_DEFAULT]: {
-        'expirationDate': false,
-        'timeToContractEnd': false,
-        'timeToContractEndPeriodId': false,
+        expirationDate: false,
+        timeToContractEnd: false,
+        timeToContractEndPeriodId: false,
     },
 };
 
 export const formFields = (isTestingUser: boolean): IForm => ({
     controls: {
-        id: [
-            null,
-        ],
-        commodityType: [
-            CommodityType.POWER,
-            [
-                Validators.required,
-            ],
-        ],
-        withoutSupplier: [
-            false,
-            [
-                Validators.required,
-            ],
-        ],
+        id: [null],
+        commodityType: [CommodityType.POWER, [Validators.required]],
+        withoutSupplier: [false, [Validators.required]],
         subjectTypeId: [
             SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-            [
-                Validators.required,
-            ],
+            [Validators.required],
         ],
-        supplierId: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
+        supplierId: [null, [Validators.required]],
         name: [
             null,
             [
@@ -87,42 +67,30 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             null,
             [
                 Validators.required,
-                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.ean,
-                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.eanFormat,
+                isTestingUser
+                    ? CustomValidators.alwaysValid
+                    : CustomValidators.ean,
+                isTestingUser
+                    ? CustomValidators.alwaysValid
+                    : CustomValidators.eanFormat,
             ],
         ],
         eic: [
             null,
             [
                 Validators.required,
-                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.eic,
-                isTestingUser ? CustomValidators.alwaysValid : CustomValidators.eicFormat,
+                isTestingUser
+                    ? CustomValidators.alwaysValid
+                    : CustomValidators.eic,
+                isTestingUser
+                    ? CustomValidators.alwaysValid
+                    : CustomValidators.eicFormat,
             ],
         ],
-        address: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
-        distributionRateId: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
-        circuitBreakerId: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
-        phasesId: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
+        address: [null, [Validators.required]],
+        distributionRateId: [null, [Validators.required]],
+        circuitBreakerId: [null, [Validators.required]],
+        phasesId: [null, [Validators.required]],
         annualConsumptionNT: [
             null,
             [
@@ -130,22 +98,18 @@ export const formFields = (isTestingUser: boolean): IForm => ({
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(
-                    CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                    CONSTS.VALIDATORS
+                        .MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION
                 ),
                 CustomValidators.maxValue(
                     CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
                     false,
                     true,
-                    'maxKWh',
+                    'maxKWh'
                 ),
             ],
         ],
-        annualConsumptionNTUnit: [
-            UNIT_OF_PRICES.KWH,
-            [
-                Validators.required,
-            ],
-        ],
+        annualConsumptionNTUnit: [UNIT_OF_PRICES.KWH, [Validators.required]],
         annualConsumptionVT: [
             null,
             [
@@ -153,74 +117,53 @@ export const formFields = (isTestingUser: boolean): IForm => ({
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(
-                    CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                    CONSTS.VALIDATORS
+                        .MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION
                 ),
                 CustomValidators.maxValue(
                     CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
                     false,
                     true,
-                    'maxKWh',
+                    'maxKWh'
                 ),
             ],
         ],
-        annualConsumptionVTUnit: [
-            UNIT_OF_PRICES.KWH,
-            [
-                Validators.required,
-            ],
-        ],
-        annualConsumptionUnit: [
-            UNIT_OF_PRICES.KWH,
-            [
-                Validators.required,
-            ],
-        ],
+        annualConsumptionVTUnit: [UNIT_OF_PRICES.KWH, [Validators.required]],
+        annualConsumptionUnit: [UNIT_OF_PRICES.KWH, [Validators.required]],
         annualConsumption: [
             null,
             [
                 Validators.required,
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(
+                    CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT
+                ),
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
                 CustomValidators.maxValue(
                     CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
                     false,
                     true,
-                    'maxKWh',
+                    'maxKWh'
                 ),
             ],
         ],
-        expirationDate: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
-        contractEndTypeId: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
+        expirationDate: [null, [Validators.required]],
+        contractEndTypeId: [null, [Validators.required]],
         timeToContractEnd: [
             null,
             [
                 Validators.required,
                 CustomValidators.isNumber(),
-                CustomValidators.minValue(CONSTS.VALIDATORS.TIME_TO_CONTRACT_END_MIN),
-                CustomValidators.maxValue(CONSTS.VALIDATORS.TIME_TO_CONTRACT_END_MAX),
+                CustomValidators.minValue(
+                    CONSTS.VALIDATORS.TIME_TO_CONTRACT_END_MIN
+                ),
+                CustomValidators.maxValue(
+                    CONSTS.VALIDATORS.TIME_TO_CONTRACT_END_MAX
+                ),
             ],
         ],
-        timeToContractEndPeriodId: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
-        ownTerminate: [
-            CONSTS.OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT,
-            [],
-        ],
+        timeToContractEndPeriodId: [null, [Validators.required]],
+        ownTerminate: [CONSTS.OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT, []],
     },
     options: {
         validator: timeToContractEndProlonged(),
@@ -245,6 +188,7 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             invalidEan: errorFieldMessages.ean.ean,
             pattern: errorFieldMessages.ean.ean,
             invalidEanOnTenthPosition: errorFieldMessages.ean.ean,
+            canBeProlongInFuture: errorFieldMessages.ean.canBeProlongInFuture,
             duplicateSupplyPoint: errorFieldMessages.ean.nonUniqueEan,
         },
         eic: {
@@ -253,6 +197,7 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             invalidEic: errorFieldMessages.eic.eic,
             pattern: errorFieldMessages.eic.eic,
             duplicateSupplyPoint: errorFieldMessages.eic.nonUniqueEic,
+            canBeProlongInFuture: errorFieldMessages.eic.canBeProlongInFuture,
             invalidEicOnFifthToSeventhPosition: errorFieldMessages.eic.eic,
         },
         address: {
@@ -277,8 +222,10 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             number: errorFieldMessages.number.positiveInteger,
             maxKWh: errorFieldMessages.annualConsumption.maxKWh,
             maxMWh: errorFieldMessages.annualConsumption.maxMWh,
-            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
-            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
+            'annual-consumption-must-be-positive-number':
+                errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint:
+                errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
@@ -289,8 +236,10 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             maxMWh: errorFieldMessages.annualConsumption.maxMWh,
             number: errorFieldMessages.number.positiveInteger,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
-            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
-            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
+            'annual-consumption-must-be-positive-number':
+                errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint:
+                errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
@@ -301,28 +250,46 @@ export const formFields = (isTestingUser: boolean): IForm => ({
             maxKWh: errorFieldMessages.annualConsumption.maxKWh,
             maxMWh: errorFieldMessages.annualConsumption.maxMWh,
             number: errorFieldMessages.number.positiveInteger,
-            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
-            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
+            'annual-consumption-must-be-positive-number':
+                errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint:
+                errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
             bsDate: errorFieldMessages.date.format,
-            bsDateMinDate: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
+            bsDateMinDate:
+                errorFieldMessages.expirationDate
+                    .expirationAtLeast30DaysBeforeNewDelivery,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
-            isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
-            isInProlongInterval: errorFieldMessages.expirationDate.isInProlongInterval,
-            expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
-            notEnoughDaysToProcessContract: errorFieldMessages.expirationDate.notEnoughDaysToProcessContract,
+            isInTerminateInterval:
+                errorFieldMessages.expirationDate.isInTerminateInterval,
+            isInProlongInterval:
+                errorFieldMessages.expirationDate.isInProlongInterval,
+            expirationAtLeast30DaysBeforeNewDelivery:
+                errorFieldMessages.expirationDate
+                    .expirationAtLeast30DaysBeforeNewDelivery,
+            notEnoughDaysToProcessContract:
+                errorFieldMessages.expirationDate
+                    .notEnoughDaysToProcessContract,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
             bsDate: errorFieldMessages.date.format,
-            bsDateMinDate: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
+            bsDateMinDate:
+                errorFieldMessages.expirationDate
+                    .expirationAtLeast30DaysBeforeNewDelivery,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
-            isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
-            isInProlongInterval: errorFieldMessages.expirationDate.isInProlongInterval,
-            expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
-            notEnoughDaysToProcessContract: errorFieldMessages.expirationDate.notEnoughDaysToProcessContract,
+            isInTerminateInterval:
+                errorFieldMessages.expirationDate.isInTerminateInterval,
+            isInProlongInterval:
+                errorFieldMessages.expirationDate.isInProlongInterval,
+            expirationAtLeast30DaysBeforeNewDelivery:
+                errorFieldMessages.expirationDate
+                    .expirationAtLeast30DaysBeforeNewDelivery,
+            notEnoughDaysToProcessContract:
+                errorFieldMessages.expirationDate
+                    .notEnoughDaysToProcessContract,
         },
         contractEndTypeId: {
             required: errorFieldMessages.contractEndTypeId.required,

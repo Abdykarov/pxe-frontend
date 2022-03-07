@@ -1,5 +1,4 @@
 import { Validators } from '@angular/forms';
-
 import { CONSTS } from 'src/app/app.constants';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
@@ -19,8 +18,10 @@ export const formFields: IForm = {
             required: errorFieldMessages.smsCode.required,
             invalidSmsCode1: errorFieldMessages.smsCode.invalidSmsCode1,
             invalidSmsCode2: errorFieldMessages.smsCode.invalidSmsCode2,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
-            smsCodeAttemptsExceededLimit: errorFieldMessages.smsCode.smsCodeAttemptsExceededLimit,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
+            smsCodeAttemptsExceededLimit:
+                errorFieldMessages.smsCode.smsCodeAttemptsExceededLimit,
         },
     },
 };

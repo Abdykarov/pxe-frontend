@@ -9,7 +9,8 @@
         customClass ? customClass : ''
     ]"
     [disabled]="isDisabled"
-    (click)="action.emit($event)">
+    (click)="action.emit($event)"
+>
     <span
         *ngIf="!!icon && !variant"
         class="icon btn__icon"
@@ -18,28 +19,25 @@
             customIconClass ? customIconClass : '',
             iconPosition ? 'btn__icon--' + iconPosition : '',
             size === 'small' ? 'icon--small' : ''
-        ]">
+        ]"
+    >
     </span>
     <span
         *ngIf="variant === 'dots'"
         class="icon btn__icon btn__icon--alone"
         [ngClass]="[
-            dotsDirection ? 'icon--dots-' + dotsDirection : 'icon--dots-vertical',
+            dotsDirection
+                ? 'icon--dots-' + dotsDirection
+                : 'icon--dots-vertical',
             customIconClass ? customIconClass : ''
-        ]">
+        ]"
+    >
     </span>
     <span
         *ngIf="variant === 'icon'"
         class="icon btn__icon btn__icon--alone"
-        [ngClass]="[
-            icon ? icon : '',
-            customIconClass ? customIconClass : ''
-        ]">
-    </span>
-    <span
-        *ngIf="label"
-        class="btn__text"
+        [ngClass]="[icon ? icon : '', customIconClass ? customIconClass : '']"
     >
-        {{ label }}
     </span>
+    <span *ngIf="label" class="btn__text"> {{ label }} </span>
 </button>

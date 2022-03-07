@@ -1,5 +1,5 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IContract } from 'src/common/graphql/models/contract';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 export interface IPaginatedContractsWithNameAndSupplyPoint {
     page: IContractWithNameAndSupplyPoint[];
@@ -30,4 +30,5 @@ export interface ISupplierInput {
     numberSeriesPrefix: String;
     numberSeriesVariable: String;
     numberSeriesSuffix: String;
+    pricesUrl: String;
 }

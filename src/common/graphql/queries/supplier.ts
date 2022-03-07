@@ -1,35 +1,32 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-angular';
 
 export const listSupplierContractsBasedOnOffersQuery = gql`
     query listSupplierContractsBasedOnOffers(
-        $filter: ContractsBasedOnOffersFilter,
-    ){
-        listSupplierContractsBasedOnOffers(
-            filter: $filter,
-        ) {
+        $filter: ContractsBasedOnOffersFilter
+    ) {
+        listSupplierContractsBasedOnOffers(filter: $filter) {
             page {
                 contract {
-                    contractId,
-                    contractStatus,
-                    deliveryFrom,
-                    deliveryTo,
-                },
-                name,
-                identificationNumber,
+                    contractId
+                    contractStatus
+                    deliveryFrom
+                    deliveryTo
+                }
+                name
+                identificationNumber
             }
-            totalRecords,
+            totalRecords
         }
     }
 `;
-
 
 export const findSupplierProfileQuery = gql`
-    query findSupplierProfile{
+    query findSupplierProfile {
         findSupplierProfile {
-            numberSeriesPrefix,
-            numberSeriesVariable,
+            numberSeriesPrefix
+            numberSeriesVariable
             numberSeriesSuffix
+            pricesUrl
         }
     }
 `;
-

@@ -1,6 +1,4 @@
-import {
-    ISupplierLogo,
-} from 'src/common/ui/supplier/model/supplier.model';
+import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 
 export const config: ISupplierLogo[] = [
     {
@@ -25,7 +23,8 @@ export const config: ISupplierLogo[] = [
     {
         alt: 'logo - EP Energy Trading a.s.',
         logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
         supplierUrl: '',
         title: 'EP Energy Trading a.s.',
         width: 75,
@@ -33,8 +32,10 @@ export const config: ISupplierLogo[] = [
     },
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-        logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
-        logoUrlHover: '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+        logoUrl:
+            '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
         supplierUrl: '',
         size: 'xl',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
@@ -54,7 +55,8 @@ export const config: ISupplierLogo[] = [
     {
         alt: 'logo - Pražská plynárenská a.s.',
         logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
         supplierUrl: '',
         size: 'xl',
         title: 'Pražská plynárenská a.s.',

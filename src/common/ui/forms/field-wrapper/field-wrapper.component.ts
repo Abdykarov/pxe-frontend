@@ -7,7 +7,6 @@ import {
     TemplateRef,
     ViewEncapsulation,
 } from '@angular/core';
-
 import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 import { getErrorMessage } from 'src/common/utils';
@@ -47,12 +46,16 @@ export class FieldWrapperComponent implements OnChanges {
 
     constructor(
         private cd: ChangeDetectorRef,
-        private dynamicPipe: DynamicPipe,
+        private dynamicPipe: DynamicPipe
     ) {}
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes && changes.error) {
-            this.errorMessage = getErrorMessage(changes.error.currentValue, this.validationMessages, this.dynamicPipe);
+            this.errorMessage = getErrorMessage(
+                changes.error.currentValue,
+                this.validationMessages,
+                this.dynamicPipe
+            );
             this.cd.markForCheck();
         }
     }

@@ -1,31 +1,24 @@
 <div class="row">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <div class="static-pages">
     <div class="row">
         <div class="col-md-6 mb-3 mb-sm-0">
-            <lnd-add
-                [label]="'Přidat'"
-                (action)="addAction()">
-            </lnd-add>
+            <lnd-add [label]="'Přidat'" (action)="addAction()"> </lnd-add>
         </div>
         <div class="col-md-6">
-            <lnd-add
-                [label]="'Přidat'"
-                (action)="addAction()">
-            </lnd-add>
+            <lnd-add [label]="'Přidat'" (action)="addAction()"> </lnd-add>
         </div>
     </div>
 </div>
 <h3>Table add</h3>
 <div class="static-pages">
     <div class="add-table-holder">
-        <lnd-add
-            [label]="'Přidat'"
-            (action)="addAction()"
-            [type]="'table'">
+        <lnd-add [label]="'Přidat'" (action)="addAction()" [type]="'table'">
         </lnd-add>
     </div>
 </div>

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
-  templateUrl: './progress-bar.html',
+    templateUrl: './progress-bar.html',
 })
 export class ProgressBarComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
@@ -79,7 +78,6 @@ export class ProgressBarComponent {
             step: '',
             label: 'Step #1 colors',
             done: true,
-
         },
         {
             step: '',
@@ -120,7 +118,6 @@ export class ProgressBarComponent {
             step: '',
             label: 'Step #1 colors',
             done: true,
-
         },
         {
             step: ProgressStatus.NONE,
@@ -150,7 +147,6 @@ export class ProgressBarComponent {
             label: 'Smlouva',
             shadowStep: true,
             active: true,
-
         },
         {
             step: '',
@@ -163,7 +159,6 @@ export class ProgressBarComponent {
             step: '',
             label: 'Step #1 colors',
             done: true,
-
         },
         {
             step: '',
@@ -206,7 +201,6 @@ export class ProgressBarComponent {
             step: '',
             label: 'Step #1 colors',
             done: true,
-
         },
         {
             step: '',
@@ -243,7 +237,6 @@ export class ProgressBarComponent {
             done: true,
         },
     ];
-
 
     constructor() {
         this.breadcrumbItemsSimple = [

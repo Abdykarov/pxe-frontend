@@ -1,6 +1,9 @@
 import { FormGroup } from '@angular/forms';
 
-export const requireIfFieldHaveValue = (firstControlName: string, secondControlName: string) => {
+export const requireIfFieldHaveValue = (
+    firstControlName: string,
+    secondControlName: string
+) => {
     return (formGroup: FormGroup) => {
         const firstControl = formGroup.controls[firstControlName];
         const secondControl = formGroup.controls[secondControlName];
@@ -13,11 +16,15 @@ export const requireIfFieldHaveValue = (firstControlName: string, secondControlN
         }
 
         if (firstValue && !secondValue) {
-            secondControl.setErrors({requireIfFieldHaveValueSecondControl: true});
+            secondControl.setErrors({
+                requireIfFieldHaveValueSecondControl: true,
+            });
         }
 
         if (!firstValue && secondValue) {
-            firstControl.setErrors({requireIfFieldHaveValueFirstControl: true});
+            firstControl.setErrors({
+                requireIfFieldHaveValueFirstControl: true,
+            });
         }
     };
 };

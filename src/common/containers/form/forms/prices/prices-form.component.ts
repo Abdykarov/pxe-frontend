@@ -6,7 +6,6 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
     CommodityType,
@@ -20,25 +19,24 @@ import { includesBothTariffs } from 'src/common/utils';
     templateUrl: './prices-form.component.html',
     styleUrls: ['./prices-form.component.scss'],
 })
-export class PricesFormComponent extends AbstractFormComponent implements OnChanges {
-
+export class PricesFormComponent
+    extends AbstractFormComponent
+    implements OnChanges
+{
     @Input()
     public supplyPoint: ISupplyPoint;
 
     @Input()
     public codeLists: ICodelistOptions;
 
-    constructor(
-        private cd: ChangeDetectorRef,
-        protected fb: FormBuilder,
-    ) {
+    constructor(private cd: ChangeDetectorRef, protected fb: FormBuilder) {
         super(fb);
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
         if (changes && changes.supplyPoint) {
-            setTimeout( _ => {
+            setTimeout((_) => {
                 this.prefillFormData();
                 this.setForm();
                 this.cd.markForCheck();
@@ -49,18 +47,27 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     public setForm = () => {
         if (this.supplyPoint.commodityType === CommodityType.POWER) {
             this.setDisableField('importPricePerKwGas');
-            this.setAnnualConsumptionNTState(this.supplyPoint?.distributionRate?.code, this.codeLists);
+            this.setAnnualConsumptionNTState(
+                this.supplyPoint?.distributionRate?.code,
+                this.codeLists
+            );
         } else {
             this.setDisableField('importPricePerKwPowerNT');
             this.setDisableField('importPricePerKwPowerVT');
         }
-    }
+    };
 
-    public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
-        if (distributionRateId && !includesBothTariffs(distributionRateId, codeLists)) {
+    public setAnnualConsumptionNTState = (
+        distributionRateId: string = null,
+        codeLists: ICodelistOptions = null
+    ) => {
+        if (
+            distributionRateId &&
+            !includesBothTariffs(distributionRateId, codeLists)
+        ) {
             this.setDisableField('importPricePerKwPowerNT');
         }
-    }
+    };
 
     public prefillFormData = () => {
         if (!this.form) {
@@ -77,14 +84,23 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
             importPricePerKwPowerNT = this.supplyPoint?.importPricePerKwPowerNT;
             importPricePerKwPowerVT = this.supplyPoint?.importPricePerKwPowerVT;
             importPriceTotalPerYear = this.supplyPoint?.importPriceTotalPerYear;
-            importPermanentMonthlyPay = this.supplyPoint?.importPermanentMonthlyPay;
+            importPermanentMonthlyPay =
+                this.supplyPoint?.importPermanentMonthlyPay;
         }
 
         this.form.controls['importPricePerKwGas'].setValue(importPricePerKwGas);
-        this.form.controls['importPricePerKwPowerNT'].setValue(importPricePerKwPowerNT);
-        this.form.controls['importPricePerKwPowerVT'].setValue(importPricePerKwPowerVT);
-        this.form.controls['importPriceTotalPerYear'].setValue(importPriceTotalPerYear);
-        this.form.controls['importPermanentMonthlyPay'].setValue(importPermanentMonthlyPay);
+        this.form.controls['importPricePerKwPowerNT'].setValue(
+            importPricePerKwPowerNT
+        );
+        this.form.controls['importPricePerKwPowerVT'].setValue(
+            importPricePerKwPowerVT
+        );
+        this.form.controls['importPriceTotalPerYear'].setValue(
+            importPriceTotalPerYear
+        );
+        this.form.controls['importPermanentMonthlyPay'].setValue(
+            importPermanentMonthlyPay
+        );
         this.resetFormError(false);
-    }
+    };
 }

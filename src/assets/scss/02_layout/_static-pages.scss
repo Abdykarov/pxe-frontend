@@ -4,6 +4,8 @@
  -
  */
 
+@use 'sass:math';
+
 .static-pages-holder {
 	.breadcrumb {
 		/* stylelint-disable declaration-no-important */
@@ -14,7 +16,7 @@
 
 .static-pages {
 	background-color: $white;
-	padding: ( $spacer * 2 ) $spacer;
+	padding: ( $spacer * 2  ) $spacer;
 	margin-bottom: $spacer;
 
 	&:last-child {
@@ -27,7 +29,7 @@
 	}
 
 	.icon-boxes {
-		margin: ( -$spacer / 2 ) ( -$spacer / 2 ) $spacer ( -$spacer / 2 );
+		margin: ( -$spacer * .5 ) ( -$spacer * .5 ) $spacer ( -$spacer * .5  );
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -42,19 +44,19 @@
 		height: 96px;
 		border: 1px solid $gray-100;
 		border-radius: $btn-border-radius;
-		padding: ( $spacer / 1.2 ) ( $spacer / 6 ) ( $spacer / 2 ) ( $spacer / 6 );
-		margin: ( $spacer / 2 );
+		padding:  math.div( $spacer, 1.2)   math.div( $spacer, 6)  ( $spacer * .5 )  math.div( $spacer, 6 ) ;
+		margin: ( $spacer * .5  );
 		text-align: center;
 
 		&--double {
-			width: ( 96px * 1.5 + $spacer );
-			height: ( 96px * 1.5 + $spacer );
+			width: ( 96px * 1.5 + $spacer  );
+			height: ( 96px * 1.5 + $spacer  );
 		}
 
 		&__symbol,
 		&__illustration-holder {
 			display: block;
-			margin-bottom: ( $spacer / 3 );
+			margin-bottom:  math.div( $spacer, 3 ) ;
 		}
 		&__illustration {
 			width: 50%;
@@ -82,7 +84,7 @@
 	}
 
 	.colors-overview {
-		margin: ( -$spacer / 4 ) ( -$spacer / 2 ) $spacer ( -$spacer / 2 );
+		margin: ( -$spacer * .25 ) ( -$spacer * .5 ) $spacer ( -$spacer * .5  );
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -99,10 +101,10 @@
 		width: 110px;
 		height: 90px;
 		border-radius: $btn-border-radius;
-		margin:( $spacer / 4 ) ( $spacer / 2 );
+		margin:( $spacer * .25 ) ( $spacer * .5  );
 
 		&--wide {
-			width: (2 * 110px ) + ( ( $spacer / 2) * 3 );    // Double color size + Triple gutter width
+			width: (2 * 110px ) + ( ( $spacer * .5) * 3  );    // Double color size + Triple gutter width
 		}
 
 		&__name {
@@ -110,14 +112,14 @@
 			flex-grow: 1;
 			width: 100%;
 			background-color: $white;
-			padding: 0 ( $spacer / 3 ) ( $spacer / 10 ) 0;
+			padding: 0  math.div( $spacer, 3)  ( $spacer * .1  ) 0;
 			font-size: .75rem;
 		}
 
 		&__value {
 			align-self: flex-end;
 			flex-grow: 1;
-			padding: 0 ( $spacer / 3 ) ( $spacer / 6 ) 0;
+			padding: 0  math.div( $spacer, 3)   math.div( $spacer, 6 )  0;
 			text-align: right;
 			color: $white;
 			font-size: .75rem;
@@ -149,7 +151,7 @@
 
 .static-page-holder {
 	background-color: $body-bg;
-	margin: -( $spacer / 2 );
+	margin: -( $spacer * .5  );
 	padding: $spacer 0;
 
 	// Media queries

@@ -1,6 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 import { UnsubscribeNewsFacade } from 'src/app/pages/public/unsubscribe-news/unsubscribe-news.facade';
 
 @Component({
@@ -15,8 +14,10 @@ export class UnsubscribeNewsContainerComponent {
 
     constructor(
         private route: ActivatedRoute,
-        private unsubscribeNewsFacade: UnsubscribeNewsFacade,
+        private unsubscribeNewsFacade: UnsubscribeNewsFacade
     ) {
-        this.unsubscribeNewsFacade.unsubscribe(route.snapshot.params['userProfileId']);
+        this.unsubscribeNewsFacade.unsubscribe(
+            route.snapshot.params['userProfileId']
+        );
     }
 }

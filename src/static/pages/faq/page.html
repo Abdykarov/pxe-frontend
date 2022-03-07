@@ -3,7 +3,12 @@
     <a class="link mt-4" (click)="routerTo($event)">Zobrazit více</a>
 </ng-template>
 
-<div class="patterns-of-contracts-page container-content container-content--public">
+<div
+    class="
+        patterns-of-contracts-page
+        container-content container-content--public
+    "
+>
     <div class="container-fluid container-fluid--max-width">
         <div class="row text-center">
             <div class="col-12 col-md-6 offset-md-3">
@@ -12,21 +17,24 @@
         </div>
         <div class="row">
             <div class="col">
-                <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+                <lnd-breadcrumb
+                    [breadcrumbItems]="breadcrumbItemsSimple"
+                ></lnd-breadcrumb>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-xl-10 offset-xl-1 mb-3">
                 <ul class="text-center link-list">
                     <li class="link-list__item">
-                        <a class="link-list__link link-list__link--active"
-                           (click)="routerTo($event)">
+                        <a
+                            class="link-list__link link-list__link--active"
+                            (click)="routerTo($event)"
+                        >
                             Elektřina
                         </a>
                     </li>
                     <li class="link-list__item">
-                        <a class="link-list__link"
-                           (click)="routerTo($event)">
+                        <a class="link-list__link" (click)="routerTo($event)">
                             Plyn
                         </a>
                     </li>
@@ -37,7 +45,9 @@
             <div class="col-12 col-xl-10 offset-xl-1 mb-3">
                 <lnd-accordion
                     [accordionContentTemplate]="accordionTemplate"
-                    [accordionItems]="accordionItems" title="">
+                    [accordionItems]="accordionItems"
+                    title=""
+                >
                 </lnd-accordion>
             </div>
         </div>

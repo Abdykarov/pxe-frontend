@@ -1,32 +1,40 @@
 <div class="banner">
-    <div class="
+    <div
+        class="
             row
-            flex-column
-            flex-md-row
-            align-items-md-center 
-            justify-content-md-between 
-            no-gutters 
-            w-100">
+            flex-column flex-md-row
+            align-items-md-center
+            justify-content-md-between
+            no-gutters
+            w-100
+        "
+    >
         <div class="col">
             <div class="banner__content">
-                <span
-                    [ngClass]="icon"
-                    class="banner__icon icon"></span>
-                <span class="banner__text">
-                    {{data.text}}
-                </span>
+                <span [ngClass]="icon" class="banner__icon icon"></span>
+                <span class="banner__text"> {{ data.text }} </span>
             </div>
         </div>
         <div class="col-auto">
-            <div class="banner__controls"
-                *ngIf="showButtonLabel">
+            <div class="banner__controls" *ngIf="showButtonLabel">
                 <lnd-button
                     *ngIf="!buttonsTemplate"
-                    label="{{buttonLabel}}"
-                    (action)="data.linkValue ? bannerAction(data.linkValue, data.linkType, data.linkData) : customBannerAction.emit($event)"
-                    type="white">
+                    label="{{ buttonLabel }}"
+                    (action)="
+                        data.linkValue
+                            ? bannerAction(
+                                  data.linkValue,
+                                  data.linkType,
+                                  data.linkData
+                              )
+                            : customBannerAction.emit($event)
+                    "
+                    type="white"
+                >
                 </lnd-button>
-                <ng-container *ngTemplateOutlet="buttonsTemplate"></ng-container>
+                <ng-container
+                    *ngTemplateOutlet="buttonsTemplate"
+                ></ng-container>
             </div>
         </div>
     </div>

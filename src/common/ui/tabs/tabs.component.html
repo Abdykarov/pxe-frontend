@@ -12,24 +12,42 @@
             [hasBeak]="true"
             *ngIf="!!selectedTab"
             [overlayEnabled]="true"
-            (toggleOverlayerAction)="toggleOverlayerAction.emit();">
-                <a *ngFor="let item of dropdownItems"
-                   (click)="item.action()"
-                   class="dropdown-item">
-                    {{ item.label }}
-                </a>
+            (toggleOverlayerAction)="toggleOverlayerAction.emit()"
+        >
+            <a
+                *ngFor="let item of dropdownItems"
+                (click)="item.action()"
+                class="dropdown-item"
+            >
+                {{ item.label }}
+            </a>
         </lnd-dropdown>
     </div>
-    <ul #tabList class="nav nav-tabs" [class.nav-tabs-filled]="shownTabsCount" role="tablist">
+    <ul
+        #tabList
+        class="nav nav-tabs"
+        [class.nav-tabs-filled]="shownTabsCount"
+        role="tablist"
+    >
         <ng-container *ngFor="let tab of tabs; let i = index">
-            <li #tabItem [hidden]="shownTabsCount && i >= shownTabsCount" class="nav-item">
-                <a (click)="selectTab(tab)"
+            <li
+                #tabItem
+                [hidden]="shownTabsCount && i >= shownTabsCount"
+                class="nav-item"
+            >
+                <a
+                    (click)="selectTab(tab)"
                     class="nav-link"
-                    [class.active]="tab.active">
-                    {{tab.tabTitle}}
+                    [class.active]="tab.active"
+                >
+                    {{ tab.tabTitle }}
                 </a>
             </li>
-            <li #moreItem [hidden]="hideMoreItem(i)" class="nav-item tabs-item-more">
+            <li
+                #moreItem
+                [hidden]="hideMoreItem(i)"
+                class="nav-item tabs-item-more"
+            >
                 <ng-template #dropdownTabExtended let-toggle="toggle">
                     <lnd-button
                         (click)="toggle()"
@@ -44,12 +62,15 @@
                     menuDirection="right"
                     *ngIf="!!tab"
                     [overlayEnabled]="true"
-                    (toggleOverlayerAction)="toggleOverlayerAction.emit();">
-                        <a *ngFor="let dropdownTab of filterTabs(i)"
-                            class="dropdown-item"
-                            (click)="selectTab(dropdownTab)">
-                            {{dropdownTab.tabTitle}}
-                        </a>
+                    (toggleOverlayerAction)="toggleOverlayerAction.emit()"
+                >
+                    <a
+                        *ngFor="let dropdownTab of filterTabs(i)"
+                        class="dropdown-item"
+                        (click)="selectTab(dropdownTab)"
+                    >
+                        {{ dropdownTab.tabTitle }}
+                    </a>
                 </lnd-dropdown>
             </li>
         </ng-container>

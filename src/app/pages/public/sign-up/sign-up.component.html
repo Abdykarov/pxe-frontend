@@ -5,15 +5,24 @@
                 <div class="section__half">
                     <div class="row">
                         <div class="col-md-8 offset-md-2 col-xl-10 offset-xl-0">
-                            <h1 class="h2--public mb-2">Založte si účet zdarma</h1>
+                            <h1 class="h2--public mb-2">
+                                Založte si účet zdarma
+                            </h1>
                             <p>
-                                Nemusíte se bát, ani my nemáme rádi spam. Máte již účet?
-                                <a class="d-inline-block" (click)="routerToLogin($event)">
-                                    Přihlaste se zde.</a>
+                                Nemusíte se bát, ani my nemáme rádi spam. Máte
+                                již účet?
+                                <a
+                                    class="d-inline-block"
+                                    (click)="routerToLogin($event)"
+                                >
+                                    Přihlaste se zde.</a
+                                >
                             </p>
-                            <pxe-re-captcha #reCapcha
-                                            id="sign-up"
-                                            (resolveAction)="submitForm($event)">
+                            <pxe-re-captcha
+                                #reCapcha
+                                id="sign-up"
+                                (resolveAction)="submitForm($event)"
+                            >
                                 <pxe-registration-form
                                     [formFields]="formFields"
                                     [formLoading]="formLoading"
@@ -28,17 +37,43 @@
                 </div>
             </div>
             <div class="col-xl-6">
-                <div class="section__half section__half--fix-height section__half--gradient-violet">
+                <div
+                    class="
+                        section__half
+                        section__half--fix-height
+                        section__half--gradient-violet
+                    "
+                >
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <h2 class="h3--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                            <h2 class="h3--public text-white">
+                                Nechcete nic vyplňovat? Nemusíte!
+                            </h2>
                             <ol class="numerical-list-stepper text-white">
-                                <li [class.active]="fileContainer?.fileUploader?.queue?.length === 0">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
-                                <li [class.active]="fileContainer?.fileUploader?.queue?.length > 0">Zadejte váš e-mail a my vám pošleme nabídky na míru. Zdarma a nezávazně.</li>
+                                <li
+                                    [class.active]="
+                                        fileContainer?.fileUploader?.queue
+                                            ?.length === 0
+                                    "
+                                >
+                                    Vložte vaši poslední fakturu za elektřinu
+                                    nebo plyn.
+                                </li>
+                                <li
+                                    [class.active]="
+                                        fileContainer?.fileUploader?.queue
+                                            ?.length > 0
+                                    "
+                                >
+                                    Zadejte váš e-mail a my vám pošleme nabídky
+                                    na míru. Zdarma a nezávazně.
+                                </li>
                             </ol>
                         </div>
                         <div class="col-md-8 offset-md-2 col-xl-10">
-                            <pxe-ask-for-offer-container #fileContainer></pxe-ask-for-offer-container>
+                            <pxe-ask-for-offer-container
+                                #fileContainer
+                            ></pxe-ask-for-offer-container>
                         </div>
                     </div>
                 </div>

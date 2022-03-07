@@ -8,25 +8,40 @@
             [src]="data.logoUrlHover"
             [title]="data.title"
             [alt]="data.alt"
-            [width]="data.width">
+            [width]="data.width"
+        />
     </a>
 </ng-template>
 
 <div class="suppliers-holder">
     <ul class="suppliers-overview">
-        <li class="suppliers-overview__item"
-            *ngFor="let supplierLogoData of configSupplier">
+        <li
+            class="suppliers-overview__item"
+            *ngFor="let supplierLogoData of configSupplier"
+        >
             <a
                 *ngIf="supplierLogoData.supplierUrl"
                 [href]="supplierLogoData.supplierUrl"
                 target="_blank"
-                class="suppliers-overview__content">
-                <ng-container *ngTemplateOutlet="images; context: { data: supplierLogoData }"></ng-container>
+                class="suppliers-overview__content"
+            >
+                <ng-container
+                    *ngTemplateOutlet="
+                        images;
+                        context: { data: supplierLogoData }
+                    "
+                ></ng-container>
             </a>
             <span
                 *ngIf="!supplierLogoData.supplierUrl"
-                class="suppliers-overview__content">
-                <ng-container *ngTemplateOutlet="images; context: { data: supplierLogoData }"></ng-container>
+                class="suppliers-overview__content"
+            >
+                <ng-container
+                    *ngTemplateOutlet="
+                        images;
+                        context: { data: supplierLogoData }
+                    "
+                ></ng-container>
             </span>
         </li>
     </ul>

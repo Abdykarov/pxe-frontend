@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
@@ -13,5 +12,5 @@ export class ChangePasswordBannerPageComponent {
 
     public clicked = (evt) => {
         evt.preventDefault();
-    }
+    };
 }

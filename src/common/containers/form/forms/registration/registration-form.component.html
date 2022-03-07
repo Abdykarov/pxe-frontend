@@ -1,18 +1,17 @@
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
+<lnd-alert *ngIf="globalError.length" type="danger">
     <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
+        {{ error }}<br />
     </ng-container>
 </lnd-alert>
 <form
     id="form-sign-up"
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
-    (keydown.enter)="submitForm($event);false"
+    (keydown.enter)="submitForm($event); (false)"
     (change)="resetCustomFieldError()"
     class="form-container form-container--large ml-0"
-    autocomplete="off">
+    autocomplete="off"
+>
     <lnd-form-field
         lndSFormDirective
         lndSBiometricsDirective
@@ -22,7 +21,10 @@
         customFormGroupClass="form-group--public mb-3"
         label="E-mail"
         [lightField]="true"
-        [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+        [success]="
+            form.controls.email.valid &&
+            (form.controls.email.touched || formError.email)
+        "
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
     ></lnd-form-field>
@@ -32,16 +34,15 @@
             class="w-100"
             customClass="btn-public btn--icon-right w-100"
             [submit]="true"
-            (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
+            (action)="submitForm($event); sAnalyticsService.sFormClick($event)"
             [isDisabled]="formLoading"
             [label]="isSignUp ? 'Založit účet zdarma' : 'Odeslat'"
             icon="icon--arrow-right"
-            iconPosition="right">
+            iconPosition="right"
+        >
         </lnd-button>
     </div>
-    <p class="mb-2">
-        Nebo si založte účet pomocí
-    </p>
+    <p class="mb-2">Nebo si založte účet pomocí</p>
     <div class="row mb-5">
         <div class="col-md-6 mb-3">
             <lnd-button
@@ -49,7 +50,8 @@
                 type="facebook"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLogin(oAuthType.FACEBOOK)">
+                (action)="oauthService.tryLogin(oAuthType.FACEBOOK)"
+            >
             </lnd-button>
         </div>
         <div class="col-md-6 mb-5">
@@ -58,23 +60,35 @@
                 type="google"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLogin(oAuthType.GOOGLE)">
+                (action)="oauthService.tryLogin(oAuthType.GOOGLE)"
+            >
             </lnd-button>
         </div>
         <div class="col-12">
             <p class="mb-2">
-                Případně použijte stejný a bezpečný způsob ověření identity jako do vašeho internetového bankovnictví.
+                Případně použijte stejný a bezpečný způsob ověření identity jako
+                do vašeho internetového bankovnictví.
             </p>
             <lnd-button
                 type="bankid"
                 class="w-100 mb-1"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLogin(oAuthType.BANK_ID)">
+                (action)="oauthService.tryLogin(oAuthType.BANK_ID)"
+            >
             </lnd-button>
-            <a href="https://bankid.cz" target="_blank">Více informací o Bank ID</a>
+            <a href="https://bankid.cz" target="_blank"
+                >Více informací o Bank ID</a
+            >
         </div>
     </div>
     <p class="font-size-14">
-        Založením účtu souhlasím s <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
+        Založením účtu souhlasím s
+        <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE"
+            >Obchodními podmínkami parc4u</a
+        >
+        a beru na vědomí informace o
+        <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA"
+            >Ochraně osobních údajů</a
+        >.
     </p>
 </form>

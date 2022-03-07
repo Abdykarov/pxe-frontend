@@ -1,16 +1,7 @@
-import {
-    DOCUMENT,
-    isPlatformBrowser,
-} from '@angular/common';
-import {
-    Inject,
-    Injectable,
-    PLATFORM_ID,
-} from '@angular/core';
-import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
-
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import * as R from 'ramda';
-
+import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 import { environment } from 'src/environments/environment';
 
 declare const sa;
@@ -19,7 +10,6 @@ declare const sa;
     providedIn: 'root',
 })
 export class SAnalyticsService {
-
     private UUID: string = null;
 
     private installedSApm = false;
@@ -29,10 +19,11 @@ export class SAnalyticsService {
 
     constructor(
         @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {}
 
-    private canUseSAnalytics = () => isPlatformBrowser(this.platformId) && environment.sAnalyticsTId;
+    private canUseSAnalytics = () =>
+        isPlatformBrowser(this.platformId) && environment.sAnalyticsTId;
 
     public init = () => {
         if (!this.canUseSAnalytics() || this.installed) {
@@ -44,7 +35,7 @@ export class SAnalyticsService {
         this.registrationApplication();
         this.pageView();
         this.installed = true;
-    }
+    };
 
     public registrationApplication = () => {
         return;
@@ -54,13 +45,13 @@ export class SAnalyticsService {
         //
         // this.UUID = uuid();
         // sa('send', 'register', '0' + this.UUID + '0');
-    }
+    };
 
     public sendWebData = (
         loanInfo = {},
         borrower = {},
         coborrower = {},
-        webdata = {},
+        webdata = {}
     ) => {
         if (!this.canUseSAnalytics()) {
             return;
@@ -85,14 +76,14 @@ export class SAnalyticsService {
 
         sa('send', 'webdata', applicationWebData);
         this.registrationApplication();
-    }
+    };
 
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
         const script = this.document.createElement('script');
         script.async = true;
         script.src = `https://sa-sdp.lnd.bz/versions/stable/${sAnalyticsPlugins}.plugin.min.js`;
         this.document.head.prepend(script);
-    }
+    };
 
     public initSApm = () => {
         if (!this.canUseSAnalytics() || this.installedSApm) {
@@ -102,16 +93,16 @@ export class SAnalyticsService {
         sa('include', SAnalyticsPlugins.sApm);
         this.installPlugin(SAnalyticsPlugins.sApm);
         this.installedSApm = true;
-    }
+    };
 
-    public installSForm  = () => {
+    public installSForm = () => {
         if (!this.canUseSAnalytics() || this.installedSForm) {
             return;
         }
 
         this.installPlugin(SAnalyticsPlugins.sForm);
         this.installedSForm = true;
-    }
+    };
 
     public installSBiometrics = () => {
         if (!this.canUseSAnalytics() || this.installedSBio) {
@@ -120,7 +111,7 @@ export class SAnalyticsService {
 
         this.installPlugin(SAnalyticsPlugins.sBiometrics);
         this.installedSBio = true;
-    }
+    };
 
     public initSBiometrics = () => {
         if (!this.canUseSAnalytics()) {
@@ -128,7 +119,7 @@ export class SAnalyticsService {
         }
 
         sa('include', 's-biometrics');
-    }
+    };
 
     public initSForm = () => {
         if (!this.canUseSAnalytics()) {
@@ -136,7 +127,7 @@ export class SAnalyticsService {
         }
 
         sa('include', 's-form');
-    }
+    };
 
     public sFormStart = () => {
         if (!this.canUseSAnalytics()) {
@@ -144,7 +135,7 @@ export class SAnalyticsService {
         }
 
         sa('s-form:start');
-    }
+    };
 
     public sFormEnd = () => {
         if (!this.canUseSAnalytics()) {
@@ -152,14 +143,14 @@ export class SAnalyticsService {
         }
 
         sa('s-form:end');
-    }
+    };
 
     public sFormBlur = (event) => {
         if (!this.canUseSAnalytics()) {
             return;
         }
         sa('s-form:blur', { event });
-    }
+    };
 
     public sFormChange = (event) => {
         if (!this.canUseSAnalytics()) {
@@ -167,23 +158,23 @@ export class SAnalyticsService {
         }
 
         sa('s-form:change', { event });
-    }
+    };
 
     public sFormClick = (event) => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
-        sa('s-form:click', {event});
-    }
+        sa('s-form:click', { event });
+    };
 
     public sFormSubmit = (event) => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
-        sa('s-form:submit', {event });
-    }
+        sa('s-form:submit', { event });
+    };
 
     public sFormFocus = (event) => {
         if (!this.canUseSAnalytics()) {
@@ -191,7 +182,7 @@ export class SAnalyticsService {
         }
 
         sa('s-form:focus', { event });
-    }
+    };
 
     public sBioFocus = (event) => {
         if (!this.canUseSAnalytics()) {
@@ -199,7 +190,7 @@ export class SAnalyticsService {
         }
 
         sa('s-biometrics:focus', { event });
-    }
+    };
 
     public sBioKeyDown = (event) => {
         if (!this.canUseSAnalytics()) {
@@ -207,7 +198,7 @@ export class SAnalyticsService {
         }
 
         sa('s-biometrics:keydown', { event });
-    }
+    };
 
     public sBioKeyUp = (event) => {
         if (!this.canUseSAnalytics()) {
@@ -215,7 +206,7 @@ export class SAnalyticsService {
         }
 
         sa('s-biometrics:keyup', { event });
-    }
+    };
 
     public sBioBlur = (event) => {
         if (!this.canUseSAnalytics()) {
@@ -223,7 +214,7 @@ export class SAnalyticsService {
         }
 
         sa('s-biometrics:blur', { event });
-    }
+    };
 
     public pageView = () => {
         if (!this.canUseSAnalytics() || this.installed) {
@@ -231,7 +222,7 @@ export class SAnalyticsService {
         }
 
         sa('send', 'pageview');
-    }
+    };
 
     private downloadSAnalytics = () => {
         const script = this.document.createElement('script');
@@ -241,5 +232,5 @@ export class SAnalyticsService {
                 m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; a.id = 'SAnalyticsScript'; m.parentNode.insertBefore(a, m);
             })(window, document, 'script', 'https://sa-sdp.lnd.bz/versions/stable/s-analytics.min.js', 'sa');`;
         this.document.head.prepend(script);
-    }
+    };
 }

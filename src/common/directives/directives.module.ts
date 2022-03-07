@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-
-import { DisplayNoneOnFirefoxDirective } from './display-none-on-firefox/display-none-on-firefox.directive';
-import { FirstTimeInViewDirective } from './first-time-in-view/first-time-in-view.directive';
-import { MaskDateDirective } from './datepicker/datepicker.directive';
-import { OffClickDirective } from './off-click/off-click.directive';
-import { OptionHighlightDirective } from './option-highlight/option-highlight.directive';
 import { SBiometricsDirective } from 'src/common/directives/s-analytics/s-biometrics.directive';
 import { SFormDirective } from 'src/common/directives/s-analytics/s-form.directive';
+import { MaskDateDirective } from './datepicker/datepicker.directive';
+import { DisplayNoneOnFirefoxDirective } from './display-none-on-firefox/display-none-on-firefox.directive';
+import { FirstTimeInViewDirective } from './first-time-in-view/first-time-in-view.directive';
+import { OffClickDirective } from './off-click/off-click.directive';
+import { OnlySsrDirective } from './only-ssr/only-ssr.directive';
+import { OptionHighlightDirective } from './option-highlight/option-highlight.directive';
 
 @NgModule({
     declarations: [
@@ -17,6 +17,7 @@ import { SFormDirective } from 'src/common/directives/s-analytics/s-form.directi
         SFormDirective,
         FirstTimeInViewDirective,
         DisplayNoneOnFirefoxDirective,
+        OnlySsrDirective,
     ],
     exports: [
         MaskDateDirective,
@@ -26,6 +27,7 @@ import { SFormDirective } from 'src/common/directives/s-analytics/s-form.directi
         SFormDirective,
         FirstTimeInViewDirective,
         DisplayNoneOnFirefoxDirective,
+        OnlySsrDirective,
     ],
 })
 export class DirectivesModule {}

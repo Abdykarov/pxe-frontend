@@ -4,6 +4,7 @@ import {
     ISupplierLogo,
 } from 'src/common/ui/carousels/models/models';
 import { ISeo } from './seo';
+import { ISignUp } from './sign-up';
 
 export interface IHelpSection {
     cards: ICardData[];
@@ -56,7 +57,7 @@ export interface IBestPricesInTheWorldSection {
     carouselDiscount: ICarouselDiscount[];
 }
 
-export interface ILandingPage {
+export interface ILandingPageContent {
     carouselReferences: IReference[];
     helpSection: IHelpSection;
     howItWorksSection: IHowItWorksSection;
@@ -64,4 +65,17 @@ export interface ILandingPage {
     iWantToSeeTheBestOffers: IiWantToSeeTheBestOffers;
     aboutUs: IAboutUs;
     seo: ISeo;
+}
+
+export interface ILandingPageQuery {
+    queryArticleContents: ICardData[];
+    queryAskForOfferContents: IAskForOffer;
+    queryLandingPageContents: ILandingPageContent;
+    querySignUpContents: ISignUp;
+}
+
+export interface IAskForOffer {
+    firstStep: string;
+    secondStep: string;
+    title: string;
 }

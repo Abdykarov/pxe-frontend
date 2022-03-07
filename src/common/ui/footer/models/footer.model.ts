@@ -1,4 +1,3 @@
-
 export interface IFooterNavigation extends Array<IFooterNavigationItem> {}
 
 export interface IFooterNavigationItem {

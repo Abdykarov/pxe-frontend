@@ -1,5 +1,5 @@
-import { ISeo } from './seo';
 import { ITagConfigItem } from 'src/app/services/model/faq.model';
+import { ISeo } from './seo';
 
 export interface IFaq {
     title: string;

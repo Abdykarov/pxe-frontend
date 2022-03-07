@@ -1,11 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
     Component,
+    HostListener,
+    Inject,
     Input,
     ViewEncapsulation,
-    Inject,
-    HostListener,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'lnd-footer',
@@ -29,8 +29,7 @@ export class FooterComponent {
         ) {
             this.scrollToTopIsVisible = true;
         } else if (
-            this.scrollToTopIsVisible &&
-            window.pageYOffset ||
+            (this.scrollToTopIsVisible && window.pageYOffset) ||
             this.document.documentElement.scrollTop ||
             this.document.body.scrollTop < 10
         ) {
@@ -38,15 +37,15 @@ export class FooterComponent {
         }
     }
 
-    constructor(
-        @Inject(DOCUMENT) private document: Document,
-    ) {}
+    constructor(@Inject(DOCUMENT) private document: Document) {}
 
     public scrollToTop = () => {
-        const currentScroll = this.document.documentElement.scrollTop || this.document.body.scrollTop;
+        const currentScroll =
+            this.document.documentElement.scrollTop ||
+            this.document.body.scrollTop;
         if (currentScroll > 0) {
             window.requestAnimationFrame(this.scrollToTop);
-            window.scrollTo(0, currentScroll - (currentScroll / 5));
+            window.scrollTo(0, currentScroll - currentScroll / 5);
         }
-    }
+    };
 }

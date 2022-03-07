@@ -5,7 +5,10 @@ import {
     Output,
     TemplateRef,
 } from '@angular/core';
-
+import {
+    CONTRACT_END_TYPE,
+    CONTRACT_END_TYPE_TRANSLATE_MAP,
+} from 'src/app/app.constants';
 import {
     AllowedOperations,
     CommodityType,
@@ -35,7 +38,8 @@ export class SupplyPointComponent {
     public action: EventEmitter<any> = new EventEmitter();
 
     public commodityType = CommodityType;
+    public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
+    public contractEndType = CONTRACT_END_TYPE;
 
     constructor() {}
 }
-

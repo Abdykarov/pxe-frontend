@@ -1,30 +1,22 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
-    Component,
     ChangeDetectionStrategy,
-    Inject,
-    PLATFORM_ID,
+    Component,
     ElementRef,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
-import {
-    DOCUMENT,
-    isPlatformBrowser,
-} from '@angular/common';
 import { Meta } from '@angular/platform-browser';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
-
+import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
-import { AuthService } from './services/auth.service';
-import { environment } from 'src/environments/environment';
-import { GTMService } from './services/gtm.service';
-import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { GTMService } from 'src/app/services/gtm.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'lnd-root',
@@ -42,7 +34,7 @@ export class AppComponent extends AbstractComponent implements OnInit {
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
         @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
 
@@ -56,7 +48,9 @@ export class AppComponent extends AbstractComponent implements OnInit {
 
             window.addEventListener('beforeunload', (e) => {
                 if (onlyOneTabActiveService.isThisTabActive()) {
-                    onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.CLOSED);
+                    onlyOneTabActiveService.setActiveTab(
+                        OnlyOneTabActiveState.CLOSED
+                    );
                 }
             });
 
@@ -64,13 +58,11 @@ export class AppComponent extends AbstractComponent implements OnInit {
                 return;
             }
 
-
-
             this.gtmService.init();
 
             this.router.events
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(event => {
+                .subscribe((event) => {
                     if (event instanceof NavigationEnd) {
                         gtmService.gtm(event);
                         // gaService.gtm(event);

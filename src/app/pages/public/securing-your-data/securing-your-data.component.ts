@@ -1,15 +1,10 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
-
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import * as R from 'ramda';
-
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISecuringYourData } from 'src/common/cms/models/securing-your-data';
 import { ISeo } from 'src/common/cms/models/seo';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
     selector: 'pxe-securing-your-data',
@@ -17,7 +12,8 @@ import { ISeo } from 'src/common/cms/models/seo';
     styleUrls: ['./securing-your-data.component.scss'],
 })
 export class SecuringYourDataComponent {
-    public readonly securingYourData: ISecuringYourData = this.route.snapshot.data.securingYourData;
+    public readonly securingYourData: ISecuringYourData =
+        this.route.snapshot.data.securingYourData;
     public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
         {
             label: 'Domů',
@@ -31,7 +27,7 @@ export class SecuringYourDataComponent {
     constructor(
         private metaService: Meta,
         private route: ActivatedRoute,
-        private titleService: Title,
+        private titleService: Title
     ) {
         const seo: ISeo = R.head(this.securingYourData.seo);
         this.titleService.setTitle(seo.title);

@@ -1,4 +1,3 @@
-
 export const vertical = [
     {
         label: 'First column',
@@ -127,5 +126,5 @@ export const rows = [
         second: 'Last row second cell',
         third: 'Last row third cell',
         last: 'Last row last cell',
-   },
+    },
 ];

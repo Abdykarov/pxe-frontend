@@ -4,22 +4,17 @@ import {
     EventEmitter,
     Input,
     Output,
-    ViewEncapsulation,
     ViewChild,
+    ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
-import {
-    BsDatepickerConfig,
-    BsLocaleService,
-} from 'ngx-bootstrap/datepicker';
-import { csLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
-
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { csLocale } from 'ngx-bootstrap/locale';
 import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
-import { defaultDatepickerConfig } from './datepicker-range.config';
 import { IValidationMessages } from '../models/validation-messages.model';
+import { defaultDatepickerConfig } from './datepicker-range.config';
 
 const locale = 'cs';
 
@@ -95,7 +90,7 @@ export class DatepickerRangeComponent {
     constructor(
         private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
-        private localeService: BsLocaleService,
+        private localeService: BsLocaleService
     ) {
         this.resetDatepickerLocale();
         this.config = defaultDatepickerConfig;
@@ -105,16 +100,17 @@ export class DatepickerRangeComponent {
         csLocale.invalidDate = invalidMessage;
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
-    }
+    };
 
     public onShowPicker = (event) => {
         const dayHoverHandler = event.dayHoverHandler;
         const hoverWrapper = (hoverEvent) => {
             const { cell, isHovered } = hoverEvent;
 
-            if ((isHovered &&
+            if (
+                isHovered &&
                 !!navigator.platform &&
-                /iPad|iPhone|iPod/.test(navigator.platform)) &&
+                /iPad|iPhone|iPod/.test(navigator.platform) &&
                 'ontouchstart' in window
             ) {
                 this.datepicker._datepickerRef.instance.daySelectHandler(cell);
@@ -123,9 +119,10 @@ export class DatepickerRangeComponent {
             return dayHoverHandler(hoverEvent);
         };
         event.dayHoverHandler = hoverWrapper;
-    }
+    };
 
     public onHidePicker = (event) => this.cd.markForCheck();
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
+    public getErrorMessage = () =>
+        getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

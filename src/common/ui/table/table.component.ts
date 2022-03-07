@@ -5,17 +5,14 @@ import {
     Input,
     OnChanges,
     Output,
-    PipeTransform,
     TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as R from 'ramda';
-
 import { AbstractComponent } from 'src/common/abstract.component';
+import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 import { isRouterLink } from 'src/common/utils';
 import { ITableColumnConfig } from './models/table.model';
-import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 
 @Component({
     selector: 'lnd-table',
@@ -49,7 +46,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     // html custom template for caption
     @Input() customCaptionTemplate?: TemplateRef<any>;
     // html templates for individual columns
-    @Input() columnTemplates?: { [templateName: string]: TemplateRef<any>; };
+    @Input() columnTemplates?: { [templateName: string]: TemplateRef<any> };
 
     @Output()
     public rowOpened: EventEmitter<any> = new EventEmitter<any>();
@@ -66,29 +63,30 @@ export class TableComponent extends AbstractComponent implements OnChanges {
 
     // for performance reasons we calculate various classes on init just once
     desktopLayoutClasses: Array<string> = [];
-    mobileLayoutClasses: Array<string>  = [];
+    mobileLayoutClasses: Array<string> = [];
 
-    constructor(
-        public router: Router,
-    ) {
+    constructor(public router: Router) {
         super();
     }
 
-    ngOnChanges () {
-        this.isAdvanced = this.tableClass && R.contains('table--advanced', this.tableClass);
+    ngOnChanges() {
+        this.isAdvanced =
+            this.tableClass && R.contains('table--advanced', this.tableClass);
         this.mobileCols = [];
-        this.cols.forEach(column => {
-            column.views.forEach(view => this.prepareViewClasses(view));
-            if ( column.hasOwnProperty('mobileViews') ) {
+        this.cols.forEach((column) => {
+            column.views.forEach((view) => this.prepareViewClasses(view));
+            if (column.hasOwnProperty('mobileViews')) {
                 this.mobileCols.push(column);
-                column.mobileViews.forEach(view => this.prepareViewClasses(view));
+                column.mobileViews.forEach((view) =>
+                    this.prepareViewClasses(view)
+                );
             }
             this.totalCols += column.views.length;
         });
         this.desktopLayoutClasses = this.getLayoutClasses(false);
         this.mobileLayoutClasses = this.getLayoutClasses(true);
 
-        if ( this.rowSelectorFn ) {
+        if (this.rowSelectorFn) {
             this.selectedRow = this.rows.find(this.rowSelectorFn);
         }
     }
@@ -106,47 +104,65 @@ export class TableComponent extends AbstractComponent implements OnChanges {
         }
     }
 
-    openRow (row) {
-        if ( this.rowDetailTemplate && !this.isStatic ) {
-            this.openedRow = ( this.openedRow === row ) ? null : row;
+    openRow(row) {
+        if (this.rowDetailTemplate && !this.isStatic) {
+            this.openedRow = this.openedRow === row ? null : row;
             this.rowOpened.emit(this.openedRow);
         }
     }
 
-    selectRow (row) {
-        if ( !this.isStatic ) {
+    selectRow(row) {
+        if (!this.isStatic) {
             this.selectedRow = row;
             this.rowSelected.emit(this.selectedRow);
         }
     }
 
-    private getLayoutClasses (mobile: boolean): Array<string> {
-        if ( !this.mobileCols.length ) {
+    private getLayoutClasses(mobile: boolean): Array<string> {
+        if (!this.mobileCols.length) {
             // we don't have mobile views
             return [];
         }
 
         const position = viewBreakpoints.indexOf(this.mobileLayoutBreakpoint);
 
-        if ( mobile ) {
-            return this.getDisplayClasses(viewBreakpoints.slice(0, position), 'table-row-group');
+        if (mobile) {
+            return this.getDisplayClasses(
+                viewBreakpoints.slice(0, position),
+                'table-row-group'
+            );
         } else {
-            return this.getDisplayClasses(viewBreakpoints.slice(position), 'table-row-group');
+            return this.getDisplayClasses(
+                viewBreakpoints.slice(position),
+                'table-row-group'
+            );
         }
     }
 
     private prepareViewClasses(view) {
-        if ( view.hasOwnProperty('showIn') ) {
-            const displayClasses = this.getDisplayClasses(view.showIn, 'table-cell');
-            view.headingClass = view.hasOwnProperty('headingClass') ? R.union(displayClasses, view.headingClass) : displayClasses;
-            view.cellClass = view.hasOwnProperty('cellClass') ? R.union(displayClasses, view.cellClass) : displayClasses;
+        if (view.hasOwnProperty('showIn')) {
+            const displayClasses = this.getDisplayClasses(
+                view.showIn,
+                'table-cell'
+            );
+            view.headingClass = view.hasOwnProperty('headingClass')
+                ? R.union(displayClasses, view.headingClass)
+                : displayClasses;
+            view.cellClass = view.hasOwnProperty('cellClass')
+                ? R.union(displayClasses, view.cellClass)
+                : displayClasses;
         }
     }
 
-    private getDisplayClasses (showIn: Array<string>, displayType: string): Array<string> {
-        return viewBreakpoints.map(breakpoint => {
-            if ( showIn.includes(breakpoint) ) {
-                return breakpoint === 'xs' ? `d-${displayType}` : `d-${breakpoint}-${displayType}`;
+    private getDisplayClasses(
+        showIn: Array<string>,
+        displayType: string
+    ): Array<string> {
+        return viewBreakpoints.map((breakpoint) => {
+            if (showIn.includes(breakpoint)) {
+                return breakpoint === 'xs'
+                    ? `d-${displayType}`
+                    : `d-${breakpoint}-${displayType}`;
             } else {
                 return breakpoint === 'xs' ? 'd-none' : `d-${breakpoint}-none`;
             }

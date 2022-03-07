@@ -1,20 +1,14 @@
 import { Component } from '@angular/core';
-
-import {
-    FormControl,
-    FormGroup,
-} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { OWN_TERMINATE_OPTIONS } from 'src/app/app.constants';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { OWN_TERMINATE_OPTIONS } from 'src/app/app.constants';
-
 import { NewSupplyPointPageConfig } from './config';
 
 @Component({
     templateUrl: './page.html',
 })
 export class NewSupplyPointPageComponent {
-
     public form: FormGroup = new FormGroup({
         supplierId: new FormControl(),
         distributionRateId: new FormControl(),
@@ -30,9 +24,7 @@ export class NewSupplyPointPageComponent {
 
     public ownTerminateOptions: Array<IOption> = OWN_TERMINATE_OPTIONS;
 
-    constructor(
-        public config: NewSupplyPointPageConfig,
-    ) {
+    constructor(public config: NewSupplyPointPageConfig) {
         this.form.controls['supplierId'].disable();
     }
 

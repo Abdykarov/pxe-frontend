@@ -1,4 +1,3 @@
-
 export enum IDropdownVariant {
     BUTTON = 'button',
     DOTS = 'dots',

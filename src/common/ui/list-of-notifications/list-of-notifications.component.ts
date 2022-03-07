@@ -1,9 +1,4 @@
-import {
-    Component,
-    Input,
-    TemplateRef,
-} from '@angular/core';
-
+import { Component, Input, TemplateRef } from '@angular/core';
 import { TypeOfList } from 'src/common/ui/list-of-notifications/models/list-of-notifications.model';
 
 @Component({
@@ -12,7 +7,6 @@ import { TypeOfList } from 'src/common/ui/list-of-notifications/models/list-of-n
     styleUrls: ['./list-of-notifications.component.scss'],
 })
 export class ListOfNotificationsComponent {
-
     @Input()
     public headerTemplate?: TemplateRef<any>;
 

@@ -1,9 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import {
-    Pipe,
-    PipeTransform,
-} from '@angular/core';
-
+import { Pipe, PipeTransform } from '@angular/core';
 import {
     IConsumption,
     RESULT_TYPE_CONSUMPTION,
@@ -15,22 +11,26 @@ const defaultDigitsInfo = '1.0-1';
     name: 'consumption',
 })
 export class ConsumptionPipe implements PipeTransform {
+    constructor(private decimalPipe: DecimalPipe) {}
 
-    constructor(
-        private decimalPipe: DecimalPipe,
-    ) {}
-
-    transform(value: number, resultType: RESULT_TYPE_CONSUMPTION): IConsumption | string {
+    transform(
+        value: number,
+        resultType: RESULT_TYPE_CONSUMPTION
+    ): IConsumption | string {
         const units = ['Wh', 'KWh', 'MWh', 'GWh', 'TWh', 'PWh'];
         const number = Math.floor(Math.log(value) / Math.log(1000));
         switch (resultType) {
             case RESULT_TYPE_CONSUMPTION.UNIT:
                 return units[number];
             case RESULT_TYPE_CONSUMPTION.VALUE:
-                return this.formatValue(value / Math.pow(1000, Math.floor(number)));
+                return this.formatValue(
+                    value / Math.pow(1000, Math.floor(number))
+                );
             case RESULT_TYPE_CONSUMPTION.BOTH:
                 return {
-                    value: this.formatValue(value / Math.pow(1000, Math.floor(number))),
+                    value: this.formatValue(
+                        value / Math.pow(1000, Math.floor(number))
+                    ),
                     unit: units[number],
                 };
         }

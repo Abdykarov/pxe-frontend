@@ -37,11 +37,13 @@
 			content: '';
 			position: absolute;
 			left: 50%;
-			margin-left: -( $dropdown-beak-border-width / 2 );
+			margin-left: -($dropdown-beak-border-width * .5);
 			width: 0;
 			height: 0;
-			border-bottom: $dropdown-beak-border-width $dropdown-beak-border-style $dropdown-beak-border-color;
-			border-right: $dropdown-beak-border-width $dropdown-beak-border-style transparent;
+			border-bottom: $dropdown-beak-border-width
+				$dropdown-beak-border-style $dropdown-beak-border-color;
+			border-right: $dropdown-beak-border-width
+				$dropdown-beak-border-style transparent;
 			box-shadow: $dropdown-beak-box-shadow;
 			cursor: default;
 			pointer-events: none;
@@ -52,7 +54,7 @@
 .dropdown {
 	&.dropdown--with-beak {
 		.dropdown-toggle::before {
-			top: calc( 100% + 6px );
+			top: calc(100% + 6px);
 			bottom: auto;
 			transform: rotate(135deg);
 		}
@@ -75,7 +77,7 @@
 .dropup {
 	&.dropdown--with-beak {
 		.dropdown-toggle::before {
-			bottom: calc( 100% + 6px );
+			bottom: calc(100% + 6px);
 			transform: rotate(-45deg);
 		}
 
@@ -116,7 +118,7 @@
 
 .dropdown-menu {
 	min-width: 100%;
-	max-width: calc( 100vw - 60px );
+	max-width: calc(100vw - 60px);
 	top: calc(100% + 10px);
 	margin-top: 0;
 	border: none;
@@ -134,7 +136,8 @@
 		&:visited {
 			position: relative;
 			display: block;
-			padding: $dropdown-item-padding-y $dropdown-item-padding-x $dropdown-item-padding-y ( $spacer * 3 );
+			padding: $dropdown-item-padding-y $dropdown-item-padding-x
+				$dropdown-item-padding-y ( $spacer * 3 );
 			clear: both;
 			width: 100%;
 			background-color: transparent;
@@ -170,7 +173,7 @@
 		position: absolute;
 		top: 50%;
 		left: $spacer;
-		margin-top: -( $icon-size-px / 2 );
+		margin-top: -($icon-size-px * .5);
 		color: $secondary;
 	}
 }

@@ -12,7 +12,6 @@
 // Component variables
 @import 'carousel-references.variables.scss';
 
-
 .carousel-references {
 	display: flex;
 	flex-direction: column;
@@ -80,7 +79,7 @@
 				justify-content: center;
 				width: auto;
 				height: auto;
-				padding: ( $spacer / 2 );
+				padding: ( $spacer * .5 );
 				border: none;
 				opacity: .2;
 

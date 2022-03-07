@@ -5,15 +5,15 @@
  */
 
 // Core component import
+@use 'sass:math';
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
 @import 'card.component.variables.scss';
 
-
 // Bootstrap button import
 @import '~bootstrap/scss/card';
-
 
 .card {
 	align-items: center;
@@ -40,7 +40,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: 0 ( $card-tile-item-spacer / 5 );
+			padding: 0 ($card-tile-item-spacer * .2);
 		}
 		@include media-breakpoint-up(xl) {
 			padding: $card-tile-item-spacer;
@@ -52,7 +52,7 @@
 		&:nth-child(-n + 3) {
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				padding-top: ( $card-tile-item-spacer / 6 );
+				padding-top: math.div($card-tile-item-spacer, 6);
 			}
 		}
 
@@ -64,7 +64,7 @@
 		}
 
 		&--last-item {
-			padding-bottom: ( $spacer / 2 );
+			padding-bottom: ( $spacer * .5 );
 			border-bottom: none;
 		}
 

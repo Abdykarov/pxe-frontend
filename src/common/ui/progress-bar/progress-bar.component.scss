@@ -5,6 +5,8 @@
  */
 
 // Core component import
+@use 'sass:math';
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
@@ -31,7 +33,7 @@
 		&::before {
 			content: '';
 			position: absolute;
-			top: ( $progress-bar-bullet-size - $progress-bar-line-height ) / 2;
+			top: ($progress-bar-bullet-size - $progress-bar-line-height) * .5;
 			left: 0;
 			width: 100%;
 			height: $progress-bar-line-height;
@@ -112,8 +114,8 @@
 		&::before {
 			content: '';
 			position: absolute;
-			top: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner ) / 2 );
-			left: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner ) / 2 );
+			top: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner) * .5 );
+			left: ( ($progress-bar-bullet-size - $progress-bar-bullet-size-inner) * .5 );
 			width: $progress-bar-bullet-size-inner;
 			height: $progress-bar-bullet-size-inner;
 			line-height: $progress-bar-bullet-size-inner;
@@ -148,8 +150,8 @@
 
 	&__label {
 		display: block;
-		padding: ( $spacer / 2 ) ( $spacer / 2 ) 0;
-		line-height: ( 19 / 14 );
+		padding: ( $spacer * .5) ( $spacer * .5 ) 0;
+		line-height: math.div(19, 14);
 	}
 
 	&.progress-bar--minor {
@@ -196,10 +198,6 @@
 
 			.progress-bar__label {
 				display: none;
-			}
-
-			&--shadow-step {
-				flex-grow: 2;
 			}
 		}
 	}
