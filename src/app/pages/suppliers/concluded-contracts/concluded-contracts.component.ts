@@ -185,36 +185,6 @@ export class ConcludedContractsComponent
             );
     };
 
-    // do budoucna
-    // public openDocument(contractId: string, documentType: DocumentType) {
-    //     const windowReference = window && window.open();
-    //     this.formLoading = true;
-    //     this.globalError = [];
-    //     this.documentService.getDocument(contractId, documentType)
-    //         .pipe(
-    //             takeUntil(this.destroy$),
-    //         )
-    //         .subscribe(
-    //             (responseDataDocument: IResponseDataDocument) => {
-    //                 this.formLoading = false;
-    //                 const canBeClosed = this.documentService.documentOpen(responseDataDocument, windowReference);
-    //                 if (windowReference && canBeClosed) {
-    //                     windowReference.close();
-    //                 }
-    //                 this.cd.markForCheck();
-    //             },
-    //             (error) => {
-    //                 const message = parseRestAPIErrors(error);
-    //                 this.formLoading = false;
-    //                 this.globalError.push(message);
-    //                 if (windowReference) {
-    //                     windowReference.close();
-    //                 }
-    //                 this.cd.markForCheck();
-    //             },
-    //         );
-    // }
-
     public redirectToOffer = (evt) => {
         evt.preventDefault();
         this.router.navigate([

@@ -8,6 +8,10 @@ import { OAuthService } from 'src/app/services/o-auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
+/**
+ * Oauth login process
+ * GOOGLE send token to BE -> redirect here
+ */
 @Component({
     templateUrl: './o-auth-layout.component.html',
     styleUrls: ['./o-auth-layout.component.scss'],

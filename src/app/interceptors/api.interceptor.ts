@@ -13,6 +13,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { processErrorScrolls } from 'src/common/utils';
 import { environment } from 'src/environments/environment';
 
+/**
+ * Add headers to requests for auth, ...
+ * File uploader and Apollo-Angular do not use httpClient.
+ */
 @Injectable({
     providedIn: 'root',
 })
@@ -23,10 +27,10 @@ export class ApiInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        if (
+        const isCmsRequest =
             request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) !== -1 ||
-            request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS_DIRECT) !== -1
-        ) {
+            request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS_DIRECT) !== -1;
+        if (isCmsRequest) {
             return next.handle(request);
         }
 
@@ -36,11 +40,11 @@ export class ApiInterceptor implements HttpInterceptor {
             },
         });
 
-        if (
+        const isRestRequestToApiWithoutLogin =
             request.url.match(/api\//) &&
             request.url.indexOf('login') < 0 &&
-            request.url.indexOf('export-csv') < 0
-        ) {
+            request.url.indexOf('export-csv') < 0;
+        if (isRestRequestToApiWithoutLogin) {
             resultRequest = request.clone({
                 headers:
                     this.authService.getAuthorizationHeaders(
@@ -49,10 +53,9 @@ export class ApiInterceptor implements HttpInterceptor {
             });
         }
 
-        if (
-            request.url.match(/api\//) &&
-            request.url.indexOf('export-csv') > 0
-        ) {
+        const isExportCsvRequest =
+            request.url.match(/api\//) && request.url.indexOf('export-csv') > 0;
+        if (isExportCsvRequest) {
             resultRequest = request.clone({
                 headers: this.authService.getAuthorizationHeaders(
                     'application/octet-stream'
