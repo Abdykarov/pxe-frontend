@@ -94,7 +94,7 @@
                                         >Dodávkové období</span
                                     >
                                     <span
-                                        *ngIf="data?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                                        *ngIf="data?.contractEndType?.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                                         class="supply-point__value"
                                     >
                                         {{data.contract.deliveryFrom |
@@ -103,7 +103,7 @@
                                         date:'d.&nbsp;M.&nbsp;y'}}
                                     </span>
                                     <span
-                                        *ngIf="data?.contractEndType.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                                        *ngIf="data?.contractEndType?.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                                         class="supply-point__value"
                                     >
                                         {{data.contract.deliveryFrom |
