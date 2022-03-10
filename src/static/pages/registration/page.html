@@ -1,5 +1,6 @@
 <ng-template #agreementTemplate>
-    Souhlasím s <a target="_blank">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank">Ochraně osobních údajů</a>.
+    Souhlasím s <a target="_blank">Obchodními podmínkami parc4u</a> a beru na
+    vědomí informace o <a target="_blank">Ochraně osobních údajů</a>.
 </ng-template>
 
 <ng-template #supplierTemplate>
@@ -13,24 +14,34 @@
                 <div class="section__half">
                     <div class="row">
                         <div class="col-md-8 offset-md-2 col-xl-10 offset-xl-0">
-                            <h1 class="h2--public mb-2">Založte si účet zdarma</h1>
+                            <h1 class="h2--public mb-2">
+                                Založte si účet zdarma
+                            </h1>
                             <p>
-                                Nemusíte se bát, ani my nemáme rádi spam. Máte již účet?
+                                Nemusíte se bát, ani my nemáme rádi spam. Máte
+                                již účet?
                                 <a class="d-inline-block">Přihlaste se zde.</a>
                             </p>
-                            <form class="form-container form-container--large ml-0">
+                            <form
+                                class="
+                                    form-container form-container--large
+                                    ml-0
+                                "
+                            >
                                 <lnd-form-field
                                     id="email"
                                     customFormGroupClass="form-group--public"
                                     infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
                                     [lightField]="true"
-                                    label="E-mail">
+                                    label="E-mail"
+                                >
                                 </lnd-form-field>
                                 <lnd-form-field
                                     [id]="'Agreement'"
                                     customFormGroupClass="form-group--public"
                                     [labelTemplate]="agreementTemplate"
-                                    [type]="'CHECKBOX'">
+                                    [type]="'CHECKBOX'"
+                                >
                                 </lnd-form-field>
                                 <lnd-button
                                     type="gradient-primary"
@@ -39,18 +50,18 @@
                                     (action)="submitForm($event)"
                                     label="Založit účet"
                                     icon="icon--arrow-right"
-                                    iconPosition="right">
+                                    iconPosition="right"
+                                >
                                 </lnd-button>
-                                <p class="mb-2">
-                                    Nebo si založte účet pomocí
-                                </p>
+                                <p class="mb-2">Nebo si založte účet pomocí</p>
                                 <div class="row mb-5">
                                     <div class="col-md-6 mb-3">
                                         <lnd-button
                                             label="Facebook"
                                             type="facebook"
                                             class="w-100"
-                                            customClass="btn-public w-100">
+                                            customClass="btn-public w-100"
+                                        >
                                         </lnd-button>
                                     </div>
                                     <div class="col-md-6 mb-5">
@@ -58,23 +69,34 @@
                                             label="Google"
                                             type="google"
                                             class="w-100"
-                                            customClass="btn-public w-100">
+                                            customClass="btn-public w-100"
+                                        >
                                         </lnd-button>
                                     </div>
                                     <div class="col-12">
                                         <p class="mb-2">
-                                            Případně použijte stejný a bezpečný způsob ověření identity jako do vašeho internetového bankovnictví.
+                                            Případně použijte stejný a bezpečný
+                                            způsob ověření identity jako do
+                                            vašeho internetového bankovnictví.
                                         </p>
                                         <lnd-button
                                             type="bankid"
                                             class="w-100 mb-1"
-                                            customClass="btn-public w-100">
+                                            customClass="btn-public w-100"
+                                        >
                                         </lnd-button>
-                                        <a href="https://bankid.cz" target="_blank">Více informací o Bank ID</a>
+                                        <a
+                                            href="https://bankid.cz"
+                                            target="_blank"
+                                            >Více informací o Bank ID</a
+                                        >
                                     </div>
                                 </div>
                                 <p class="font-size-14">
-                                    Založením účtu souhlasím s <a href="#">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a href="#">Ochraně osobních údajů</a>.
+                                    Založením účtu souhlasím s
+                                    <a href="#">Obchodními podmínkami parc4u</a>
+                                    a beru na vědomí informace o
+                                    <a href="#">Ochraně osobních údajů</a>.
                                 </p>
                             </form>
                         </div>
@@ -82,13 +104,27 @@
                 </div>
             </div>
             <div class="col-xl-6">
-                <div class="section__half section__half--fix-height section__half--gradient-violet">
+                <div
+                    class="
+                        section__half
+                        section__half--fix-height
+                        section__half--gradient-violet
+                    "
+                >
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <h2 class="h3--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                            <h2 class="h3--public text-white">
+                                Nechcete nic vyplňovat? Nemusíte!
+                            </h2>
                             <ol class="numerical-list-stepper text-white">
-                                <li class="active">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
-                                <li>Zadejte váš email a my vám pošleme nabídky na míru. Zdarma a nezávazně.</li>
+                                <li class="active">
+                                    Vložte vaši poslední fakturu za elektřinu
+                                    nebo plyn.
+                                </li>
+                                <li>
+                                    Zadejte váš email a my vám pošleme nabídky
+                                    na míru. Zdarma a nezávazně.
+                                </li>
                             </ol>
                         </div>
                         <div class="col-md-8 offset-md-2 col-xl-10">
@@ -101,7 +137,8 @@
                                         wrapperCustomClass="drop-zone--zindex text-white"
                                         mainText="Soubory přetáhněte sem nebo "
                                         secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
-                                        [labelFromMainText]="true">
+                                        [labelFromMainText]="true"
+                                    >
                                     </pxe-file-uploader>
                                 </div>
                             </div>

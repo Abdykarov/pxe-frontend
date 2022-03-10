@@ -5,6 +5,8 @@
  */
 
 // Core component import
+@use 'sass:math';
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
@@ -69,11 +71,13 @@
 	&__inner {
 		position: relative;
 		height: 100%;
-		padding: $supply-point-offer-inner-padding-mobil $supply-point-offer-inner-padding-horizontal-mobil;
+		padding: $supply-point-offer-inner-padding-mobil
+			$supply-point-offer-inner-padding-horizontal-mobil;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding;
+			padding: $supply-point-offer-inner-padding
+				$supply-point-offer-inner-padding;
 		}
 
 		&--second {
@@ -140,19 +144,19 @@
 	&__value-name {
 		display: flex;
 		align-items: center;
-		line-height: ( 18 / 14 );
+		line-height: math.div(18, 14);
 		text-transform: uppercase;
 		width: 100%;
 	}
 
 	&__title-label {
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * .25 );
 	}
 
 	&__title {
 		display: block;
 		width: 100%;
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * .25 );
 	}
 
 	&__info-icon {
@@ -182,7 +186,7 @@
 	}
 
 	&__value-name {
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: ( $spacer * .25 );
 		color: rgba($font-text, .5);
 	}
 
@@ -205,7 +209,7 @@
 	}
 
 	&__addon {
-		margin-top: ( $spacer / 2 );
+		margin-top: ( $spacer * .5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -243,7 +247,7 @@
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				width: calc(50% - #{ $spacer / 2 } );
+				width: calc(50% - #{$spacer * .5} );
 			}
 
 			&::before {

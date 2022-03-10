@@ -1,234 +1,404 @@
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
+<lnd-alert *ngIf="globalError.length" type="danger">
     <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
+        {{ error }}<br />
     </ng-container>
 </lnd-alert>
 <form
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
     (change)="resetCustomFieldError()"
-    autocomplete="off">
+    autocomplete="off"
+>
     <div class="row">
-        <div *ngIf="form.controls.name.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.name.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-form-field
-                    [error]="formError.name || form.controls.name.errors"
-                    [formControl]="form.controls.name"
-                    [id]="'name'"
-                    label="Název produktu"
-                    [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
-                    [touched]="form.controls.name.touched || formError.name"
-                    [validationMessages]="formFields.validationMessages.name"
-                    [value]="form.controls.name.value"
+                [error]="formError.name || form.controls.name.errors"
+                [formControl]="form.controls.name"
+                [id]="'name'"
+                label="Název produktu"
+                [success]="
+                    form.controls.name.valid &&
+                    (form.controls.name.touched || formError.name)
+                "
+                [touched]="form.controls.name.touched || formError.name"
+                [validationMessages]="formFields.validationMessages.name"
+                [value]="form.controls.name.value"
             ></lnd-form-field>
         </div>
-        <div *ngIf="form.controls.greenEnergy.status !== 'DISABLED'"
-             class="col-4 col-xl-3 offset-xl-3">
+        <div
+            *ngIf="form.controls.greenEnergy.status !== 'DISABLED'"
+            class="col-4 col-xl-3 offset-xl-3"
+        >
             <lnd-form-field
                 [id]="'greenEnergy'"
                 label="Zelená energie"
                 [type]="'CHECKBOX'"
-                [customFormGroupClass]="'form-group--in-table form-group--with-green-energy-icon mb-2'"
+                [customFormGroupClass]="
+                    'form-group--in-table form-group--with-green-energy-icon mb-2'
+                "
                 [formControl]="form.controls.greenEnergy"
             ></lnd-form-field>
         </div>
     </div>
     <div class="row">
-        <div *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-select
-                    [error]="formError.subjectTypeId || form.controls.subjectTypeId.errors"
-                    label="Odběratel"
-                    [options]="subjectTypeOptions"
-                    [parentForm]="form"
-                    [selectName]="'subjectTypeId'"
-                    [success]="form.controls.subjectTypeId.valid && (form.controls.subjectTypeId.touched || formError.subjectTypeId)"
-                    [touched]="form.controls.subjectTypeId.touched || formError.subjectTypeId"
-                    [validationMessages]="formFields.validationMessages.subjectTypeId">
+                [error]="
+                    formError.subjectTypeId ||
+                    form.controls.subjectTypeId.errors
+                "
+                label="Odběratel"
+                [options]="subjectTypeOptions"
+                [parentForm]="form"
+                [selectName]="'subjectTypeId'"
+                [success]="
+                    form.controls.subjectTypeId.valid &&
+                    (form.controls.subjectTypeId.touched ||
+                        formError.subjectTypeId)
+                "
+                [touched]="
+                    form.controls.subjectTypeId.touched ||
+                    formError.subjectTypeId
+                "
+                [validationMessages]="
+                    formFields.validationMessages.subjectTypeId
+                "
+            >
             </lnd-select>
         </div>
-        <div *ngIf="form.controls.distributionLocation.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.distributionLocation.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-select
-                    [error]="formError.distributionLocation || form.controls.distributionLocation.errors"
-                    label="Distribuční umístění"
-                    [options]="codeLists && codeLists[distributionLocationType]"
-                    [parentForm]="form"
-                    [selectName]="'distributionLocation'"
-                    [success]="form.controls.distributionLocation.valid && (form.controls.distributionLocation.touched || formError.distributionLocation)"
-                    [touched]="form.controls.distributionLocation.touched || formError.distributionLocation"
-                    [validationMessages]="formFields.validationMessages.distributionLocation">
+                [error]="
+                    formError.distributionLocation ||
+                    form.controls.distributionLocation.errors
+                "
+                label="Distribuční umístění"
+                [options]="codeLists && codeLists[distributionLocationType]"
+                [parentForm]="form"
+                [selectName]="'distributionLocation'"
+                [success]="
+                    form.controls.distributionLocation.valid &&
+                    (form.controls.distributionLocation.touched ||
+                        formError.distributionLocation)
+                "
+                [touched]="
+                    form.controls.distributionLocation.touched ||
+                    formError.distributionLocation
+                "
+                [validationMessages]="
+                    formFields.validationMessages.distributionLocation
+                "
+            >
             </lnd-select>
         </div>
-        <div *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-select
-                    [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
-                    label="Distribuční sazba"
-                    [options]="codeLists && codeLists[distributionRateType]"
-                    [parentForm]="form"
-                    [selectName]="'distributionRateId'"
-                    [success]="form.controls.distributionRateId.valid && (form.controls.distributionRateId.touched || formError.distributionRateId)"
-                    [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
-                    [validationMessages]="formFields.validationMessages.distributionRateId">
+                [error]="
+                    formError.distributionRateId ||
+                    form.controls.distributionRateId.errors
+                "
+                label="Distribuční sazba"
+                [options]="codeLists && codeLists[distributionRateType]"
+                [parentForm]="form"
+                [selectName]="'distributionRateId'"
+                [success]="
+                    form.controls.distributionRateId.valid &&
+                    (form.controls.distributionRateId.touched ||
+                        formError.distributionRateId)
+                "
+                [touched]="
+                    form.controls.distributionRateId.touched ||
+                    formError.distributionRateId
+                "
+                [validationMessages]="
+                    formFields.validationMessages.distributionRateId
+                "
+            >
             </lnd-select>
         </div>
-        <div *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-select
-                    [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
-                    label="Jistič"
-                    [options]="codeLists && codeLists[CODE_LIST_CIRCUIT_BREAKER]"
-                    [parentForm]="form"
-                    [selectName]="'circuitBreakerId'"
-                    [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
-                    [touched]="form.controls.circuitBreakerId.touched || formError.circuitBreakerId"
-                    [validationMessages]="formFields.validationMessages.circuitBreakerId">
+                [error]="
+                    formError.circuitBreakerId ||
+                    form.controls.circuitBreakerId.errors
+                "
+                label="Jistič"
+                [options]="codeLists && codeLists[CODE_LIST_CIRCUIT_BREAKER]"
+                [parentForm]="form"
+                [selectName]="'circuitBreakerId'"
+                [success]="
+                    form.controls.circuitBreakerId.valid &&
+                    (form.controls.circuitBreakerId.touched ||
+                        formError.circuitBreakerId)
+                "
+                [touched]="
+                    form.controls.circuitBreakerId.touched ||
+                    formError.circuitBreakerId
+                "
+                [validationMessages]="
+                    formFields.validationMessages.circuitBreakerId
+                "
+            >
             </lnd-select>
         </div>
-        <div *ngIf="form.controls.deliveryLength.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.deliveryLength.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-select
-                    [error]="formError.deliveryLength || form.controls.deliveryLength.errors"
-                    label="Délka dodávky"
-                    [options]="deliveryLengthOptions"
-                    [parentForm]="form"
-                    [selectName]="'deliveryLength'"
-                    [success]="form.controls.deliveryLength.valid && (form.controls.deliveryLength.touched || formError.deliveryLength)"
-                    [touched]="form.controls.deliveryLength.touched || formError.deliveryLength"
-                    [validationMessages]="formFields.validationMessages.deliveryLength">
+                [error]="
+                    formError.deliveryLength ||
+                    form.controls.deliveryLength.errors
+                "
+                label="Délka dodávky"
+                [options]="deliveryLengthOptions"
+                [parentForm]="form"
+                [selectName]="'deliveryLength'"
+                [success]="
+                    form.controls.deliveryLength.valid &&
+                    (form.controls.deliveryLength.touched ||
+                        formError.deliveryLength)
+                "
+                [touched]="
+                    form.controls.deliveryLength.touched ||
+                    formError.deliveryLength
+                "
+                [validationMessages]="
+                    formFields.validationMessages.deliveryLength
+                "
+            >
             </lnd-select>
         </div>
-        <div *ngIf="form.controls.annualConsumptionId.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.annualConsumptionId.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-select
-                    [error]="formError.annualConsumptionId || form.controls.annualConsumptionId.errors"
-                    label="Spotřeba"
-                    [options]="codeLists && codeLists['CGAS']"
-                    [parentForm]="form"
-                    [selectName]="'annualConsumptionId'"
-                    [success]="form.controls.annualConsumptionId.valid && (form.controls.annualConsumptionId.touched || formError.annualConsumptionId)"
-                    [touched]="form.controls.annualConsumptionId.touched || formError.annualConsumptionId"
-                    [validationMessages]="formFields.validationMessages.annualConsumptionId">
+                [error]="
+                    formError.annualConsumptionId ||
+                    form.controls.annualConsumptionId.errors
+                "
+                label="Spotřeba"
+                [options]="codeLists && codeLists['CGAS']"
+                [parentForm]="form"
+                [selectName]="'annualConsumptionId'"
+                [success]="
+                    form.controls.annualConsumptionId.valid &&
+                    (form.controls.annualConsumptionId.touched ||
+                        formError.annualConsumptionId)
+                "
+                [touched]="
+                    form.controls.annualConsumptionId.touched ||
+                    formError.annualConsumptionId
+                "
+                [validationMessages]="
+                    formFields.validationMessages.annualConsumptionId
+                "
+            >
             </lnd-select>
         </div>
-        <div *ngIf="form.controls.priceVT.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.priceVT.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-form-field
-                    appendText="Kč/MWh (bez DPH)"
-                    [error]="formError.priceVT || form.controls.priceVT.errors"
-                    [formControl]="form.controls.priceVT"
-                    [id]="'priceVT'"
-                    label="Cena za VT"
-                    [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-                    [success]="form.controls.priceVT.valid && (form.controls.priceVT.touched || formError.priceVT)"
-                    [touched]="form.controls.priceVT.touched || formError.priceVT"
-                    [validationMessages]="formFields.validationMessages.priceVT"
-                    [value]="form.controls.priceVT.value"
+                appendText="Kč/MWh (bez DPH)"
+                [error]="formError.priceVT || form.controls.priceVT.errors"
+                [formControl]="form.controls.priceVT"
+                [id]="'priceVT'"
+                label="Cena za VT"
+                [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
+                [success]="
+                    form.controls.priceVT.valid &&
+                    (form.controls.priceVT.touched || formError.priceVT)
+                "
+                [touched]="form.controls.priceVT.touched || formError.priceVT"
+                [validationMessages]="formFields.validationMessages.priceVT"
+                [value]="form.controls.priceVT.value"
             ></lnd-form-field>
         </div>
-        <div *ngIf="form.controls.priceNT.status !== 'DISABLED' || commodityType === COMMODITY_TYPE_POWER"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="
+                form.controls.priceNT.status !== 'DISABLED' ||
+                commodityType === COMMODITY_TYPE_POWER
+            "
+            class="col-4 col-xl-3"
+        >
             <lnd-form-field
-                    appendText="Kč/MWh (bez DPH)"
-                    [disabledField]="form.controls.priceNT.status === 'DISABLED'"
-                    [error]="formError.priceNT || form.controls.priceNT.errors"
-                    [formControl]="form.controls.priceNT"
-                    [id]="'priceNT'"
-                    label="Cena za NT"
-                    [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-                    [success]="form.controls.priceNT.valid && (form.controls.priceNT.touched || formError.priceNT)"
-                    [touched]="form.controls.priceNT.touched || formError.priceNT"
-                    [validationMessages]="formFields.validationMessages.priceNT"
-                    [value]="form.controls.priceNT.value"
+                appendText="Kč/MWh (bez DPH)"
+                [disabledField]="form.controls.priceNT.status === 'DISABLED'"
+                [error]="formError.priceNT || form.controls.priceNT.errors"
+                [formControl]="form.controls.priceNT"
+                [id]="'priceNT'"
+                label="Cena za NT"
+                [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
+                [success]="
+                    form.controls.priceNT.valid &&
+                    (form.controls.priceNT.touched || formError.priceNT)
+                "
+                [touched]="form.controls.priceNT.touched || formError.priceNT"
+                [validationMessages]="formFields.validationMessages.priceNT"
+                [value]="form.controls.priceNT.value"
             ></lnd-form-field>
         </div>
-        <div *ngIf="form.controls.priceGas.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.priceGas.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-form-field
-                    appendText="Kč/MWh (bez DPH)"
-                    [error]="formError.priceGas || form.controls.priceGas.errors"
-                    [formControl]="form.controls.priceGas"
-                    [id]="'priceGas'"
-                    label="Cena"
-                    [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-                    [success]="form.controls.priceGas.valid && (form.controls.priceGas.touched || formError.priceGas)"
-                    [touched]="form.controls.priceGas.touched || formError.priceGas"
-                    [validationMessages]="formFields.validationMessages.priceGas"
-                    [value]="form.controls.priceGas.value"
+                appendText="Kč/MWh (bez DPH)"
+                [error]="formError.priceGas || form.controls.priceGas.errors"
+                [formControl]="form.controls.priceGas"
+                [id]="'priceGas'"
+                label="Cena"
+                [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
+                [success]="
+                    form.controls.priceGas.valid &&
+                    (form.controls.priceGas.touched || formError.priceGas)
+                "
+                [touched]="form.controls.priceGas.touched || formError.priceGas"
+                [validationMessages]="formFields.validationMessages.priceGas"
+                [value]="form.controls.priceGas.value"
             ></lnd-form-field>
         </div>
-        <div *ngIf="form.controls.validFromTo.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.validFromTo.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-datepicker-range
-                    [datepickerName]="'validFromTo'"
-                    [error]="formError.validFromTo || form.controls.validFromTo.errors"
-                    id="validFromTo"
-                    label="Platnost"
-                    [parentForm]="form"
-                    [placeholder]="'dd.mm.rrrr'"
-                    [success]="form.controls.validFromTo.valid && (form.controls.validFromTo.touched || formError.validFromTo)"
-                    [touched]="form.controls.validFromTo.touched || formError.validFromTo"
-                    [validationMessages]="formFields.validationMessages.validFromTo"
+                [datepickerName]="'validFromTo'"
+                [error]="
+                    formError.validFromTo || form.controls.validFromTo.errors
+                "
+                id="validFromTo"
+                label="Platnost"
+                [parentForm]="form"
+                [placeholder]="'dd.mm.rrrr'"
+                [success]="
+                    form.controls.validFromTo.valid &&
+                    (form.controls.validFromTo.touched || formError.validFromTo)
+                "
+                [touched]="
+                    form.controls.validFromTo.touched || formError.validFromTo
+                "
+                [validationMessages]="formFields.validationMessages.validFromTo"
             >
             </lnd-datepicker-range>
         </div>
-        <div *ngIf="form.controls.deliveryFromTo.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.deliveryFromTo.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-datepicker-range
-                    [datepickerName]="'deliveryFromTo'"
-                    [error]="formError.deliveryFromTo || form.controls.deliveryFromTo.errors"
-                    id="deliveryFromTo"
-                    label="Dodávkové období"
-                    [parentForm]="form"
-                    [placeholder]="'dd.mm.rrrr'"
-                    [success]="form.controls.deliveryFromTo.valid && (form.controls.deliveryFromTo.touched || formError.deliveryFromTo)"
-                    [touched]="form.controls.deliveryFromTo.touched || formError.deliveryFromTo"
-                    [validationMessages]="formFields.validationMessages.deliveryFromTo"
+                [datepickerName]="'deliveryFromTo'"
+                [error]="
+                    formError.deliveryFromTo ||
+                    form.controls.deliveryFromTo.errors
+                "
+                id="deliveryFromTo"
+                label="Dodávkové období"
+                [parentForm]="form"
+                [placeholder]="'dd.mm.rrrr'"
+                [success]="
+                    form.controls.deliveryFromTo.valid &&
+                    (form.controls.deliveryFromTo.touched ||
+                        formError.deliveryFromTo)
+                "
+                [touched]="
+                    form.controls.deliveryFromTo.touched ||
+                    formError.deliveryFromTo
+                "
+                [validationMessages]="
+                    formFields.validationMessages.deliveryFromTo
+                "
             >
             </lnd-datepicker-range>
         </div>
-        <div *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
-             class="col-4 col-xl-3">
+        <div
+            *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
+            class="col-4 col-xl-3"
+        >
             <lnd-form-field
-                    *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
-                    appendText="Kč/měsíc (bez DPH)"
-                    [error]="formError.permanentPaymentPrice || form.controls.permanentPaymentPrice.errors"
-                    [formControl]="form.controls.permanentPaymentPrice"
-                    [id]="'permanentPaymentPrice'"
-                    label="Stálá platba"
-                    [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-                    [success]="form.controls.permanentPaymentPrice.valid && (form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice)"
-                    [touched]="form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice"
-                    [validationMessages]="formFields.validationMessages.permanentPaymentPrice"
-                    [value]="form.controls.permanentPaymentPrice.value"
+                *ngIf="
+                    form.controls.permanentPaymentPrice.status !== 'DISABLED'
+                "
+                appendText="Kč/měsíc (bez DPH)"
+                [error]="
+                    formError.permanentPaymentPrice ||
+                    form.controls.permanentPaymentPrice.errors
+                "
+                [formControl]="form.controls.permanentPaymentPrice"
+                [id]="'permanentPaymentPrice'"
+                label="Stálá platba"
+                [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
+                [success]="
+                    form.controls.permanentPaymentPrice.valid &&
+                    (form.controls.permanentPaymentPrice.touched ||
+                        formError.permanentPaymentPrice)
+                "
+                [touched]="
+                    form.controls.permanentPaymentPrice.touched ||
+                    formError.permanentPaymentPrice
+                "
+                [validationMessages]="
+                    formFields.validationMessages.permanentPaymentPrice
+                "
+                [value]="form.controls.permanentPaymentPrice.value"
             ></lnd-form-field>
         </div>
     </div>
     <div class="row">
-        <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
-            formArrayName="benefits">
+        <ng-container
+            *ngFor="
+                let benefit of (form | valueOfForm: 'benefits').controls;
+                let i = index
+            "
+            formArrayName="benefits"
+        >
             <ng-container [formGroupName]="i">
-                    <div class="col-4 col-xl-3">
-                        <lnd-form-field
-                            formControlName="name"
-                            [error]="benefit.controls.name.errors"
-                            [id]="'benefit' + i"
-                            [label]="'Benefit ' + (i + 1)"
-                            [value]="benefit.value.name"
-                            [success]="benefit.controls.name.valid && benefit.controls.name.touched"
-                            [touched]="benefit.controls.name.touched"
-                            [validationMessages]="formFieldsBenefit.validationMessages.name"
-                        ></lnd-form-field>
-                    </div>
+                <div class="col-4 col-xl-3">
+                    <lnd-form-field
+                        formControlName="name"
+                        [error]="benefit.controls.name.errors"
+                        [id]="'benefit' + i"
+                        [label]="'Benefit ' + (i + 1)"
+                        [value]="benefit.value.name"
+                        [success]="
+                            benefit.controls.name.valid &&
+                            benefit.controls.name.touched
+                        "
+                        [touched]="benefit.controls.name.touched"
+                        [validationMessages]="
+                            formFieldsBenefit.validationMessages.name
+                        "
+                    ></lnd-form-field>
+                </div>
             </ng-container>
         </ng-container>
     </div>
     <div class="row">
-        <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
-            formArrayName="benefits">
+        <ng-container
+            *ngFor="
+                let benefit of (form | valueOfForm: 'benefits').controls;
+                let i = index
+            "
+            formArrayName="benefits"
+        >
             <ng-container [formGroupName]="i">
                 <div class="col-4 col-xl-3">
                     <lnd-form-field
@@ -237,9 +407,14 @@
                         [id]="'url-benefit' + i"
                         [label]="'URL na podmínky benefitu ' + (i + 1)"
                         [value]="benefit.value.url"
-                        [success]="benefit.controls.url.valid && benefit.controls.url.touched"
+                        [success]="
+                            benefit.controls.url.valid &&
+                            benefit.controls.url.touched
+                        "
                         [touched]="benefit.controls.url.touched"
-                        [validationMessages]="formFieldsBenefit.validationMessages.url"
+                        [validationMessages]="
+                            formFieldsBenefit.validationMessages.url
+                        "
                     ></lnd-form-field>
                 </div>
             </ng-container>
@@ -248,18 +423,18 @@
     <div class="row">
         <div class="col text-right">
             <lnd-button
-                    *ngIf="showCancel"
-                    type="link"
-                    label="Storno"
-                    customClass="mr-5"
-                    [isDisabled]="formLoading"
-                    (action)="customAction.emit()"
+                *ngIf="showCancel"
+                type="link"
+                label="Storno"
+                customClass="mr-5"
+                [isDisabled]="formLoading"
+                (action)="customAction.emit()"
             ></lnd-button>
             <lnd-button
-                    type="primary"
-                    label="Uložit"
-                    [isDisabled]="formLoading"
-                    (action)="submitForm()"
+                type="primary"
+                label="Uložit"
+                [isDisabled]="formLoading"
+                (action)="submitForm()"
             ></lnd-button>
         </div>
     </div>

@@ -1,57 +1,82 @@
-<ng-template #columnTemplateDeliveryTime
-             let-row="row">
-    {{row.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+<ng-template #columnTemplateDeliveryTime let-row="row">
+    {{ row.contract.deliveryFrom | date: "d.&nbsp;M.&nbsp;y" }} - {{
+    row.contract.deliveryTo | date: "d.&nbsp;M.&nbsp;y" }}
 </ng-template>
 
 <ng-template #downloadPdfTemplate let-row="row">
     <div class="loader__wrapper-text">
         <a
-            class="text-with-icon text-with-icon--link align-items-baseline mb-0"
-            [class.link--disabled]="row.contract.contractId | inArray: downloadingContractIds"
-            (click)="downloadPDF(row.contract.contractId)">
-            <span class="icon icon--document text-with-icon__icon text-with-icon__icon--public"></span>
+            class="
+                text-with-icon text-with-icon--link
+                align-items-baseline
+                mb-0
+            "
+            [class.link--disabled]="
+                row.contract.contractId | inArray: downloadingContractIds
+            "
+            (click)="downloadPDF(row.contract.contractId)"
+        >
+            <span
+                class="
+                    icon icon--document
+                    text-with-icon__icon text-with-icon__icon--public
+                "
+            ></span>
             <span class="text-with-icon__text">Stáhnout PDF</span>
         </a>
-        <lnd-loader *ngIf="row.contract.contractId | inArray: downloadingContractIds"></lnd-loader>
+        <lnd-loader
+            *ngIf="row.contract.contractId | inArray: downloadingContractIds"
+        ></lnd-loader>
     </div>
 </ng-template>
 
 <pxe-layout-container pageTitle="Uzavřené smlouvy">
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
     </div>
     <ul class="text-center link-list">
         <li class="link-list__item">
-            <a class="link-list__link"
-               routerLinkActive="link-list__link--active"
-               [routerLinkActiveOptions]="{exact: true}"
-               [routerLink]="[routePower]">Elektřina</a>
+            <a
+                class="link-list__link"
+                routerLinkActive="link-list__link--active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[routePower]"
+                >Elektřina</a
+            >
         </li>
         <li class="link-list__item">
-            <a class="link-list__link"
-               routerLinkActive="link-list__link--active"
-               [routerLinkActiveOptions]="{exact: true}"
-               [routerLink]="[routeGas]">Plyn</a>
+            <a
+                class="link-list__link"
+                routerLinkActive="link-list__link--active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[routeGas]"
+                >Plyn</a
+            >
         </li>
     </ul>
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
-            <lnd-placeloader [loading]="formLoading && !globalError.length"></lnd-placeloader>
+            <lnd-placeloader
+                [loading]="formLoading && !globalError.length"
+            ></lnd-placeloader>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
-            <ng-container *ngIf="(paginatedContractsWithNameAndSupplyPoint | pathValue:['page']) &&
-                                  paginatedContractsWithNameAndSupplyPoint.page.length &&
-                                  tableCols">
+            <ng-container
+                *ngIf="
+                    (paginatedContractsWithNameAndSupplyPoint
+                        | pathValue: ['page']) &&
+                    paginatedContractsWithNameAndSupplyPoint.page.length &&
+                    tableCols
+                "
+            >
                 <lnd-table
                     [cols]="tableCols"
                     [rows]="paginatedContractsWithNameAndSupplyPoint.page"
@@ -69,7 +94,9 @@
                         [itemsPerPage]="paginationConfig.itemsPerPage"
                         [maxSize]="paginationConfig.maxSize"
                         (pageChanged)="pageChanged($event)"
-                        [totalItems]="paginatedContractsWithNameAndSupplyPoint.totalRecords"
+                        [totalItems]="
+                            paginatedContractsWithNameAndSupplyPoint.totalRecords
+                        "
                         [firstText]="paginationConfig.firstText"
                         [previousText]="paginationConfig.previousText"
                         [nextText]="paginationConfig.nextText"
@@ -78,10 +105,21 @@
                 </div>
             </ng-container>
             <lnd-info-banner
-                *ngIf="(paginatedContractsWithNameAndSupplyPoint | pathValue:['page']) &&
-                        paginatedContractsWithNameAndSupplyPoint.page.length === 0"
-                [bannerDescription]="'Vytvořte nabídku a uvidíte, že zájemců se objeví brzo mnoho.'"
-                [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + (commodityType === COMMODITY_TYPE_POWER ? 'elektřiny' : 'plynu') + '.'"
+                *ngIf="
+                    (paginatedContractsWithNameAndSupplyPoint
+                        | pathValue: ['page']) &&
+                    paginatedContractsWithNameAndSupplyPoint.page.length === 0
+                "
+                [bannerDescription]="
+                    'Vytvořte nabídku a uvidíte, že zájemců se objeví brzo mnoho.'
+                "
+                [bannerTitle]="
+                    'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' +
+                    (commodityType === COMMODITY_TYPE_POWER
+                        ? 'elektřiny'
+                        : 'plynu') +
+                    '.'
+                "
                 [bannerType]="bannerType"
                 [buttonLabel]="'Vytvořte nabídku'"
                 (buttonAction)="redirectToOffer($event)"

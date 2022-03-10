@@ -11,7 +11,7 @@
 .table-basic {
 	tbody {
 		td {
-			padding: 0 ( $spacer / 4 );
+			padding: 0 ( $spacer * .25  );
 		}
 
 		td:first-child {

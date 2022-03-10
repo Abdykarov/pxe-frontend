@@ -5,6 +5,8 @@
  */
 
 // NgxBootstrap datepicker import
+@use 'sass:math';
+
 @import '~ngx-bootstrap/datepicker/utils/scss/variables.scss';
 @import '~ngx-bootstrap/datepicker/utils/scss/mixins.scss';
 @import '~ngx-bootstrap/datepicker/bs-datepicker.scss';
@@ -42,13 +44,13 @@ bs-years-calendar-view,
 bs-month-calendar-view {
 	.bs-datepicker-head {
 		.current {
-			margin-left: -( $spacer / 2.5 );
+			margin-left: -(math.div( $spacer, 2.5) );
 		}
 	}
 }
 
 .bs-datepicker {
-	margin-top: ( $spacer / 2 );
+	margin-top: ( $spacer * .5 );
 	background: transparent;
 	box-shadow: 0 0 10px 0 rgba($black, .09);
 

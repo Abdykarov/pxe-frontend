@@ -1,14 +1,11 @@
 import { Validators } from '@angular/forms';
-
-import * as R from 'ramda';
-
 import { CONSTS } from 'src/app/app.constants';
-import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { CustomValidators } from 'src/common/utils';
 
 export function createRegistrationFormFields(signUpType: SignUpType): IForm {
     return {
@@ -17,7 +14,9 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 '',
                 [
                     Validators.required,
-                    Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN),
+                    Validators.maxLength(
+                        CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN
+                    ),
                     CustomValidators.email,
                 ],
             ],
@@ -27,8 +26,10 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 required: errorFieldMessages.email.required,
                 pattern: errorFieldMessages.email.email,
                 invalidEmail: errorFieldMessages.email.email,
-                alreadyRegisteredEmail: errorFieldMessages.email.alreadyRegisteredEmail,
-                maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+                alreadyRegisteredEmail:
+                    errorFieldMessages.email.alreadyRegisteredEmail,
+                maxlengthRequiredLengthActualLength:
+                    errorFieldMessages.string.maxlength,
             },
         },
     };

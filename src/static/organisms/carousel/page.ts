@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISupplierLogo } from 'src/common/ui/carousels/models/models';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class CarouselComponent {
-
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-     public supplierLogos: ISupplierLogo[] = [
+    public supplierLogos: ISupplierLogo[] = [
         {
             alt: 'logo - Alpiq CZ',
             logoUrl: '/assets/images/suppliers/logo_alpiq-white.svg',
@@ -28,7 +25,8 @@ export class CarouselComponent {
         },
         {
             alt: 'logo - EP Energy Trading a.s.',
-            logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-white.svg',
+            logoUrl:
+                '/assets/images/suppliers/logo_ep-energy-trading-white.svg',
             title: 'EP Energy Trading a.s.',
             width: 80,
             faqUrl: '/faq/supplier/energy-trading',
@@ -42,22 +40,23 @@ export class CarouselComponent {
         },
         {
             alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-            logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia-white.svg',
+            logoUrl:
+                '/assets/images/suppliers/logo_carbounion-bohemia-white.svg',
             title: 'CARBOUNION BOHEMIA, spol. s r. o.',
             width: 50,
             faqUrl: '/faq/supplier/yello-energy',
         },
         {
             alt: 'logo - Pražská plynárenská a.s.',
-            logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-white.svg',
+            logoUrl:
+                '/assets/images/suppliers/logo_prazska-plynarenska-white.svg',
             title: 'Pražská plynárenská a.s.',
             width: 103,
             faqUrl: '/faq/supplier/prazska-plynarenska',
         },
     ];
 
-    constructor(
-    ) {
+    constructor() {
         this.breadcrumbItemsSimple = [
             {
                 label: 'Carousels',

@@ -1,6 +1,4 @@
-import {
-    ISupplierLogo,
-} from 'src/common/ui/supplier/model/supplier.model';
+import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 
 export const configSupplier: ISupplierLogo[] = [
     {
@@ -48,7 +46,8 @@ export const configSupplier: ISupplierLogo[] = [
     {
         alt: 'logo - EP Energy Trading a.s.',
         logoUrl: '/assets/images/suppliers/logo_ep-energy-trading.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
         supplierUrl: '',
         title: 'EP Energy Trading a.s.',
         width: 75,
@@ -56,7 +55,8 @@ export const configSupplier: ISupplierLogo[] = [
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
         logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x.png',
-        logoUrlHover: '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
         supplierUrl: '',
         size: 'xl',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
@@ -90,7 +90,8 @@ export const configSupplier: ISupplierLogo[] = [
     {
         alt: 'logo - Pražská plynárenská a.s.',
         logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
         supplierUrl: '',
         title: 'Pražská plynárenská a.s.',
         width: 129,
@@ -98,7 +99,8 @@ export const configSupplier: ISupplierLogo[] = [
     {
         alt: 'logo - Pražská energetika, a.s.',
         logoUrl: '/assets/images/suppliers/logo_prazska-energetika.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_prazska-energetika-hover.svg',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_prazska-energetika-hover.svg',
         supplierUrl: '',
         title: 'Pražská energetika, a.s.',
         width: 61,
@@ -106,7 +108,8 @@ export const configSupplier: ISupplierLogo[] = [
     {
         alt: 'logo - Slovenské elektrárne, a. s.',
         logoUrl: '/assets/images/suppliers/logo_slovenske-elektrarne.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_slovenske-elektrarne-hover.svg',
+        logoUrlHover:
+            '/assets/images/suppliers/logo_slovenske-elektrarne-hover.svg',
         supplierUrl: '',
         size: 'xl',
         title: 'Slovenské elektrárne, a. s.',

@@ -1,9 +1,8 @@
 import { Validators } from '@angular/forms';
-
 import { CONSTS } from 'src/app/app.constants';
-import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
+import { CustomValidators } from 'src/common/utils';
 import { fieldsMustMatch } from 'src/common/utils/validators/fields-must-match.fnc';
 import { fieldsMustNotMatch } from 'src/common/utils/validators/fields-must-not-match.fnc';
 
@@ -24,12 +23,7 @@ export const changePasswordFields: IForm = {
                 Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.PASSWORD),
             ],
         ],
-        confirmPassword: [
-            '',
-            [
-                Validators.required,
-            ],
-        ],
+        confirmPassword: ['', [Validators.required]],
     },
     options: {
         validator: [
@@ -40,13 +34,16 @@ export const changePasswordFields: IForm = {
     validationMessages: {
         currentPassword: {
             required: errorFieldMessages.password.currentRequired,
-            invalidCurrentPassword: errorFieldMessages.password.invalidCurrentPassword,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            invalidCurrentPassword:
+                errorFieldMessages.password.invalidCurrentPassword,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
         },
         password: {
             required: errorFieldMessages.password.required,
             pattern: errorFieldMessages.password.pattern,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
             fieldsMustNotMatch: errorFieldMessages.password.fieldsMustNotMatch,
         },
         confirmPassword: {
@@ -59,12 +56,7 @@ export const changePasswordFields: IForm = {
 
 export const loginSupplyAuthFormFields: IForm = {
     controls: {
-        confirmationCode: [
-            '',
-            [
-                Validators.required,
-            ],
-        ],
+        confirmationCode: ['', [Validators.required]],
     },
     validationMessages: {
         confirmationCode: {

@@ -2,19 +2,21 @@
     [hidden]="disabledField && hiddenOnDisable"
     [formGroup]="parentForm"
     class="form-group ng-select-custom"
-    [ngClass]="customClass">
+    [ngClass]="customClass"
+>
     <div
         class="input-group"
-        [class.invalid-input]="(!!error && !!touched) && !inputFocused"
+        [class.invalid-input]="!!error && !!touched && !inputFocused"
         [class.input-group--append]="!!appendButtonIcon"
-        [class.input-group--append-button-icon]="!!appendButtonIcon">
-        <label
-            (click)="select.open();"
-            class="ng-select-label">
+        [class.input-group--append-button-icon]="!!appendButtonIcon"
+    >
+        <label (click)="select.open()" class="ng-select-label">
             {{ label }}
         </label>
         <ng-container *ngIf="templateLabelAfterLabel">
-            <ng-container *ngTemplateOutlet="templateLabelAfterLabel"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="templateLabelAfterLabel"
+            ></ng-container>
         </ng-container>
         <ng-select
             #select
@@ -25,14 +27,14 @@
             [searchable]="searchable"
             [formControl]="parentForm.controls[selectName]"
             [bindValue]="bindValue"
-            (blur)="inputFocused = false;blur.emit($event)"
-            (focus)="inputFocused = true;focus.emit($event)"
+            (blur)="inputFocused = false; blur.emit($event)"
+            (focus)="inputFocused = true; focus.emit($event)"
             bindLabel="label"
             [placeholder]="placeholder"
             [class.is-disabled]="disabledField"
             [attr.tabindex]="!!disabledField ? '-1' : null"
             [attr.disabled]="!!disabledField ? 'disabled' : null"
-            [class.is-invalid]="(!!error && !!touched) && !inputFocused"
+            [class.is-invalid]="!!error && !!touched && !inputFocused"
             [class.focus]="inputFocused"
             [class.is-valid]="success"
             [class.is-warning]="warning"
@@ -40,58 +42,81 @@
             [typeahead]="typeahead"
             [searchFn]="customSearchFn"
             (remove)="remove.emit($event)"
-            (change)="change.emit($event);"
-            (open)="open.emit($event);"
-            (close)="close.emit($event);">
+            (change)="change.emit($event)"
+            (open)="open.emit($event)"
+            (close)="close.emit($event)"
+        >
             <ng-template
-                    ng-option-tmp
-                    let-item="item"
-                    let-index="index"
-                    let-search="searchTerm">
+                ng-option-tmp
+                let-item="item"
+                let-index="index"
+                let-search="searchTerm"
+            >
                 <ng-container *ngIf="!templateItem">
-                    <div [innerHTML]="item.label" [lndOptionHighlight]="search"></div>
+                    <div
+                        [innerHTML]="item.label"
+                        [lndOptionHighlight]="search"
+                    ></div>
                 </ng-container>
                 <ng-container *ngIf="templateItem">
-                    <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
+                    <ng-container
+                        *ngTemplateOutlet="
+                            templateItem;
+                            context: {
+                                item: item,
+                                index: index,
+                                search: search
+                            }
+                        "
+                    ></ng-container>
                 </ng-container>
             </ng-template>
             <ng-container *ngIf="templateLabel">
                 <ng-template ng-label-tmp let-item="item">
-                    <ng-container *ngTemplateOutlet="templateLabel; context: {item: item}"></ng-container>
+                    <ng-container
+                        *ngTemplateOutlet="
+                            templateLabel;
+                            context: { item: item }
+                        "
+                    ></ng-container>
                 </ng-template>
             </ng-container>
             <ng-container *ngIf="templateNotFound">
                 <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-                    <ng-container *ngTemplateOutlet="templateNotFound; context: {searchTerm: searchTerm}"></ng-container>
+                    <ng-container
+                        *ngTemplateOutlet="
+                            templateNotFound;
+                            context: { searchTerm: searchTerm }
+                        "
+                    ></ng-container>
                 </ng-template>
             </ng-container>
         </ng-select>
-        <div
-            *ngIf="!!appendButtonIcon"
-            class="input-group-append-help">
+        <div *ngIf="!!appendButtonIcon" class="input-group-append-help">
             <button
                 (click)="appendButtonAction.emit()"
                 type="button"
-                class="btn">
-                <span
-                    class="icon"
-                    [ngClass]="appendButtonIcon">
-                </span>
+                class="btn"
+            >
+                <span class="icon" [ngClass]="appendButtonIcon"> </span>
             </button>
         </div>
         <div
             *ngIf="!!subtext || subtextTemplate"
             class="input-subtext"
-            [class.input-subtext--disabled]="!!disabledField">
+            [class.input-subtext--disabled]="!!disabledField"
+        >
             {{ subtext }}
-            <ng-container *ngIf="subtextTemplate"
-                          [ngTemplateOutlet]="subtextTemplate">
+            <ng-container
+                *ngIf="subtextTemplate"
+                [ngTemplateOutlet]="subtextTemplate"
+            >
             </ng-container>
         </div>
         <div
             *ngIf="!!getErrorMessage() && showErrorMessage"
             [innerHtml]="getErrorMessage()"
-            class="invalid-feedback">
-        </div>
+            class="invalid-feedback"
+        ></div>
     </div>
 </div>

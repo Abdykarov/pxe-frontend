@@ -1,9 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
@@ -12,7 +7,6 @@ import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.m
     styleUrls: ['./info-banner.component.scss'],
 })
 export class InfoBannerComponent {
-
     @Input()
     public buttonLabel: string;
 
@@ -28,7 +22,7 @@ export class InfoBannerComponent {
     public BannerTypeImages = BannerTypeImages;
 
     @Input()
-    public buttonCustomClass  = 'info-banner__btn';
+    public buttonCustomClass = 'info-banner__btn';
 
     @Input()
     public showButton = true;

@@ -1,6 +1,8 @@
 <div class="row static-pages-holder">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 
@@ -8,19 +10,19 @@
     <div class="static-pages static-pages--bg-transparent">
         <div class="supply-points-offer">
             <pxe-supply-point-offer
-                    [supplyPointOffer]="supplyPointOffer"
-                    (action)="click($event)"
-                    [questions]="questions"
+                [supplyPointOffer]="supplyPointOffer"
+                (action)="click($event)"
+                [questions]="questions"
             ></pxe-supply-point-offer>
             <h3>Owner</h3>
             <pxe-supply-point-offer
-                    [isOwner]="true"
-                    [supplyPointOffer]="supplyPointOffer"
-                    (action)="click($event)"
+                [isOwner]="true"
+                [supplyPointOffer]="supplyPointOffer"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
             <pxe-supply-point-offer
-                    [supplyPointOffer]="supplyPointOffer"
-                    (action)="click($event)"
+                [supplyPointOffer]="supplyPointOffer"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
         </div>
     </div>

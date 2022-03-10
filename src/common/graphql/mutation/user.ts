@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-angular';
 
 export const resetPasswordMutation = gql`
     mutation resetPassword($login: String!) {
@@ -8,26 +8,25 @@ export const resetPasswordMutation = gql`
 
 export const changePasswordMutation = gql`
     mutation changePassword($oldPassword: String!, $newPassword: String!) {
-        changePassword(oldPassword: $oldPassword,newPassword: $newPassword) {
-            token,
-            landingPage,
+        changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+            token
+            landingPage
         }
     }
 `;
 
 export const updateUserProfileMutation = gql`
-    mutation updateUserProfile($userDetail: UserDetailInput!, $smsCode: String!) {
+    mutation updateUserProfile(
+        $userDetail: UserDetailInput!
+        $smsCode: String!
+    ) {
         updateUserProfile(userDetail: $userDetail, smsCode: $smsCode)
     }
 `;
 
 export const unsubscribeNotificationsMutation = gql`
-    mutation unsubscribeNotifications(
-        $userProfileId: ID!,
-    ){
-        unsubscribeNotifications(
-            userProfileId: $userProfileId,
-        )
+    mutation unsubscribeNotifications($userProfileId: ID!) {
+        unsubscribeNotifications(userProfileId: $userProfileId)
     }
 `;
 
@@ -42,4 +41,3 @@ export const updateNotificationsAllowedMutation = gql`
         updateNotificationsAllowed(notificationsAllowed: $notificationsAllowed)
     }
 `;
-

@@ -6,46 +6,61 @@ import {
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
-
 import * as R from 'ramda';
 import { Observable } from 'rxjs';
-
+import { ROUTES } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserStatus } from 'src/app/services/model/auth.model';
-import { ROUTES } from 'src/app/app.constants';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
+/**
+ * If any account is waiting for payment it is blocked on payment view.
+ */
 @Injectable({
     providedIn: 'root',
 })
 export class PaymentGuard implements CanActivateChild {
-
     constructor(
         private authService: AuthService,
         private router: Router,
+        private navigateConsumerService: NavigateConsumerService
     ) {}
 
     canActivateChild(
         childRoute: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        state: RouterStateSnapshot
+    ):
+        | Observable<boolean | UrlTree>
+        | Promise<boolean | UrlTree>
+        | boolean
+        | UrlTree {
         this.authService.checkLogin();
-        const storedSupplyPointId = this.authService.currentUserValue?.evaluatedSupplyPoint?.toString();
-        const actualSupplyPointId = state.root.queryParams?.supplyPointId?.toString();
+        const storedSupplyPointId =
+            this.authService.currentUserValue?.evaluatedSupplyPoint?.toString();
+        const actualSupplyPointId =
+            state.root.queryParams?.supplyPointId?.toString();
 
-        if (this.authService.currentUserValue?.userStatus === UserStatus.AWAITING_VERIFICATION &&
-            (R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0 || actualSupplyPointId !== storedSupplyPointId)
-            ) {
-                if (storedSupplyPointId) {
-                    const extras = {
-                        queryParams: {
-                            supplyPointId: storedSupplyPointId,
-                        },
-                    };
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
-                } else {
-                    this.authService.logoutForced();
-                }
-                return false;
+        const isInPaymentState =
+            this.authService.currentUserValue?.userStatus ===
+            UserStatus.AWAITING_VERIFICATION;
+        if (
+            isInPaymentState &&
+            (R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0 ||
+                actualSupplyPointId !== storedSupplyPointId)
+        ) {
+            if (storedSupplyPointId) {
+                const queryParams = {
+                    supplyPointId: storedSupplyPointId,
+                };
+                this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+                    ProgressStatus.WAITING_FOR_PAYMENT,
+                    queryParams
+                );
+            } else {
+                this.authService.logoutForced();
+            }
+            return false;
         }
 
         return true;

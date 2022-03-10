@@ -4,8 +4,7 @@
  -
  */
 
-
-$breadcrumb-bg:                     transparent;
-$breadcrumb-item-padding:           ( $spacer / 2 );
-$breadcrumb-margin-bottom:          ( $spacer / 2 );
-$breadcrumb-divider-color:          $font-text;
+$breadcrumb-bg: transparent;
+$breadcrumb-item-padding: ( $spacer * .5 );
+$breadcrumb-margin-bottom: ( $spacer * .5 );
+$breadcrumb-divider-color: $font-text;

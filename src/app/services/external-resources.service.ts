@@ -1,11 +1,15 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import * as R from 'ramda';
-import { externalScripts, externalStyles } from 'src/app/app.constants';
 import {
+    BUILD_ID_PROVIDER,
+    externalScripts,
+    externalStyles,
+} from 'src/app/app.constants';
+import {
+    ExternalResourceType,
     IExternalPromise,
     IExternalResource,
-    ExternalResourceType,
 } from 'src/app/services/model/widget.model';
 import { v4 as generateUuid } from 'uuid';
 
@@ -23,6 +27,7 @@ export class ScriptService {
     constructor(
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(BUILD_ID_PROVIDER) public buildId: string
     ) {
         R.forEach((script: IExternalResource) => {
             this.resources[ExternalResourceType.scripts][script.name] = {
@@ -48,7 +53,7 @@ export class ScriptService {
     ): Promise<IExternalPromise[]> {
         if (isPlatformBrowser(this.platformId)) {
             const promises: Promise<IExternalPromise>[] = R.map((script) =>
-                this.loadResource(type, script),
+                this.loadResource(type, script)
             )([...scripts]);
             return Promise.all(promises);
         } else {
@@ -63,27 +68,27 @@ export class ScriptService {
 
     private createResource(
         type = ExternalResourceType.scripts,
-        name: string,
+        name: string
     ): HTMLElement {
         let resource;
         if (type === 'scripts') {
             resource = this.document.createElement('script');
             resource.type = 'text/javascript';
-            resource.src = this.resources[type][name].src;
+            resource.src = `${this.resources[type][name].src}?v=${this.buildId}`;
             resource.defer = true;
             resource.async = false;
         } else {
             resource = this.document.createElement('link');
             resource.type = 'text/css';
             resource.rel = 'stylesheet';
-            resource.href = this.resources[type][name].src;
+            resource.src = `${this.resources[type][name].src}?v=${this.buildId}`;
         }
         return resource;
     }
 
     private loadResource(
         type = ExternalResourceType.scripts,
-        name: string,
+        name: string
     ): Promise<IExternalPromise> {
         return new Promise((resolve, reject) => {
             if (this.resources[type][name].loaded) {

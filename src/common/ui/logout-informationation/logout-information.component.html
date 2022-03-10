@@ -1,10 +1,15 @@
 <lnd-banner-ui
-    *ngIf="tokenWillExpireInSeconds < TIME_TO_SHOW_USER_LOGOUT_BANNER &&
-    tokenWillExpireInSeconds > 0 && authService.isLastRefreshToken"
+    *ngIf="
+        tokenWillExpireInSeconds < TIME_TO_SHOW_USER_LOGOUT_BANNER &&
+        tokenWillExpireInSeconds > 0 &&
+        authService.isLastRefreshToken
+    "
     [data]="{
         linkValue: '#',
-        text: 'Vaše přihlášení brzy vyprší z důvodu neaktivity. K automatickému odhlášení dojde za '
-            + (this.tokenWillExpireInSeconds | logoutInInformation) + '.',
+        text:
+            'Vaše přihlášení brzy vyprší z důvodu neaktivity. K automatickému odhlášení dojde za ' +
+            (this.tokenWillExpireInSeconds | logoutInInformation) +
+            '.',
         linkType: '',
         title: ''
     }"

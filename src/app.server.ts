@@ -1,3 +1,2 @@
-export { AppServerModule } from './app/app.server.module';
-
 export { renderModule, renderModuleFactory } from '@angular/platform-server';
+export { AppServerModule } from './app/server/app.server.module';

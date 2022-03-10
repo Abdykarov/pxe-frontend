@@ -1,10 +1,9 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-
-import { inArray } from 'src/common/utils/in-array';
 import { ImportProgressStep } from 'src/app/pages/suppliers/import/import.model';
-import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { inArray } from 'src/common/utils/in-array';
 
 const getStatusIndex = (status: string, steps: IStepperProgressItem[]) =>
     R.findIndex(R.propEq('step', status))(steps);
@@ -81,16 +80,31 @@ const stepsRequests: IStepperProgressItem[] = [
 ];
 
 export const indexOfOfferStepWithoutShadowStep = R.pipe(
-    R.filter(item => !item.shadowStep),
-    R.findIndex(item => item.step === ProgressStatus.OFFER_STEP),
+    R.filter((item) => !item.shadowStep),
+    R.findIndex((item) => item.step === ProgressStatus.OFFER_STEP)
 )(stepsRequests);
 
 export const indexOfSteps = {
-    [ProgressStatus.SUPPLY_POINT]: getStatusIndex(ProgressStatus.SUPPLY_POINT, stepsRequests),
-    [ProgressStatus.OFFER_STEP]: getStatusIndex(ProgressStatus.OFFER_STEP, stepsRequests),
-    [ProgressStatus.PERSONAL_DATA]: getStatusIndex(ProgressStatus.PERSONAL_DATA, stepsRequests),
-    [ProgressStatus.READY_FOR_SIGN]: getStatusIndex(ProgressStatus.READY_FOR_SIGN, stepsRequests),
-    [ProgressStatus.WAITING_FOR_PAYMENT]: getStatusIndex(ProgressStatus.WAITING_FOR_PAYMENT, stepsRequests),
+    [ProgressStatus.SUPPLY_POINT]: getStatusIndex(
+        ProgressStatus.SUPPLY_POINT,
+        stepsRequests
+    ),
+    [ProgressStatus.OFFER_STEP]: getStatusIndex(
+        ProgressStatus.OFFER_STEP,
+        stepsRequests
+    ),
+    [ProgressStatus.PERSONAL_DATA]: getStatusIndex(
+        ProgressStatus.PERSONAL_DATA,
+        stepsRequests
+    ),
+    [ProgressStatus.READY_FOR_SIGN]: getStatusIndex(
+        ProgressStatus.READY_FOR_SIGN,
+        stepsRequests
+    ),
+    [ProgressStatus.WAITING_FOR_PAYMENT]: getStatusIndex(
+        ProgressStatus.WAITING_FOR_PAYMENT,
+        stepsRequests
+    ),
 };
 
 export const indexesOfSecondStep = [
@@ -106,27 +120,31 @@ const stepsMapping = {
     [TypeStepper.CREATE_USER]: stepsCreateUser,
 };
 
-const getSteps = (typeStepper: TypeStepper): IStepperProgressItem[] => stepsMapping[typeStepper];
+const getSteps = (typeStepper: TypeStepper): IStepperProgressItem[] =>
+    stepsMapping[typeStepper];
 
 export const getConfigStepper = (
     activeStep: ProgressStatus | ImportProgressStep,
     withShadowSteps = true,
-    typeStepper: TypeStepper = TypeStepper.REQUEST,
+    typeStepper: TypeStepper = TypeStepper.REQUEST
 ): IStepperProgressItem[] => {
-    let activeIndex = R.findIndex(R.propEq('step', activeStep))(getSteps(typeStepper));
+    let activeIndex = R.findIndex(R.propEq('step', activeStep))(
+        getSteps(typeStepper)
+    );
 
     if (!withShadowSteps && inArray(activeIndex, indexesOfSecondStep)) {
         activeIndex = indexOfOfferStepWithoutShadowStep;
     }
 
     return R.pipe(
-        R.filter(item => !item.shadowStep || (item.shadowStep && withShadowSteps)),
-        R_.mapIndexed(
-            (item: IStepperProgressItem, index: number) => ({
-                active: index === activeIndex,
-                done: index < activeIndex || activeStep === ProgressStatus.COMPLETED,
-                ...item,
-            }),
+        R.filter(
+            (item) => !item.shadowStep || (item.shadowStep && withShadowSteps)
         ),
+        R_.mapIndexed((item: IStepperProgressItem, index: number) => ({
+            active: index === activeIndex,
+            done:
+                index < activeIndex || activeStep === ProgressStatus.COMPLETED,
+            ...item,
+        }))
     )(getSteps(typeStepper));
 };

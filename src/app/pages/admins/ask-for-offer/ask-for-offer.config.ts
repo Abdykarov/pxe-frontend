@@ -3,7 +3,7 @@ import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/c
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 
-export const tableConfig: ITableColumnConfig[] = ([
+export const tableConfig: ITableColumnConfig[] = [
     {
         label: 'Datum přijetí',
         views: [
@@ -23,7 +23,6 @@ export const tableConfig: ITableColumnConfig[] = ([
                 content: (row) => `${row.email}`,
             },
         ],
-
     },
     {
         label: 'Soubor',
@@ -45,7 +44,7 @@ export const tableConfig: ITableColumnConfig[] = ([
             },
         ],
     },
-]);
+];
 
 export const paginationConfig: IPaginationConfig = {
     itemsPerPage: 20,
@@ -61,8 +60,7 @@ export const confirmDeleteAskForOfferInfo = (): IShowModal => ({
     component: 'ConfirmModalComponent',
     modalType: CONSTS.MODAL_TYPE.CONFIRM_INFO_DELETE_ASK_FOR_OFFER,
     instanceData: {
-        confirmText:
-            `Faktura byla smazána.`,
+        confirmText: `Faktura byla smazána.`,
         titleConfirm: 'OK',
         showClose: false,
         showCloseButton: false,

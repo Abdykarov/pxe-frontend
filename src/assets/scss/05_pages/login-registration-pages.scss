@@ -16,7 +16,7 @@
 			padding-bottom: ( $spacer * 5 );
 		}
 		@include media-breakpoint-up(xl) {
-			padding: ( $spacer * 3 ) 0 ( $spacer * 5 );
+			padding: ( $spacer * 3 ) 0 ( $spacer * 5  );
 		}
 
 		&::after {

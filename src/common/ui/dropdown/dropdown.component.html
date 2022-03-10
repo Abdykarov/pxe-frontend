@@ -7,9 +7,14 @@
     ]"
     (lndOffClick)="isOpen = false"
     [offClickEnabled]="isOpen"
-    >
+>
     <div class="dropdown-toggle">
-        <ng-container *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle, isOpen: this.isOpen } "></ng-container>
+        <ng-container
+            *ngTemplateOutlet="
+                actionTemplate;
+                context: { toggle: this.toggle, isOpen: this.isOpen }
+            "
+        ></ng-container>
     </div>
     <div
         class="dropdown-menu"
@@ -17,8 +22,14 @@
         [ngClass]="[
             isOpen ? 'dropdown-menu--open' : '',
             menuDirection ? 'dropdown-menu-' + menuDirection : ''
-        ]">
+        ]"
+    >
         <ng-content></ng-content>
-        <ng-container *ngTemplateOutlet="contentTemplate; context: { toggle: this.toggle, isOpen: this.isOpen } "></ng-container>
+        <ng-container
+            *ngTemplateOutlet="
+                contentTemplate;
+                context: { toggle: this.toggle, isOpen: this.isOpen }
+            "
+        ></ng-container>
     </div>
 </div>

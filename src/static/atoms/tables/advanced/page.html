@@ -1,8 +1,6 @@
 <ng-template #rowDetail let-row="row">
     <div class="row">
-        <div class="col-6">
-            Detail
-        </div>
+        <div class="col-6">Detail</div>
     </div>
 </ng-template>
 <ng-template #actionCol>
@@ -16,7 +14,9 @@
 
 <div class="row static-pages-holder">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <div class="static-pages-holder">

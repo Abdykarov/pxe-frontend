@@ -1,11 +1,5 @@
-import {
-    Component,
-    Input,
-    TemplateRef,
-} from '@angular/core';
-
+import { Component, Input, TemplateRef } from '@angular/core';
 import * as R from 'ramda';
-
 import { IAccordionItem } from './models/accordion-item.model';
 
 @Component({
@@ -13,9 +7,7 @@ import { IAccordionItem } from './models/accordion-item.model';
     templateUrl: './accordion.component.html',
     styleUrls: ['./accordion.component.scss'],
 })
-
 export class AccordionComponent {
-
     @Input()
     public accordionItems: IAccordionItem[] = [];
 
@@ -33,9 +25,9 @@ export class AccordionComponent {
         if (!item.isActive && this.onlyOneItemOpened) {
             R.map((accordionItem: IAccordionItem) => {
                 accordionItem.isActive = false;
-                return accordionItem ;
+                return accordionItem;
             }, this.accordionItems);
         }
         item.isActive = !item.isActive;
-    }
+    };
 }

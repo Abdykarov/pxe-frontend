@@ -1,6 +1,7 @@
 <ng-template #phraseHelpTemplate>
     <p class="small mt-0 mb-1">
-        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu.
+        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší
+        hodnotu.
     </p>
 </ng-template>
 
@@ -13,9 +14,11 @@
         [actionTemplate]="tooltipBottom"
         direction="bottom"
         customClass="ml-2"
-        customContentClass="tooltip__content--fixed-width">
+        customContentClass="tooltip__content--fixed-width"
+    >
         <p class="mb-2">
-            Vyberte tuto možnost pokud nemáte platnou smlouvu s dodavatelem, například váš dodavatel selhal a jste v dodávce poslední instance.
+            Vyberte tuto možnost pokud nemáte platnou smlouvu s dodavatelem,
+            například váš dodavatel selhal a jste v dodávce poslední instance.
         </p>
     </lnd-tooltip>
 </ng-template>
@@ -34,27 +37,43 @@
     ></lnd-form-field>
 </ng-template>
 
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
+<lnd-alert *ngIf="globalError.length" type="danger">
     <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
+        {{ error }}<br />
     </ng-container>
 </lnd-alert>
 
-<lnd-placeloader [loading]="!(codeLists && suppliers && suppliers[form.controls.commodityType.value])"></lnd-placeloader>
+<lnd-placeloader
+    [loading]="
+        !(
+            codeLists &&
+            suppliers &&
+            suppliers[form.controls.commodityType.value]
+        )
+    "
+></lnd-placeloader>
 
-<div *ngIf="codeLists && suppliers && suppliers[form.controls.commodityType.value]">
+<div
+    *ngIf="
+        codeLists && suppliers && suppliers[form.controls.commodityType.value]
+    "
+>
     <form
         [formGroup]="form"
         (keydown)="resetCustomFieldError()"
         (change)="resetCustomFieldError()"
-        autocomplete="off">
+        autocomplete="off"
+    >
         <div class="page-box mb-3">
             <div class="form-container">
                 <div class="row no-gutters mb-2">
                     <div class="col-12">
-                        <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/light.svg" title="">
+                        <img
+                            alt="Současná smlouva"
+                            class="w-25 mb-3"
+                            src="/assets/images/illustrations/light.svg"
+                            title=""
+                        />
                         <h2 class="page-box__title">
                             Komodita <br />a současný dodavatel
                         </h2>
@@ -64,7 +83,10 @@
                     lndSFormDirective
                     lndSBiometricsDirective
                     *ngIf="form.controls.commodityType.status !== 'DISABLED'"
-                    [error]="formError.commodityType || form.controls.commodityType.errors"
+                    [error]="
+                        formError.commodityType ||
+                        form.controls.commodityType.errors
+                    "
                     [formControl]="form.controls.commodityType"
                     [id]="'commodityType'"
                     label="Druh energie"
@@ -72,15 +94,27 @@
                     [customFormGroupClass]="'mb-3'"
                     [radioGroupItemClass]="'custom-control-inline'"
                     [options]="commodityTypeOptions"
-                    [success]="form.controls.commodityType.valid && (form.controls.commodityType.touched || formError.commodityType)"
-                    [touched]="form.controls.commodityType.touched || formError.commodityType"
-                    [validationMessages]="formFields.validationMessages.commodityType"
+                    [success]="
+                        form.controls.commodityType.valid &&
+                        (form.controls.commodityType.touched ||
+                            formError.commodityType)
+                    "
+                    [touched]="
+                        form.controls.commodityType.touched ||
+                        formError.commodityType
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.commodityType
+                    "
                 ></lnd-form-field>
                 <lnd-form-field
                     lndSFormDirective
                     lndSBiometricsDirective
                     *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
-                    [error]="formError.subjectTypeId || form.controls.subjectTypeId.errors"
+                    [error]="
+                        formError.subjectTypeId ||
+                        form.controls.subjectTypeId.errors
+                    "
                     [formControl]="form.controls.subjectTypeId"
                     [id]="'subjectTypeId'"
                     label="Odběratel"
@@ -88,9 +122,18 @@
                     [customFormGroupClass]="'mb-3'"
                     [radioGroupItemClass]="'custom-control-inline'"
                     [options]="subjectTypeOptions"
-                    [success]="form.controls.subjectTypeId.valid && (form.controls.subjectTypeId.touched || formError.subjectTypeId)"
-                    [touched]="form.controls.subjectTypeId.touched || formError.subjectTypeId"
-                    [validationMessages]="formFields.validationMessages.subjectTypeId"
+                    [success]="
+                        form.controls.subjectTypeId.valid &&
+                        (form.controls.subjectTypeId.touched ||
+                            formError.subjectTypeId)
+                    "
+                    [touched]="
+                        form.controls.subjectTypeId.touched ||
+                        formError.subjectTypeId
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.subjectTypeId
+                    "
                 ></lnd-form-field>
                 <lnd-select
                     lndSFormDirective
@@ -99,16 +142,30 @@
                     [hiddenOnDisable]="false"
                     [disabledField]="form.controls['withoutSupplier'].value"
                     [templateLabelAfterLabel]="withoutSupplierTemplate"
-                    [error]="formError.supplierId || form.controls.supplierId.errors"
+                    [error]="
+                        formError.supplierId || form.controls.supplierId.errors
+                    "
                     label="Současný dodavatel"
-                    [options]="suppliers && suppliers[form.controls.commodityType.value]"
+                    [options]="
+                        suppliers &&
+                        suppliers[form.controls.commodityType.value]
+                    "
                     [parentForm]="form"
                     [selectName]="'supplierId'"
-                    [success]="form.controls.supplierId.valid && (form.controls.supplierId.touched || formError.supplierId)"
+                    [success]="
+                        form.controls.supplierId.valid &&
+                        (form.controls.supplierId.touched ||
+                            formError.supplierId)
+                    "
                     subtext="Začněte psát a my vám poradíme."
                     searchable="true"
-                    [touched]="form.controls.supplierId.touched || formError.supplierId"
-                    [validationMessages]="formFields.validationMessages.supplierId">
+                    [touched]="
+                        form.controls.supplierId.touched || formError.supplierId
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.supplierId
+                    "
+                >
                 </lnd-select>
             </div>
         </div>
@@ -116,7 +173,12 @@
             <div class="form-container">
                 <div class="row no-gutters mb-2">
                     <div class="col-12">
-                        <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-point.svg" title="">
+                        <img
+                            alt="Současná smlouva"
+                            class="w-25 mb-3"
+                            src="/assets/images/illustrations/house-point.svg"
+                            title=""
+                        />
                         <h2 class="page-box__title">
                             Identifikace a adresa odběrného místa
                         </h2>
@@ -126,14 +188,23 @@
                     lndSFormDirective
                     lndSBiometricsDirective
                     *ngIf="form.controls.name.status !== 'DISABLED'"
-                    [appendButtonIcon]="helpDocuments && helpDocuments['name'] ? 'icon--info' : null"
-                    (appendButtonAction)="showHelp('name', 'Vaše pojmenování odběrného místa')"
+                    [appendButtonIcon]="
+                        helpDocuments && helpDocuments['name']
+                            ? 'icon--info'
+                            : null
+                    "
+                    (appendButtonAction)="
+                        showHelp('name', 'Vaše pojmenování odběrného místa')
+                    "
                     [error]="formError.name || form.controls.name.errors"
                     [formControl]="form.controls.name"
                     [id]="'name'"
                     label="Vaše pojmenování odběrného místa"
                     subtext="Cokoliv, podle čeho chcete místo identifikovat."
-                    [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+                    [success]="
+                        form.controls.name.valid &&
+                        (form.controls.name.touched || formError.name)
+                    "
                     [touched]="form.controls.name.touched || formError.name"
                     [validationMessages]="formFields.validationMessages.name"
                 ></lnd-form-field>
@@ -141,14 +212,21 @@
                     lndSFormDirective
                     lndSBiometricsDirective
                     *ngIf="form.controls.ean.status !== 'DISABLED'"
-                    [appendButtonIcon]="helpDocuments && helpDocuments['ean'] ? 'icon--info' : null"
+                    [appendButtonIcon]="
+                        helpDocuments && helpDocuments['ean']
+                            ? 'icon--info'
+                            : null
+                    "
                     (appendButtonAction)="showHelp('ean', 'EAN')"
                     [error]="formError.ean || form.controls.ean.errors"
                     [formControl]="form.controls.ean"
                     [id]="'ean'"
                     label="EAN"
                     subtext="Unikátní identifikační číslo odběrného místa."
-                    [success]="form.controls.ean.valid && (form.controls.ean.touched || formError.ean)"
+                    [success]="
+                        form.controls.ean.valid &&
+                        (form.controls.ean.touched || formError.ean)
+                    "
                     [touched]="form.controls.ean.touched || formError.ean"
                     [validationMessages]="formFields.validationMessages.ean"
                 ></lnd-form-field>
@@ -156,14 +234,25 @@
                     lndSFormDirective
                     lndSBiometricsDirective
                     *ngIf="form.controls.eic.status !== 'DISABLED'"
-                    [appendButtonIcon]="helpDocuments && helpDocuments['eic'] ? 'icon--info' : null"
+                    [appendButtonIcon]="
+                        helpDocuments && helpDocuments['eic']
+                            ? 'icon--info'
+                            : null
+                    "
                     (appendButtonAction)="showHelp('eic', 'EIC')"
-                    [error]="formError.eic || formError.ean || form.controls.eic.errors"
+                    [error]="
+                        formError.eic ||
+                        formError.ean ||
+                        form.controls.eic.errors
+                    "
                     [formControl]="form.controls.eic"
                     [id]="'eic'"
                     label="EIC"
                     subtext="Unikátní identifikační číslo odběrného místa."
-                    [success]="form.controls.eic.valid && (form.controls.eic.touched || formError.eic)"
+                    [success]="
+                        form.controls.eic.valid &&
+                        (form.controls.eic.touched || formError.eic)
+                    "
                     [touched]="form.controls.eic.touched || formError.eic"
                     [validationMessages]="formFields.validationMessages.eic"
                 ></lnd-form-field>
@@ -172,16 +261,28 @@
                     lndSFormDirective
                     lndSBiometricsDirective
                     *ngIf="form.controls.address.status !== 'DISABLED'"
-                    [appendButtonIcon]="helpDocuments && helpDocuments['address'] ? 'icon--info' : null"
-                    (appendButtonAction)="showHelp('address', 'Adresa odběrného místa')"
+                    [appendButtonIcon]="
+                        helpDocuments && helpDocuments['address']
+                            ? 'icon--info'
+                            : null
+                    "
+                    (appendButtonAction)="
+                        showHelp('address', 'Adresa odběrného místa')
+                    "
                     [error]="formError.address || form.controls.address.errors"
                     [label]="'Adresa odběrného místa'"
                     [parentForm]="form"
                     [formFieldsParentForm]="formFields"
-                    [success]="form.controls.address.valid && (form.controls.address.touched || formError.address)"
-                    [touched]="form.controls.address.touched || formError.address"
+                    [success]="
+                        form.controls.address.valid &&
+                        (form.controls.address.touched || formError.address)
+                    "
+                    [touched]="
+                        form.controls.address.touched || formError.address
+                    "
                     [validationMessages]="formFields.validationMessages.address"
-                    [whispererName]="'address'">
+                    [whispererName]="'address'"
+                >
                 </pxe-address-whisperer>
             </div>
         </div>
@@ -189,36 +290,85 @@
             <div class="form-container">
                 <div class="row no-gutters mb-2">
                     <div class="col-12">
-                        <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
+                        <img
+                            alt="Současná smlouva"
+                            class="w-25 mb-3"
+                            src="/assets/images/illustrations/house-info.svg"
+                            title=""
+                        />
                         <h2 class="page-box__title mb-2">
-                            Parametry odběru {{commodityType === CommodityTypes.POWER ? 'elektřiny' : 'plynu'}}
+                            Parametry odběru {{ commodityType ===
+                            CommodityTypes.POWER ? "elektřiny" : "plynu" }}
                         </h2>
                     </div>
                 </div>
                 <lnd-select
                     lndSFormDirective
                     lndSBiometricsDirective
-                    *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
-                    [appendButtonIcon]="helpDocuments && helpDocuments['distributionRateId'] ? 'icon--info' : null"
-                    (appendButtonAction)="showHelp('distributionRateId', 'Distribučná sazba')"
-                    [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
+                    *ngIf="
+                        form.controls.distributionRateId.status !== 'DISABLED'
+                    "
+                    [appendButtonIcon]="
+                        helpDocuments && helpDocuments['distributionRateId']
+                            ? 'icon--info'
+                            : null
+                    "
+                    (appendButtonAction)="
+                        showHelp('distributionRateId', 'Distribučná sazba')
+                    "
+                    [error]="
+                        formError.distributionRateId ||
+                        form.controls.distributionRateId.errors
+                    "
                     label="Distribuční sazba"
                     [options]="codeLists && codeLists[distributionRateType]"
                     [parentForm]="form"
                     [selectName]="'distributionRateId'"
-                    [success]="form.controls.distributionRateId.valid && (form.controls.distributionRateId.touched || formError.distributionRateId)"
-                    [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
-                    [validationMessages]="formFields.validationMessages.distributionRateId">
+                    [success]="
+                        form.controls.distributionRateId.valid &&
+                        (form.controls.distributionRateId.touched ||
+                            formError.distributionRateId)
+                    "
+                    [touched]="
+                        form.controls.distributionRateId.touched ||
+                        formError.distributionRateId
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.distributionRateId
+                    "
+                >
                 </lnd-select>
                 <pxe-field-wrapper
                     *ngIf="form.controls.commodityType.value === 'POWER'"
                     labelFor="phasesId"
                     [subtextTemplate]="phraseHelpTemplate"
-                    [wrapperFocused]="(fieldWrapperFocused$ | async) === 'phasesId' || (fieldWrapperFocused$ | async) === 'circuitBreakerId'"
-                    [error]="((form.controls.phasesId.touched || formError.phasesId) && (formError.phasesId || form.controls.phasesId.errors)) ||
-                             ((form.controls.circuitBreakerId.touched || formError.circuitBreakerId) && (formError.circuitBreakerId || form.controls.circuitBreakerId.errors))"
-                    [validationMessages]="((form.controls.phasesId.touched || formError.phasesId) && (formError.phasesId || form.controls.phasesId.errors) && formFields.validationMessages.phasesId) ||
-                                          ((form.controls.circuitBreakerId.touched || formError.circuitBreakerId) && (formError.circuitBreakerId || form.controls.circuitBreakerId.errors) && formFields.validationMessages.circuitBreakerId)">
+                    [wrapperFocused]="
+                        (fieldWrapperFocused$ | async) === 'phasesId' ||
+                        (fieldWrapperFocused$ | async) === 'circuitBreakerId'
+                    "
+                    [error]="
+                        ((form.controls.phasesId.touched ||
+                            formError.phasesId) &&
+                            (formError.phasesId ||
+                                form.controls.phasesId.errors)) ||
+                        ((form.controls.circuitBreakerId.touched ||
+                            formError.circuitBreakerId) &&
+                            (formError.circuitBreakerId ||
+                                form.controls.circuitBreakerId.errors))
+                    "
+                    [validationMessages]="
+                        ((form.controls.phasesId.touched ||
+                            formError.phasesId) &&
+                            (formError.phasesId ||
+                                form.controls.phasesId.errors) &&
+                            formFields.validationMessages.phasesId) ||
+                        ((form.controls.circuitBreakerId.touched ||
+                            formError.circuitBreakerId) &&
+                            (formError.circuitBreakerId ||
+                                form.controls.circuitBreakerId.errors) &&
+                            formFields.validationMessages.circuitBreakerId)
+                    "
+                >
                     <div class="row no-gutters">
                         <div class="col-12 mb-2">
                             <small>Jistič</small>
@@ -227,56 +377,144 @@
                             <lnd-select
                                 lndSFormDirective
                                 lndSBiometricsDirective
-                                *ngIf="form.controls.phasesId.status !== 'DISABLED'"
-                                [appendButtonIcon]="helpDocuments && helpDocuments['phasesId'] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('phasesId', 'Jistič fáze')"
-                                [error]="formError.phasesId || form.controls.phasesId.errors"
+                                *ngIf="
+                                    form.controls.phasesId.status !== 'DISABLED'
+                                "
+                                [appendButtonIcon]="
+                                    helpDocuments && helpDocuments['phasesId']
+                                        ? 'icon--info'
+                                        : null
+                                "
+                                (appendButtonAction)="
+                                    showHelp('phasesId', 'Jistič fáze')
+                                "
+                                [error]="
+                                    formError.phasesId ||
+                                    form.controls.phasesId.errors
+                                "
                                 [id]="'phasesId'"
                                 label="fáze"
                                 (focus)="fieldWrapperFocus('phasesId')"
                                 (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'phasesId' || (fieldWrapperFocused$ | async) === 'circuitBreakerId'"
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'phasesId' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'circuitBreakerId'
+                                "
                                 [showErrorMessage]="false"
-                                [options]="codeLists && codeLists[codeList.CIRCUIT_BREAKER_PHASE]"
+                                [options]="
+                                    codeLists &&
+                                    codeLists[codeList.CIRCUIT_BREAKER_PHASE]
+                                "
                                 [parentForm]="form"
                                 [selectName]="'phasesId'"
-                                [success]="form.controls.phasesId.valid && (form.controls.phasesId.touched || formError.phasesId)"
-                                [touched]="form.controls.phasesId.touched || formError.phasesId"
-                                [validationMessages]="formFields.validationMessages.phasesId">
+                                [success]="
+                                    form.controls.phasesId.valid &&
+                                    (form.controls.phasesId.touched ||
+                                        formError.phasesId)
+                                "
+                                [touched]="
+                                    form.controls.phasesId.touched ||
+                                    formError.phasesId
+                                "
+                                [validationMessages]="
+                                    formFields.validationMessages.phasesId
+                                "
+                            >
                             </lnd-select>
                         </div>
                         <div class="col-12 col-md-6 pl-md-1">
                             <lnd-select
                                 lndSFormDirective
                                 lndSBiometricsDirective
-                                *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
-                                [appendButtonIcon]="helpDocuments && helpDocuments['circuitBreakerId'] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('circuitBreakerId', 'Jistič')"
-                                [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
+                                *ngIf="
+                                    form.controls.circuitBreakerId.status !==
+                                    'DISABLED'
+                                "
+                                [appendButtonIcon]="
+                                    helpDocuments &&
+                                    helpDocuments['circuitBreakerId']
+                                        ? 'icon--info'
+                                        : null
+                                "
+                                (appendButtonAction)="
+                                    showHelp('circuitBreakerId', 'Jistič')
+                                "
+                                [error]="
+                                    formError.circuitBreakerId ||
+                                    form.controls.circuitBreakerId.errors
+                                "
                                 [id]="'circuitBreakerId'"
                                 label="velikost"
                                 (focus)="fieldWrapperFocus('circuitBreakerId')"
                                 (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'phasesId' || (fieldWrapperFocused$ | async) === 'circuitBreakerId'"
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'phasesId' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'circuitBreakerId'
+                                "
                                 [showErrorMessage]="false"
-                                [options]="codeLists && codeLists[codeList.CIRCUIT_BREAKER_SIZE]"
+                                [options]="
+                                    codeLists &&
+                                    codeLists[codeList.CIRCUIT_BREAKER_SIZE]
+                                "
                                 [parentForm]="form"
                                 [selectName]="'circuitBreakerId'"
-                                [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
-                                [touched]="form.controls.circuitBreakerId.touched || formError.circuitBreakerId"
-                                [validationMessages]="formFields.validationMessages.circuitBreakerId">
+                                [success]="
+                                    form.controls.circuitBreakerId.valid &&
+                                    (form.controls.circuitBreakerId.touched ||
+                                        formError.circuitBreakerId)
+                                "
+                                [touched]="
+                                    form.controls.circuitBreakerId.touched ||
+                                    formError.circuitBreakerId
+                                "
+                                [validationMessages]="
+                                    formFields.validationMessages
+                                        .circuitBreakerId
+                                "
+                            >
                             </lnd-select>
                         </div>
                     </div>
                 </pxe-field-wrapper>
                 <pxe-field-wrapper
-                    *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
+                    *ngIf="
+                        form.controls.annualConsumptionNT.status !== 'DISABLED'
+                    "
                     labelFor="annualConsumptionNTUnit"
-                    [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionNT'"
-                    [error]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors)) ||
-                             ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors))"
-                    [validationMessages]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors) && formFields.validationMessages.annualConsumptionNTUnit) ||
-                                          ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors) && formFields.validationMessages.annualConsumptionNT)">
+                    [wrapperFocused]="
+                        (fieldWrapperFocused$ | async) ===
+                            'annualConsumptionNTUnit' ||
+                        (fieldWrapperFocused$ | async) === 'annualConsumptionNT'
+                    "
+                    [error]="
+                        ((form.controls.annualConsumptionNTUnit.touched ||
+                            formError.annualConsumptionNTUnit) &&
+                            (formError.annualConsumptionNTUnit ||
+                                form.controls.annualConsumptionNTUnit
+                                    .errors)) ||
+                        ((form.controls.annualConsumptionNT.touched ||
+                            formError.annualConsumptionNT) &&
+                            (formError.annualConsumptionNT ||
+                                form.controls.annualConsumptionNT.errors))
+                    "
+                    [validationMessages]="
+                        ((form.controls.annualConsumptionNTUnit.touched ||
+                            formError.annualConsumptionNTUnit) &&
+                            (formError.annualConsumptionNTUnit ||
+                                form.controls.annualConsumptionNTUnit.errors) &&
+                            formFields.validationMessages
+                                .annualConsumptionNTUnit) ||
+                        ((form.controls.annualConsumptionNT.touched ||
+                            formError.annualConsumptionNT) &&
+                            (formError.annualConsumptionNT ||
+                                form.controls.annualConsumptionNT.errors) &&
+                            formFields.validationMessages.annualConsumptionNT)
+                    "
+                >
                     <div class="row no-gutters">
                         <div class="col-12 mb-2">
                             <small>Roční spotřeba - nízký tarif</small>
@@ -286,48 +524,132 @@
                                 lndSFormDirective
                                 lndSBiometricsDirective
                                 label="spotřeba"
-                                [formControl]="form.controls.annualConsumptionNT"
-                                (focus)="fieldWrapperFocus('annualConsumptionNT')"
+                                [formControl]="
+                                    form.controls.annualConsumptionNT
+                                "
+                                (focus)="
+                                    fieldWrapperFocus('annualConsumptionNT')
+                                "
                                 (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNT' || (fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit'"
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionNT' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionNTUnit'
+                                "
                                 [id]="'annualConsumptionNT'"
-                                [success]="form.controls.annualConsumptionNT.valid && (form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT)"
-                                [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT"
-                                [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
-                                [validationMessages]="formFields.validationMessages.annualConsumptionNT"
+                                [success]="
+                                    form.controls.annualConsumptionNT.valid &&
+                                    (form.controls.annualConsumptionNT
+                                        .touched ||
+                                        formError.annualConsumptionNT)
+                                "
+                                [touched]="
+                                    form.controls.annualConsumptionNT.touched ||
+                                    formError.annualConsumptionNT
+                                "
+                                [error]="
+                                    formError.annualConsumptionNT ||
+                                    form.controls.annualConsumptionNT.errors
+                                "
+                                [validationMessages]="
+                                    formFields.validationMessages
+                                        .annualConsumptionNT
+                                "
                             ></lnd-form-field>
                         </div>
                         <div class="col-12 col-md-5 pl-md-1">
                             <lnd-select
                                 lndSFormDirective
                                 lndSBiometricsDirective
-                                [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionNT'] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('annualConsumptionNT', 'Roční spotřeba - nízký tarif')"
+                                [appendButtonIcon]="
+                                    helpDocuments &&
+                                    helpDocuments['annualConsumptionNT']
+                                        ? 'icon--info'
+                                        : null
+                                "
+                                (appendButtonAction)="
+                                    showHelp(
+                                        'annualConsumptionNT',
+                                        'Roční spotřeba - nízký tarif'
+                                    )
+                                "
                                 [id]="'annualConsumptionNTUnit'"
-                                (focus)="fieldWrapperFocus('annualConsumptionNTUnit')"
+                                (focus)="
+                                    fieldWrapperFocus('annualConsumptionNTUnit')
+                                "
                                 (blur)="fieldWrapperBlur()"
-                                [error]="formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionNT'"
+                                [error]="
+                                    formError.annualConsumptionNTUnit ||
+                                    form.controls.annualConsumptionNTUnit.errors
+                                "
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionNTUnit' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionNT'
+                                "
                                 [showErrorMessage]="false"
-                                [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
+                                [options]="
+                                    codeLists &&
+                                    codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]
+                                "
                                 [clearable]="false"
                                 label="jednotka"
                                 [parentForm]="form"
                                 [selectName]="'annualConsumptionNTUnit'"
-                                [success]="form.controls.annualConsumptionNTUnit.valid && (form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit)"
-                                [touched]="form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit">
+                                [success]="
+                                    form.controls.annualConsumptionNTUnit
+                                        .valid &&
+                                    (form.controls.annualConsumptionNTUnit
+                                        .touched ||
+                                        formError.annualConsumptionNTUnit)
+                                "
+                                [touched]="
+                                    form.controls.annualConsumptionNTUnit
+                                        .touched ||
+                                    formError.annualConsumptionNTUnit
+                                "
+                            >
                             </lnd-select>
                         </div>
                     </div>
                 </pxe-field-wrapper>
                 <pxe-field-wrapper
-                    *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
+                    *ngIf="
+                        form.controls.annualConsumptionVT.status !== 'DISABLED'
+                    "
                     labelFor="annualConsumptionVTUnit"
-                    [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
-                    [error]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors)) ||
-                             ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors))"
-                    [validationMessages]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors) && formFields.validationMessages.annualConsumptionVTUnit) ||
-                                          ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
+                    [wrapperFocused]="
+                        (fieldWrapperFocused$ | async) ===
+                            'annualConsumptionVTUnit' ||
+                        (fieldWrapperFocused$ | async) === 'annualConsumptionVT'
+                    "
+                    [error]="
+                        ((form.controls.annualConsumptionVTUnit.touched ||
+                            formError.annualConsumptionVTUnit) &&
+                            (formError.annualConsumptionVTUnit ||
+                                form.controls.annualConsumptionVTUnit
+                                    .errors)) ||
+                        ((form.controls.annualConsumptionVT.touched ||
+                            formError.annualConsumptionVT) &&
+                            (formError.annualConsumptionVT ||
+                                form.controls.annualConsumptionVT.errors))
+                    "
+                    [validationMessages]="
+                        ((form.controls.annualConsumptionVTUnit.touched ||
+                            formError.annualConsumptionVTUnit) &&
+                            (formError.annualConsumptionVTUnit ||
+                                form.controls.annualConsumptionVTUnit.errors) &&
+                            formFields.validationMessages
+                                .annualConsumptionVTUnit) ||
+                        ((form.controls.annualConsumptionVT.touched ||
+                            formError.annualConsumptionVT) &&
+                            (formError.annualConsumptionVT ||
+                                form.controls.annualConsumptionVT.errors) &&
+                            formFields.validationMessages.annualConsumptionVT)
+                    "
+                >
                     <div class="row no-gutters">
                         <div class="col-12 mb-2">
                             <small>Roční spotřeba - vysoký tarif</small>
@@ -337,15 +659,38 @@
                                 lndSFormDirective
                                 lndSBiometricsDirective
                                 label="spotřeba"
-                                [formControl]="form.controls.annualConsumptionVT"
-                                (focus)="fieldWrapperFocus('annualConsumptionVT')"
+                                [formControl]="
+                                    form.controls.annualConsumptionVT
+                                "
+                                (focus)="
+                                    fieldWrapperFocus('annualConsumptionVT')
+                                "
                                 (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVT' || (fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit'"
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionVT' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionVTUnit'
+                                "
                                 [id]="'annualConsumptionVT'"
-                                [success]="form.controls.annualConsumptionVT.valid && (form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT)"
-                                [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT"
-                                [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
-                                [validationMessages]="formFields.validationMessages.annualConsumptionVT"
+                                [success]="
+                                    form.controls.annualConsumptionVT.valid &&
+                                    (form.controls.annualConsumptionVT
+                                        .touched ||
+                                        formError.annualConsumptionVT)
+                                "
+                                [touched]="
+                                    form.controls.annualConsumptionVT.touched ||
+                                    formError.annualConsumptionVT
+                                "
+                                [error]="
+                                    formError.annualConsumptionVT ||
+                                    form.controls.annualConsumptionVT.errors
+                                "
+                                [validationMessages]="
+                                    formFields.validationMessages
+                                        .annualConsumptionVT
+                                "
                             ></lnd-form-field>
                         </div>
                         <div class="col-12 col-md-5 pl-md-1">
@@ -353,32 +698,92 @@
                                 lndSFormDirective
                                 lndSBiometricsDirective
                                 label="jednotka"
-                                [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionVT'] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('annualConsumptionVT', 'Roční spotřeba - vysoký tarif')"
+                                [appendButtonIcon]="
+                                    helpDocuments &&
+                                    helpDocuments['annualConsumptionVT']
+                                        ? 'icon--info'
+                                        : null
+                                "
+                                (appendButtonAction)="
+                                    showHelp(
+                                        'annualConsumptionVT',
+                                        'Roční spotřeba - vysoký tarif'
+                                    )
+                                "
                                 [id]="'annualConsumptionVTUnit'"
-                                (focus)="fieldWrapperFocus('annualConsumptionVTUnit')"
+                                (focus)="
+                                    fieldWrapperFocus('annualConsumptionVTUnit')
+                                "
                                 (blur)="fieldWrapperBlur()"
-                                [error]="formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
+                                [error]="
+                                    formError.annualConsumptionVTUnit ||
+                                    form.controls.annualConsumptionVTUnit.errors
+                                "
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionVTUnit' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionVT'
+                                "
                                 [showErrorMessage]="false"
-                                [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
+                                [options]="
+                                    codeLists &&
+                                    codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]
+                                "
                                 [clearable]="false"
                                 [parentForm]="form"
                                 [selectName]="'annualConsumptionVTUnit'"
-                                [success]="form.controls.annualConsumptionVTUnit.valid && (form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit)"
-                                [touched]="form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit">
+                                [success]="
+                                    form.controls.annualConsumptionVTUnit
+                                        .valid &&
+                                    (form.controls.annualConsumptionVTUnit
+                                        .touched ||
+                                        formError.annualConsumptionVTUnit)
+                                "
+                                [touched]="
+                                    form.controls.annualConsumptionVTUnit
+                                        .touched ||
+                                    formError.annualConsumptionVTUnit
+                                "
+                            >
                             </lnd-select>
                         </div>
                     </div>
                 </pxe-field-wrapper>
                 <pxe-field-wrapper
-                    *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
+                    *ngIf="
+                        form.controls.annualConsumption.status !== 'DISABLED'
+                    "
                     labelFor="annualConsumptionUnit"
-                    [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
-                    [error]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors)) ||
-                             ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
-                    [validationMessages]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors) && formFields.validationMessages.annualConsumptionUnit) ||
-                                          ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
+                    [wrapperFocused]="
+                        (fieldWrapperFocused$ | async) ===
+                            'annualConsumptionUnit' ||
+                        (fieldWrapperFocused$ | async) === 'annualConsumption'
+                    "
+                    [error]="
+                        ((form.controls.annualConsumptionUnit.touched ||
+                            formError.annualConsumptionUnit) &&
+                            (formError.annualConsumptionUnit ||
+                                form.controls.annualConsumptionUnit.errors)) ||
+                        ((form.controls.annualConsumption.touched ||
+                            formError.annualConsumption) &&
+                            (formError.annualConsumption ||
+                                form.controls.annualConsumption.errors))
+                    "
+                    [validationMessages]="
+                        ((form.controls.annualConsumptionUnit.touched ||
+                            formError.annualConsumptionUnit) &&
+                            (formError.annualConsumptionUnit ||
+                                form.controls.annualConsumptionUnit.errors) &&
+                            formFields.validationMessages
+                                .annualConsumptionUnit) ||
+                        ((form.controls.annualConsumption.touched ||
+                            formError.annualConsumption) &&
+                            (formError.annualConsumption ||
+                                form.controls.annualConsumption.errors) &&
+                            formFields.validationMessages.annualConsumption)
+                    "
+                >
                     <div class="row no-gutters">
                         <div class="col-12 mb-2">
                             <small>Roční spotřeba</small>
@@ -391,12 +796,30 @@
                                 [formControl]="form.controls.annualConsumption"
                                 (focus)="fieldWrapperFocus('annualConsumption')"
                                 (blur)="fieldWrapperBlur()"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumption' || (fieldWrapperFocused$ | async) === 'annualConsumptionUnit'"
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumption' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionUnit'
+                                "
                                 [id]="'annualConsumption'"
-                                [success]="form.controls.annualConsumption.valid && (form.controls.annualConsumption.touched || formError.annualConsumption)"
-                                [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
-                                [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
-                                [validationMessages]="formFields.validationMessages.annualConsumption"
+                                [success]="
+                                    form.controls.annualConsumption.valid &&
+                                    (form.controls.annualConsumption.touched ||
+                                        formError.annualConsumption)
+                                "
+                                [touched]="
+                                    form.controls.annualConsumption.touched ||
+                                    formError.annualConsumption
+                                "
+                                [error]="
+                                    formError.annualConsumption ||
+                                    form.controls.annualConsumption.errors
+                                "
+                                [validationMessages]="
+                                    formFields.validationMessages
+                                        .annualConsumption
+                                "
                             ></lnd-form-field>
                         </div>
                         <div class="col-12 col-md-5 pl-md-1">
@@ -404,20 +827,53 @@
                                 lndSFormDirective
                                 lndSBiometricsDirective
                                 label="jednotka"
-                                [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
-                                (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
+                                [appendButtonIcon]="
+                                    helpDocuments &&
+                                    helpDocuments['annualConsumption']
+                                        ? 'icon--info'
+                                        : null
+                                "
+                                (appendButtonAction)="
+                                    showHelp(
+                                        'annualConsumption',
+                                        'Roční spotřeba'
+                                    )
+                                "
                                 [id]="'annualConsumptionUnit'"
-                                (focus)="fieldWrapperFocus('annualConsumptionUnit')"
+                                (focus)="
+                                    fieldWrapperFocus('annualConsumptionUnit')
+                                "
                                 (blur)="fieldWrapperBlur()"
-                                [error]="formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors"
-                                [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
+                                [error]="
+                                    formError.annualConsumptionUnit ||
+                                    form.controls.annualConsumptionUnit.errors
+                                "
+                                [inputFocused]="
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumptionUnit' ||
+                                    (fieldWrapperFocused$ | async) ===
+                                        'annualConsumption'
+                                "
                                 [showErrorMessage]="false"
-                                [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
+                                [options]="
+                                    codeLists &&
+                                    codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]
+                                "
                                 [clearable]="false"
                                 [parentForm]="form"
                                 [selectName]="'annualConsumptionUnit'"
-                                [success]="form.controls.annualConsumptionUnit.valid && (form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit)"
-                                [touched]="form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit">
+                                [success]="
+                                    form.controls.annualConsumptionUnit.valid &&
+                                    (form.controls.annualConsumptionUnit
+                                        .touched ||
+                                        formError.annualConsumptionUnit)
+                                "
+                                [touched]="
+                                    form.controls.annualConsumptionUnit
+                                        .touched ||
+                                    formError.annualConsumptionUnit
+                                "
+                            >
                             </lnd-select>
                         </div>
                     </div>
@@ -430,14 +886,26 @@
                     <div class="col-12">
                         <img
                             *ngIf="!form.controls['withoutSupplier'].value"
-                            alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/document-cancel.svg" title="">
-                        <h2 class="page-box__title" [innerHTML]="
-                            form.controls['withoutSupplier'].value ? 'Zahájení<br>nové dodávky od' : 'Výpověď současné smlouvy'
-                        "></h2>
+                            alt="Současná smlouva"
+                            class="w-25 mb-3"
+                            src="/assets/images/illustrations/document-cancel.svg"
+                            title=""
+                        />
+                        <h2
+                            class="page-box__title"
+                            [innerHTML]="
+                                form.controls['withoutSupplier'].value
+                                    ? 'Zahájení<br>nové dodávky od'
+                                    : 'Výpověď současné smlouvy'
+                            "
+                        ></h2>
                     </div>
                 </div>
                 <ng-container *ngIf="!form.controls['withoutSupplier'].value">
-                    <label class="control-label radiogroup-control-label" [for]="'ownTerminate'">
+                    <label
+                        class="control-label radiogroup-control-label"
+                        [for]="'ownTerminate'"
+                    >
                         Jak vypovíte stávající smlouvu?
                     </label>
                     <lnd-form-field
@@ -453,104 +921,274 @@
                     <lnd-form-field
                         lndSFormDirective
                         lndSBiometricsDirective
-                        *ngIf="form.controls.contractEndTypeId.status !== 'DISABLED'"
-                        [error]="formError.contractEndTypeId || form.controls.contractEndTypeId.errors"
+                        *ngIf="
+                            form.controls.contractEndTypeId.status !==
+                            'DISABLED'
+                        "
+                        [error]="
+                            formError.contractEndTypeId ||
+                            form.controls.contractEndTypeId.errors
+                        "
                         [id]="'contractEndTypeId'"
                         label="Ukončení platnosti aktuální smlouvy"
                         [type]="'RADIOGROUP'"
                         [customFormGroupClass]="'mb-5'"
-                        [options]="codeLists && codeLists[codeList.CONTRACT_END_TYPE]"
+                        [options]="
+                            codeLists && codeLists[codeList.CONTRACT_END_TYPE]
+                        "
                         [formControl]="form.controls.contractEndTypeId"
-                        [success]="form.controls.contractEndTypeId.valid && (form.controls.contractEndTypeId.touched || formError.contractEndTypeId)"
-                        [touched]="form.controls.contractEndTypeId.touched || formError.contractEndTypeId"
-                        [validationMessages]="formFields.validationMessages.contractEndTypeId">
-                    ></lnd-form-field>
+                        [success]="
+                            form.controls.contractEndTypeId.valid &&
+                            (form.controls.contractEndTypeId.touched ||
+                                formError.contractEndTypeId)
+                        "
+                        [touched]="
+                            form.controls.contractEndTypeId.touched ||
+                            formError.contractEndTypeId
+                        "
+                        [validationMessages]="
+                            formFields.validationMessages.contractEndTypeId
+                        "
+                    >
+                        ></lnd-form-field
+                    >
                     <lnd-datepicker
                         lndSFormDirective
                         lndSBiometricsDirective
-                        *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
-                        [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-                        (appendButtonAction)="showHelp('expirationDate', 'Ukončení platnosti stávající smlouvy')"
+                        *ngIf="
+                            form.controls.expirationDate.status !== 'DISABLED'
+                        "
+                        [appendButtonIcon]="
+                            helpDocuments && helpDocuments['expirationDate']
+                                ? 'icon--info'
+                                : null
+                        "
+                        (appendButtonAction)="
+                            showHelp(
+                                'expirationDate',
+                                'Ukončení platnosti stávající smlouvy'
+                            )
+                        "
                         [datepickerName]="'expirationDate'"
-                        [error]="formError.expirationDate || form.controls.expirationDate.errors"
+                        [error]="
+                            formError.expirationDate ||
+                            form.controls.expirationDate.errors
+                        "
                         id="datepicker-1"
                         label="Ukončení platnosti stávající smlouvy"
                         [parentForm]="form"
                         [placeholder]="'dd.mm.rrrr'"
                         [minDate]="minDate"
-                        [success]="form.controls.expirationDate.valid && (form.controls.expirationDate.touched || formError.expirationDate)"
-                        [touched]="form.controls.expirationDate.touched || formError.expirationDate"
-                        [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
+                        [success]="
+                            form.controls.expirationDate.valid &&
+                            (form.controls.expirationDate.touched ||
+                                formError.expirationDate)
+                        "
+                        [touched]="
+                            form.controls.expirationDate.touched ||
+                            formError.expirationDate
+                        "
+                        [validationMessages]="
+                            form.controls.commodityType.value === 'POWER'
+                                ? formFields.validationMessages
+                                      .expirationDatePower
+                                : formFields.validationMessages
+                                      .expirationDateGas
+                        "
                     >
                     </lnd-datepicker>
                     <pxe-field-wrapper
-                            *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED' && form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
-                            label="Jak dlouhou máte výpovědní lhůtu?"
-                            labelFor="timeToContractEnd"
-                            [wrapperFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
-                            [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
-                                     ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
-                            [validationMessages]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors) && formFields.validationMessages.timeToContractEnd) ||
-                                                  ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors) && formFields.validationMessages.timeToContractEndPeriodId)">
+                        *ngIf="
+                            form.controls.timeToContractEnd.status !==
+                                'DISABLED' &&
+                            form.controls.timeToContractEndPeriodId.status !==
+                                'DISABLED'
+                        "
+                        label="Jak dlouhou máte výpovědní lhůtu?"
+                        labelFor="timeToContractEnd"
+                        [wrapperFocused]="
+                            (fieldWrapperFocused$ | async) ===
+                                'timeToContractEnd' ||
+                            (fieldWrapperFocused$ | async) ===
+                                'timeToContractEndPeriodId'
+                        "
+                        [error]="
+                            ((form.controls.timeToContractEnd.touched ||
+                                formError.timeToContractEnd) &&
+                                (formError.timeToContractEnd ||
+                                    form.controls.timeToContractEnd.errors)) ||
+                            ((form.controls.timeToContractEndPeriodId.touched ||
+                                formError.timeToContractEndPeriodId) &&
+                                (formError.timeToContractEndPeriodId ||
+                                    form.controls.timeToContractEndPeriodId
+                                        .errors))
+                        "
+                        [validationMessages]="
+                            ((form.controls.timeToContractEnd.touched ||
+                                formError.timeToContractEnd) &&
+                                (formError.timeToContractEnd ||
+                                    form.controls.timeToContractEnd.errors) &&
+                                formFields.validationMessages
+                                    .timeToContractEnd) ||
+                            ((form.controls.timeToContractEndPeriodId.touched ||
+                                formError.timeToContractEndPeriodId) &&
+                                (formError.timeToContractEndPeriodId ||
+                                    form.controls.timeToContractEndPeriodId
+                                        .errors) &&
+                                formFields.validationMessages
+                                    .timeToContractEndPeriodId)
+                        "
+                    >
                         <div class="row align-items-end no-gutters">
                             <div class="col-4 pr-1">
                                 <lnd-form-field
                                     lndSFormDirective
                                     lndSBiometricsDirective
-                                    *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
-                                    [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
-                                    (appendButtonAction)="showHelp('timeToContractEnd', 'Výpovědní lhůta')"
-                                    [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
-                                    [formControl]="form.controls.timeToContractEnd"
+                                    *ngIf="
+                                        form.controls.timeToContractEnd
+                                            .status !== 'DISABLED'
+                                    "
+                                    [appendButtonIcon]="
+                                        helpDocuments &&
+                                        helpDocuments['timeToContractEnd']
+                                            ? 'icon--info'
+                                            : null
+                                    "
+                                    (appendButtonAction)="
+                                        showHelp(
+                                            'timeToContractEnd',
+                                            'Výpovědní lhůta'
+                                        )
+                                    "
+                                    [error]="
+                                        formError.timeToContractEnd ||
+                                        form.controls.timeToContractEnd.errors
+                                    "
+                                    [formControl]="
+                                        form.controls.timeToContractEnd
+                                    "
                                     [id]="'timeToContractEnd'"
-                                    (focus)="fieldWrapperFocus('timeToContractEnd')"
+                                    (focus)="
+                                        fieldWrapperFocus('timeToContractEnd')
+                                    "
                                     (blur)="fieldWrapperBlur()"
-                                    [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
+                                    [inputFocused]="
+                                        (fieldWrapperFocused$ | async) ===
+                                            'timeToContractEnd' ||
+                                        (fieldWrapperFocused$ | async) ===
+                                            'timeToContractEndPeriodId'
+                                    "
                                     label="Jak dlouhou máte výpovědní lhůtu?"
                                     [showErrorMessage]="false"
-                                    [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
-                                    [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
-                                    [validationMessages]="formFields.validationMessages.timeToContractEnd"
+                                    [success]="
+                                        form.controls.timeToContractEnd.valid &&
+                                        (form.controls.timeToContractEnd
+                                            .touched ||
+                                            formError.timeToContractEnd)
+                                    "
+                                    [touched]="
+                                        form.controls.timeToContractEnd
+                                            .touched ||
+                                        formError.timeToContractEnd
+                                    "
+                                    [validationMessages]="
+                                        formFields.validationMessages
+                                            .timeToContractEnd
+                                    "
                                 ></lnd-form-field>
                             </div>
                             <div class="col-8 pl-1">
                                 <lnd-select
                                     lndSFormDirective
                                     lndSBiometricsDirective
-                                    *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
-                                    [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
-                                    (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
-                                    [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
+                                    *ngIf="
+                                        form.controls.timeToContractEndPeriodId
+                                            .status !== 'DISABLED'
+                                    "
+                                    [appendButtonIcon]="
+                                        helpDocuments && helpDocuments['']
+                                            ? 'icon--info'
+                                            : null
+                                    "
+                                    (appendButtonAction)="
+                                        showHelp(
+                                            'timeToContractEndPeriodId',
+                                            'Jistič'
+                                        )
+                                    "
+                                    [error]="
+                                        formError.timeToContractEndPeriodId ||
+                                        form.controls.timeToContractEndPeriodId
+                                            .errors
+                                    "
                                     label=""
-                                    (focus)="fieldWrapperFocus('timeToContractEndPeriodId')"
+                                    (focus)="
+                                        fieldWrapperFocus(
+                                            'timeToContractEndPeriodId'
+                                        )
+                                    "
                                     (blur)="fieldWrapperBlur()"
-                                    [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
-                                    [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
+                                    [inputFocused]="
+                                        (fieldWrapperFocused$ | async) ===
+                                            'timeToContractEnd' ||
+                                        (fieldWrapperFocused$ | async) ===
+                                            'timeToContractEndPeriodId'
+                                    "
+                                    [options]="
+                                        codeLists &&
+                                        codeLists[
+                                            codeList.TIME_TO_CONTRACT_END_PERIOD
+                                        ]
+                                    "
                                     [parentForm]="form"
                                     [clearable]="false"
                                     [selectName]="'timeToContractEndPeriodId'"
                                     [showErrorMessage]="false"
-                                    [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
-                                    [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
-                                    [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">
+                                    [success]="
+                                        form.controls.timeToContractEndPeriodId
+                                            .valid &&
+                                        (form.controls.timeToContractEndPeriodId
+                                            .touched ||
+                                            formError.timeToContractEndPeriodId)
+                                    "
+                                    [touched]="
+                                        form.controls.timeToContractEndPeriodId
+                                            .touched ||
+                                        formError.timeToContractEndPeriodId
+                                    "
+                                    [validationMessages]="
+                                        formFields.validationMessages
+                                            .timeToContractEndPeriodId
+                                    "
+                                >
                                 </lnd-select>
                             </div>
                         </div>
                     </pxe-field-wrapper>
                 </ng-container>
-                <div class="row mb-5"
-                     *ngIf="form.getRawValue() | newSupplyWillBegin as newSupplyWillBegin">
+                <div
+                    class="row mb-5"
+                    *ngIf="
+                        form.getRawValue()
+                            | newSupplyWillBegin as newSupplyWillBegin
+                    "
+                >
                     <div *ngIf="newSupplyWillBegin" class="col-12">
-                        <small *ngIf="!form.controls['withoutSupplier'].value">Předpokládané zahájení nové dodávky od:</small>
-                        {{newSupplyWillBegin | date:'d.&nbsp;M.&nbsp;y'}}
+                        <small *ngIf="!form.controls['withoutSupplier'].value"
+                            >Předpokládané zahájení nové dodávky od:</small
+                        >
+                        {{ newSupplyWillBegin | date: "d.&nbsp;M.&nbsp;y" }}
                     </div>
                 </div>
                 <div class="text-center">
                     <lnd-button
                         type="primary"
-                        (action)="submitForm();sAnalyticsService.sFormClick($event);"
+                        (action)="
+                            submitForm(); sAnalyticsService.sFormClick($event)
+                        "
                         [isDisabled]="formLoading"
-                        [label]="submitLabel">
+                        [label]="submitLabel"
+                    >
                     </lnd-button>
                 </div>
             </div>

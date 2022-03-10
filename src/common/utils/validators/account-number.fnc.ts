@@ -3,7 +3,10 @@ import * as R_ from 'ramda-extension';
 const accountNumberWeights: number[] = [6, 3, 7, 9, 10, 5, 8, 4, 2, 1];
 const accountNumberPrefixWeights: number[] = [10, 5, 8, 4, 2, 1];
 
-const accountNumberFormatValidator = (value: string, weights: number[]): boolean => {
+const accountNumberFormatValidator = (
+    value: string,
+    weights: number[]
+): boolean => {
     let sum = 0;
 
     if (!value.match(/[0-9]+/i)) {
@@ -11,7 +14,7 @@ const accountNumberFormatValidator = (value: string, weights: number[]): boolean
     }
 
     value.split('').forEach((char, i) => {
-        sum = sum + (weights[i] * parseInt(char, 10));
+        sum = sum + weights[i] * parseInt(char, 10);
     });
 
     return sum % 11 === 0;

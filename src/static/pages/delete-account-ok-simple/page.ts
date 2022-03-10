@@ -7,10 +7,10 @@ export class DeleteAccountOkSimpleComponent {
     submitVerification = (evt) => {
         evt.preventDefault();
         console.log('CLICKED');
-    }
+    };
 
     redirectToUserProfile = (evt) => {
         evt.preventDefault();
         console.log('CLICKED');
-    }
+    };
 }

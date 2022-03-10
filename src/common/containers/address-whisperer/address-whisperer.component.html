@@ -1,25 +1,26 @@
-<ng-template
-    #templateNotFoundDefault
-    let-searchTerm="searchTerm">
+<ng-template #templateNotFoundDefault let-searchTerm="searchTerm">
     <div class="ml-2 mr-2 small">
-        Adresu jsme nenašli. Možná jste se překlepli. Zkuste to znovu nebo <a (click)="fillAddressBySelf($event)">vyplňte adresu ručně</a>.
+        Adresu jsme nenašli. Možná jste se překlepli. Zkuste to znovu nebo
+        <a (click)="fillAddressBySelf($event)">vyplňte adresu ručně</a>.
     </div>
 </ng-template>
 
-<ng-template
-    #templateItemDefault
-    let-item="item"
-    let-index="index">
-    {{ item.street }}{{item.descriptiveNumber ? '&nbsp;' : ''}}{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }}<br>
-    {{ item.city }}{{item?.postCode ? '&nbsp;' : ''}}{{ item.postCode }}
+<ng-template #templateItemDefault let-item="item" let-index="index">
+    {{ item.street }}{{ item.descriptiveNumber ? "&nbsp;" : "" }}{{
+    item.descriptiveNumber }}<ng-container
+        *ngIf="item && item.orientationNumber && item.descriptiveNumber"
+        >/</ng-container
+    >{{ item.orientationNumber }}<br />
+    {{ item.city }}{{ item?.postCode ? "&nbsp;" : "" }}{{ item.postCode }}
 </ng-template>
 
-<ng-template
-    #templateLabelDefault
-    let-item="item"
-    let-index="index">
-    {{ item.street }}{{item.descriptiveNumber ? '&nbsp;' : ''}}{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }},
-    {{ item.city }}{{item?.postCode ? ',' : ''}} {{ item.postCode }}
+<ng-template #templateLabelDefault let-item="item" let-index="index">
+    {{ item.street }}{{ item.descriptiveNumber ? "&nbsp;" : "" }}{{
+    item.descriptiveNumber }}<ng-container
+        *ngIf="item && item.orientationNumber && item.descriptiveNumber"
+        >/</ng-container
+    >{{ item.orientationNumber }}, {{ item.city }}{{ item?.postCode ? "," : ""
+    }} {{ item.postCode }}
 </ng-template>
 
 <ng-template #subtextTemplateDefault>
@@ -71,7 +72,8 @@
     </pxe-address-not-found>
     <div
         class="check-other-correspondence-address"
-        *ngIf="addressSubtextTemplate">
+        *ngIf="addressSubtextTemplate"
+    >
         <ng-container *ngTemplateOutlet="addressSubtextTemplate"></ng-container>
     </div>
 </div>

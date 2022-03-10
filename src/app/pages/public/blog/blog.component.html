@@ -3,7 +3,8 @@
         <pxe-layout-container
             [withHeader]="!(isDetail$ | async)"
             [pageTitle]="(activeType$ | async)?.title"
-            [breadcrumbItemsSimple]="(breadcrumb$ | async)">
+            [breadcrumbItemsSimple]="breadcrumb$ | async"
+        >
             <router-outlet></router-outlet>
         </pxe-layout-container>
     </div>

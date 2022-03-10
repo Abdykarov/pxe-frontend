@@ -5,6 +5,8 @@
  */
 
 // Core component import
+@use 'sass:math';
+
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
@@ -64,24 +66,24 @@
 	}
 
 	> :not(:last-child) {
-		margin-bottom: ( $spacer / 2 );
+		margin-bottom: ( $spacer * .5 );
 		margin-right: 0;
 
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			margin-bottom: 0;
-			margin-right: ( $spacer / 3 );
+			margin-right: math.div($spacer, 3);
 		}
 	}
 
 	> :not(:first-child) {
-		margin-top: ( $spacer / 2 );
+		margin-top: ( $spacer * .5 );
 		margin-left: 0;
 
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			margin-top: 0;
-			margin-left: ( $spacer / 3 );
+			margin-left: math.div($spacer, 3);
 		}
 	}
 }
@@ -99,7 +101,7 @@
 		@include reset-pa-ma;
 		font-family: $font-family-sans-serif;
 		color: $body-color;
-		font-size: ( $icon-size-px * 1.5 );
+		font-size: ($icon-size-px * 1.5);
 		z-index: $zindex-modal;
 	}
 
@@ -148,7 +150,7 @@
 		margin-bottom: $spacer;
 
 		> :not(:last-child) {
-			margin-bottom: ( $spacer / 2 );
+			margin-bottom: ( $spacer * .5 );
 			margin-right: 0;
 		}
 

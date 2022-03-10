@@ -6,9 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-
 import * as d3 from 'd3';
-
 import { AbstractGraphComponent } from 'src/common/ui/graphs/abstract.graph.component';
 import { LINE_CONSTS } from 'src/common/ui/graphs/line-graph/line-graph.config';
 import { IDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
@@ -19,8 +17,10 @@ import { IDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-grap
     styleUrls: ['./line-graph.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class LineGraphComponent extends AbstractGraphComponent implements OnInit {
-
+export class LineGraphComponent
+    extends AbstractGraphComponent
+    implements OnInit
+{
     @ViewChild('svgWrapper', { static: true })
     public svgWrapper: ElementRef;
 
@@ -38,15 +38,48 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
     @Input()
     public locale = d3.timeFormatLocale({
-        'dateTime': '%A,%e.%B %Y, %X',
-        'date': '%-d. %-m. %Y',
-        'time': '%H:%M:%S',
-        'periods': ['AM', 'PM'],
-        'days': ['neděle', 'pondělí', 'úterý', 'středa', 'čvrtek', 'pátek', 'sobota'],
-        'shortDays': ['ne.', 'po.', 'út.', 'st.', 'čt.', 'pá.', 'so.'],
-        'months': ['leden', 'únor', 'březen', 'duben',
-            'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
-        'shortMonths': ['led', 'úno', 'břez', 'dub', 'kvě', 'čer', 'červ', 'srp', 'zář', 'říj', 'list', 'pros'],
+        dateTime: '%A,%e.%B %Y, %X',
+        date: '%-d. %-m. %Y',
+        time: '%H:%M:%S',
+        periods: ['AM', 'PM'],
+        days: [
+            'neděle',
+            'pondělí',
+            'úterý',
+            'středa',
+            'čvrtek',
+            'pátek',
+            'sobota',
+        ],
+        shortDays: ['ne.', 'po.', 'út.', 'st.', 'čt.', 'pá.', 'so.'],
+        months: [
+            'leden',
+            'únor',
+            'březen',
+            'duben',
+            'květen',
+            'červen',
+            'červenec',
+            'srpen',
+            'září',
+            'říjen',
+            'listopad',
+            'prosinec',
+        ],
+        shortMonths: [
+            'led',
+            'úno',
+            'břez',
+            'dub',
+            'kvě',
+            'čer',
+            'červ',
+            'srp',
+            'zář',
+            'říj',
+            'list',
+            'pros',
+        ],
     });
 
     @Input()
@@ -55,9 +88,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
     @Input()
     public unit: string;
 
-    constructor(
-        private hostElement: ElementRef,
-    ) {
+    constructor(private hostElement: ElementRef) {
         super();
     }
 
@@ -70,7 +101,8 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
     }
 
     protected initGraph = () => {
-        const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
+        const parentRect =
+            this.hostElement.nativeElement.parentNode.getBoundingClientRect();
         this.width = parentRect.width - (this.margin.left + this.margin.right);
 
         const that = this;
@@ -84,64 +116,105 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             formatYear = this.locale.format('%Y');
 
         const multiFormat = (date) => {
-            return (d3.timeSecond(date) < date ? formatMillisecond
-                : d3.timeMinute(date) < date ? formatSecond
-                    : d3.timeHour(date) < date ? formatMinute
-                        : d3.timeDay(date) < date ? formatHour
-                            : d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
-                                : d3.timeYear(date) < date ? formatMonth
-                                    : formatYear)(date);
+            return (
+                d3.timeSecond(date) < date
+                    ? formatMillisecond
+                    : d3.timeMinute(date) < date
+                    ? formatSecond
+                    : d3.timeHour(date) < date
+                    ? formatMinute
+                    : d3.timeDay(date) < date
+                    ? formatHour
+                    : d3.timeMonth(date) < date
+                    ? d3.timeWeek(date) < date
+                        ? formatDay
+                        : formatWeek
+                    : d3.timeYear(date) < date
+                    ? formatMonth
+                    : formatYear
+            )(date);
         };
 
-        const yScale = d3.scaleLinear()
+        const yScale = d3
+            .scaleLinear()
             .domain([
-                d3.min(this.data, (d: IDataLineGraph) => d.value) - this.reservedValueInYAxis,
-                d3.max(this.data, (d: IDataLineGraph) => d.value) + this.reservedValueInYAxis,
+                d3.min(this.data, (d: IDataLineGraph) => d.value) -
+                    this.reservedValueInYAxis,
+                d3.max(this.data, (d: IDataLineGraph) => d.value) +
+                    this.reservedValueInYAxis,
             ])
             .range([this.height, 0]);
 
-        const xScale = d3.scaleTime()
+        const xScale = d3
+            .scaleTime()
             .domain(d3.extent(this.data, (d: IDataLineGraph) => d.date))
-            .range([ 0, this.width ]);
+            .range([0, this.width]);
 
-        const line = d3.line()
+        const line = d3
+            .line()
             .x((d: any) => xScale(d.date))
             .y((d: any) => yScale(d.value));
 
-        const svg = d3.select(this.svgWrapper.nativeElement).append('svg')
+        const svg = d3
+            .select(this.svgWrapper.nativeElement)
+            .append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
             .append('g')
-            .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+            .attr(
+                'transform',
+                `translate(${this.margin.left}, ${this.margin.top})`
+            );
 
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', `translate(0, ${this.height})`)
             .call(
-                d3.axisBottom(xScale)
-                    .ticks(that.viewPortWidth < this.CONSTS.XL_RESOLUTION ? LINE_CONSTS.TICKS_TABLET : LINE_CONSTS.TICKS_DESkTOP)
+                d3
+                    .axisBottom(xScale)
+                    .ticks(
+                        that.viewPortWidth < this.CONSTS.XL_RESOLUTION
+                            ? LINE_CONSTS.TICKS_TABLET
+                            : LINE_CONSTS.TICKS_DESkTOP
+                    )
                     .tickSize(0)
                     .tickPadding(LINE_CONSTS.PADDING)
-                    .tickFormat(multiFormat),
+                    .tickFormat(multiFormat)
             )
-            .call(
-                g => g.selectAll('.tick:not(:first-of-type) line').clone()
+            .call((g) =>
+                g
+                    .selectAll('.tick:not(:first-of-type) line')
+                    .clone()
                     .attr('y2', -this.height)
-                    .attr('stroke', '#ddd'),
+                    .attr('stroke', '#ddd')
             );
 
         svg.append('g')
             .attr('class', 'x axis')
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(0).tickFormat(<any>''));
+            .call(
+                d3
+                    .axisBottom(xScale)
+                    .tickSize(0)
+                    .tickPadding(0)
+                    .tickFormat(<any>'')
+            );
 
         svg.append('g')
             .attr('class', 'y axis')
             .attr('transform', `translate(${this.width}, 0)`)
-            .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat(<any>''));
+            .call(
+                d3
+                    .axisRight(yScale)
+                    .tickSize(0)
+                    .tickPadding(0)
+                    .tickFormat(<any>'')
+            );
 
         svg.append('g')
             .attr('class', 'y axis')
-            .call(d3.axisLeft(yScale).tickSize(0).tickPadding(LINE_CONSTS.PADDING));
+            .call(
+                d3.axisLeft(yScale).tickSize(0).tickPadding(LINE_CONSTS.PADDING)
+            );
 
         svg.append('path')
             .datum(this.data)
@@ -150,24 +223,27 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
         if (this.titleText) {
             svg.append('text')
-                .attr('x', (this.width / 2))
+                .attr('x', this.width / 2)
                 .attr('y', LINE_CONSTS.TITLE_TEXT_MARGIN_BOTTOM)
                 .attr('class', 'title')
                 .text(this.titleText);
         }
 
-        const focus = svg.append('g')
+        const focus = svg
+            .append('g')
             .attr('class', 'focus')
             .style('display', 'none');
 
-        focus.append('rect')
+        focus
+            .append('rect')
             .attr('class', 'tooltip')
             .attr('width', LINE_CONSTS.TOOLTIP_BACKGROUND_WIDTH)
             .attr('height', this.height)
             .attr('x', -(LINE_CONSTS.TOOLTIP_BACKGROUND_WIDTH / 2))
             .attr('y', 0);
 
-        focus.append('rect')
+        focus
+            .append('rect')
             .attr('class', 'tooltip--rect')
             .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
             .attr('height', LINE_CONSTS.TOOLTIP_HEIGHT)
@@ -175,26 +251,31 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             .attr('rx', LINE_CONSTS.TOOLTIP_RADIUS)
             .attr('ry', LINE_CONSTS.TOOLTIP_RADIUS);
 
-        focus.append('text')
+        focus
+            .append('text')
             .attr('class', 'tooltip--state')
             .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
             .attr('height', LINE_CONSTS.TOOLTIP_LABEL_HEIGHT);
 
-        focus.append('text')
+        focus
+            .append('text')
             .attr('class', 'tooltip--value')
             .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
             .attr('height', LINE_CONSTS.TOOLTIP_LABEL_HEIGHT);
 
-        focus.append('text')
+        focus
+            .append('text')
             .attr('class', 'tooltip-unit')
             .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
             .attr('height', LINE_CONSTS.TOOLTIP_LABEL_HEIGHT);
 
-        focus.append('polygon')
+        focus
+            .append('polygon')
             .attr('class', 'tooltip--polygon')
             .attr('points', '-10,0 10,0 0,15');
 
-        focus.append('path')
+        focus
+            .append('path')
             .attr('class', 'tooltip--triangle')
             .attr('d', 'M-10,0 L0,15 L10,0');
 
@@ -213,27 +294,62 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             const i = that.bisectDate(that.data, x0, 1);
             const prevIndex = i - 2;
             const d1: IDataLineGraph = that.data[i - 1];
-            const d0: IDataLineGraph = prevIndex < 0 ? d1 : that.data[prevIndex];
-            const d: IDataLineGraph = <any>x0 - <any>(d0).date > <any>(d1).date - <any>x0 ? d1 : d0;
+            const d0: IDataLineGraph =
+                prevIndex < 0 ? d1 : that.data[prevIndex];
+            const d: IDataLineGraph =
+                <any>x0 - <any>d0.date > <any>d1.date - <any>x0 ? d1 : d0;
             focus.attr('transform', `translate(${xScale(d.date)}, 0)`);
             const coordinates = d3.mouse(this);
             const mouseY = coordinates[1];
-            focus.select('.tooltip--state')
-                .attr('transform', `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${(mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_STATE)})`)
+            focus
+                .select('.tooltip--state')
+                .attr(
+                    'transform',
+                    `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${
+                        mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_STATE
+                    })`
+                )
                 .text(that.tooltipState + that.dateFormatter(d.date));
 
-            focus.select('.tooltip--value')
-                .attr('transform', `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${(mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_VALUE)})`)
+            focus
+                .select('.tooltip--value')
+                .attr(
+                    'transform',
+                    `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${
+                        mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_VALUE
+                    })`
+                )
                 .text(that.formatValue(d.value).replace('.', ','));
 
-            focus.select('.tooltip-unit')
-                .attr('transform', `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${(mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_UNIT)})`)
+            focus
+                .select('.tooltip-unit')
+                .attr(
+                    'transform',
+                    `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${
+                        mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_UNIT
+                    })`
+                )
                 .text(that.unit);
 
-            focus.select('.tooltip--rect').attr('transform', `translate(0,${(mouseY - LINE_CONSTS.TOOLTIP_Y_MARGIN)})`);
-            focus.select('.tooltip--polygon').attr('transform', `translate(0, ${(mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN)})`);
-            focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN)})`);
-            that.mouseMove.emit({...d});
+            focus
+                .select('.tooltip--rect')
+                .attr(
+                    'transform',
+                    `translate(0,${mouseY - LINE_CONSTS.TOOLTIP_Y_MARGIN})`
+                );
+            focus
+                .select('.tooltip--polygon')
+                .attr(
+                    'transform',
+                    `translate(0, ${mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN})`
+                );
+            focus
+                .select('.tooltip--triangle')
+                .attr(
+                    'transform',
+                    `translate(0, ${mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN})`
+                );
+            that.mouseMove.emit({ ...d });
         }
 
         svg.append('rect')
@@ -243,6 +359,5 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             .on('mouseover', mouseIn)
             .on('mouseout', mouseOut)
             .on('mousemove', mousemove);
-
-    }
+    };
 }

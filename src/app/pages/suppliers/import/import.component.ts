@@ -1,8 +1,4 @@
-import {
-    Component,
-    OnInit,
-} from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({

@@ -1,3 +1,3 @@
-- PDF.jar slouzi ke generovani PDF
-- Java 9! (Na Jave 8 nejde)
-- Spusteni `java -jar pdf.jar "{nazev-souboru}"`
+-   PDF.jar slouzi ke generovani PDF
+-   Java 9! (Na Jave 8 nejde)
+-   Spusteni `java -jar pdf.jar "{nazev-souboru}"`

@@ -3,26 +3,22 @@
 </ng-template>
 <ng-container *ngIf="globalError$ | async as globalError">
     <div class="row">
-        <div *ngIf="globalError?.length !== 0"
-             class="col-12">
-            <lnd-alert
-                type="danger">
+        <div *ngIf="globalError?.length !== 0" class="col-12">
+            <lnd-alert type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
     </div>
 </ng-container>
-<ng-container *ngIf="isLoading$ | async; else formRefTemplate" >
+<ng-container *ngIf="isLoading$ | async; else formRefTemplate">
     <lnd-placeloader [loading]="true"></lnd-placeloader>
 </ng-container>
 <ng-template #formRefTemplate>
-    <div *ngIf="successResult$ | async"
-         class="row">
+    <div *ngIf="successResult$ | async" class="row">
         <div class="col-12 col-xl-8 offset-xl-2">
-            <lnd-alert type="info"
-                       hasIcon="true">
+            <lnd-alert type="info" hasIcon="true">
                 Změny byly úspěšně uloženy
             </lnd-alert>
         </div>
@@ -33,7 +29,35 @@
         (keydown)="resetCustomFieldError()"
         (change)="resetCustomFieldError()"
         autocomplete="off"
-        class="form-container form-container--big">
+        class="form-container form-container--big"
+    >
+        <div class="form-container">
+            <div class="row no-gutters">
+                <div class="col-12 pr-md-2 justify-content-center">
+                    <lnd-form-field
+                        [error]="
+                        formError.pricesUrl ||
+                        form.controls.pricesUrl.errors
+                    "
+                        [formControl]="form.controls.pricesUrl"
+                        [id]="'prices-url'"
+                        label="Odkaz na ceníky na vašich stránkách"
+                        [success]="
+                        form.controls.pricesUrl.valid &&
+                        (form.controls.pricesUrl.touched ||
+                            formError.pricesUrl)
+                    "
+                        [touched]="
+                        form.controls.pricesUrl.touched ||
+                        formError.pricesUrl
+                    "
+                        [validationMessages]="
+                        formFields.validationMessages.pricesUrl
+                    "
+                    ></lnd-form-field>
+                </div>
+            </div>
+        </div>
         <div class="row no-gutters">
             <div class="col-12 mb-2">
                 <span class="font-size-12 align-top mr-2">Číselná řada</span>
@@ -41,43 +65,83 @@
                     [actionTemplate]="tooltipSeries"
                     direction="bottom"
                     class="tooltip-supplier-profile-numbers"
-                    customContentClass="tooltip__content--fixed-width">
-                    Údaje z číselné řady se propisují do uzavřených smluv. <br>
-                    Např. EL001CK (EL - prefix, 001 - proměnná, CK - sufix). <br>
-                    K proměnné se vždy bude přičítat +1, musí tedy být číselného formátu.
+                    customContentClass="tooltip__content--fixed-width"
+                >
+                    Údaje z číselné řady se propisují do uzavřených smluv.
+                    <br />
+                    Např. EL001CK (EL - prefix, 001 - proměnná, CK - sufix).
+                    <br />
+                    K proměnné se vždy bude přičítat +1, musí tedy být číselného
+                    formátu.
                 </lnd-tooltip>
             </div>
             <div class="col-12 col-md-4 pr-md-2">
                 <lnd-form-field
-                    [error]="formError.numberSeriesPrefix || form.controls.numberSeriesPrefix.errors"
+                    [error]="
+                        formError.numberSeriesPrefix ||
+                        form.controls.numberSeriesPrefix.errors
+                    "
                     [formControl]="form.controls.numberSeriesPrefix"
                     [id]="'numerical-series-prefix'"
                     label="Prefix"
-                    [success]="form.controls.numberSeriesPrefix.valid && (form.controls.numberSeriesPrefix.touched || formError.numberSeriesPrefix)"
-                    [touched]="form.controls.numberSeriesPrefix.touched || formError.numberSeriesPrefix"
-                    [validationMessages]="formFields.validationMessages.numberSeriesPrefix"
+                    [success]="
+                        form.controls.numberSeriesPrefix.valid &&
+                        (form.controls.numberSeriesPrefix.touched ||
+                            formError.numberSeriesPrefix)
+                    "
+                    [touched]="
+                        form.controls.numberSeriesPrefix.touched ||
+                        formError.numberSeriesPrefix
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.numberSeriesPrefix
+                    "
                 ></lnd-form-field>
             </div>
             <div class="col-12 col-md-4 pr-md-2">
                 <lnd-form-field
-                    [error]="formError.numberSeriesVariable || form.controls.numberSeriesVariable.errors"
+                    [error]="
+                        formError.numberSeriesVariable ||
+                        form.controls.numberSeriesVariable.errors
+                    "
                     [formControl]="form.controls.numberSeriesVariable"
                     [id]="'numerical-series'"
                     label="Proměnná"
-                    [success]="form.controls.numberSeriesVariable.valid && (form.controls.numberSeriesVariable.touched || formError.numberSeriesVariable)"
-                    [touched]="form.controls.numberSeriesVariable.touched || formError.numberSeriesVariable"
-                    [validationMessages]="formFields.validationMessages.numberSeriesVariable"
+                    [success]="
+                        form.controls.numberSeriesVariable.valid &&
+                        (form.controls.numberSeriesVariable.touched ||
+                            formError.numberSeriesVariable)
+                    "
+                    [touched]="
+                        form.controls.numberSeriesVariable.touched ||
+                        formError.numberSeriesVariable
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.numberSeriesVariable
+                    "
                 ></lnd-form-field>
             </div>
             <div class="col-12 col-md-4">
                 <lnd-form-field
-                    [error]="formError.numberSeriesSuffix || form.controls.numberSeriesSuffix.errors"
+                    [error]="
+                        formError.numberSeriesSuffix ||
+                        form.controls.numberSeriesSuffix.errors
+                    "
                     [formControl]="form.controls.numberSeriesSuffix"
                     [id]="'numerical-series-sufix'"
                     label="Sufix"
-                    [success]="form.controls.numberSeriesSuffix.valid && (form.controls.numberSeriesSuffix.touched || formError.numberSeriesSuffix)"
-                    [touched]="form.controls.numberSeriesSuffix.touched || formError.numberSeriesSuffix"
-                    [validationMessages]="formFields.validationMessages.numberSeriesSuffix"
+                    [success]="
+                        form.controls.numberSeriesSuffix.valid &&
+                        (form.controls.numberSeriesSuffix.touched ||
+                            formError.numberSeriesSuffix)
+                    "
+                    [touched]="
+                        form.controls.numberSeriesSuffix.touched ||
+                        formError.numberSeriesSuffix
+                    "
+                    [validationMessages]="
+                        formFields.validationMessages.numberSeriesSuffix
+                    "
                 ></lnd-form-field>
             </div>
         </div>
@@ -85,7 +149,8 @@
             <lnd-button
                 type="primary"
                 (action)="submitForm($event)"
-                label="Uložit">
+                label="Uložit"
+            >
             </lnd-button>
         </div>
     </form>

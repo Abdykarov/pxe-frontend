@@ -3,26 +3,30 @@
     [size]="size"
     [isModalOpen]="modalOpen"
     [showClose]="showClose"
-    (close)="closeModal.emit(false)">
+    (close)="closeModal.emit(false)"
+>
     <div (lndOffClick)="closeModal.emit(false)">
-        <div
-            class="modal-body">
+        <div class="modal-body">
             <span class="icon icon--info modal-confirm__icon"></span>
-            <h2 class="modal-confirm__title"
-                [innerHTML]="instanceData?.confirmText"></h2>
+            <h2
+                class="modal-confirm__title"
+                [innerHTML]="instanceData?.confirmText"
+            ></h2>
         </div>
         <div class="modal-footer">
             <lnd-button
-                    *ngIf="showConfirm"
-                    type="primary"
-                    [label]="titleConfirm"
-                    (action)="closeModal.emit(true)">
+                *ngIf="showConfirm"
+                type="primary"
+                [label]="titleConfirm"
+                (action)="closeModal.emit(true)"
+            >
             </lnd-button>
             <lnd-button
-                    *ngIf="showCloseButton"
-                    type="link"
-                    [label]="titleClose"
-                    (action)="closeModal.emit(false)">
+                *ngIf="showCloseButton"
+                type="link"
+                [label]="titleClose"
+                (action)="closeModal.emit(false)"
+            >
             </lnd-button>
         </div>
     </div>

@@ -1,26 +1,11 @@
-import {
-    ActivatedRoute,
-    NavigationEnd,
-    Router,
-} from '@angular/router';
-import {
-    Component,
-    OnDestroy,
-} from '@angular/core';
-
+import { Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import {
-    filter,
-    takeUntil,
-} from 'rxjs/operators';
-
+import { filter, takeUntil } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
-import { BlogFacade } from './blog.facade';
-import {
-    IArticlesWithTotals,
-    IType,
-} from 'src/common/cms/models/blog';
+import { IArticlesWithTotals, IType } from 'src/common/cms/models/blog';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { BlogFacade } from './blog.facade';
 import { IRouterParams } from './blog.model';
 
 @Component({
@@ -30,32 +15,35 @@ import { IRouterParams } from './blog.model';
 })
 export class BlogComponent extends AbstractComponent implements OnDestroy {
     public readonly types: IType[] = this.route.snapshot.data.types;
-    public readonly articlesWithTotal: IArticlesWithTotals = this.route.snapshot.data.articlesWithTotal;
-    public readonly activeType$: Observable<IType> = this.blogFacade.activeType$;
-    public readonly breadcrumb$: Observable<IBreadcrumbItems> = this.blogFacade.breadcrumb$;
-    public readonly isDetail$: Observable<boolean> = this.blogFacade.isDetailSubject$;
+    public readonly articlesWithTotal: IArticlesWithTotals =
+        this.route.snapshot.data.articlesWithTotal;
+    public readonly activeType$: Observable<IType> =
+        this.blogFacade.activeType$;
+    public readonly breadcrumb$: Observable<IBreadcrumbItems> =
+        this.blogFacade.breadcrumb$;
+    public readonly isDetail$: Observable<boolean> =
+        this.blogFacade.isDetailSubject$;
 
     constructor(
         public blogFacade: BlogFacade,
         private route: ActivatedRoute,
-        private router: Router,
+        private router: Router
     ) {
         super();
 
-        const {
-            items,
-            total,
-        } = this.articlesWithTotal;
+        const { items, total } = this.articlesWithTotal;
 
         this.blogFacade.blogTypesSubject$.next(this.types);
 
         router.events
             .pipe(
                 takeUntil(this.destroy$),
-                filter(val => val instanceof NavigationEnd),
+                filter((val) => val instanceof NavigationEnd)
             )
             .subscribe((_) => {
-                this.blogFacade.typeChange(<IRouterParams>this.route.firstChild.snapshot.params);
+                this.blogFacade.typeChange(
+                    <IRouterParams>this.route.firstChild.snapshot.params
+                );
             });
     }
 

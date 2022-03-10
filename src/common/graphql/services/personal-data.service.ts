@@ -1,52 +1,48 @@
 import { Injectable } from '@angular/core';
-
 import { Apollo } from 'apollo-angular';
-
-import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
-import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
+import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import {
     savePersonalDataMutation,
     updatePersonalDataMutation,
 } from 'src/common/graphql/mutation/personal-data';
+import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
+import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PersonalDataService {
+    constructor(private apollo: Apollo) {}
 
-    constructor(
-        private apollo: Apollo,
-    ) {}
-
-    public getPersonalData = (contractId: string) => this.apollo
-        .watchQuery<any>({
+    public getPersonalData = (contractId: string) =>
+        this.apollo.watchQuery<any>({
             query: getPersonalDataQuery,
             variables: {
                 contractId,
             },
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public savePersonalData = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => this.apollo
-        .mutate<any>({
+    public savePersonalData = (
+        supplyPoint: ISupplyPoint,
+        personalData: IPersonalDataInput
+    ) =>
+        this.apollo.mutate<any>({
             mutation: savePersonalDataMutation,
             variables: {
                 contractId: supplyPoint.contract.contractId,
                 personalData,
             },
-            update: (cache, {data}) => {
-                const { getSupplyPoint } = cache.readQuery(
-                    {
-                        query: getSupplyPointQuery,
-                        variables: {
-                            supplyPointId: supplyPoint.id,
-                        },
-                    });
+            update: (cache, { data }) => {
+                const { getSupplyPoint } = cache.readQuery({
+                    query: getSupplyPointQuery,
+                    variables: {
+                        supplyPointId: supplyPoint.id,
+                    },
+                });
 
                 this.loadSupplyPoint(getSupplyPoint, personalData);
 
@@ -58,10 +54,13 @@ export class PersonalDataService {
                     },
                 });
             },
-        })
+        });
 
-    public updatePersonalData = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => this.apollo
-        .mutate<any>({
+    public updatePersonalData = (
+        supplyPoint: ISupplyPoint,
+        personalData: IPersonalDataInput
+    ) =>
+        this.apollo.mutate<any>({
             mutation: updatePersonalDataMutation,
             variables: {
                 contractId: supplyPoint.contract.contractId,
@@ -86,10 +85,13 @@ export class PersonalDataService {
             //         },
             //     });
             // },
-        })
+        });
 
     // docasny reseni pred sync s BE
-    public loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {
+    public loadSupplyPoint = (
+        supplyPoint: ISupplyPoint,
+        personalData: IPersonalDataInput
+    ) => {
         // zkusit nak zautomatizovat pri pridani casche (pres funkci s argumentem typu interface? )
         // interface Foo {
         //    prop1: number;
@@ -106,9 +108,15 @@ export class PersonalDataService {
             address2: personalData.address2,
             email: personalData.email,
             phone: personalData.phone,
-            signatoryName: personalData.signatoryName ? personalData.signatoryName : '',
-            signatorySurname: personalData.signatorySurname ? personalData.signatorySurname : '',
-            signatoryPosition: personalData.signatoryPosition ? personalData.signatoryPosition : '',
+            signatoryName: personalData.signatoryName
+                ? personalData.signatoryName
+                : '',
+            signatorySurname: personalData.signatorySurname
+                ? personalData.signatorySurname
+                : '',
+            signatoryPosition: personalData.signatoryPosition
+                ? personalData.signatoryPosition
+                : '',
             bankAccountNumber: personalData.bankAccountNumber,
             bankCode: personalData.bankCode,
             depositPaymentType: {
@@ -138,6 +146,5 @@ export class PersonalDataService {
         }
 
         return supplyPoint;
-    }
-
+    };
 }

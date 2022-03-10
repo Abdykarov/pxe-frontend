@@ -6,7 +6,6 @@ import {
     TemplateRef,
     ViewEncapsulation,
 } from '@angular/core';
-
 import { FileUploader } from 'src/third-sides/file-upload';
 
 @Component({

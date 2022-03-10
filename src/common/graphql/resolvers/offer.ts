@@ -2,10 +2,10 @@ export const defaults = {};
 
 export const resolvers = {
     Offer: {
-        marked(_, variables, {cache}) {
+        marked(_, variables, { cache }) {
             return false;
         },
-        isLastUpdated(_, variables, {cache}) {
+        isLastUpdated(_, variables, { cache }) {
             return false;
         },
     },

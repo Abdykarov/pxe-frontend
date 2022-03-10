@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import {
     fileUploader,
     stepperProgressConfig,
@@ -16,14 +15,14 @@ export class ImportUploadComponent {
     public downloadExampleFile = (evt) => {
         evt.preventDefault();
         console.log('downloadExampleFile');
-    }
+    };
 
     public uploadFile = (file: FileUploader) => {
         console.log('upload');
-    }
+    };
 
     public backAction = (evt) => {
         evt.preventDefault();
         console.log('back');
-    }
+    };
 }

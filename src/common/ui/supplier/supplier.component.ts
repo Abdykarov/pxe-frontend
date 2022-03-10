@@ -1,11 +1,5 @@
-import {
-    Component,
-    Input,
-} from '@angular/core';
-
-import {
-    ISupplierLogo,
-} from './model/supplier.model';
+import { Component, Input } from '@angular/core';
+import { ISupplierLogo } from './model/supplier.model';
 
 @Component({
     selector: 'pxe-supplier',

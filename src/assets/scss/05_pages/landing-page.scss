@@ -35,8 +35,8 @@
 
 	.section-video-holder {
 		position: relative;
-		width: calc( 100% + #{$spacer} );
-		margin: 0 ( -$spacer / 2 );
+		width: calc( 100% + #{$spacer}  );
+		margin: 0 ( -$spacer * .5  );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -44,8 +44,8 @@
 			margin: 0;
 		}
 		@include media-breakpoint-up(xl) {
-			width: calc( 100% + #{$spacer} );
-			margin: 0 ( -$spacer / 2 );
+			width: calc( 100% + #{$spacer}  );
+			margin: 0 ( -$spacer * .5  );
 		}
 		@include media-breakpoint-up(lg) {
 			width: 100%;
@@ -67,8 +67,8 @@
 
 	// Section Picture
 	.section-picture-holder {
-		width: calc( 100% + #{$spacer} );
-		margin: 0 ( -$spacer / 2 );
+		width: calc( 100% + #{$spacer}  );
+		margin: 0 ( -$spacer * .5  );
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
@@ -117,7 +117,7 @@
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			display: inline;
-			padding: ( $spacer / 4 ) ( $spacer / 2 );
+			padding: ( $spacer * .25 ) ( $spacer * .5  );
 			background-color: $white;
 			line-height: 1.5;
 		}
@@ -129,14 +129,14 @@
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			margin: 0 ( -$spacer );
+			margin: 0 ( -$spacer  );
 		}
 		@include media-breakpoint-up(lg) {
-			margin: 0 ( -$spacer * 1.5 );
+			margin: 0 ( -$spacer * 1.5  );
 		}
 
 		li {
-			padding-top: ( $spacer + $numerical-list-lp-numb-size );
+			padding-top: ( $spacer + $numerical-list-lp-numb-size  );
 			padding-left: 0;
 
 			// Media queries
@@ -147,14 +147,14 @@
 			}
 			@include media-breakpoint-up(lg) {
 				width: 25%;
-				padding-left: ( $spacer * 1.5 );
-				padding-right: ( $spacer * 1.5 );
+				padding-left: ( $spacer * 1.5  );
+				padding-right: ( $spacer * 1.5  );
 			}
 
 			&::before {
 				width: $numerical-list-lp-numb-size;
 				height: $numerical-list-lp-numb-size;
-				padding-left: ( $spacer / 10 );
+				padding-left: ( $spacer * .1  );
 				background-color: $secondary;
 				color: $white;
 				letter-spacing: -2px;

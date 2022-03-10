@@ -4,7 +4,6 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 @Component({
     templateUrl: './page.html',
 })
-
 export class ButtonsPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 

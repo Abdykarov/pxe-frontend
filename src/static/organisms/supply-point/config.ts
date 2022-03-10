@@ -122,7 +122,6 @@ export const supplyPointConfigPower: ISupplyPoint = {
     timeToContractEndPeriod: null,
 };
 
-
 export const supplyPointConfigGas: ISupplyPoint = {
     id: '77',
     name: 'Můj byt',

@@ -1,12 +1,6 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
-import * as R from 'ramda';
+import { Component, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import * as R from 'ramda';
 // own models
 import { ICardData } from './models/data.model';
 import { ICardType } from './models/type.model';
@@ -17,7 +11,6 @@ import { ICardType } from './models/type.model';
     styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-
     @Input()
     public data: ICardData;
 
@@ -28,6 +21,8 @@ export class CardComponent {
     public linkUrl?: string[];
 
     constructor(public domSanitizer: DomSanitizer) {
-        this.type = R.contains(this.type, Object.values(ICardType)) ? this.type : null;
+        this.type = R.contains(this.type, Object.values(ICardType))
+            ? this.type
+            : null;
     }
 }

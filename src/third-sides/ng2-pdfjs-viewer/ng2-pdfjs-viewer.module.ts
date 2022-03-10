@@ -3,20 +3,14 @@ import { CommonModule } from '@angular/common';
 import { PdfJsViewerComponent } from './ng2-pdfjs-viewer.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
-  declarations: [
-    PdfJsViewerComponent,
-  ],
-  exports: [
-    PdfJsViewerComponent,
-  ],
+    imports: [CommonModule],
+    declarations: [PdfJsViewerComponent],
+    exports: [PdfJsViewerComponent],
 })
 export class PdfJsViewerModule {
-  static forRoot(): ModuleWithProviders<PdfJsViewerModule> {
-    return {
-      ngModule: PdfJsViewerModule,
-    };
-  }
+    static forRoot(): ModuleWithProviders<PdfJsViewerModule> {
+        return {
+            ngModule: PdfJsViewerModule,
+        };
+    }
 }

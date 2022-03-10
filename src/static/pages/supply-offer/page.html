@@ -3,7 +3,8 @@
         label="Označit"
         customFormGroupClass="form-group form-group--in-table"
         (click)="click($event)"
-        [type]="'CHECKBOX'">
+        [type]="'CHECKBOX'"
+    >
     </lnd-form-field>
 </ng-template>
 <ng-template #columnTemplateMark let-row="row">
@@ -11,11 +12,14 @@
         label="&#8203;"
         customFormGroupClass="form-group form-group--in-table"
         (click)="click($event)"
-        [type]="'CHECKBOX'">
+        [type]="'CHECKBOX'"
+    >
     </lnd-form-field>
-    <span *ngIf="row.greenEnergy"
-          class="icon icon--leaf icon--green ml-2 align-bottom">
-        </span>
+    <span
+        *ngIf="row.greenEnergy"
+        class="icon icon--leaf icon--green ml-2 align-bottom"
+    >
+    </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
@@ -29,21 +33,25 @@
     {{row.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
-    {{row.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.validTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.validTo |
+    date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #columnTemplateDeliveryFromTo let-row="row">
-    {{row.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.deliveryTo |
+    date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
-    <div *ngIf="table.openedRow !== row"
-         class="action-area-div">
+    <span
+        >{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc
+        (bez&nbsp;DPH)</span
+    >
+    <div *ngIf="table.openedRow !== row" class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
             <lnd-button
-                    icon="icon--edit"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();action(table, row)"
+                icon="icon--edit"
+                type="icon"
+                variant="icon"
+                (action)="toggle();action(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipEdit" direction="bottom">
@@ -52,10 +60,10 @@
 
         <ng-template #tooltipNew let-toggle="toggle">
             <lnd-button
-                    icon="icon--add-new"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();action(table, row)"
+                icon="icon--add-new"
+                type="icon"
+                variant="icon"
+                (action)="toggle();action(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipNew" direction="bottom">
@@ -64,10 +72,10 @@
 
         <ng-template #tooltipDuplicate let-toggle="toggle">
             <lnd-button
-                    icon="icon--copy"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();action(table, row)"
+                icon="icon--copy"
+                type="icon"
+                variant="icon"
+                (action)="toggle();action(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipDuplicate" direction="bottom">
@@ -76,10 +84,10 @@
 
         <ng-template #tooltipDelete let-toggle="toggle">
             <lnd-button
-                    icon="icon--delete"
-                    type="icon"
-                    variant="icon"
-                    (action)="toggle();action(table, row)"
+                icon="icon--delete"
+                type="icon"
+                variant="icon"
+                (action)="toggle();action(table, row)"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
@@ -93,10 +101,10 @@
         <div class="col text-right">
             <ng-template #tooltipNewDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--add-new"
-                        type="icon"
-                        variant="icon"
-                        (action)="toggle();"
+                    icon="icon--add-new"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();"
                 ></lnd-button>
             </ng-template>
             <lnd-tooltip [actionTemplate]="tooltipNewDetail" direction="bottom">
@@ -104,24 +112,30 @@
             </lnd-tooltip>
             <ng-template #tooltipDuplicateDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--copy"
-                        type="icon"
-                        variant="icon"
-                        (action)="toggle();"
+                    icon="icon--copy"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();"
                 ></lnd-button>
             </ng-template>
-            <lnd-tooltip [actionTemplate]="tooltipDuplicateDetail" direction="bottom">
+            <lnd-tooltip
+                [actionTemplate]="tooltipDuplicateDetail"
+                direction="bottom"
+            >
                 Duplikovat
             </lnd-tooltip>
             <ng-template #tooltipDeleteDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--delete"
-                        type="icon"
-                        variant="icon"
-                        (action)="toggle();"
+                    icon="icon--delete"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();"
                 ></lnd-button>
             </ng-template>
-            <lnd-tooltip [actionTemplate]="tooltipDeleteDetail" direction="bottom">
+            <lnd-tooltip
+                [actionTemplate]="tooltipDeleteDetail"
+                direction="bottom"
+            >
                 Smazat
             </lnd-tooltip>
         </div>
@@ -129,8 +143,8 @@
     <div class="row align-items-center">
         <div class="col-4 col-xl-3">
             <lnd-form-field
-                    [id]="'name'"
-                    label="Název produktu"
+                [id]="'name'"
+                label="Název produktu"
             ></lnd-form-field>
         </div>
         <div class="col-4 col-xl-3 offset-xl-3">
@@ -148,7 +162,8 @@
                 label="Odběratel"
                 [options]="supplyOfferConfig.subjectTypeOptions"
                 [parentForm]="form"
-                [selectName]="'subjectTypeId'">
+                [selectName]="'subjectTypeId'"
+            >
             </lnd-select>
         </div>
         <div class="col-4 col-xl-3">
@@ -156,7 +171,8 @@
                 label="Distribuční umístění"
                 [options]="newSupplyPointPageConfig.suppliersOptions"
                 [parentForm]="form"
-                [selectName]="'distributionLocation'">
+                [selectName]="'distributionLocation'"
+            >
             </lnd-select>
         </div>
         <div class="col-4 col-xl-3">
@@ -164,7 +180,8 @@
                 label="Distribuční sazba"
                 [options]="newSupplyPointPageConfig.distributionRateOptions"
                 [parentForm]="form"
-                [selectName]="'distributionRateId'">
+                [selectName]="'distributionRateId'"
+            >
             </lnd-select>
         </div>
         <div class="col-4 col-xl-3">
@@ -172,7 +189,8 @@
                 label="Jistič"
                 [options]="newSupplyPointPageConfig.circuitBreakerOptions"
                 [parentForm]="form"
-                [selectName]="'circuitBreakerId'">
+                [selectName]="'circuitBreakerId'"
+            >
             </lnd-select>
         </div>
         <div class="col-4 col-xl-3">
@@ -180,7 +198,8 @@
                 label="Délka dodávky"
                 [options]="supplyOfferConfig.deliveryLengthOptions"
                 [parentForm]="form"
-                [selectName]="'deliveryLength'">
+                [selectName]="'deliveryLength'"
+            >
             </lnd-select>
         </div>
         <div class="col-4 col-xl-3">
@@ -188,7 +207,8 @@
                 label="Spotřeba"
                 [options]="supplyOfferConfig.annualConsumptionOptions"
                 [parentForm]="form"
-                [selectName]="'annualConsumptionId'">
+                [selectName]="'annualConsumptionId'"
+            >
             </lnd-select>
         </div>
         <div class="col-4 col-xl-3">
@@ -291,15 +311,15 @@
     <div class="row">
         <div class="col text-right">
             <lnd-button
-                    type="link"
-                    label="Storno"
-                    customClass="mr-5"
-                    (action)="table.openRow(row)"
+                type="link"
+                label="Storno"
+                customClass="mr-5"
+                (action)="table.openRow(row)"
             ></lnd-button>
             <lnd-button
-                    type="primary"
-                    label="Uložit"
-                    (action)="table.openRow(row)"
+                type="primary"
+                label="Uložit"
+                (action)="table.openRow(row)"
             ></lnd-button>
         </div>
     </div>
@@ -309,9 +329,7 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col-12 col-md-6 offset-md-3 text-center">
-                <h1>
-                    Vložení nabídek
-                </h1>
+                <h1>Vložení nabídek</h1>
             </div>
         </div>
         <div class="row mb-4">
@@ -323,9 +341,7 @@
                         </a>
                     </li>
                     <li class="link-list__item">
-                        <a class="link-list__link">
-                            Plyn
-                        </a>
+                        <a class="link-list__link"> Plyn </a>
                     </li>
                 </ul>
             </div>
@@ -335,7 +351,12 @@
                 <div class="row mb-4">
                     <div class="col-12 text-center">
                         <div class="supply-offer-controls">
-                            <div class="supply-offer-controls__btn-holder mb-2 mb-md-0">
+                            <div
+                                class="
+                                    supply-offer-controls__btn-holder
+                                    mb-2 mb-md-0
+                                "
+                            >
                                 <lnd-button
                                     label="Přidat nabídku"
                                     type="secondary"
@@ -391,7 +412,8 @@
                         columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
                         columnTemplateMarkAll: columnTemplateMarkAll,
                         columnTemplateMark: columnTemplateMark
-                    }">
+                    }"
+                >
                 </lnd-table>
             </div>
         </div>

@@ -1,4 +1,3 @@
-
 export enum IDropdownDirection {
     CENTER = 'center',
     DOWN = 'down',

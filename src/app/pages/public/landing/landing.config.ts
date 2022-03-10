@@ -1,11 +1,11 @@
 import { CONSTS } from 'src/app/app.constants';
-import { IModalSize } from 'src/common/ui/modal/models/size.model';
-import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IScrollSettings,
     SCROLL_TO,
 } from 'src/app/services/model/scroll-to.model';
 import { LpVideoModalComponent } from 'src/common/containers/modal/modals/lp-video/lp-video-modal.component';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import { IModalSize } from 'src/common/ui/modal/models/size.model';
 
 export const lpVideoModalConfig = (): IShowModal => ({
     component: LpVideoModalComponent,

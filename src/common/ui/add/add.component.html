@@ -3,18 +3,20 @@
     [ngClass]="[
         type === 'table' ? 'add-table link' : 'add',
         customClass ? customClass : ''
-    ]">
+    ]"
+>
     <div class="add__holder">
-        <span
-            *ngIf="type === 'default'"
-            class="add__icon">
+        <span *ngIf="type === 'default'" class="add__icon">
             <span class="icon icon--add"></span>
         </span>
         <div
             *ngIf="type === 'table'"
-            class="icon__holder-small add-table__icon-holder">
+            class="icon__holder-small add-table__icon-holder"
+        >
             <span class="icon icon--add icon--small"></span>
         </div>
-        <span [ngClass]="type === 'table' ? 'add-table__text' : 'add__text'">{{ label }}</span>
+        <span [ngClass]="type === 'table' ? 'add-table__text' : 'add__text'"
+            >{{ label }}</span
+        >
     </div>
 </a>

@@ -1,57 +1,87 @@
 <pxe-layout-container pageTitle="Přehled">
-    <lnd-placeloader [loading]="!globalError.length && loadingData"></lnd-placeloader>
+    <lnd-placeloader
+        [loading]="!globalError.length && loadingData"
+    ></lnd-placeloader>
     <div class="row">
         <div class="col-12">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
     </div>
-    <div *ngIf="supplyPointStatistic && supplyPointStatistic.gasCount === 0 && supplyPointStatistic.powerCount === 0"
-         class="row mb-7">
+    <div
+        *ngIf="
+            supplyPointStatistic &&
+            supplyPointStatistic.gasCount === 0 &&
+            supplyPointStatistic.powerCount === 0
+        "
+        class="row mb-7"
+    >
         <div class="col">
             <lnd-info-banner
                 [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
-                [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
+                [bannerDescription]="
+                    'Zadejte odběrné místo a my vám hned dáme nabídky'
+                "
                 [buttonLabel]="'Nové odběrné místo'"
-                (buttonAction)="navigateToNewSupplyPoint()"
+                (buttonAction)="navigateConsumerService.navigateToRequestStepByProgressStatus(ProgressStatus.SUPPLY_POINT)"
             ></lnd-info-banner>
         </div>
     </div>
     <lnd-banner-ui
-        *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
-        [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat' : 'Rozpracované smlouvy'"
+        *ngIf="
+            supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0
+        "
+        [buttonLabel]="
+            supplyPointStatistic.notConcludedCount === 1
+                ? 'Pokračovat'
+                : 'Rozpracované smlouvy'
+        "
         [data]="{
-            text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte jednu rozpracovanou smlouvu.' : 'Máte rozpracováno více smluv.'
+            text:
+                supplyPointStatistic.notConcludedCount === 1
+                    ? 'Máte jednu rozpracovanou smlouvu.'
+                    : 'Máte rozpracováno více smluv.'
         }"
-        (customBannerAction)="completeRequestAction(supplyPointStatistic.notConcludedItems)"
+        (customBannerAction)="
+            supplyPointUtilsService.completeRequestAction(supplyPointStatistic.notConcludedItems)
+        "
     ></lnd-banner-ui>
-    <div *ngIf="supplyPointStatistic && !loadingData"
-         class="row mt-4">
-        <div class="col-md-6">
+    <div class="row mt-4">
+        <div *ngIf="supplyPointStatistic && !loadingData" class="col-md-6">
             <h2>Odběrná místa</h2>
             <pxe-supply-points-summary
                 [concludedPlacesCount]="supplyPointStatistic.concludedCount"
-                [notConcludedPlacesCount]="supplyPointStatistic.notConcludedCount"
+                [notConcludedPlacesCount]="
+                    supplyPointStatistic.notConcludedCount
+                "
                 [powerPlacesCount]="supplyPointStatistic.powerCount"
-                [powerPlacesConsumptionSum]="supplyPointStatistic.powerAnnualConsumptionSum"
+                [powerPlacesConsumptionSum]="
+                    supplyPointStatistic.powerAnnualConsumptionSum
+                "
                 [gasPlacesCount]="supplyPointStatistic.gasCount"
-                [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
-                [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
-                [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems"
-                (requestListAction)="navigateToRequests()"
-                (newSupplierAction)="supplierAction(supplyPointStatistic.showDeliveryItems)"
-                (supplyPointsListAction)="navigateToSupplyPoints()">
+                [gasPlacesConsumptionSum]="
+                    supplyPointStatistic.gasAnnualConsumptionSum
+                "
+                [supplyPointsEndingCount]="
+                    supplyPointStatistic.showDeliveryCount
+                "
+                [supplyPointsEndingData]="
+                    supplyPointStatistic.showDeliveryItems
+                "
+                (requestListAction)="navigateConsumerService.navigateToRequests()"
+                (newSupplierAction)="
+                    supplierAction(supplyPointStatistic.showDeliveryItems)
+                "
+                (supplyPointsListAction)="navigateConsumerService.navigateToSupplyPoints()"
+            >
             </pxe-supply-points-summary>
         </div>
         <div class="col-md-6 mt-md-0 mt-4">
             <h2>Novinky</h2>
-            <pxe-news [news]="(news$ | async)"></pxe-news>
+            <pxe-news [news]="news$ | async"></pxe-news>
         </div>
     </div>
 </pxe-layout-container>
-

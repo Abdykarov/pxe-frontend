@@ -1,26 +1,13 @@
 import { Injectable } from '@angular/core';
-
+import { Meta, Title } from '@angular/platform-browser';
 import * as R from 'ramda';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
-
-import {
-    BehaviorSubject,
-    combineLatest,
-} from 'rxjs';
-
-import { BlogService } from 'src/common/cms/services/blog.service';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import {
-    IArticle,
-    IBlog,
-    IType,
-} from 'src/common/cms/models/blog';
-import { IRouterParams } from './blog.model';
+import { IArticle, IBlog, IType } from 'src/common/cms/models/blog';
 import { ISeo } from 'src/common/cms/models/seo';
+import { BlogService } from 'src/common/cms/services/blog.service';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IRouterParams } from './blog.model';
 
 @Injectable({
     providedIn: 'root',
@@ -36,16 +23,28 @@ export class BlogFacade {
         },
     ];
 
-    public activeArticleSubject$: BehaviorSubject<IArticle> = new BehaviorSubject(null);
-    public activeArticlesSubject$: BehaviorSubject<IArticle[]> = new BehaviorSubject(null);
-    public activeTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
+    public activeArticleSubject$: BehaviorSubject<IArticle> =
+        new BehaviorSubject(null);
+    public activeArticlesSubject$: BehaviorSubject<IArticle[]> =
+        new BehaviorSubject(null);
+    public activeTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(
+        null
+    );
     public allTypesSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
     public blogSubject$: BehaviorSubject<IBlog> = new BehaviorSubject(null);
-    public blogTypesSubject$: BehaviorSubject<IType[]> = new BehaviorSubject(null);
-    public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> = new BehaviorSubject(null);
-    public routerParamsSubject$: BehaviorSubject<IRouterParams> = new BehaviorSubject(null);
-    public isDetailSubject$: BehaviorSubject<boolean> = new BehaviorSubject(null);
-    public totalItemsSubject$: BehaviorSubject<number> = new BehaviorSubject(null);
+    public blogTypesSubject$: BehaviorSubject<IType[]> = new BehaviorSubject(
+        null
+    );
+    public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> =
+        new BehaviorSubject(null);
+    public routerParamsSubject$: BehaviorSubject<IRouterParams> =
+        new BehaviorSubject(null);
+    public isDetailSubject$: BehaviorSubject<boolean> = new BehaviorSubject(
+        null
+    );
+    public totalItemsSubject$: BehaviorSubject<number> = new BehaviorSubject(
+        null
+    );
 
     public activeArticle$ = this.activeArticleSubject$.asObservable();
     public activeArticles$ = this.activeArticlesSubject$.asObservable();
@@ -61,22 +60,15 @@ export class BlogFacade {
     constructor(
         private blogService: BlogService,
         private metaService: Meta,
-        private titleService: Title,
+        private titleService: Title
     ) {
-        combineLatest([this.routerParams$, this.blog$])
-            .subscribe(([
-                params,
-                blog,
-            ]) => {
+        combineLatest([this.routerParams$, this.blog$]).subscribe(
+            ([params, blog]) => {
                 if (!params?.type || !blog) {
                     return;
                 }
 
-                const {
-                    types,
-                    articles,
-                    total,
-                } = blog;
+                const { types, articles, total } = blog;
 
                 const url = params?.type;
                 const isDetail = !!params?.article;
@@ -93,47 +85,41 @@ export class BlogFacade {
                 }
                 this.setBreadcrumb();
                 this.setSeo();
-            });
+            }
+        );
     }
 
-    private getAllTypes = (types: IType[]): IType => R.filter(
-        R.propEq('isAllTypes', true),
-    )(types)
+    private getAllTypes = (types: IType[]): IType =>
+        R.filter(R.propEq('isAllTypes', true))(types);
 
     private setActiveType = (types: IType[], url: string): void => {
         const activeType = R.find(R.propEq('url', url))(types);
         this.activeTypeSubject$.next(activeType);
-    }
+    };
 
-    public getSeoByActiveTag = (type: string, activeTypes: IType[]) => R.pipe(
-        R.find(R.propEq('url', type)),
-        R.prop('seo'),
-        R.head,
-    )(activeTypes)
+    public getSeoByActiveTag = (type: string, activeTypes: IType[]) =>
+        R.pipe(
+            R.find(R.propEq('url', type)),
+            R.prop('seo'),
+            R.head
+        )(activeTypes);
 
     private setActiveArticles = (articles: IArticle[]): void => {
         const { url } = this.activeTypeSubject$.getValue();
 
         const activeArticles = R.cond([
+            [(data) => this.isAllTypes(), (data) => data],
             [
-                data => this.isAllTypes(),
-                (data) => data,
-            ],
-            [
-                data => !this.isAllTypes(),
-                R.filter(
-                    R.pipe(
-                        R.prop('type'),
-                        R.find(R.propEq('url', url)),
-                    ),
-                ),
+                (data) => !this.isAllTypes(),
+                R.filter(R.pipe(R.prop('type'), R.find(R.propEq('url', url)))),
             ],
         ])(articles);
 
         this.activeArticlesSubject$.next(articles);
-    }
+    };
 
-    private setTypes = (types: IType[]): void => this.blogTypesSubject$.next(types);
+    private setTypes = (types: IType[]): void =>
+        this.blogTypesSubject$.next(types);
 
     private setBreadcrumb = (): void => {
         const isDetail = this.isDetailPage();
@@ -161,17 +147,17 @@ export class BlogFacade {
             };
             this.breadcrumbSubject$.next(breadcrumbDefaultCopy);
         }
-    }
+    };
 
     private setActiveArticle = (): void => {
         const activeArticleParam = this.routerParamsSubject$.getValue().article;
         const activeArticles = this.activeArticlesSubject$.getValue();
 
-        const activeArticle = R.find(
-            R.propEq('url', activeArticleParam),
-        )(activeArticles);
+        const activeArticle = R.find(R.propEq('url', activeArticleParam))(
+            activeArticles
+        );
         this.activeArticleSubject$.next(activeArticle);
-    }
+    };
 
     private setSeo = (): void => {
         const isDetail = this.isDetailPage();
@@ -190,47 +176,55 @@ export class BlogFacade {
             name: 'keywords',
             content: seo.keywords,
         });
-    }
+    };
 
-    private getSeoOverview = (): ISeo => R.pipe(R.prop('seo'), R.head)(this.activeTypeSubject$.getValue());
+    private getSeoOverview = (): ISeo =>
+        R.pipe(R.prop('seo'), R.head)(this.activeTypeSubject$.getValue());
 
     private getSeoDetail = (): ISeo => {
         const activeArticle = this.activeArticleSubject$.getValue();
         if (!activeArticle) {
             return null;
         }
-        return R.pipe(
-            R.prop('seo'),
-            R.head,
-        )(activeArticle);
-    }
+        return R.pipe(R.prop('seo'), R.head)(activeArticle);
+    };
 
     private isDetailPage = (): boolean => this.isDetailSubject$.getValue();
-    private isAllTypes = (): boolean => this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
+    private isAllTypes = (): boolean =>
+        this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 
-    public fetchMoreArticles(): void {
-        const currentCountArticle = this.activeArticlesSubject$.getValue().length;
-        this.blogService.getArticles(currentCountArticle)
-            .subscribe(
-            ({ items }) => {
+    public fetchMoreArticles(page: number): void {
+        const currentCountArticle =
+            this.activeArticlesSubject$.getValue().length;
+
+        this.blogService
+            .getArticles(
+                currentCountArticle,
+                this.isAllTypes()
+                    ? null
+                    : this.activeTypeSubject$.getValue().url,
+                page.toString()
+            )
+            .subscribe(({ items }) => {
                 const currentArticles = this.activeArticlesSubject$.getValue();
                 const nextArticleState = [...currentArticles, ...items];
                 this.activeArticlesSubject$.next(nextArticleState);
-            },
-        );
+            });
     }
 
     public typeChange = (params: IRouterParams) => {
-        this.blogService.getArticles(0, params.type !== CONSTS.ALL_BLOG ? params.type : undefined)
-            .subscribe(
-                ({items, total}) => {
-                    this.routerParamsSubject$.next(params);
-                    this.blogSubject$.next({
-                        types: this.blogTypesSubject$.value,
-                        total: total,
-                        articles: items,
-                    });
-                },
-            );
-       }
+        this.blogService
+            .getArticles(
+                0,
+                params.type !== CONSTS.ALL_BLOG ? params.type : undefined
+            )
+            .subscribe(({ items, total }) => {
+                this.routerParamsSubject$.next(params);
+                this.blogSubject$.next({
+                    types: this.blogTypesSubject$.value,
+                    total: total,
+                    articles: items,
+                });
+            });
+    };
 }

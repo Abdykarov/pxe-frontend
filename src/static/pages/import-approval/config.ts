@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import * as R from 'ramda';
-
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DELIVERY_LENGTH_OPTIONS } from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 
 @Injectable({
@@ -136,7 +134,12 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) =>
+                            `${
+                                R.find(R.propEq('value', row.deliveryLength))(
+                                    DELIVERY_LENGTH_OPTIONS
+                                ).label
+                            }`,
                     },
                 ],
             },
@@ -145,7 +148,10 @@ export class ApprovalConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -255,7 +261,10 @@ export class ApprovalConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],

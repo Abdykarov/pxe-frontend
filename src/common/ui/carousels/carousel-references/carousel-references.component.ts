@@ -1,9 +1,4 @@
-import {
-    Component,
-    Input,
-    ViewEncapsulation,
-} from '@angular/core';
-
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IReference } from 'src/common/ui/carousels/models/models';
 
@@ -22,5 +17,6 @@ export class CarouselReferencesComponent extends AbstractComponent {
     @Input()
     public carouselItems: IReference[] = [];
 
-    public maxHeightChangeAction = (maxHeight: number) => this.maxHeight = maxHeight;
+    public maxHeightChangeAction = (maxHeight: number) =>
+        (this.maxHeight = maxHeight);
 }

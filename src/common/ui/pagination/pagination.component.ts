@@ -5,9 +5,7 @@ import {
     Output,
     ViewEncapsulation,
 } from '@angular/core';
-
 import { PageChangedEvent } from 'ngx-bootstrap';
-
 import { paginationConfig } from 'src/common/ui/pagination/pagination.config';
 
 @Component({

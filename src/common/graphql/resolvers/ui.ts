@@ -10,28 +10,33 @@ export const defaults = {
 
 export const resolvers = {
     Mutation: {
-        toggleOverlay: (_, variables, {cache}) => {
-            const prev = cache.readQuery({query: getConfigQuery});
+        toggleOverlay: (_, variables, { cache }) => {
+            const prev = cache.readQuery({ query: getConfigQuery });
             const data = {
                 ui: {
-                    securedLayout: prev.ui.securedLayout ? {
-                        navigationConfig: prev.ui.securedLayout.navigationConfig,
-                        navigationItemOpened: prev.ui.securedLayout.navigationItemOpened,
-                        __typename: 'securedLayout',
-                    } : null,
-                    showOverlay: variables.value === null ? !prev.ui.showOverlay : variables.value,
+                    securedLayout: prev.ui.securedLayout
+                        ? {
+                              navigationConfig:
+                                  prev.ui.securedLayout.navigationConfig,
+                              navigationItemOpened:
+                                  prev.ui.securedLayout.navigationItemOpened,
+                              __typename: 'securedLayout',
+                          }
+                        : null,
+                    showOverlay:
+                        variables.value === null
+                            ? !prev.ui.showOverlay
+                            : variables.value,
                     __typename: 'ui',
                 },
             };
-            cache.writeQuery(
-                {
-                    query: getConfigQuery,
-                    data,
-                },
-            );
+            cache.writeQuery({
+                query: getConfigQuery,
+                data,
+            });
             return data;
         },
-        loadConfig: (_, variables, {cache}) => {
+        loadConfig: (_, variables, { cache }) => {
             const data = {
                 ui: {
                     securedLayout: {
@@ -43,20 +48,19 @@ export const resolvers = {
                     __typename: 'ui',
                 },
             };
-            cache.writeQuery(
-                {
-                    query: getConfigQuery,
-                    data,
-                },
-            );
+            cache.writeQuery({
+                query: getConfigQuery,
+                data,
+            });
             return data;
         },
-        openItem: (_, variables, {cache}) => {
-            const prev = cache.readQuery({query: getConfigQuery});
+        openItem: (_, variables, { cache }) => {
+            const prev = cache.readQuery({ query: getConfigQuery });
             const data = {
                 ui: {
                     securedLayout: {
-                        navigationConfig: prev.ui.securedLayout.navigationConfig,
+                        navigationConfig:
+                            prev.ui.securedLayout.navigationConfig,
                         navigationItemOpened: variables.item,
                         __typename: 'securedLayout',
                     },
@@ -64,15 +68,13 @@ export const resolvers = {
                     __typename: 'ui',
                 },
             };
-            cache.writeQuery(
-                {
-                    query: getConfigQuery,
-                    data,
-                },
-            );
+            cache.writeQuery({
+                query: getConfigQuery,
+                data,
+            });
             return data;
         },
-        logout: (_, variables, {cache}) => {
+        logout: (_, variables, { cache }) => {
             const data = {
                 ui: {
                     securedLayout: null,
@@ -80,7 +82,7 @@ export const resolvers = {
                     __typename: 'ui',
                 },
             };
-            cache.writeData({data});
+            cache.writeData({ data });
             return null;
         },
     },

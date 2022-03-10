@@ -1,5 +1,5 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 export const offerConfig1: IOffer = {
     id: '0',
@@ -35,7 +35,7 @@ export const offerConfig1: IOffer = {
     deliveryFrom: '',
     deliveryTo: '',
     deliveryLength: 1,
-    permanentPaymentPrice: 823.00,
+    permanentPaymentPrice: 823.0,
     priceGas: 10,
     priceNT: 3.14,
     priceVT: 3.54,
@@ -85,7 +85,7 @@ export const offerConfig2: IOffer = {
     deliveryLength: 1,
     id: '0',
     name: '',
-    permanentPaymentPrice: 869.00,
+    permanentPaymentPrice: 869.0,
     priceGas: 0.9,
     priceNT: 2.64,
     priceVT: 6.54,
@@ -144,7 +144,7 @@ export const offerConfig3: IOffer = {
     deliveryLength: 1,
     id: '0',
     name: '',
-    permanentPaymentPrice: 880.00,
+    permanentPaymentPrice: 880.0,
     priceGas: 0,
     priceNT: 2.64,
     priceVT: 6.54,

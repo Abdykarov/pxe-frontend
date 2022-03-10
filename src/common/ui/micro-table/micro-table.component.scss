@@ -10,7 +10,6 @@
 // Custom import
 @import '~bootstrap/scss/dropdown';
 
-
 .list-of-supply-points {
 	&__item {
 		display: flex;
@@ -25,7 +24,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 1.25 ) ( $spacer * 2 );
+			padding: ($spacer * 1.25) ($spacer * 2);
 		}
 
 		&::before {
@@ -51,11 +50,11 @@
 
 	&__item-controls {
 		display: flex;
-		margin-left: ( $spacer * 1.5 );
+		margin-left: ($spacer * 1.5);
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			margin-left: ( $spacer * 2 );
+			margin-left: ($spacer * 2);
 		}
 	}
 }

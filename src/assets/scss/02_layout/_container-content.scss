@@ -12,7 +12,7 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		min-height: calc(100vh - #{$footer-height-tablet});
-		padding-top: ( ( $header-height - $logo-height-tablet ) / 2 );
+		padding-top: ( ( $header-height - $logo-height-tablet ) * .5 );
 	}
 
 	&--public {

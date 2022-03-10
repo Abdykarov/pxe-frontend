@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import {
-    Observable,
-    of,
-} from 'rxjs';
-
+import { Observable, of } from 'rxjs';
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { UserService } from 'src/common/graphql/services/user.service';
 
@@ -12,10 +7,7 @@ import { UserService } from 'src/common/graphql/services/user.service';
     providedIn: 'root',
 })
 export class UnsubscribeNewsFacade extends AbstractFacade {
-
-    constructor(
-         private userService: UserService,
-    ) {
+    constructor(private userService: UserService) {
         super();
     }
 
@@ -23,7 +15,8 @@ export class UnsubscribeNewsFacade extends AbstractFacade {
 
     public unsubscribe = (userProfileId: string): void => {
         this.isUploadingSubject$.next(true);
-        this.userService.unsubscribeNotification(userProfileId)
+        this.userService
+            .unsubscribeNotification(userProfileId)
             .subscribe(this.updateObserver);
-    }
+    };
 }

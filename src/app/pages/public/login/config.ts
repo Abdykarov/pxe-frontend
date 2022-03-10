@@ -1,13 +1,10 @@
-import { emailFormFields } from 'src/common/containers/form/forms/reset-password/reset-password-form.config';
 import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
-import {
-    IFormFieldsLogin,
-    ILoginState,
-} from './login.model';
 import {
     loginFormFields,
     loginSupplyAuthFormFields,
 } from 'src/common/containers/form/forms/login/login-form.config';
+import { emailFormFields } from 'src/common/containers/form/forms/reset-password/reset-password-form.config';
+import { IFormFieldsLogin, ILoginState } from './login.model';
 
 export const formFieldsLogin: IFormFieldsLogin = {
     loginFormFields: loginFormFields,

@@ -1,4 +1,3 @@
-
 export enum IAlertIcon {
     SUCCESS = 'icon--check',
     WARNING = 'icon--alert',

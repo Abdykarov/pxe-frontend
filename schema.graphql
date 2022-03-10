@@ -1,7 +1,7 @@
 scalar Date
 
 input SupplyPointInput {
-    supplierId: ID!
+    supplierId: ID
     name: String!
     address: AddressInput!
     powerAttributes: SupplyPointInputPowerAttributes
@@ -11,8 +11,14 @@ input SupplyPointInput {
     contractEndTypeId: String!
     timeToContractEnd: Int
     timeToContractEndPeriodId: String
+    withoutSupplier: Boolean
 }
 
+enum ContractType {
+    ACTIVE,
+    FUTURE,
+    HISTORY
+}
 
 input SupplyPointInputGasAttributesImport {
     eic: String!
@@ -90,7 +96,6 @@ type SupplyPoint {
     annualConsumption: Float
     annualConsumptionUnit: String
     expirationDate: Date
-    withoutSupplier: Boolean
     subject: CodelistItem!
     lastAnnualConsumptionNT: Float
     lastAnnualConsumptionVT: Float
@@ -107,7 +112,10 @@ type SupplyPoint {
     importPricePerKwPowerNT: Float
     importPricePerKwGas: Float
     importPriceTotalPerYear: Float
-    importPermanentMonthlyPay: Float
+    importPermanentMonthlyPay: Float,
+    withoutSupplier: Boolean
+    closedByContractEntityId: String,
+    closedByContractIsConcluded: Boolean
 }
 
 enum ProgressStatus {
@@ -118,12 +126,24 @@ enum ProgressStatus {
     WAITING_FOR_PAYMENT
 }
 
-enum AllowedOperations{
+enum AllowedOperations {
+    TERMINATE_CONTRACT
+    LEAVE_CONTRACT
+    PARTIAL_EDIT
+    SHOW_DELIVERY_TO_INFINITE_PERIOD
+    SHOW_DELIVERY_TO
+    UNSET_AUTOMATIC_PROLONGATION
     TERMINATE_CONTRACT,
     LEAVE_CONTRACT,
     PARTIAL_EDIT,
+    DELETE_CONTRACT,
     SHOW_DELIVERY_TO,
-    UNSET_AUTOMATIC_PROLONGATION
+    UNSET_AUTOMATIC_PROLONGATION,
+    FINALIZE_NEXT_CONTRACT,
+    OPEN_NEXT_CONTRACT,
+    CREATE_FROM_HISTORY_CONTRACT,
+    FINALIZE_FROM_HISTORY_CONTRACT,
+    SHOW_CREATED_CONTRACT_FROM_HISTORY
 }
 
 enum ContractDeleteReason{
@@ -137,6 +157,9 @@ type Supplier {
     vatNumber: String
     logoPath: String
     sampleDocuments: [SupplierSampleDocument]
+    numberSeriesPrefix: String
+    numberSeriesVariable: String
+    numberSeriesSuffix: String
 }
 
 type Address {
@@ -331,6 +354,7 @@ input SupplyPointInputImport {
     importPricePerKwGas: Float
     importPriceTotalPerYear: Float
     importPermanentMonthlyPay: Float
+    withoutSupplier: Boolean
 }
 
 type SupplyPointImportResponse {
@@ -348,7 +372,6 @@ type SupplyPointImportResponse {
     personalData: PersonalDataInputImportResponse
     askForOfferId: ID
 }
-
 
 type PersonalDataInputImportResponse {
     name: String
@@ -578,6 +601,31 @@ type SupplyPointGlobalStatistic {
     totalPossibleDeliveryCountPower: Int!
 }
 
+type SummaryDetail {
+    contractCount: Int!
+    allContractCount: Int!
+    offerCount: Int!
+    allOfferCount: Int!
+    supplyPointCount: Int!
+    allSupplyPointCount: Int!
+}
+
+type OfferLite {
+    id: ID!
+    productName: String!
+    contractTo: Date!
+}
+
+type ContractPair {
+    key: Int!
+    value: Int!
+}
+
+enum CalendarFormat {
+    DAY,
+    WEEK
+}
+
 input UserDetailInput {
     userName: String!
     firstName: String!
@@ -585,6 +633,11 @@ input UserDetailInput {
     phoneNumber: String!
 }
 
+input SupplierInput {
+    numberSeriesPrefix: String
+    numberSeriesVariable: String
+    numberSeriesSuffix: String
+}
 
 input ContractBasedOnSupplyPointFilter {
     supplyPointId: ID!,
@@ -601,9 +654,12 @@ type Query {
         commodityType: CommodityType
     ): [SupplierSampleDocument]!
     getSupplyPoint(supplyPointId: ID!, contractId: ID): SupplyPoint
-    findSupplyPoints(identificationNumber: String): [SupplyPoint]
-    findSupplierOffers: [Offer]
+    findSupplierOffers(commodityType: CommodityType!): [Offer]
+    findSupplyPointByContractId(contractId: ID): SupplyPoint
     findSupplyPointOffers(identificationNumber: String!): SupplyPointOffers
+    findSupplyPointsConcludedByContractType(
+        contractType: ContractType
+    ): [SupplyPoint]
     getPersonalData(contractId: ID!): PersonalData
     getContractById(contractId: ID!): ContractResponseDto
     findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, identificationNumber: String): [SupplyPoint]
@@ -613,12 +669,19 @@ type Query {
     listAskForOffer(filter: AskForOfferFilter): PaginatedAskForOffer
     listContractsBasedOnSupplyPointAndStatus(filter: ContractBasedOnSupplyPointFilter!): [ContractResponseDto]!
     findSupplyPointImports(askForOfferId: ID!): [SupplyPoint]!
+    findSupplierProfile: Supplier
+    getSummaryList(commodityType: CommodityType): SummaryDetail!
+    getOffersWithoutRenewableOffer(commodityType: CommodityType): [OfferLite!]
+    getContractSummary(commodityType: CommodityType, format: CalendarFormat!): [ContractPair!]
 }
 
 
 
 # The Root Mutation for the application
 type Mutation {
+    updateSupplierProfile(
+        supplierInput: SupplierInput!
+    ): Boolean!
     updatePowerSupplyPointWithContract(
         supplyPointId: ID!,
         supplyPointUpdate: SupplyPointUpdate

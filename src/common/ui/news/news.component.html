@@ -1,12 +1,10 @@
 <div *ngIf="news" class="news">
-	<div class="news__inner">
-		<div class="news__item mb-4" *ngFor="let oneNew of news; let i = index">
-			<span class="news__item-date">
-				{{oneNew.date | date:'d.&nbsp;M.&nbsp;y'}}
-			</span>
-			<span class="news__item-description">
-				{{oneNew.new}}
-			</span>
-		</div>
-	</div>
+    <div class="news__inner">
+        <div class="news__item mb-4" *ngFor="let oneNew of news; let i = index">
+            <span class="news__item-date">
+                {{oneNew.date | date:'d.&nbsp;M.&nbsp;y'}}
+            </span>
+            <span class="news__item-description"> {{oneNew.new}} </span>
+        </div>
+    </div>
 </div>

@@ -24,7 +24,7 @@ Pipes
 
 ## /resources
 
-Modules with backend services providing data and updating the store. 
+Modules with backend services providing data and updating the store.
 
 ## /store
 

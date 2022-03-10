@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <div class="row">
@@ -11,14 +13,15 @@
 <h3>With text</h3>
 <div class="row">
     <div class="col-md-4 mb-4">
-        <lnd-placeloader [loading]="true"
-                         label="Nahrávám..."></lnd-placeloader>
+        <lnd-placeloader [loading]="true" label="Nahrávám..."></lnd-placeloader>
     </div>
 </div>
 <h3>With longer text</h3>
 <div class="row">
     <div class="col-md-4">
-        <lnd-placeloader [loading]="true"
-                         label="Nahrávám komponentu..."></lnd-placeloader>
+        <lnd-placeloader
+            [loading]="true"
+            label="Nahrávám komponentu..."
+        ></lnd-placeloader>
     </div>
 </div>
