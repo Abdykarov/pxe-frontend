@@ -21,7 +21,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(lg) {
-			padding-top: ( $header-height + $spacer  );
+			padding-top: $header-height;
 		}
 	}
 }
