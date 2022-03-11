@@ -9,6 +9,7 @@ import {
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import * as R from 'ramda';
 import { Observable, of } from 'rxjs';
 import {
     ARTICLES_PAGE,
@@ -25,7 +26,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root',
 })
 export class TransferHttpResponseInterceptor implements HttpInterceptor {
-    private nextRouteUrl: string;
+    private nextRouteUrl = '';
 
     constructor(
         private transferState: TransferState,
@@ -37,7 +38,10 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         router.events.subscribe((event) => {
             const eventUrl = event['url'];
             if (eventUrl) {
-                this.nextRouteUrl = this.processUrlFromFragment(eventUrl);
+                this.nextRouteUrl = R.pipe(
+                    this.processUrlFromFragment,
+                    this.processUrlFromQueryParams
+                )(eventUrl);
                 return;
             }
         });
@@ -45,6 +49,9 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
 
     private processUrlFromFragment = (url: string) =>
         url.substr(0, url.indexOf('#')) || url || '';
+
+    private processUrlFromQueryParams = (url: string) =>
+        url.substr(0, url.indexOf('?')) || url || '';
 
     private isRefreshToken = (req) =>
         req.url.indexOf(CONSTS.CMS.REFRESH_TOKEN_URL) >= -1;
