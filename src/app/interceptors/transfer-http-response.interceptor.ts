@@ -16,8 +16,9 @@ import {
     BUILD_ID_PROVIDER,
     CONSTS,
     IS_PRERENDER_PROVIDER,
+    ROUTES,
 } from 'src/app/app.constants';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 /**
  * Interceptor for work with squidex.
@@ -26,7 +27,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root',
 })
 export class TransferHttpResponseInterceptor implements HttpInterceptor {
-    private nextRouteUrl = '';
+    private nextRouteUrl = ROUTES.ROUTER_LOGIN;
 
     constructor(
         private transferState: TransferState,
@@ -42,7 +43,6 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     this.processUrlFromFragment,
                     this.processUrlFromQueryParams
                 )(eventUrl);
-                return;
             }
         });
     }
