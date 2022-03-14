@@ -60,6 +60,7 @@ import {
     transformCodeList,
 } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -71,6 +72,9 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     @Input()
     public supplyPoint: ISupplyPoint;
+
+    @Input()
+    public nextSupplyPoint?: ISupplyPoint = null;
 
     @Input()
     public contractActionsTemplate?: TemplateRef<any>;
@@ -87,6 +91,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public codeList = CODE_LIST;
     public codeLists: ICodelistOptions;
     public contractEndType = CONTRACT_END_TYPE;
+    public ContractStatus = ContractStatus;
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';

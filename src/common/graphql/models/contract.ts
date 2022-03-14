@@ -22,6 +22,7 @@ export enum ContractStatus {
     CONCLUDED = 'CONCLUDED',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
     TO_BE_CANCELED = 'TO_BE_CANCELED',
+    PREPARED_TO_PROLONGATION = 'PREPARED_TO_PROLONGATION',
 }
 
 export interface IPayment {

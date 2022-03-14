@@ -40,7 +40,7 @@ import {
     TIME_TO_CONTRACT_END_PERIOD_MAP,
 } from 'src/app/app.constants';
 import { ContractActions } from '../models/supply-point-detail.model';
-import { ContractDeleteReason } from 'src/common/graphql/models/contract';
+import { ContractDeleteReason, ContractStatus } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
@@ -78,6 +78,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint = null;
     public nextSupplyPoint: ISupplyPoint = null;
+    public ContractStatus = ContractStatus;
     public contractId = this.route.snapshot.params.contractId;
     public supplyPointId = this.route.snapshot.params.supplyPointId;
     public contractAction: ContractActions = ContractActions.NONE;
