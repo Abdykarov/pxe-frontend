@@ -41,7 +41,7 @@
                 *ngIf="supplyPoint?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                 [data]="{
                     text: 'Platnost vaší stávající smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day') + ', ale ' +
-                     'máte jednu navazující smlouvu rozpracovanou, chcete jí dokončit?'
+                     'máte jednu navazující smlouvu rozpracovanou, chcete ji dokončit?'
                 }"
                 (customBannerAction)="finallyNextContractAction.emit()"
             ></lnd-banner-ui>
@@ -49,7 +49,7 @@
                 *ngIf="supplyPoint?.contractEndType.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                 buttonLabel="Dokončit"
                 [data]="{
-                    text: 'Máte jednu navazující smlouvu rozpracovanou, chcete jí dokončit?'
+                    text: 'Máte jednu navazující smlouvu rozpracovanou, chcete ji dokončit?'
                 }"
                 (customBannerAction)="finallyNextContractAction.emit()"
             ></lnd-banner-ui>
