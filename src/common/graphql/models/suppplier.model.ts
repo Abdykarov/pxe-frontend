@@ -30,4 +30,5 @@ export interface ISupplierInput {
     numberSeriesPrefix: String;
     numberSeriesVariable: String;
     numberSeriesSuffix: String;
+    pricesUrl: String;
 }

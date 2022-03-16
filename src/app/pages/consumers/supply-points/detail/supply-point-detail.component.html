@@ -144,6 +144,7 @@
         <!--</div>-->
     </div>
 </ng-template>
+
 <pxe-layout-container pageTitle="Odběrné místo">
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
@@ -161,6 +162,7 @@
     <ng-container *ngIf="supplyPoint && !dataLoading">
         <pxe-supply-point-detail-form
             #supplyPointDetailForm
+            [nextSupplyPoint]='nextSupplyPoint'
             [formFields]="formFields"
             [formLoading]="formLoading"
             [formSent]="formSent"
@@ -174,7 +176,7 @@
         ></pxe-supply-point-detail-form>
     </ng-container>
 
-    <div *ngIf="supplyPoint?.contract?.nextContractId "
+    <div *ngIf="supplyPoint?.contract?.nextContractId && nextSupplyPoint?.contract?.contractStatus !== ContractStatus.PREPARED_TO_PROLONGATION"
         class="row text-center">
         <div class="col-12 col-lg-10 offset-lg-1">
             <h2 *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"> Tato smlouva bude nahrazena budoucí smlouvou. </h2>

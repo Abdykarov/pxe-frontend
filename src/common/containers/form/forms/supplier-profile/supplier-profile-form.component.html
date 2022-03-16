@@ -33,7 +33,35 @@
         (keydown)="resetCustomFieldError()"
         (change)="resetCustomFieldError()"
         autocomplete="off"
-        class="form-container form-container--big">
+        class="form-container form-container--big"
+    >
+        <div class="form-container">
+            <div class="row no-gutters">
+                <div class="col-12 pr-md-2 justify-content-center">
+                    <lnd-form-field
+                        [error]="
+                        formError.pricesUrl ||
+                        form.controls.pricesUrl.errors
+                    "
+                        [formControl]="form.controls.pricesUrl"
+                        [id]="'prices-url'"
+                        label="Odkaz na ceníky na vašich stránkách"
+                        [success]="
+                        form.controls.pricesUrl.valid &&
+                        (form.controls.pricesUrl.touched ||
+                            formError.pricesUrl)
+                    "
+                        [touched]="
+                        form.controls.pricesUrl.touched ||
+                        formError.pricesUrl
+                    "
+                        [validationMessages]="
+                        formFields.validationMessages.pricesUrl
+                    "
+                    ></lnd-form-field>
+                </div>
+            </div>
+        </div>
         <div class="row no-gutters">
             <div class="col-12 mb-2">
                 <span class="font-size-12 align-top mr-2">Číselná řada</span>

@@ -59,9 +59,25 @@
                             <div class="col-md-auto order-md-2"
                                  *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem">
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">Dodávkové období</span>
-                                    <span class="supply-point__value">
-                                        {{data.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{data.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+                                    <span class="supply-point__value-name"
+                                        >Dodávkové období</span
+                                    >
+                                    <span
+                                        *ngIf="data?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                                        class="supply-point__value"
+                                    >
+                                        {{data.contract.deliveryFrom |
+                                        date:'d.&nbsp;M.&nbsp;y'}} -
+                                        {{data.contract.deliveryTo |
+                                        date:'d.&nbsp;M.&nbsp;y'}}
+                                    </span>
+                                    <span
+                                        *ngIf="data?.contractEndType.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                                        class="supply-point__value"
+                                    >
+                                        {{data.contract.deliveryFrom |
+                                        date:'d.&nbsp;M.&nbsp;y'}} -
+                                        {{contractEndTypeTranslateMap[data?.contractEndType.code]}}
                                     </span>
                                 </div>
                             </div>

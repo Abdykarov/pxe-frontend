@@ -15,16 +15,42 @@
     </ng-container>
 </ng-container>
 
-<ng-container *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo']) && supplyPoint.contract.nextContractId &&
-                     !supplyPoint.contract.isNextContractConcluded && (today | dateDiff: supplyPoint.contract.deliveryTo) as contractEndInDays">
-    <div *ngIf="contractEndInDays >= 0"
-         class="row">
+<div
+    class="row"
+    *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO_INFINITE_PERIOD"
+>
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <lnd-banner-ui
+            buttonLabel="Najít dodavatele"
+            [data]="{
+                text: 'Ukončit smlouvu na dobu neurčitou novou smlouvou'
+        }"
+            (customBannerAction)="findNewSupplier()"
+        ></lnd-banner-ui>
+    </div>
+</div>
+
+<ng-container
+    *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo']) && supplyPoint.contract.nextContractId &&
+    nextSupplyPoint?.contract?.contractStatus !== ContractStatus.PREPARED_TO_PROLONGATION &&
+                     !supplyPoint.contract.isNextContractConcluded && (today | dateDiff: supplyPoint.contract.deliveryTo) as contractEndInDays"
+>
+    <div *ngIf="contractEndInDays >= 0" class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-banner-ui
                 buttonLabel="Dokončit"
+                *ngIf="supplyPoint?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                 [data]="{
                     text: 'Platnost vaší stávající smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day') + ', ale ' +
-                     'máte jednu navazující smlouvu rozpracovanou, chcete jí dokončit?'
+                     'máte jednu navazující smlouvu rozpracovanou, chcete ji dokončit?'
+                }"
+                (customBannerAction)="finallyNextContractAction.emit()"
+            ></lnd-banner-ui>
+            <lnd-banner-ui
+                *ngIf="supplyPoint?.contractEndType.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                buttonLabel="Dokončit"
+                [data]="{
+                    text: 'Máte jednu navazující smlouvu rozpracovanou, chcete ji dokončit?'
                 }"
                 (customBannerAction)="finallyNextContractAction.emit()"
             ></lnd-banner-ui>
@@ -324,17 +350,26 @@
                             Stáhnout</a> (PDF)
                         <lnd-loader *ngIf="formLoading"></lnd-loader>
                     </div>
-                    <div *ngIf="isForm && (supplyPoint | pathValue:['contract', 'deliveryTo'])"
-                         [class.mb-2]="supplyPoint.contract.deliveryTo"
-                         class="col-12">
-                        <p class="mb-1 text-uppercase">Dodávka do</p>
-                        <span class="perex mb-1">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
-                        <p class="small mb-3">{{
-                            contractEndTypeTranslateMap[
-                                supplyPoint?.contract?.prolong ?
-                                    supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
-                                    supplyPointContractEndTypes.CONTRACT_END_TERM
-                            ]}}
+                    <div
+                        *ngIf="isForm && (supplyPoint | pathValue:['contract', 'deliveryTo'])"
+                        [class.mb-2]="supplyPoint.contract.deliveryTo"
+                        class="col-12"
+                    >
+                        <ng-container
+                            *ngIf="supplyPoint?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                        >
+                            <p class="mb-1 text-uppercase">Dodávka do</p>
+                            <span class="perex mb-1"
+                                >{{supplyPoint.contract.deliveryTo |
+                                date:'d.&nbsp;M.&nbsp;y'}}</span
+                            >
+                        </ng-container>
+                        <p
+                            class="small mb-3"
+                            [class.small]="supplyPoint?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                            [class.page-box__title]="supplyPoint?.contractEndType.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                        >
+                            {{contractEndTypeTranslateMap[supplyPoint?.contractEndType.code]}}
                         </p>
                     </div>
                     <div *ngIf="!isForm"
