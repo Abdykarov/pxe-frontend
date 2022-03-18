@@ -1,12 +1,5 @@
-import {
-    Component,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
-
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RecaptchaComponent } from 'ng-recaptcha';
-
 import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.service';
 
 @Component({
@@ -14,13 +7,10 @@ import { ReCaptchaService } from 'src/common/containers/re-captcha/re-captcha.se
     templateUrl: './re-captcha-initializer.component.html',
 })
 export class ReCaptchaInitializerComponent implements OnInit, OnDestroy {
-
     @ViewChild('captchaRef', { static: true })
     public captchaRef: RecaptchaComponent;
 
-    constructor(
-       private reCaptchaService: ReCaptchaService,
-    ) {}
+    constructor(private reCaptchaService: ReCaptchaService) {}
 
     public ngOnInit(): void {
         this.reCaptchaService.setReCaptcha(this.captchaRef);
@@ -34,4 +24,3 @@ export class ReCaptchaInitializerComponent implements OnInit, OnDestroy {
         this.reCaptchaService.resolve(code);
     }
 }
-

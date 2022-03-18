@@ -5,7 +5,7 @@
  -  Only use for styling modular components in Angular
  */
 
-@import '01_base/variables';                                                  // Variables
+@import './variables.scss';                                                  // Variables
 @import '~bootstrap/scss/functions';                                          // Bootstrap functions
 @import '~bootstrap/scss/variables';                                          // Bootstrap variables
 @import '~bootstrap/scss/mixins';                                             // Bootstrap mixins
@@ -19,8 +19,8 @@
 @import '~bootstrap/scss/grid';                                               // Bootstrap grid
 @import '~bootstrap/scss/transitions';                                        // Bootstrap transitions
 @import '~bootstrap/scss/utilities';                                          // Bootstrap utilities
-@import '01_base/mixins';                                                     // Mixins
-@import '01_base/utilities';                                                  // Utilities
-@import '01_base/master';                                                     // Master styles
-@import '01_base/icons';                                                      // Icons
-@import '01_base/typography';                                                 // Typography
+@import './mixins';                                                     // Mixins
+@import './utilities';                                                  // Utilities
+@import './master';                                                     // Master styles
+@import './icons';                                                      // Icons
+@import './typography';                                                 // Typography

@@ -5,9 +5,7 @@ import {
     Output,
     ViewEncapsulation,
 } from '@angular/core';
-
 import * as R from 'ramda';
-
 import { IModalSize } from './models/size.model';
 
 @Component({
@@ -39,6 +37,8 @@ export class ModalComponent {
     public close: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() {
-        this.size = R.contains(this.size, Object.values(IModalSize)) ? this.size : null;
+        this.size = R.contains(this.size, Object.values(IModalSize))
+            ? this.size
+            : null;
     }
 }

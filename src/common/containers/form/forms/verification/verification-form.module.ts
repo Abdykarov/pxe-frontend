@@ -1,22 +1,14 @@
 import { CommonModule } from '@angular/common';
-import {
-    FormsModule,
-    ReactiveFormsModule,
-} from '@angular/forms';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { VerificationFormComponent } from './verification-form.component';
 
 @NgModule({
-    declarations: [
-        VerificationFormComponent,
-    ],
-    exports: [
-        VerificationFormComponent,
-    ],
+    declarations: [VerificationFormComponent],
+    exports: [VerificationFormComponent],
     imports: [
         ButtonModule,
         CommonModule,
@@ -26,4 +18,4 @@ import { VerificationFormComponent } from './verification-form.component';
         ReactiveFormsModule,
     ],
 })
-export class VerificationFormModule { }
+export class VerificationFormModule {}

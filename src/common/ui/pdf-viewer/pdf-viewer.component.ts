@@ -1,11 +1,4 @@
-import {
-    Component,
-    ElementRef,
-    Input,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
-
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PdfJsViewerComponent } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.component';
 
 @Component({
@@ -14,7 +7,6 @@ import { PdfJsViewerComponent } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs
     styleUrls: ['./pdf-viewer.component.scss'],
 })
 export class PdfViewerComponent implements OnInit {
-
     @ViewChild('pdfjsViewer', { static: true, read: ElementRef })
     public pdfjsViewerWrapper: ElementRef;
 
@@ -40,10 +32,10 @@ export class PdfViewerComponent implements OnInit {
     public customPdfCss = false;
 
     ngOnInit(): void {
-        const iframe = this.pdfjsViewerWrapper.nativeElement.querySelector('iframe');
+        const iframe =
+            this.pdfjsViewerWrapper.nativeElement.querySelector('iframe');
         iframe.setAttribute('frameBorder', 0);
     }
 
-    public refresh = () => setTimeout(_ => this.pdfjsViewer.refresh());
+    public refresh = () => setTimeout((_) => this.pdfjsViewer.refresh());
 }
-

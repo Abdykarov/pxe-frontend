@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-
 import {
-    supplyPointConfigPower,
     supplyPointConfigGas,
+    supplyPointConfigPower,
 } from 'src/static/organisms/supply-point/config';
 
 @Component({

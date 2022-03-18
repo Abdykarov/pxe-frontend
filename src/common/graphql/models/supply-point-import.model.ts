@@ -1,9 +1,9 @@
+import { IPersonalDataInputForm } from './personal-data.model';
 import {
     IAddress,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
 } from './supply.model';
-import { IPersonalDataInputForm } from './personal-data.model';
 
 export interface ISupplyPointImportInput {
     id?: string;

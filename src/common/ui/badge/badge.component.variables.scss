@@ -4,8 +4,8 @@
  -
  */
 
-$badge-min-height:                  30px;
-$badge-padding-y:                   ( $spacer / 4 );
-$badge-padding-x:                   $spacer;
-$badge-border-radius:               $border-radius;
-$badge-beak-size:                   20px;
+$badge-min-height: 30px;
+$badge-padding-y: ( $spacer * .25 );
+$badge-padding-x: $spacer;
+$badge-border-radius: $border-radius;
+$badge-beak-size: 20px;

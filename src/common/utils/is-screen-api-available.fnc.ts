@@ -1,1 +1,2 @@
-export const isScreenApiAvailable = () => window && window.screen && window.screen.orientation;
+export const isScreenApiAvailable = () =>
+    window && window.screen && window.screen.orientation;

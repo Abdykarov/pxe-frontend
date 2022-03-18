@@ -1,7 +1,13 @@
 <ng-template #profileMenu let-toggle="toggle">
     <lnd-button
         (click)="toggle()"
-        [label]="user?.firstName && user?.lastName ? user.firstName + ' ' + user.lastName : user?.email ? user.email : ''"
+        [label]="
+            user?.firstName && user?.lastName
+                ? user.firstName + ' ' + user.lastName
+                : user?.email
+                ? user.email
+                : ''
+        "
         type="dropdown"
         icon="icon--triangle-down"
         customIconClass="icon--small"
@@ -13,98 +19,133 @@
     class="header"
     [class.header--public]="settings.isPublic"
     [class.header--secured]="!settings.isPublic"
-    [class.header--lp]="settings.isLandingPage && !settings.isPublicEmptyPage">
-    <div
-        class="container-fluid">
+    [class.header--lp]="settings.isLandingPage && !settings.isPublicEmptyPage"
+>
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="header-inner">
                     <div class="logo-holder">
                         <a
                             (click)="homeRedirect.emit($event)"
-                            class="logo-link">
+                            class="logo-link"
+                        >
                             <img
                                 src="/assets/images/layout/logo-parc4u.png"
                                 class="logo"
                                 title="parc4u"
-                                alt="logo parc4u">
+                                alt="logo parc4u"
+                            />
                         </a>
                     </div>
                     <div
                         class="public-menu-holder"
-                        *ngIf="settings.isPublic && !settings.isStatic && !settings.isPublicEmptyPage">
+                        *ngIf="
+                            settings.isPublic &&
+                            !settings.isStatic &&
+                            !settings.isPublicEmptyPage
+                        "
+                    >
                         <lnd-button
                             *ngIf="!settings.isLandingPage"
                             label="Domů"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="landingPageRedirect.emit($event)">
+                            (click)="landingPageRedirect.emit($event)"
+                        >
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="
+                                settings.isLandingPage &&
+                                !settings.isPublicEmptyPage
+                            "
                             label="S čím vám pomůžeme"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="helpAction.emit()">
+                            (click)="helpAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="
+                                settings.isLandingPage &&
+                                !settings.isPublicEmptyPage
+                            "
                             label="Jak to funguje"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="howItWorksAction.emit()">
+                            (click)="howItWorksAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="
+                                settings.isLandingPage &&
+                                !settings.isPublicEmptyPage
+                            "
                             label="Více o cenách"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="bestPricesInTheWorldAction.emit()">
+                            (click)="bestPricesInTheWorldAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="
+                                settings.isLandingPage &&
+                                !settings.isPublicEmptyPage
+                            "
                             label="Blog"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="blogAction.emit()">
+                            (click)="blogAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="
+                                settings.isLandingPage &&
+                                !settings.isPublicEmptyPage
+                            "
                             label="FAQ"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="faqAction.emit()">
+                            (click)="faqAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
                             *ngIf="!isLogged"
                             label="Přihlásit"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="loginAction.emit()">
+                            (click)="loginAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
                             *ngIf="!isLogged"
                             label="Založit účet"
                             type="primary"
-                            (click)="signUpAction.emit()">
+                            (click)="signUpAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
                             *ngIf="isLogged"
                             label="Odhlášení"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="logoutAction.emit()">
+                            (click)="logoutAction.emit()"
+                        >
                         </lnd-button>
                         <lnd-button
                             *ngIf="isLogged"
                             label="Zpět do aplikace"
                             type="primary"
-                            (click)="homeRedirect.emit(true)">
+                            (click)="homeRedirect.emit(true)"
+                        >
                         </lnd-button>
                     </div>
-                    <div *ngIf="settings.isPublic"
-                         class="menu-holder">
-                        <ng-template #publicMenuHamburgerTemplate let-toggle="toggle" let-isOpen="isOpen">
+                    <div *ngIf="settings.isPublic" class="menu-holder">
+                        <ng-template
+                            #publicMenuHamburgerTemplate
+                            let-toggle="toggle"
+                            let-isOpen="isOpen"
+                        >
                             <pxe-hamburger
                                 *ngIf="!settings.hideHamburger"
                                 [isMenuOpen]="isOpen"
@@ -115,82 +156,154 @@
                             #publicMenu
                             [actionTemplate]="publicMenuHamburgerTemplate"
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
-                            menuDirection="right">
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
-                               (click)="landingPageRedirect.emit($event)">
+                            menuDirection="right"
+                        >
+                            <a
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                *ngIf="
+                                    !settings.isLandingPage &&
+                                    !settings.isPublicEmptyPage
+                                "
+                                (click)="landingPageRedirect.emit($event)"
+                            >
                                 Domů
                             </a>
-                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               class="dropdown-item dropdown-item--without-icon"
-                               (click)="helpAction.emit()">
+                            <a
+                                *ngIf="
+                                    settings.isLandingPage &&
+                                    !settings.isPublicEmptyPage
+                                "
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                (click)="helpAction.emit()"
+                            >
                                 S čím vám pomůžeme
                             </a>
-                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               class="dropdown-item dropdown-item--without-icon"
-                               (click)="howItWorksAction.emit()">
+                            <a
+                                *ngIf="
+                                    settings.isLandingPage &&
+                                    !settings.isPublicEmptyPage
+                                "
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                (click)="howItWorksAction.emit()"
+                            >
                                 Jak to funguje
                             </a>
-                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               class="dropdown-item dropdown-item--without-icon"
-                               (click)="bestPricesInTheWorldAction.emit()">
+                            <a
+                                *ngIf="
+                                    settings.isLandingPage &&
+                                    !settings.isPublicEmptyPage
+                                "
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                (click)="bestPricesInTheWorldAction.emit()"
+                            >
                                 Více o cenách
                             </a>
-                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               class="dropdown-item dropdown-item--without-icon"
-                               (click)="blogAction.emit()">
+                            <a
+                                *ngIf="
+                                    settings.isLandingPage &&
+                                    !settings.isPublicEmptyPage
+                                "
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                (click)="blogAction.emit()"
+                            >
                                 Blog
                             </a>
-                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               class="dropdown-item dropdown-item--without-icon"
-                               (click)="faqAction.emit()">
+                            <a
+                                *ngIf="
+                                    settings.isLandingPage &&
+                                    !settings.isPublicEmptyPage
+                                "
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                (click)="faqAction.emit()"
+                            >
                                 FAQ
                             </a>
-                            <a *ngIf="!settings.isPublicEmptyPage && isLogged"
-                                class="dropdown-item dropdown-item--without-icon"
-                               (click)="logoutAction.emit() ">
+                            <a
+                                *ngIf="!settings.isPublicEmptyPage && isLogged"
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                (click)="logoutAction.emit()"
+                            >
                                 Odhlášení
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage && isLogged"
-                               (click)="homeRedirect.emit(true)">
+                            <a
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                *ngIf="!settings.isPublicEmptyPage && isLogged"
+                                (click)="homeRedirect.emit(true)"
+                            >
                                 Zpět do aplikace
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage && !isLogged"
-                               (click)="loginAction.emit() ">
+                            <a
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                *ngIf="!settings.isPublicEmptyPage && !isLogged"
+                                (click)="loginAction.emit()"
+                            >
                                 Přihlásit
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage && !isLogged"
-                               (click)="signUpAction.emit()">
+                            <a
+                                class="
+                                    dropdown-item dropdown-item--without-icon
+                                "
+                                *ngIf="!settings.isPublicEmptyPage && !isLogged"
+                                (click)="signUpAction.emit()"
+                            >
                                 Založit účet
                             </a>
                         </lnd-dropdown>
                     </div>
-                    <div *ngIf="!settings.isPublic"
-                         class="menu-holder">
+                    <div *ngIf="!settings.isPublic" class="menu-holder">
                         <pxe-hamburger
-                                *ngIf="!settings.hideHamburger"
-                                [isMenuOpen]="isMenuOpen"
-                                [disableAction]="isMenuOpen"
-                                (toggleMenu)="toggleMenu.emit($event)"
+                            *ngIf="!settings.hideHamburger"
+                            [isMenuOpen]="isMenuOpen"
+                            [disableAction]="isMenuOpen"
+                            (toggleMenu)="toggleMenu.emit($event)"
                         ></pxe-hamburger>
                     </div>
                     <div
                         class="user-holder"
-                        *ngIf="!settings.isPublic && !settings.isStatic">
-                        <span class="icon icon--favourite-stroke text-color--secondary"></span>
+                        *ngIf="!settings.isPublic && !settings.isStatic"
+                    >
+                        <span
+                            class="
+                                icon icon--favourite-stroke
+                                text-color--secondary
+                            "
+                        ></span>
                         <lnd-dropdown
                             #userProfile
                             [actionTemplate]="profileMenu"
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
-                            menuDirection="right">
-                            <a *ngFor="let item of userMenu"
+                            menuDirection="right"
+                        >
+                            <a
+                                *ngFor="let item of userMenu"
                                 [ngClass]="item.class"
                                 class="dropdown-item"
-                                [routerLink]="item.url">
-                                <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
+                                [routerLink]="item.url"
+                            >
+                                <span
+                                    [ngClass]="
+                                        'dropdown-item-icon icon icon--' +
+                                        item.icon
+                                    "
+                                ></span>
                                 {{ item.label }}
                             </a>
                         </lnd-dropdown>

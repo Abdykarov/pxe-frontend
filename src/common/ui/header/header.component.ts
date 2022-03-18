@@ -6,17 +6,12 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-
-import {
-    debounceTime,
-    takeUntil,
-} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { ISettings } from 'src/app/layouts/models/router-data.model';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { DropdownComponent } from 'src/common/ui/dropdown/dropdown.component';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
-import { ISettings } from 'src/app/layouts/models/router-data.model';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 
 @Component({
@@ -79,13 +74,12 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    public resizeEvent$ = fromEvent(window, 'resize')
-        .pipe(
-            takeUntil(this.destroy$),
-            debounceTime(200),
-        );
+    public resizeEvent$ = fromEvent(window, 'resize').pipe(
+        takeUntil(this.destroy$),
+        debounceTime(200)
+    );
 
-    ngOnInit () {
+    ngOnInit() {
         super.ngOnInit();
         this.resizeEvent$.subscribe(() => {
             if (this.userProfile && this.userProfile.isOpen) {

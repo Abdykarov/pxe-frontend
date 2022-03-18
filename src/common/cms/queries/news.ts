@@ -1,13 +1,14 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-angular';
 
 export const getNewsQuery = gql`
     query queryNewsContents {
         queryNewsContents {
             flatData {
                 news {
-                    date,
+                    date
                     new
-                },
+                }
             }
         }
-    }`;
+    }
+`;

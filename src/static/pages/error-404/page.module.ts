@@ -1,24 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
-
+import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
 // own classes
 import { Error404PageComponent } from './page';
-import {
-    LoginType,
-    SignType,
-} from 'src/app/layouts/models/router-data.model';
 
 @NgModule({
-    declarations: [
-        Error404PageComponent,
-    ],
-    exports: [
-        Error404PageComponent,
-    ],
-    imports: [
-        CommonModule,
-    ],
+    declarations: [Error404PageComponent],
+    exports: [Error404PageComponent],
+    imports: [CommonModule],
 })
 export class Error404PageModule {}
 

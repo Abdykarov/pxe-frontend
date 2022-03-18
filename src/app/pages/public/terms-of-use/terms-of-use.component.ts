@@ -1,15 +1,10 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
-
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import * as R from 'ramda';
-
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISeo } from 'src/common/cms/models/seo';
 import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
     selector: 'pxe-term-of-use',
@@ -19,12 +14,13 @@ import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
 export class TermsOfUseComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public readonly termsOfUse: ITermsOfUSe = this.route.snapshot.data.termsOfUse;
+    public readonly termsOfUse: ITermsOfUSe =
+        this.route.snapshot.data.termsOfUse;
 
     constructor(
         private metaService: Meta,
         private route: ActivatedRoute,
-        private titleService: Title,
+        private titleService: Title
     ) {
         const seo: ISeo = R.head(this.termsOfUse.seo);
 

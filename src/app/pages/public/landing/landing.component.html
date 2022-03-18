@@ -1,15 +1,17 @@
 <ng-template #accordionTemplate let-data>
     <div [innerHTML]="data.shortContent | htmlContent"></div>
     <div *ngIf="data.fullContent">
-        <a class="link"
-           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag[0].url , data.url]">
+        <a
+            class="link"
+            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag[0].url, data.url]"
+        >
             Zobrazit více
         </a>
     </div>
 </ng-template>
 
 <div class="landing-page">
-    <div class="section">
+    <div class="section section--first">
         <div class="container-fluid container-fluid--max-width">
             <lnd-lp-personalization-container></lnd-lp-personalization-container>
         </div>
@@ -20,41 +22,79 @@
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-xl-3 mb-3">
-                            <img class="img-fluid" src="/assets/images/illustrations/papers.svg" alt="" title="">
+                            <img
+                                class="img-fluid"
+                                src="/assets/images/illustrations/papers.svg"
+                                alt=""
+                                title=""
+                            />
                         </div>
                         <div class="col-xl-9">
-                            <h3 class="h3--public">O smlouvy se už nikdy nemusíte starat</h3>
-                            <a (click)="scrollToService.scrollToHelp()">S čím vám parc4u pomůže?</a>
+                            <h3 class="h3--public">
+                                O smlouvy se už nikdy nemusíte starat
+                            </h3>
+                            <a (click)="scrollToService.scrollToHelp()"
+                                >S čím vám parc4u pomůže?</a
+                            >
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-xl-3 mb-3">
-                            <img class="img-fluid" src="/assets/images/illustrations/computer.svg" alt="" title="">
+                            <img
+                                class="img-fluid"
+                                src="/assets/images/illustrations/computer.svg"
+                                alt=""
+                                title=""
+                            />
                         </div>
                         <div class="col-xl-9">
-                            <h3 class="h3--public">Vše zdarma, z domu a bez papírování</h3>
-                            <a (click)="scrollToService.scrollToHowItsWorks()">Jak to funguje?</a>
+                            <h3 class="h3--public">
+                                Vše zdarma, z domu a bez papírování
+                            </h3>
+                            <a (click)="scrollToService.scrollToHowItsWorks()"
+                                >Jak to funguje?</a
+                            >
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-xl-3 mb-3">
-                            <img class="img-fluid" src="/assets/images/illustrations/calendar.svg" alt="" title="">
+                            <img
+                                class="img-fluid"
+                                src="/assets/images/illustrations/calendar.svg"
+                                alt=""
+                                title=""
+                            />
                         </div>
                         <div class="col-xl-9">
-                            <h3 class="h3--public">Každý rok vám zajistíme výhodnou cenu</h3>
-                            <a (click)="scrollToService.scrollToBestPricesInTheWorld()">Více o cenách</a>
+                            <h3 class="h3--public">
+                                Každý rok vám zajistíme výhodnou cenu
+                            </h3>
+                            <a
+                                (click)="
+                                    scrollToService.scrollToBestPricesInTheWorld()
+                                "
+                                >Více o cenách</a
+                            >
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row d-none d-xl-flex">
                 <div class="col-12 text-center">
-                    <a class="link-next-section" (click)="scrollToService.scrollToHelp()">
-                        <span class="icon icon--arrow-right link-next-section__icon"></span>
+                    <a
+                        class="link-next-section"
+                        (click)="scrollToService.scrollToHelp()"
+                    >
+                        <span
+                            class="
+                                icon icon--arrow-right
+                                link-next-section__icon
+                            "
+                        ></span>
                     </a>
                 </div>
             </div>
@@ -62,15 +102,17 @@
     </div>
     <div #help id="s-cim-vam-pomuzeme" class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
-            <h2 class="h4--public text-secondary text-center text-xl-left">S čím vám pomůžeme</h2>
+            <h2 class="h4--public text-secondary text-center text-xl-left">
+                S čím vám pomůžeme
+            </h2>
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
-                    <div *ngFor="let item of landingPage?.helpSection?.cards" class="col-md-4 card-tile__item" [ngClass]="item.customClasses">
-                        <lnd-card
-                            type="block"
-                            [data]="item"
-                        >
-                        </lnd-card>
+                    <div
+                        *ngFor="let item of landingPage?.helpSection?.cards"
+                        class="col-md-4 card-tile__item"
+                        [ngClass]="item.customClasses"
+                    >
+                        <lnd-card type="block" [data]="item"> </lnd-card>
                     </div>
                 </div>
             </div>
@@ -80,28 +122,59 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
-                    <pxe-carousel-references [carouselItems]="landingPage.carouselReferences"></pxe-carousel-references>
+                    <pxe-carousel-references
+                        [carouselItems]="landingPage.carouselReferences"
+                    ></pxe-carousel-references>
                 </div>
             </div>
         </div>
     </div>
-    <div #howItWorks id="jak-to-funguje" class="section section--bg-two-half section--gradient-violet-right-half">
+    <div
+        #howItWorks
+        id="jak-to-funguje"
+        class="section section--bg-two-half section--gradient-violet-right-half"
+    >
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-xl-6">
                     <div class="section__half">
                         <div class="row">
-                            <div class="col-md-8 offset-md-2 col-xl-10 offset-xl-0">
-                                <h2 class="h4--public text-secondary">{{landingPage?.howItWorksSection?.title}}</h2>
-                                <h3 class="h2--public">{{landingPage?.howItWorksSection?.steps?.length}} {{landingPage?.howItWorksSection?.description}}</h3>
+                            <div
+                                class="
+                                    col-md-8
+                                    offset-md-2
+                                    col-xl-10
+                                    offset-xl-0
+                                "
+                            >
+                                <h2 class="h4--public text-secondary">
+                                    {{ landingPage?.howItWorksSection?.title }}
+                                </h2>
+                                <h3 class="h2--public">
+                                    {{ landingPage?.howItWorksSection?.steps
+                                    ?.length }} {{
+                                    landingPage?.howItWorksSection ?.description
+                                    }}
+                                </h3>
                                 <ol class="circular-number-list">
-                                    <li *ngFor="let step of landingPage?.howItWorksSection?.steps">
-                                        <h4 class="h3--public">{{step.title}}</h4>
-                                        <p class="mb-0">{{step.description}}</p>
+                                    <li
+                                        *ngFor="
+                                            let step of landingPage
+                                                ?.howItWorksSection?.steps
+                                        "
+                                    >
+                                        <h4 class="h3--public">
+                                            {{ step.title }}
+                                        </h4>
+                                        <p class="mb-0">
+                                            {{ step.description }}
+                                        </p>
                                     </li>
                                 </ol>
                                 <lnd-button
-                                    [label]="landingPage.howItWorksSection.buttonText"
+                                    [label]="
+                                        landingPage.howItWorksSection.buttonText
+                                    "
                                     type="gradient-primary"
                                     customClass="btn-public btn--icon-right"
                                     icon="icon--arrow-right"
@@ -117,14 +190,34 @@
                     <div class="section__half section__half--gradient-violet">
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
-                                <h2 class="h2--public text-white">{{askForOffer?.title}}</h2>
+                                <h2 class="h2--public text-white">
+                                    {{ askForOffer?.title }}
+                                </h2>
                                 <ol class="numerical-list-stepper">
-                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">{{askForOffer?.firstStep}}</li>
-                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length > 0">{{askForOffer?.secondStep}}</li>
+                                    <li
+                                        [class.active]="
+                                            howItWorksFileContainer
+                                                ?.fileUploader?.queue
+                                                ?.length === 0
+                                        "
+                                    >
+                                        {{ askForOffer?.firstStep }}
+                                    </li>
+                                    <li
+                                        [class.active]="
+                                            howItWorksFileContainer
+                                                ?.fileUploader?.queue?.length >
+                                            0
+                                        "
+                                    >
+                                        {{ askForOffer?.secondStep }}
+                                    </li>
                                 </ol>
                             </div>
                             <div class="col-md-8 offset-md-2 col-xl-10">
-                                <pxe-ask-for-offer-container #howItWorksFileContainer></pxe-ask-for-offer-container>
+                                <pxe-ask-for-offer-container
+                                    #howItWorksFileContainer
+                                ></pxe-ask-for-offer-container>
                             </div>
                         </div>
                     </div>
@@ -132,37 +225,75 @@
             </div>
         </div>
     </div>
-    <div #bestPricesInTheWorld id="vice-o-cenach" class="section section--light-gray">
+    <div
+        #bestPricesInTheWorld
+        id="vice-o-cenach"
+        class="section section--light-gray"
+    >
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
-                    <h2 class="h4--public text-secondary">{{landingPage.bestPricesInTheWorldSection?.title}}</h2>
-                    <h3 class="h2--public mb-3">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"description"}}</h3>
-                    <p class="mb-4 mb-md-6">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"perex"}}</p>
+                    <h2 class="h4--public text-secondary">
+                        {{ landingPage.bestPricesInTheWorldSection?.title }}
+                    </h2>
+                    <h3 class="h2--public mb-3">
+                        {{ landingPage | bestPricesInTheWorldSection :
+                        activeCommodityTypeCarouselCompare : "description" }}
+                    </h3>
+                    <p class="mb-4 mb-md-6">
+                        {{ landingPage | bestPricesInTheWorldSection :
+                        activeCommodityTypeCarouselCompare : "perex" }}
+                    </p>
                     <ul class="link-list link-list--lp">
                         <li class="link-list__item">
-                            <a (click)="activeCommodityTypeCarouselCompare = CommodityType.POWER"
-                               class="link-list__link"
-                               [class.link-list__link--active]="activeCommodityTypeCarouselCompare == CommodityType.POWER">
-                                {{landingPage.bestPricesInTheWorldSection?.carouselDiscount[0]?.title}}
+                            <a
+                                (click)="
+                                    activeCommodityTypeCarouselCompare =
+                                        CommodityType.POWER
+                                "
+                                class="link-list__link"
+                                [class.link-list__link--active]="
+                                    activeCommodityTypeCarouselCompare ===
+                                    CommodityType.POWER
+                                "
+                            >
+                                {{ landingPage.bestPricesInTheWorldSection
+                                ?.carouselDiscount[0]?.title }}
                             </a>
                         </li>
                         <li class="link-list__item">
-                            <a (click)="activeCommodityTypeCarouselCompare = CommodityType.GAS"
-                               class="link-list__link"
-                               [class.link-list__link--active]="activeCommodityTypeCarouselCompare == CommodityType.GAS">
-                                {{landingPage.bestPricesInTheWorldSection?.carouselDiscount[1]?.title}}
+                            <a
+                                (click)="
+                                    activeCommodityTypeCarouselCompare =
+                                        CommodityType.GAS
+                                "
+                                class="link-list__link"
+                                [class.link-list__link--active]="
+                                    activeCommodityTypeCarouselCompare ===
+                                    CommodityType.GAS
+                                "
+                            >
+                                {{ landingPage.bestPricesInTheWorldSection
+                                ?.carouselDiscount[1]?.title }}
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-12 mb-5">
-                    <pxe-carousel-compare [commodityType]="activeCommodityTypeCarouselCompare"></pxe-carousel-compare>
+                    <pxe-carousel-compare
+                        [commodityType]="activeCommodityTypeCarouselCompare"
+                    ></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
-                    <p class="mb-6">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"countingDescription"}}</p>
+                    <p class="mb-6">
+                        {{ landingPage | bestPricesInTheWorldSection :
+                        activeCommodityTypeCarouselCompare :
+                        "countingDescription" }}
+                    </p>
                     <lnd-button
-                        [label]="landingPage.bestPricesInTheWorldSection?.buttonText"
+                        [label]="
+                            landingPage.bestPricesInTheWorldSection?.buttonText
+                        "
                         type="gradient-primary"
                         customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"
@@ -177,13 +308,53 @@
     <div class="section section--dark-blue section--picture-bg">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="mb-6 col-md-4 offset-md-1 mb-md-0 col-xl-3 offset-xl-2">
+                <div
+                    class="
+                        mb-6
+                        col-md-4
+                        offset-md-1
+                        mb-md-0
+                        col-xl-3
+                        offset-xl-2
+                    "
+                >
                     <span class="info-flag">
-                        <img class="info-flag__img d-block" src="/assets/images/layout/logo-pxe-white.svg" alt="logo pxe" title="pxe">
-                        <span class="text-white">{{landingPage.aboutUs.chatText}}</span>
-                        <svg width="20px" height="17px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="info-flag__beak">
-                            <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g id="Video-LP-fallback" transform="translate(-1024.000000, -4326.000000)" fill="#7355A6"><path d="M1024,4326 L1041,4326 L1041,4338.17157 C1041,4339.27614 1040.10457,4340.17157 1039,4340.17157 C1038.46957,4340.17157 1037.96086,4339.96086 1037.58579,4339.58579 L1024,4326 L1024,4326 Z" id="Rectangle-Copy-12" transform="translate(1032.500000, 4334.500000) scale(-1, 1) translate(-1032.500000, -4334.500000) "></path></g>
+                        <img
+                            class="info-flag__img d-block"
+                            src="/assets/images/layout/logo-pxe-white.svg"
+                            alt="logo pxe"
+                            title="pxe"
+                        />
+                        <span class="text-white"
+                            >{{ landingPage.aboutUs.chatText }}</span
+                        >
+                        <svg
+                            width="20px"
+                            height="17px"
+                            viewBox="0 0 20 17"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            class="info-flag__beak"
+                        >
+                            <g
+                                id="Landing-page"
+                                stroke="none"
+                                stroke-width="1"
+                                fill="none"
+                                fill-rule="evenodd"
+                            >
+                                <g
+                                    id="Video-LP-fallback"
+                                    transform="translate(-1024.000000, -4326.000000)"
+                                    fill="#7355A6"
+                                >
+                                    <path
+                                        d="M1024,4326 L1041,4326 L1041,4338.17157 C1041,4339.27614 1040.10457,4340.17157 1039,4340.17157 C1038.46957,4340.17157 1037.96086,4339.96086 1037.58579,4339.58579 L1024,4326 L1024,4326 Z"
+                                        id="Rectangle-Copy-12"
+                                        transform="translate(1032.500000, 4334.500000) scale(-1, 1) translate(-1032.500000, -4334.500000) "
+                                    ></path>
+                                </g>
                             </g>
                         </svg>
                     </span>
@@ -191,9 +362,15 @@
                 <div class="mb-6 col-md-4 offset-md-1 mb-md-5 col-xl-6 mb-xl-6">
                     <div class="row">
                         <div class="col-12 mb-6">
-                            <h2 class="h4--public text-white">{{landingPage.aboutUs.title}}</h2>
-                            <h3 class="h2--public text-white mb-3 mb-xl-6">{{landingPage.aboutUs.bigText}}</h3>
-                            <p class="text-white">{{landingPage.aboutUs.description}}</p>
+                            <h2 class="h4--public text-white">
+                                {{ landingPage.aboutUs.title }}
+                            </h2>
+                            <h3 class="h2--public text-white mb-3 mb-xl-6">
+                                {{ landingPage.aboutUs.bigText }}
+                            </h3>
+                            <p class="text-white">
+                                {{ landingPage.aboutUs.description }}
+                            </p>
                             <lnd-button
                                 [label]="landingPage.aboutUs.buttonText"
                                 type="gradient-primary"
@@ -207,7 +384,9 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-6">
-                    <pxe-carousel-suppliers [supplierLogos]="landingPage?.aboutUs?.logos"></pxe-carousel-suppliers>
+                    <pxe-carousel-suppliers
+                        [supplierLogos]="landingPage?.aboutUs?.logos"
+                    ></pxe-carousel-suppliers>
                 </div>
             </div>
         </div>
@@ -218,22 +397,43 @@
             <div class="row px-3">
                 <div class="col-12 card-blogs mb-4">
                     <div class="row card-blogs__inner">
-                        <div *ngFor="let article of articles"
-                             class="col-md-4 card-blog__item">
+                        <div
+                            *ngFor="let article of articles"
+                            class="col-md-4 card-blog__item"
+                        >
                             <lnd-card
                                 type="link"
                                 [data]="article"
-                                [linkUrl]="[this.ROUTES.ROUTER_BLOG, article.customData, article.id]"
+                                [linkUrl]="[
+                                    this.ROUTES.ROUTER_BLOG,
+                                    article.customData,
+                                    article.id
+                                ]"
                             >
                             </lnd-card>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 text-center">
-                    <a (click)="routerToAllArticle($event)"
-                        class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-4 mb-md-0">
-                        <span class="text-with-icon__text text-body">Všechny články</span>
-                        <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
+                    <a
+                        (click)="routerToAllArticle($event)"
+                        class="
+                            text-with-icon
+                            text-with-icon--link
+                            text-with-icon--icon-right
+                            mb-4 mb-md-0
+                        "
+                    >
+                        <span class="text-with-icon__text text-body"
+                            >Všechny články</span
+                        >
+                        <span
+                            class="
+                                icon icon--add-new
+                                text-with-icon__icon
+                                text-with-icon__icon--public
+                            "
+                        ></span>
                     </a>
                 </div>
             </div>
@@ -246,22 +446,44 @@
                     <h2 class="h2--public">Často kladené dotazy</h2>
                 </div>
                 <div class="col-xl-8 offset-xl-2 mb-3">
-                    <lnd-accordion *ngIf="frequentedQuestions.length"
-                                   [accordionContentTemplate]="accordionTemplate"
-                                   [accordionItems]="frequentedQuestions | questionsToAccordions: faqConfig"
-                                   title="Často kladené dotazy">
+                    <lnd-accordion
+                        *ngIf="frequentedQuestions.length"
+                        [accordionContentTemplate]="accordionTemplate"
+                        [accordionItems]="
+                            frequentedQuestions
+                                | questionsToAccordions: faqConfig
+                        "
+                        title="Často kladené dotazy"
+                    >
                     </lnd-accordion>
                 </div>
                 <div class="col-xl-8 offset-xl-2">
                     <div class="row">
                         <div class="col-md-6">
-                            <a class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-4 mb-md-0" (click)="routerToFaq($event)">
-                                <span class="text-with-icon__text text-body">Další dotazy</span>
-                                <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
+                            <a
+                                class="
+                                    text-with-icon
+                                    text-with-icon--link
+                                    text-with-icon--icon-right
+                                    mb-4 mb-md-0
+                                "
+                                (click)="routerToFaq($event)"
+                            >
+                                <span class="text-with-icon__text text-body"
+                                    >Další dotazy</span
+                                >
+                                <span
+                                    class="
+                                        icon icon--add-new
+                                        text-with-icon__icon
+                                        text-with-icon__icon--public
+                                    "
+                                ></span>
                             </a>
                         </div>
                         <div class="col-md-6 text-md-right">
-                            Nenašli jste odpověď? Napište nám na <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>
+                            Nenašli jste odpověď? Napište nám na
+                            <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>
                         </div>
                     </div>
                 </div>
@@ -272,7 +494,9 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 text-center">
-                    <h2 class="h2--public text-white">{{landingPage.iWantToSeeTheBestOffers.title}}</h2>
+                    <h2 class="h2--public text-white">
+                        {{ landingPage.iWantToSeeTheBestOffers.title }}
+                    </h2>
                     <lnd-button
                         [label]="landingPage.iWantToSeeTheBestOffers.buttonText"
                         type="gradient-primary"
@@ -290,10 +514,26 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
-                    <h2 class="h2--public text-white">{{askForOffer?.title}}</h2>
+                    <h2 class="h2--public text-white">
+                        {{ askForOffer?.title }}
+                    </h2>
                     <ol class="numerical-list-stepper">
-                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">{{askForOffer?.firstStep}}</li>
-                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 0">{{askForOffer?.secondStep}}</li>
+                        <li
+                            [class.active]="
+                                lastContentFileUploader?.fileUploader?.queue
+                                    ?.length === 0
+                            "
+                        >
+                            {{ askForOffer?.firstStep }}
+                        </li>
+                        <li
+                            [class.active]="
+                                lastContentFileUploader?.fileUploader?.queue
+                                    ?.length > 0
+                            "
+                        >
+                            {{ askForOffer?.secondStep }}
+                        </li>
                     </ol>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">

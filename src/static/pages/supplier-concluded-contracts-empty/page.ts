@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
@@ -11,5 +10,5 @@ export class SupplierConcludedContractsEmptyComponent {
     public redirectToOffer = (evt) => {
         evt.preventDefault();
         console.log('CLICKED');
-    }
+    };
 }

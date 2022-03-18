@@ -7,7 +7,6 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .banner {
 	position: relative;
 	padding: $spacer ( $spacer * 1.5 );
@@ -18,7 +17,7 @@
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		padding: ( $spacer * 2 ) ( $spacer * 3 );
+		padding: ( $spacer * 2) ( $spacer * 3 );
 	}
 
 	&__content {
@@ -46,4 +45,3 @@
 		}
 	}
 }
-

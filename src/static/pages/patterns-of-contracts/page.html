@@ -2,7 +2,12 @@
     <a (click)="click($event)">Stáhnout</a>
 </ng-template>
 
-<div class="patterns-of-contracts-page container-content container-content--public">
+<div
+    class="
+        patterns-of-contracts-page
+        container-content container-content--public
+    "
+>
     <div class="container-fluid container-fluid--max-width">
         <div class="row text-center">
             <div class="col-12 col-md-6 offset-md-3">
@@ -13,14 +18,15 @@
             <div class="col-12">
                 <ul class="text-center link-list mb-4">
                     <li class="link-list__item">
-                        <a class="link-list__link link-list__link--active"
-                            (click)="click($event)">
+                        <a
+                            class="link-list__link link-list__link--active"
+                            (click)="click($event)"
+                        >
                             Elektřina
                         </a>
                     </li>
                     <li class="link-list__item">
-                        <a class="link-list__link"
-                            (click)="click($event)">
+                        <a class="link-list__link" (click)="click($event)">
                             Plyn
                         </a>
                     </li>
@@ -41,22 +47,33 @@
                     <div class="page-box__inner">
                         <ul class="link-list link-list--small mb-3">
                             <li class="link-list__item">
-                                <a class="link-list__link link-list__link--active"
-                                    (click)="click($event)">
+                                <a
+                                    class="
+                                        link-list__link link-list__link--active
+                                    "
+                                    (click)="click($event)"
+                                >
                                     Domácnost
                                 </a>
                             </li>
                             <li class="link-list__item">
-                                <a class="link-list__link"
-                                    (click)="click($event)">
+                                <a
+                                    class="link-list__link"
+                                    (click)="click($event)"
+                                >
                                     Firma
                                 </a>
                             </li>
                         </ul>
-                        <h3 class="h2 mb-2">Aktuální smlouva o dodávce elektřiny pro domácnosti</h3>
+                        <h3 class="h2 mb-2">
+                            Aktuální smlouva o dodávce elektřiny pro domácnosti
+                        </h3>
                         <p class="mb-0">
-                            Níže naleznete dokumenty potřebné k uzavření dodávky energií/plynu pro budoucí období.
-                            Návrh smlouvy o sdružených službách dodávky elektřiny/plynu, obsahuje také všeobecné podmínky dodávky a plnou moc pro dodavatele.
+                            Níže naleznete dokumenty potřebné k uzavření dodávky
+                            energií/plynu pro budoucí období. Návrh smlouvy o
+                            sdružených službách dodávky elektřiny/plynu,
+                            obsahuje také všeobecné podmínky dodávky a plnou moc
+                            pro dodavatele.
                         </p>
                     </div>
                     <div class="page-box__inner page-box__inner--light">
@@ -69,19 +86,25 @@
                                         [openFile]="false"
                                         [downloadFileName]="downloadFileName"
                                         [viewBookmark]="false"
-                                        zoom="page-width">
-                                    ></pxe-pdf-viewer>
+                                        zoom="page-width"
+                                    >
+                                        ></pxe-pdf-viewer
+                                    >
                                 </div>
                             </div>
                             <div class="col-12 mb-5 text-right">
                                 <lnd-button
                                     label="Stáhnout"
                                     type="primary"
-                                    (action)="click($event)">
+                                    (action)="click($event)"
+                                >
                                 </lnd-button>
                             </div>
                             <div class="col-12">
-                                <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
+                                <h5>
+                                    Archiv smluv o dodávce elektřiny společnosti
+                                    Power Central Europe, a.s. pro domácnosti
+                                </h5>
                                 <lnd-table
                                     [cols]="tableConfig"
                                     [rows]="rows"
@@ -90,8 +113,10 @@
                                     [tableWrapperClass]="['table-wrapper--advanced pb-4']"
                                     [columnTemplates]="{
                                         columnTemplateDownload: columnTemplateDownload
-                                    }">
-                                ></lnd-table>
+                                    }"
+                                >
+                                    ></lnd-table
+                                >
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISupplyPointStatistic } from 'src/common/graphql/models/supply.model';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import {
     supplyPointStatistic,
     supplyPointStatisticMore,
@@ -15,8 +14,10 @@ export class SupplyPointOverviewComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     public supplyPointStatistic: ISupplyPointStatistic = supplyPointStatistic;
-    public supplyPointStatisticMore: ISupplyPointStatistic = supplyPointStatisticMore;
-    public supplyPointStatisticNone: ISupplyPointStatistic = supplyPointStatisticNone;
+    public supplyPointStatisticMore: ISupplyPointStatistic =
+        supplyPointStatisticMore;
+    public supplyPointStatisticNone: ISupplyPointStatistic =
+        supplyPointStatisticNone;
 
     constructor() {
         this.breadcrumbItemsSimple = [

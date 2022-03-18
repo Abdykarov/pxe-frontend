@@ -1,15 +1,7 @@
 import { Injectable } from '@angular/core';
-
-import {
-    BehaviorSubject,
-    Subject,
-} from 'rxjs';
-
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ConfirmModalComponent } from './modals/confirm/confirm-modal.component';
-import {
-    ICloseModalData,
-    IShowModal,
-} from './modals/model/modal.model';
+import { ICloseModalData, IShowModal } from './modals/model/modal.model';
 
 @Injectable({
     providedIn: 'root',
@@ -22,6 +14,8 @@ export class ModalService {
     public showModal$: Subject<IShowModal> = new Subject();
     public closeModal$: Subject<IShowModal> = new Subject();
 
-    public loadModalComponent = (component: string) => this.components[component];
-    public setCloseModalData = (data: ICloseModalData) => this.closeModalData$.next(data);
+    public loadModalComponent = (component: string) =>
+        this.components[component];
+    public setCloseModalData = (data: ICloseModalData) =>
+        this.closeModalData$.next(data);
 }

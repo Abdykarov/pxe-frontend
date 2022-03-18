@@ -77,21 +77,21 @@
 			text-align: center;
 			text-transform: uppercase;
 			text-decoration: none;
-			padding: ( $spacer / 4 ) 0;
+			padding: ( $spacer * .25 ) 0;
 
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				padding: ( $spacer / 2 ) 0;
+				padding: ( $spacer * .5 ) 0;
 			}
 			// display: inline-block;
 			// width: 100%;
 			// height: 100%;
-			// padding: ( $spacer / 3 ) ( $spacer / 2 );
+			// padding: ( $spacer / 3 ) ( $spacer / 2  );
 			// vertical-align: bottom;
 
 			// // Media queries
 			// @include media-breakpoint-up(md) {
-			// 	padding: ( $spacer * .3 ) ( $spacer / 2 );
+			// 	padding: ( $spacer * .3 ) ( $spacer / 2  );
 			// }
 
 			&.active {
@@ -117,7 +117,7 @@
 
 .tab-content {
 	width: 100%;
-	// padding: ( $spacer / 2 ) ( $spacer / 2 ) $spacer;
+	// padding: ( $spacer / 2 ) ( $spacer / 2  ) $spacer;
 	// background-color: $white;
 
 	// Media queries

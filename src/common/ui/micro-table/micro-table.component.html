@@ -1,14 +1,24 @@
 <ul class="list-of-supply-points">
-    <li *ngFor="let item of data"
+    <li
+        *ngFor="let item of data"
         [class.list-of-supply-points__item--active]="item.active"
-        class="list-of-supply-points__item">
+        class="list-of-supply-points__item"
+    >
         <div class="d-flex flex-column">
-            <span class="list-of-supply-points__item-title">{{item.label}}</span>
-            <span *ngIf='item.description' class="list-of-supply-points__item-description">{{item.description}}</span>
+            <span class="list-of-supply-points__item-title"
+                >{{item.label}}</span
+            >
+            <span
+                *ngIf="item.description"
+                class="list-of-supply-points__item-description"
+                >{{item.description}}</span
+            >
         </div>
         <div class="list-of-supply-points__item-controls">
             <ng-container *ngIf="actionTemplates">
-                <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item.data}"></ng-container>
+                <ng-container
+                    *ngTemplateOutlet="actionTemplates; context: {data: item.data}"
+                ></ng-container>
             </ng-container>
         </div>
     </li>

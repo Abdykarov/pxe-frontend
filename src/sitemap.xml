@@ -4,24 +4,24 @@
         <loc>http://localhost:4200</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/terms-of-use</loc>
+        <loc>http://localhost:4200/podminky-uzivani</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/cookies-policy</loc>
+        <loc>http://localhost:4200/zasady-pouzivani-cookies</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/securing-your-data</loc>
+        <loc>http://localhost:4200/ochrana-osobnich-udaju</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/login</loc>
+        <loc>http://localhost:4200/prihlaseni</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/sign-up</loc>
+        <loc>http://localhost:4200/registrace</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/patterns-of-contracts/individual</loc>
+        <loc>http://localhost:4200/vzory-smluv/domacnost</loc>
     </url>
     <url>
-        <loc>http://localhost:4200/patterns-of-contracts/business</loc>
+        <loc>http://localhost:4200/vzory-smluv/firma</loc>
     </url>
 </urlset>

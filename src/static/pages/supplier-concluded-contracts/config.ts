@@ -1,23 +1,16 @@
-import {
-    Inject,
-    Injectable,
-    LOCALE_ID,
-} from '@angular/core';
 import { formatDate } from '@angular/common';
-
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 import {
     IContractWithNameAndSupplyPoint,
     IPaginatedContractsWithNameAndSupplyPoint,
 } from 'src/common/graphql/models/suppplier.model';
-import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SupplierConcludedContractsConfig {
-    constructor(
-        @Inject(LOCALE_ID) private locale: string,
-    ) {}
+    constructor(@Inject(LOCALE_ID) private locale: string) {}
 
     public readonly paginationConfig: IPaginationConfig = {
         itemsPerPage: 50,
@@ -36,7 +29,8 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPoint) => `${row.name}`,
+                    content: (row: IContractWithNameAndSupplyPoint) =>
+                        `${row.name}`,
                 },
             ],
         },
@@ -46,7 +40,8 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPoint) => `${row.identificationNumber}`,
+                    content: (row: IContractWithNameAndSupplyPoint) =>
+                        `${row.identificationNumber}`,
                 },
             ],
         },
@@ -57,8 +52,16 @@ export class SupplierConcludedContractsConfig {
                     headingClass: [''],
                     cellClass: [''],
                     content: (row: IContractWithNameAndSupplyPoint) =>
-                        `${formatDate(row.contract.deliveryFrom, 'dd. MM. yyyy', this.locale)} -
-                        ${formatDate(row.contract.deliveryTo, 'dd. MM. yyyy', this.locale)}`,
+                        `${formatDate(
+                            row.contract.deliveryFrom,
+                            'dd. MM. yyyy',
+                            this.locale
+                        )} -
+                        ${formatDate(
+                            row.contract.deliveryTo,
+                            'dd. MM. yyyy',
+                            this.locale
+                        )}`,
                 },
             ],
         },
@@ -74,65 +77,66 @@ export class SupplierConcludedContractsConfig {
         },
     ];
 
-    public readonly paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPoint = {
-        page: [
-            {
-                name: 'Jaroslav Dvořák',
-                identificationNumber: '859182407150233062',
-                contract: {
-                    offerValidity: true,
-                    deliveryTo: '2021-08-01',
-                    deliveryFrom: '2020-08-01',
-                    personalData: {
-                        name: '',
-                        birthDate: '',
-                        ico: '',
-                        dic: '',
-                        address1: null,
-                        address2: null,
-                        email: '',
-                        phone: '',
-                        bankAccountNumber: '',
-                        bankCode: '',
-                        depositPaymentType: {
-                            type: '',
-                            code: '',
-                            description: '',
-                            help: '',
+    public readonly paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPoint =
+        {
+            page: [
+                {
+                    name: 'Jaroslav Dvořák',
+                    identificationNumber: '859182407150233062',
+                    contract: {
+                        offerValidity: true,
+                        deliveryTo: '2021-08-01',
+                        deliveryFrom: '2020-08-01',
+                        personalData: {
+                            name: '',
+                            birthDate: '',
+                            ico: '',
+                            dic: '',
+                            address1: null,
+                            address2: null,
+                            email: '',
+                            phone: '',
+                            bankAccountNumber: '',
+                            bankCode: '',
+                            depositPaymentType: {
+                                type: '',
+                                code: '',
+                                description: '',
+                                help: '',
+                            },
+                            deposit: 1000,
                         },
-                        deposit: 1000,
                     },
                 },
-            },
-            {
-                name: 'Jaroslav Dvořák',
-                identificationNumber: '859182407150233563',
-                contract: {
-                    offerValidity: true,
-                    deliveryTo: '2021-09-01',
-                    deliveryFrom: '2020-09-01',
-                    personalData: {
-                        name: '',
-                        birthDate: '',
-                        ico: '',
-                        dic: '',
-                        address1: null,
-                        address2: null,
-                        email: '',
-                        phone: '',
-                        bankAccountNumber: '',
-                        bankCode: '',
-                        depositPaymentType: {
-                            type: '',
-                            code: '',
-                            description: '',
-                            help: '',
+                {
+                    name: 'Jaroslav Dvořák',
+                    identificationNumber: '859182407150233563',
+                    contract: {
+                        offerValidity: true,
+                        deliveryTo: '2021-09-01',
+                        deliveryFrom: '2020-09-01',
+                        personalData: {
+                            name: '',
+                            birthDate: '',
+                            ico: '',
+                            dic: '',
+                            address1: null,
+                            address2: null,
+                            email: '',
+                            phone: '',
+                            bankAccountNumber: '',
+                            bankCode: '',
+                            depositPaymentType: {
+                                type: '',
+                                code: '',
+                                description: '',
+                                help: '',
+                            },
+                            deposit: 1000,
                         },
-                        deposit: 1000,
                     },
                 },
-            },
-        ],
-        totalRecords: 2,
-    };
+            ],
+            totalRecords: 2,
+        };
 }

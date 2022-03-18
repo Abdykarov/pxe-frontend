@@ -1,11 +1,11 @@
-<div class="row mb-6" *ngIf="(activeArticle$ | async) as activeArticle">
+<div class="row mb-6" *ngIf="activeArticle$ | async as activeArticle">
     <div class="col-12 col-xl-6 offset-xl-3 mb-3">
-        <h1 class="h2--public">{{activeArticle.header}}</h1>
+        <h1 class="h2--public">{{ activeArticle.header }}</h1>
         <div [innerHTML]="activeArticle.content | htmlContent"></div>
     </div>
 </div>
-<ng-container *ngIf="(activeType$ | async) as activeTag">
-    <div class="card-blogs" *ngIf="(otherArticles$ | async) as otherArticles">
+<ng-container *ngIf="activeType$ | async as activeTag">
+    <div class="card-blogs" *ngIf="otherArticles$ | async as otherArticles">
         <h2 class="h2--public text-center">Všechny články</h2>
         <div class="row card-blogs__inner mb-4">
             <ng-container *ngFor="let article of otherArticles">
@@ -13,7 +13,11 @@
                     <lnd-card
                         type="link"
                         [data]="article"
-                        [linkUrl]="[this.ROUTES.ROUTER_BLOG, article.customData, article.id]"
+                        [linkUrl]="[
+                            this.ROUTES.ROUTER_BLOG,
+                            article.customData,
+                            article.id
+                        ]"
                     ></lnd-card>
                 </div>
             </ng-container>
@@ -26,7 +30,8 @@
                     customClass="btn-public btn--icon-right"
                     icon="icon--arrow-down"
                     iconPosition="right"
-                    label="Zobrazit všechny články">
+                    label="Zobrazit všechny články"
+                >
                 </lnd-button>
             </div>
         </div>

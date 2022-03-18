@@ -62,4 +62,3 @@ export enum ContractDeleteReason {
     LEAVING = 'LEAVING',
     TERMINATION = 'TERMINATION',
 }
-

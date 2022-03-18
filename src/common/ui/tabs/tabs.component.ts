@@ -11,7 +11,6 @@ import {
     ViewChild,
     ViewChildren,
 } from '@angular/core';
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IDropdownItem } from 'src/common/ui/dropdown/models/item.model';
 import { TabComponent } from './tab.component';
@@ -21,8 +20,12 @@ import { TabComponent } from './tab.component';
     templateUrl: './tabs.component.html',
     styleUrls: ['./tabs.component.scss'],
 })
-export class TabsComponent extends AbstractComponent implements AfterContentInit, AfterViewInit {
-    @Output() selectAction: EventEmitter<TabComponent> = new EventEmitter<TabComponent>();
+export class TabsComponent
+    extends AbstractComponent
+    implements AfterContentInit, AfterViewInit
+{
+    @Output() selectAction: EventEmitter<TabComponent> =
+        new EventEmitter<TabComponent>();
 
     @Input()
     @Output()
@@ -44,13 +47,13 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
     private tabItemWidths: Array<number> = [];
 
     ngAfterContentInit() {
-        const activeTabs = this.tabs.filter(tab => tab.active);
+        const activeTabs = this.tabs.filter((tab) => tab.active);
 
-        if ( activeTabs.length === 0 ) {
+        if (activeTabs.length === 0) {
             this.selectTab(this.tabs.first);
         }
 
-        this.dropdownItems = this.tabs.toArray().map(tab => {
+        this.dropdownItems = this.tabs.toArray().map((tab) => {
             return <IDropdownItem>{
                 label: tab.tabTitle,
                 action: () => this.selectTab(tab),
@@ -60,17 +63,17 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
 
     ngAfterViewInit() {
         const tabsArray = this.tabItems.toArray();
-        if ( !tabsArray.length ) {
+        if (!tabsArray.length) {
             return;
         }
 
-        if ( !this.tabItemWidths.length ) {
+        if (!this.tabItemWidths.length) {
             tabsArray.forEach((tabItem) => {
                 this.tabItemWidths.push(this.getElementWidth(tabItem));
             });
         }
 
-        if ( !this.moreItemWidth ) {
+        if (!this.moreItemWidth) {
             this.moreItemWidth = this.getElementWidth(this.moreItem);
         }
 
@@ -82,18 +85,18 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
             const tabListWidth = this.getElementWidth(this.tabList);
             let totalWidth = 0;
 
-            if ( !this.shouldShowDropdown() ) {
+            if (!this.shouldShowDropdown()) {
                 this.shownTabsCount = this.tabs.length;
                 return;
             }
             this.shownTabsCount = 0;
 
             this.tabItemWidths.some((itemWidth, index) => {
-                if ( totalWidth + itemWidth < tabListWidth ) {
+                if (totalWidth + itemWidth < tabListWidth) {
                     totalWidth += itemWidth;
                     ++this.shownTabsCount;
                 } else {
-                    if ( totalWidth + this.moreItemWidth >= tabListWidth ) {
+                    if (totalWidth + this.moreItemWidth >= tabListWidth) {
                         --this.shownTabsCount;
                     }
                     return true;
@@ -104,7 +107,7 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
     }
 
     selectTab(selectedTab: TabComponent) {
-        this.tabs.toArray().forEach(tab => tab.active = false);
+        this.tabs.toArray().forEach((tab) => (tab.active = false));
 
         this.selectedTab = selectedTab;
         selectedTab.active = true;
@@ -116,12 +119,17 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
     }
 
     hideMoreItem(index: number): boolean {
-        return !this.shouldShowDropdown()
-            || (this.shownTabsCount && (this.shownTabsCount === this.tabs.toArray().length || (index !== this.shownTabsCount - 1)));
+        return (
+            !this.shouldShowDropdown() ||
+            (this.shownTabsCount &&
+                (this.shownTabsCount === this.tabs.toArray().length ||
+                    index !== this.shownTabsCount - 1))
+        );
     }
 
     toggleDropdown(index: number) {
-        this.openedDropdownIndex = this.openedDropdownIndex === index ? -1 : index;
+        this.openedDropdownIndex =
+            this.openedDropdownIndex === index ? -1 : index;
     }
 
     shouldShowDropdown(): boolean {
@@ -130,7 +138,8 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
 
     private getElementWidth(element: ElementRef): number {
         const nativeEl = element.nativeElement;
-        const style = nativeEl.currentStyle || window.getComputedStyle(nativeEl);
+        const style =
+            nativeEl.currentStyle || window.getComputedStyle(nativeEl);
         return nativeEl.offsetWidth + parseInt(style['margin-right'], 10);
     }
 }

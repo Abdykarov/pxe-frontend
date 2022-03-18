@@ -7,16 +7,15 @@
         [id]="'checkbox-in-subtext'"
         label="Mám jinou korespondenční adresu"
         [type]="'CHECKBOX'"
-        [formControl]="form.controls.onlyAddress1">
+        [formControl]="form.controls.onlyAddress1"
+    >
     </lnd-form-field>
 </ng-template>
 
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Rekapitulace
-            </h1>
+            <h1>Rekapitulace</h1>
         </div>
     </div>
     <div class="row mb-6">
@@ -29,15 +28,11 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <h2>
-                Rekapitulace
-            </h2>
+            <h2>Rekapitulace</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <form
-                    [formGroup]="form"
-                    class="form-container">
+                <form [formGroup]="form" class="form-container">
                     <lnd-form-field
                         [formControl]="form.controls.name"
                         [id]="'name'"
@@ -55,33 +50,36 @@
                         [label]="'Trvalá adresa'"
                         [addressSubtextTemplate]="otherAddress"
                         [parentForm]="form"
-                        [whispererName]="'permanentAddress'">
+                        [whispererName]="'permanentAddress'"
+                    >
                     </pxe-address-whisperer>
                     <pxe-field-wrapper
                         label="Bankovní účet"
                         labelFor="bankAccount"
-                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX">
+                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                    >
                         <div class="row no-gutters">
                             <div class="col-8 pr-1">
                                 <lnd-form-field
-                                        [formControl]="form.controls.acountNumber"
-                                        [id]="'bankAccount'"
-                                        label="Bankovní účet"
-                                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                                    [formControl]="form.controls.acountNumber"
+                                    [id]="'bankAccount'"
+                                    label="Bankovní účet"
+                                    subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
                                 ></lnd-form-field>
                             </div>
                             <div class="col-4 pl-1">
                                 <lnd-form-field
-                                        [formControl]="form.controls.acountBankCode"
-                                        [id]="'acountBankCode'"
-                                        label=""
+                                    [formControl]="form.controls.acountBankCode"
+                                    [id]="'acountBankCode'"
+                                    label=""
                                 ></lnd-form-field>
                             </div>
                         </div>
                     </pxe-field-wrapper>
                     <pxe-field-wrapper
                         label="Telefonní číslo"
-                        labelFor="telephonePrefix">
+                        labelFor="telephonePrefix"
+                    >
                         <div class="row no-gutters">
                             <div class="col-4 pr-1">
                                 <lnd-form-field
@@ -108,7 +106,8 @@
                         label="Způsob placení záloh"
                         [options]="depositPaymentTypeId"
                         [parentForm]="form"
-                        [selectName]="'depositPaymentTypeId'">
+                        [selectName]="'depositPaymentTypeId'"
+                    >
                     </lnd-select>
                     <lnd-form-field
                         [formControl]="form.controls.deposit"
@@ -120,7 +119,8 @@
                         <lnd-button
                             type="primary"
                             (action)="submitForm($event)"
-                            label="Pokračovat">
+                            label="Pokračovat"
+                        >
                         </lnd-button>
                     </div>
                 </form>

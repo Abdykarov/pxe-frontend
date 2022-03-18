@@ -1,8 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    OnDestroy,
-} from '@angular/core';
+import { Directive, ElementRef, OnDestroy } from '@angular/core';
 import * as textMask from 'vanilla-text-mask/dist/vanillaTextMask.js';
 
 @Directive({

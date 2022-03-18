@@ -9,12 +9,10 @@ import {
     TemplateRef,
 } from '@angular/core';
 import * as R from 'ramda';
-import { debounceTime } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-
+import { debounceTime } from 'rxjs/operators';
 // Own models
 import { IDropdownDirection } from './models/direction.model';
-
 
 const DROPDOWN_MENU_SELECTOR = '.dropdown-menu';
 const PAGE_PADDING = 30;
@@ -24,7 +22,6 @@ const PAGE_PADDING = 30;
     templateUrl: './dropdown.component.html',
     styleUrls: ['./dropdown.component.scss'],
 })
-
 export class DropdownComponent implements OnInit {
     @Input()
     public actionTemplate?: TemplateRef<any>;
@@ -78,34 +75,36 @@ export class DropdownComponent implements OnInit {
         this.originalDirection = this.direction;
     }
 
-    constructor(
-        private hostElement: ElementRef,
-        private renderer: Renderer2,
-    ) {
-        this.direction = R.contains(this.direction, Object.values(IDropdownDirection)) ? this.direction : IDropdownDirection.DOWN;
+    constructor(private hostElement: ElementRef, private renderer: Renderer2) {
+        this.direction = R.contains(
+            this.direction,
+            Object.values(IDropdownDirection)
+        )
+            ? this.direction
+            : IDropdownDirection.DOWN;
 
-        const resizeEvent$ = fromEvent(window, 'resize')
-            .pipe(
-                debounceTime(200),
-            );
+        const resizeEvent$ = fromEvent(window, 'resize').pipe(
+            debounceTime(200)
+        );
         resizeEvent$.subscribe(() => this.manageDropdownPosition());
     }
 
     public toggle = () => {
         this.isOpen = !this.isOpen;
-    }
+    };
 
     public itemClick = () => {
         if (this.closeOnClick) {
             this.isOpen = false;
         }
-    }
+    };
 
     public manageDropdownPosition() {
         if (R.isEmpty(this.openedDropdown)) {
             return;
         }
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
         const clientWidth = document.body.clientWidth;
         const clientHeight = document.body.clientHeight;
         const wrapper = this.openedDropdown;
@@ -118,8 +117,14 @@ export class DropdownComponent implements OnInit {
         const wrapperRect = wrapper.getBoundingClientRect();
         let dropdownMenuRect = dropdownMenu.getBoundingClientRect();
 
-        const isDownAvailable = scrollTop + dropdownMenuRect.height + wrapperRect.bottom + PAGE_PADDING < clientHeight;
-        const isUpAvailable = dropdownMenuRect.height + 2 * PAGE_PADDING < wrapperRect.bottom;
+        const isDownAvailable =
+            scrollTop +
+                dropdownMenuRect.height +
+                wrapperRect.bottom +
+                PAGE_PADDING <
+            clientHeight;
+        const isUpAvailable =
+            dropdownMenuRect.height + 2 * PAGE_PADDING < wrapperRect.bottom;
 
         this.direction = this.originalDirection;
 
@@ -128,11 +133,12 @@ export class DropdownComponent implements OnInit {
         }
 
         switch (this.originalDirection) {
-            case IDropdownDirection.DOWN: {
-                if (!isDownAvailable && isUpAvailable) {
-                    this.direction = IDropdownDirection.UP;
+            case IDropdownDirection.DOWN:
+                {
+                    if (!isDownAvailable && isUpAvailable) {
+                        this.direction = IDropdownDirection.UP;
+                    }
                 }
-            }
                 break;
             case IDropdownDirection.UP: {
                 if (isDownAvailable && !isUpAvailable) {

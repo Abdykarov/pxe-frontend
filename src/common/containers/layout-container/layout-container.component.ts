@@ -1,14 +1,8 @@
-import {
-    Component,
-    Inject,
-    Input,
-    PLATFORM_ID,
-} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
+import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
     selector: 'pxe-layout-container',
@@ -16,7 +10,6 @@ import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
     styleUrls: ['./layout-container.component.scss'],
 })
 export class LayoutContainerComponent {
-
     @Input()
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
@@ -32,7 +25,7 @@ export class LayoutContainerComponent {
 
     constructor(
         public authService: AuthService,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         if (isPlatformBrowser(this.platformId)) {
             this.showBanner = window.history.state.showBanner;

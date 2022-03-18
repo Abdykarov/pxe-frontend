@@ -13,7 +13,6 @@
 // Bootstrap alert and close import
 @import '~bootstrap/scss/badge';
 
-
 .badge {
 	@include link-without-href {
 		display: inline-flex;
@@ -78,4 +77,3 @@
 		}
 	}
 }
-

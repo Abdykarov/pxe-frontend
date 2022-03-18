@@ -6,9 +6,8 @@ import {
 } from 'src/common/ui/navigation/models/navigation.model';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class DropdownPageComponent {
     public navigationItems: INavigationMenu = [];
 
@@ -22,7 +21,7 @@ export class DropdownPageComponent {
 
     constructor() {
         this.navigationItems = [];
-        const item1: INavigationItem =  {
+        const item1: INavigationItem = {
             label: 'Profil uživatele',
             icon: 'user',
             url: '/basic/dropdown',
@@ -32,7 +31,7 @@ export class DropdownPageComponent {
             icon: 'lock-close',
             url: '/basic/dropdown',
         };
-        const item3: INavigationItem =  {
+        const item3: INavigationItem = {
             class: 'link--logout',
             icon: 'power',
             label: 'Odhlášení',

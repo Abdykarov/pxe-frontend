@@ -6,7 +6,6 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import * as R from 'ramda';
-
 // own models
 import { IAddType } from './models/type.model';
 
@@ -16,7 +15,6 @@ import { IAddType } from './models/type.model';
     styleUrls: ['./add.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-
 export class AddComponent {
     @Output()
     public action: EventEmitter<any> = new EventEmitter<any>();
@@ -31,6 +29,8 @@ export class AddComponent {
     public type?: IAddType;
 
     constructor() {
-        this.type = R.contains(this.type, Object.values(IAddType)) ? this.type : IAddType.DEFAULT;
+        this.type = R.contains(this.type, Object.values(IAddType))
+            ? this.type
+            : IAddType.DEFAULT;
     }
 }

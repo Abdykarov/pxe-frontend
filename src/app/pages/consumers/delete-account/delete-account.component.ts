@@ -6,37 +6,30 @@ import {
     ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { map, takeUntil } from 'rxjs/operators';
+import { CONSTS } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
-import { ContractStatus } from 'src/common/graphql/models/contract';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import {
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { parseGraphQLErrors, scrollToElementFnc } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-delete-account',
     templateUrl: './delete-account.component.html',
     styleUrls: ['./delete-account.component.scss'],
 })
-export class DeleteAccountComponent extends AbstractComponent implements OnInit {
+export class DeleteAccountComponent
+    extends AbstractComponent
+    implements OnInit
+{
     public readonly MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE = 5;
 
     public currentUser: IJwtPayload;
@@ -49,35 +42,41 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
 
     public pxeVerificationFormWrapper: ElementRef;
 
-    @ViewChild('pxeVerificationFormWrapper') set content(pxeVerificationFormWrapper: ElementRef) {
+    @ViewChild('pxeVerificationFormWrapper') set content(
+        pxeVerificationFormWrapper: ElementRef
+    ) {
         if (pxeVerificationFormWrapper) {
             this.pxeVerificationFormWrapper = pxeVerificationFormWrapper;
         }
     }
 
     constructor(
+        public navigateConsumerService: NavigateConsumerService,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private registrationService: RegistrationService,
         private router: Router,
-        private supplyService: SupplyService,
+        private supplyService: SupplyService
     ) {
         super();
         this.currentUser = this.authService.currentUserValue;
     }
 
     ngOnInit() {
-        this.supplyService.findSupplyPointsByContractStatus([
+        this.supplyService
+            .findSupplyPointsByContractStatus([
                 ContractStatus.CONCLUDED,
                 ContractStatus.WAITING_FOR_PAYMENT,
             ])
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.findSupplyPointsByContractStatus),
-                map(R.pipe(
-                    R.sortBy(R.compose(R.toLower, R.prop('name'))),
-                    R.uniqBy(R.prop('name')),
-                )),
+                map(({ data }) => data.findSupplyPointsByContractStatus),
+                map(
+                    R.pipe(
+                        R.sortBy(R.compose(R.toLower, R.prop('name'))),
+                        R.uniqBy(R.prop('name'))
+                    )
+                )
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
@@ -85,20 +84,21 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                     this.loading = false;
                     this.cd.markForCheck();
                 },
-                error => {
+                (error) => {
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                },
+                }
             );
     }
 
     public sendConfirmationSms = () => {
         this.formLoading = true;
-        this.registrationService.sendUnregisterSms()
+        this.registrationService
+            .sendUnregisterSms()
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) =>  data.sendUnregisterSms),
+                map(({ data }) => data.sendUnregisterSms)
             )
             .subscribe(
                 (result: boolean) => {
@@ -106,21 +106,22 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },
-                error => {
+                (error) => {
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.formLoading = false;
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
+    };
 
     public submitVerification = (smsCode: string = null) => {
         this.formLoading = true;
-        this.registrationService.makeUnregistration(smsCode)
+        this.registrationService
+            .makeUnregistration(smsCode)
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.makeUnregistration),
+                map(({ data }) => data.makeUnregistration)
             )
             .subscribe(
                 (deletedAccount: boolean) => {
@@ -132,24 +133,19 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                         this.cd.markForCheck();
                     }
                 },
-                error => {
+                (error) => {
                     this.formLoading = false;
-                    const { globalError, fieldError } = parseGraphQLErrors(error);
+                    const { globalError, fieldError } =
+                        parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
                     if (Object.keys(this.fieldError).length) {
-                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
+                        scrollToElementFnc(
+                            this.pxeVerificationFormWrapper.nativeElement
+                        );
                     }
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
-
-    public redirectToUserProfile = () => {
-        this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
-    }
-
-    public redirectToConcludedContract = () => {
-        this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
-    }
+    };
 }

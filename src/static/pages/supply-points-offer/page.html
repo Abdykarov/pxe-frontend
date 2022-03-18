@@ -1,8 +1,6 @@
 <div class="row mb-4">
     <div class="col-12 col-md-6 offset-md-3 text-center">
-        <h1>
-            Výběr nabídky
-        </h1>
+        <h1>Výběr nabídky</h1>
     </div>
 </div>
 <div class="row mb-4 mb-xl-6">
@@ -15,17 +13,19 @@
 </div>
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
-        <div class="row justify-content-md-between mb-md-3 text-center text-md-left">
+        <div
+            class="
+                row
+                justify-content-md-between
+                mb-md-3
+                text-center text-md-left
+            "
+        >
             <div class="col-12 mb-5 col-md-auto mb-md-0">
-                <lnd-button
-                    label="Krok zpět"
-                    type="secondary">
-                </lnd-button>
+                <lnd-button label="Krok zpět" type="secondary"> </lnd-button>
             </div>
             <div class="col-12 mb-5 col-md-auto mb-md-0">
-                <lnd-button
-                    label="Zobrazit současnou smlouvu"
-                    type="dark">
+                <lnd-button label="Zobrazit současnou smlouvu" type="dark">
                 </lnd-button>
             </div>
         </div>
@@ -33,29 +33,29 @@
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="supply-points-offer">
             <pxe-supply-point-offer
-                    [questions]="questions"
-                    [supplyPointOffer]="offer1"
-                    (action)="click($event)"
+                [questions]="questions"
+                [supplyPointOffer]="offer1"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
             <pxe-supply-point-offer
-                    [questions]="questions"
-                    [supplyPointOffer]="offer2"
-                    (action)="click($event)"
+                [questions]="questions"
+                [supplyPointOffer]="offer2"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
             <pxe-supply-point-offer
-                    [questions]="questions"
-                    [isOwner]="true"
-                    [supplyPointOffer]="offer3"
-                    (action)="click($event)"
+                [questions]="questions"
+                [isOwner]="true"
+                [supplyPointOffer]="offer3"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
             <pxe-supply-point-offer
-                    [questions]="questions"
-                    [supplyPointOffer]="offer1"
-                    (action)="click($event)"
+                [questions]="questions"
+                [supplyPointOffer]="offer1"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
             <pxe-supply-point-offer
-                    [supplyPointOffer]="offer2"
-                    (action)="click($event)"
+                [supplyPointOffer]="offer2"
+                (action)="click($event)"
             ></pxe-supply-point-offer>
         </div>
     </div>

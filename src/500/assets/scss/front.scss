@@ -4,19 +4,16 @@
  -  This file includes and describes all used CSS written in SCSS preprocesor
  */
 
-
 /* -------------------------- */
 /*   1. CORE - CONFIG,        */
 /*             BASE           */
 /*             VENDORS        */
 /* -------------------------- */
-@import 'src/assets/scss/01_base/external.scss';                           // Core CSS
-
-
+@import 'src/assets/scss/01_base/external.scss'; // Core CSS
 
 /* ------------------------- */
 /*   2. TEMPLATES & PAGES    */
 /* ------------------------- */
 
-@import 'src/assets/scss/05_pages/error-page.scss';                        // Shared error page
+@import 'src/assets/scss/05_pages/error-page.scss'; // Shared error page
 @import 'src/common/ui/footer/footer.component.scss';

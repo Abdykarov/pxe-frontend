@@ -1,9 +1,4 @@
-import {
-    Component,
-    Input,
-    TemplateRef,
-} from '@angular/core';
-
+import { Component, Input, TemplateRef } from '@angular/core';
 // Own models
 import { IBreadcrumbItems } from './models/breadcrumb.model';
 
@@ -19,4 +14,3 @@ export class BreadcrumbComponent {
     @Input()
     public dropdownContent?: TemplateRef<any>;
 }
-

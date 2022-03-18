@@ -1,4 +1,3 @@
-
 export interface ITableColumnViewConfig {
     showIn?: Array<string>;
     headingClass?: Array<string>;

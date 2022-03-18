@@ -1,6 +1,7 @@
 <div class="row bg-white progress-price-of-power">
     <div class="col-12 text-center my-2">
-        Vývoj ceny elektřiny na trhu, více info <a href="https://www.pxe.cz/" target="_blank">zde</a>.
+        Vývoj ceny elektřiny na trhu, více info
+        <a href="https://www.pxe.cz/" target="_blank">zde</a>.
     </div>
     <div class="col-12">
         <lnd-line-graph
@@ -18,8 +19,9 @@
             (mouseOut)="mouseOut()"
         ></lnd-line-graph>
     </div>
-    <div [class.invisible]="!diff"
-         class="col-12 text-center mb-2 h-75">
-        {{currValue}} CZK/MHw&nbsp;&nbsp;<lnd-indicator [value]="diff"></lnd-indicator>
+    <div [class.invisible]="!diff" class="col-12 text-center mb-2 h-75">
+        {{ currValue }} CZK/MHw&nbsp;&nbsp;<lnd-indicator
+            [value]="diff"
+        ></lnd-indicator>
     </div>
 </div>

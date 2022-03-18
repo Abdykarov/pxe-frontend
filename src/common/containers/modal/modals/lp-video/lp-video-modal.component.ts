@@ -10,7 +10,6 @@ import {
     Renderer2,
     ViewChild,
 } from '@angular/core';
-
 import { CONSTS } from 'src/app/app.constants';
 import {
     isFullScreenMode,
@@ -25,7 +24,6 @@ import {
     templateUrl: './lp-video-modal.component.html',
 })
 export class LpVideoModalComponent implements OnInit, OnDestroy {
-
     @ViewChild('video', { static: true })
     public _video: ElementRef;
 
@@ -40,27 +38,28 @@ export class LpVideoModalComponent implements OnInit, OnDestroy {
 
     private fullscreenchangeListener: () => void;
 
-    constructor(
-        public cd: ChangeDetectorRef,
-        private renderer: Renderer2,
-    ) {}
-
+    constructor(public cd: ChangeDetectorRef, private renderer: Renderer2) {}
 
     ngOnInit() {
-        const isMoreThanLgResolution = window.innerWidth >= CONSTS.LG_RESOLUTION;
+        const isMoreThanLgResolution =
+            window.innerWidth >= CONSTS.LG_RESOLUTION;
 
         if (!isMoreThanLgResolution) {
             openFullscreen(this.video);
             if (isScreenApiAvailable()) {
                 // catch for chrome emulator
-                window.screen.orientation.lock('landscape').catch(_ => {});
+                window.screen.orientation.lock('landscape').catch((_) => {});
             }
 
-            this.fullscreenchangeListener = this.renderer.listen(this.video, 'fullscreenchange', (event) => {
-                if (!isFullScreenMode()) {
-                    this.closeModal.emit();
+            this.fullscreenchangeListener = this.renderer.listen(
+                this.video,
+                'fullscreenchange',
+                (event) => {
+                    if (!isFullScreenMode()) {
+                        this.closeModal.emit();
+                    }
                 }
-            });
+            );
         }
     }
 
@@ -80,15 +79,15 @@ export class LpVideoModalComponent implements OnInit, OnDestroy {
         }
 
         playVideo(this.video);
-    }
+    };
 
-    public pause =  (event = null) => {
+    public pause = (event = null) => {
         if (event) {
             event.preventDefault();
         }
 
         this.video.pause();
-    }
+    };
 
     get isVideoPlaying(): boolean {
         return this._video && !this.video.paused;

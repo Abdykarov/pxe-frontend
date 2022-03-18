@@ -1,69 +1,100 @@
-<a class="supply-point"
-   [class.supply-point--list-item]="isListItem"
-   (click)="action.emit(data)">
+<a
+    class="supply-point"
+    [class.supply-point--list-item]="isListItem"
+    (click)="action.emit(data)"
+>
     <div class="row no-gutters">
-        <div class="col-12"
-            [class.col-xl-7]="!isListItem">
+        <div class="col-12" [class.col-xl-7]="!isListItem">
             <div class="supply-point__inner supply-point__inner--info">
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
                         <span
                             [class.icon--flame]="data.commodityType === commodityType.GAS"
                             [class.icon--flash]="data.commodityType === commodityType.POWER"
-                            class="icon supply-point__icon"></span>
+                            class="icon supply-point__icon"
+                        ></span>
                     </div>
                     <div class="col-9 col-md-10">
-                        <span class="supply-point__title text-break">{{data.name}}</span>
-                        <span *ngIf="data.commodityType === commodityType.POWER"
-                              class="supply-point__title-subtext">
-                            {{data.distributionRate.description}} ({{data.distributionRate.code}})
+                        <span class="supply-point__title text-break"
+                            >{{data.name}}</span
+                        >
+                        <span
+                            *ngIf="data.commodityType === commodityType.POWER"
+                            class="supply-point__title-subtext"
+                        >
+                            {{data.distributionRate.description}}
+                            ({{data.distributionRate.code}})
                         </span>
                     </div>
                     <div class="col-9 col-md-10 offset-3 offset-md-2 mt-2">
-                        <div *ngIf="data?.contract?.offer?.greenEnergy"
-                             class="green-energy">
-                            <span class="icon icon--leaf green-energy__icon"></span>
-                            <span class="green-energy__text">Zelená energie</span>
+                        <div
+                            *ngIf="data?.contract?.offer?.greenEnergy"
+                            class="green-energy"
+                        >
+                            <span
+                                class="icon icon--leaf green-energy__icon"
+                            ></span>
+                            <span class="green-energy__text"
+                                >Zelená energie</span
+                            >
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-10 offset-md-2">
                         <div class="row justify-content-between">
-                            <div *ngIf="data.commodityType === commodityType.POWER"
-                                 class="col-6 col-md-auto">
+                            <div
+                                *ngIf="data.commodityType === commodityType.POWER"
+                                class="col-6 col-md-auto"
+                            >
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">Jistič</span>
-                                    <span class="supply-point__value">{{data.circuitBreaker.description}}</span>
+                                    <span class="supply-point__value-name"
+                                        >Jistič</span
+                                    >
+                                    <span class="supply-point__value"
+                                        >{{data.circuitBreaker.description}}</span
+                                    >
                                 </div>
                             </div>
                             <div class="col-6 col-md-auto order-md-2">
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">Spotřeba</span>
-                                    <lnd-indicator [value]="data | consumptionIndicator: UNIT_INDICATOR"></lnd-indicator>
+                                    <span class="supply-point__value-name"
+                                        >Spotřeba</span
+                                    >
+                                    <lnd-indicator
+                                        [value]="data | consumptionIndicator: UNIT_INDICATOR"
+                                    ></lnd-indicator>
                                 </div>
                             </div>
                             <div class="col-md-auto order-md-1">
                                 <div class="supply-point__value-box">
-                                    <span *ngIf="data.commodityType === commodityType.POWER"
-                                          class="supply-point__value-name">
+                                    <span
+                                        *ngIf="data.commodityType === commodityType.POWER"
+                                        class="supply-point__value-name"
+                                    >
                                         EAN
                                     </span>
-                                    <span *ngIf="data.commodityType === commodityType.GAS"
-                                          class="supply-point__value-name">
+                                    <span
+                                        *ngIf="data.commodityType === commodityType.GAS"
+                                        class="supply-point__value-name"
+                                    >
                                         EIC
                                     </span>
-                                    <span class="supply-point__value">{{data.identificationNumber}}</span>
+                                    <span class="supply-point__value"
+                                        >{{data.identificationNumber}}</span
+                                    >
                                 </div>
                             </div>
-                            <div class="col-md-auto order-md-2"
-                                 *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem">
+                            <div
+                                class="col-md-auto order-md-2"
+                                *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem"
+                            >
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name"
                                         >Dodávkové období</span
                                     >
                                     <span
-                                        *ngIf="data?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                                        *ngIf="data?.contractEndType?.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                                         class="supply-point__value"
                                     >
                                         {{data.contract.deliveryFrom |
@@ -72,7 +103,7 @@
                                         date:'d.&nbsp;M.&nbsp;y'}}
                                     </span>
                                     <span
-                                        *ngIf="data?.contractEndType.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
+                                        *ngIf="data?.contractEndType?.code === contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                                         class="supply-point__value"
                                     >
                                         {{data.contract.deliveryFrom |
@@ -83,33 +114,46 @@
                             </div>
                         </div>
                         <ng-container *ngIf="additionalInfoTemplate">
-                            <ng-container *ngTemplateOutlet="additionalInfoTemplate; context: { data: this.data } "></ng-container>
+                            <ng-container
+                                *ngTemplateOutlet="additionalInfoTemplate; context: { data: this.data } "
+                            ></ng-container>
                         </ng-container>
                     </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="!isListItem"
-             class="col-xl-5">
+        <div *ngIf="!isListItem" class="col-xl-5">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
                     <div class="col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
-                            <ng-container *ngIf="(data | pathValue:['contract', 'personalData', 'deposit']) as deposit">
+                            <ng-container
+                                *ngIf="(data | pathValue:['contract', 'personalData', 'deposit']) as deposit"
+                            >
                                 <div class="col-12">
-                                    <span class="supply-point__price-label">Sjednaná záloha&nbsp;<small>(včetně&nbsp;DPH)</small></span>
+                                    <span class="supply-point__price-label"
+                                        >Sjednaná záloha&nbsp;<small
+                                            >(včetně&nbsp;DPH)</small
+                                        ></span
+                                    >
                                 </div>
-                                <div *ngIf="(data | pathValue:['contract', 'offer', 'supplier','name'])"
-                                     class="col-md-8 col-xl-12 mb-4 mb-md-0">
-                                    <span class="supply-point__price">{{deposit | number: '1.0-2'}} Kč</span>
-                                    / měsíc ({{data.contract.offer.supplier.name}})
+                                <div
+                                    *ngIf="(data | pathValue:['contract', 'offer', 'supplier','name'])"
+                                    class="col-md-8 col-xl-12 mb-4 mb-md-0"
+                                >
+                                    <span class="supply-point__price"
+                                        >{{deposit | number: '1.0-2'}} Kč</span
+                                    >
+                                    / měsíc
+                                    ({{data.contract.offer.supplier.name}})
                                 </div>
                             </ng-container>
                             <div class="col-md-4 supply-point__addon">
                                 <lnd-button
                                     label="Vybrat"
                                     type="primary"
-                                    (action)="$event.stopPropagation();action.emit(data)">
+                                    (action)="$event.stopPropagation();action.emit(data)"
+                                >
                                 </lnd-button>
                             </div>
                         </div>

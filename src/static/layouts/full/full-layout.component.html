@@ -1,33 +1,52 @@
-<div
-    id="top"
-    class="body-inner full-layout">
-    <lnd-header
-        [settings]="settings"
-        (homeRedirect)="homeRedirect()">
+<div id="top" class="body-inner full-layout">
+    <lnd-header [settings]="settings" (homeRedirect)="homeRedirect()">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
     </main>
-    <lnd-footer
-        [isSimpleFooter]="settings.isSimpleFooter">
+    <lnd-footer [isSimpleFooter]="settings.isSimpleFooter">
         <ul class="footer-navigation__list">
             <li class="footer-navigation__item">
-                <a routerLink="/secured/dashboard" class="footer-navigation__link">Obchodní podmínky parc4u</a>
+                <a
+                    routerLink="/secured/dashboard"
+                    class="footer-navigation__link"
+                    >Obchodní podmínky parc4u</a
+                >
             </li>
             <li class="footer-navigation__item">
-                <a routerLink="/secured/dashboard" class="footer-navigation__link">Vzory smluv o dodávce</a>
+                <a
+                    routerLink="/secured/dashboard"
+                    class="footer-navigation__link"
+                    >Vzory smluv o dodávce</a
+                >
             </li>
             <li class="footer-navigation__item">
-                <a routerLink="/secured/dashboard" class="footer-navigation__link">Často kladené otázky</a>
+                <a
+                    routerLink="/secured/dashboard"
+                    class="footer-navigation__link"
+                    >Často kladené otázky</a
+                >
             </li>
             <li class="footer-navigation__item">
-                <a routerLink="/secured/dashboard" class="footer-navigation__link">Cookies policy</a>
+                <a
+                    routerLink="/secured/dashboard"
+                    class="footer-navigation__link"
+                    >Cookies policy</a
+                >
             </li>
             <li class="footer-navigation__item">
-                <a routerLink="/secured/dashboard" class="footer-navigation__link">Ochrana osobních údajů</a>
+                <a
+                    routerLink="/secured/dashboard"
+                    class="footer-navigation__link"
+                    >Ochrana osobních údajů</a
+                >
             </li>
             <li class="footer-navigation__item">
-                <a routerLink="/secured/dashboard" class="footer-navigation__link">O PXE</a>
+                <a
+                    routerLink="/secured/dashboard"
+                    class="footer-navigation__link"
+                    >O PXE</a
+                >
             </li>
         </ul>
     </lnd-footer>

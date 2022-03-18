@@ -2,7 +2,8 @@
     id="top"
     class="body-inner"
     [class.body-inner--overlay]="showOverlay || isMenuOpen"
-    [class.body-inner--overlay-aside]="showOverlay || isMenuOpen">
+    [class.body-inner--overlay-aside]="showOverlay || isMenuOpen"
+>
     <lnd-header
         [user]="authService.currentUser$ | async"
         [userMenu]="navigationMenuUserActions"
@@ -18,7 +19,8 @@
             <div
                 class="container-aside"
                 [class.d-lg-none]="settings.hideLeftNavigation"
-                [class.col-lg-2]="!settings.hideLeftNavigation">
+                [class.col-lg-2]="!settings.hideLeftNavigation"
+            >
                 <lnd-navigation
                     [activeUrl]="activeUrl"
                     [config]="navConfig"
@@ -26,69 +28,82 @@
                     [itemOpened]="itemOpened"
                     (openItem)="toggleNavigationItem($event)"
                     (lndOffClick)="toggleMenuOpen(!isMenuOpen)"
-                    [offClickEnabled]="isMenuOpen">
+                    [offClickEnabled]="isMenuOpen"
+                >
                 </lnd-navigation>
             </div>
-            <div class="container-content"
+            <div
+                class="container-content"
                 [class.col-lg-8]="!settings.hideLeftNavigation"
                 [class.col-lg-10]="settings.hideLeftNavigation"
-                [class.offset-lg-1]="settings.hideLeftNavigation">
+                [class.offset-lg-1]="settings.hideLeftNavigation"
+            >
                 <main class="main">
                     <router-outlet></router-outlet>
                     <lnd-modal-dynamic></lnd-modal-dynamic>
                 </main>
             </div>
         </div>
-        <lnd-footer
-            [isSimpleFooter]="settings.isSimpleFooter">
+        <lnd-footer [isSimpleFooter]="settings.isSimpleFooter">
             <ul class="footer-navigation__list">
                 <li class="footer-navigation__item">
-                    <a [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
-                       class="footer-navigation__link"
+                    <a
+                        [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
+                        class="footer-navigation__link"
                     >
                         Obchodní podmínky parc4u
                     </a>
                 </li>
                 <li class="footer-navigation__item">
-                    <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual]"
-                       [fragment]="commodityTypePower"
-                       class="footer-navigation__link"
+                    <a
+                        [routerLink]="[
+                            '/',
+                            CONSTS.PATHS.PATTERNS_OF_CONTRACTS,
+                            subjectTypeIndividual
+                        ]"
+                        [fragment]="commodityTypePower"
+                        class="footer-navigation__link"
                     >
                         Vzory smluv o dodávce
                     </a>
                 </li>
                 <li class="footer-navigation__item">
-                    <a [routerLink]="['/', CONSTS.PATHS.FAQ]"
-                       class="footer-navigation__link"
+                    <a
+                        [routerLink]="['/', CONSTS.PATHS.FAQ]"
+                        class="footer-navigation__link"
                     >
                         Často kladené otázky
                     </a>
                 </li>
                 <li class="footer-navigation__item">
-                    <a [routerLink]="['/', CONSTS.PATHS.COOKIES_POLICY]"
-                       class="footer-navigation__link"
+                    <a
+                        [routerLink]="['/', CONSTS.PATHS.COOKIES_POLICY]"
+                        class="footer-navigation__link"
                     >
                         Cookies policy
                     </a>
                 </li>
                 <li class="footer-navigation__item">
-                    <a [routerLink]="['/', CONSTS.PATHS.BLOG, CONSTS.ALL_BLOG]"
-                       class="footer-navigation__link"
+                    <a
+                        [routerLink]="['/', CONSTS.PATHS.BLOG, CONSTS.ALL_BLOG]"
+                        class="footer-navigation__link"
                     >
                         Blog
                     </a>
                 </li>
                 <li class="footer-navigation__item">
-                    <a [routerLink]="['/', CONSTS.PATHS.SECURING_YOUR_DATA]"
-                       class="footer-navigation__link"
+                    <a
+                        [routerLink]="['/', CONSTS.PATHS.SECURING_YOUR_DATA]"
+                        class="footer-navigation__link"
                     >
                         Ochrana osobních údajů
                     </a>
                 </li>
                 <li class="footer-navigation__item">
-                    <a href="https://www.pxe.cz/"
-                       target="_blank"
-                       class="footer-navigation__link"
+                    <a
+                        href="https://www.pxe.cz/"
+                        target="_blank"
+                        class="footer-navigation__link"
                     >
                         O PXE
                     </a>

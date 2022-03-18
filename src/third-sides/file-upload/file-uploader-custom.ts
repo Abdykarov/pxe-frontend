@@ -1,10 +1,7 @@
 import * as R from 'ramda';
 
 import { FileItem } from './file-item.class';
-import {
-    FileUploader,
-    FileUploaderOptions,
-} from './file-uploader.class';
+import { FileUploader, FileUploaderOptions } from './file-uploader.class';
 
 export class FileUploaderCustom extends FileUploader {
     constructor(options: FileUploaderOptions) {
@@ -30,9 +27,9 @@ export class FileUploaderCustom extends FileUploader {
             sendable.append('files', item._file, item.file.name);
         }
 
-        R.forEachObjIndexed(
-            (value, key) => sendable.append(key, value),
-        )(appendData);
+        R.forEachObjIndexed((value, key) => sendable.append(key, value))(
+            appendData,
+        );
 
         if (this.options.additionalParameter !== undefined) {
             Object.keys(this.options.additionalParameter).forEach((key) => {
@@ -41,7 +38,10 @@ export class FileUploaderCustom extends FileUploader {
         }
         xhr.onload = () => {
             this.isUploading = false;
-            const gist = (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304 ? 'Success' : 'Error';
+            const gist =
+                (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304
+                    ? 'Success'
+                    : 'Error';
             const method = 'on' + gist + 'Item';
             this[method](fakeitem, null, xhr.status, null);
         };

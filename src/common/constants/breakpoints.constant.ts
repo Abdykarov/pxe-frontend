@@ -1,2 +1,1 @@
-
-export const viewBreakpoints = [ 'xs', 'sm', 'md', 'lg', 'xl' ];
+export const viewBreakpoints = ['xs', 'sm', 'md', 'lg', 'xl'];

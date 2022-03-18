@@ -1,20 +1,27 @@
 <ng-template #canBeDeletedTemplate>
-    <p [class.mb-3]="currentUser.phoneNumber">Mrzí nás, že parc4u opouštíte, ale bránit vám v tom nemůžeme.</p>
-    <p *ngIf="currentUser.phoneNumber">Zrušení účtu a smazání veškerých svých dat v parc4u provedete ověřovacím SMS kódem.</p>
+    <p [class.mb-3]="currentUser.phoneNumber">
+        Mrzí nás, že parc4u opouštíte, ale bránit vám v tom nemůžeme.
+    </p>
+    <p *ngIf="currentUser.phoneNumber">
+        Zrušení účtu a smazání veškerých svých dat v parc4u provedete ověřovacím
+        SMS kódem.
+    </p>
     <div class="row justify-content-between">
         <div class="col-12 col-md-auto mb-4 mb-md-0">
             <lnd-button
                 label="Zůstat v parc4u"
                 type="link"
                 [customClass]="currentUser.phoneNumber ? 'mt-md-4' : ''"
-                (click)="redirectToUserProfile()">
+                (click)="navigateConsumerService.navigateToUserProfile()"
+            >
             </lnd-button>
         </div>
         <div
             class="col-12"
             [class.col-md-auto]="!currentUser.phoneNumber"
             [class.col-md-9]="currentUser.phoneNumber"
-            #pxeVerificationFormWrapper>
+            #pxeVerificationFormWrapper
+        >
             <pxe-verification-form
                 *ngIf="currentUser.phoneNumber"
                 enableVerificationLabel="Zrušit účet"
@@ -41,48 +48,73 @@
     </div>
 </ng-template>
 <ng-template #cantBeDeletedTemplate>
-    <p class="mb-3">Mrzí nás, že parc4u opouštíte, ale bránit vám v tom nemůžeme.</p>
-    <p class="mb-3">K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.</p>
+    <p class="mb-3">
+        Mrzí nás, že parc4u opouštíte, ale bránit vám v tom nemůžeme.
+    </p>
+    <p class="mb-3">
+        K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je
+        potřeba, před zrušením účtu, vypovědět.
+    </p>
     <ul class="check-list check-list--less-offset">
-        <li *ngFor="let supplyPoint of supplyPoints | slice:0:MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE">
-            {{supplyPoint.name}}
+        <li
+            *ngFor="
+                let supplyPoint of supplyPoints
+                    | slice
+                        : 0
+                        : MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE
+            "
+        >
+            {{ supplyPoint.name }}
         </li>
-        <li *ngIf="supplyPoints.length > MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE">a další</li>
+        <li
+            *ngIf="
+                supplyPoints.length >
+                MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE
+            "
+        >
+            a další
+        </li>
     </ul>
     <div class="row justify-content-between">
         <div class="col-12 col-md-auto mb-4 mb-md-0">
             <lnd-button
                 label="Zůstat v parc4u"
                 type="link"
-                (click)="redirectToUserProfile()">
+                (click)="navigateConsumerService.navigateToUserProfile()"
+            >
             </lnd-button>
         </div>
         <div class="col-12 col-md-auto">
             <lnd-button
                 label="Přejít na smlouvy"
                 type="primary"
-                (click)="redirectToConcludedContract()">
+                (click)="navigateConsumerService.navigateToSupplyPoints()"
+            >
             </lnd-button>
         </div>
     </div>
 </ng-template>
 <pxe-layout-container pageTitle="Zrušení uživatelského účtu">
-    <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
+    <lnd-placeloader
+        [loading]="loading && !globalError.length"
+    ></lnd-placeloader>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <lnd-alert
-                *ngIf="globalError.length"
-                type="danger">
+            <lnd-alert *ngIf="globalError.length" type="danger">
                 <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
+                    {{ error }}<br />
                 </ng-container>
             </lnd-alert>
         </div>
-        <div *ngIf="supplyPoints !== null"
-              class="col-12 col-xl-10 offset-xl-1">
+        <div *ngIf="supplyPoints !== null" class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <ng-container *ngTemplateOutlet="this.supplyPoints.length === 0 ?
-                    canBeDeletedTemplate : cantBeDeletedTemplate"></ng-container>
+                <ng-container
+                    *ngTemplateOutlet="
+                        this.supplyPoints.length === 0
+                            ? canBeDeletedTemplate
+                            : cantBeDeletedTemplate
+                    "
+                ></ng-container>
             </div>
         </div>
     </div>

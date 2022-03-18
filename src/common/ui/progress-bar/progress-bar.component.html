@@ -1,27 +1,21 @@
- <nav class="progress-bar-holder">
-    <ol
-        class="progress-bar"
-        [class.progress-bar--minor]="isMinor">
+<nav class="progress-bar-holder">
+    <ol class="progress-bar" [class.progress-bar--minor]="isMinor">
         <li
             *ngFor="let item of config"
             class="progress-bar__item"
             [class.progress-bar__item--done]="item.done"
             [class.progress-bar__item--shadow-step]="item.shadowStep"
-            [class.progress-bar__item--active]="item.active">
-            <a
-                class="progress-bar__item-inner">
+            [class.progress-bar__item--active]="item.active"
+        >
+            <a class="progress-bar__item-inner">
                 <span class="progress-bar__bullet">
                     <span
                         *ngIf="!!item.done"
-                        class="
-                            progress-bar__icon
-                            icon
-                            icon--check">
+                        class="progress-bar__icon icon icon--check"
+                    >
                     </span>
                 </span>
-                <span class="progress-bar__label">
-                    {{ item.label }}
-                </span>
+                <span class="progress-bar__label"> {{ item.label }} </span>
             </a>
         </li>
     </ol>

@@ -1,46 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeCs from '@angular/common/locales/cs';
-import {
-    ErrorHandler,
-    LOCALE_ID,
-    NgModule,
-} from '@angular/core';
 import localeCsExtra from '@angular/common/locales/extra/cs';
-import {
-    ReactiveFormsModule,
-    Validators,
-} from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
-
-import { ApolloModule } from 'apollo-angular';
+import { ErrorHandler, LOCALE_ID, NgModule, PLATFORM_ID } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule, Meta } from '@angular/platform-browser';
+import { TransferHttpCacheModule } from '@nguniversal/common';
+import { RECAPTCHA_LANGUAGE, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CookieModule } from 'ngx-cookie';
-import { HttpLinkModule } from 'apollo-angular-link-http';
-import {
-    RECAPTCHA_LANGUAGE,
-    RECAPTCHA_SETTINGS,
-} from 'ng-recaptcha';
-import { TransferHttpCacheModule } from '@nguniversal/common';
-
 // own classes
 import { ApolloCMSGraphQLProvider } from 'src/common/cms/middleware/apollo-cms-graphql-provider';
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app.routing';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { environment } from 'src/environments/environment';
 import { FileUploadModule } from 'src/third-sides/file-upload';
+import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
+import { AppComponent } from './app.component';
+import { buildIdFactory } from './app.config';
+import { BUILD_ID_PROVIDER } from './app.constants';
+import { AppRoutingModule } from './app.routing';
 import { GlobalErrorHandler } from './errors/global.error.handler';
 import { InterceptorProviders } from './interceptors';
-import { PipesModule } from 'src/common/pipes/common/pipes.module';
-import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-    ],
+    declarations: [AppComponent],
     imports: [
-        ApolloModule,
         AppRoutingModule,
         BrowserModule.withServerTransition({
             appId: 'pxe-pacr4retail',
@@ -50,7 +35,6 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         PdfJsViewerModule.forRoot(),
         FileUploadModule,
         HttpClientModule,
-        HttpLinkModule,
         PipesModule,
         ReactiveFormsModule,
         TransferHttpCacheModule,
@@ -59,6 +43,11 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         ApolloGraphQLProvider,
         ApolloCMSGraphQLProvider,
         InterceptorProviders,
+        {
+            provide: BUILD_ID_PROVIDER,
+            useFactory: buildIdFactory,
+            deps: [Meta, PLATFORM_ID],
+        },
         {
             provide: ErrorHandler,
             useClass: GlobalErrorHandler,
@@ -81,16 +70,10 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
             useValue: 'cs',
         },
     ],
-    bootstrap: [
-        AppComponent,
-    ],
+    bootstrap: [AppComponent],
 })
-
 export class AppModule {
-
     constructor() {
         registerLocaleData(localeCs, localeCsExtra);
     }
 }
-
-Validators.required.prototype.isRequiredValidator = true;

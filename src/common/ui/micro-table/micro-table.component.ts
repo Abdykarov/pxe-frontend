@@ -1,9 +1,4 @@
-import {
-    Component,
-    Input,
-    TemplateRef,
-} from '@angular/core';
-
+import { Component, Input, TemplateRef } from '@angular/core';
 import { IMicroTableData } from './micro-table/item.model';
 
 @Component({
@@ -12,7 +7,6 @@ import { IMicroTableData } from './micro-table/item.model';
     styleUrls: ['./micro-table.component.scss'],
 })
 export class MicroTableComponent {
-
     @Input()
     public data: IMicroTableData[];
 

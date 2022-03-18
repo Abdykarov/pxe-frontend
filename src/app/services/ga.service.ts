@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { environment } from 'src/environments/environment';
 
 declare const gtag;
@@ -10,7 +9,7 @@ declare const gtag;
 export class GAService {
     public gtm = (event): void => {
         gtag('config', environment.gtmId, {
-            'page_path': event.urlAfterRedirects,
+            page_path: event.urlAfterRedirects,
         });
-    }
+    };
 }

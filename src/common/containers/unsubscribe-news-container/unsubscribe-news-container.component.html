@@ -1,22 +1,26 @@
 <ng-container *ngIf="globalError$ | async as globalError">
     <div class="row">
-        <div *ngIf="globalError?.length !== 0"
-             class="col-12">
-            <lnd-alert
-                type="danger">
-                Odhlášení z novinek se bohužel nepovedlo. Pro odhlášení nás kontaktujte na <a class="link--interactive-revert text-white" href="mailto:info@parc4u.cz">info@parc4u.cz</a>.
+        <div *ngIf="globalError?.length !== 0" class="col-12">
+            <lnd-alert type="danger">
+                Odhlášení z novinek se bohužel nepovedlo. Pro odhlášení nás
+                kontaktujte na
+                <a
+                    class="link--interactive-revert text-white"
+                    href="mailto:info@parc4u.cz"
+                    >info@parc4u.cz</a
+                >.
             </lnd-alert>
         </div>
     </div>
 </ng-container>
-<ng-container *ngIf="isLoading$ | async; else dataTemplate" >
-    <lnd-placeloader [loading]="true" label="Právě probíhá odhlašování"></lnd-placeloader>
+<ng-container *ngIf="isLoading$ | async; else dataTemplate">
+    <lnd-placeloader
+        [loading]="true"
+        label="Právě probíhá odhlašování"
+    ></lnd-placeloader>
 </ng-container>
 <ng-template #dataTemplate>
-    <lnd-alert
-        *ngIf="successResult$ | async"
-        type="info"
-        [hasIcon]="true">
+    <lnd-alert *ngIf="successResult$ | async" type="info" [hasIcon]="true">
         Odhlášení z odběru novinek proběhlo úspěšně.
     </lnd-alert>
 </ng-template>

@@ -1,25 +1,23 @@
+import { Injectable } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     Resolve,
     RouterStateSnapshot,
 } from '@angular/router';
-import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
-
-import { ILandingPage } from 'src/common/cms/models/landing-page';
+import { ILandingPageContent } from 'src/common/cms/models/landing-page';
 import { LandingPageService } from 'src/common/cms/services/landing-page.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class LandingPageResolver implements Resolve<any> {
+    constructor(private landingPageService: LandingPageService) {}
 
-    constructor(
-        private landingPageService: LandingPageService,
-    ) {}
-
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ILandingPage> {
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<ILandingPageContent> {
         return this.landingPageService.getLandingPage();
     }
 }
