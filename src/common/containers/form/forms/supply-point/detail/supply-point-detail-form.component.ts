@@ -39,6 +39,7 @@ import {
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { UtilsService } from 'src/common/containers/supply-point-detail/services/utils.service';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
     AllowedOperations,
     CommodityType,
@@ -65,6 +66,9 @@ export class SupplyPointDetailFormComponent
     public supplyPoint: ISupplyPoint;
 
     @Input()
+    public nextSupplyPoint?: ISupplyPoint = null;
+
+    @Input()
     public contractActionsTemplate?: TemplateRef<any>;
 
     @Input()
@@ -85,6 +89,7 @@ export class SupplyPointDetailFormComponent
     public codeList = CODE_LIST;
     public codeLists: ICodelistOptions;
     public contractEndType = CONTRACT_END_TYPE;
+    public ContractStatus = ContractStatus;
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';
