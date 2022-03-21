@@ -27,7 +27,7 @@ export class VerificationFormComponent
     public showForm = false;
 
     @Input()
-    public smsSent: number = null;
+    public smsSent: number | boolean = null;
 
     @Input()
     public contract: IContract;
@@ -85,6 +85,7 @@ export class VerificationFormComponent
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+        console.log('AHOJ - ngOnChanges', changes);
         if (
             this.form &&
             changes.smsSent &&

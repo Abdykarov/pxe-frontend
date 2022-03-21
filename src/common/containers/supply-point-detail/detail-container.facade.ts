@@ -71,12 +71,14 @@ export class DetailContainerFacade extends AbstractFacade {
         this.apiService
             .submitVerification(smsCode, supplyPoint, supplyPointDetailForm)
             .subscribe(
-                (result: boolean) =>
+                (result: boolean) => {
                     this.apiService.processSuccessVerificationResult(
                         result,
                         this.globalErrorSubject$,
-                        this.formSent$
-                    ),
+                        this.formSent$,
+                        this.smsSentSubject$
+                    );
+                },
                 (error: ErrorResponse) => {
                     this.processError(error);
                     if (
@@ -98,6 +100,7 @@ export class DetailContainerFacade extends AbstractFacade {
 
     public changeActiveContractAction = (contractAction: ContractActions) => {
         this.contractActionsService.changeActiveContractAction(contractAction);
+        this.smsSentSubject$.next(null);
     };
 
     public saveDocument = (contractId: string, documentType: DocumentType) => {
