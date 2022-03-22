@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 import * as R from 'ramda';
 import { combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

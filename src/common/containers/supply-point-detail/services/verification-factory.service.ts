@@ -75,14 +75,16 @@ export class VerificationFactoryService {
     public processSuccessVerificationResult(
         result: boolean,
         globalErrorSubject$: BehaviorSubject<string[]>,
-        formSent$: BehaviorSubject<boolean>
+        formSent$: BehaviorSubject<boolean>,
+        smsSentSubject$: BehaviorSubject<number>
     ): void {
         switch (this.contractActionsService.getValue()) {
             case ContractActions.UNSET_PROLONGATION:
                 this.processSuccessVerificationResultUnsetContractProlongation(
                     result,
                     globalErrorSubject$,
-                    formSent$
+                    formSent$,
+                    smsSentSubject$
                 );
                 break;
             case ContractActions.TERMINATE_CONTRACT:
@@ -119,7 +121,8 @@ export class VerificationFactoryService {
     private processSuccessVerificationResultUnsetContractProlongation(
         unsetContractProlongation: boolean,
         globalErrorSubject$: BehaviorSubject<string[]>,
-        formSent$: BehaviorSubject<boolean>
+        formSent$: BehaviorSubject<boolean>,
+        smsSentSubject$: BehaviorSubject<number>
     ): void {
         if (unsetContractProlongation) {
             formSent$.next(true);
@@ -127,6 +130,7 @@ export class VerificationFactoryService {
                 formSent$.next(false);
             }, CONSTS.TIME_TO_SHOW_FLASH_MESSAGES);
             globalErrorSubject$.next([]);
+            smsSentSubject$.next(null);
             this.contractActionsService.changeActiveContractAction(
                 ContractActions.NONE
             );

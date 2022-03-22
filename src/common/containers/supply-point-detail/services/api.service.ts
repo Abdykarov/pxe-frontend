@@ -45,15 +45,15 @@ export class ApiService {
     public processSuccessVerificationResult(
         result: boolean,
         globalErrorSubject$: BehaviorSubject<string[]>,
-        formSent$: BehaviorSubject<boolean>
-    ): Function {
-        return () => {
-            this.verificationService.processSuccessVerificationResult(
-                result,
-                globalErrorSubject$,
-                formSent$
-            );
-        };
+        formSent$: BehaviorSubject<boolean>,
+        smsSentSubject$: BehaviorSubject<number>
+    ): void {
+        this.verificationService.processSuccessVerificationResult(
+            result,
+            globalErrorSubject$,
+            formSent$,
+            smsSentSubject$
+        );
     }
 
     public sendContractConfirmationSms(contractId: string): Observable<any> {

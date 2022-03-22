@@ -70,9 +70,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                             this.router
                                 .navigate([CONSTS.PATHS.LOGIN])
                                 .then(() => {
-                                    if (this.state.refresh) {
-                                        window.location.reload();
-                                    }
+                                    window.location.reload();
                                 });
                         },
                         (err) => console.log(err)

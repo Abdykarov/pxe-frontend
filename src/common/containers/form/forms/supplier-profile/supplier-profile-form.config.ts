@@ -41,13 +41,6 @@ export const supplierProfileFormFields: IForm = {
                 CustomValidators.URL,
             ],
         ],
-        pricesUrl: [
-            null,
-            [
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.URL_PRICES),
-                CustomValidators.URL,
-            ],
-        ],
     },
     validationMessages: {
         numberSeriesPrefix: {
@@ -67,11 +60,6 @@ export const supplierProfileFormFields: IForm = {
                 errorFieldMessages.cannotBeNullIfFieldIsFilled,
             maxlengthRequiredLengthActualLength:
                 errorFieldMessages.string.maxlength,
-        },
-        pricesUrl: {
-            maxlengthRequiredLengthActualLength:
-                errorFieldMessages.string.maxlength,
-            url: errorFieldMessages.url.url,
         },
         pricesUrl: {
             maxlengthRequiredLengthActualLength:

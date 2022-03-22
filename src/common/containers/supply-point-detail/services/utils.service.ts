@@ -22,9 +22,15 @@ export class UtilsService {
         supplyPointCopy: ISupplyPoint,
         allowedOperation: AllowedOperations = AllowedOperations.SHOW_DELIVERY_TO
     ) {
+        const supplyPointWithId = {
+            ...supplyPointCopy,
+        };
+
         delete supplyPointCopy['id'];
-        evt.preventDefault();
-        evt.cancelBubble = true;
+        if (evt) {
+            evt.preventDefault();
+            evt.cancelBubble = true;
+        }
 
         const state = {
             supplyPointCopy,
@@ -68,8 +74,8 @@ export class UtilsService {
             );
         } else {
             this.navigateConsumerService.navigateToSupplyPointDetail(
-                supplyPointCopy.id,
-                supplyPointCopy.contract.nextContractId
+                supplyPointWithId.id,
+                supplyPointWithId.contract.nextContractId
             );
         }
     }

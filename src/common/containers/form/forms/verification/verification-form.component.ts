@@ -27,7 +27,7 @@ export class VerificationFormComponent
     public showForm = false;
 
     @Input()
-    public smsSent: number = null;
+    public smsSent: number | boolean = null;
 
     @Input()
     public contract: IContract;
