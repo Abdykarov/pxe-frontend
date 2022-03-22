@@ -187,7 +187,9 @@
                                         Archiv smluv o dodávce {{ commodityType
                                         === COMMODITY_TYPE.POWER ? "elektřiny" :
                                         "plynu" }} společnosti Power Exchange
-                                        Central Europe, a.s. pro domácnosti
+                                        Central Europe, a.s. pro {{ subjectType
+                                        === SUBJECT_TYPE.INDIVIDUAL ?
+                                        "domácnost" : "firmu" }}
                                     </h5>
                                     <lnd-table
                                         [withoutBorder]="true"
