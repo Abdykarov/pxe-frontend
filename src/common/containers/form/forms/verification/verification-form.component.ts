@@ -85,7 +85,6 @@ export class VerificationFormComponent
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-        console.log('AHOJ - ngOnChanges', changes);
         if (
             this.form &&
             changes.smsSent &&

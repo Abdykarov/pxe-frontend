@@ -27,8 +27,10 @@ export class UtilsService {
         };
 
         delete supplyPointCopy['id'];
-        evt.preventDefault();
-        evt.cancelBubble = true;
+        if (evt) {
+            evt.preventDefault();
+            evt.cancelBubble = true;
+        }
 
         const state = {
             supplyPointCopy,

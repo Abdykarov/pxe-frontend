@@ -45,7 +45,6 @@ import {
     CommodityType,
     ICodelistOptions,
     ISupplyPoint,
-    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -179,7 +178,10 @@ export class SupplyPointDetailFormComponent
                 )
                 .subscribe((modal) => {
                     if (modal.modalType === confirmFindNewSupplyPoint) {
-                        this.navigateToSupplyPoint(modal.data);
+                        this.utilsService.restoreContractAction(
+                            null,
+                            this.supplyPoint
+                        );
                     }
 
                     if (modal.modalType === confirmSaveSupplyPoint) {
@@ -210,20 +212,9 @@ export class SupplyPointDetailFormComponent
                 confirmFindNewSupplyPointConfig(this.supplyPoint)
             );
         } else {
-            this.navigateToSupplyPoint(this.supplyPoint);
+            this.utilsService.restoreContractAction(null, this.supplyPoint);
         }
     };
-
-    public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) =>
-        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
-            ProgressStatus.SUPPLY_POINT,
-            null,
-            {
-                supplyPointCopy: {
-                    ...supplyPoint,
-                },
-            }
-        );
 
     public fixAnnualConsumptionByUnit = () => {
         const annualConsumptionUnit = this.supplyPoint.annualConsumptionUnit;
