@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONSTS, RequestsOverviewBannerShow } from 'src/app/app.constants';
@@ -18,8 +17,7 @@ export class VerificationFactoryService {
     constructor(
         private contractActionsService: ContractActionsService,
         private contractService: ContractService,
-        private navigateConsumerService: NavigateConsumerService,
-        private router: Router
+        private navigateConsumerService: NavigateConsumerService
     ) {}
 
     public verificationFactory(
