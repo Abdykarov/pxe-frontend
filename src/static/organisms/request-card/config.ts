@@ -5,6 +5,8 @@ import {
 } from 'src/common/graphql/models/supply.model';
 
 export const supplyPointConfig: ISupplyPoint = {
+    closedByContractEntityId: '',
+    closedByContractIsConcluded: false,
     id: '5456',
     name: 'Byt praha',
     allowedOperations: [],
@@ -36,6 +38,8 @@ export const supplyPointConfig: ISupplyPoint = {
 };
 
 export const supplyPointConfig2: ISupplyPoint = {
+    closedByContractEntityId: '',
+    closedByContractIsConcluded: false,
     id: '5456',
     name: 'Byt praha',
     allowedOperations: [],
