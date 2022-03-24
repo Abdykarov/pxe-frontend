@@ -39,12 +39,12 @@ import {
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { UtilsService } from 'src/common/containers/supply-point-detail/services/utils.service';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
     AllowedOperations,
     CommodityType,
     ICodelistOptions,
     ISupplyPoint,
-    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -63,6 +63,9 @@ export class SupplyPointDetailFormComponent
 
     @Input()
     public supplyPoint: ISupplyPoint;
+
+    @Input()
+    public nextSupplyPoint?: ISupplyPoint = null;
 
     @Input()
     public contractActionsTemplate?: TemplateRef<any>;
@@ -85,6 +88,7 @@ export class SupplyPointDetailFormComponent
     public codeList = CODE_LIST;
     public codeLists: ICodelistOptions;
     public contractEndType = CONTRACT_END_TYPE;
+    public ContractStatus = ContractStatus;
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';
@@ -174,7 +178,10 @@ export class SupplyPointDetailFormComponent
                 )
                 .subscribe((modal) => {
                     if (modal.modalType === confirmFindNewSupplyPoint) {
-                        this.navigateToSupplyPoint(modal.data);
+                        this.utilsService.restoreContractAction(
+                            null,
+                            this.supplyPoint
+                        );
                     }
 
                     if (modal.modalType === confirmSaveSupplyPoint) {
@@ -205,20 +212,9 @@ export class SupplyPointDetailFormComponent
                 confirmFindNewSupplyPointConfig(this.supplyPoint)
             );
         } else {
-            this.navigateToSupplyPoint(this.supplyPoint);
+            this.utilsService.restoreContractAction(null, this.supplyPoint);
         }
     };
-
-    public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) =>
-        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
-            ProgressStatus.SUPPLY_POINT,
-            null,
-            {
-                supplyPointCopy: {
-                    ...supplyPoint,
-                },
-            }
-        );
 
     public fixAnnualConsumptionByUnit = () => {
         const annualConsumptionUnit = this.supplyPoint.annualConsumptionUnit;

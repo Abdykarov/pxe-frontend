@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import * as R from 'ramda';
 import { Observable } from 'rxjs';
 import { map, share, switchMap } from 'rxjs/operators';
-import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractFacade } from 'src/common/abstract.facade';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -15,9 +14,7 @@ export class SupplyPointsOverviewContainerFacade extends AbstractFacade {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        protected supplyPointService: SupplyService,
-        private navigateConsumerService: NavigateConsumerService
+        protected supplyPointService: SupplyService
     ) {
         super();
     }

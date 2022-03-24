@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { SupplyPointUtilsService } from 'src/app/services/supply-point-utils.service';
@@ -32,7 +32,6 @@ export class SupplyPointsOverviewContainerComponent extends AbstractComponent {
     constructor(
         public completeRequestAction: SupplyPointUtilsService,
         public navigateConsumerService: NavigateConsumerService,
-        private route: ActivatedRoute,
         public router: Router,
         public supplyPointsOverviewContainerFacade: SupplyPointsOverviewContainerFacade,
         public utilsService: UtilsService

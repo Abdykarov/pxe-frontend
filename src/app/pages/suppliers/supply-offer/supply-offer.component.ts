@@ -154,6 +154,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 ([codeLists, offers, commodityType]) => {
+                    console.log('TABLE');
                     this.tableRows = offers;
                     if (!this.initRows) {
                         this.tableCols =
@@ -190,7 +191,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 ) {
                     this.deleteDisabled[modal.data.row.id] = true;
                     this.offerService
-                        .deleteOffer(modal.data.row.id)
+                        .deleteOffer(modal.data.row.id, this.commodityType)
                         .pipe(takeUntil(this.destroy$))
                         .subscribe(
                             () => {

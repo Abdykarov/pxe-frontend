@@ -38,8 +38,8 @@ export class OfferService {
     public findSupplierOffers = (commodityType: CommodityType) =>
         this.apollo.watchQuery<any>({
             query: findSupplierOffersQuery,
-            fetchPolicy: 'network-only',
-            nextFetchPolicy: 'cache-first',
+            fetchPolicy: 'cache-and-network',
+            nextFetchPolicy: 'cache-only',
             variables: {
                 commodityType,
             },
@@ -67,6 +67,9 @@ export class OfferService {
             update: (cache, { data }) => {
                 const { findSupplierOffers: offers } = cache.readQuery({
                     query: findSupplierOffersQuery,
+                    variables: {
+                        commodityType: CommodityType.POWER,
+                    },
                 });
                 const offersWithLastUpdatedFalse =
                     this.setIsLastUpdatedToFalse(offers);
@@ -75,6 +78,9 @@ export class OfferService {
                 createdOffer.isLastUpdated = true;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
+                    variables: {
+                        commodityType: CommodityType.POWER,
+                    },
                     data: {
                         findSupplierOffers: [
                             ...offersWithLastUpdatedFalse,
@@ -98,6 +104,9 @@ export class OfferService {
             update: (cache, { data }) => {
                 const { findSupplierOffers: offers } = cache.readQuery({
                     query: findSupplierOffersQuery,
+                    variables: {
+                        commodityType: CommodityType.GAS,
+                    },
                 });
                 const offersWithLastUpdatedFalse =
                     this.setIsLastUpdatedToFalse(offers);
@@ -106,6 +115,9 @@ export class OfferService {
                 createdOffer.isLastUpdated = true;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
+                    variables: {
+                        commodityType: CommodityType.GAS,
+                    },
                     data: {
                         findSupplierOffers: [
                             ...offersWithLastUpdatedFalse,
@@ -119,7 +131,8 @@ export class OfferService {
     private checkAndUpdateApolloClientInUpdateOffers = (
         offerId,
         data,
-        cache
+        cache,
+        commodityType
     ) => {
         const operationOffers = data.updatePowerOffer
             ? data.updatePowerOffer
@@ -130,6 +143,9 @@ export class OfferService {
 
         const { findSupplierOffers: offers } = cache.readQuery({
             query: findSupplierOffersQuery,
+            variables: {
+                commodityType,
+            },
         });
         const offersWithLastUpdatedFalse = this.setIsLastUpdatedToFalse(offers);
 
@@ -154,6 +170,9 @@ export class OfferService {
 
         cache.writeQuery({
             query: findSupplierOffersQuery,
+            variables: {
+                commodityType,
+            },
             data: {
                 findSupplierOffers: [...newFindSupplierOffers],
             },
@@ -176,7 +195,8 @@ export class OfferService {
                 this.checkAndUpdateApolloClientInUpdateOffers(
                     offerId,
                     data,
-                    cache
+                    cache,
+                    CommodityType.POWER
                 );
             },
         });
@@ -197,12 +217,13 @@ export class OfferService {
                 this.checkAndUpdateApolloClientInUpdateOffers(
                     offerId,
                     data,
-                    cache
+                    cache,
+                    CommodityType.GAS
                 );
             },
         });
 
-    public deleteOffer = (offerId: string) =>
+    public deleteOffer = (offerId: string, commodityType: CommodityType) =>
         this.apollo.mutate<any>({
             mutation: deleteOfferMutation,
             variables: {
@@ -211,17 +232,20 @@ export class OfferService {
             update: (cache, { data }) => {
                 const { findSupplierOffers: offers } = cache.readQuery({
                     query: findSupplierOffersQuery,
+                    variables: {
+                        commodityType,
+                    },
                 });
-                const updatedData = R.map((offer) => {
-                    if (offer.id === data.deleteOffer.toString()) {
-                        offer.status = IOfferStatus.DELETED;
-                    }
-                    return offer;
-                })(offers);
+                const updatedData = R.reject(
+                    (offer) => offer.id === data.deleteOffer.toString()
+                )(offers);
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
+                    variables: {
+                        commodityType,
+                    },
                     data: {
-                        findSupplierOffers: updatedData,
+                        findSupplierOffers: [...updatedData],
                     },
                 });
             },
@@ -322,9 +346,12 @@ export class OfferService {
     public deleteMarkedOffer = (
         commodityType: CommodityType
     ): Observable<any>[] => {
-        const client = this.apollo.getClient();
+        const client = this.apollo.client;
         const { findSupplierOffers: offers } = client.readQuery({
             query: findSupplierOffersQuery,
+            variables: {
+                commodityType,
+            },
         });
         const offerObservableForDelete = [];
         R.map((offer: IOffer) => {
@@ -334,7 +361,7 @@ export class OfferService {
                 commodityType === offer.commodityType
             ) {
                 offerObservableForDelete.push(
-                    this.deleteOffer(offer.id).pipe(
+                    this.deleteOffer(offer.id, commodityType).pipe(
                         catchError((err) => of({ isError: true, error: err }))
                     )
                 );

@@ -76,7 +76,7 @@
                 *ngIf="supplyPoint?.contractEndType.code !== contractEndType.CONTRACT_END_INDEFINITE_PERIOD"
                 [data]="{
                     text: 'Platnost vaší stávající smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day') + ', ale ' +
-                     'máte jednu navazující smlouvu rozpracovanou, chcete jí dokončit?'
+                     'máte jednu navazující smlouvu rozpracovanou, chcete ji dokončit?'
                 }"
                 (customBannerAction)="finallyNextContractAction.emit()"
             ></lnd-banner-ui>
@@ -168,13 +168,6 @@
                         <span class="perex"
                             >{{supplyPoint.identificationNumber}}</span
                         >
-                    </div>
-                    <div
-                        *ngIf="supplyPoint?.contract?.offer?.greenEnergy"
-                        class="green-energy justify-content-center mb-5"
-                    >
-                        <span class="icon icon--leaf green-energy__icon"></span>
-                        <span class="green-energy__text">Zelená energie</span>
                     </div>
                     <div *ngIf="!isForm" class="col-12 mb-5">
                         <p class="mb-1 text-uppercase">

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONSTS, RequestsOverviewBannerShow } from 'src/app/app.constants';
@@ -18,8 +17,7 @@ export class VerificationFactoryService {
     constructor(
         private contractActionsService: ContractActionsService,
         private contractService: ContractService,
-        private navigateConsumerService: NavigateConsumerService,
-        private router: Router
+        private navigateConsumerService: NavigateConsumerService
     ) {}
 
     public verificationFactory(
@@ -75,14 +73,16 @@ export class VerificationFactoryService {
     public processSuccessVerificationResult(
         result: boolean,
         globalErrorSubject$: BehaviorSubject<string[]>,
-        formSent$: BehaviorSubject<boolean>
+        formSent$: BehaviorSubject<boolean>,
+        smsSentSubject$: BehaviorSubject<number>
     ): void {
         switch (this.contractActionsService.getValue()) {
             case ContractActions.UNSET_PROLONGATION:
                 this.processSuccessVerificationResultUnsetContractProlongation(
                     result,
                     globalErrorSubject$,
-                    formSent$
+                    formSent$,
+                    smsSentSubject$
                 );
                 break;
             case ContractActions.TERMINATE_CONTRACT:
@@ -119,7 +119,8 @@ export class VerificationFactoryService {
     private processSuccessVerificationResultUnsetContractProlongation(
         unsetContractProlongation: boolean,
         globalErrorSubject$: BehaviorSubject<string[]>,
-        formSent$: BehaviorSubject<boolean>
+        formSent$: BehaviorSubject<boolean>,
+        smsSentSubject$: BehaviorSubject<number>
     ): void {
         if (unsetContractProlongation) {
             formSent$.next(true);
@@ -127,6 +128,7 @@ export class VerificationFactoryService {
                 formSent$.next(false);
             }, CONSTS.TIME_TO_SHOW_FLASH_MESSAGES);
             globalErrorSubject$.next([]);
+            smsSentSubject$.next(null);
             this.contractActionsService.changeActiveContractAction(
                 ContractActions.NONE
             );

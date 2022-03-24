@@ -63,6 +63,7 @@ export class SupplierProfileComponent extends AbstractComponent {
             )
             .subscribe(
                 () => {
+                    console.log('updateUserProfile');
                     this.formLoading = false;
                     if (this.profileChanged) {
                         this.smsSent = false;
@@ -85,6 +86,7 @@ export class SupplierProfileComponent extends AbstractComponent {
     };
 
     public sendChangePhoneNumberSmsMutation = (phoneNumber: string) => {
+        this.formLoading = true;
         this.userService
             .sendChangePhoneNumberSmsMutation(phoneNumber)
             .pipe(
@@ -98,7 +100,10 @@ export class SupplierProfileComponent extends AbstractComponent {
                     if (!sendChangePhoneNumberSms) {
                         this.globalError = [defaultErrorMessage];
                     } else {
-                        this.smsSent = true;
+                        setTimeout(() => {
+                            this.smsSent = true;
+                            this.cd.detectChanges();
+                        });
                     }
                     this.cd.markForCheck();
                 },
