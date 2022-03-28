@@ -539,27 +539,19 @@ export class SupplyPointFormComponent
             annualConsumption =
                 this.normalizationAnnualConsumption(annualConsumption);
 
-            if (
-                this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL ||
-                this.formValues?.id
-            ) {
-                expirationDate = expirationDateFromSupplyPoint;
-                contractEndTypeId =
-                    this.formValues?.contractEndType &&
-                    this.formValues.contractEndType.code;
-                timeToContractEnd = this.formValues?.timeToContractEnd;
-                timeToContractEndPeriodId =
-                    this.formValues?.timeToContractEndPeriod &&
-                    this.formValues.timeToContractEndPeriod.code;
-            } else {
-                expirationDate =
-                    expirationDateFromContract || expirationDateFromSupplyPoint;
-                contractEndTypeId =
-                    CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
-                timeToContractEnd =
-                    CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
-                timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
-            }
+            expirationDate =
+                expirationDateFromContract || expirationDateFromSupplyPoint;
+            contractEndTypeId =
+                (this.formValues?.contractEndType &&
+                    this.formValues.contractEndType.code) ||
+                CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
+            timeToContractEnd =
+                this.formValues?.timeToContractEnd ||
+                CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
+            timeToContractEndPeriodId =
+                (this.formValues?.timeToContractEndPeriod &&
+                    this.formValues.timeToContractEndPeriod.code) ||
+                TimeToContractEndPeriod.DAY;
 
             if (annualConsumptionNTUnit) {
                 this.form.controls['annualConsumptionNTUnit'].setValue(
