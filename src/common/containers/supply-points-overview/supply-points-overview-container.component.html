@@ -48,17 +48,19 @@
         *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT)"
         class="row"
     >
-        <pxe-badge
-            type="info"
-            [isLink]="true"
-            (action)="utilsService.restoreContractAction(
-                            $event,
-                            data,
-                            allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT
-                       )"
-        >
-            Dokončit obnovovací smlouvu
-        </pxe-badge>
+        <div class="col-12">
+            <pxe-badge
+                type="info"
+                [isLink]="true"
+                (action)="utilsService.restoreContractAction(
+                                $event,
+                                data,
+                                allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT
+                           )"
+            >
+                Dokončit obnovovací smlouvu
+            </pxe-badge>
+        </div>
     </div>
     <div
         *ngIf="(data?.allowedOperations | isAllowedOperation: allowedOperations.OPEN_NEXT_CONTRACT)"
