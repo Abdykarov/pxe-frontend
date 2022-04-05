@@ -4,9 +4,9 @@
 >
     <div class="col-12 col-xl-10 offset-xl-1">
         <lnd-banner-ui
-            buttonLabel="Dokončit rozpacovanou smlouvu (novou)"
+            buttonLabel="Dokončit"
             [data]="{
-                    text: 'Some texts'
+                    text: 'Přejete si dokončit rozpracovanou smlouvu?'
                 }"
             (customBannerAction)="utilsService.restoreContractAction($event, supplyPoint, allowedOperations.FINALIZE_FROM_HISTORY_CONTRACT)"
         ></lnd-banner-ui>
@@ -19,9 +19,9 @@
 >
     <div class="col-12 col-xl-10 offset-xl-1">
         <lnd-banner-ui
-            buttonLabel="Otevřít uzavřenou smlouvu (novou)"
+            buttonLabel="Otevřít"
             [data]="{
-                    text: 'Some texts'
+                    text: 'Přejete si otevřít uzavřenou smlouvu?'
                 }"
             (customBannerAction)="utilsService.restoreContractAction($event, supplyPoint, allowedOperations.SHOW_CREATED_CONTRACT_FROM_HISTORY)"
         ></lnd-banner-ui>
