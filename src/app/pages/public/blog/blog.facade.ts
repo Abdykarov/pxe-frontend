@@ -203,7 +203,9 @@ export class BlogFacade {
                 this.isAllTypes()
                     ? null
                     : this.activeTypeSubject$.getValue().url,
-                page.toString()
+                page.toString(),
+                undefined,
+                CONSTS.ARTICLE_PAGE_SIZE
             )
             .subscribe(({ items }) => {
                 const currentArticles = this.activeArticlesSubject$.getValue();
@@ -216,7 +218,10 @@ export class BlogFacade {
         this.blogService
             .getArticles(
                 0,
-                params.type !== CONSTS.ALL_BLOG ? params.type : undefined
+                params.type !== CONSTS.ALL_BLOG ? params.type : undefined,
+                null,
+                params.article ? params.article : undefined,
+                params.article ? null : CONSTS.ARTICLE_PAGE_SIZE
             )
             .subscribe(({ items, total }) => {
                 this.routerParamsSubject$.next(params);

@@ -1,11 +1,14 @@
 import { gql } from 'apollo-angular';
-import { CONSTS } from 'src/app/app.constants';
 
 export const getArticles = gql`
-    query queryArticleContentsWithTotal($skip: Int!, $filter: String) {
+    query queryArticleContentsWithTotal(
+        $skip: Int!
+        $filter: String
+        $top: Int
+    ) {
         queryArticleContentsWithTotal(
             skip: $skip
-            top: ${CONSTS.ARTICLE_PAGE_SIZE}
+            top: $top
             orderby: "data/date/iv desc"
             filter: $filter
         ) {
