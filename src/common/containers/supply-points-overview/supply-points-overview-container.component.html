@@ -211,7 +211,7 @@
 
 <div
     *ngIf="supplyPointsOverviewContainerFacade.supplyPoints$ | async as supplyPoints"
-    class="supply-points"
+    [class.supply-points]="supplyPoints.length !== 0"
 >
     <ng-container *ngIf="supplyPoints.length !== 0">
         <pxe-supply-point
@@ -234,15 +234,13 @@
                 <div class="col-md-8 offset-md-2">
                     <p>
                         V případě zájmu o dodávku energií pro nové odběrné
-                        místo, pokračujte prosím zadáním odběrného místa
-                        <ng-container
-                            *ngIf="supplyPointStatistic.notConcludedCount"
-                        ></ng-container>
+                        místo, pokračujte prosím zadáním odběrného místa.
                         <ng-container
                             *ngIf="supplyPointStatistic.notConcludedCount"
                         >
                             Pokud už máte vytvořené odběrné místo, můžete se
-                            vrátit k vaší rozpracované smlouvě a dokončit proces
+                            vrátit k vaší rozpracované smlouvě a dokončit
+                            proces.
                         </ng-container>
                     </p>
                 </div>
