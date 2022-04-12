@@ -105,7 +105,7 @@ export class BlogFacade {
         )(activeTypes);
 
     private setActiveArticles = (articles: IArticle[]): void => {
-        const { url } = this.activeTypeSubject$.getValue();
+        const { url } = this.activeTypeSubject$.getValue() || {};
 
         const activeArticles = R.cond([
             [(data) => this.isAllTypes(), (data) => data],
