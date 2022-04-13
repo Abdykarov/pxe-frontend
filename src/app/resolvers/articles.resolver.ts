@@ -19,10 +19,14 @@ export class ArticlesResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<IArticlesWithTotals> {
-        const { path } = route.firstChild.firstChild.url[0];
+        const { path: type } = route.firstChild.firstChild.url[0] || {};
+        const { path: article } = route.firstChild.firstChild.url[1] || {};
         return this.blogService.getArticles(
             0,
-            path !== CONSTS.ALL_BLOG ? path : undefined
+            type !== CONSTS.ALL_BLOG ? type : undefined,
+            null,
+            article ? article : undefined,
+            article ? null : CONSTS.ARTICLE_PAGE_SIZE
         );
     }
 }

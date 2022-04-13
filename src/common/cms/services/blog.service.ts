@@ -16,13 +16,25 @@ export class BlogService {
             false
         );
 
-    public getArticles = (skip = 0, type, page: string = null) =>
+    public getArticles = (
+        skip = 0,
+        type: string = undefined,
+        page: string = undefined,
+        url: string = undefined,
+        top: number = undefined
+    ) =>
         this.apolloCmsService.fetchQuery(
             {
                 query: getArticles,
                 variables: {
                     skip,
                     ...(!!type && { filter: `data/typePlain/iv eq '${type}'` }),
+                    ...(!!url && { filter: `data/url/iv eq '${url}'` }),
+                    ...(!!type &&
+                        !!url && {
+                            filter: `data/url/iv eq '${url}' or data/typePlain/iv eq '${type}'`,
+                        }),
+                    top,
                 },
                 context: {
                     headers: {
