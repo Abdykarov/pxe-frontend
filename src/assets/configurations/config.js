@@ -7,8 +7,8 @@ window.angularDevstack = {
     "config": {
         "gaId": "",
         "gtmId": "GTM-58VS48R",
-        "environment": "test",
-        "production": false,
+        "environment": "prod",
+        "production": true,
         "re_captcha": {
             "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
             "size": "invisible",
@@ -24,9 +24,9 @@ window.angularDevstack = {
         "sAnalyticsTId": "",
         "url": "http://localhost:4200",
         "url_graphql": "http://localhost:4200/graphql",
-        "url_cms_assets": "https://squidex-preview.lnd.bz/api/assets/",
-        "url_cms": "https://squidex-preview.lnd.bz",
-        "url_cms_local": "https://squidex-preview.lnd.bz",
+        "url_cms_assets": "https://squidex-prod.lnd.bz/api/assets/",
+        "url_cms": "https://squidex-prod.lnd.bz",
+        "url_cms_local": "https://squidex-prod.lnd.bz",
         "url_cms_api": "api/content/pxe-parc4u/graphql",
         "url_api": "http://localhost:4200/api",
         "web_api_key": "default-api-key",
