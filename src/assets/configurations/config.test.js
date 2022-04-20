@@ -23,7 +23,7 @@ window.angularDevstack = {
         "url_cms_assets": "https://squidex-prod.lnd.bz/api/assets/pxe-parc4u/",
         "url_graphql": "https://test.parc4u.cz/graphql",
         "url_api": "https://test.parc4u.cz/api",
-        "url_cms_api": "cms/api",
+        "url_cms_api": "api/content/pxe-parc4u/graphql",
         "url_cms": "https://squidex-prod.lnd.bz",
         "url_cms_local": "https://squidex-prod.lnd.bz",
         "web_api_key": "default-api-key",
