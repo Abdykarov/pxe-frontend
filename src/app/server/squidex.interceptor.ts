@@ -33,6 +33,7 @@ export class SquidexInterceptor implements HttpInterceptor {
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
+        console.log('%c ***** INTECETPT PAGE *****', 'background: #bada55; color: #000; font-weight: bold', req.headers.get(ARTICLES_PAGE));
         return next.handle(req).pipe(
             tap((event: any) => {
                 if (
@@ -56,7 +57,17 @@ export class SquidexInterceptor implements HttpInterceptor {
 
                     const dirPath = join(APP_FOLDER, this.pageUrl);
                     if (req.headers.has(ARTICLES_PAGE)) {
-                        const page = req.headers.get(ARTICLES_PAGE);
+                        let page: any = req.headers.get(ARTICLES_PAGE);
+
+                        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', {page, pageurl: this.pageUrl, headers: JSON.stringify(req.headers), req: JSON.stringify(req)}, req);
+
+                        while (existsSync(`${dirPath}/data-${page}.json`)) {
+                            page = parseInt(page) + 1;
+                        }
+
+                        // if (existsSync(`${dirPath}/data-${page}.json`)) {
+                        //     page = parseInt(page) + 1;
+                        // }
 
                         if (parseInt(page) > 1) {
                             mkdirSync(dirPath, { recursive: true });
