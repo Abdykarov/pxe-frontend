@@ -13,6 +13,12 @@ window.angularDevstack = {
             "errorMode": "handled",
             "badge": "none"
         },
+        "cms": {
+            "client_id": "pxe-parc4u:default",
+            "client_secret": "oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx",
+            "grand_type": "client_credentials",
+            "scope": "squidex-api"
+        },
         "sAnalyticsTId": "SA-00080-1",
         "url": "https://parc4u.cz",
         "url_cms_assets": "https://squidex-prod.lnd.bz/api/assets/pxe-parc4u/",

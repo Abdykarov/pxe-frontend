@@ -1,26 +1,27 @@
-// Variables for PRODUCTION environment
+// Default variables for PREVIEW environment
 // !!! it is necessary to follow the JSON structure !!!
+//siteKey test all valid
 
 window.angularDevstack = {
     "config": {
         "gaId": "",
-        "environment": "prod",
         "gtmId": "GTM-58VS48R",
+        "environment": "preview",
         "production": true,
         "re_captcha": {
-            "siteKey": "6Lf2gakaAAAAAAPDsPPKvsCih_A2lGeahqlxCtuO",
+            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
             "size": "invisible",
             "errorMode": "handled",
             "badge": "none"
         },
-        "sAnalyticsTId": "SA-00080-1",
-        "url": "https://parc4u.cz",
-        "url_cms_assets": "https://squidex-prod.lnd.bz/api/assets/pxe-parc4u/",
+        "sAnalyticsTId": "",
+        "url": "https://pxeparc-preview.lnd.bz",
+        "url_cms_assets": "https://squidex.lnd.bz/api/assets/pxe-parc4u/",
         "url_graphql": "https://pxeparc-preview.lnd.bz/graphql",
-        "url_api": "https://parc4u.cz/api",
+        "url_api": "https://pxeparc-preview.lnd.bz/api",
         "url_cms_api": "cms/api",
-        "url_cms": "https://squidex-prod.lnd.bz",
-        "url_cms_local": "https://squidex-prod.lnd.bz",
+        "url_cms": "https://squidex.lnd.bz",
+        "url_cms_local": "https://squidex.lnd.bz",
         "web_api_key": "preview-api-key",
         "x_api_key": "6DBE159EAAB67C2AFD31DED689608711",
         "includeTestData": true,
