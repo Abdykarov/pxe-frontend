@@ -106,6 +106,7 @@ export class BlogFacade {
 
     private setActiveArticles = (articles: IArticle[]): void => {
         const { url } = this.activeTypeSubject$.getValue() || {};
+        // console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', this.activeTypeSubject$.getValue(), url);
 
         const activeArticles = R.cond([
             [(data) => this.isAllTypes(), (data) => data],
@@ -194,6 +195,7 @@ export class BlogFacade {
         this.activeTypeSubject$.getValue().url === CONSTS.ALL_BLOG;
 
     public fetchMoreArticles(page: number): void {
+        // console.log('%c ***** fetchMoreArticles *****', 'background: #bada55; color: #000; font-weight: bold', page);
         const currentCountArticle =
             this.activeArticlesSubject$.getValue().length;
 

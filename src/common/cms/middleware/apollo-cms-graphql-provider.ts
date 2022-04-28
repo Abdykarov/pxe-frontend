@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 
 const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
     const Authorization = cmsService.getAuthorizationHeaders();
+    // console.log('%c ***** setTokenHeader *****', 'background: #bada55; color: #000; font-weight: bold', operation.getContext()['headers']);
     operation.setContext({
         headers: {
             ...(!!Authorization && { Authorization }),

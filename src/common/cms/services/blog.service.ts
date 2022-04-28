@@ -19,17 +19,19 @@ export class BlogService {
     public getArticles = (
         skip = 0,
         type: string = undefined,
-        page: string = undefined,
+        page: string = null,
         url: string = undefined,
         top: number = undefined
-    ) =>
-        this.apolloCmsService.fetchQuery(
+    ) => {
+        // console.log('%c ***** getArticles *****', 'background: #bada55; color: #000; font-weight: bold', {page});
+        return this.apolloCmsService.fetchQuery(
             {
                 query: getArticles,
                 variables: {
                     skip,
                     ...(!!type && { filter: `data/typePlain/iv eq '${type}'` }),
                     ...(!!url && { filter: `data/url/iv eq '${url}'` }),
+                    // ...(!!page && { page: parseInt(page) }),
                     ...(!!type &&
                         !!url && {
                             filter: `data/url/iv eq '${url}' or data/typePlain/iv eq '${type}'`,
@@ -44,4 +46,5 @@ export class BlogService {
             },
             false
         );
+    };
 }
