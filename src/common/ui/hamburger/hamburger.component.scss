@@ -11,14 +11,14 @@
 	position: relative;
 	width: $menu-width;
 	height: $menu-height;
-	margin-top: ($menu-height - $logo-height-mobile);
+	margin-top: ( $spacer * .2 );
 	margin-right: -$menu-toggle-line-center;
 	cursor: pointer;
 	overflow: hidden;
 
 	// Media queries
-	@include media-breakpoint-up(md) {
-		margin-top: ($menu-height - $logo-height-tablet);
+	@include media-breakpoint-up(lg) {
+		margin-top: ($menu-height - $logo-height-desktop);
 	}
 
 	&__holder {
@@ -58,8 +58,8 @@
 		margin-top: -($logo-height-mobile - $menu-toggle-line-width-rotate);
 
 		// Media queries
-		@include media-breakpoint-up(md) {
-			margin-top: -($logo-height-tablet - $menu-toggle-line-width-rotate);
+		@include media-breakpoint-up(lg) {
+			margin-top: -($logo-height-desktop - $menu-toggle-line-width-rotate);
 		}
 
 		.menu-toggle__line {

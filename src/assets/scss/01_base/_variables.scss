@@ -218,13 +218,14 @@ $images-path:                      '../../images/';
 
 // Header
 $header-bg:                        $body-bg;
-$header-height:                    100px;
+$header-height-mobile:             70px;
+$header-height-desktop:            100px;
 
 
 // Logo
 $logo-width-mobile:                80px;
 $logo-height-mobile:               32px;
-$logo-height-tablet:               41px;
+$logo-height-desktop:              41px;
 
 
 // Menu
