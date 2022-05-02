@@ -23,7 +23,6 @@ export class BlogService {
         url: string = undefined,
         top: number = undefined
     ) => {
-        // console.log('%c ***** getArticles *****', 'background: #bada55; color: #000; font-weight: bold', {page});
         return this.apolloCmsService.fetchQuery(
             {
                 query: getArticles,
@@ -31,7 +30,6 @@ export class BlogService {
                     skip,
                     ...(!!type && { filter: `data/typePlain/iv eq '${type}'` }),
                     ...(!!url && { filter: `data/url/iv eq '${url}'` }),
-                    // ...(!!page && { page: parseInt(page) }),
                     ...(!!type &&
                         !!url && {
                             filter: `data/url/iv eq '${url}' or data/typePlain/iv eq '${type}'`,

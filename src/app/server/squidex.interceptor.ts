@@ -33,7 +33,6 @@ export class SquidexInterceptor implements HttpInterceptor {
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        // console.log('%c ***** INTECETPT PAGE *****', 'background: #bada55; color: #000; font-weight: bold', req.headers.get(ARTICLES_PAGE));
         return next.handle(req).pipe(
             tap((event: any) => {
                 if (
@@ -59,8 +58,8 @@ export class SquidexInterceptor implements HttpInterceptor {
                     if (req.headers.has(ARTICLES_PAGE)) {
                         let page: any = req.headers.get(ARTICLES_PAGE);
 
-                        // console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', {page, pageurl: this.pageUrl, headers: JSON.stringify(req.headers), req: JSON.stringify(req)}, req);
-                        // TODO fix - there is wrong page number in header in some cases
+                        // TODO temp fix - there is wrong page number in header in some cases
+                        // (425d8e6360c5c8aa91b3b4e4971851641ec88258 + f199b2d331887736a52a48db7aac2d98ee3ddb82)
                         while (existsSync(`${dirPath}/data-${page}.json`)) {
                             page = parseInt(page) + 1;
                         }

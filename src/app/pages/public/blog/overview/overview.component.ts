@@ -42,21 +42,12 @@ export class OverviewComponent extends AbstractComponent {
                     .pipe(takeUntil(this.destroy$))
                     .subscribe(([totalItems, articles]) => {
                         if (totalItems > articles.length) {
-                            // console.log('%c ***** totalItems *****', 'background: #bada55; color: #000; font-weight: bold', {
-                            //     totalItems,
-                            //     articleslength: articles.length
-                            // });
                             let currentLength = this.CONSTS.ARTICLE_PAGE_SIZE;
                             while (currentLength < totalItems) {
                                 const page =
                                     currentLength /
                                         this.CONSTS.ARTICLE_PAGE_SIZE +
                                     1;
-                                // console.log('%c ***** page *****', 'background: #bada55; color: #000; font-weight: bold', {
-                                //     page,
-                                //     currentLength,
-                                //     totalItems,
-                                // });
                                 this.blogFacade.fetchMoreArticles(page);
                                 currentLength += this.CONSTS.ARTICLE_PAGE_SIZE;
                             }
