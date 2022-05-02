@@ -19,6 +19,9 @@
         <loc>http://localhost:4200/registrace</loc>
     </url>
     <url>
+        <loc>http://localhost:4200/odhlaseni</loc>
+    </url>
+    <url>
         <loc>http://localhost:4200/vzory-smluv/domacnost</loc>
     </url>
     <url>
