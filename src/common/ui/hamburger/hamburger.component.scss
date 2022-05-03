@@ -11,7 +11,7 @@
 	position: relative;
 	width: $menu-width;
 	height: $menu-height;
-	margin-top: ( $spacer * .2 );
+	margin-top: ( $spacer * .4 );
 	margin-right: -$menu-toggle-line-center;
 	cursor: pointer;
 	overflow: hidden;
@@ -59,7 +59,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(lg) {
-			margin-top: -($logo-height-desktop - $menu-toggle-line-width-rotate);
+			margin-top: -($spacer * .9);
 		}
 
 		.menu-toggle__line {
