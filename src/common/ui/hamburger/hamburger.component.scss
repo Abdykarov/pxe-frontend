@@ -55,12 +55,7 @@
 
 	&--open {
 		height: $menu-toggle-line-width-rotate;
-		margin-top: -($logo-height-mobile - $menu-toggle-line-width-rotate);
-
-		// Media queries
-		@include media-breakpoint-up(lg) {
-			margin-top: -($spacer * .9);
-		}
+		margin-top: -($spacer * .9);
 
 		.menu-toggle__line {
 			top: 8px;
