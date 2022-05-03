@@ -39,6 +39,9 @@
 		@include media-breakpoint-down(xl) {
 			z-index: $zindex-header;
 		}
+		@include media-breakpoint-up(lg) {
+			background-color: $body-bg-lp;
+		}
 
 		.header-inner {
 			// Media queries
