@@ -42,10 +42,12 @@ export class OAuthLayoutComponent extends AbstractComponent {
             }
 
             this.oAuthService.processLogin(queryParams);
-            this.router.navigate(
-                [this.authService.routerAfterLogin(queryParams)],
-                extras
-            );
+            this.router
+                .navigate(
+                    [this.authService.routerAfterLogin(queryParams)],
+                    extras
+                )
+                .then(() => window.location.reload());
         } else {
             const isLogged = this.authService.isLogged();
             const isFromOAuthBankIdVerified = !!queryParams.supplyPointId;

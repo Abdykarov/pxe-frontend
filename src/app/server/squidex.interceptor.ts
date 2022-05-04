@@ -56,7 +56,13 @@ export class SquidexInterceptor implements HttpInterceptor {
 
                     const dirPath = join(APP_FOLDER, this.pageUrl);
                     if (req.headers.has(ARTICLES_PAGE)) {
-                        const page = req.headers.get(ARTICLES_PAGE);
+                        let page: any = req.headers.get(ARTICLES_PAGE);
+
+                        // TODO temp fix - there is wrong page number in header in some cases
+                        // (425d8e6360c5c8aa91b3b4e4971851641ec88258 + f199b2d331887736a52a48db7aac2d98ee3ddb82)
+                        while (existsSync(`${dirPath}/data-${page}.json`)) {
+                            page = parseInt(page) + 1;
+                        }
 
                         if (parseInt(page) > 1) {
                             mkdirSync(dirPath, { recursive: true });

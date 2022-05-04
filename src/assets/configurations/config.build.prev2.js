@@ -1,4 +1,4 @@
-// Default variables for LOCAL environment
+// Default variables for PREVIEW environment
 // !!! it is necessary to follow the JSON structure !!!
 //siteKey test all valid
 
@@ -21,10 +21,10 @@ window.angularDevstack = {
             "scope": "squidex-api"
         },
         "sAnalyticsTId": "",
-        "url": "http://localhost:4200",
+        "url": "https://pxeparc-preview.lnd.bz",
         "url_cms_assets": "https://squidex.lnd.bz/api/assets/pxe-parc4u/",
-        "url_graphql": "http://localhost:4200/graphql",
-        "url_api": "http://localhost:4200/api",
+        "url_graphql": "https://pxeparc-preview.lnd.bz/graphql",
+        "url_api": "https://pxeparc-preview.lnd.bz/api",
         "url_cms_api": "api/content/pxe-parc4u/graphql",
         "url_cms": "https://squidex.lnd.bz",
         "url_cms_local": "https://squidex.lnd.bz",

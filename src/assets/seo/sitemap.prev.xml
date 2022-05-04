@@ -1,3 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/podminky-uzivani</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/zasady-pouzivani-cookies</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/ochrana-osobnich-udaju</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/prihlaseni</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/registrace</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/odhlaseni</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/vzory-smluv/domacnost</loc>
+    </url>
+    <url>
+        <loc>https://pxeparc-preview.lnd.bz/vzory-smluv/firma</loc>
+    </url>
 </urlset>

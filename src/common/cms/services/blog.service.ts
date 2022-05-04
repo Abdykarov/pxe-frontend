@@ -19,11 +19,11 @@ export class BlogService {
     public getArticles = (
         skip = 0,
         type: string = undefined,
-        page: string = undefined,
+        page: string = null,
         url: string = undefined,
         top: number = undefined
-    ) =>
-        this.apolloCmsService.fetchQuery(
+    ) => {
+        return this.apolloCmsService.fetchQuery(
             {
                 query: getArticles,
                 variables: {
@@ -44,4 +44,5 @@ export class BlogService {
             },
             false
         );
+    };
 }

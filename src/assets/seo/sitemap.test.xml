@@ -1,3 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://test.parc4u.cz</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/podminky-uzivani</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/zasady-pouzivani-cookies</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/ochrana-osobnich-udaju</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/prihlaseni</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/registrace</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/odhlaseni</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/vzory-smluv/domacnost</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/vzory-smluv/firma</loc>
+    </url>
 </urlset>
