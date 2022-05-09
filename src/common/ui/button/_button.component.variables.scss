@@ -5,6 +5,8 @@
  */
 
 
+@use 'sass:math';
+
 $btn-font-weight:                  400;
 $btn-focus-box-shadow-size:        0 0 8px 0;
 $btn-focus-box-shadow-color:       rgba($primary, .8);
@@ -18,14 +20,14 @@ $btn-width-icon-alone:             30px;
 $btn-height:                       40px;
 $btn-height-small:                 30px;
 $btn-height-large:                 68px;
-$btn-padding-y:                    ( $spacer / 2 );
+$btn-padding-y:                    ( $spacer * .5  );
 $btn-padding-x:                    $spacer;
 $btn-line-height:                  $line-height-sm;
 $btn-border-radius:                4px;
-$btn-padding-y-sm:                 ( $spacer / 6 );
-$btn-padding-x-sm:                 ( $spacer / 3 );
+$btn-padding-y-sm:                  math.div( $spacer, 6 ) ;
+$btn-padding-x-sm:                  math.div( $spacer, 3 ) ;
 $font-size-sm:                     .688rem;
-$btn-line-height-sm:               ( 18 / 11 );
+$btn-line-height-sm:                math.div(18, 11) ;
 $btn-font-family:                  'roboto', arial;
 $btn-border-width:                 2px;
 $btn-border-radius-sm:             $btn-border-radius;
@@ -34,10 +36,10 @@ $btn-width-public:                 auto;
 $btn-height-public:                64px;
 $btn-width-icon-public:            18px;
 
-$btn-padding-y-lg-mobile:          ( $spacer * 1.5 );
-$btn-padding-x-lg-mobile:          ( $spacer * 1.5 );
-$btn-padding-y-lg:                 ( $spacer * 2 );
-$btn-padding-x-lg:                 ( $spacer * 2 );
+$btn-padding-y-lg-mobile:          ( $spacer * 1.5  );
+$btn-padding-x-lg-mobile:          ( $spacer * 1.5  );
+$btn-padding-y-lg:                 ( $spacer * 2  );
+$btn-padding-x-lg:                 ( $spacer * 2  );
 $btn-font-size-lg:                 1.125rem;
 $btn-border-radius-lg:             $btn-border-radius;
 

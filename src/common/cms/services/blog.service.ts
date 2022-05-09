@@ -1,43 +1,48 @@
 import { Injectable } from '@angular/core';
-
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import {
-    getTypes,
-    getArticles,
-    getLpArticles,
-} from 'src/common/cms/queries/blog';
+import { getArticles, getTypes } from 'src/common/cms/queries/blog';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BlogService {
+    constructor(private apolloCmsService: ApolloCmsService) {}
 
-    constructor(
-        private apolloCmsService: ApolloCmsService,
-    ) {}
-
-    public getTypes = () => this.apolloCmsService
-        .fetchQuery({
+    public getTypes = () =>
+        this.apolloCmsService.fetchQuery(
+            {
                 query: getTypes,
             },
-            false,
-        )
+            false
+        );
 
-    public getArticles = (skip = 0, type = null) => this.apolloCmsService
-        .fetchQuery({
+    public getArticles = (
+        skip = 0,
+        type: string = undefined,
+        page: string = null,
+        url: string = undefined,
+        top: number = undefined
+    ) => {
+        return this.apolloCmsService.fetchQuery(
+            {
                 query: getArticles,
                 variables: {
                     skip,
-                    ...(!!type) && {filter: `data/typePlain/iv eq '${type}'`},
+                    ...(!!type && { filter: `data/typePlain/iv eq '${type}'` }),
+                    ...(!!url && { filter: `data/url/iv eq '${url}'` }),
+                    ...(!!type &&
+                        !!url && {
+                            filter: `data/url/iv eq '${url}' or data/typePlain/iv eq '${type}'`,
+                        }),
+                    top,
+                },
+                context: {
+                    headers: {
+                        ...(!!page && { page }),
+                    },
                 },
             },
-            false,
-        )
-
-    public getLpArticles = () => this.apolloCmsService
-        .fetchQuery({
-                query: getLpArticles,
-            },
-            false,
-        )
+            false
+        );
+    };
 }

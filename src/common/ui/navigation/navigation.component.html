@@ -1,57 +1,79 @@
-<aside class="aside"
-       [class.aside--open]="isMenuOpen">
+<aside class="aside" [class.aside--open]="isMenuOpen">
     <nav class="navigation">
-        <ul
-            *ngFor="let menu of config"
-            class="navigation-main">
+        <ul *ngFor="let menu of config" class="navigation-main">
             <li
                 *ngFor="let item of menu"
                 class="navigation-main__item"
-                [class.navigation-main__item--active]="item | isMenuItemActive: activeUrl"
+                [class.navigation-main__item--active]="
+                    item | isMenuItemActive: activeUrl
+                "
                 [class.navigation-main__item--sub]="item.children"
                 [class.navigation-main__item--open]="item === itemOpened"
-                [ngClass]="item.class">
+                [ngClass]="item.class"
+            >
                 <a
-                    [class.navigation-main__is-label-only]="item.type === navigationItemType.ONLY_LABEL"
-                    [class.navigation-main__link]="(item.type === undefined) || item.type === navigationItemType.NORMAL"
+                    [class.navigation-main__is-label-only]="
+                        item.type === navigationItemType.ONLY_LABEL
+                    "
+                    [class.navigation-main__link]="
+                        item.type === undefined ||
+                        item.type === navigationItemType.NORMAL
+                    "
                     [routerLink]="item.url ? item.url : null"
-                    [attr.aria-expanded]="item.children ? item === itemOpened : null"
+                    [attr.aria-expanded]="
+                        item.children ? item === itemOpened : null
+                    "
                     [attr.aria-controls]="item.id ? item.id : null"
-                    (click)="callOpenItem(item)">
+                    (click)="callOpenItem(item)"
+                >
                     <span
                         class="navigation-main__link-label"
-                        i18n="@@lnd.navigation.{{ item.label }}">
+                        i18n="@@lnd.navigation.{{ item.label }}"
+                    >
                         {{ item.label }}
                     </span>
-                    <span
-                        *ngIf="item.badge"
-                        class="badge badge-secondary">
+                    <span *ngIf="item.badge" class="badge badge-secondary">
                         {{ item.badge }}
                     </span>
                     <span
                         class="navigation-main__link-icon icon"
-                        [ngClass]="'icon--' + item.icon">
+                        [ngClass]="'icon--' + item.icon"
+                    >
                     </span>
                     <span
                         *ngIf="item.children && item.children.length"
-                        class="navigation-main__sub-icon icon icon--arrow-minimal-down">
+                        class="
+                            navigation-main__sub-icon
+                            icon icon--arrow-minimal-down
+                        "
+                    >
                     </span>
                 </a>
                 <ul
                     *ngIf="item.children && item === itemOpened"
                     class="navigation-main-sub"
-                    id="{{ item.id }}">
+                    id="{{ item.id }}"
+                >
                     <li
                         *ngFor="let childItem of item.children"
                         class="navigation-main-sub__item"
                         [ngClass]="childItem.class"
-                        [routerLinkActive]="[childItem.url ? 'navigation-main-sub__item--active' : '']">
+                        [routerLinkActive]="[
+                            childItem.url
+                                ? 'navigation-main-sub__item--active'
+                                : ''
+                        ]"
+                    >
                         <a
                             [routerLink]="childItem.url ? childItem.url : null"
-                            class="navigation-main-sub__link">
+                            class="navigation-main-sub__link"
+                        >
                             <span
                                 class="navigation-main-sub__link-label"
-                                i18n="@@lnd.navigation.{{ item.label }}.{{ childItem.label }}">
+                                i18n="
+                                    @@lnd.navigation.{{ item.label }}.{{
+                                    childItem.label }}"
+                            >
                                 {{ childItem.label }}
                             </span>
                         </a>

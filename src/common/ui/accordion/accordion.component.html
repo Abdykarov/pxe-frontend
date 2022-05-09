@@ -3,19 +3,27 @@
 </ng-template>
 
 <div class="accordion">
-    <div *ngFor="let item of accordionItems"
-         class="accordion__item"
-         [ngClass]="{ 'accordion__item--active': item.isActive }">
-        <a [href]="item.url" class="accordion__toggle"
-           (click)="toggleClick($event, item)">
+    <div
+        *ngFor="let item of accordionItems"
+        class="accordion__item"
+        [ngClass]="{ 'accordion__item--active': item.isActive }"
+    >
+        <a
+            [href]="item.url"
+            class="accordion__toggle"
+            (click)="toggleClick($event, item)"
+        >
             <span class="text-break" [innerHTML]="item.label"></span>
-            <span class="icon
-                         icon--triangle-down
-                         accordion__toggle-icon">
+            <span class="icon icon--triangle-down accordion__toggle-icon">
             </span>
         </a>
         <div class="accordion__content">
-            <ng-container *ngTemplateOutlet="accordionContentTemplate || defaultTemplate; context: { $implicit: item.data }">
+            <ng-container
+                *ngTemplateOutlet="
+                    accordionContentTemplate || defaultTemplate;
+                    context: { $implicit: item.data }
+                "
+            >
             </ng-container>
         </div>
     </div>

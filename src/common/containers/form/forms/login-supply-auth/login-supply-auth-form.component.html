@@ -1,16 +1,17 @@
 <ng-template #reSendAuthSupplySms>
-    Na číslo <span class="d-inline-block">{{telephoneNumber | phone}}</span> jsme vám poslali autentizační kód.
-    <br>
-    <a (click)="handleCustomAction($event)">
-        Poslat znovu
-    </a>
+    Na číslo
+    <span class="d-inline-block">{{ telephoneNumber | phone }}</span> jsme vám
+    poslali autentizační kód.
+    <br />
+    <a (click)="handleCustomAction($event)"> Poslat znovu </a>
 </ng-template>
 
 <form
     [formGroup]="form"
-    (keydown.enter)="submitForm($event);false"
+    (keydown.enter)="submitForm($event); (false)"
     class="form-container"
-    autocomplete="off">
+    autocomplete="off"
+>
     <lnd-form-field
         lndSFormDirective
         lndSBiometricsDirective
@@ -20,7 +21,10 @@
         [formControl]="form.controls.confirmationCode"
         [id]="'confirmationCode'"
         label="Kód"
-        [success]="form.controls.confirmationCode.valid && form.controls.confirmationCode.touched"
+        [success]="
+            form.controls.confirmationCode.valid &&
+            form.controls.confirmationCode.touched
+        "
         [touched]="form.controls.confirmationCode.touched"
         [validationMessages]="formFields.validationMessages.confirmationCode"
         [subtextTemplate]="reSendAuthSupplySms"
@@ -35,7 +39,8 @@
             [isDisabled]="!!formLoading"
             label="Přihlásit se"
             icon="icon--arrow-right"
-            iconPosition="right">
+            iconPosition="right"
+        >
         </lnd-button>
     </div>
 </form>

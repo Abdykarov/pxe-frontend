@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-
 import * as R from 'ramda';
-
 import {
     CODE_LIST,
     CONSTS,
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { IOfferTableRows } from './models/supply-offer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { PluralPipe } from 'src/common/pipes/common/plurar/plural.pipe';
+import { IOfferTableRows } from './models/supply-offer.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SupplyOfferConfig {
-    constructor(
-        private pluralPipe: PluralPipe,
-    ) {}
+    constructor(private pluralPipe: PluralPipe) {}
 
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
@@ -48,7 +44,10 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label,
+                        content: (row) =>
+                            R.find(R.propEq('value', row.subject.code))(
+                                SUBJECT_TYPE_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -59,9 +58,15 @@ export class SupplyOfferConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row) => {
-                            return row.distributionLocation ?
-                                R.find(R.propEq('value', row.distributionLocation.code))(codeLists[CODE_LIST.DISTRIBUTION_POWER]).label :
-                                '';
+                            return row.distributionLocation
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.distributionLocation.code
+                                      )
+                                  )(codeLists[CODE_LIST.DISTRIBUTION_POWER])
+                                      .label
+                                : '';
                         },
                     },
                 ],
@@ -73,9 +78,14 @@ export class SupplyOfferConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row) => {
-                            return row.distributionRate ?
-                                R.find(R.propEq('value', row.distributionRate.code))(codeLists[CODE_LIST.DIST_RATE]).label :
-                                '';
+                            return row.distributionRate
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.distributionRate.code
+                                      )
+                                  )(codeLists[CODE_LIST.DIST_RATE]).label
+                                : '';
                         },
                     },
                 ],
@@ -87,9 +97,11 @@ export class SupplyOfferConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row) => {
-                            return row.circuitBreaker ?
-                                R.find(R.propEq('value', row.circuitBreaker.code))(codeLists[CODE_LIST.CIRCUIT_BREAKER]).label :
-                                '';
+                            return row.circuitBreaker
+                                ? R.find(
+                                      R.propEq('value', row.circuitBreaker.code)
+                                  )(codeLists[CODE_LIST.CIRCUIT_BREAKER]).label
+                                : '';
                         },
                     },
                 ],
@@ -140,7 +152,10 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
+                        content: (row) =>
+                            R.find(R.propEq('value', row.deliveryLength))(
+                                DELIVERY_LENGTH_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -149,7 +164,10 @@ export class SupplyOfferConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -181,7 +199,10 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label,
+                        content: (row) =>
+                            R.find(R.propEq('value', row.subject.code))(
+                                SUBJECT_TYPE_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -192,9 +213,14 @@ export class SupplyOfferConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row) => {
-                            return row.distributionLocation ?
-                                R.find(R.propEq('value', row.distributionLocation.code))(codeLists[CODE_LIST.DISTRIBUTION_GAS]).label :
-                                '';
+                            return row.distributionLocation
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.distributionLocation.code
+                                      )
+                                  )(codeLists[CODE_LIST.DISTRIBUTION_GAS]).label
+                                : '';
                         },
                     },
                 ],
@@ -206,9 +232,14 @@ export class SupplyOfferConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row) => {
-                            return row.annualConsumption ?
-                                R.find(R.propEq('value', row.annualConsumption.code))(codeLists[CODE_LIST.CONSUMPTION]).label :
-                                '';
+                            return row.annualConsumption
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.annualConsumption.code
+                                      )
+                                  )(codeLists[CODE_LIST.CONSUMPTION]).label
+                                : '';
                         },
                     },
                 ],
@@ -249,7 +280,10 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
+                        content: (row) =>
+                            R.find(R.propEq('value', row.deliveryLength))(
+                                DELIVERY_LENGTH_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -258,13 +292,16 @@ export class SupplyOfferConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
             },
         ],
-    })
+    });
 
     public confirmDeleteOfferConfig = (data): IShowModal => ({
         component: 'ConfirmModalComponent',
@@ -274,10 +311,12 @@ export class SupplyOfferConfig {
             titleConfirm: 'ANO SMAZAT',
             data,
         },
-    })
+    });
 
     public confirmCancelOfferConfig = (data): IShowModal => {
-        const name = data.currentOfferFormValues.name ? data.currentOfferFormValues.name : '';
+        const name = data.currentOfferFormValues.name
+            ? data.currentOfferFormValues.name
+            : '';
         const space = name ? ' ' : '';
         return {
             component: 'ConfirmModalComponent',
@@ -288,31 +327,41 @@ export class SupplyOfferConfig {
                 data,
             },
         };
-    }
+    };
 
-    public confirmDeleteMarkedConfig = (numberOfOffers = 0, commodityType: CommodityType): IShowModal => {
+    public confirmDeleteMarkedConfig = (
+        numberOfOffers = 0,
+        commodityType: CommodityType
+    ): IShowModal => {
         return {
             component: 'ConfirmModalComponent',
             modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_MARKED,
             instanceData: {
-                confirmText:
-                    `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(numberOfOffers, 'offer_delete')}
-                        ${commodityType === CommodityType.GAS ? 'plynu' : 'elektřiny'}?`,
+                confirmText: `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(
+                    numberOfOffers,
+                    'offer_delete'
+                )}
+                        ${
+                            commodityType === CommodityType.GAS
+                                ? 'plynu'
+                                : 'elektřiny'
+                        }?`,
                 titleConfirm: 'ANO',
             },
         };
-    }
+    };
 
     public confirmInfo = (isCreateAction: Boolean): IShowModal => ({
         component: 'ConfirmModalComponent',
         modalType: CONSTS.MODAL_TYPE.CONFIRM_INFO_OFFER,
         instanceData: {
-            confirmText:
-                `Nabídka byla úspěšně ${isCreateAction ? 'přidána' : 'upravena'}.`,
+            confirmText: `Nabídka byla úspěšně ${
+                isCreateAction ? 'přidána' : 'upravena'
+            }.`,
             titleConfirm: 'OK',
             showClose: false,
             showCloseButton: false,
         },
         withoutScroll: true,
-    })
+    });
 }

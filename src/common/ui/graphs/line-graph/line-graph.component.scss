@@ -48,7 +48,7 @@
 
 		.tooltip {
 			fill: $gray-100;
-			opacity: .3;
+			opacity: $opacity-disabled;
 
 			&--polygon {
 				fill: $gray-000;

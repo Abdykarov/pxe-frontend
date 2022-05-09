@@ -12,20 +12,26 @@ export const supplierProfileFormFields: IForm = {
         numberSeriesPrefix: [
             null,
             [
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_SERIES),
+                Validators.maxLength(
+                    CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_SERIES
+                ),
             ],
         ],
         numberSeriesVariable: [
             null,
             [
                 Validators.pattern(`^\\d+$`),
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_NUMBER_SERIES),
+                Validators.maxLength(
+                    CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_NUMBER_SERIES
+                ),
             ],
         ],
         numberSeriesSuffix: [
             null,
             [
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_SERIES),
+                Validators.maxLength(
+                    CONSTS.VALIDATORS.MAX_LENGTH.SUPPLIER_PROFILE_SERIES
+                ),
             ],
         ],
         pricesUrl: [
@@ -38,17 +44,22 @@ export const supplierProfileFormFields: IForm = {
     },
     validationMessages: {
         numberSeriesPrefix: {
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
-            cannotBeNullIfFieldIsFilled: errorFieldMessages.cannotBeNullIfFieldIsFilled,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
+            cannotBeNullIfFieldIsFilled:
+                errorFieldMessages.cannotBeNullIfFieldIsFilled,
         },
         numberSeriesVariable: {
             required: errorFieldMessages.numericalSeries.required,
             pattern: errorFieldMessages.numberSeriesVariable.pattern,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
         },
         numberSeriesSuffix: {
-            cannotBeNullIfFieldIsFilled: errorFieldMessages.cannotBeNullIfFieldIsFilled,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
+            cannotBeNullIfFieldIsFilled:
+                errorFieldMessages.cannotBeNullIfFieldIsFilled,
+            maxlengthRequiredLengthActualLength:
+                errorFieldMessages.string.maxlength,
         },
         pricesUrl: {
             maxlengthRequiredLengthActualLength:
@@ -58,8 +69,14 @@ export const supplierProfileFormFields: IForm = {
     },
     options: {
         validator: [
-            cannotBeNullIfFieldIsFilled('numberSeriesPrefix', 'numberSeriesVariable'),
-            cannotBeNullIfFieldIsFilled('numberSeriesSuffix', 'numberSeriesVariable'),
+            cannotBeNullIfFieldIsFilled(
+                'numberSeriesPrefix',
+                'numberSeriesVariable'
+            ),
+            cannotBeNullIfFieldIsFilled(
+                'numberSeriesSuffix',
+                'numberSeriesVariable'
+            ),
         ],
     },
 };

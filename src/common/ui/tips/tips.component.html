@@ -1,20 +1,12 @@
-<div class="
-        tip
-        d-none
-        d-md-flex"
-     [ngClass]="[
-        'tip--' + type
-     ]">
-    <div class="
-            tip__image
-            mb-md-0
-            mr-md-4">
+<div class="tip d-none d-md-flex" [ngClass]="['tip--' + type]">
+    <div class="tip__image mb-md-0 mr-md-4">
         <img
             *ngIf="imgSrc"
             [src]="domSanitizer.bypassSecurityTrustUrl(imgSrc)"
             class="img-fluid"
             [attr.title]="imgTitle"
-            [attr.alt]="imgAlt">
+            [attr.alt]="imgAlt"
+        />
     </div>
     <div class="tip__text">
         <ng-content></ng-content>

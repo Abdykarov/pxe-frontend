@@ -1,12 +1,10 @@
 <ng-container *ngIf="passwordWasSent">
-    <lnd-alert
-        type="info"
-        customClass="mb-2">
+    <lnd-alert type="info" customClass="mb-2">
         <ng-container *ngIf="wasSentToPhone">
             Heslo jsme vám zaslali na telefonní číslo
         </ng-container>
         <ng-container *ngIf="!wasSentToPhone">
-            Heslo jsme vám zaslali na {{login}}
+            Heslo jsme vám zaslali na {{ login }}
         </ng-container>
     </lnd-alert>
     <div class="text-right mb-3">
@@ -21,22 +19,19 @@
     </div>
 </ng-container>
 <ng-template #forgottenPassword>
-    <a *ngIf="!passwordWasSent"
-       (click)="handleCustomAction($event)">
+    <a *ngIf="!passwordWasSent" (click)="handleCustomAction($event)">
         Zapomněli jste heslo?
     </a>
 </ng-template>
-<lnd-alert
-    *ngIf="reasonForLogoutUser"
-    type="info"
-    customClass="mb-2">
-    {{reasonForLogoutUser}}
+<lnd-alert *ngIf="reasonForLogoutUser" type="info" customClass="mb-2">
+    {{ reasonForLogoutUser }}
 </lnd-alert>
 <form
     [formGroup]="form"
-    (keydown.enter)="submitForm($event);false"
+    (keydown.enter)="submitForm($event); (false)"
     class="form-container form-container--large"
-    autocomplete="off">
+    autocomplete="off"
+>
     <lnd-form-field
         lndSFormDirective
         lndSBiometricsDirective
@@ -60,7 +55,9 @@
         [lightField]="true"
         [id]="'password'"
         label="Heslo"
-        [success]="form.controls.password.valid && form.controls.password.touched"
+        [success]="
+            form.controls.password.valid && form.controls.password.touched
+        "
         type="PASSWORD"
         [touched]="form.controls.password.touched"
         [validationMessages]="formFields.validationMessages.password"
@@ -71,15 +68,14 @@
         class="w-100 mb-5"
         customClass="btn-public btn--icon-right w-100"
         [submit]="true"
-        (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
+        (action)="submitForm($event); sAnalyticsService.sFormClick($event)"
         [isDisabled]="!!formLoading"
         label="Přihlásit se"
         icon="icon--arrow-right"
-        iconPosition="right">
+        iconPosition="right"
+    >
     </lnd-button>
-    <p class="mb-2">
-        Nebo se přihlaště pomocí
-    </p>
+    <p class="mb-2">Nebo se přihlaště pomocí</p>
     <div class="row mb-5">
         <div class="col-md-6 mb-3">
             <lnd-button
@@ -87,7 +83,8 @@
                 type="facebook"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLogin(oAuthType.FACEBOOK)">
+                (action)="oauthService.tryLogin(oAuthType.FACEBOOK)"
+            >
             </lnd-button>
         </div>
         <div class="col-md-6 mb-5">
@@ -96,24 +93,35 @@
                 type="google"
                 class="w-100"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLogin(oAuthType.GOOGLE)">
+                (action)="oauthService.tryLogin(oAuthType.GOOGLE)"
+            >
             </lnd-button>
         </div>
         <div class="col-12">
             <p class="mb-2">
-                Případně použijte stejný a bezpečný způsob ověření identity jako do vašeho internetového bankovnictví.
+                Případně použijte stejný a bezpečný způsob ověření identity jako
+                do vašeho internetového bankovnictví.
             </p>
             <lnd-button
                 type="bankid"
                 class="w-100 mb-1"
                 customClass="btn-public w-100"
-                (action)="oauthService.tryLogin(oAuthType.BANK_ID)">
+                (action)="oauthService.tryLogin(oAuthType.BANK_ID)"
+            >
             </lnd-button>
-            <a href="https://bankid.cz" target="_blank">Více informací o Bank ID</a>
+            <a href="https://bankid.cz" target="_blank"
+                >Více informací o Bank ID</a
+            >
         </div>
     </div>
     <p class="font-size-14">
-        Založením účtu souhlasím s <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
+        Založením účtu souhlasím s
+        <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE"
+            >Obchodními podmínkami parc4u</a
+        >
+        a beru na vědomí informace o
+        <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA"
+            >Ochraně osobních údajů</a
+        >.
     </p>
 </form>
-

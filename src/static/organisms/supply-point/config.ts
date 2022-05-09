@@ -4,6 +4,8 @@ import {
 } from 'src/common/graphql/models/supply.model';
 
 export const supplyPointConfigPower: ISupplyPoint = {
+    closedByContractEntityId: '',
+    closedByContractIsConcluded: false,
     id: '72',
     name: 'Vilka',
     commodityType: CommodityType.GAS,
@@ -122,8 +124,9 @@ export const supplyPointConfigPower: ISupplyPoint = {
     timeToContractEndPeriod: null,
 };
 
-
 export const supplyPointConfigGas: ISupplyPoint = {
+    closedByContractEntityId: '',
+    closedByContractIsConcluded: false,
     id: '77',
     name: 'Můj byt',
     commodityType: CommodityType.GAS,

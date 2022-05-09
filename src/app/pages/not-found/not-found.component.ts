@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-
-import { AbstractComponent } from 'src/common/abstract.component';
-import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
     SubjectTypeLowerCase,
@@ -11,6 +8,8 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({
     templateUrl: './not-found.component.html',
@@ -31,14 +30,12 @@ export class NotFoundComponent extends AbstractComponent {
         hideHamburger: true,
     };
 
-    constructor(
-        private authService: AuthService,
-    ) {
+    constructor(private authService: AuthService) {
         super();
     }
 
     public homeRedirect = (evt) => {
         evt.preventDefault();
         this.authService.homeRedirect();
-    }
+    };
 }

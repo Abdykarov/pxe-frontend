@@ -1,20 +1,14 @@
 import { CommonModule } from '@angular/common';
-import {
-    FormsModule,
-    ReactiveFormsModule,
-} from '@angular/forms';
 import { NgModule } from '@angular/core';
-
-import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/common/directives/directives.module';
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginSupplyAuthFormComponent } from './login-supply-auth-form.component';
-import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
-    declarations: [
-        LoginSupplyAuthFormComponent,
-    ],
+    declarations: [LoginSupplyAuthFormComponent],
     imports: [
         ButtonModule,
         CommonModule,
@@ -24,8 +18,6 @@ import { PipesModule } from 'src/common/pipes/common/pipes.module';
         PipesModule,
         ReactiveFormsModule,
     ],
-    exports: [
-        LoginSupplyAuthFormComponent,
-    ],
+    exports: [LoginSupplyAuthFormComponent],
 })
 export class LoginSupplyAuthFormModule {}

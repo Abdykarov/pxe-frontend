@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -7,49 +8,40 @@ import {
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {
-    filter,
-    map,
-    takeUntil,
-} from 'rxjs/operators';
-
+import { filter, map, takeUntil } from 'rxjs/operators';
+import { CONSTS, RequestsOverviewBannerShow } from 'src/app/app.constants';
+import { confirmDeleteRequest } from 'src/app/pages/consumers/requests-overview/requests-overview.config';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    AllowedOperations,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
-    CONSTS,
-    RequestsOverviewBannerShow,
-    ROUTES,
-} from 'src/app/app.constants';
-import { confirmDeleteRequest } from 'src/app/pages/consumers/requests-overview/requests-overview.config';
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { DateDiffPipe } from 'src/common/pipes/secured/date-diff/date-diff.pipe';
-import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
-    inArray,
     isDataAvailable,
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { ModalService } from 'src/common/containers/modal/modal.service';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 import { OverviewState } from './requests-overview.model';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-requests-overview',
     templateUrl: './requests-overview.component.html',
     styleUrls: ['./requests-overview.component.scss'],
 })
-export class RequestsOverviewComponent extends AbstractComponent implements OnInit {
+export class RequestsOverviewComponent
+    extends AbstractComponent
+    implements OnInit
+{
     public readonly BANNER_TYPE_ACCEPTED = BannerTypeImages.ACCEPTED;
 
     public globalError: string[] = [];
@@ -59,7 +51,6 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     public RequestsOverviewBannersShow = RequestsOverviewBannerShow;
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
-    public sourceSupplyPoints: ISupplyPoint[] = null;
     public deletedRequest: ISupplyPoint = null;
 
     @ViewChild('deletedRequestInfo')
@@ -69,10 +60,10 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
         private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
         private modalsService: ModalService,
-        private navigateRequestService: NavigateRequestService,
+        private navigateConsumerService: NavigateConsumerService,
         private router: Router,
         private supplyService: SupplyService,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) private platformId: string
     ) {
         super();
     }
@@ -80,33 +71,34 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     ngOnInit() {
         if (isPlatformBrowser(this.platformId)) {
             this.requestsOverviewBannerShow =
-                R.path(['history', 'state', 'requestsOverviewBannerShow'], window) || RequestsOverviewBannerShow.NONE;
+                R.path(
+                    ['history', 'state', 'requestsOverviewBannerShow'],
+                    window
+                ) || RequestsOverviewBannerShow.NONE;
         }
 
-        this.supplyService.findSupplyPointsByContractStatus([
-                ContractStatus.NOT_CONCLUDED,
-                ContractStatus.CONCLUDED,
-            ])
+        this.supplyService
+            .findSupplyPointsByContractStatus([ContractStatus.NOT_CONCLUDED])
             .pipe(
                 takeUntil(this.destroy$),
                 filter(isDataAvailable),
-                map(({data}) =>  data.findSupplyPointsByContractStatus),
+                map(({ data }) => data.findSupplyPointsByContractStatus)
             )
             .subscribe(
                 (supplyPointsSource: ISupplyPoint[]) => {
-                    this.sourceSupplyPoints = supplyPointsSource;
                     this.loadingRequests = false;
-                    const { overviewState, supplyPoints } = getOverviewState(supplyPointsSource);
-                    this.supplyPoints = supplyPoints;
+                    const { overviewState, supplyPoints } =
+                        getOverviewState(supplyPointsSource);
+                    this.supplyPoints = supplyPointsSource;
                     this.state = overviewState;
                     this.cd.markForCheck();
                 },
-                error => {
+                (error) => {
                     this.supplyPoints = null;
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                },
+                }
             );
 
         this.modalsService.closeModalData$
@@ -115,65 +107,60 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                 filter(
                     R.allPass([
                         R_.isNotNil,
-                        R.propEq('modalType', CONSTS.MODAL_TYPE.CONFIRM_DELETE_REQUEST),
-                    ]),
-                ),
+                        R.propEq(
+                            'modalType',
+                            CONSTS.MODAL_TYPE.CONFIRM_DELETE_REQUEST
+                        ),
+                    ])
+                )
             )
-            .subscribe(modal => {
+            .subscribe((modal) => {
                 if (modal.confirmed) {
-                    this.supplyService.deleteUnfinishedSupplyPoint(modal.data.id)
-                        .pipe(
-                            takeUntil(this.destroy$),
-                        )
+                    this.supplyService
+                        .deleteUnfinishedSupplyPoint(modal.data.id)
+                        .pipe(takeUntil(this.destroy$))
                         .subscribe(
-                            _ => {
-                                this.sourceSupplyPoints = R.filter(
+                            (_) => {
+                                this.supplyPoints = R.filter(
                                     (supplyPoint: ISupplyPoint) =>
-                                        R.path(['identificationNumber'], supplyPoint) !== modal.data.identificationNumber,
-                                )(this.sourceSupplyPoints);
-                                const { overviewState, supplyPoints } = getOverviewState(this.sourceSupplyPoints);
-                                this.supplyPoints = supplyPoints;
+                                        R.path(
+                                            ['identificationNumber'],
+                                            supplyPoint
+                                        ) !== modal.data.identificationNumber
+                                )(this.supplyPoints);
+                                const { overviewState, supplyPoints } =
+                                    getOverviewState(this.supplyPoints);
                                 this.state = overviewState;
                                 this.deletedRequest = modal.data;
-                                setTimeout(() => scrollToElementFnc(this.deletedRequestInfo.nativeElement));
+                                setTimeout(() =>
+                                    scrollToElementFnc(
+                                        this.deletedRequestInfo.nativeElement
+                                    )
+                                );
                                 this.cd.markForCheck();
                             },
                             (error) => {
-                                const { globalError } = parseGraphQLErrors(error);
+                                const { globalError } =
+                                    parseGraphQLErrors(error);
                                 this.globalError = globalError;
                                 this.cd.markForCheck();
-                            },
+                            }
                         );
                 }
                 this.modalsService.closeModalData$.next(null);
             });
     }
 
-    public completeRequestAction = (supplyPoint: ISupplyPoint): void => this.navigateRequestService.routerToRequestStep(supplyPoint);
+    public completeRequestAction = (supplyPoint: ISupplyPoint): void =>
+        this.navigateConsumerService.routerToRequestStep(supplyPoint);
 
-    public removeRequestAction = (supplyPoint: ISupplyPoint): void => this.modalsService
-        .showModal$.next(confirmDeleteRequest(supplyPoint))
+    public removeRequestAction = (supplyPoint: ISupplyPoint): void =>
+        this.modalsService.showModal$.next(confirmDeleteRequest(supplyPoint));
 
-    public newRequestAction = (evt): void => {
+    public createSupplyPoint = (evt): void => {
         evt.preventDefault();
-        const lastSupplyPointsWithConcludedContract = R.find(
-            (supplyPoint: ISupplyPoint) =>
-                supplyPoint.allowedOperations && inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
-        )(this.sourceSupplyPoints);
-
-        if (lastSupplyPointsWithConcludedContract) {
-            this.router.navigate(
-                [ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION],
-            );
-            return;
-        }
-        this.router.navigate(
-            [ROUTES.ROUTER_REQUEST_SIGNBOARD],
+        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+            ProgressStatus.SIGNBOARD
         );
-    }
-
-    public createSupplyPoint = (event) => {
-        event.preventDefault();
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
-    }
+    };
 }

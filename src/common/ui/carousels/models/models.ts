@@ -21,4 +21,3 @@ export interface ISupplierLogo extends IDefaultCarouselItem {
     title: string;
     width: number;
 }
-

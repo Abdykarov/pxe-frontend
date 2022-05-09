@@ -1,34 +1,22 @@
-import {
-    Component,
-    Input,
-    OnInit,
-} from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
 import { lpVideoModalConfig } from 'src/app/pages/public/landing/landing.config';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 
 @Component({
-  selector: 'lnd-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.css'],
+    selector: 'lnd-basic',
+    templateUrl: './basic.component.html',
+    styleUrls: ['./basic.component.scss'],
 })
 export class BasicComponent implements OnInit {
-
     @Input()
     public text = '';
 
-  constructor(
-      private modalService: ModalService,
-  ) { }
+    constructor(private modalService: ModalService) {}
 
-  ngOnInit(): void {
-
-  }
+    ngOnInit(): void {}
 
     public playVideoInModal = (event) => {
         event.preventDefault();
-        this.modalService
-            .showModal$.next(lpVideoModalConfig());
-    }
-
+        this.modalService.showModal$.next(lpVideoModalConfig());
+    };
 }

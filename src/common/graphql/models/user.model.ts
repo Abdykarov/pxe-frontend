@@ -16,7 +16,6 @@ export enum LANDING_PAGE {
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
 
-
 export interface IUserDetailInput {
     email?: string;
     firstName?: string;

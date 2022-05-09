@@ -1,7 +1,4 @@
-import {
-    IQuestion,
-    Tag,
-} from 'src/app/services/model/faq.model';
+import { IQuestion, Tag } from 'src/app/services/model/faq.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 
@@ -32,7 +29,7 @@ export const offerConfig: IOffer = {
     deliveryLength: 1,
     id: '0',
     name: 'Bohemia plus',
-    permanentPaymentPrice: 823.00,
+    permanentPaymentPrice: 823.0,
     priceGas: 0,
     priceNT: 3.14,
     priceVT: 3.54,
@@ -64,19 +61,23 @@ export const offerConfig: IOffer = {
     greenEnergy: true,
 };
 
-export const questions: IQuestion[] = [{
-    id: 15,
-    tag: {
-        type: Tag.SUPPLIER,
-        url: 'supplier',
-        label: 'Dodavatelé',
-        title: 'Časté otázky',
+export const questions: IQuestion[] = [
+    {
+        id: 15,
+        tag: {
+            type: Tag.SUPPLIER,
+            url: 'supplier',
+            label: 'Dodavatelé',
+            title: 'Časté otázky',
+        },
+        url: 'future',
+        header: 'Jak chcete parc4u rozvíjet?',
+        shortContent:
+            'Rádi bychom získali pro parc4u dostatek zákazníků, což nám umožní další' +
+            ' rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.',
+        seoKeywords:
+            'parc4u, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené',
+        oneOfMostVisited: true,
+        vatNumber: '555',
     },
-    'url': 'future',
-    'header': 'Jak chcete parc4u rozvíjet?',
-    'shortContent': 'Rádi bychom získali pro parc4u dostatek zákazníků, což nám umožní další' +
-        ' rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.',
-    'seoKeywords': 'parc4u, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené',
-    'oneOfMostVisited': true,
-    vatNumber: '555',
-}];
+];

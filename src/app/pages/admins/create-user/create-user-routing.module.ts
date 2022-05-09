@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
-import {
-    Routes,
-    RouterModule,
-} from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { CreateUserComponent } from './create-user.component';
 import { PricesComponent } from './prices/prices.component';
-import { SupplyPointComponent } from './supply-point/supply-point.component';
-import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { RecapitulationComponent } from './recapitulation/recapitulation.component';
-import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
+import { SupplyPointComponent } from './supply-point/supply-point.component';
 
 const routes: Routes = [
     {
@@ -55,11 +51,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-    ],
-    exports: [
-        RouterModule,
-    ],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class CreateUserRoutingModule { }
+export class CreateUserRoutingModule {}

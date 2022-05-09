@@ -1,10 +1,5 @@
-import {
-    Component,
-    Input,
-    OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
@@ -12,17 +7,17 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
     templateUrl: './user-notification-form.component.html',
     styleUrls: ['./user-notification-form.component.scss'],
 })
-export class UserNotificationFormComponent extends AbstractFormComponent implements OnInit {
-
+export class UserNotificationFormComponent
+    extends AbstractFormComponent
+    implements OnInit
+{
     @Input()
     public isNotificationsAllowed = false;
 
     @Input()
     public formValues = null;
 
-    constructor(
-        protected fb: FormBuilder,
-    ) {
+    constructor(protected fb: FormBuilder) {
         super(fb);
     }
 
@@ -34,7 +29,9 @@ export class UserNotificationFormComponent extends AbstractFormComponent impleme
 
     public prefillForm = () => {
         if (this.formValues?.notificatiosAllowed !== undefined) {
-            this.form.controls['notificatiosAllowed'].setValue(this.formValues?.notificatiosAllowed);
+            this.form.controls['notificatiosAllowed'].setValue(
+                this.formValues?.notificatiosAllowed
+            );
         }
-    }
+    };
 }

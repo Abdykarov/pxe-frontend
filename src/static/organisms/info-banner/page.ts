@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
-
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class InfoBannerPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    constructor(
-    ) {
+    constructor() {
         this.breadcrumbItemsSimple = [
             {
                 label: 'Info banner',
@@ -19,7 +16,8 @@ export class InfoBannerPageComponent {
         ];
     }
 
-    public bannerDescription = 'Info banner message description banner message description';
+    public bannerDescription =
+        'Info banner message description banner message description';
 
     public buttonLabel = 'Info banner CTA';
 
@@ -28,5 +26,5 @@ export class InfoBannerPageComponent {
     public clicked = (evt) => {
         evt.preventDefault();
         console.log('clicked');
-    }
+    };
 }

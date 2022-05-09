@@ -1,15 +1,13 @@
-<ng-template #columnTemplateDeliveryTime
-             let-row="row">
-    {{row.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+<ng-template #columnTemplateDeliveryTime let-row="row">
+    {{row.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} -
+    {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 
 <ng-template #downloadPdfTemplate let-row="row">
-    <a 
+    <a
         (click)="downloadPDF(row.contract.contractId)"
-        class="
-            text-with-icon 
-            text-with-icon--link
-            mb-0">
+        class="text-with-icon text-with-icon--link mb-0"
+    >
         <span class="icon icon--document text-with-icon__icon"></span>
         <span class="text-with-icon__text">Stáhnout PDF</span>
     </a>
@@ -18,9 +16,7 @@
 <div class="container-fluid">
     <div class="row mb-3">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Uzavřené smlouvy
-            </h1>
+            <h1>Uzavřené smlouvy</h1>
         </div>
     </div>
     <div class="row">
@@ -32,9 +28,7 @@
                     </a>
                 </li>
                 <li class="link-list__item">
-                    <a class="link-list__link">
-                        Plyn
-                    </a>
+                    <a class="link-list__link"> Plyn </a>
                 </li>
             </ul>
         </div>

@@ -4,9 +4,11 @@
  -
  */
 
-$aside-bg:                         $body-bg;
-$aside-bg-secondary:               $gray-600;
-$aside-width-mobile:               260px;
-$aside-width-desktop:              calc( ( ( 100% / #{$grid-columns} ) * 2 ) - ( #{$spacer / 2} ) );
-$aside-line-width:                 50px;
-$aside-right-offset-mobile:        30px;
+$aside-bg: $body-bg;
+$aside-bg-secondary: $gray-600;
+$aside-width-mobile: 260px;
+$aside-width-desktop: calc(
+	((100% / #{$grid-columns}) * 2) - (#{$spacer * .5} )
+);
+$aside-line-width: 50px;
+$aside-right-offset-mobile: 30px;

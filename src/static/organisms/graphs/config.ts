@@ -1,4 +1,4 @@
-export const config =  [
+export const config = [
     {
         label: 'Pondělí',
         value: 12,
@@ -113,7 +113,7 @@ export const config =  [
     },
 ];
 
-export const config2 =  [
+export const config2 = [
     {
         label: 'Pondělí',
         value: 12,

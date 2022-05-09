@@ -8,15 +8,16 @@ const countWeightedSum = (icArray: Array<number>): number =>
         R.prop('weightedSum'),
         R.reduce(
             ({ weightedSum, index }, number) => ({
-                weightedSum: weightedSum + number * (COUNT_NUMBERS_OF_ICO - index),
+                weightedSum:
+                    weightedSum + number * (COUNT_NUMBERS_OF_ICO - index),
                 index: ++index,
             }),
             {
                 weightedSum: 0,
                 index: 0,
-            },
+            }
         ),
-        R.dropLast(1),
+        R.dropLast(1)
     )(icArray);
 
 const getCompareParameter = R.cond([
@@ -36,6 +37,6 @@ export const verifyIC = (ico: string): boolean => {
         R.equals(icArray[CONTROL_INDEX]),
         getCompareParameter,
         R.modulo(R.__, 11),
-        countWeightedSum,
+        countWeightedSum
     )(icArray);
 };

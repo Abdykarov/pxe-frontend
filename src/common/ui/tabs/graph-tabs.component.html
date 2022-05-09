@@ -1,12 +1,17 @@
 <div class="tabs tabs-graph" [class.tabs-graph--expanded]="expanded">
     <ul class="nav nav-tabs">
         <li *ngFor="let tab of tabs" class="nav-item">
-            <a (click)="selectTab(tab)"
+            <a
+                (click)="selectTab(tab)"
                 class="nav-link"
                 [class.active]="tab.active"
-                [class.disabled]="tab.disabled">
-                <span class="tabs-graph__title">{{tab.tabTitle}}</span>
-                <span class="tabs-graph__description" [innerHtml]="tab.tabDescription"></span>
+                [class.disabled]="tab.disabled"
+            >
+                <span class="tabs-graph__title">{{ tab.tabTitle }}</span>
+                <span
+                    class="tabs-graph__description"
+                    [innerHtml]="tab.tabDescription"
+                ></span>
             </a>
         </li>
     </ul>

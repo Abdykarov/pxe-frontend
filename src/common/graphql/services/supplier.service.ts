@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
 import { Apollo } from 'apollo-angular';
-
 import {
     IContractsBasedOnOffersFilter,
     ISupplierInput,
@@ -12,20 +10,16 @@ import {
 } from 'src/common/graphql/queries/supplier';
 import { updateSupplierProfileMutation } from '../mutation/supplier';
 
-
 @Injectable({
     providedIn: 'root',
 })
 export class SupplierService {
-
-    constructor(
-        private apollo: Apollo,
-    ) {}
+    constructor(private apollo: Apollo) {}
 
     public getListSupplierContractsBasedOnOffers = (
-        contractsBasedOnOffersFilter: IContractsBasedOnOffersFilter,
-    ) => this.apollo
-        .watchQuery<any>({
+        contractsBasedOnOffersFilter: IContractsBasedOnOffersFilter
+    ) =>
+        this.apollo.watchQuery<any>({
             query: listSupplierContractsBasedOnOffersQuery,
             variables: {
                 filter: {
@@ -33,19 +27,17 @@ export class SupplierService {
                 },
             },
             fetchPolicy: 'network-only',
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public findSupplierProfile = () => this.apollo
-        .watchQuery<any>({
+    public findSupplierProfile = () =>
+        this.apollo.watchQuery<any>({
             query: findSupplierProfileQuery,
             fetchPolicy: 'network-only',
             useInitialLoading: true,
-        })
-        .valueChanges
+        }).valueChanges;
 
-    public updateSupplierProfile = (supplierInput: ISupplierInput) => this.apollo
-        .mutate<any>({
+    public updateSupplierProfile = (supplierInput: ISupplierInput) =>
+        this.apollo.mutate<any>({
             mutation: updateSupplierProfileMutation,
             variables: {
                 supplierInput,
@@ -56,5 +48,5 @@ export class SupplierService {
                     query: findSupplierProfileQuery,
                 },
             ],
-        })
+        });
 }

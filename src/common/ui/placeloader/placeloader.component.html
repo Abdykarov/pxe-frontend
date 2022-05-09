@@ -1,5 +1,4 @@
-<div *ngIf="loading"
-     class="placeloader__wrapper">
+<div *ngIf="loading" class="placeloader__wrapper">
     <div class="placeloader__holder">
         <div class="placeloader">
             <span class="placeloader__symbol">
@@ -7,10 +6,7 @@
                 <span class="placeloader__symbol-circle"></span>
                 <span class="placeloader__symbol-circle"></span>
             </span>
-            <span *ngIf="label"
-                  class="placeloader__text">
-                {{ label }}
-            </span>
+            <span *ngIf="label" class="placeloader__text"> {{ label }} </span>
         </div>
     </div>
 </div>

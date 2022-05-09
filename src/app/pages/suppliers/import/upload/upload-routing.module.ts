@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
-import {
-    Routes,
-    RouterModule,
-} from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { CONSTS } from 'src/app/app.constants';
-import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 import { UploadComponent } from 'src/app/pages/suppliers/import/upload/upload.component';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes: Routes = [
     {
@@ -19,11 +15,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-    ],
-    exports: [
-        RouterModule,
-    ],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class UploadRoutingModule { }
+export class UploadRoutingModule {}

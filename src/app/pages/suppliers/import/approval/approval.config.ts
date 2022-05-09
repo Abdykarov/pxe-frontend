@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
 import * as R from 'ramda';
-
 import {
     CODE_LIST,
     CONSTS,
@@ -45,7 +43,9 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            R.find(R.propEq('value', row.offer.subjectTypeId))(SUBJECT_TYPE_OPTIONS).label,
+                            R.find(R.propEq('value', row.offer.subjectTypeId))(
+                                SUBJECT_TYPE_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -56,10 +56,15 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offer.distributionLocation ?
-                                R.find(R.propEq('value', row.offer.distributionLocation))
-                                    (codeLists[CODE_LIST.DISTRIBUTION_POWER]).label :
-                                    '';
+                            return row.offer.distributionLocation
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.offer.distributionLocation
+                                      )
+                                  )(codeLists[CODE_LIST.DISTRIBUTION_POWER])
+                                      .label
+                                : '';
                         },
                     },
                 ],
@@ -71,12 +76,16 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offer.powerAttributes.distributionRateId ?
-                                R.find(R.propEq('value', row.offer.powerAttributes.distributionRateId))
-                                (codeLists[CODE_LIST.DIST_RATE]).label :
-                                '';
+                            return row.offer.powerAttributes.distributionRateId
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.offer.powerAttributes
+                                              .distributionRateId
+                                      )
+                                  )(codeLists[CODE_LIST.DIST_RATE]).label
+                                : '';
                         },
-
                     },
                 ],
             },
@@ -87,12 +96,16 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offer.powerAttributes.circuitBreakerId ?
-                                R.find(R.propEq('value', row.offer.powerAttributes.circuitBreakerId))
-                                (codeLists[CODE_LIST.CIRCUIT_BREAKER]).label :
-                                '';
+                            return row.offer.powerAttributes.circuitBreakerId
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.offer.powerAttributes
+                                              .circuitBreakerId
+                                      )
+                                  )(codeLists[CODE_LIST.CIRCUIT_BREAKER]).label
+                                : '';
                         },
-
                     },
                 ],
             },
@@ -143,7 +156,9 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            R.find(R.propEq('value', row.offer.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
+                            R.find(R.propEq('value', row.offer.deliveryLength))(
+                                DELIVERY_LENGTH_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -152,7 +167,10 @@ export class ApprovalConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -186,7 +204,9 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            R.find(R.propEq('value', row.offer.subjectTypeId))(SUBJECT_TYPE_OPTIONS).label,
+                            R.find(R.propEq('value', row.offer.subjectTypeId))(
+                                SUBJECT_TYPE_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -197,10 +217,14 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offer.distributionLocation ?
-                                R.find(R.propEq('value', row.offer.distributionLocation))
-                                (codeLists[CODE_LIST.DISTRIBUTION_GAS]).label :
-                                '';
+                            return row.offer.distributionLocation
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.offer.distributionLocation
+                                      )
+                                  )(codeLists[CODE_LIST.DISTRIBUTION_GAS]).label
+                                : '';
                         },
                     },
                 ],
@@ -212,10 +236,15 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offer.gasAttributes.annualConsumptionId ?
-                                R.find(R.propEq('value', row.offer.gasAttributes.annualConsumptionId))
-                                (codeLists[CODE_LIST.CONSUMPTION]).label :
-                                '';
+                            return row.offer.gasAttributes.annualConsumptionId
+                                ? R.find(
+                                      R.propEq(
+                                          'value',
+                                          row.offer.gasAttributes
+                                              .annualConsumptionId
+                                      )
+                                  )(codeLists[CODE_LIST.CONSUMPTION]).label
+                                : '';
                         },
                     },
                 ],
@@ -257,7 +286,9 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            R.find(R.propEq('value', row.offer.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
+                            R.find(R.propEq('value', row.offer.deliveryLength))(
+                                DELIVERY_LENGTH_OPTIONS
+                            ).label,
                     },
                 ],
             },
@@ -266,13 +297,16 @@ export class ApprovalConfig {
                 views: [
                     {
                         headingClass: ['text-right'],
-                        cellClass: ['text-right', 'table--advanced__action-area'],
+                        cellClass: [
+                            'text-right',
+                            'table--advanced__action-area',
+                        ],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
             },
         ],
-    })
+    });
 
     public confirmBackActionConfig = (): IShowModal => ({
         component: 'ConfirmModalComponent',
@@ -282,5 +316,5 @@ export class ApprovalConfig {
             titleConfirm: 'Ano',
             titleClose: 'Ne',
         },
-    })
+    });
 }

@@ -1,34 +1,22 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
     ElementRef,
     ViewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
-
 import * as R from 'ramda';
 import { fromEvent } from 'rxjs';
-import {
-    debounceTime,
-    takeUntil,
-} from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { CONSTS, GTM_CONSTS } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    getConfigStepper,
-    playVideo,
-} from 'src/common/utils';
+import { CryptoService } from 'src/app/services/crypto.service';
 import { GTMService } from 'src/app/services/gtm.service';
-import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
-import {
-    CONSTS,
-    GTM_CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
-
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { getConfigStepper, playVideo } from 'src/common/utils';
 
 @Component({
     selector: 'lnd-signboard',
@@ -36,63 +24,67 @@ import {
     styleUrls: ['./signboard.component.scss'],
 })
 export class SignboardComponent extends AbstractComponent {
-
     @ViewChild('video')
     public _video: ElementRef;
 
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(
+        this.ACTUAL_PROGRESS_STATUS
+    );
     public showWelcome = false;
     public showTextUnderVideo = true;
     public idFileUploader = 'file-upload';
 
     public isMoreThanMdResolution = false;
 
-    public resizeEvent$ = fromEvent(window, 'resize')
-        .pipe(
-            debounceTime(200),
-        );
+    public resizeEvent$ = fromEvent(window, 'resize').pipe(debounceTime(200));
 
     constructor(
         public authService: AuthService,
         public cd: ChangeDetectorRef,
+        private cryptoService: CryptoService,
         private gtmService: GTMService,
-        private router: Router,
+        public navigateConsumerService: NavigateConsumerService
     ) {
         super();
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
 
         if (isPlatformBrowser) {
-            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
+            this.isMoreThanMdResolution =
+                window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
-        this.resizeEvent$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(_  => {
-                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
-                this.cd.markForCheck();
-            });
+        this.resizeEvent$.pipe(takeUntil(this.destroy$)).subscribe((_) => {
+            this.isMoreThanMdResolution =
+                window.innerWidth >= CONSTS.MD_RESOLUTION;
+            this.cd.markForCheck();
+        });
 
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
+        this.gtmService.loadFormEvent(
+            GTM_CONSTS.LABELS.STEP_ONE,
+            this.cryptoService.hashedUserId
+        );
     }
 
     public routerToNextStep = (evt) => {
         evt.preventDefault();
         this.gtmService.pushEvent({
-            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
-            'category': GTM_CONSTS.CATEGORIES.FORM,
-            'action': GTM_CONSTS.ACTIONS.START,
-            'label': GTM_CONSTS.LABELS.STEP_ONE,
-            'userID': this.authService.hashedUserId,
+            event: GTM_CONSTS.EVENTS.EVENT_TRACKING,
+            category: GTM_CONSTS.CATEGORIES.FORM,
+            action: GTM_CONSTS.ACTIONS.START,
+            label: GTM_CONSTS.LABELS.STEP_ONE,
+            userID: this.cryptoService.hashedUserId,
         });
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
-    }
+        this.navigateConsumerService.navigateToRequestStepByProgressStatus(
+            ProgressStatus.SUPPLY_POINT
+        );
+    };
 
     public videoEnded = (event) => {
         this.showTextUnderVideo = true;
         this.video.currentTime = 0;
         this.pause(); // fix for IE
-    }
+    };
 
     public play = (event = null) => {
         if (event) {
@@ -100,18 +92,18 @@ export class SignboardComponent extends AbstractComponent {
         }
 
         playVideo(this.video);
-    }
+    };
 
-    public pause =  (event = null) => {
+    public pause = (event = null) => {
         if (event) {
             event.preventDefault();
         }
 
         this.video.pause();
-    }
+    };
 
     get isVideoPlaying(): boolean {
-      return this._video && !this.video.paused;
+        return this._video && !this.video.paused;
     }
 
     get video(): HTMLMediaElement {

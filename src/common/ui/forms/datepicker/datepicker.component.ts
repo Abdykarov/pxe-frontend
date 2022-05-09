@@ -4,22 +4,17 @@ import {
     EventEmitter,
     Input,
     Output,
-    ViewEncapsulation,
     ViewChild,
+    ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
-import {
-    BsDatepickerConfig,
-    BsLocaleService,
-} from 'ngx-bootstrap/datepicker';
-import { csLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
-
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { csLocale } from 'ngx-bootstrap/locale';
 import { DynamicPipe } from 'src/common/pipes/common/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
-import { defaultDatepickerConfig } from './datepicker.config';
 import { IValidationMessages } from '../models/validation-messages.model';
+import { defaultDatepickerConfig } from './datepicker.config';
 
 const locale = 'cs';
 
@@ -46,7 +41,7 @@ export class DatepickerComponent {
     public change?: EventEmitter<any> = new EventEmitter();
 
     @Output()
-    public hide?:  EventEmitter<any> = new EventEmitter();
+    public hide?: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public config: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
@@ -101,7 +96,7 @@ export class DatepickerComponent {
     constructor(
         private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
-        private localeService: BsLocaleService,
+        private localeService: BsLocaleService
     ) {
         this.resetDatepickerLocale();
         this.config = defaultDatepickerConfig;
@@ -109,7 +104,9 @@ export class DatepickerComponent {
 
     public checkValue = (event) => {
         const stringDate = event.target.value;
-        const dateFormatRegexp = new RegExp(defaultDatepickerConfig.dateFormatRegexp);
+        const dateFormatRegexp = new RegExp(
+            defaultDatepickerConfig.dateFormatRegexp
+        );
         if (dateFormatRegexp.test(stringDate)) {
             const match = stringDate.match(dateFormatRegexp);
             const date = Date.parse(`${match[3]}-${match[2]}-${match[1]}`);
@@ -121,13 +118,13 @@ export class DatepickerComponent {
         } else {
             this.resetDatepickerOnError(stringDate);
         }
-    }
+    };
 
     public resetDatepickerLocale = (invalidMessage = '') => {
         csLocale.invalidDate = invalidMessage;
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
-    }
+    };
 
     public resetDatepickerOnError = (value: string) => {
         this.resetDatepickerLocale(value);
@@ -135,19 +132,20 @@ export class DatepickerComponent {
         // this.datepicker.bsValue = null;
         // this.datepicker.bsValue = undefined;
         this.parentForm.controls[this.datepickerName].setErrors({
-            'bsDate': true,
+            bsDate: true,
         });
         this.datepicker.isOpen = false;
-    }
+    };
 
     public onShowPicker = (event) => {
         const dayHoverHandler = event.dayHoverHandler;
         const hoverWrapper = (hoverEvent) => {
             const { cell, isHovered } = hoverEvent;
 
-            if ((isHovered &&
+            if (
+                isHovered &&
                 !!navigator.platform &&
-                /iPad|iPhone|iPod/.test(navigator.platform)) &&
+                /iPad|iPhone|iPod/.test(navigator.platform) &&
                 'ontouchstart' in window
             ) {
                 this.datepicker._datepickerRef.instance.daySelectHandler(cell);
@@ -160,9 +158,10 @@ export class DatepickerComponent {
             window.scrollTo(window.scrollX, window.scrollY - 1);
             window.scrollTo(window.scrollX, window.scrollY + 1);
         });
-    }
+    };
 
     public onHidePicker = (event) => this.cd.markForCheck();
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
+    public getErrorMessage = () =>
+        getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

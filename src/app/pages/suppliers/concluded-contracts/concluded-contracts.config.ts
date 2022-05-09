@@ -1,21 +1,13 @@
-import {
-    Inject,
-    Injectable,
-    LOCALE_ID,
-} from '@angular/core';
-
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IContractWithNameAndSupplyPoint } from 'src/common/graphql/models/suppplier.model';
-import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ConcludedContractsConfig {
-
-    constructor(
-        @Inject(LOCALE_ID) private locale: string,
-    ) {}
+    constructor(@Inject(LOCALE_ID) private locale: string) {}
 
     public readonly paginationConfig: IPaginationConfig = {
         itemsPerPage: 50,
@@ -27,14 +19,15 @@ export class ConcludedContractsConfig {
         lastText: '<span class="arrow-text">last</span>',
     };
 
-    public getTableCols = (commodityType: CommodityType) => ([
+    public getTableCols = (commodityType: CommodityType) => [
         {
             label: 'Jméno a příjmení',
             views: [
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPoint) => `${row.name}`,
+                    content: (row: IContractWithNameAndSupplyPoint) =>
+                        `${row.name}`,
                 },
             ],
         },
@@ -44,7 +37,8 @@ export class ConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPoint) => `${row.identificationNumber}`,
+                    content: (row: IContractWithNameAndSupplyPoint) =>
+                        `${row.identificationNumber}`,
                 },
             ],
         },
@@ -68,6 +62,5 @@ export class ConcludedContractsConfig {
                 },
             ],
         },
-    ])
-
+    ];
 }

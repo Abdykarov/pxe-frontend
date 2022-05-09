@@ -5,6 +5,8 @@
  */
 
 
+@use 'sass:math';
+
 .main {
 	position: relative;
 
@@ -16,13 +18,13 @@
 		> li {
 			position: relative;
 			padding-left: $spacer;
-			padding-bottom: ( $lists-margin-bottom / 2 );
+			padding-bottom: ( $lists-margin-bottom * .5 );
 		}
 
 		ol,
 		ul {
 			margin-bottom: 0;
-			margin-top: ( $lists-margin-bottom / 2 );
+			margin-top: ( $lists-margin-bottom * .5 );
 		}
 	}
 
@@ -31,8 +33,8 @@
 			&::before {
 				content: '';
 				position: absolute;
-				top: ( $list-bullet-size / 2 );
-				left: ( $list-bullet-size / 2 );
+				top: ( $list-bullet-size * .5 );
+				left: ( $list-bullet-size * .5 );
 				width: $list-bullet-size;
 				height: $list-bullet-size;
 				border-radius: $list-bullet-size;
@@ -58,7 +60,7 @@
 			content: counter(ol-list-1, decimal) '.';
 			position: absolute;
 			top: 0;
-			left: ( $list-bullet-size / 2 );
+			left: ( $list-bullet-size * .5 );
 			color: $font-text;
 			font-weight: 700;
 		}
@@ -73,7 +75,7 @@
 
 			> li::before {
 				content: counter(ol-list-2, lower-latin) ')';
-				padding-right: ( $spacer / 4 );
+				padding-right: ( $spacer * .25  );
 			}
 
 			ol {
@@ -97,7 +99,7 @@
 		}
 
 		& > li {
-			padding-bottom: ( $spacer * .75 );
+			padding-bottom: ( $spacer * .75  );
 		}
 
 		.active,
@@ -109,15 +111,15 @@
 
 	ol.circular-number-list {
 		& > li {
-			padding-top: ( $circular-number-list-size + ( $spacer * .25 ) );
+			padding-top: ( $circular-number-list-size + ( $spacer * .25 )  );
 			padding-left: 0;
-			padding-bottom: ( $spacer * 2 );
-			line-height: ( 24 / 16 );
+			padding-bottom: ( $spacer * 2  );
+			line-height:  math.div(24, 16) ;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
 				padding-top: 0;
-				padding-left: ( $circular-number-list-size + ( $spacer * .75 ) );
+				padding-left: ( $circular-number-list-size + ( $spacer * .75 )  );
 			}
 		}
 
@@ -158,16 +160,16 @@
 
 		> li {
 			padding-left: 0;
-			margin-bottom: ( $spacer * 2.5 );
+			margin-bottom: ( $spacer * 2.5  );
 
 			&::before {
 				font-size: $h2-font-size;
-				line-height: ( 24 / 18 );
+				line-height:  math.div(24, 18) ;
 				padding-left: $list-decimal-padding-left;
 			}
 
 			.decimal-list__item-title {
-				padding-left: ( $spacer * .5 );
+				padding-left: ( $spacer * .5  );
 				margin-bottom: $spacer;
 				display: inline-block;
 			}
@@ -194,7 +196,7 @@
 			> li::before {
 				padding-left: 0;
 				font-size: $h3-font-size-public-xs;
-				line-height: ( 30 / 24 );
+				line-height:  math.div(30, 24) ;
 				font-weight: 700;
 
 				// Media queries
@@ -219,7 +221,7 @@
 	ol.lower-roman {
 		> li {
 			counter-increment: ol-lower-roman-list;
-			padding-left: ( $spacer * 1.5 );
+			padding-left: ( $spacer * 1.5  );
 		}
 
 		> li::before {
@@ -231,7 +233,7 @@
 	ol.lower-alpha {
 		> li {
 			position: relative;
-			padding-left: ( $spacer * 1.5 );
+			padding-left: ( $spacer * 1.5  );
 
 			&::before {
 				position: absolute;
@@ -242,9 +244,9 @@
 
 	.check-list {
 		li {
-			padding-left: ( $icon-size-small-px + ( $spacer / 2 ) );
-			padding-bottom: ( $spacer * 1.5 );
-			line-height: ( 18 / 14 );
+			padding-left: ( $icon-size-small-px + ( $spacer * .5 )  );
+			padding-bottom: ( $spacer * 1.5  );
+			line-height:  math.div(18, 14) ;
 
 			&::before {
 				content: '\e906';
@@ -271,33 +273,33 @@
 
 		&--less-offset {
 			li {
-				padding-bottom: ( $spacer * .25 );
+				padding-bottom: ( $spacer * .25  );
 			}
 		}
 
 		&--medium-offset {
 			li {
-				padding-bottom: ( $spacer * .5 );
+				padding-bottom: ( $spacer * .5  );
 			}
 		}
 	}
 
 	.link-list {
-		margin: 0 ( -$spacer * .75 );
+		margin: 0 ( -$spacer * .75  );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			margin: 0 ( -$spacer * 1.25 );
+			margin: 0 ( -$spacer * 1.25  );
 		}
 
 		&__item {
 			display: inline-flex;
-			padding: 0 ( $spacer * .75 );
+			padding: 0 ( $spacer * .75  );
 			margin-bottom: $spacer;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding: 0 ( $spacer * 1.25 );
+				padding: 0 ( $spacer * 1.25  );
 			}
 
 			&::before {
@@ -324,12 +326,12 @@
 		}
 
 		&--small {
-			margin: 0 ( -$spacer / 2 );
+			margin: 0 ( -$spacer * .5  );
 
 			.link-list__item {
 				// Media queries
 				@include media-breakpoint-up(md) {
-					padding: 0 ( $spacer / 2 );
+					padding: 0 ( $spacer * .5  );
 				}
 			}
 
@@ -358,7 +360,7 @@
 		}
 
 		.link-list__item + .link-list__item {
-			margin-left: ( $spacer * 2 );
+			margin-left: ( $spacer * 2  );
 
 			// Media queries
 			@include media-breakpoint-up(xl) {
@@ -368,18 +370,18 @@
 
 		.link-list__link {
 			@include link-without-href {
-				padding-bottom: ( $spacer / 4 );
+				padding-bottom: ( $spacer * .25  );
 				font-size: $font-size-base-public;
 				text-transform: none;
 
 				// Media queries
 				@include media-breakpoint-up(md) {
-					padding-left: ( $spacer / 2 );
-					padding-right: ( $spacer / 2 );
+					padding-left: ( $spacer * .5  );
+					padding-right: ( $spacer * .5  );
 				}
 				@include media-breakpoint-up(xl) {
-					padding-left: ( $spacer * 2 );
-					padding-right: ( $spacer * 2 );
+					padding-left: ( $spacer * 2  );
+					padding-right: ( $spacer * 2  );
 				}
 			}
 

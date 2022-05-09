@@ -15,7 +15,6 @@
 @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/input-group';
 
-
 .form-control-info-wrapper {
 	width: 100%;
 	padding-bottom: $icon-size-px;
@@ -24,7 +23,7 @@
 .form-control-info {
 	position: relative;
 	display: inline-block;
-	padding: ( $spacer / 2 ) $spacer;
+	padding: ( $spacer * .5  ) $spacer;
 	background-color: $secondary;
 	color: $white;
 	border-radius: 3px 3px 3px 0;
@@ -32,7 +31,7 @@
 
 .form-control-info-beak {
 	position: absolute;
-	top: calc( 100% - 1px );
+	top: calc(100% - 1px);
 	left: 0;
 	color: $secondary;
 }
@@ -49,7 +48,6 @@
 		.form-control {
 			font-size: $font-size-base-public;
 		}
-
 
 		.form-control {
 			height: $input-height-public;
@@ -123,13 +121,13 @@
 		}
 
 		.custom-control-label {
-			padding-right: ( $icon-size-px + ( $spacer / 2 ) );
+			padding-right: ( $icon-size-px + ( $spacer * .5 ) );
 			z-index: $zindex-custom-control;
 		}
 	}
 
 	.is-disabled {
-		opacity: .3;
+		opacity: $opacity-disabled;
 	}
 }
 
@@ -201,7 +199,7 @@
 
 textarea.form-control {
 	min-height: $input-textarea-min-height;
-	padding: ( ( $spacer * 2 ) + $input-border-width );
+	padding: ( $input-border-width + ( $spacer * 2 ) );
 	line-height: $input-textarea-line-height;
 	border-color: $input-border-color;
 	border-width: $input-border-width;
@@ -214,8 +212,8 @@ textarea.form-control {
 	}
 
 	& + .control-label {
-		top: ( $form-group-padding-top + $spacer + ( $input-border-width * 2 ) ) ; // 26px
-		left: ( ( $spacer * 2 ) + ( $input-border-width * 2 ) );
+		top: ( $form-group-padding-top + $spacer + ( $input-border-width * 2 ) ); // 26px
+		left: ( ( $spacer * 2) + ($input-border-width * 2) );
 	}
 
 	&[disabled] {
@@ -247,7 +245,7 @@ textarea.form-control--not-empty {
 	position: relative;
 	display: block;
 	top: 0;
-	margin-bottom: ( $spacer / 2 );
+	margin-bottom: ( $spacer * .5 );
 }
 
 // States
@@ -327,7 +325,7 @@ textarea.form-control--not-empty {
 
 	& ~ .invalid-feedback {
 		display: none;
-		margin-top: ( $spacer / 4 );
+		margin-top: ( $spacer * .25 );
 		font-size: $small-font-size;
 		max-width: $input-width;
 	}
@@ -350,12 +348,12 @@ textarea.form-control--not-empty {
 }
 
 .form-control--with-indentation {
-	padding: 0 ( $spacer * 4.5 ) 0 ( $spacer * 1.5 ) ;
+	padding: 0 ( $spacer * 4.5) 0 ( $spacer * 1.5 );
 
 	&:focus,
 	&.focus,
 	&:hover {
-		padding-top: ( $input-padding-y + $input-border-width );
+		padding-top: ($input-padding-y + $input-border-width);
 	}
 }
 
@@ -423,7 +421,7 @@ textarea.form-control--not-empty {
 .input-group-append-help {
 	position: absolute;
 	top: $form-group-padding-top;
-	right: -( $input-height );
+	right: -$input-height;
 	width: $input-height;
 	height: $input-height;
 	line-height: $input-height;
@@ -593,7 +591,7 @@ textarea.form-control--not-empty {
 }
 
 .custom-control-label {
-	padding-left: ( $custom-control-indicator-size-px + ( $spacer / 2 ) );
+	padding-left: calc( #{$custom-control-indicator-size} + ( #{$spacer} * .5) );
 	color: $input-color;
 	font-size: $input-font-size;
 	cursor: pointer;
@@ -641,8 +639,8 @@ th {
 		}
 
 		&::after {
-			top: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 + $custom-control-indicator-top);
-			left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2);
+			top: ( $custom-radio-filling-center + $custom-control-indicator-top );
+			left: $custom-radio-filling-center;
 			width: $custom-radio-filling-size;
 			height: $custom-radio-filling-size;
 			background-color: $custom-radio-control-indicator-checked-bg;
@@ -730,7 +728,7 @@ th {
 			@include icon;
 			content: '\e906';
 			font-size: $custom-checkbox-icon-size;
-			line-height: $custom-control-indicator-size-px;
+			line-height: $custom-control-indicator-size;
 			text-align: center;
 		}
 	}
@@ -795,8 +793,8 @@ th {
 			}
 
 			&::after {
-				width: $custom-control-indicator-size-px;
-				height: $custom-control-indicator-size-px;
+				width: $custom-control-indicator-size;
+				height: $custom-control-indicator-size;
 				top: 50%;
 				right: 30px;
 				left: auto;
@@ -890,7 +888,7 @@ th {
 		&:nth-of-type(1) {
 			.custom-control-input {
 				& + .custom-control-label {
-					padding-right: ( $spacer * 6 ) + ( $custom-switch-width / 2 );
+					padding-right: ( 1.25rem * 6) + ($custom-switch-width * .5 ); //todo
 				}
 			}
 		}
@@ -900,7 +898,7 @@ th {
 			margin-left: -$spacer * 7;
 
 			.custom-control-input + .custom-control-label {
-				padding-left: ( $spacer * 6 ) + ( $custom-switch-width / 2 );
+				padding-left: ( 1.25rem * 6) + ($custom-switch-width * .5 ); //todo
 
 				&::before {
 					display: block;
@@ -918,8 +916,8 @@ th {
 					display: block;
 					border: none;
 					background-color: $white;
-					width: $custom-control-indicator-size-px;
-					height: $custom-control-indicator-size-px;
+					width: $custom-control-indicator-size;
+					height: $custom-control-indicator-size;
 					top: 50%;
 					left: 4px;
 					transform: translate(0, -50%);
@@ -960,9 +958,9 @@ th {
 
 	.select-icon {
 		position: absolute;
-		top: ( $input-height / 2 );
+		top: ( $input-height * .5 );
 		right: 0;
-		padding-right: ( $spacer / 2 );
+		padding-right: ( $spacer * .5 );
 		font-weight: $font-weight-bold;
 		pointer-events: none;
 	}
@@ -999,7 +997,7 @@ th {
 // File input
 .custom-file {
 	width: auto;
-	margin-bottom: ( $spacer / 2 );
+	margin-bottom: ( $spacer * .5 );
 }
 
 .custom-file-input {
@@ -1043,7 +1041,7 @@ th {
 }
 
 .input-subtext {
-	margin-top: ( $spacer / 4 );
+	margin-top: ( $spacer * .25 );
 	font-size: $small-font-size;
 	text-align: justify;
 

@@ -1,14 +1,5 @@
-FROM docker.lnd.bz/nodejs:10
+FROM docker.lnd.bz/nginx:1.20
 
-LABEL maintainer="devops@lundegaard.eu"
-LABEL author="ondrej.kopal@lundegaard.eu"
+ARG APP
 
-ENV ENV $ENV
-ENV YARN_RUN $YARN_RUN
-
-WORKDIR /opt
-
-EXPOSE 4200
-
-# Run
-ENTRYPOINT ["./run-application.sh"]
+COPY ./dist/$APP /var/www/

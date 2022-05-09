@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <h3>Dropdown</h3>
@@ -67,12 +69,17 @@
                 [actionTemplate]="dropdown3"
                 (toggleOverlayerAction)="toggleOverlayer();"
                 [overlayEnabled]="true"
-                menuDirection="center">
-                <a *ngFor="let item of navigationItems"
+                menuDirection="center"
+            >
+                <a
+                    *ngFor="let item of navigationItems"
                     [ngClass]="item.class"
                     class="dropdown-item"
-                    [routerLink]="item.url">
-                    <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
+                    [routerLink]="item.url"
+                >
+                    <span
+                        [ngClass]="'dropdown-item-icon icon icon--' + item.icon"
+                    ></span>
                     {{ item.label }}
                 </a>
             </lnd-dropdown>

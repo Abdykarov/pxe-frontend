@@ -7,18 +7,17 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .header {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	height: $header-height;
+	background-color: $body-bg;
 	color: $white;
 	z-index: $zindex-header;
 
 	&--public {
-		position: fixed;
 		background-color: $body-bg-lp;
 	}
 
@@ -32,8 +31,8 @@
 		.header-inner {
 			// Media queries
 			@include media-breakpoint-down(xl) {
-				width: calc( 100% + #{$spacer} );
-				margin-left: -( $spacer / 2 );
+				width: calc(100% + #{$spacer} );
+				margin-left: -( $spacer * .5 );
 				background-color: $body-bg-lp;
 			}
 		}

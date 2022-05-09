@@ -4,7 +4,6 @@
  -
  */
 
-
 .container-content {
 	// max-width: $body-max-width;
 	padding-top: $header-height;
@@ -12,16 +11,15 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		min-height: calc(100vh - #{$footer-height-tablet});
-		padding-top: ( ( $header-height - $logo-height-tablet ) / 2 );
 	}
 
 	&--public {
-		padding-top: ( $header-height + ( $spacer * 1.5 ) );
+		padding-top: ($header-height + ($spacer * 1.5));
 		font-size: $large-font-size;
 
 		// Media queries
 		@include media-breakpoint-up(lg) {
-			padding-top: ( $header-height + $spacer );
+			padding-top: $header-height;
 		}
 	}
 }

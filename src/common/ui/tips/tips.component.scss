@@ -5,6 +5,8 @@
  */
 
 // Core component import
+@use 'sass:math';
+
 @import 'src/assets/scss/01_base/base.scss';
 
 .tip {
@@ -44,29 +46,29 @@
 	}
 
 	&--small {
-		padding: ( $spacer / 2 );
+		padding: ( $spacer * .5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
 			height: $tip-height-small;
-			padding: ( $spacer / 3 ) ( $spacer / 2 );
+			padding: math.div( $spacer, 3) ( $spacer * .5 );
 		}
 
 		.tip__image {
-			width: ( $tip-height-small - ( $spacer / 1.5 ) );
-			min-width: ( $tip-height-small - ( $spacer / 1.5 ) );
-			height: ( $tip-height-small - ( $spacer / 1.5 ) );
+			width: ($tip-height-small - math.div( $spacer, 1.5) );
+			min-width: ($tip-height-small - math.div( $spacer, 1.5) );
+			height: ($tip-height-small - math.div( $spacer, 1.5) );
 		}
 	}
 
 	&--big {
 		min-height: $tip-min-height-big;
-		padding: ( $spacer / 2 );
+		padding: ( $spacer * .5 );
 
 		.tip__image {
-			width: ( $tip-min-height-big - $spacer );
-			min-width: ( $tip-min-height-big - $spacer );
-			height: ( $tip-min-height-big - $spacer );
+			width: ($tip-min-height-big - $spacer );
+			min-width: ($tip-min-height-big - $spacer );
+			height: ($tip-min-height-big - $spacer );
 		}
 	}
 }

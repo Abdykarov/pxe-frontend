@@ -1,14 +1,13 @@
 import * as R from 'ramda';
-
-import {
-    CommodityType,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
 import {
     IOffer,
     ISupplyPointImportPrices,
     ISupplyPointOffers,
 } from 'src/common/graphql/models/offer.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 
 export const countTotalPriceIncludeAnnualConsumption = (
     {
@@ -27,12 +26,16 @@ export const countTotalPriceIncludeAnnualConsumption = (
         priceNTWithVAT = 0,
         priceGasWithVAT = 0,
         monthlyConsumptionFee = 0,
-    }: IOffer,
+    }: IOffer
 ): number => {
-    const vtCount = annualConsumptionVT * (importPricePerKwPowerVT || priceVTWithVAT);
-    const ntCount = annualConsumptionNT * (importPricePerKwPowerNT || priceNTWithVAT);
-    const gasCount = annualConsumption * (importPricePerKwGas || priceGasWithVAT);
-    const totalPriceCount = (importPermanentMonthlyPay || monthlyConsumptionFee) * 12;
+    const vtCount =
+        annualConsumptionVT * (importPricePerKwPowerVT || priceVTWithVAT);
+    const ntCount =
+        annualConsumptionNT * (importPricePerKwPowerNT || priceNTWithVAT);
+    const gasCount =
+        annualConsumption * (importPricePerKwGas || priceGasWithVAT);
+    const totalPriceCount =
+        (importPermanentMonthlyPay || monthlyConsumptionFee) * 12;
     return vtCount + ntCount + gasCount + totalPriceCount;
 };
 
@@ -93,7 +96,7 @@ export const emptySupplyPoint: IOffer = {
 
 export const supplyPointImportPricesToOffer = (
     supplyPoint: ISupplyPoint,
-    supplyPointImportPrices: ISupplyPointImportPrices,
+    supplyPointImportPrices: ISupplyPointImportPrices
 ): IOffer => {
     if (supplyPointImportPrices?.importPermanentMonthlyPay != null) {
         return {
@@ -122,7 +125,8 @@ export const supplyPointImportPricesToOffer = (
             isOwnOffer: false,
             marked: false,
             marketOrganizerRegulatedPrice: 0,
-            monthlyConsumptionFee: supplyPointImportPrices?.importPermanentMonthlyPay,
+            monthlyConsumptionFee:
+                supplyPointImportPrices?.importPermanentMonthlyPay,
             name: null,
             permanentPaymentPrice: 0,
             priceGas: 0,
@@ -142,65 +146,90 @@ export const supplyPointImportPricesToOffer = (
             validFrom: '',
             validTo: '',
             totalPriceIncludeAnnualConsumption:
-                countTotalPriceIncludeAnnualConsumption(supplyPoint, supplyPointImportPrices, emptySupplyPoint),
+                countTotalPriceIncludeAnnualConsumption(
+                    supplyPoint,
+                    supplyPointImportPrices,
+                    emptySupplyPoint
+                ),
         };
     }
     return null;
 };
 
-const plusVat  = (value) => {
+const plusVat = (value) => {
     if (value) {
-        return value *= 1.21;
+        return (value *= 1.21);
     }
 
     return null;
 };
 
-export const setTotalPriceWithAnnualConsumption =
-    (supplyPoint: ISupplyPoint, supplyPointOffers: ISupplyPointOffers): ISupplyPointOffers => {
+export const setTotalPriceWithAnnualConsumption = (
+    supplyPoint: ISupplyPoint,
+    supplyPointOffers: ISupplyPointOffers
+): ISupplyPointOffers => {
+    if (supplyPointOffers.supplyPointImportPrices) {
+        const supplyPointImportPrices =
+            supplyPointOffers.supplyPointImportPrices;
+        supplyPointImportPrices.importPermanentMonthlyPay = plusVat(
+            supplyPointImportPrices.importPermanentMonthlyPay
+        );
+        supplyPointImportPrices.importPricePerKwGas = plusVat(
+            supplyPointImportPrices.importPricePerKwGas
+        );
+        supplyPointImportPrices.importPricePerKwPowerNT = plusVat(
+            supplyPointImportPrices.importPricePerKwPowerNT
+        );
+        supplyPointImportPrices.importPricePerKwPowerVT = plusVat(
+            supplyPointImportPrices.importPricePerKwPowerVT
+        );
+        supplyPointImportPrices.importPriceTotalPerYear = plusVat(
+            supplyPointImportPrices.importPriceTotalPerYear
+        );
+        supplyPointOffers.supplyPointImportPrices = supplyPointImportPrices;
+    }
 
-        if (supplyPointOffers.supplyPointImportPrices) {
-            const supplyPointImportPrices = supplyPointOffers.supplyPointImportPrices;
-            supplyPointImportPrices.importPermanentMonthlyPay = plusVat(supplyPointImportPrices.importPermanentMonthlyPay);
-            supplyPointImportPrices.importPricePerKwGas = plusVat(supplyPointImportPrices.importPricePerKwGas);
-            supplyPointImportPrices.importPricePerKwPowerNT = plusVat(supplyPointImportPrices.importPricePerKwPowerNT);
-            supplyPointImportPrices.importPricePerKwPowerVT = plusVat(supplyPointImportPrices.importPricePerKwPowerVT);
-            supplyPointImportPrices.importPriceTotalPerYear = plusVat(supplyPointImportPrices.importPriceTotalPerYear);
-            supplyPointOffers.supplyPointImportPrices = supplyPointImportPrices;
-        }
-
-        R.forEach((offer: IOffer) =>
-            offer.totalPriceIncludeAnnualConsumption = countTotalPriceIncludeAnnualConsumption(
-                supplyPoint,
-                emptySupplyPointImportPrices,
-                offer,
-            ),
-        )(supplyPointOffers.offers);
+    R.forEach(
+        (offer: IOffer) =>
+            (offer.totalPriceIncludeAnnualConsumption =
+                countTotalPriceIncludeAnnualConsumption(
+                    supplyPoint,
+                    emptySupplyPointImportPrices,
+                    offer
+                ))
+    )(supplyPointOffers.offers);
 
     return supplyPointOffers;
 };
 
-export const sortByTotalPriceAscend = R.sort(R.ascend(R.prop('totalPriceIncludeAnnualConsumption')));
+export const sortByTotalPriceAscend = R.sort(
+    R.ascend(R.prop('totalPriceIncludeAnnualConsumption'))
+);
 
-export const addPastOfferToFindSupplyPointOffers =
-    (supplyPoint: ISupplyPoint, supplyPointOffers: ISupplyPointOffers): IOffer[] => {
-
+export const addPastOfferToFindSupplyPointOffers = (
+    supplyPoint: ISupplyPoint,
+    supplyPointOffers: ISupplyPointOffers
+): IOffer[] => {
     if (supplyPointOffers?.pastOffer) {
         supplyPointOffers.pastOffer.totalPriceIncludeAnnualConsumption =
             countTotalPriceIncludeAnnualConsumption(
                 supplyPoint,
                 emptySupplyPointImportPrices,
-                supplyPointOffers.pastOffer,
+                supplyPointOffers.pastOffer
             );
     }
 
-    const pastOffer: IOffer = supplyPointOffers.pastOffer ||
-    supplyPointImportPricesToOffer(supplyPoint, supplyPointOffers.supplyPointImportPrices);
+    const pastOffer: IOffer =
+        supplyPointOffers.pastOffer ||
+        supplyPointImportPricesToOffer(
+            supplyPoint,
+            supplyPointOffers.supplyPointImportPrices
+        );
 
     return R.pipe(
         R.prop('offers'),
         R.append(pastOffer),
-        R.reject(R.isNil),
+        R.reject(R.isNil)
     )(supplyPointOffers);
 };
 
@@ -220,15 +249,15 @@ export const ifCurrentIsTheBestRemoveIt = (offers: IOffer[]): IOffer[] => {
     return offers;
 };
 
-export const filterOffersOnlyActualSupplier = (supplyPoint: ISupplyPoint, supplyPointOffers: IOffer[]): IOffer[] => {
+export const filterOffersOnlyActualSupplier = (
+    supplyPoint: ISupplyPoint,
+    supplyPointOffers: IOffer[]
+): IOffer[] => {
     if (!R.isNil(supplyPointOffers) && !R.isNil(supplyPoint)) {
-        return R.filter((supplyPointOffer: IOffer) =>
-            supplyPointOffer.supplier.id === supplyPoint?.supplier?.id)
-        (supplyPointOffers);
+        return R.filter(
+            (supplyPointOffer: IOffer) =>
+                supplyPointOffer.supplier.id === supplyPoint?.supplier?.id
+        )(supplyPointOffers);
     }
     return supplyPointOffers;
 };
-
-
-
-

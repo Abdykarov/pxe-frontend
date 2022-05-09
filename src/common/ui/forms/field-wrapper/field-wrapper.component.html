@@ -1,13 +1,14 @@
-<div class="field-wrapper"
-     [class.field-wrapper--focused]="wrapperFocused"
-     [class.field-wrapper-with-label]="label || labelTemplate">
+<div
+    class="field-wrapper"
+    [class.field-wrapper--focused]="wrapperFocused"
+    [class.field-wrapper-with-label]="label || labelTemplate"
+>
     <label
         *ngIf="label || labelTemplate"
         [for]="labelFor"
-        class="control-label">
-        <ng-container *ngIf="label">
-            {{label}}
-        </ng-container>
+        class="control-label"
+    >
+        <ng-container *ngIf="label"> {{ label }} </ng-container>
         <ng-container *ngIf="labelTemplate">
             <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
         </ng-container>
@@ -18,7 +19,8 @@
     <div
         *ngIf="!!subtext || subtextTemplate"
         class="input-subtext"
-        [innerHTML]="subtext">
+        [innerHTML]="subtext"
+    >
         <ng-container *ngIf="subtextTemplate">
             <ng-container *ngTemplateOutlet="subtextTemplate"></ng-container>
         </ng-container>
@@ -26,6 +28,6 @@
     <div
         *ngIf="!!errorMessage"
         [innerHtml]="errorMessage"
-        class="invalid-feedback">
-    </div>
+        class="invalid-feedback"
+    ></div>
 </div>

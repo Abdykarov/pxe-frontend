@@ -1,69 +1,66 @@
 <div class="row">
     <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+        <lnd-breadcrumb
+            [breadcrumbItems]="breadcrumbItemsSimple"
+        ></lnd-breadcrumb>
     </div>
 </div>
 <lnd-tabs (toggleOverlayerAction)="toggleOverlayer()">
-    <lnd-tab tabTitle="Tab 1">
-        Tab 1 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Tab 2">
-        Tab 2 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Tab 3">
-        Tab 3 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Tab 4">
-        Tab 4 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Tab 5">
-        Tab 5 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Tab 6">
-        Tab 6 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Tab 7">
-        Tab 7 content
-    </lnd-tab>
+    <lnd-tab tabTitle="Tab 1"> Tab 1 content </lnd-tab>
+    <lnd-tab tabTitle="Tab 2"> Tab 2 content </lnd-tab>
+    <lnd-tab tabTitle="Tab 3"> Tab 3 content </lnd-tab>
+    <lnd-tab tabTitle="Tab 4"> Tab 4 content </lnd-tab>
+    <lnd-tab tabTitle="Tab 5"> Tab 5 content </lnd-tab>
+    <lnd-tab tabTitle="Tab 6"> Tab 6 content </lnd-tab>
+    <lnd-tab tabTitle="Tab 7"> Tab 7 content </lnd-tab>
 </lnd-tabs>
 <lnd-tabs (toggleOverlayerAction)="toggleOverlayer()">
-    <lnd-tab tabTitle="Short tab 1">
-        Short tab 1 content
-    </lnd-tab>
-    <lnd-tab tabTitle="Short tab 2">
-        Short tab 2 content
-    </lnd-tab>
+    <lnd-tab tabTitle="Short tab 1"> Short tab 1 content </lnd-tab>
+    <lnd-tab tabTitle="Short tab 2"> Short tab 2 content </lnd-tab>
 </lnd-tabs>
 <h3>Graph tabs</h3>
 <div class="static-pages">
     <lnd-graph-tabs>
-        <lnd-tab tabTitle="Active"
-                 tabDescription="Lorem ipsum dolor sit amet, consectetuer adipiscing elit.">
+        <lnd-tab
+            tabTitle="Active"
+            tabDescription="Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+        >
             Graph tab 1...
         </lnd-tab>
-        <lnd-tab tabTitle="Standard link"
-                 tabDescription="Aenean vel massa quis mauris vehicula lacinia.">
+        <lnd-tab
+            tabTitle="Standard link"
+            tabDescription="Aenean vel massa quis mauris vehicula lacinia."
+        >
             Graph tab 2...
         </lnd-tab>
     </lnd-graph-tabs>
     <lnd-graph-tabs>
-        <lnd-tab tabTitle="Active"
-                 tabDescription="Lorem ipsum dolor sit amet, consectetuer adipiscing elit.">
+        <lnd-tab
+            tabTitle="Active"
+            tabDescription="Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+        >
             Graph tab 1...
         </lnd-tab>
-        <lnd-tab tabTitle="Disabled"
-                 tabDescription="Aenean vel massa quis mauris vehicula lacinia." [disabled]="true">
+        <lnd-tab
+            tabTitle="Disabled"
+            tabDescription="Aenean vel massa quis mauris vehicula lacinia."
+            [disabled]="true"
+        >
             Graph tab 2...
         </lnd-tab>
     </lnd-graph-tabs>
     <h4>Graph tabs expanded</h4>
     <lnd-graph-tabs [expanded]="true">
-        <lnd-tab tabTitle="Active"
-                 tabDescription="Lorem ipsum dolor sit amet, consectetuer adipiscing elit.">
+        <lnd-tab
+            tabTitle="Active"
+            tabDescription="Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+        >
             Graph tab 1...
         </lnd-tab>
-        <lnd-tab tabTitle="Standard link"
-                 tabDescription="Aenean vel massa quis mauris vehicula lacinia.">
+        <lnd-tab
+            tabTitle="Standard link"
+            tabDescription="Aenean vel massa quis mauris vehicula lacinia."
+        >
             Graph tab 2...
         </lnd-tab>
     </lnd-graph-tabs>

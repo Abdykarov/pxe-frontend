@@ -1,21 +1,13 @@
-import {
-    Component,
-    ChangeDetectorRef,
-} from '@angular/core';
-
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { map, takeUntil } from 'rxjs/operators';
+import { IChangePassword } from 'src/app/pages/public/login/login.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { IChangePassword } from 'src/app/pages/public/login/login.model';
-import { ILoginResponse } from 'src/app/services/model/auth.model';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { UserService } from 'src/common/graphql/services/user.service';
+import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     templateUrl: './change-password.component.html',
@@ -31,7 +23,7 @@ export class ChangePasswordComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private userService: UserService,
+        private userService: UserService
     ) {
         super();
     }
@@ -42,10 +34,14 @@ export class ChangePasswordComponent extends AbstractComponent {
         this.fieldError = {};
         this.globalError = [];
 
-        this.userService.changePassword(changePassword.currentPassword, changePassword.password)
+        this.userService
+            .changePassword(
+                changePassword.currentPassword,
+                changePassword.password
+            )
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.changePassword),
+                map(({ data }) => data.changePassword)
             )
             .subscribe(
                 (loginResponse: ILoginResponse) => {
@@ -54,14 +50,15 @@ export class ChangePasswordComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },
-                error => {
+                (error) => {
                     this.globalError = [];
                     this.formLoading = false;
-                    const { globalError, fieldError } = parseGraphQLErrors(error);
+                    const { globalError, fieldError } =
+                        parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
+    };
 }

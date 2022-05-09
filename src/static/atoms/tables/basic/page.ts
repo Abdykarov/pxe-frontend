@@ -3,9 +3,8 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 import * as config from './config';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class BasicTablesPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public tableCaption = 'Caption of table';

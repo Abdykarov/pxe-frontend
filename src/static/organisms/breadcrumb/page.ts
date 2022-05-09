@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
-
 export class BreadcrumbPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public breadcrumbItemsMultiple0: IBreadcrumbItems;
@@ -12,8 +11,7 @@ export class BreadcrumbPageComponent {
     public breadcrumbItemsMultiple2: IBreadcrumbItems;
     private body = document.getElementById('top');
 
-    constructor(
-    ) {
+    constructor() {
         this.breadcrumbItemsSimple = [
             {
                 label: 'Breadcrumb',

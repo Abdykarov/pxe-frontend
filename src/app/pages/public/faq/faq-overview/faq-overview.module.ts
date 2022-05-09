@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { PipesModule } from 'src/common/pipes/common/pipes.module';
 import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
 import { FaqOverviewRoutingModule } from './faq-overview-routing.module';
 import { FaqOverviewComponent } from './faq-overview.component';
-import { PipesModule } from 'src/common/pipes/common/pipes.module';
 
 @NgModule({
-    declarations: [
-        FaqOverviewComponent,
-    ],
+    declarations: [FaqOverviewComponent],
     imports: [
         AccordionModule,
         CommonModule,
@@ -17,4 +14,4 @@ import { PipesModule } from 'src/common/pipes/common/pipes.module';
         PipesModule,
     ],
 })
-export class FaqOverviewModule { }
+export class FaqOverviewModule {}

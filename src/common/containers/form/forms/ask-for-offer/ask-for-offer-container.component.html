@@ -1,7 +1,13 @@
 <ng-template #agreementTemplate>
     <span class="text-white">
-        Souhlasím se <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE">Obchodními podmínkami účasti na trhu parc4u</a> a beru na vědomí
-        <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA">Informaci o zpracování osobních údajů</a>.
+        Souhlasím se
+        <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE"
+            >Obchodními podmínkami účasti na trhu parc4u</a
+        >
+        a beru na vědomí
+        <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA"
+            >Informaci o zpracování osobních údajů</a
+        >.
     </span>
 </ng-template>
 
@@ -10,9 +16,10 @@
     [formGroup]="form"
     [name]="id"
     (keydown)="resetCustomFieldError()"
-    (keydown.enter)="submitForm($event);false"
+    (keydown.enter)="submitForm($event); (false)"
     (change)="resetCustomFieldError()"
-    autocomplete="off">
+    autocomplete="off"
+>
     <div class="row">
         <div class="col-12 text-center mb-3">
             <pxe-file-uploader
@@ -24,40 +31,39 @@
                 mainText="Soubory přetáhněte sem nebo "
                 secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
                 [labelFromMainText]="true"
-                [contentTemplate]="fileUploaderTemplate">
+                [contentTemplate]="fileUploaderTemplate"
+            >
             </pxe-file-uploader>
         </div>
         <div class="col-12 mb-3">
-            <lnd-alert
-                *ngIf="errors.length"
-                type="danger">
-                {{ errors[0] }}<br>
+            <lnd-alert *ngIf="errors.length" type="danger">
+                {{ errors[0] }}<br />
             </lnd-alert>
-            <lnd-alert
-                *ngIf="success"
-                type="success">
-                Děkujeme po zpracování vaší žádosti se vám obratem ozveme.
+            <lnd-alert *ngIf="success" type="success">
+                Děkujeme. Po zpracování vaší žádosti se vám obratem ozveme.
             </lnd-alert>
             <ng-container *ngIf="!fileUploader.isUploading">
-                <span class="d-inline-flex align-items-center mr-4 mb-2"
-                      [class.text-white]="isPublic"
-                      *ngFor="let fileItem of fileUploader.queue">
+                <span
+                    class="d-inline-flex align-items-center mr-4 mb-2"
+                    [class.text-white]="isPublic"
+                    *ngFor="let fileItem of fileUploader.queue"
+                >
                     <span class="icon icon--document mr-2"></span>
-                    {{fileItem?.file?.name}}
+                    {{ fileItem?.file?.name }}
                     <lnd-button
                         *ngIf="!fileUploader.isUploading"
                         (click)="removeFile(fileItem)"
                         [customClass]="isPublic ? 'btn-icon--on-dark-bg' : ''"
                         icon="icon--bin"
                         variant="icon"
-                        type="icon">
+                        type="icon"
+                    >
                     </lnd-button>
                 </span>
             </ng-container>
         </div>
         <div class="col-12" *ngIf="fileUploader.queue.length && !success">
-            <div class="form-container"
-                [class.ml-0]="isPublic">
+            <div class="form-container" [class.ml-0]="isPublic">
                 <lnd-form-field
                     *ngIf="!email"
                     lndSFormDirective
@@ -65,10 +71,17 @@
                     [error]="formError.email || form.controls.email.errors"
                     [formControl]="form.controls.email"
                     [id]="'email' + id"
-                    [customFormGroupClass]="isPublic ? 'form-group--public form-group--on-dark-bg' : 'form-group--public'"
+                    [customFormGroupClass]="
+                        isPublic
+                            ? 'form-group--public form-group--on-dark-bg'
+                            : 'form-group--public'
+                    "
                     label="E-mail"
                     [disabledField]="fileUploader.isUploading"
-                    [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+                    [success]="
+                        form.controls.email.valid &&
+                        (form.controls.email.touched || formError.email)
+                    "
                     [touched]="form.controls.email.touched || formError.email"
                     [validationMessages]="formFields.validationMessages.email"
                 ></lnd-form-field>
@@ -82,16 +95,22 @@
                     label=""
                     [disabledField]="fileUploader.isUploading"
                     [labelTemplate]="agreementTemplate"
-                    [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
-                    [touched]="form.controls.consent.touched || formError.consent"
+                    [success]="
+                        form.controls.consent.valid &&
+                        (form.controls.consent.touched || formError.consent)
+                    "
+                    [touched]="
+                        form.controls.consent.touched || formError.consent
+                    "
                     [type]="'CHECKBOX'"
                     [validationMessages]="formFields.validationMessages.consent"
                 ></lnd-form-field>
-                <div *ngIf="!email"
-                     class="text-right">
-                    <pxe-re-captcha #reCapcha
-                                    [id]="id"
-                                    (resolveAction)="submitForm($event)">
+                <div *ngIf="!email" class="text-right">
+                    <pxe-re-captcha
+                        #reCapcha
+                        [id]="id"
+                        (resolveAction)="submitForm($event)"
+                    >
                         <lnd-button
                             type="gradient-primary"
                             class="w-100"
@@ -99,12 +118,16 @@
                             customClass="w-100 btn-public"
                             [submit]="true"
                             (action)="reCapcha.execute($event)"
-                            [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
+                            [label]="
+                                !fileUploader.isUploading
+                                    ? 'Odeslat'
+                                    : 'Odesílám...'
+                            "
+                        >
                         </lnd-button>
                     </pxe-re-captcha>
                 </div>
-                <div *ngIf="email"
-                     class="d-flex justify-content-center">
+                <div *ngIf="email" class="d-flex justify-content-center">
                     <lnd-button
                         type="gradient-primary"
                         class="w-50"
@@ -112,7 +135,12 @@
                         [isDisabled]="fileUploader.isUploading"
                         [submit]="true"
                         (action)="submitForm($event)"
-                        [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
+                        [label]="
+                            !fileUploader.isUploading
+                                ? 'Odeslat'
+                                : 'Odesílám...'
+                        "
+                    >
                     </lnd-button>
                 </div>
             </div>

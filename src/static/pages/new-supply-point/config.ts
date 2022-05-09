@@ -83,7 +83,6 @@ export class NewSupplyPointPageConfig {
             value: 3,
             label: 'Smlouva na dobu neurčitou',
         },
-
     ];
 
     public circuitBreakerOptions = [
@@ -125,7 +124,6 @@ export class NewSupplyPointPageConfig {
         },
     ];
 
-
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
             active: true,
@@ -142,4 +140,3 @@ export class NewSupplyPointPageConfig {
         },
     ];
 }
-

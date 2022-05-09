@@ -1,28 +1,19 @@
-import {
-    Component,
-    ChangeDetectorRef,
-} from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as R from 'ramda';
-import {
-    map,
-    switchMap,
-    takeUntil,
-} from 'rxjs/operators';
-
-import { AbstractComponent } from 'src/common/abstract.component';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
-import { IUserDetailInput } from 'src/common/graphql/models/user.model';
-import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
-import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
+import { NavigateConsumerService } from 'src/app/services/navigate-consumer.service';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { userNotificationFormFields } from 'src/common/containers/form/forms/user-notification/user-notification-form.config';
 import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
+import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { UserService } from 'src/common/graphql/services/user.service';
+import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     templateUrl: './profile.component.html',
@@ -46,8 +37,9 @@ export class ProfileComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        public navigateConsumerService: NavigateConsumerService,
         private router: Router,
-        private userService: UserService,
+        private userService: UserService
     ) {
         super();
         this.formValues = this.authService.currentUserValue;
@@ -59,44 +51,51 @@ export class ProfileComponent extends AbstractComponent {
         this.fieldError = {};
         this.globalError = [];
 
-        const userDetailInput: IUserDetailInput = R.pick(['firstName', 'lastName', 'phoneNumber'], userProfileModelForm);
+        const userDetailInput: IUserDetailInput = R.pick(
+            ['firstName', 'lastName', 'phoneNumber'],
+            userProfileModelForm
+        );
         userDetailInput.userName = this.authService.currentUserValue.email;
 
-        this.userService.updateUserProfile(userDetailInput, userProfileModelForm.smsCode)
+        this.userService
+            .updateUserProfile(userDetailInput, userProfileModelForm.smsCode)
             .pipe(
-                map(({data}) => data.updateUserProfile),
+                map(({ data }) => data.updateUserProfile),
                 switchMap((profileChanged: boolean) => {
                     this.profileChanged = profileChanged;
                     return this.authService.refreshToken();
                 }),
-                takeUntil(this.destroy$),
+                takeUntil(this.destroy$)
             )
             .subscribe(
                 () => {
                     this.formLoading = false;
                     if (this.profileChanged) {
                         this.smsSent = false;
-                        this.oldPhone = this.authService.currentUserValue.phoneNumber;
+                        this.oldPhone =
+                            this.authService.currentUserValue.phoneNumber;
                         this.formSent = true;
                         this.formValues = this.authService.currentUserValue;
                         this.cd.markForCheck();
                     }
                 },
-                error => {
+                (error) => {
                     this.formLoading = false;
-                    const { globalError, fieldError } = parseGraphQLErrors(error);
+                    const { globalError, fieldError } =
+                        parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
+    };
 
     public sendChangePhoneNumberSmsMutation = (phoneNumber: string) => {
-        this.userService.sendChangePhoneNumberSmsMutation(phoneNumber)
+        this.userService
+            .sendChangePhoneNumberSmsMutation(phoneNumber)
             .pipe(
-                map(({data}) => data.sendChangePhoneNumberSms),
-                takeUntil(this.destroy$),
+                map(({ data }) => data.sendChangePhoneNumberSms),
+                takeUntil(this.destroy$)
             )
             .subscribe(
                 (sendChangePhoneNumberSms) => {
@@ -109,23 +108,25 @@ export class ProfileComponent extends AbstractComponent {
                     }
                     this.cd.markForCheck();
                 },
-                error => {
+                (error) => {
                     this.smsSent = false;
                     this.formLoading = false;
-                    const { globalError, fieldError } = parseGraphQLErrors(error);
+                    const { globalError, fieldError } =
+                        parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
+    };
 
-    public toggleWatchDog = ({notificatiosAllowed}) => {
-        this.userService.updateNotificationsAllowed(notificatiosAllowed)
+    public toggleWatchDog = ({ notificatiosAllowed }) => {
+        this.userService
+            .updateNotificationsAllowed(notificatiosAllowed)
             .pipe(
-                map(({data}) => data.updateNotificationsAllowed),
+                map(({ data }) => data.updateNotificationsAllowed),
                 switchMap(this.authService.refreshToken),
-                takeUntil(this.destroy$),
+                takeUntil(this.destroy$)
             )
             .subscribe(
                 (_) => {
@@ -133,17 +134,12 @@ export class ProfileComponent extends AbstractComponent {
                     this.formNotificationSent = true;
                     this.cd.markForCheck();
                 },
-                error => {
+                (error) => {
                     this.formLoading = false;
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                },
+                }
             );
-    }
-
-
-    public redirectToDeleteProfile = () => {
-        this.router.navigate([ROUTES.ROUTER_DELETE_ACCOUNT]);
-    }
+    };
 }

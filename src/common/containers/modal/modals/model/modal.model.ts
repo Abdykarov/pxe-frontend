@@ -2,11 +2,11 @@ export interface IShowModal {
     component: any;
     modalType?: string;
     instanceData?: {
-        showClose?: boolean,
-        showConfirm?: boolean,
-        titleClose?: string,
-        titleConfirm?: string,
-        size?: string,
+        showClose?: boolean;
+        showConfirm?: boolean;
+        titleClose?: string;
+        titleConfirm?: string;
+        size?: string;
         [key: string]: any;
     };
     withoutScroll?: boolean;

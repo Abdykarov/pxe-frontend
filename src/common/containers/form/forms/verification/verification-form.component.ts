@@ -1,32 +1,33 @@
 import {
     Component,
+    EventEmitter,
     Input,
     OnChanges,
-    SimpleChanges,
     OnDestroy,
-    TemplateRef,
     Output,
-    EventEmitter,
+    SimpleChanges,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-
-import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { formFields } from './verification-form.config';
-import { IContract } from 'src/common/graphql/models/contract';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { IContract } from 'src/common/graphql/models/contract';
+import { formFields } from './verification-form.config';
 
 @Component({
     selector: 'pxe-verification-form',
     templateUrl: './verification-form.component.html',
     styleUrls: ['./verification-form.component.scss'],
 })
-export class VerificationFormComponent extends AbstractFormComponent implements OnChanges, OnDestroy {
-
+export class VerificationFormComponent
+    extends AbstractFormComponent
+    implements OnChanges, OnDestroy
+{
     @Input()
     public showForm = false;
 
     @Input()
-    public smsSent: number = null;
+    public smsSent: number | boolean = null;
 
     @Input()
     public contract: IContract;
@@ -71,7 +72,7 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
 
     constructor(
         protected fb: FormBuilder,
-        public sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService
     ) {
         super(fb);
         sAnalyticsService.sFormStart();
@@ -84,7 +85,11 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-        if (this.form && changes.smsSent && changes.smsSent.currentValue !== changes.smsSent.previousValue) {
+        if (
+            this.form &&
+            changes.smsSent &&
+            changes.smsSent.currentValue !== changes.smsSent.previousValue
+        ) {
             this.form.reset();
             this.resetFormError(false);
         }
@@ -92,12 +97,12 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
 
     public submitValidForm = () => {
         this.submitAction.emit(this.form.controls.smsCode.value);
-    }
+    };
 
     public submitSms = () => {
         this.resetFormError(false);
         this.customAction.emit();
-    }
+    };
 
-    public enableVerification = () => this.showForm = true;
+    public enableVerification = () => (this.showForm = true);
 }

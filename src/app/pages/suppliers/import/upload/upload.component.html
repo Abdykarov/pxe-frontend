@@ -1,32 +1,36 @@
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
-        <pxe-progress-bar class="mb-6"
-                          [config]="configStepper">
+        <pxe-progress-bar class="mb-6" [config]="configStepper">
         </pxe-progress-bar>
         <div class="row mb-3">
             <div class="col-xl-8 offset-xl-2 text-center">
-                <lnd-alert
-                    *ngIf="globalError.length"
-                    type="danger">
+                <lnd-alert *ngIf="globalError.length" type="danger">
                     <ng-container *ngFor="let error of globalError">
-                        {{ error }}<br>
+                        {{ error }}<br />
                     </ng-container>
                 </lnd-alert>
-                <lnd-alert
-                    *ngIf="errorInParsing"
-                    type="danger">
-                    Importovaný dokument se nepodařilo nahrát. Formát vyplněných dat pravděpodobně nesplňuje požadovaný formát.
-                    Ukázku požadovaného formátu dokumentu si můžete stáhnout níže.
+                <lnd-alert *ngIf="errorInParsing" type="danger">
+                    Importovaný dokument se nepodařilo nahrát. Formát vyplněných
+                    dat pravděpodobně nesplňuje požadovaný formát. Ukázku
+                    požadovaného formátu dokumentu si můžete stáhnout níže.
                 </lnd-alert>
                 <p *ngIf="!isInitState">
                     <lnd-info-banner
-                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br />' +
-                         ' V souboru jsme nalezli '+ (listOfErrors.length) + ' ' + (listOfErrors.length | plural: 'error') + '.'"
+                        [bannerTitle]="
+                            'Import nabídek jsme nemohli dokončit. <br />' +
+                            ' V souboru jsme nalezli ' +
+                            listOfErrors.length +
+                            ' ' +
+                            (listOfErrors.length | plural: 'error') +
+                            '.'
+                        "
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
                         [showButton]="false"
                     >
                     </lnd-info-banner>
-                    Opravte si soubor podle <a (click)="scrollToErrors($event)">seznamu chyb</a> a pak ho nahrajte znovu.
+                    Opravte si soubor podle
+                    <a (click)="scrollToErrors($event)">seznamu chyb</a> a pak
+                    ho nahrajte znovu.
                 </p>
                 <ng-container *ngIf="isInitState">
                     <p class="mb-3">
@@ -35,41 +39,52 @@
                     <lnd-button
                         label="Stáhnout vzorový soubor"
                         type="secondary"
-                        (click)="downloadExampleImportFile($event)">
+                        (click)="downloadExampleImportFile($event)"
+                    >
                     </lnd-button>
                 </ng-container>
             </div>
         </div>
         <div class="row mb-5 mt-4">
             <div class="col-xl-8 offset-xl-2 text-center">
-                <lnd-alert
-                    *ngIf="fileErrors.length"
-                    type="danger">
+                <lnd-alert *ngIf="fileErrors.length" type="danger">
                     <ng-container *ngFor="let error of fileErrors">
-                        {{ error }}<br>
+                        {{ error }}<br />
                     </ng-container>
                 </lnd-alert>
                 <lnd-placeloader [loading]="loading"></lnd-placeloader>
                 <pxe-file-uploader
                     *ngIf="!loading"
                     [uploader]="fileUploader"
-                    (fileSelectAction)="uploadFile($event)">
-                ></pxe-file-uploader>
+                    (fileSelectAction)="uploadFile($event)"
+                >
+                    ></pxe-file-uploader
+                >
             </div>
         </div>
-        <div #listOfNotificationsRow
-             class="row mb-2"
-             *ngIf="listOfErrors && listOfErrors.length && !isInitState">
+        <div
+            #listOfNotificationsRow
+            class="row mb-2"
+            *ngIf="listOfErrors && listOfErrors.length && !isInitState"
+        >
             <div class="col-xl-8 offset-xl-2">
                 <pxe-list-of-notifications
                     [headerText]="'Seznam chyb'"
-                    [notifications]="listOfErrors">
+                    [notifications]="listOfErrors"
+                >
                 </pxe-list-of-notifications>
             </div>
         </div>
         <div class="row">
             <div class="col-xl-8 offset-xl-2 text text-center">
-                <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_OFFER, CONSTS.PATHS[commodityType] | lowercase]">
+                <a
+                    [routerLink]="[
+                        '/',
+                        CONSTS.PATHS.SECURED,
+                        CONSTS.PATHS.SUPPLY_OFFER,
+                        CONSTS.PATHS[commodityType] | lowercase
+                    ]"
+                >
                     Zpět
                 </a>
             </div>

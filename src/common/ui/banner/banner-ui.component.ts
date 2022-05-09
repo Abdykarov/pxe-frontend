@@ -6,10 +6,8 @@ import {
     TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-
 // own classes
 import { AbstractComponent } from 'src/common/abstract.component';
-
 // own models
 import { IBannerObj } from './models/banner-object.model';
 
@@ -19,7 +17,6 @@ import { IBannerObj } from './models/banner-object.model';
     styleUrls: ['./banner-ui.component.scss'],
 })
 export class BannerUIComponent extends AbstractComponent {
-
     @Input()
     public buttonLabel: string;
 
@@ -42,13 +39,11 @@ export class BannerUIComponent extends AbstractComponent {
         if (type === 'external') {
             window.open(value);
         } else {
-            this.router.navigate([value], {state});
+            this.router.navigate([value], { state });
         }
     }
 
-    constructor(
-        private router: Router,
-    ) {
+    constructor(private router: Router) {
         super();
     }
 }

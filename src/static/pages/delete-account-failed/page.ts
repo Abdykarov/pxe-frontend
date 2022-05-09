@@ -4,14 +4,13 @@ import { Component } from '@angular/core';
     templateUrl: './page.html',
 })
 export class DeleteAccountFailedComponent {
-
     redirectToUserProfile = (evt) => {
         evt.preventDefault();
         console.log('CLICKED');
-    }
+    };
 
     redirectToConcludedContract = (evt) => {
         evt.preventDefault();
         console.log('CLICKED');
-    }
+    };
 }

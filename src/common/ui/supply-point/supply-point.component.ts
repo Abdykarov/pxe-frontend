@@ -5,7 +5,6 @@ import {
     Output,
     TemplateRef,
 } from '@angular/core';
-
 import {
     CONTRACT_END_TYPE,
     CONTRACT_END_TYPE_TRANSLATE_MAP,
@@ -44,4 +43,3 @@ export class SupplyPointComponent {
 
     constructor() {}
 }
-

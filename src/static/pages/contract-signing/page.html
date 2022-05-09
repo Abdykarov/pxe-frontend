@@ -1,9 +1,7 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Podepsání smlouvy
-            </h1>
+            <h1>Podepsání smlouvy</h1>
         </div>
     </div>
     <div class="row mb-6">
@@ -11,22 +9,29 @@
             <h2>Odběrné místo: U budky</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+            <pxe-progress-bar
+                [config]="stepperProgressConfig"
+            ></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="row align-items-center mb-1 mb-xl-3">
-                <div class="col-12 text-center mb-5 col-md-3 text-md-left mb-md-0">
-                    <lnd-button
-                        label="Krok zpět"
-                        type="secondary">
+                <div
+                    class="
+                        col-12
+                        text-center
+                        mb-5
+                        col-md-3
+                        text-md-left
+                        mb-md-0
+                    "
+                >
+                    <lnd-button label="Krok zpět" type="secondary">
                     </lnd-button>
                 </div>
                 <div class="col-12 col-md-6 text-center">
-                    <h2 class="mb-0">
-                        Podepište smlouvu
-                    </h2>
+                    <h2 class="mb-0">Podepište smlouvu</h2>
                 </div>
             </div>
         </div>
@@ -37,31 +42,39 @@
                         <lnd-button
                             [label]="showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'"
                             type="link"
-                            (click)="toggleOffer($event)">
+                            (click)="toggleOffer($event)"
+                        >
                         </lnd-button>
                     </div>
                     <div
                         class="col-12 d-xl-block"
                         [class.d-block]="showOffer"
-                        [class.d-none]="!showOffer">
+                        [class.d-none]="!showOffer"
+                    >
                         <pxe-supply-point-offer
                             [isFromContract]="true"
                             [supplyPointOffer]="offer"
                             [interactive]="false"
-                            customClass="supply-point-offer--page-box mb-0">
+                            customClass="supply-point-offer--page-box mb-0"
+                        >
                         </pxe-supply-point-offer>
                     </div>
                 </div>
                 <div class="page-box__inner page-box__inner--light">
                     <h3 class="mb-2">Podepište smlouvu pomocí SMS</h3>
                     <p>
-                        Níže naleznete dokumenty, které jsou potřebné k uzavření dodávky elektřiny pro budoucí období.
-                        Návrh smlouvy o <strong>sdružených službách dodávky elektřiny</strong> obsahuje také <strong>obchodní
-                        podmínky</strong> dodávky a <strong>plnou moc</strong> pro dodavatele.
+                        Níže naleznete dokumenty, které jsou potřebné k uzavření
+                        dodávky elektřiny pro budoucí období. Návrh smlouvy o
+                        <strong>sdružených službách dodávky elektřiny</strong>
+                        obsahuje také <strong>obchodní podmínky</strong> dodávky
+                        a <strong>plnou moc</strong> pro dodavatele.
                     </p>
                     <div class="row mb-2">
                         <div class="col">
-                            <span class="small">Informace před uzavřením smlouvy o sdružených službách dodávky elektřiny</span>
+                            <span class="small"
+                                >Informace před uzavřením smlouvy o sdružených
+                                službách dodávky elektřiny</span
+                            >
                         </div>
                         <div class="col-auto">
                             <a class="small" href="#">Stáhnout</a>
@@ -73,13 +86,17 @@
                                 [pdfSrc]="urlPdfInformation"
                                 [openFile]="false"
                                 [viewBookmark]="false"
-                                zoom="page-width">
+                                zoom="page-width"
+                            >
                             </pxe-pdf-viewer>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <span class="small">Smlouva o sdružených službách dodávky elektřiny</span>
+                            <span class="small"
+                                >Smlouva o sdružených službách dodávky
+                                elektřiny</span
+                            >
                         </div>
                         <div class="col-auto">
                             <a class="small" href="#">Stáhnout</a>
@@ -91,7 +108,8 @@
                                 [pdfSrc]="urlPdfContract"
                                 [openFile]="false"
                                 [viewBookmark]="false"
-                                zoom="page-width">
+                                zoom="page-width"
+                            >
                             </pxe-pdf-viewer>
                         </div>
                     </div>
@@ -100,17 +118,23 @@
                     <div class="row justify-content-end">
                         <div class="col-12">
                             <p class="mt-5">
-                                Kliknutím na tlačítko „Podepsat smlouvu“ souhlasím s výše uvedeným návrhem smlouvy o sdružených službách
-                                dodávky elektřiny/plynu, včetně přiložených obchodních podmínek dodávky a uděluji
-                                dodavateli plnou moc, která je přílohou návrhu smlouvy. Potvrzuji, že jsem se s obsahem těchto
-                                dokumentů seznámil/a a že jsem obdržel/a dokument "Informace před uzavřením smlouvy o sdružených službách dodávky elektřiny".
+                                Kliknutím na tlačítko „Podepsat smlouvu“
+                                souhlasím s výše uvedeným návrhem smlouvy o
+                                sdružených službách dodávky elektřiny/plynu,
+                                včetně přiložených obchodních podmínek dodávky a
+                                uděluji dodavateli plnou moc, která je přílohou
+                                návrhu smlouvy. Potvrzuji, že jsem se s obsahem
+                                těchto dokumentů seznámil/a a že jsem obdržel/a
+                                dokument "Informace před uzavřením smlouvy o
+                                sdružených službách dodávky elektřiny".
                             </p>
                         </div>
                         <div class="col-12 text-center mb-5">
                             <lnd-button
                                 id="sign-contract"
                                 label="Podepsat smlouvu"
-                                type="primary">
+                                type="primary"
+                            >
                             </lnd-button>
                         </div>
                     </div>
