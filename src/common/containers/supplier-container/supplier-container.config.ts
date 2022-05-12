@@ -30,18 +30,18 @@ export const config: ISupplierLogo[] = [
         width: 75,
         faqUrl: '/faq/supplier/energy-trading',
     },
-    {
-        alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-        logoUrl:
-            '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
-        logoUrlHover:
-            '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
-        supplierUrl: '',
-        size: 'xl',
-        title: 'CARBOUNION BOHEMIA, spol. s r. o.',
-        width: 70,
-        faqUrl: '/faq/supplier/carbounion',
-    },
+    // {
+    //     alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
+    //     logoUrl:
+    //         '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+    //     logoUrlHover:
+    //         '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+    //     supplierUrl: '',
+    //     size: 'xl',
+    //     title: 'CARBOUNION BOHEMIA, spol. s r. o.',
+    //     width: 70,
+    //     faqUrl: '/faq/supplier/carbounion',
+    // },
     {
         alt: 'logo - Yello Energy',
         logoUrl: '/assets/images/suppliers/logo_yello-energy-hover.svg',
