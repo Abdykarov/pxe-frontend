@@ -251,7 +251,7 @@
  -	@param {Number} [value=0] - Set padding and margin to all sides
  */
 
-@mixin overlayer($height: 100vh, $position: fixed, $subElement: before) {
+@mixin overlayer($height: 100%, $position: fixed, $subElement: before) {
 	position: relative;
 	height: $height;
 

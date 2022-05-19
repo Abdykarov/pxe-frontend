@@ -14,7 +14,7 @@
 
 .aside {
 	display: none;
-	position: absolute;
+	position: fixed;
 	z-index: 2010;
 	top: (
 		($header-height-mobile * .5) +
@@ -54,7 +54,6 @@
 		);
 	}
 	@include media-breakpoint-up(lg) {
-		position: fixed;
 		display: block;
 		top: $header-height-desktop;
 		bottom: 0;
