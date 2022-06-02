@@ -12,20 +12,35 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	height: $header-height;
+	height: $header-height-mobile;
 	background-color: $body-bg;
 	color: $white;
 	z-index: $zindex-header;
 
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		height: $header-height-desktop;
+		background-color: rgba($body-bg, 85%);
+	}
+
 	&--public {
 		background-color: $body-bg-lp;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			background-color: rgba($body-bg-lp, 85%);
+		}
 	}
 
 	&--lp {
 		z-index: $zindex-lp;
 
+		// Media queries
 		@include media-breakpoint-down(xl) {
 			z-index: $zindex-header;
+		}
+		@include media-breakpoint-up(lg) {
+			background-color: $body-bg-lp;
 		}
 
 		.header-inner {
@@ -45,14 +60,20 @@
 }
 
 .header-inner {
-	height: $header-height;
-	line-height: $header-height;
+	height: $header-height-mobile;
+	line-height: $header-height-mobile;
 	padding-left: $spacer;
 	padding-right: $spacer;
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: space-between;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		height: $header-height-desktop;
+		line-height: $header-height-desktop;
+	}
 }
 
 .logo-holder {
@@ -113,8 +134,8 @@ a.logo-link {
 		height: $logo-height-mobile;
 
 		// Media queries
-		@include media-breakpoint-up(md) {
-			height: $logo-height-tablet;
+		@include media-breakpoint-up(lg) {
+			height: $logo-height-desktop;
 		}
 	}
 }
