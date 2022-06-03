@@ -1,4 +1,4 @@
-FROM docker.lnd.bz/nginx:1.20
+FROM docker.lnd.bz/nginx:1.20_non-root
 
 ARG APP
 
