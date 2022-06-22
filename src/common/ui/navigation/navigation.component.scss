@@ -14,10 +14,10 @@
 
 .aside {
 	display: none;
-	position: absolute;
+	position: fixed;
 	z-index: 2010;
 	top: (
-		($header-height * .5) +
+		($header-height-mobile * .5) +
 			($menu-toggle-line-width-rotate - ($logo-height-mobile * .5)) +
 			( $spacer * .75 )
 	);
@@ -34,8 +34,8 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		top: (
-			($header-height * .5) +
-				($menu-toggle-line-width-rotate - ($logo-height-tablet * .5)) +
+			($header-height-mobile * .5) +
+				($menu-toggle-line-width-rotate - ($logo-height-mobile * .5)) +
 				( $spacer * .75 )
 		);
 	}
@@ -44,7 +44,7 @@
 			100vh -
 				(
 					(
-							(#{$header-height} / 2) +
+							(#{$header-height-mobile} / 2) +
 								(
 									#{$menu-toggle-line-width-rotate} - (#{$logo-height-mobile} /
 												2)
@@ -54,9 +54,8 @@
 		);
 	}
 	@include media-breakpoint-up(lg) {
-		position: fixed;
 		display: block;
-		top: $header-height;
+		top: $header-height-desktop;
 		bottom: 0;
 		left: 0;
 		right: 0;

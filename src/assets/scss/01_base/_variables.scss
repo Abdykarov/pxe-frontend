@@ -218,18 +218,19 @@ $images-path:                      '../../images/';
 
 // Header
 $header-bg:                        $body-bg;
-$header-height:                    100px;
+$header-height-mobile:             70px;
+$header-height-desktop:            100px;
 
 
 // Logo
 $logo-width-mobile:                80px;
 $logo-height-mobile:               32px;
-$logo-height-tablet:               41px;
+$logo-height-desktop:              41px;
 
 
 // Menu
 $menu-width:                       40px;
-$menu-height:                      50px;
+$menu-height:                      46px;
 $menu-toggle-line-width:           24px;
 $menu-toggle-line-width-rotate:    20px;
 $menu-toggle-line-height:          4px;

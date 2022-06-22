@@ -6,20 +6,23 @@
 
 .container-content {
 	// max-width: $body-max-width;
-	padding-top: $header-height;
+	padding-top: $header-height-mobile;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
 		min-height: calc(100vh - #{$footer-height-tablet});
 	}
+	@include media-breakpoint-up(lg) {
+		padding-top: $header-height-desktop;
+	}
 
 	&--public {
-		padding-top: ($header-height + ($spacer * 1.5));
+		padding-top: ($header-height-mobile + ($spacer * 1.5));
 		font-size: $large-font-size;
 
 		// Media queries
 		@include media-breakpoint-up(lg) {
-			padding-top: $header-height;
+			padding-top: $header-height-desktop;
 		}
 	}
 }

@@ -52,16 +52,16 @@ export const configSupplier: ISupplierLogo[] = [
         title: 'EP Energy Trading a.s.',
         width: 75,
     },
-    {
-        alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-        logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x.png',
-        logoUrlHover:
-            '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
-        supplierUrl: '',
-        size: 'xl',
-        title: 'CARBOUNION BOHEMIA, spol. s r. o.',
-        width: 70,
-    },
+    // {
+    //     alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
+    //     logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x.png',
+    //     logoUrlHover:
+    //         '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+    //     supplierUrl: '',
+    //     size: 'xl',
+    //     title: 'CARBOUNION BOHEMIA, spol. s r. o.',
+    //     width: 70,
+    // },
     {
         alt: 'logo - MND a.s.',
         logoUrl: '/assets/images/suppliers/logo_mnd.svg',
